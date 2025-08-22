@@ -1,6 +1,6 @@
 /* Base */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #2c2c2c; color: #fff; }
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #1a1a1a; color: #fff; }
 a { color: #fff; text-decoration: none; }
 
 /* Header */
@@ -100,11 +100,37 @@ a { color: #fff; text-decoration: none; }
 }
 
 
-/* Tax calculator */
-.tax-calculator { width: 240px; padding: 16px; background: #203457; border: 1px solid #080000; border-radius: 12px; position: sticky; top: 16px; height: fit-content; }
-.tax-calculator input { width: 100%; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #0c0101; background: #2e2e2e; color: #fff; }
-.tax-calculator #taxResult { font-weight: bold; margin-bottom: 8px; }
-.tax-explanation { font-size: 0.85rem; opacity: 0.8; }
+.tax-calculator {
+  width: 240px;
+  padding: 16px;
+  background: #1a1a1a; /* graphite black */
+  border: 1px solid #ff1a1a; /* red neon border */
+  border-radius: 12px;
+  position: sticky;
+  top: 16px;
+  height: fit-content;
+  box-shadow: 0 0 12px rgba(255, 26, 26, 0.3); /* glowing red */
+}
+
+.tax-calculator h2,
+.tax-calculator #taxResult,
+.tax-calculator .tax-explanation,
+.tax-calculator label {
+  color: #ff4d4d; /* lighter red accent */
+  text-shadow: none;
+}
+
+.tax-calculator input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #2c2c2c;
+  color: #fff;
+}
+
+
 
 /* Section spacing */
 .section { margin-bottom: 40px; }
