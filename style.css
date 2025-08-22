@@ -18,7 +18,7 @@ a { color: #fff; text-decoration: none; }
 
 #search {
   display: inline-block;
-  margin: 0 0 0 100px; /* slightly more to the right */
+  margin: 0 0 0 100px;
   width: 300px;
   max-width: 90%;
   padding: 12px;
@@ -28,40 +28,36 @@ a { color: #fff; text-decoration: none; }
   color: #fff;
 }
 
-/* === Main layout changes start === */
+/* Main layout */
 .main-container {
-    display: flex;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 20px;
-    align-items: stretch; /* NEW: makes nav stretch to match sections height */
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 20px;
+  align-items: stretch;
 }
 
 .sections-nav {
-    width: 200px;
-    padding: 8px;
-    border-right: 2px solid #4a4a4a; /* vertical line */
-    /* REMOVED: position: sticky; top: 16px; align-self: flex-start; */
+  width: 200px;
+  padding: 8px;
+  border-right: 2px solid #4a4a4a;
 }
 
-/* KEEP these button styles exactly as they are */
-.sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
+.sections-nav button { 
+  display: block; width: 100%; padding: 8px; margin-bottom: 8px; 
+  background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; 
+}
 .sections-nav button.active { background: #232324; }
 
 .sections {
-    flex: 3; /* UPDATED from flex:1 */
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
-/* === Main layout changes end === */
 
 /* Cards container */
-.cards { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 16px; 
-}
+.cards { display: flex; flex-wrap: wrap; gap: 16px; }
 
 /* Card */
 .card { 
@@ -71,14 +67,11 @@ a { color: #fff; text-decoration: none; }
   border: 1px solid #0b0101; 
   border-radius: 12px; 
   padding: 12px; 
-  background: #4a4a4a;  /* keep original background */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth hover */
+  background: #4a4a4a;
+  transition: background 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-10px); /* lift effect */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* shadow underneath */
-}
+.card.clicked { background: #666; }
 
 .card img { 
   width: 150px; 
@@ -95,10 +88,7 @@ a { color: #fff; text-decoration: none; }
   gap: 4px; 
 }
 
-.card-info h3 { 
-  margin: 0; 
-  font-size: 1.1rem; 
-}
+.card-info h3 { margin: 0; font-size: 1.1rem; }
 
 .card-info .badge { 
   display: inline-block; 
@@ -110,15 +100,14 @@ a { color: #fff; text-decoration: none; }
   margin-bottom: 4px; 
 }
 
-.hidden { 
-  display: none !important; 
-}
+.hidden { display: none !important; }
 
+/* Tax Calculator */
 .tax-calculator { 
   width: 240px; 
   padding: 16px; 
-  background: #1f2a33; /* dark slate/charcoal background for contrast */ 
-  border: 1px solid #33cce6; /* softer cyan border */ 
+  background: #1f2a33; 
+  border: 1px solid #33cce6; 
   border-radius: 12px; 
   position: sticky; 
   top: 16px; 
@@ -128,10 +117,7 @@ a { color: #fff; text-decoration: none; }
 .tax-calculator h2, 
 .tax-calculator #taxResult, 
 .tax-calculator .tax-explanation, 
-.tax-calculator label { 
-  color: #33cce6; /* softer cyan text */ 
-  text-shadow: none; 
-} 
+.tax-calculator label { color: #33cce6; text-shadow: none; } 
 
 .tax-calculator input { 
   width: 100%; 
@@ -139,25 +125,13 @@ a { color: #fff; text-decoration: none; }
   margin-bottom: 8px; 
   border-radius: 6px; 
   border: 1px solid #444; 
-  background: #2a3945; /* slightly lighter than calc background */ 
+  background: #2a3945; 
   color: #fff; 
 }
 
-
 /* Dollar sign and number color */
-#taxResult .calc-amount {
-  color: #ffde59; /* yellow number */
-  font-weight: bold;
-}
-
-#taxResult .calc-amount::before {
-  content: "$";
-  color: #00ff7f; /* green dollar sign */
-  margin-right: 3px;
-}
-
-
-
+#taxResult .calc-amount { color: #ffde59; font-weight: bold; }
+#taxResult .calc-amount::before { content: "$"; color: #00ff7f; margin-right: 3px; }
 
 /* Section spacing */
 .section { margin-bottom: 40px; }
@@ -171,98 +145,5 @@ a { color: #fff; text-decoration: none; }
   .card-info { text-align: center; }
 }
 
-/* Floating texts, header, neon effects, outlines etc. remain untouched */
-#floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
-.card-info label, .card-info .section-label, .tax-calculator label { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
-#floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
-#floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
-
-/* Entire header text and animations remain untouched */
-.blockspin-header { font-size: 4rem; font-weight: bold; text-align: center; color: white; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
-.blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
-@keyframes redNeonPulse { 0% { color: #e60000; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 8px #ff1a1a, 0 0 14px #ff3333, 0 0 20px #ff4d4d; } 100% { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 12px #ff3333, 0 0 22px #ff4d4d, 0 0 34px #ff6666, 0 0 46px #ff8080; } }
-@keyframes redFlicker { 0%, 92%, 100% { opacity: 1; } 93% { opacity: 0.7; } 95% { opacity: 0.3; } 97% { opacity: 0.9; } 98% { opacity: 0.6; } 99% { opacity: 1; } }
-
-/* Site Bio text and all remaining effects unchanged */
-.site-header p { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-.sections-nav button { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-#floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-.tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1px 0 #000; }
-.card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-
-
-
-
-/* === 3D Flip Card CSS === */
-.card-flip {
-  perspective: 1000px; /* Enable 3D perspective */
-}
-
-.card-flip-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.card-flip.flipped .card-flip-inner {
-  transform: rotateY(180deg);
-}
-
-.card-flip .front,
-.card-flip .back {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.card-flip .back {
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 12px;
-  box-sizing: border-box;
-  background: #1f2a33; /* match calculator background for contrast */
-  color: #fff;
-  border-radius: 12px;
-}
-
-.card-flip .back img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-.card-flip .flip-btn,
-.card-flip .back-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #00ff00;
-  color: #000;
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-flip .back-btn {
-  background: #ff0; /* yellow back button */
-  color: #000;
-}
-
-.card-flip .flip-btn:hover,
-.card-flip .back-btn:hover {
-  transform: scale(1.2);
-}
+/* Flip button inside card */
+.flip-btn { position: absolute; top: 8px; right: 8px; background: #00ff00; color: #000; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
