@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
+const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Uncommon",
   "Rare",
@@ -46,6 +46,8 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
+  const backImg = safe(item["Back Image URL"]); // New back image column
+  const backText = safe(item["Back Text"]);     // New back text column
 
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
@@ -53,13 +55,22 @@ function createCard(item) {
 
   return `
     <div class="card" data-name="${escapeAttr(name)}">
-      ${imgTag}
-      <div class="card-info">
-        <h3>${name}</h3>
-        ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
-        ${avg ? `<div>Average Value: ${avg}</div>` : ""}
-        ${ranged ? `<div>Ranged Value: ${ranged}</div>` : ""}
-        ${afterTax ? `<div>After Tax Value: ${afterTax}</div>` : ""}
+      <div class="card-inner">
+        <div class="card-front">
+          ${imgTag}
+          <div class="card-info">
+            <h3>${name}</h3>
+            ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
+            ${avg ? `<div>Average Value: ${avg}</div>` : ""}
+            ${ranged ? `<div>Ranged Value: ${ranged}</div>` : ""}
+            ${afterTax ? `<div>After Tax Value: ${afterTax}</div>` : ""}
+          </div>
+        </div>
+        <div class="card-back">
+          ${backImg ? `<img src="${backImg}" alt="Back image">` : ""}
+          ${backText ? `<div class="back-text">${backText}</div>` : ""}
+          <button class="flip-toggle">Back</button>
+        </div>
       </div>
     </div>
   `;
@@ -98,6 +109,7 @@ function showSection(name) {
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
+  resetFlippedCards(); // Reset flipped cards when switching sections
 }
 
 // === SEARCH ===
@@ -123,9 +135,45 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
-
+    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">$${withdraw}</span>`;
   });
+}
+
+// === FLIP CARD HELPERS ===
+function initFlipCards() {
+  let flippedCard = null;
+
+  document.querySelectorAll(".card").forEach(card => {
+    const toggleFront = card.querySelector(".card-info");
+    const toggle = toggleFront.querySelector(".flip-toggle") || document.createElement("button");
+    if (!toggle.parentNode) {
+      toggle.textContent = "!";
+      toggle.className = "flip-toggle";
+      toggle.style.marginBottom = "4px";
+      toggleFront.insertBefore(toggle, toggleFront.firstChild);
+    }
+
+    toggle.addEventListener("click", () => {
+      if (flippedCard && flippedCard !== card) {
+        flippedCard.classList.remove("flipped");
+      }
+      card.classList.toggle("flipped");
+      flippedCard = card.classList.contains("flipped") ? card : null;
+    });
+
+    // Back button inside card-back
+    const backBtn = card.querySelector(".card-back .flip-toggle");
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        card.classList.remove("flipped");
+        flippedCard = null;
+      });
+    }
+  });
+}
+
+function resetFlippedCards() {
+  document.querySelectorAll(".card.flipped").forEach(card => card.classList.remove("flipped"));
 }
 
 // === HELPERS ===
@@ -145,5 +193,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Show first section by default
-if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-})
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+
+  // Initialize flip cards after rendering
+  initFlipCards();
+});
