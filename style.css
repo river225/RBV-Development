@@ -1,121 +1,217 @@
-/* Base */
+/* ==============================
+   Base & Body
+============================== */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #252836; color: #fff; }
-a { color: #fff; text-decoration: none; }
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: "Segoe UI", Roboto, Arial, sans-serif; 
+  background-color: #1e1e1e; /* new dark background */ 
+  color: #ffffff;
+}
+a { color: #ffffff; text-decoration: none; }
 
-/* Header */
-.site-header { text-align: left; max-width: 1100px; margin: 0 auto 16px; padding: 16px; }
-.header-top { display: flex; align-items: center; justify-content: space-between; }
-.header-buttons { display: flex; gap: 10px; }
-.btn { padding: 8px 12px; border-radius: 8px; border: 1px solid #4a4a4a; background: #3a3a3a; }
+/* ==============================
+   Header
+============================== */
+.site-header { 
+  text-align: center; 
+  max-width: 1100px; 
+  margin: 0 auto 16px; 
+  padding: 16px; 
+}
+.site-header h1 { 
+  font-size: 4rem; 
+  margin-bottom: 10px; 
+  color: #ffffff; 
+}
+.site-header p { 
+  color: #cccccc; 
+  text-shadow: 
+    1.5px 1.5px 0 #000,
+   -1.5px 1.5px 0 #000,
+    1.5px -1.5px 0 #000,
+   -1.5px -1.5px 0 #000;
+}
 
-/* Search bar */
-.search-container {
-  max-width: 1100px;
-  margin: 0 auto 24px;
+/* ==============================
+   Search Bar
+============================== */
+.search-container { 
+  max-width: 1100px; 
+  margin: 0 auto 24px; 
   text-align: center;
 }
-
-
-
-#search {
-  display: inline-block;
-  margin: 0 0 0 100px; /* slightly more to the right */
-  width: 300px;
-  max-width: 90%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #0b0101;
-  background: #3a3a3a;
-  color: #fff;
+#search { 
+  display: inline-block; 
+  width: 300px; 
+  max-width: 90%; 
+  padding: 12px; 
+  border-radius: 10px; 
+  border: 1px solid #0b0101; 
+  background: #2a2a2a; /* darker input */ 
+  color: #ffffff; 
 }
 
-
-
-/* Main layout */
-.main-container { display: flex; max-width: 1400px; margin: 0 auto; gap: 20px; }
-.sections-nav { width: 200px; padding: 8px; border-right: 1px solid #4a4a4a; position: sticky; top: 16px; align-self: flex-start; }
-.sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
-.sections-nav button.active { background: #232324; }
-
-/* Sections area */
-.sections { flex: 1; display: flex; flex-direction: column; gap: 24px; }
-
-/* Cards container */
-.cards { display: flex; flex-wrap: wrap; gap: 16px; }
-
-/* Card */
-.card { flex: 1 1 calc(50% - 16px); display: flex; gap: 16px; border: 1px solid #0b0101; border-radius: 12px; padding: 12px; background: #4a4a4a; }
-.card img { width: 150px; height: 150px; object-fit: contain; border-radius: 8px; background: #2e2e2e; }
-.card-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-.card-info h3 { margin: 0; font-size: 1.1rem; }
-.card-info .badge { display: inline-block; padding: 2px 6px; border-radius: 999px; border: 1px solid #090808; background: #070012; font-size: 0.8rem; margin-bottom: 4px; }
-.hidden { display: none !important; }
-
-/* Tax calculator */
-.tax-calculator { width: 240px; padding: 16px; background: #203457; border: 1px solid #080000; border-radius: 12px; position: sticky; top: 16px; height: fit-content; }
-.tax-calculator input { width: 100%; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #0c0101; background: #2e2e2e; color: #fff; }
-.tax-calculator #taxResult { font-weight: bold; margin-bottom: 8px; }
-.tax-explanation { font-size: 0.85rem; opacity: 0.8; }
-
-/* Section spacing */
-.section { margin-bottom: 40px; }
-
-/* Responsive */
-@media (max-width: 900px) {
-  .main-container { flex-direction: column; }
-  .sections-nav, .tax-calculator { width: 100%; position: relative; }
-  .card { flex-direction: column; width: 100%; }
-  .card img { width: 100%; height: auto; }
-  .card-info { text-align: center; }
+/* ==============================
+   Main Layout
+============================== */
+.main-container { 
+  display: flex; 
+  max-width: 1400px; 
+  margin: 0 auto; 
+  gap: 20px; 
 }
-/* your existing styles... */
+.sections-nav { 
+  width: 200px; 
+  padding: 8px; 
+  border-right: 1px solid #3a3a3a; 
+  position: sticky; 
+  top: 16px; 
+  align-self: flex-start; 
+}
+.sections-nav button { 
+  display: block; 
+  width: 100%; 
+  padding: 8px; 
+  margin-bottom: 8px; 
+  background: #2c2c2c; 
+  border: 1px solid #100101; 
+  border-radius: 6px; 
+  cursor: pointer; 
+  color: #fff; 
+  text-align: left; 
+  text-shadow: 
+    1.5px 1.5px 0 #000,
+   -1.5px 1.5px 0 #000,
+    1.5px -1.5px 0 #000,
+   -1.5px -1.5px 0 #000;
+}
+.sections-nav button.active { 
+  background-color: #232324; 
+}
 
+/* Sections container */
+.sections { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 24px; 
+}
+
+/* ==============================
+   Cards
+============================== */
+.cards { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 16px; 
+}
+.card { 
+  flex: 1 1 calc(50% - 16px); 
+  display: flex; 
+  gap: 16px; 
+  border: 1px solid #3a3a3a; 
+  border-radius: 12px; 
+  padding: 12px; 
+  background: #2c2c2c; /* updated card background */ 
+}
+.card img { 
+  width: 150px; 
+  height: 150px; 
+  object-fit: contain; 
+  border-radius: 8px; 
+  background: #1f1f1f; 
+}
+.card-info { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
+}
+.card-info h3, 
+.card-info .badge, 
+.card-info div:not(.discord-line):not(.demand):not(.demand-number) { 
+  text-shadow: 
+    1.5px 1.5px 0 #000,
+   -1.5px 1.5px 0 #000,
+    1.5px -1.5px 0 #000,
+   -1.5px -1.5px 0 #000;
+}
+.card-info .badge { 
+  background-color: #44475a; /* better badge color */ 
+  border: 1px solid #2f2f2f; 
+}
+
+/* ==============================
+   Tax Calculator
+============================== */
+.tax-calculator { 
+  width: 240px; 
+  padding: 16px; 
+  background-color: #33384d; /* updated calculator background */ 
+  border: 1px solid #2a2a3a; 
+  border-radius: 12px; 
+  position: sticky; 
+  top: 16px; 
+  height: fit-content; 
+  color: #ffffff;
+}
+.tax-calculator input { 
+  width: 100%; 
+  padding: 8px; 
+  margin-bottom: 8px; 
+  border-radius: 6px; 
+  border: 1px solid #0c0101; 
+  background: #2a2a3a; 
+  color: #fff; 
+}
+.tax-calculator #taxResult { 
+  font-weight: bold; 
+  margin-bottom: 8px; 
+}
+.tax-explanation { 
+  font-size: 0.85rem; 
+  opacity: 0.8; 
+}
+
+/* ==============================
+   Floating Text & Buttons
+============================== */
 #floating-text {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  color: rgb(26, 216, 26);
+  color: #1ed760; /* updated green */
   font-weight: bold;
   z-index: 1000;
-}
-/* Black outline for card labels only */
-.card-info label, 
-.card-info .section-label, 
-.tax-calculator label {
   text-shadow: 
-    2px 2px 0 #000,
-   -2px 2px 0 #000,
-    2px -2px 0 #000,
-   -2px -2px 0 #000;
+    1.5px 1.5px 0 #000,
+   -1.5px 1.5px 0 #000,
+    1.5px -1.5px 0 #000,
+   -1.5px -1.5px 0 #000;
 }
 
 #floating-text-left {
   position: fixed;
-  bottom: 6px;   /* stays aligned with green text */
+  bottom: 35px;   /* white text above green */
   left: 10px;
   color: white;
   font-weight: 500;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
   font-size: 0.85rem;   
   line-height: 1.25;    
   z-index: 1000;
   text-align: left;
-
-  /* Black outline */
   text-shadow: 
     1px 1px 0 #000,
    -1px 1px 0 #000,
     1px -1px 0 #000,
    -1px -1px 0 #000;
 }
-
 #floating-text-left .discord-line {
   font-weight: bold;
   font-size: 0.9rem;
   margin-top: 3px;
-
-  /* keep the black outline too */
   text-shadow: 
     1px 1px 0 #000,
    -1px 1px 0 #000,
@@ -123,14 +219,32 @@ a { color: #fff; text-decoration: none; }
    -1px -1px 0 #000;
 }
 
+.bottom-buttons {
+  position: fixed;
+  bottom: 70px; /* above text on mobile, ignored on PC */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 1000;
+}
+.bottom-buttons .btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.discord-btn { background-color: #5865f2; }
+.tiktok-btn { background-color: #FE2C55; }
 
-
-/* Entire header text */
+/* ==============================
+   Header Neon BlockSpin
+============================== */
 .blockspin-header {
   font-size: 4rem;
   font-weight: bold;
   text-align: center;
-  color: white; /* Block + Values */
+  color: white;
   text-shadow:
     4px 0 0 #000,
    -4px 0 0 #000,
@@ -144,8 +258,6 @@ a { color: #fff; text-decoration: none; }
     0 0 12px #fff,
     0 0 18px #ccc;
 }
-
-/* Spin word with smoother/faster pulse + moderate flicker */
 .blockspin-header .spin-word {
   color: #ff1a1a;
   text-shadow:
@@ -163,109 +275,17 @@ a { color: #fff; text-decoration: none; }
     0 0 40px #ff6666,
     0 0 55px #ff8080;
   animation: redNeonPulse 4s ease-in-out infinite alternate,
-             redFlicker 10s infinite; /* faster pulse + more frequent flicker */
+             redFlicker 10s infinite;
 }
+@keyframes redNeonPulse { /* pulse effect */ 0% { color: #e60000; } 100% { color: #ff1a1a; } }
+@keyframes redFlicker { 0%,92%,100%{opacity:1;} 93%{opacity:0.7;} 95%{opacity:0.3;} 97%{opacity:0.9;} 98%{opacity:0.6;} 99%{opacity:1;} }
 
-/* Pulse (breathing effect) */
-@keyframes redNeonPulse {
-  0% {
-    color: #e60000;
-    text-shadow:
-      4px 0 0 #000,
-     -4px 0 0 #000,
-      0 4px 0 #000,
-      0 -4px 0 #000,
-      2px 2px 0 #000,
-     -2px 2px 0 #000,
-      2px -2px 0 #000,
-     -2px -2px 0 #000,
-      0 0 8px #ff1a1a,
-      0 0 14px #ff3333,
-      0 0 20px #ff4d4d;
-  }
-  100% {
-    color: #ff1a1a;
-    text-shadow:
-      4px 0 0 #000,
-     -4px 0 0 #000,
-      0 4px 0 #000,
-      0 -4px 0 #000,
-      2px 2px 0 #000,
-     -2px 2px 0 #000,
-      2px -2px 0 #000,
-     -2px -2px 0 #000,
-      0 0 12px #ff3333,
-      0 0 22px #ff4d4d,
-      0 0 34px #ff6666,
-      0 0 46px #ff8080;
-  }
+/* ==============================
+   Responsive Mobile
+============================== */
+@media (max-width: 768px) {
+  /* Keep PC/iPad layout intact, only adjust floating */
+  #floating-text-left { bottom: 35px; }
+  #floating-text { bottom: 10px; }
+  .bottom-buttons { bottom: 60px; }
 }
-
-/* Flicker (occasional) */
-@keyframes redFlicker {
-  0%, 92%, 100% { opacity: 1; }
-  93% { opacity: 0.7; }
-  95% { opacity: 0.3; }
-  97% { opacity: 0.9; }
-  98% { opacity: 0.6; }
-  99% { opacity: 1; }
-}
-
-
-
-
-/* Site Bio text */
-.site-header p {
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-
-/* Section navigation button names */
-.sections-nav button {
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-
-/* Green text at bottom right */
-#floating-text {
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-
-/* Tax calculator text (excluding search inputs) */
-.tax-calculator h2,
-.tax-calculator #taxResult,
-.tax-calculator .tax-explanation,
-.tax-calculator label {
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-
-/* Card text outlines */
-.card-info h3, /* Item Name */
-.card-info .badge, /* Average Value label */
-.card-info div:not(.discord-line):not(.demand):not(.demand-number) { /* Ranged, After Tax values */
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-
-
-
-
-
-
