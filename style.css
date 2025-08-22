@@ -1,54 +1,166 @@
-/* Site background */
-html, body {
-  background: #1e1e1e;
-  color: #f0f0f0;
+/* =====================
+   Base / Global
+   ===================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #1c1c1c; color: #f1f1f1; }
+a { color: #26d81a; text-decoration: none; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+
+/* =====================
+   Header
+   ===================== */
+.site-header { text-align: center; padding: 20px; }
+.site-header h1.blockspin-header { 
+  font-size: 4rem; font-weight: bold; color: #fff;
+  text-shadow: 2px 2px 4px #000;
+}
+.blockspin-header .spin-word {
+  color: #ff1a1a;
+  text-shadow:
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0 0 10px #ff4d4d,
+    0 0 20px #ff6666,
+    0 0 30px #ff8080;
+  animation: redNeonPulse 3s ease-in-out infinite alternate,
+             redFlicker 8s infinite;
+}
+.site-header p {
+  text-shadow: 1px 1px 2px #000; margin: 6px 0;
 }
 
-/* Item cards */
-.card {
-  background: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 12px;
+/* Neon header animations */
+@keyframes redNeonPulse {
+  0% { color: #e60000; text-shadow: 0 0 12px #ff4d4d; }
+  100% { color: #ff1a1a; text-shadow: 0 0 28px #ff8080; }
+}
+@keyframes redFlicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.7; }
+  95% { opacity: 0.3; }
+  97% { opacity: 0.9; }
+  98% { opacity: 0.6; }
+  99% { opacity: 1; }
+}
+
+/* =====================
+   Search Bar
+   ===================== */
+.search-container { max-width: 1100px; margin: 0 auto 24px; text-align: center; }
+#search {
+  display: inline-block;
+  width: 300px;
+  max-width: 90%;
   padding: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  border-radius: 10px;
+  border: 1px solid #0b0101;
+  background: #2b2b2b;
+  color: #fff;
+}
+
+/* =====================
+   Main Layout
+   ===================== */
+.main-container { display: flex; max-width: 1400px; margin: 0 auto; gap: 20px; }
+.sections-nav { width: 200px; padding: 8px; border-right: 1px solid #4a4a4a; position: sticky; top: 16px; }
+.sections-nav button {
+  display: block; width: 100%; padding: 8px; margin-bottom: 8px; 
+  background: #3a3a3a; border: 1px solid #100101; border-radius: 6px;
+  text-align: left; color: #fff; text-shadow: 1.5px 1.5px 0 #000;
+}
+.sections-nav button.active { background: #232324; }
+
+.sections { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+
+/* =====================
+   Cards
+   ===================== */
+.cards { display: flex; flex-wrap: wrap; gap: 16px; }
+.card {
+  flex: 1 1 calc(50% - 16px);
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #2a2a2a, #242424);
+  border: 1px solid #555;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
   transition: all 0.3s ease;
 }
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.7);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.7);
 }
-
-/* Card text */
-.card-info h3, .card-info .badge, .card-info div {
-  color: #f0f0f0;
+.card img {
+  width: 150px; height: 150px; object-fit: contain; border-radius: 10px; background: #1f1f1f;
 }
+.card-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.card-info h3, .card-info .badge, .card-info div { color: #f1f1f1; text-shadow: 1.5px 1.5px 2px #000; }
+.card-info .badge { background: #3b3b3b; border-radius: 999px; border: 1px solid #111; padding: 2px 6px; font-size: 0.8rem; }
 
-/* Tax calculator */
+/* =====================
+   Calculator
+   ===================== */
 .tax-calculator {
-  background: #252525;
-  border: 1px solid #555;
+  width: 240px; padding: 16px; border-radius: 12px;
+  background: #303030; border: 1px solid #555;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5); position: sticky; top: 16px;
 }
 .tax-calculator input {
-  background: #2f2f2f;
-  color: #fff;
+  width: 100%; padding: 8px; margin-bottom: 8px; border-radius: 6px;
+  border: 1px solid #555; background: #1f1f1f; color: #fff;
 }
-.tax-calculator button {
-  background: #26d81a;
-  color: #000;
-}
-.tax-calculator button:hover {
-  background: #1fb114;
-}
+.tax-calculator #taxResult { font-weight: bold; margin-bottom: 8px; }
+.tax-calculator .tax-explanation { font-size: 0.85rem; opacity: 0.8; }
 
-/* Floating buttons */
+/* =====================
+   Floating Text & Buttons
+   ===================== */
+#floating-text {
+  position: fixed; bottom: 10px; right: 10px;
+  color: #26d81a; font-weight: bold;
+  text-shadow: 1.5px 1.5px 2px #000; z-index: 1000;
+}
+#floating-text-left {
+  position: fixed; bottom: 40px; left: 10px;
+  color: #fff; font-weight: 500; font-size: 0.85rem;
+  text-shadow: 0 0 8px #fff, 1px 1px 1px #000; z-index: 1000;
+}
+#floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; }
+
+.bottom-buttons {
+  position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 15px; z-index: 1000;
+}
 .bottom-buttons .btn {
-  background: linear-gradient(45deg, #5865f2, #ff4d4d);
-  color: #fff;
-  border: none;
+  background: linear-gradient(45deg, #ff4d4d, #ff80a0);
+  color: #fff; border-radius: 10px; padding: 12px 20px;
+  font-weight: bold; transition: all 0.3s ease;
+}
+.bottom-buttons .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(255,77,77,0.6);
 }
 
-/* Headers */
-.site-header h1 {
-  color: #fff;
-  text-shadow: 2px 2px 4px #000;
+/* =====================
+   Responsive
+   ===================== */
+@media (max-width: 900px) {
+  .main-container { flex-direction: column; }
+  .sections-nav, .tax-calculator { width: 100%; position: relative; }
+  .card { flex-direction: column; width: 100%; }
+  .card img { width: 100%; height: auto; }
+  .card-info { text-align: center; }
+}
+
+/* =====================
+   Mobile Specific Floating
+   ===================== */
+@media (max-width: 768px) {
+  #floating-text-left { bottom: 40px; left: 10px; }
+  #floating-text { bottom: 20px; right: 10px; }
+  .bottom-buttons { bottom: 70px; }
 }
