@@ -1,291 +1,54 @@
-/* ==============================
-   Base & Body
-============================== */
-* { box-sizing: border-box; }
-html, body { 
-  height: 100%; 
-  margin: 0; 
-  font-family: "Segoe UI", Roboto, Arial, sans-serif; 
-  background-color: #1e1e1e; /* new dark background */ 
-  color: #ffffff;
-}
-a { color: #ffffff; text-decoration: none; }
-
-/* ==============================
-   Header
-============================== */
-.site-header { 
-  text-align: center; 
-  max-width: 1100px; 
-  margin: 0 auto 16px; 
-  padding: 16px; 
-}
-.site-header h1 { 
-  font-size: 4rem; 
-  margin-bottom: 10px; 
-  color: #ffffff; 
-}
-.site-header p { 
-  color: #cccccc; 
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
+/* Site background */
+html, body {
+  background: #1e1e1e;
+  color: #f0f0f0;
 }
 
-/* ==============================
-   Search Bar
-============================== */
-.search-container { 
-  max-width: 1100px; 
-  margin: 0 auto 24px; 
-  text-align: center;
+/* Item cards */
+.card {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
 }
-#search { 
-  display: inline-block; 
-  width: 300px; 
-  max-width: 90%; 
-  padding: 12px; 
-  border-radius: 10px; 
-  border: 1px solid #0b0101; 
-  background: #2a2a2a; /* darker input */ 
-  color: #ffffff; 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.7);
 }
 
-/* ==============================
-   Main Layout
-============================== */
-.main-container { 
-  display: flex; 
-  max-width: 1400px; 
-  margin: 0 auto; 
-  gap: 20px; 
-}
-.sections-nav { 
-  width: 200px; 
-  padding: 8px; 
-  border-right: 1px solid #3a3a3a; 
-  position: sticky; 
-  top: 16px; 
-  align-self: flex-start; 
-}
-.sections-nav button { 
-  display: block; 
-  width: 100%; 
-  padding: 8px; 
-  margin-bottom: 8px; 
-  background: #2c2c2c; 
-  border: 1px solid #100101; 
-  border-radius: 6px; 
-  cursor: pointer; 
-  color: #fff; 
-  text-align: left; 
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-.sections-nav button.active { 
-  background-color: #232324; 
+/* Card text */
+.card-info h3, .card-info .badge, .card-info div {
+  color: #f0f0f0;
 }
 
-/* Sections container */
-.sections { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 24px; 
+/* Tax calculator */
+.tax-calculator {
+  background: #252525;
+  border: 1px solid #555;
+}
+.tax-calculator input {
+  background: #2f2f2f;
+  color: #fff;
+}
+.tax-calculator button {
+  background: #26d81a;
+  color: #000;
+}
+.tax-calculator button:hover {
+  background: #1fb114;
 }
 
-/* ==============================
-   Cards
-============================== */
-.cards { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 16px; 
-}
-.card { 
-  flex: 1 1 calc(50% - 16px); 
-  display: flex; 
-  gap: 16px; 
-  border: 1px solid #3a3a3a; 
-  border-radius: 12px; 
-  padding: 12px; 
-  background: #2c2c2c; /* updated card background */ 
-}
-.card img { 
-  width: 150px; 
-  height: 150px; 
-  object-fit: contain; 
-  border-radius: 8px; 
-  background: #1f1f1f; 
-}
-.card-info { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 4px; 
-}
-.card-info h3, 
-.card-info .badge, 
-.card-info div:not(.discord-line):not(.demand):not(.demand-number) { 
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-.card-info .badge { 
-  background-color: #44475a; /* better badge color */ 
-  border: 1px solid #2f2f2f; 
-}
-
-/* ==============================
-   Tax Calculator
-============================== */
-.tax-calculator { 
-  width: 240px; 
-  padding: 16px; 
-  background-color: #33384d; /* updated calculator background */ 
-  border: 1px solid #2a2a3a; 
-  border-radius: 12px; 
-  position: sticky; 
-  top: 16px; 
-  height: fit-content; 
-  color: #ffffff;
-}
-.tax-calculator input { 
-  width: 100%; 
-  padding: 8px; 
-  margin-bottom: 8px; 
-  border-radius: 6px; 
-  border: 1px solid #0c0101; 
-  background: #2a2a3a; 
-  color: #fff; 
-}
-.tax-calculator #taxResult { 
-  font-weight: bold; 
-  margin-bottom: 8px; 
-}
-.tax-explanation { 
-  font-size: 0.85rem; 
-  opacity: 0.8; 
-}
-
-/* ==============================
-   Floating Text & Buttons
-============================== */
-#floating-text {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  color: #1ed760; /* updated green */
-  font-weight: bold;
-  z-index: 1000;
-  text-shadow: 
-    1.5px 1.5px 0 #000,
-   -1.5px 1.5px 0 #000,
-    1.5px -1.5px 0 #000,
-   -1.5px -1.5px 0 #000;
-}
-
-#floating-text-left {
-  position: fixed;
-  bottom: 35px;   /* white text above green */
-  left: 10px;
-  color: white;
-  font-weight: 500;
-  font-size: 0.85rem;   
-  line-height: 1.25;    
-  z-index: 1000;
-  text-align: left;
-  text-shadow: 
-    1px 1px 0 #000,
-   -1px 1px 0 #000,
-    1px -1px 0 #000,
-   -1px -1px 0 #000;
-}
-#floating-text-left .discord-line {
-  font-weight: bold;
-  font-size: 0.9rem;
-  margin-top: 3px;
-  text-shadow: 
-    1px 1px 0 #000,
-   -1px 1px 0 #000,
-    1px -1px 0 #000,
-   -1px -1px 0 #000;
-}
-
-.bottom-buttons {
-  position: fixed;
-  bottom: 70px; /* above text on mobile, ignored on PC */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 15px;
-  z-index: 1000;
-}
+/* Floating buttons */
 .bottom-buttons .btn {
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  color: #ffffff;
+  background: linear-gradient(45deg, #5865f2, #ff4d4d);
+  color: #fff;
+  border: none;
 }
-.discord-btn { background-color: #5865f2; }
-.tiktok-btn { background-color: #FE2C55; }
 
-/* ==============================
-   Header Neon BlockSpin
-============================== */
-.blockspin-header {
-  font-size: 4rem;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  text-shadow:
-    4px 0 0 #000,
-   -4px 0 0 #000,
-    0 4px 0 #000,
-    0 -4px 0 #000,
-    2px 2px 0 #000,
-   -2px 2px 0 #000,
-    2px -2px 0 #000,
-   -2px -2px 0 #000,
-    0 0 6px #fff,
-    0 0 12px #fff,
-    0 0 18px #ccc;
-}
-.blockspin-header .spin-word {
-  color: #ff1a1a;
-  text-shadow:
-    4px 0 0 #000,
-   -4px 0 0 #000,
-    0 4px 0 #000,
-    0 -4px 0 #000,
-    2px 2px 0 #000,
-   -2px 2px 0 #000,
-    2px -2px 0 #000,
-   -2px -2px 0 #000,
-    0 0 10px #ff1a1a,
-    0 0 20px #ff3333,
-    0 0 30px #ff4d4d,
-    0 0 40px #ff6666,
-    0 0 55px #ff8080;
-  animation: redNeonPulse 4s ease-in-out infinite alternate,
-             redFlicker 10s infinite;
-}
-@keyframes redNeonPulse { /* pulse effect */ 0% { color: #e60000; } 100% { color: #ff1a1a; } }
-@keyframes redFlicker { 0%,92%,100%{opacity:1;} 93%{opacity:0.7;} 95%{opacity:0.3;} 97%{opacity:0.9;} 98%{opacity:0.6;} 99%{opacity:1;} }
-
-/* ==============================
-   Responsive Mobile
-============================== */
-@media (max-width: 768px) {
-  /* Keep PC/iPad layout intact, only adjust floating */
-  #floating-text-left { bottom: 35px; }
-  #floating-text { bottom: 10px; }
-  .bottom-buttons { bottom: 60px; }
+/* Headers */
+.site-header h1 {
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
 }
