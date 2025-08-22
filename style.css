@@ -56,14 +56,13 @@ a { color: #fff; text-decoration: none; }
   border: 1px solid #0b0101; 
   border-radius: 12px; 
   padding: 12px; 
-  background: #4a4a4a; 
-  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* smooth hover */
+  background: #4a4a4a;  /* keep original background */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth hover */
 }
 
 .card:hover {
-  transform: translateY(-10px);        /* lift effect */
-  background-color: #000000;           /* black background on hover */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5); /* subtle 3D depth */
+  transform: translateY(-10px); /* lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* shadow underneath */
 }
 
 .card img { 
@@ -272,16 +271,14 @@ a { color: #fff; text-decoration: none; }
    -1.5px -1.5px 0 #000;
 }
 
-.sections-nav {
-    width: 200px;
-    padding: 8px;
-    border-right: 2px solid #4a4a4a; /* slightly thicker vertical line */
-    height: auto; /* make sure it spans content height */
-    position: sticky;
-    top: 16px;
-    align-self: flex-start;
+/* Section navigation button names */
+.sections-nav button {
+  text-shadow: 
+    1.5px 1.5px 0 #000,
+   -1.5px 1.5px 0 #000,
+    1.5px -1.5px 0 #000,
+   -1.5px -1.5px 0 #000;
 }
-
 
 /* Green text at bottom right */
 #floating-text {
@@ -314,3 +311,7 @@ a { color: #fff; text-decoration: none; }
     1.5px -1.5px 0 #000,
    -1.5px -1.5px 0 #000;
 }
+
+
+
+
