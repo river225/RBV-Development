@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
+const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
 const SECTION_NAMES = [
   "Uncommon",
   "Rare",
@@ -46,50 +46,45 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
-  const backImg = safe(item["Back Image URL"]);
-  const backText = safe(item["Back Text"]);
-  const flipToggle = safe(item["Flip Card"])?.toLowerCase() === "yes";
+
+  const flipToggle = safe(item["Flip Toggle"]).toLowerCase() === "yes";
+  const flipImg = safe(item["Flip Image URL"]);
+  const flipText = safe(item["Flip Text"]);
 
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
     : "";
 
-  const backImgTag = backImg
-    ? `<img src="${backImg}" alt="${name}" class="back-img" onerror="this.style.display='none'">`
+  // Front content
+  const frontHTML = `
+    <div class="front card">
+      ${imgTag}
+      <div class="card-info">
+        <h3>${name}</h3>
+        ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
+        ${avg ? `<div>Average Value: ${avg}</div>` : ""}
+        ${ranged ? `<div>Ranged Value: ${ranged}</div>` : ""}
+        ${afterTax ? `<div>After Tax Value: ${afterTax}</div>` : ""}
+      </div>
+      ${flipToggle ? `<button class="flip-btn">!</button>` : ""}
+    </div>
+  `;
+
+  // Back content
+  const backHTML = flipToggle
+    ? `<div class="back">
+         ${flipImg ? `<img src="${flipImg}" alt="${name} back">` : ""}
+         <div>${flipText}</div>
+         <button class="back-btn">&larr;</button>
+       </div>`
     : "";
 
-  const backTextTag = backText
-    ? `<div class="back-text">${backText}</div>`
-    : "";
-
-  // Only add flip button if toggle is yes
-  const flipButton = flipToggle
-    ? `<button class="flip-button front">!</button>`
-    : "";
-
-  const backButton = flipToggle
-    ? `<button class="flip-button back">&#x21A9;</button>`
-    : "";
-
+  // Wrap in flip container
   return `
-    <div class="card-container">
-      <div class="card" data-name="${escapeAttr(name)}">
-        <div class="card-front">
-          ${flipButton}
-          ${imgTag}
-          <div class="card-info">
-            <h3>${name}</h3>
-            ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
-            ${avg ? `<div>Average Value: ${avg}</div>` : ""}
-            ${ranged ? `<div>Ranged Value: ${ranged}</div>` : ""}
-            ${afterTax ? `<div>After Tax Value: ${afterTax}</div>` : ""}
-          </div>
-        </div>
-        <div class="card-back">
-          ${backButton}
-          ${backImgTag}
-          ${backTextTag}
-        </div>
+    <div class="card-flip" data-name="${escapeAttr(name)}">
+      <div class="card-flip-inner">
+        ${frontHTML}
+        ${backHTML}
       </div>
     </div>
   `;
@@ -128,11 +123,8 @@ function showSection(name) {
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
-
-  // Reset flipped cards when switching sections
-  document.querySelectorAll(".card-container.flipped").forEach(c => {
-    c.classList.remove("flipped");
-  });
+  // Reset all flipped cards when switching sections
+  document.querySelectorAll(".card-flip.flipped").forEach(card => card.classList.remove("flipped"));
 }
 
 // === SEARCH ===
@@ -162,36 +154,31 @@ function initTaxCalculator() {
   });
 }
 
+// === 3D CARD FLIP HANDLERS ===
+function initCardFlips() {
+  document.addEventListener("click", e => {
+    if (e.target.classList.contains("flip-btn")) {
+      const cardFlip = e.target.closest(".card-flip");
+      if (cardFlip) cardFlip.classList.add("flipped");
+    }
+    if (e.target.classList.contains("back-btn")) {
+      const cardFlip = e.target.closest(".card-flip");
+      if (cardFlip) cardFlip.classList.remove("flipped");
+    }
+  });
+}
+
 // === HELPERS ===
 function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
-
-// === 3D FLIP CARD INIT ===
-function initFlipCards() {
-  document.addEventListener("click", e => {
-    const target = e.target;
-
-    // Front flip button
-    if (target.classList.contains("flip-button") && target.classList.contains("front")) {
-      const container = target.closest(".card-container");
-      container.classList.add("flipped");
-    }
-
-    // Back flip button
-    if (target.classList.contains("flip-button") && target.classList.contains("back")) {
-      const container = target.closest(".card-container");
-      container.classList.remove("flipped");
-    }
-  });
-}
 
 // === INIT ===
 document.addEventListener("DOMContentLoaded", async () => {
   initSectionsNav();
   initSearch();
   initTaxCalculator();
-  initFlipCards();
+  initCardFlips(); // <-- initialize flip buttons
 
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
