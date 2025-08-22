@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
+const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
 const SECTION_NAMES = [
   "Uncommon",
   "Rare",
@@ -46,17 +46,36 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
-  const backImg = safe(item["Back Image URL"]); // New back image column
-  const backText = safe(item["Back Text"]);     // New back text column
+  const backImg = safe(item["Back Image URL"]);
+  const backText = safe(item["Back Text"]);
+  const flipToggle = safe(item["Flip Card"])?.toLowerCase() === "yes";
 
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
     : "";
 
+  const backImgTag = backImg
+    ? `<img src="${backImg}" alt="${name}" class="back-img" onerror="this.style.display='none'">`
+    : "";
+
+  const backTextTag = backText
+    ? `<div class="back-text">${backText}</div>`
+    : "";
+
+  // Only add flip button if toggle is yes
+  const flipButton = flipToggle
+    ? `<button class="flip-button front">!</button>`
+    : "";
+
+  const backButton = flipToggle
+    ? `<button class="flip-button back">&#x21A9;</button>`
+    : "";
+
   return `
-    <div class="card" data-name="${escapeAttr(name)}">
-      <div class="card-inner">
+    <div class="card-container">
+      <div class="card" data-name="${escapeAttr(name)}">
         <div class="card-front">
+          ${flipButton}
           ${imgTag}
           <div class="card-info">
             <h3>${name}</h3>
@@ -67,9 +86,9 @@ function createCard(item) {
           </div>
         </div>
         <div class="card-back">
-          ${backImg ? `<img src="${backImg}" alt="Back image">` : ""}
-          ${backText ? `<div class="back-text">${backText}</div>` : ""}
-          <button class="flip-toggle">Back</button>
+          ${backButton}
+          ${backImgTag}
+          ${backTextTag}
         </div>
       </div>
     </div>
@@ -109,7 +128,11 @@ function showSection(name) {
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
-  resetFlippedCards(); // Reset flipped cards when switching sections
+
+  // Reset flipped cards when switching sections
+  document.querySelectorAll(".card-container.flipped").forEach(c => {
+    c.classList.remove("flipped");
+  });
 }
 
 // === SEARCH ===
@@ -135,45 +158,8 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">$${withdraw}</span>`;
+    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
   });
-}
-
-// === FLIP CARD HELPERS ===
-function initFlipCards() {
-  let flippedCard = null;
-
-  document.querySelectorAll(".card").forEach(card => {
-    const toggleFront = card.querySelector(".card-info");
-    const toggle = toggleFront.querySelector(".flip-toggle") || document.createElement("button");
-    if (!toggle.parentNode) {
-      toggle.textContent = "!";
-      toggle.className = "flip-toggle";
-      toggle.style.marginBottom = "4px";
-      toggleFront.insertBefore(toggle, toggleFront.firstChild);
-    }
-
-    toggle.addEventListener("click", () => {
-      if (flippedCard && flippedCard !== card) {
-        flippedCard.classList.remove("flipped");
-      }
-      card.classList.toggle("flipped");
-      flippedCard = card.classList.contains("flipped") ? card : null;
-    });
-
-    // Back button inside card-back
-    const backBtn = card.querySelector(".card-back .flip-toggle");
-    if (backBtn) {
-      backBtn.addEventListener("click", () => {
-        card.classList.remove("flipped");
-        flippedCard = null;
-      });
-    }
-  });
-}
-
-function resetFlippedCards() {
-  document.querySelectorAll(".card.flipped").forEach(card => card.classList.remove("flipped"));
 }
 
 // === HELPERS ===
@@ -181,11 +167,31 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
+// === 3D FLIP CARD INIT ===
+function initFlipCards() {
+  document.addEventListener("click", e => {
+    const target = e.target;
+
+    // Front flip button
+    if (target.classList.contains("flip-button") && target.classList.contains("front")) {
+      const container = target.closest(".card-container");
+      container.classList.add("flipped");
+    }
+
+    // Back flip button
+    if (target.classList.contains("flip-button") && target.classList.contains("back")) {
+      const container = target.closest(".card-container");
+      container.classList.remove("flipped");
+    }
+  });
+}
+
 // === INIT ===
 document.addEventListener("DOMContentLoaded", async () => {
   initSectionsNav();
   initSearch();
   initTaxCalculator();
+  initFlipCards();
 
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
@@ -194,7 +200,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Show first section by default
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-
-  // Initialize flip cards after rendering
-  initFlipCards();
 });
