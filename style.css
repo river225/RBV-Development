@@ -191,46 +191,28 @@ a { color: #fff; text-decoration: none; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
 
-  /* Center calculator */
-  .tax-calculator {
-    margin: 20px auto;
-    max-width: 90%;
-    text-align: center;
-    display: block;
-    float: none; /* prevents side alignment */
-  }
-
-/* === Mobile fixes === */
-@media (max-width: 768px) {
+/* === Mobile-only: Center search bar and calculator === */
+@media (max-width: 767px) {
   /* Center search bar */
   .search-container {
     display: flex;
     justify-content: center;
-  }
-
-  #search {
-    margin: 0;              /* remove the 100px offset */
-    width: 90%;             /* allow it to shrink on small screens */
-    max-width: 300px;       /* still respect your desktop width */
-  }
-}
-
-/* === MOBILE ONLY: Center search bar under sections === */
-@media only screen and (max-width: 767px) {
-  /* Make search container block and centered */
-  .search-container {
-    width: 90%;          /* almost full width */
-    max-width: 400px;    /* limit on bigger phones */
-    margin: 20px auto;   /* top/bottom spacing + center horizontally */
-    display: block;
-    text-align: center;
+    margin: 20px auto; /* top/bottom spacing + center horizontally */
   }
 
   .search-container input {
-    width: 100%;         /* fill container */
-    max-width: 400px;
+    width: 90%;         /* fill most of the screen */
+    max-width: 300px;   /* but not too wide on bigger phones */
     padding: 10px;
-    text-align: center;  /* input text centered */
     border-radius: 8px;
+    text-align: center; /* center text inside input */
+  }
+
+  /* Center tax calculator */
+  .tax-calculator {
+    margin: 20px auto;  /* spacing + center horizontally */
+    max-width: 300px;   /* limit width */
+    text-align: center;
+    display: block;
   }
 }

@@ -123,7 +123,8 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+
   });
 }
 
@@ -132,29 +133,11 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// === MOVE SEARCH BAR FOR MOBILE ===
-function moveSearchBarForMobile() {
-  const searchContainer = document.querySelector(".search-container");
-  const sections = document.getElementById("sections");
-
-  if (!searchContainer || !sections) return;
-
-  if (window.innerWidth <= 767) { // mobile breakpoint
-    sections.parentNode.insertBefore(searchContainer, sections);
-  } else {
-    const mainContainer = document.querySelector(".main-container");
-    if (mainContainer) mainContainer.parentNode.insertBefore(searchContainer, mainContainer);
-  }
-}
-
 // === INIT ===
 document.addEventListener("DOMContentLoaded", async () => {
   initSectionsNav();
-  initTaxCalculator();
-
-  // Move search first, then init listener
-  moveSearchBarForMobile();
   initSearch();
+  initTaxCalculator();
 
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
@@ -162,10 +145,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Show first section by default
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-});
-
-// === WINDOW RESIZE ===
-window.addEventListener("resize", () => {
-  moveSearchBarForMobile(); // only move, do not reattach listener
-});
+if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+})
