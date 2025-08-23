@@ -191,93 +191,52 @@ a { color: #fff; text-decoration: none; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
 
-/* === MOBILE ONLY: pinned white and green text at bottom === */
-@media (max-width: 767px) {
-  /* Container to stack the floating elements at bottom */
-  .mobile-bottom-container {
+/* Mobile only: applies to real phones */
+@media only screen and (max-width: 767px) and (pointer: coarse) {
+  /* Pin the floating texts to bottom */
+  #floating-text-left, #floating-text {
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    background: transparent; /* keep transparent so site still visible */
-    padding: 8px 0;
-    z-index: 1000;
+    text-align: center;
+    margin: 0;
+    z-index: 9999;
   }
 
-  /* White text */
   #floating-text-left {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    width: auto;
-    text-align: center;
-    margin: 0;
+    bottom: 40px; /* white text slightly above green text */
     color: white;
-    font-weight: 500;
-    font-size: 0.85rem;
-    line-height: 1.25;
   }
 
-  /* Buttons stacked */
-  .bottom-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-  }
-
-  /* Green text */
   #floating-text {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    width: auto;
-    text-align: center;
-    margin: 0;
+    bottom: 10px; /* green text at the very bottom */
     color: rgb(26, 216, 26);
-    font-weight: bold;
-    font-size: 1rem;
+  }
+
+  /* Make buttons stack above texts */
+  .header-buttons {
+    position: fixed;
+    bottom: 80px; /* sits above white+green text */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 9999;
   }
 
   /* Center search bar */
   .search-container {
-    display: flex;
-    justify-content: center;
-    padding: 0 10px;
+    text-align: center;
   }
 
   #search {
-    margin-left: 0;
+    margin: 0 auto;
+    display: block;
   }
 
   /* Center tax calculator */
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .tax-calculator {
-    width: 90%;
-    max-width: 300px;
-    margin: 10px 0;
-    position: relative;
-    top: auto;
-  }
-
-  /* Cards fill width nicely */
-  .sections {
-    width: 100%;
-  }
-
-  .card {
-    flex: 1 1 100%;
+    margin: 20px auto;
+    float: none;
   }
 }
-
