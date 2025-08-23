@@ -240,3 +240,28 @@ a { color: #fff; text-decoration: none; }
     z-index: 1000;
   }
 }
+
+/* MOBILE ONLY: pin floating texts stacked at bottom center */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 80px; /* make room so you can scroll low enough to see text */
+  }
+
+  #floating-text-left,
+  #floating-text {
+    position: fixed !important; /* force override */
+    left: 50% !important;
+    transform: translateX(-50%); /* center horizontally */
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  #floating-text-left {
+    bottom: 40px;  /* white text on top */
+  }
+
+  #floating-text {
+    bottom: 15px;  /* green text just below */
+  }
+}
