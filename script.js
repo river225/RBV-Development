@@ -132,22 +132,7 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// === INIT ===
-document.addEventListener("DOMContentLoaded", async () => {
-  initSectionsNav();
-  initSearch();
-  initTaxCalculator();
-
-  for (const sec of SECTION_NAMES) {
-    const items = await fetchSheet(sec);
-    renderSection(sec, items);
-  }
-
-  // Show first section by default
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-});
-
-// === MOVE SEARCH BAR FOR MOBILE (NEW) ===
+// === MOVE SEARCH BAR FOR MOBILE ===
 function moveSearchBarForMobile() {
   const searchContainer = document.querySelector(".search-container");
   const sections = document.getElementById("sections");
@@ -162,6 +147,25 @@ function moveSearchBarForMobile() {
   }
 }
 
-// Run on load and on resize
-window.addEventListener("DOMContentLoaded", moveSearchBarForMobile);
-window.addEventListener("resize", moveSearchBarForMobile);
+// === INIT ===
+document.addEventListener("DOMContentLoaded", async () => {
+  initSectionsNav();
+  initTaxCalculator();
+
+  // Move search first, then init listener
+  moveSearchBarForMobile();
+  initSearch();
+
+  for (const sec of SECTION_NAMES) {
+    const items = await fetchSheet(sec);
+    renderSection(sec, items);
+  }
+
+  // Show first section by default
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+});
+
+// === WINDOW RESIZE ===
+window.addEventListener("resize", () => {
+  moveSearchBarForMobile(); // only move, do not reattach listener
+});
