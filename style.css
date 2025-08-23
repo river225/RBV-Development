@@ -197,3 +197,31 @@ a { color: #fff; text-decoration: none; }
     display: none !important;
   }
 }
+
+
+/* === Mobile-only pinned texts at page bottom === */
+@media (max-width: 767px) {
+  .mobile-bottom-text {
+    text-align: center;
+    margin-top: 40px;  /* spacing above the texts */
+    padding-bottom: 20px; /* breathing room at bottom */
+  }
+
+  .mobile-white-text {
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .mobile-green-text {
+    color: #00c853; /* green */
+    font-size: 0.9rem;
+  }
+}
+
+/* Hide on PC + iPad */
+@media (min-width: 768px) {
+  .mobile-bottom-text {
+    display: none;
+  }
+}
