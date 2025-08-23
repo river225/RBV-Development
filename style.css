@@ -191,49 +191,72 @@ a { color: #fff; text-decoration: none; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
 
-/* Mobile-specific adjustments */
-@media (max-width: 900px) {
-
-  /* Stack floating texts and buttons at bottom */
-  #floating-text-left {
-    position: fixed;
-    bottom: 90px; /* moved higher */
-    left: 50%;
-    transform: translateX(-50%);
+/* === MOBILE ONLY ADJUSTMENTS (phones only) === */
+@media (max-width: 767px) {
+  /* Stack floating elements vertically at bottom */
+  #floating-text-left,
+  .bottom-buttons,
+  #floating-text {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
     text-align: center;
-    width: 90%;
-    font-size: 0.85rem;
+    margin: 5px 0;
+  }
+
+  #floating-text-left {
+    order: 1;
   }
 
   .bottom-buttons {
-    position: fixed;
-    bottom: 50px; /* moved higher */
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
+    gap: 8px;
+    order: 2;
   }
 
   #floating-text {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+    order: 3;
+    color: rgb(26, 216, 26);
+    font-weight: bold;
   }
 
-  /* Center calculator and search bar */
-  .tax-calculator, .search-container {
-    margin: 0 auto;
-    text-align: center;
+  /* Center search bar */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 10px;
+  }
+
+  #search {
+    margin-left: 0;
+  }
+
+  /* Center tax calculator */
+  .main-container {
+    flex-direction: column;
+    align-items: center;
   }
 
   .tax-calculator {
     width: 90%;
+    max-width: 300px;
+    margin: 10px 0;
+    position: relative;
+    top: auto;
   }
 
-  #search {
-    margin-left: 0; /* remove extra left margin */
+  /* Ensure sections take full width */
+  .sections {
+    width: 100%;
+  }
+
+  /* Cards fill width nicely */
+  .card {
+    flex: 1 1 100%;
   }
 }
+
