@@ -189,3 +189,31 @@ a { color: #fff; text-decoration: none; }
 #floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1px 0 #000; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
+
+
+
+/* Mobile-only adjustments for floating texts */
+@media only screen and (max-width: 767px) and (pointer: coarse) {
+  /* Pin both texts to bottom */
+  #floating-text-left, #floating-text {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    left: 0;
+    z-index: 9999; /* overlay everything */
+  }
+
+  /* White text on top of green text */
+  #floating-text-left {
+    bottom: 60px; /* stacked slightly above green text */
+    color: white;
+  }
+
+  /* Green text at the very bottom */
+  #floating-text {
+    bottom: 20px;
+    color: rgb(26, 216, 26);
+    font-weight: bold;
+  }
+}
