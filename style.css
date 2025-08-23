@@ -191,45 +191,49 @@ a { color: #fff; text-decoration: none; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
 
-/* Mobile-specific floating stack */
+/* Mobile-specific adjustments */
 @media (max-width: 900px) {
-  /* Container to stack everything at bottom */
-  body {
-    position: relative;
-  }
 
-  #floating-text-left,
-  .bottom-buttons,
-  #floating-text {
+  /* Stack floating texts and buttons at bottom */
+  #floating-text-left {
     position: fixed;
+    bottom: 90px; /* moved higher */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     width: 90%;
-    max-width: 400px;
-    z-index: 1000;
-  }
-
-  /* Stack order */
-  #floating-text-left {
-    bottom: 90px; /* white text on top */
+    font-size: 0.85rem;
   }
 
   .bottom-buttons {
-    bottom: 50px; /* buttons in middle */
-    display: flex;
-    justify-content: center;
-    gap: 12px;
+    position: fixed;
+    bottom: 50px; /* moved higher */
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
   }
 
   #floating-text {
-    bottom: 10px; /* green text at bottom */
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
   }
 
-  /* Make sure buttons don't overflow */
-  .bottom-buttons .btn {
-    flex: 1;
-    font-size: 0.9rem;
-    padding: 10px;
+  /* Center calculator and search bar */
+  .tax-calculator, .search-container {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .tax-calculator {
+    width: 90%;
+  }
+
+  #search {
+    margin-left: 0; /* remove extra left margin */
   }
 }
