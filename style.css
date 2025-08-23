@@ -220,3 +220,23 @@ a { color: #fff; text-decoration: none; }
     float: none !important;
   }
 }
+
+
+/* MOBILE ONLY: pin floating texts to bottom, white above green */
+@media (max-width: 767px) {
+  #floating-text-left {
+    position: fixed;       /* stick to bottom */
+    bottom: 30px;          /* slightly above green text */
+    left: 10px;
+    font-size: 0.85rem;
+    z-index: 1000;
+  }
+
+  #floating-text {
+    position: fixed;       /* stick to bottom */
+    bottom: 10px;          /* spacing from bottom */
+    right: 10px;
+    font-size: 0.85rem;
+    z-index: 1000;
+  }
+}
