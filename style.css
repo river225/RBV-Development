@@ -192,76 +192,53 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* === Mobile-only: Center search bar and calculator === */
+/* === MOBILE ONLY FIXES === */
 @media (max-width: 767px) {
-  /* Center search bar container */
+  /* Center search bar */
   .search-container {
-    display: flex !important;       /* ensure flex is applied */
-    justify-content: center !important; /* center horizontally */
-    margin: 20px auto !important;   /* spacing top/bottom + horizontal center */
+    display: flex !important;
+    justify-content: center !important;
+    margin: 20px auto !important;
   }
-
-  /* Center input inside container */
   .search-container input {
-    width: 90% !important;          /* almost full width */
-    max-width: 300px !important;    /* not too wide on bigger phones */
+    width: 90% !important;
+    max-width: 300px !important;
     padding: 10px;
     border-radius: 8px;
-    text-align: center !important;  /* center text inside input */
-    margin: 0 !important;           /* remove any left/right offsets */
+    text-align: center !important;
   }
 
   /* Center tax calculator */
   .tax-calculator {
-    margin: 20px auto !important;   /* spacing + center horizontally */
-    max-width: 300px !important;    /* limit width */
+    margin: 20px auto !important;
+    max-width: 300px !important;
     text-align: center !important;
     display: block !important;
     float: none !important;
   }
-}
 
-
-/* MOBILE ONLY: pin floating texts to bottom, white above green */
-@media (max-width: 767px) {
-  #floating-text-left {
-    position: fixed;       /* stick to bottom */
-    bottom: 30px;          /* slightly above green text */
-    left: 10px;
-    font-size: 0.85rem;
-    z-index: 1000;
-  }
-
-  #floating-text {
-    position: fixed;       /* stick to bottom */
-    bottom: 10px;          /* spacing from bottom */
-    right: 10px;
-    font-size: 0.85rem;
-    z-index: 1000;
-  }
-}
-
-/* MOBILE ONLY: pin floating texts stacked at bottom center */
-@media (max-width: 767px) {
+  /* Give extra scroll room for pinned texts */
   body {
-    padding-bottom: 80px; /* make room so you can scroll low enough to see text */
+    padding-bottom: 100px;
   }
 
+  /* Pin floating texts at bottom center */
   #floating-text-left,
   #floating-text {
-    position: fixed !important; /* force override */
+    position: fixed !important;
     left: 50% !important;
-    transform: translateX(-50%); /* center horizontally */
-    width: 100%;
-    text-align: center;
+    transform: translateX(-50%) !important;
+    text-align: center !important;
+    width: auto !important;
     z-index: 1000;
   }
 
   #floating-text-left {
-    bottom: 40px;  /* white text on top */
+    bottom: 40px !important; /* white text above */
   }
 
   #floating-text {
-    bottom: 15px;  /* green text just below */
+    bottom: 15px !important; /* green text below */
   }
 }
+
