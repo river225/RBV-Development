@@ -190,106 +190,10 @@ a { color: #fff; text-decoration: none; }
 .tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1px 0 #000; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
-
-
-/* === MOBILE ONLY FIXES === */
+/* === Hide existing floating white + green text on MOBILE only === */
 @media (max-width: 767px) {
-  /* Center search bar */
-  .search-container {
-    display: flex !important;
-    justify-content: center !important;
-    margin: 20px auto !important;
-  }
-  .search-container input {
-    width: 90% !important;
-    max-width: 300px !important;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center !important;
-  }
-
-  /* Center tax calculator */
-  .tax-calculator {
-    margin: 20px auto !important;
-    max-width: 300px !important;
-    text-align: center !important;
-    display: block !important;
-    float: none !important;
-  }
-
-  /* Give extra scroll room for pinned texts */
-  body {
-    padding-bottom: 100px;
-  }
-
-  /* Pin floating texts at bottom center */
-  #floating-text-left,
-  #floating-text {
-    position: fixed !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    text-align: center !important;
-    width: auto !important;
-    z-index: 1000;
-  }
-
+  #floating-text,
   #floating-text-left {
-    bottom: 40px !important; /* white text above */
-  }
-
-  #floating-text {
-    bottom: 15px !important; /* green text below */
-  }
-}
-
-/* === MOBILE ONLY FIXES === */
-@media (max-width: 767px) {
-  /* Center search bar */
-  .search-container {
-    display: flex !important;
-    justify-content: center !important;
-    margin: 20px auto !important;
-    width: 100% !important;
-  }
-  .search-container input {
-    width: 90% !important;
-    max-width: 320px !important;
-    text-align: center !important;
-    padding: 10px;
-    border-radius: 8px;
-  }
-
-  /* Center tax calculator */
-  .tax-calculator {
-    margin: 20px auto !important;
-    max-width: 320px !important;
-    text-align: center !important;
-    display: block !important;
-  }
-
-  /* Make sure you can scroll down enough to see texts */
-  body {
-    padding-bottom: 100px !important;
-  }
-
-  /* Pin floating texts to bottom center */
-  #floating-text-left,
-  #floating-text {
-    position: fixed !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    text-align: center !important;
-    width: auto !important;
-    z-index: 1000;
-  }
-
-  /* White text above */
-  #floating-text-left {
-    bottom: 40px !important;
-  }
-
-  /* Green text below */
-  #floating-text {
-    bottom: 15px !important;
+    display: none !important;
   }
 }
