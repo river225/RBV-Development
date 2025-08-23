@@ -192,22 +192,23 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* Mobile-only adjustments for floating texts */
+/* --- MOBILE FLOATING TEXT STACK --- */
 @media only screen and (max-width: 767px) and (pointer: coarse) {
-  /* Pin both texts to bottom */
+  /* Both texts pinned at the bottom */
   #floating-text-left, #floating-text {
     position: fixed;
+    left: 0;
     width: 100%;
     text-align: center;
     margin: 0;
-    left: 0;
-    z-index: 9999; /* overlay everything */
+    z-index: 10000; /* overlay everything */
   }
 
-  /* White text on top of green text */
+  /* White text stacked above green */
   #floating-text-left {
-    bottom: 60px; /* stacked slightly above green text */
+    bottom: 60px; /* adjust if needed */
     color: white;
+    font-size: 0.9rem; /* optional smaller text */
   }
 
   /* Green text at the very bottom */
