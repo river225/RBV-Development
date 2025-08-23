@@ -189,3 +189,47 @@ a { color: #fff; text-decoration: none; }
 #floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1px 0 #000; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
+
+
+/* Mobile-specific floating stack */
+@media (max-width: 900px) {
+  /* Container to stack everything at bottom */
+  body {
+    position: relative;
+  }
+
+  #floating-text-left,
+  .bottom-buttons,
+  #floating-text {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    z-index: 1000;
+  }
+
+  /* Stack order */
+  #floating-text-left {
+    bottom: 90px; /* white text on top */
+  }
+
+  .bottom-buttons {
+    bottom: 50px; /* buttons in middle */
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  #floating-text {
+    bottom: 10px; /* green text at bottom */
+  }
+
+  /* Make sure buttons don't overflow */
+  .bottom-buttons .btn {
+    flex: 1;
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
