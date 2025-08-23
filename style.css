@@ -214,3 +214,13 @@ a { color: #fff; text-decoration: none; }
     max-width: 300px;       /* still respect your desktop width */
   }
 }
+/* Existing mobile styles: center calculator, pin texts */
+@media only screen and (max-width: 767px) and (pointer: coarse) {
+    /* floating texts & calculator styles here */
+}
+
+/* New mobile styles: move search bar under sections */
+@media (max-width: 768px) {
+    .search-container { /* move & center */ }
+    #search { /* adjust width & margin */ }
+}

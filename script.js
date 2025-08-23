@@ -147,3 +147,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Show first section by default
 if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 })
+
+function moveSearchBarForMobile() {
+  const searchContainer = document.querySelector(".search-container");
+  const sections = document.getElementById("sections");
+  
+  if (!searchContainer || !sections) return;
+
+  if (window.innerWidth <= 767) { // mobile breakpoint
+    sections.parentNode.insertBefore(searchContainer, sections);
+  } else {
+    // move it back above main-container if not mobile
+    const mainContainer = document.querySelector(".main-container");
+    if (mainContainer) mainContainer.parentNode.insertBefore(searchContainer, mainContainer);
+  }
+}
+
+// Run on load and on resize
+window.addEventListener("DOMContentLoaded", moveSearchBarForMobile);
+window.addEventListener("resize", moveSearchBarForMobile);
