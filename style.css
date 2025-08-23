@@ -191,19 +191,24 @@ a { color: #fff; text-decoration: none; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
 
-/* Mobile-only tweaks */
+/* === Mobile only overrides === */
 @media (max-width: 768px) {
   /* Center search bar */
   .search-container {
-    justify-content: center;
+    text-align: center;
   }
 
-  .search-container input {
-    width: 90%;   /* makes it fit nicely on small screens */
-    max-width: 400px;
+  #search {
     margin: 0 auto;
     display: block;
   }
+
+  /* Center tax calculator */
+  .tax-calculator {
+    margin: 20px auto;
+    float: none;
+  }
+}
 
   /* Center calculator */
   .tax-calculator {
@@ -213,4 +218,4 @@ a { color: #fff; text-decoration: none; }
     display: block;
     float: none; /* prevents side alignment */
   }
-}
+
