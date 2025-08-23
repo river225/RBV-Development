@@ -191,25 +191,6 @@ a { color: #fff; text-decoration: none; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
 
-/* === Mobile only overrides === */
-@media (max-width: 768px) {
-  /* Center search bar */
-  .search-container {
-    text-align: center;
-  }
-
-  #search {
-    margin: 0 auto;
-    display: block;
-  }
-
-  /* Center tax calculator */
-  .tax-calculator {
-    margin: 20px auto;
-    float: none;
-  }
-}
-
   /* Center calculator */
   .tax-calculator {
     margin: 20px auto;
@@ -219,3 +200,17 @@ a { color: #fff; text-decoration: none; }
     float: none; /* prevents side alignment */
   }
 
+/* === Mobile fixes === */
+@media (max-width: 768px) {
+  /* Center search bar */
+  .search-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  #search {
+    margin: 0;              /* remove the 100px offset */
+    width: 90%;             /* allow it to shrink on small screens */
+    max-width: 300px;       /* still respect your desktop width */
+  }
+}
