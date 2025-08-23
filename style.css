@@ -229,3 +229,34 @@ a { color: #fff; text-decoration: none; }
     display: none;
   }
 }
+
+
+/* === Mobile-only: center search bar and tax calculator === */
+@media (max-width: 767px) {
+  /* Center search bar container */
+  .search-container {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 20px auto !important;
+    width: 90% !important;
+    max-width: 300px !important;
+  }
+
+  /* Center input inside search bar */
+  .search-container input {
+    width: 100% !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    margin: 0 !important;
+  }
+
+  /* Center tax calculator */
+  .tax-calculator {
+    margin: 20px auto !important;  /* center horizontally */
+    max-width: 300px !important;
+    text-align: center !important;
+    display: block !important;
+    float: none !important;
+  }
+}
