@@ -123,8 +123,7 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
-
+    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
   });
 }
 
@@ -145,19 +144,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Show first section by default
-if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-})
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+});
 
+// === MOVE SEARCH BAR FOR MOBILE (NEW) ===
 function moveSearchBarForMobile() {
   const searchContainer = document.querySelector(".search-container");
   const sections = document.getElementById("sections");
-  
+
   if (!searchContainer || !sections) return;
 
   if (window.innerWidth <= 767) { // mobile breakpoint
     sections.parentNode.insertBefore(searchContainer, sections);
   } else {
-    // move it back above main-container if not mobile
     const mainContainer = document.querySelector(".main-container");
     if (mainContainer) mainContainer.parentNode.insertBefore(searchContainer, mainContainer);
   }
