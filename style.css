@@ -214,13 +214,23 @@ a { color: #fff; text-decoration: none; }
     max-width: 300px;       /* still respect your desktop width */
   }
 }
-/* Existing mobile styles: center calculator, pin texts */
-@media only screen and (max-width: 767px) and (pointer: coarse) {
-    /* floating texts & calculator styles here */
-}
 
-/* New mobile styles: move search bar under sections */
-@media (max-width: 768px) {
-    .search-container { /* move & center */ }
-    #search { /* adjust width & margin */ }
+/* === MOBILE ONLY: Center search bar under sections === */
+@media only screen and (max-width: 767px) {
+  /* Make search container block and centered */
+  .search-container {
+    width: 90%;          /* almost full width */
+    max-width: 400px;    /* limit on bigger phones */
+    margin: 20px auto;   /* top/bottom spacing + center horizontally */
+    display: block;
+    text-align: center;
+  }
+
+  .search-container input {
+    width: 100%;         /* fill container */
+    max-width: 400px;
+    padding: 10px;
+    text-align: center;  /* input text centered */
+    border-radius: 8px;
+  }
 }
