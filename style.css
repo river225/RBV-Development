@@ -41,6 +41,7 @@ a { color: #fff; text-decoration: none; }
     width: 200px;
     padding: 8px;
     border-right: 2px solid #4a4a4a; /* vertical line */
+    /* REMOVED: position: sticky; top: 16px; align-self: flex-start; */
 }
 
 /* KEEP these button styles exactly as they are */
@@ -142,6 +143,7 @@ a { color: #fff; text-decoration: none; }
   color: #fff; 
 }
 
+
 /* Dollar sign and number color */
 #taxResult .calc-amount {
   color: #ffde59; /* yellow number */
@@ -153,6 +155,9 @@ a { color: #fff; text-decoration: none; }
   color: #00ff7f; /* green dollar sign */
   margin-right: 3px;
 }
+
+
+
 
 /* Section spacing */
 .section { margin-bottom: 40px; }
@@ -182,50 +187,5 @@ a { color: #fff; text-decoration: none; }
 .site-header p { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .sections-nav button { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 #floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-.tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
+.tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1px 0 #000; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-
-
-
-  /* Center search bar */
-  .search-container {
-    text-align: center;
-  }
-
-  #search {
-    margin: 0 auto;
-    display: block;
-  }
-
-  /* Center tax calculator */
-  .tax-calculator {
-    margin: 20px auto;
-    float: none;
-  }
-
-
-/* === Section Header Image with Bottom Fade === */
-.section-header-image {
-  position: relative;
-  width: 100%;
-  max-height: 200px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.section-header-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.section-header-image::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 30px; /* small fade */
-  background: linear-gradient(to bottom, rgba(28,28,28,0) 0%, rgba(28,28,28,1) 100%);
-  pointer-events: none;
-}

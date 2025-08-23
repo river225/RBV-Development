@@ -8,6 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
+  // "Car Customisation"
 ];
 
 // === FETCH HELPERS ===
@@ -67,12 +68,8 @@ function createCard(item) {
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
 
-  // Check for header image in first item of the section
-  const headerImage = safe(items[0]["Header Image URL"]);
-
   const html = `
     <section class="section" id="${slugify(title)}">
-      ${headerImage ? `<div class="section-header-image"><img src="${headerImage}" alt="${title} Header"></div>` : ""}
       <h2>${title}</h2>
       <div class="cards">
         ${items.map(createCard).join("")}
@@ -126,7 +123,8 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+
   });
 }
 
@@ -146,5 +144,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-});
+  // Show first section by default
+if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+})
