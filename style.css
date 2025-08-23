@@ -201,10 +201,14 @@ a { color: #fff; text-decoration: none; }
 
 /* === Mobile-only pinned texts at page bottom === */
 @media (max-width: 767px) {
+  body {
+    padding-bottom: 120px; /* ensures you can scroll low enough to see the texts */
+  }
+
   .mobile-bottom-text {
     text-align: center;
-    margin-top: 40px;  /* spacing above the texts */
-    padding-bottom: 20px; /* breathing room at bottom */
+    margin-top: 40px;  
+    padding-bottom: 40px; 
   }
 
   .mobile-white-text {
