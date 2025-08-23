@@ -1,8 +1,17 @@
 // === CONFIG ===
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
-const SECTION_NAMES = ["FlipCards"]; // new single tab
+const SECTION_NAMES = [
+  "Uncommon",
+  "Rare",
+  "Epic",
+  "Legendary",
+  "Omega",
+  "Misc",
+  "Cars",
+  // "Car Customisation"
+];
 
-// === FETCH HELPER ===
+// === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
   try {
     const base = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq`;
@@ -10,6 +19,7 @@ async function fetchSheet(sheetName) {
     const res = await fetch(url);
     const text = await res.text();
     const json = JSON.parse(text.substring(47, text.length - 2));
+
     const cols = json.table.cols.map(c => c.label?.trim() || "");
     const rows = json.table.rows || [];
     const items = rows.map(r => {
@@ -20,6 +30,7 @@ async function fetchSheet(sheetName) {
       });
       return obj;
     });
+
     return items.filter(x => String(x["Name"] || "").trim().length > 0);
   } catch (err) {
     console.error(`Failed to fetch sheet: ${sheetName}`, err);
@@ -36,14 +47,12 @@ function createCard(item) {
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
 
-  const flipToggle = safe(item["Flip Toggle"]).toLowerCase() === "yes";
-  const flipImg = safe(item["Flip Image URL"]);
-  const flipText = safe(item["Flip Text"]);
-
-  const imgTag = img ? `<img src="${img}" alt="${name}" />` : "";
+  const imgTag = img
+    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
+    : "";
 
   return `
-    <div class="card" data-name="${escapeAttr(name)}" ${flipToggle ? 'data-flip-img="'+flipImg+'" data-flip-text="'+flipText+'"' : ''}>
+    <div class="card" data-name="${escapeAttr(name)}">
       ${imgTag}
       <div class="card-info">
         <h3>${name}</h3>
@@ -58,6 +67,7 @@ function createCard(item) {
 
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
+
   const html = `
     <section class="section" id="${slugify(title)}">
       <h2>${title}</h2>
@@ -69,7 +79,7 @@ function renderSection(title, items) {
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
-// === NAVIGATION ===
+// === SECTION NAVIGATION ===
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
   SECTION_NAMES.forEach(name => {
@@ -94,6 +104,7 @@ function showSection(name) {
 function initSearch() {
   const input = document.getElementById("search");
   if (!input) return;
+
   input.addEventListener("input", () => {
     const val = input.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card => {
@@ -108,25 +119,12 @@ function initTaxCalculator() {
   const taxInput = document.getElementById("taxInput");
   const taxResult = document.getElementById("taxResult");
   if (!taxInput || !taxResult) return;
+
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
-  });
-}
+   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
 
-// === CARD CLICK TO FLIP ===
-function initCardClick() {
-  document.addEventListener("click", e => {
-    const card = e.target.closest(".card");
-    if (!card) return;
-    const flipImg = card.dataset.flipImg;
-    const flipText = card.dataset.flipText;
-    if (flipImg || flipText) {
-      card.classList.add("flipped");
-      if (flipImg) card.querySelector("img").src = flipImg;
-      if (flipText) card.querySelector("h3").textContent = flipText;
-    }
   });
 }
 
@@ -146,6 +144,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-  initCardClick();
-});
+  // Show first section by default
+if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+})
