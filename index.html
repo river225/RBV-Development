@@ -6,119 +6,99 @@
 <title>BlockSpin Values</title>
 <link rel="stylesheet" href="style.css" />
 <style>
-/* Floating buttons at the bottom */
-.bottom-buttons {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-}
-.bottom-buttons .btn {
-    padding: 12px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    color: rgb(255, 255, 255);
-}
-.discord-btn {
-    background-color: #5865f2;
-}
-.tiktok-btn {
-    background-color: #FE2C55;
-}
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #1c1c1c; color: #fff; }
+a { color: #fff; text-decoration: none; }
 
-/* Header styling */
-.site-header {
-    text-align: center;
-    padding: 20px 20px 10px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.site-header h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
-    color: white;
-}
+/* Header */
+.site-header { text-align: left; max-width: 1100px; margin: 0 auto 16px; padding: 16px; }
+.header-top { display: flex; align-items: center; justify-content: space-between; }
+.header-buttons { display: flex; gap: 10px; }
+.btn { padding: 8px 12px; border-radius: 8px; border: 1px solid #4a4a4a; background: #3a3a3a; }
 
 /* Search bar */
 .search-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: 10px 0 20px 0;
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  text-align: center;
 }
-.search-container input {
-    width: 300px;
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-/* Section banner */
-.section-banner {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto 20px auto;
-    text-align: center;
-}
-.section-banner img {
-    width: 100%;
-    max-height: 250px;
-    object-fit: contain;
-    border-radius: 12px;
-    display: none; /* hidden by default */
+#search {
+  display: inline-block;
+  margin: 0 0 0 100px;
+  width: 300px;
+  max-width: 90%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #0b0101;
+  background: #3a3a3a;
+  color: #fff;
 }
 
-/* Main layout */
+/* === Main layout === */
 .main-container {
-    display: flex;
-    gap: 20px;
-    padding: 0 20px 40px 20px;
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 20px;
+  align-items: stretch;
 }
 .sections-nav {
-    flex: 1;
+  width: 200px;
+  padding: 8px;
+  border-right: 2px solid #4a4a4a;
 }
-.sections {
-    flex: 3;
-}
+.sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
+.sections-nav button.active { background: #232324; }
+
+.sections { flex: 3; display: flex; flex-direction: column; gap: 24px; }
+
+/* Cards */
+.cards { display: flex; flex-wrap: wrap; gap: 16px; }
+.card { flex: 1 1 calc(50% - 16px); display: flex; gap: 16px; border: 1px solid #0b0101; border-radius: 12px; padding: 12px; background: #4a4a4a; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.card:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+.card img { width: 150px; height: 150px; object-fit: contain; border-radius: 8px; background: #2e2e2e; }
+.card-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.card-info h3 { margin:0; font-size:1.1rem; }
+.card-info .badge { display:inline-block; padding:2px 6px; border-radius:999px; border:1px solid #090808; background:#070012; font-size:0.8rem; margin-bottom:4px; }
+.hidden { display: none !important; }
 
 /* Tax calculator */
-.tax-calculator {
-    flex: 1;
-    padding: 15px;
-    max-width: 250px;
-    position: sticky;
-    top: 10px;
-    height: fit-content;
-}
+.tax-calculator { width: 240px; padding: 16px; background: #1f2a33; border:1px solid #33cce6; border-radius:12px; position: sticky; top:16px; height: fit-content; }
+.tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { color:#33cce6; text-shadow:none; }
+.tax-calculator input { width:100%; padding:8px; margin-bottom:8px; border-radius:6px; border:1px solid #444; background:#2a3945; color:#fff; }
+#taxResult .calc-amount { color:#ffde59; font-weight:bold; }
+#taxResult .calc-amount::before { content:"$"; color:#00ff7f; margin-right:3px; }
+
+/* Section banner */
+.section-banner { width:100%; max-width:1400px; margin:0 auto 20px auto; text-align:center; }
+.section-banner img { width:100%; max-height:250px; object-fit:contain; border-radius:12px; display:none; }
+
+/* Section spacing */
+.section { margin-bottom: 40px; }
+
+/* Floating texts & effects */
+#floating-text, #floating-text-left { z-index:1000; }
+#floating-text { position:fixed; bottom:10px; right:10px; color:rgb(26,216,26); font-weight:bold; }
+#floating-text-left { position:fixed; bottom:6px; left:10px; color:white; font-weight:500; font-family:"Segoe UI", Roboto, Arial, sans-serif; font-size:0.85rem; line-height:1.25; text-align:left; }
+.blockspin-header { font-size:4rem; font-weight:bold; text-align:center; color:white; text-shadow:4px 0 0 #000,-4px 0 0 #000,0 4px 0 #000,0 -4px 0 #000,2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 0 6px #fff,0 0 12px #fff,0 0 18px #ccc; }
+.blockspin-header .spin-word { color:#ff1a1a; text-shadow:4px 0 0 #000,-4px 0 0 #000,0 4px 0 #000,0 -4px 0 #000,2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 0 10px #ff1a1a,0 0 20px #ff3333,0 0 30px #ff4d4d,0 0 40px #ff6666,0 0 55px #ff8080; animation:redNeonPulse 4s ease-in-out infinite alternate,redFlicker 10s infinite; }
+@media(max-width:900px){.main-container{flex-direction:column}.sections-nav,.tax-calculator{width:100%;position:relative}.card{flex-direction:column;width:100%}.card img{width:100%;height:auto}.card-info{text-align:center}.section-banner img{display:none !important;}}
+@media(max-width:767px){.search-container{display:flex !important;justify-content:center !important;align-items:center !important;margin:20px auto !important;width:100% !important}.search-container input{width:90% !important;max-width:320px !important;text-align:center !important;margin:0 auto !important;display:block !important}.tax-calculator{display:block !important;margin:20px auto !important;max-width:320px !important;text-align:center !important;float:none !important;position:relative !important;top:auto !important}#floating-text,#floating-text-left{display:none !important}}
 </style>
 </head>
 <body>
 
 <!-- Header -->
 <header class="site-header">
-<h1 class="blockspin-header">
-  Block<span class="spin-word">Spin</span> Values
-</h1>
-
+<h1 class="blockspin-header">Block<span class="spin-word">Spin</span> Values</h1>
 <p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p>
-<p><em>You can suggest value changes or website changes in our discord ! we are currently hiring people good at BlockSpin Values, join discord for more information. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5 </em></p>
+<p><em>You can suggest value changes or website changes in our discord! We are currently hiring people good at BlockSpin Values. Join Discord for more info. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5</em></p>
 </header>
 
-<!-- Search bar -->
+<!-- Search -->
 <div class="search-container">
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
-</div>
-
-<!-- Section banner (PC only) -->
-<div class="section-banner">
-  <img id="sectionBanner" src="" alt="Section Banner">
 </div>
 
 <div class="main-container">
@@ -126,7 +106,12 @@
     <!-- Section navigation -->
     <nav class="sections-nav" id="sections-nav"></nav>
 
-    <!-- Main content area -->
+    <!-- Section banner (PC only) -->
+    <div class="section-banner">
+      <img id="sectionBanner" src="" alt="Section Banner">
+    </div>
+
+    <!-- Main sections -->
     <main id="sections" class="sections"></main>
 
     <!-- Tax calculator -->
@@ -141,20 +126,91 @@
 
 </div>
 
-<!-- Floating buttons at the bottom -->
+<!-- Floating buttons -->
 <div class="bottom-buttons">
 <a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a>
 <a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a>
 </div>
 
-<script src="script.js"></script>
-
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
-
 <div id="floating-text-left">
   <div>Want to suggest value changes or trade your items?</div>
   <div class="discord-line">Join our Discord!</div>
 </div>
+
+<script>
+// === CONFIG ===
+const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
+const SECTION_NAMES = ["Uncommon","Rare","Epic","Legendary","Omega","Misc","Cars"];
+
+// === FETCH HELPERS ===
+async function fetchSheet(sheetName){
+  try{
+    const base=`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq`;
+    const url=`${base}?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&headers=1`;
+    const res=await fetch(url);
+    const text=await res.text();
+    const json=JSON.parse(text.substring(47,text.length-2));
+    const cols=json.table.cols.map(c=>c.label?.trim()||"");
+    const rows=json.table.rows||[];
+    return rows.map(r=>{
+      const obj={};
+      cols.forEach((label,i)=>{
+        const cell=r.c?.[i];
+        obj[label]=cell?(cell.f??cell.v??""):"";
+      });
+      return obj;
+    }).filter(x=>String(x["Name"]||"").trim().length>0);
+  }catch(err){console.error(`Failed to fetch sheet: ${sheetName}`,err); return [];}
+}
+
+// === RENDERING ===
+function createCard(item){
+  const name=safe(item["Name"]), img=safe(item["Image URL"]), demand=safe(item["Demand"]), avg=safe(item["Average Value"]), ranged=safe(item["Ranged Value"]), afterTax=safe(item["After Tax Value"]);
+  const imgTag=img?`<img src="${img}" alt="${name}" onerror="this.style.display='none'">`:"";
+  return `<div class="card" data-name="${escapeAttr(name)}">${imgTag}<div class="card-info"><h3>${name}</h3>${demand?`<span class="badge">Demand: ${demand}</span>`:""}${avg?`<div>Average Value: ${avg}</div>`:""}${ranged?`<div>Ranged Value: ${ranged}</div>`:""}${afterTax?`<div>After Tax Value: ${afterTax}</div>`:""}</div></div>`;
+}
+function renderSection(title, items){
+  if(!items||items.length===0)return;
+  const html=`<section class="section" id="${slugify(title)}"><h2>${title}</h2><div class="cards">${items.map(createCard).join("")}</div></section>`;
+  document.getElementById("sections").insertAdjacentHTML("beforeend",html);
+}
+
+// === NAV & SEARCH & TAX ===
+function initSectionsNav(){const nav=document.getElementById("sections-nav");SECTION_NAMES.forEach(name=>{const btn=document.createElement("button");btn.textContent=name;btn.addEventListener("click",()=>showSection(name));nav.appendChild(btn);});}
+function initSearch(){const input=document.getElementById("search");if(!input)return;input.addEventListener("input",()=>{const val=input.value.toLowerCase();document.querySelectorAll(".card").forEach(card=>{card.classList.toggle("hidden",!card.dataset.name.toLowerCase().includes(val))});});}
+function initTaxCalculator(){const taxInput=document.getElementById("taxInput");const taxResult=document.getElementById("taxResult");if(!taxInput||!taxResult)return;taxInput.addEventListener("input",()=>{const val=parseFloat(taxInput.value)||0;const withdraw=Math.round(val/0.72);taxResult.innerHTML=`Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;});}
+
+// === HELPERS ===
+function safe(str){return str??"";}
+function escapeAttr(str){return(""+str).replace(/"/g,"&quot;");}
+function slugify(str){return str.toLowerCase().replace(/\s+/g,"-");}
+
+// === BANNERS & INIT ===
+const bannerImg=document.getElementById("sectionBanner");
+let sectionBanners={};
+
+async function fetchSectionBanners(){try{const data=await fetchSheet("SectionsBanner");data.forEach(row=>{const section=row["Section Name"];const url=row["Banner URL"];if(section&&url)sectionBanners[section]=url;});}catch(e){console.error("Failed to fetch banners",e);}}
+
+function updateBanner(sectionName){if(window.innerWidth<=900)return;const url=sectionBanners[sectionName];if(url){bannerImg.src=url;bannerImg.style.display="block";}else{bannerImg.src="";bannerImg.style.display="none";}}
+
+function showSection(name){
+  SECTION_NAMES.forEach(sec=>{const el=document.getElementById(slugify(sec));if(el)el.style.display=sec===name?"block":"none";});
+  document.querySelectorAll("#sections-nav button").forEach(b=>b.classList.toggle("active",b.textContent===name));
+  updateBanner(name);
+}
+
+async function initSections(){
+  initSectionsNav();
+  initSearch();
+  initTaxCalculator();
+  await fetchSectionBanners();
+  for(const sec of SECTION_NAMES){const items=await fetchSheet(sec);renderSection(sec,items);}
+  if(SECTION_NAMES.length>0)showSection(SECTION_NAMES[0]);
+  window.showSection=showSection;
+}
+initSections();
+</script>
 
 </body>
 </html>
