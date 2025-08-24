@@ -8,6 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
+  // "Car Customisation"
 ];
 
 // === FETCH HELPERS ===
@@ -89,6 +90,16 @@ function initSectionsNav() {
   });
 }
 
+function showSection(name) {
+  SECTION_NAMES.forEach(sec => {
+    const el = document.getElementById(slugify(sec));
+    if (el) el.style.display = sec === name ? "block" : "none";
+  });
+  document.querySelectorAll("#sections-nav button").forEach(b => {
+    b.classList.toggle("active", b.textContent === name);
+  });
+}
+
 // === SEARCH ===
 function initSearch() {
   const input = document.getElementById("search");
@@ -112,7 +123,8 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+
   });
 }
 
@@ -122,57 +134,16 @@ function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
 // === INIT ===
-(async function init() {
+document.addEventListener("DOMContentLoaded", async () => {
   initSectionsNav();
   initSearch();
   initTaxCalculator();
 
-  const bannerImg = document.getElementById("sectionBanner");
-  let sectionBanners = {};
-
-  async function fetchSectionBanners() {
-    const data = await fetchSheet("SectionsBanner");
-    data.forEach(row => {
-      const section = row["Section Name"];
-      const url = row["Banner URL"];
-      if (section && url) sectionBanners[section] = url;
-    });
-  }
-
-  function updateBanner(sectionName) {
-    if (window.innerWidth <= 900) { 
-      bannerImg.style.display = "none"; 
-      return;
-    }
-    if (sectionBanners[sectionName]) {
-      bannerImg.src = sectionBanners[sectionName];
-      bannerImg.style.display = "block";
-    } else {
-      bannerImg.src = "";
-      bannerImg.style.display = "none";
-    }
-  }
-
-  window.showSection = function showSection(name) {
-    SECTION_NAMES.forEach(sec => {
-      const el = document.getElementById(slugify(sec));
-      if (el) el.style.display = sec === name ? "block" : "none";
-    });
-    document.querySelectorAll("#sections-nav button").forEach(b => {
-      b.classList.toggle("active", b.textContent === name);
-    });
-    updateBanner(name);
-  }
-
-  // Fetch banners first
-  await fetchSectionBanners();
-
-  // Render sections
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
     renderSection(sec, items);
   }
 
   // Show first section by default
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-})();
+if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+})

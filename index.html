@@ -1,132 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BlockSpin Values</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-/* Base styles omitted for brevity; keep your original CSS here */
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<title>BlockSpin Values</title> 
+<link rel="stylesheet" href="style.css" /> 
+<style> 
+/* Floating buttons at the bottom */ 
+.bottom-buttons { 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex; 
+    gap: 15px; 
+} 
+.bottom-buttons .btn { 
+    padding: 12px 20px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    border-radius: 8px; 
+    color: rgb(255, 255, 255); 
+} 
+.discord-btn { 
+    background-color: #5865f2; 
+} 
+.tiktok-btn { 
+    background-color: #FE2C55; 
+} 
 
-/* Section banner */
-.section-banner { width:100%; max-width:1400px; margin:0 auto 20px auto; text-align:center; }
-.section-banner img { width:100%; max-height:250px; object-fit:contain; border-radius:12px; display:none; }
+/* Header styling */ 
+.site-header { 
+    text-align: center; 
+    padding: 20px 20px 10px 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+} 
+.site-header h1 { 
+    font-size: 4rem; 
+    margin-bottom: 10px; 
+    color: white; 
+} 
 
-@media(max-width:900px){
-  .section-banner img { display:none !important; }
-}
-</style>
-</head>
-<body>
+/* Search bar */ 
+.search-container { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    margin: 10px 0 20px 0; 
+} 
+.search-container input { 
+    width: 300px; 
+    padding: 10px; 
+    font-size: 1rem; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+} 
 
-<!-- Header -->
-<header class="site-header">
-<h1 class="blockspin-header">Block<span class="spin-word">Spin</span> Values</h1>
-<p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p>
-<p><em>You can suggest value changes or website changes in our discord! We are currently hiring people good at BlockSpin Values. Join Discord for more info. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5</em></p>
-</header>
+/* Main layout */ 
+.main-container { 
+    display: flex; 
+    gap: 20px; 
+    padding: 0 20px 40px 20px; 
+} 
+.sections-nav { 
+    flex: 1; 
+} 
+.sections { 
+    flex: 3; 
+} 
 
-<!-- Search -->
-<div class="search-container">
-<input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
+/* Tax calculator */ 
+.tax-calculator { 
+    flex: 1; 
+    padding: 15px; 
+    max-width: 250px; 
+    position: sticky; 
+    top: 10px; 
+    height: fit-content; 
+} 
+</style> 
+</head> 
+<body> 
+
+<!-- Header --> 
+<header class="site-header"> 
+
+<h1 class="blockspin-header">
+  Block<span class="spin-word">Spin</span> Values
+</h1>
+
+
+
+    <!---- <h1>
+<span class="block-word">Block</span><span class="spin-word">Spin</span> Values
+</h1> -->
+
+
+<p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p> 
+<p><em>You can suggest value changes or website changes in our discord ! we are currently hiring people good at BlockSpin Values, join discord for more information. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5 </em></p> 
+</header> 
+
+<!-- Search bar --> 
+<div class="search-container"> 
+<input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
+</div> 
+
+<div class="main-container"> 
+
+    <!-- Section navigation --> 
+    <nav class="sections-nav" id="sections-nav"></nav> 
+
+    <!-- Main content area --> 
+    <main id="sections" class="sections"></main> 
+
+    <!-- Tax calculator --> 
+    <aside class="tax-calculator"> 
+        <h2>Tax Calculator</h2> 
+        <input type="number" id="taxInput" placeholder="Amount..." /> 
+  <div id="taxResult">
+  Amount to withdraw: <span class="calc-amount">0</span>
 </div>
 
-<div class="main-container">
+        <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p> 
+    </aside> 
 
-  <!-- Section navigation -->
-  <nav class="sections-nav" id="sections-nav"></nav>
 
-  <!-- Hardcoded section banner -->
-  <div class="section-banner">
-    <img id="sectionBanner" src="" alt="Section Banner">
-  </div>
-
-  <!-- Main sections -->
-  <main id="sections" class="sections"></main>
-
-  <!-- Tax calculator -->
-  <aside class="tax-calculator">
-      <h2>Tax Calculator</h2>
-      <input type="number" id="taxInput" placeholder="Amount..." />
-      <div id="taxResult">
-        Amount to withdraw: <span class="calc-amount">0</span>
-      </div>
-      <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p>
-  </aside>
+<!--- <div id="taxResult">Amount to withdraw: 0</div> -->
 
 </div>
 
-<!-- Floating buttons -->
-<div class="bottom-buttons">
-<a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a>
-<a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a>
-</div>
+<!-- Floating buttons at the bottom --> 
+<div class="bottom-buttons"> 
+<a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a> 
+<a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a> 
+</div> 
 
+<script src="script.js"></script> 
+<!-- your existing content -->
+ 
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
+
 <div id="floating-text-left">
   <div>Want to suggest value changes or trade your items?</div>
   <div class="discord-line">Join our Discord!</div>
 </div>
 
-<script>
-// === CONFIG ===
-const SECTION_NAMES = ["Uncommon","Rare","Epic","Legendary","Omega","Misc","Cars"];
-
-// Hardcoded banners
-const BANNERS = {
-  "Uncommon":"https://i.imgur.com/L3pFt8u.png",
-  "Rare":"https://i.imgur.com/RrN9R0q.png",
-  "Epic":"https://i.imgur.com/fj4KXcR.png",
-  "Legendary":"https://i.imgur.com/ydpFzZr.png",
-  "Omega":"https://i.imgur.com/Dt2I8o1.png",
-  "Misc":"https://i.imgur.com/LFqOvhR.png",
-  "Cars":"https://i.imgur.com/1Y9QJua.png"
-};
-
-// === RENDERING & HELPERS ===
-function createCard(item){
-  const name=item["Name"]||"", img=item["Image URL"]||"", demand=item["Demand"]||"", avg=item["Average Value"]||"", ranged=item["Ranged Value"]||"", afterTax=item["After Tax Value"]||"";
-  const imgTag=img?`<img src="${img}" alt="${name}" onerror="this.style.display='none'">`:"";
-  return `<div class="card" data-name="${name}">${imgTag}<div class="card-info"><h3>${name}</h3>${demand?`<span class="badge">Demand: ${demand}</span>`:""}${avg?`<div>Average Value: ${avg}</div>`:""}${ranged?`<div>Ranged Value: ${ranged}</div>`:""}${afterTax?`<div>After Tax Value: ${afterTax}</div>`:""}</div></div>`;
-}
-function renderSection(title, items){
-  if(!items||items.length===0)return;
-  const html=`<section class="section" id="${title}"><h2>${title}</h2><div class="cards">${items.map(createCard).join("")}</div></section>`;
-  document.getElementById("sections").insertAdjacentHTML("beforeend",html);
-}
-
-// === NAV & SEARCH ===
-function initSectionsNav(){const nav=document.getElementById("sections-nav");SECTION_NAMES.forEach(name=>{const btn=document.createElement("button");btn.textContent=name;btn.addEventListener("click",()=>showSection(name));nav.appendChild(btn);});}
-function initSearch(){const input=document.getElementById("search");if(!input)return;input.addEventListener("input",()=>{const val=input.value.toLowerCase();document.querySelectorAll(".card").forEach(card=>{card.classList.toggle("hidden",!card.dataset.name.toLowerCase().includes(val))});});}
-
-// === TAX CALCULATOR ===
-function initTaxCalculator(){const taxInput=document.getElementById("taxInput");const taxResult=document.getElementById("taxResult");if(!taxInput||!taxResult)return;taxInput.addEventListener("input",()=>{const val=parseFloat(taxInput.value)||0;const withdraw=Math.round(val/0.72);taxResult.innerHTML=`Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;});}
-
-// === BANNERS ===
-const bannerImg=document.getElementById("sectionBanner");
-function updateBanner(sectionName){if(window.innerWidth<=900)return;const url=BANNERS[sectionName];if(url){bannerImg.src=url;bannerImg.style.display="block";}else{bannerImg.style.display="none";}}
-
-// === SHOW SECTION ===
-function showSection(name){
-  SECTION_NAMES.forEach(sec=>{const el=document.getElementById(sec);if(el)el.style.display=sec===name?"block":"none";});
-  document.querySelectorAll("#sections-nav button").forEach(b=>b.classList.toggle("active",b.textContent===name));
-  updateBanner(name);
-}
-
-// === INIT ===
-document.addEventListener("DOMContentLoaded",()=>{
-  initSectionsNav();
-  initSearch();
-  initTaxCalculator();
-
-  // Example: render dummy sections (replace with your JSON fetch if needed)
-  SECTION_NAMES.forEach(sec=>{
-    renderSection(sec,[{Name:sec+" Item 1", "Image URL":"https://i.imgur.com/4AiXzf8.png","Demand":"High","Average Value":"100","Ranged Value":"80-120","After Tax Value":"72"}]);
-  });
-
-  showSection(SECTION_NAMES[0]);
-});
-</script>
-
-</body>
+</body> 
 </html>
