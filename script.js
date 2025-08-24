@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function updateBanner(sectionName) {
+    if (window.innerWidth <= 900) return; // PC only
     if (sectionBanners[sectionName]) {
       bannerImg.src = sectionBanners[sectionName];
       bannerImg.style.display = "block";
