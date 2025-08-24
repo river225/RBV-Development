@@ -122,18 +122,16 @@ function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
 // === INIT ===
-(async function() {
-
+(async function init() {
   initSectionsNav();
   initSearch();
   initTaxCalculator();
 
-  // SECTION BANNERS
   const bannerImg = document.getElementById("sectionBanner");
-  let sectionBanners = {}; // store banner URLs
+  let sectionBanners = {};
 
   async function fetchSectionBanners() {
-    const data = await fetchSheet("SectionsBanner"); // sheet name
+    const data = await fetchSheet("SectionsBanner");
     data.forEach(row => {
       const section = row["Section Name"];
       const url = row["Banner URL"];
@@ -142,7 +140,10 @@ function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
   }
 
   function updateBanner(sectionName) {
-    if (window.innerWidth <= 900) return; // PC only
+    if (window.innerWidth <= 900) { 
+      bannerImg.style.display = "none"; 
+      return;
+    }
     if (sectionBanners[sectionName]) {
       bannerImg.src = sectionBanners[sectionName];
       bannerImg.style.display = "block";
@@ -152,8 +153,7 @@ function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
     }
   }
 
-  // override showSection to update banner
-  function showSection(name) {
+  window.showSection = function showSection(name) {
     SECTION_NAMES.forEach(sec => {
       const el = document.getElementById(slugify(sec));
       if (el) el.style.display = sec === name ? "block" : "none";
@@ -161,23 +161,18 @@ function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
     document.querySelectorAll("#sections-nav button").forEach(b => {
       b.classList.toggle("active", b.textContent === name);
     });
-
     updateBanner(name);
   }
 
-  // fetch banners first
+  // Fetch banners first
   await fetchSectionBanners();
 
-  // render sections
+  // Render sections
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
     renderSection(sec, items);
   }
 
-  // show first section by default
+  // Show first section by default
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-
-  // replace original global showSection reference
-  window.showSection = showSection;
-
 })();
