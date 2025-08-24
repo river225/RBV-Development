@@ -11,49 +11,6 @@ const SECTION_NAMES = [
   // "Car Customisation"
 ];
 
-// === SECTION BANNERS ===
-const BANNER_SHEET = "Section Images"; // Sheet name where you store Section -> Image URL
-let sectionBanners = {}; // Store section -> image mapping
-
-// Fetch section banners from spreadsheet
-async function fetchSectionBanners() {
-  try {
-    const base = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq`;
-    const url = `${base}?tqx=out:json&sheet=${encodeURIComponent(BANNER_SHEET)}&headers=1`;
-    const res = await fetch(url);
-    const text = await res.text();
-    const json = JSON.parse(text.substring(47, text.length - 2));
-
-    const cols = json.table.cols.map(c => c.label?.trim() || "");
-    const rows = json.table.rows || [];
-    rows.forEach(r => {
-      const obj = {};
-      cols.forEach((label, i) => {
-        const cell = r.c?.[i];
-        obj[label] = cell ? (cell.f ?? cell.v ?? "") : "";
-      });
-      const section = obj["Section"]?.trim();
-      const img = obj["Image URL"]?.trim();
-      if(section && img) sectionBanners[section] = img;
-    });
-  } catch (err) {
-    console.error("Failed to fetch section banners", err);
-  }
-}
-
-// Show banner for a section (PC only)
-function showSectionBanner(sectionName) {
-  if (window.innerWidth <= 767) return; // skip for mobile
-  const imgEl = document.getElementById("section-banner-img");
-  if (!imgEl) return;
-  const src = sectionBanners[sectionName] || "";
-  imgEl.style.opacity = 0; // fade out
-  setTimeout(() => {
-    imgEl.src = src;
-    imgEl.style.opacity = 1; // fade in
-  }, 200);
-}
-
 // === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
   try {
@@ -141,9 +98,6 @@ function showSection(name) {
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
-
-  // <-- Show corresponding banner (desktop only)
-  showSectionBanner(name);
 }
 
 // === SEARCH ===
@@ -169,7 +123,8 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+
   });
 }
 
@@ -184,14 +139,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSearch();
   initTaxCalculator();
 
-  // <-- Fetch banners first
-  await fetchSectionBanners();
-
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
     renderSection(sec, items);
   }
 
   // Show first section by default
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-});
+if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+})
