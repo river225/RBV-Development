@@ -122,7 +122,7 @@ function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
 // === INIT ===
-document.addEventListener("DOMContentLoaded", async () => {
+(async function() {
 
   initSectionsNav();
   initSearch();
@@ -179,4 +179,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // replace original global showSection reference
   window.showSection = showSection;
-});
+
+})();
