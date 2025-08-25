@@ -40,6 +40,7 @@ a { color: #fff; text-decoration: none; }
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: flex-start; /* banner aligned top-left */
 }
 
 /* Section banner */
@@ -47,7 +48,7 @@ a { color: #fff; text-decoration: none; }
     width: 150px;
     height: auto;
     object-fit: contain;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* slightly move up */
 }
 
 /* Sections nav */
@@ -96,7 +97,7 @@ a { color: #fff; text-decoration: none; }
 /* Responsive */
 @media (max-width: 900px) {
   .main-container { flex-direction: column; }
-  .nav-banner-wrapper { flex-direction: row; gap: 10px; justify-content: center; }
+  .nav-banner-wrapper { flex-direction: row; gap: 10px; justify-content: center; align-items: flex-start; }
   .sections-nav, .tax-calculator { width: 100%; position: relative; }
   .card { flex-direction: column; width: 100%; }
   .card img { width: 100%; height: auto; }
