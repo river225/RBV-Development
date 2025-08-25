@@ -8,7 +8,6 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
-  // "Car Customisation"
 ];
 
 // Map section names to banner images
@@ -108,7 +107,7 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // === Show banner image only on PC (min-width 768px)
+  // Banner logic only added, nothing else modified
   const banner = document.getElementById("section-banner");
   if (window.innerWidth >= 768) {
     banner.src = SECTION_BANNERS[name] || "";
@@ -147,7 +146,7 @@ function initTaxCalculator() {
 
 // === HELPERS ===
 function safe(str) { return str ?? ""; }
-function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
+function escapeAttr(str) { return (str + "").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
 // === INIT ===
@@ -161,6 +160,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  // Show first section by default
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 });

@@ -106,3 +106,16 @@ a { color: #fff; text-decoration: none; }
   .tax-calculator { display: block !important; margin: 20px auto !important; max-width: 320px !important; text-align: center !important; float: none !important; position: relative !important; top: auto !important; }
   #floating-text, #floating-text-left { display: none !important; }
 }
+
+
+/* Base CSS is untouched, your original full CSS goes here ... */
+
+/* Banner CSS added */
+#section-banner {
+    width: 150px;       /* small */
+    height: auto;
+    object-fit: contain;
+    margin-right: 20px; /* space between banner and nav */
+}
+
+/* All your original CSS remains exactly as it was */
