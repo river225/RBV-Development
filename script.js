@@ -8,20 +8,17 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
-  // "Car Customisation"
 ];
 
-// === SECTION BANNERS (new) ===
-// Replace these URLs with your banner images for each section
+// === SECTION BANNERS ===
 const SECTION_BANNERS = {
-  "Uncommon": "https://yourcdn.com/uncommon-banner.png",
+  "Uncommon": "https://i.imgur.com/9BEC888.png",
   "Rare": "https://i.imgur.com/9BEC888.png",
-  "Epic": "https://yourcdn.com/epic-banner.png",
-  "Legendary": "https://yourcdn.com/legendary-banner.png",
-  "Omega": "https://yourcdn.com/omega-banner.png",
-  "Misc": "https://yourcdn.com/misc-banner.png",
-  "Cars": "https://yourcdn.com/cars-banner.png",
-  // "Car Customisation": "..."
+  "Epic": "https://i.imgur.com/9BEC888.png",
+  "Legendary": "https://i.imgur.com/9BEC888.png",
+  "Omega": "https://i.imgur.com/9BEC888.png",
+  "Misc": "https://i.imgur.com/9BEC888.png",
+  "Cars": "https://i.imgur.com/9BEC888.png"
 };
 
 // === FETCH HELPERS ===
@@ -60,9 +57,7 @@ function createCard(item) {
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
 
-  const imgTag = img
-    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
-    : "";
+  const imgTag = img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">` : "";
 
   return `
     <div class="card" data-name="${escapeAttr(name)}">
@@ -112,10 +107,7 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // === SHOW SECTION BANNER (desktop only) ===
-  if (window.innerWidth > 900) {
-    updateSectionBanner(name);
-  }
+  if (window.innerWidth > 900) updateSectionBanner(name);
 }
 
 // === SECTION BANNER FUNCTION ===
@@ -188,5 +180,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+  if (SECTION_NAMES.length > 0) {
+    showSection(SECTION_NAMES[0]);
+    if (window.innerWidth > 900) updateSectionBanner(SECTION_NAMES[0]);
+  }
 });
