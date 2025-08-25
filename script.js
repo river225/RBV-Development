@@ -8,17 +8,18 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
+  // "Car Customisation"
 ];
 
-// === SECTION BANNERS ===
+// Map section names to banner images
 const SECTION_BANNERS = {
   "Uncommon": "https://i.imgur.com/9BEC888.png",
-  "Rare": "https://i.imgur.com/9BEC888.png",
-  "Epic": "https://i.imgur.com/9BEC888.png",
-  "Legendary": "https://i.imgur.com/9BEC888.png",
-  "Omega": "https://i.imgur.com/9BEC888.png",
-  "Misc": "https://i.imgur.com/9BEC888.png",
-  "Cars": "https://i.imgur.com/9BEC888.png"
+  "Rare": "https://i.imgur.com/AQKsONR.png",
+  "Epic": "https://i.imgur.com/REPLACE_EPIC.png",
+  "Legendary": "https://i.imgur.com/REPLACE_LEGENDARY.png",
+  "Omega": "https://i.imgur.com/REPLACE_OMEGA.png",
+  "Misc": "https://i.imgur.com/REPLACE_MISC.png",
+  "Cars": "https://i.imgur.com/REPLACE_CARS.png"
 };
 
 // === FETCH HELPERS ===
@@ -107,41 +108,21 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  if (window.innerWidth > 900) updateSectionBanner(name);
-}
-
-// === SECTION BANNER FUNCTION ===
-function updateSectionBanner(sectionName) {
-  const bannerDiv = document.getElementById("section-banner");
-  if (!bannerDiv) return;
-
-  const url = SECTION_BANNERS[sectionName];
-  if (!url) {
-    bannerDiv.style.display = "none";
-    return;
+  // === Show banner image only on PC (min-width 768px)
+  const banner = document.getElementById("section-banner");
+  if (window.innerWidth >= 768) {
+    banner.src = SECTION_BANNERS[name] || "";
+    banner.style.display = SECTION_BANNERS[name] ? "block" : "none";
+  } else {
+    banner.style.display = "none";
   }
-
-  bannerDiv.style.display = "block";
-
-  const newImg = document.createElement("img");
-  newImg.src = url;
-  bannerDiv.appendChild(newImg);
-
-  requestAnimationFrame(() => { newImg.style.opacity = 1; });
-
-  const imgs = Array.from(bannerDiv.querySelectorAll("img"));
-  imgs.forEach(img => {
-    if (img !== newImg) {
-      img.style.opacity = 0;
-      img.addEventListener("transitionend", () => img.remove());
-    }
-  });
 }
 
 // === SEARCH ===
 function initSearch() {
   const input = document.getElementById("search");
   if (!input) return;
+
   input.addEventListener("input", () => {
     const val = input.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card => {
@@ -180,5 +161,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
+  // Show first section by default
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 });
