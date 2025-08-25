@@ -180,8 +180,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  if (SECTION_NAMES.length > 0) {
-    showSection(SECTION_NAMES[0]);
-    if (window.innerWidth > 900) updateSectionBanner(SECTION_NAMES[0]);
-  }
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 });
