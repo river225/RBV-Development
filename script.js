@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
+const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Uncommon",
   "Rare",
@@ -8,17 +8,19 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
+  // "Car Customisation"
 ];
 
-// Map section names to banner images
-const SECTION_BANNERS = {
-  "Uncommon": "https://i.imgur.com/9BEC888.png",
-  "Rare": "https://i.imgur.com/AQKsONR.png",
-  "Epic": "https://i.imgur.com/REPLACE_EPIC.png",
-  "Legendary": "https://i.imgur.com/REPLACE_LEGENDARY.png",
-  "Omega": "https://i.imgur.com/REPLACE_OMEGA.png",
-  "Misc": "https://i.imgur.com/REPLACE_MISC.png",
-  "Cars": "https://i.imgur.com/REPLACE_CARS.png"
+// Map section names to floating banner images
+const sectionImages = {
+  "Uncommon": "path/to/uncommon.png",
+  "Rare": "path/to/rare.png",
+  "Epic": "path/to/epic.png",
+  "Legendary": "path/to/legendary.png",
+  "Omega": "path/to/omega.png",
+  "Misc": "path/to/misc.png",
+  "Cars": "path/to/cars.png",
+  // add other sections here
 };
 
 // === FETCH HELPERS ===
@@ -77,6 +79,7 @@ function createCard(item) {
 
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
+
   const html = `
     <section class="section" id="${slugify(title)}">
       <h2>${title}</h2>
@@ -108,13 +111,12 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // Banner logic: only for desktop
-  const banner = document.getElementById("section-banner");
-  if (window.innerWidth >= 768) {
-    banner.src = SECTION_BANNERS[name] || "";
-    banner.style.display = SECTION_BANNERS[name] ? "block" : "none";
-  } else {
-    banner.style.display = "none";
+  // Update floating banner image per section
+  const banner = document.querySelector("#floating-section-banner img");
+  if (banner && sectionImages[name]) {
+    banner.src = sectionImages[name];
+  } else if (banner) {
+    banner.src = ""; // hide if no image
   }
 }
 
@@ -161,5 +163,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
+  // Show first section by default
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 });
