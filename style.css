@@ -40,18 +40,7 @@ a { color: #fff; text-decoration: none; }
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: relative; /* allows banner to move up */
-}
-
-/* Section banner */
-#section-banner {
-    position: absolute; /* lets us move it up */
-    top: -10px;         /* adjust this value to move banner higher/lower */
-    left: 0;            /* keep aligned with nav */
-    width: 150px;
-    height: auto;
-    object-fit: contain;
-    margin-bottom: 10px;
+    position: relative; /* relative for absolute banner positioning */
 }
 
 /* Sections nav */
@@ -97,7 +86,20 @@ a { color: #fff; text-decoration: none; }
 .blockspin-header { font-size: 4rem; font-weight: bold; text-align: center; color: white; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
 .blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
 
-/* Responsive */
+/* Section banner overlay only for desktop */
+@media (min-width: 768px) {
+    #section-banner {
+        position: absolute;   /* overlay sections */
+        top: -10px;           /* move banner up */
+        left: 0px;            /* align left */
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+        z-index: 2;           /* above sections nav */
+    }
+}
+
+/* Responsive adjustments */
 @media (max-width: 900px) {
   .main-container { flex-direction: column; }
   .nav-banner-wrapper { flex-direction: row; gap: 10px; justify-content: center; }
