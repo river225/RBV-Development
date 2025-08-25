@@ -90,12 +90,13 @@ a { color: #fff; text-decoration: none; }
 @media (min-width: 768px) {
     #section-banner {
         position: absolute;   /* overlay sections */
-        top: -10px;           /* move banner up */
+        top: -60px;           /* force banner higher up */
         left: 0px;            /* align left */
         width: 150px;
         height: auto;
         object-fit: contain;
         z-index: 2;           /* above sections nav */
+        pointer-events: none; /* banner won't block clicks */
     }
 }
 
