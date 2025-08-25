@@ -5,106 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
 <title>BlockSpin Values</title> 
 <link rel="stylesheet" href="style.css" /> 
-<style> 
-/* Floating buttons at the bottom */ 
-.bottom-buttons { 
-    position: fixed; 
-    bottom: 20px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    display: flex; 
-    gap: 15px; 
-} 
-.bottom-buttons .btn { 
-    padding: 12px 20px; 
-    text-decoration: none; 
-    font-weight: bold; 
-    border-radius: 8px; 
-    color: rgb(255, 255, 255); 
-} 
-.discord-btn { 
-    background-color: #5865f2; 
-} 
-.tiktok-btn { 
-    background-color: #FE2C55; 
-} 
-
-/* Header styling */ 
-.site-header { 
-    text-align: center; 
-    padding: 20px 20px 10px 20px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-} 
-.site-header h1 { 
-    font-size: 4rem; 
-    margin-bottom: 10px; 
-    color: white; 
-} 
-
-/* Search bar */ 
-.search-container { 
-    width: 100%; 
-    display: flex; 
-    justify-content: center; 
-    margin: 10px 0 20px 0; 
-} 
-.search-container input { 
-    width: 300px; 
-    padding: 10px; 
-    font-size: 1rem; 
-    border-radius: 8px; 
-    border: 1px solid #ccc; 
-    text-align: left; 
-} 
-
-/* Main layout */ 
-.main-container { 
-    display: flex; 
-    gap: 20px; 
-    padding: 0 20px 40px 20px; 
-} 
-.sections-nav { 
-    flex: 1; 
-} 
-.sections { 
-    flex: 3; 
-} 
-
-/* Tax calculator */ 
-.tax-calculator { 
-    flex: 1; 
-    padding: 15px; 
-    max-width: 250px; 
-    position: sticky; 
-    top: 10px; 
-    height: fit-content; 
-} 
-
-/* Floating Section Banner */
-#floating-section-banner {
-  position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  max-width: 120px;
-  z-index: 1000;
-  pointer-events: none;
-}
-#floating-section-banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Hide banner on mobile */
-@media (max-width: 900px) {
-  #floating-section-banner { display: none !important; }
-}
-
-</style> 
 </head> 
 <body> 
 
@@ -142,22 +42,20 @@
 
 </div>
 
-<!-- Floating buttons at the bottom --> 
+<!-- Bottom Buttons --> 
 <div class="bottom-buttons"> 
 <a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a> 
 <a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a> 
 </div> 
 
-<!-- Floating texts -->
+<!-- Floating Texts -->
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
 <div id="floating-text-left">
   <div>Want to suggest value changes or trade your items?</div>
   <div class="discord-line">Join our Discord!</div>
 </div>
 
-<!-- Floating section banner -->
-<div id="floating-section-banner"><img src="" alt="Section Banner"></div>
-
 <script src="script.js"></script> 
+
 </body> 
 </html>

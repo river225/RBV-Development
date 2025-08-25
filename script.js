@@ -1,4 +1,4 @@
- // === CONFIG ===
+// === CONFIG ===
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Uncommon",
@@ -7,18 +7,18 @@ const SECTION_NAMES = [
   "Legendary",
   "Omega",
   "Misc",
-  "Cars",
+  "Cars"
 ];
 
-// Map section names to floating banner images
-const sectionImages = {
+// Map section names to section banner images
+const sectionBanners = {
   "Uncommon": "path/to/uncommon.png",
   "Rare": "path/to/rare.png",
   "Epic": "path/to/epic.png",
   "Legendary": "path/to/legendary.png",
   "Omega": "path/to/omega.png",
   "Misc": "path/to/misc.png",
-  "Cars": "path/to/cars.png",
+  "Cars": "path/to/cars.png"
 };
 
 // === FETCH HELPERS ===
@@ -78,7 +78,12 @@ function createCard(item) {
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
 
+  // Add section banner above each section (desktop only)
+  const bannerHTML = sectionBanners[title] ? 
+    `<div class="section-banner"><img src="${sectionBanners[title]}" alt="${title} Banner"></div>` : "";
+
   const html = `
+    ${bannerHTML}
     <section class="section" id="${slugify(title)}">
       <h2>${title}</h2>
       <div class="cards">
@@ -108,14 +113,6 @@ function showSection(name) {
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
-
-  // Update floating banner image per section
-  const banner = document.querySelector("#floating-section-banner img");
-  if (banner && sectionImages[name]) {
-    banner.src = sectionImages[name];
-  } else if (banner) {
-    banner.src = "";
-  }
 }
 
 // === SEARCH ===
