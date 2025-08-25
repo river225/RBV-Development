@@ -18,7 +18,7 @@ a { color: #fff; text-decoration: none; }
 
 #search {
   display: inline-block;
-  margin: 0 0 0 100px; /* slightly more to the right */
+  margin: 0 0 0 100px;
   width: 300px;
   max-width: 90%;
   padding: 12px;
@@ -28,137 +28,90 @@ a { color: #fff; text-decoration: none; }
   color: #fff;
 }
 
-/* === Main layout changes start === */
+/* Main layout */
 .main-container {
     display: flex;
     max-width: 1400px;
     margin: 0 auto;
     gap: 20px;
-    align-items: stretch; /* NEW: makes nav stretch to match sections height */
+    align-items: stretch;
 }
 
 .sections-nav {
     width: 200px;
     padding: 8px;
-    border-right: 2px solid #4a4a4a; /* vertical line */
-    /* REMOVED: position: sticky; top: 16px; align-self: flex-start; */
+    border-right: 2px solid #4a4a4a;
 }
 
-/* KEEP these button styles exactly as they are */
 .sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
 .sections-nav button.active { background: #232324; }
 
-.sections {
-    flex: 3; /* UPDATED from flex:1 */
+.sections-wrapper {
+    flex: 3;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
-/* === Main layout changes end === */
+
+.sections { display: flex; flex-direction: column; gap: 24px; }
+
+/* === Section banner styles (new) === */
+.section-banner {
+    width: 100%;
+    max-height: 250px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: none;
+    position: relative;
+}
+
+.section-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 /* Cards container */
-.cards { 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 16px; 
-}
+.cards { display: flex; flex-wrap: wrap; gap: 16px; }
 
-/* Card */
-.card { 
-  flex: 1 1 calc(50% - 16px); 
-  display: flex; 
-  gap: 16px; 
-  border: 1px solid #0b0101; 
-  border-radius: 12px; 
-  padding: 12px; 
-  background: #4a4a4a;  /* keep original background */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth hover */
-}
+.card { flex: 1 1 calc(50% - 16px); display: flex; gap: 16px; border: 1px solid #0b0101; border-radius: 12px; padding: 12px; background: #4a4a4a; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.card:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); }
 
-.card:hover {
-  transform: translateY(-10px); /* lift effect */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* shadow underneath */
-}
+.card img { width: 150px; height: 150px; object-fit: contain; border-radius: 8px; background: #2e2e2e; }
 
-.card img { 
-  width: 150px; 
-  height: 150px; 
-  object-fit: contain; 
-  border-radius: 8px; 
-  background: #2e2e2e; 
-}
+.card-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.card-info h3 { margin: 0; font-size: 1.1rem; }
+.card-info .badge { display: inline-block; padding: 2px 6px; border-radius: 999px; border: 1px solid #090808; background: #070012; font-size: 0.8rem; margin-bottom: 4px; }
 
-.card-info { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 4px; 
-}
+.hidden { display: none !important; }
 
-.card-info h3 { 
-  margin: 0; 
-  font-size: 1.1rem; 
-}
+/* Tax Calculator */
+.tax-calculator { width: 240px; padding: 16px; background: #1f2a33; border: 1px solid #33cce6; border-radius: 12px; position: sticky; top: 16px; height: fit-content; }
+.tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { color: #33cce6; text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
+.tax-calculator input { width: 100%; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #444; background: #2a3945; color: #fff; }
 
-.card-info .badge { 
-  display: inline-block; 
-  padding: 2px 6px; 
-  border-radius: 999px; 
-  border: 1px solid #090808; 
-  background: #070012; 
-  font-size: 0.8rem; 
-  margin-bottom: 4px; 
-}
+#taxResult .calc-amount { color: #ffde59; font-weight: bold; }
+#taxResult .calc-amount::before { content: "$"; color: #00ff7f; margin-right: 3px; }
 
-.hidden { 
-  display: none !important; 
-}
-
-.tax-calculator { 
-  width: 240px; 
-  padding: 16px; 
-  background: #1f2a33; /* dark slate/charcoal background for contrast */ 
-  border: 1px solid #33cce6; /* softer cyan border */ 
-  border-radius: 12px; 
-  position: sticky; 
-  top: 16px; 
-  height: fit-content; 
-} 
-
-.tax-calculator h2, 
-.tax-calculator #taxResult, 
-.tax-calculator .tax-explanation, 
-.tax-calculator label { 
-  color: #33cce6; /* softer cyan text */ 
-  text-shadow: none; 
-} 
-
-.tax-calculator input { 
-  width: 100%; 
-  padding: 8px; 
-  margin-bottom: 8px; 
-  border-radius: 6px; 
-  border: 1px solid #444; 
-  background: #2a3945; /* slightly lighter than calc background */ 
-  color: #fff; 
-}
-
-
-/* Dollar sign and number color */
-#taxResult .calc-amount {
-  color: #ffde59; /* yellow number */
-  font-weight: bold;
-}
-
-#taxResult .calc-amount::before {
-  content: "$";
-  color: #00ff7f; /* green dollar sign */
-  margin-right: 3px;
-}
-
-
-/* Section spacing */
 .section { margin-bottom: 40px; }
+
+/* Floating text */
+#floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
+#floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
+#floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; }
+
+/* Header Neon */
+.blockspin-header { font-size: 4rem; font-weight: bold; text-align: center; color: white; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
+.blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
+@keyframes redNeonPulse { 0% { color: #e60000; } 100% { color: #ff1a1a; } }
+@keyframes redFlicker { 0%, 92%, 100% { opacity: 1; } 93% { opacity: 0.7; } 95% { opacity: 0.3; } 97% { opacity: 0.9; } 98% { opacity: 0.6; } 99% { opacity: 1; } }
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -167,61 +120,12 @@ a { color: #fff; text-decoration: none; }
   .card { flex-direction: column; width: 100%; }
   .card img { width: 100%; height: auto; }
   .card-info { text-align: center; }
+  .section-banner { display: none !important; } /* Banner hidden on mobile/tablet */
 }
 
-/* Floating texts, header, neon effects, outlines etc. remain untouched */
-#floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
-.card-info label, .card-info .section-label, .tax-calculator label { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
-#floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
-#floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
-
-/* Entire header text and animations remain untouched */
-.blockspin-header { font-size: 4rem; font-weight: bold; text-align: center; color: white; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
-.blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
-@keyframes redNeonPulse { 0% { color: #e60000; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 8px #ff1a1a, 0 0 14px #ff3333, 0 0 20px #ff4d4d; } 100% { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 12px #ff3333, 0 0 22px #ff4d4d, 0 0 34px #ff6666, 0 0 46px #ff8080; } }
-@keyframes redFlicker { 0%, 92%, 100% { opacity: 1; } 93% { opacity: 0.7; } 95% { opacity: 0.3; } 97% { opacity: 0.9; } 98% { opacity: 0.6; } 99% { opacity: 1; } }
-
-/* Site Bio text and all remaining effects unchanged */
-.site-header p { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-.sections-nav button { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-#floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-.tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-.card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-
-/* === MOBILE ONLY: Center search bar, calculator, and hide floating texts === */
 @media (max-width: 767px) {
-  /* Center search bar */
-  .search-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 20px auto !important;
-    width: 100% !important;
-  }
-
-  .search-container input {
-    width: 90% !important;
-    max-width: 320px !important;
-    text-align: center !important;
-    margin: 0 auto !important;
-    display: block !important;
-  }
-
-  /* Center calculator */
-  .tax-calculator {
-    display: block !important;
-    margin: 20px auto !important;
-    max-width: 320px !important;
-    text-align: center !important;
-    float: none !important;
-    position: relative !important; /* override sticky */
-    top: auto !important;
-  }
-
-  /* Hide floating green & white texts */
-  #floating-text,
-  #floating-text-left {
-    display: none !important;
-  }
+  .search-container { display: flex !important; justify-content: center !important; align-items: center !important; margin: 20px auto !important; width: 100% !important; }
+  .search-container input { width: 90% !important; max-width: 320px !important; text-align: center !important; margin: 0 auto !important; display: block !important; }
+  .tax-calculator { display: block !important; margin: 20px auto !important; max-width: 320px !important; text-align: center !important; float: none !important; position: relative !important; top: auto !important; }
+  #floating-text, #floating-text-left { display: none !important; }
 }
-

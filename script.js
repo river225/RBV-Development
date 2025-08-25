@@ -11,6 +11,19 @@ const SECTION_NAMES = [
   // "Car Customisation"
 ];
 
+// === SECTION BANNERS (new) ===
+// Replace these URLs with your banner images for each section
+const SECTION_BANNERS = {
+  "Uncommon": "https://yourcdn.com/uncommon-banner.png",
+  "Rare": "https://i.imgur.com/9BEC888.png",
+  "Epic": "https://yourcdn.com/epic-banner.png",
+  "Legendary": "https://yourcdn.com/legendary-banner.png",
+  "Omega": "https://yourcdn.com/omega-banner.png",
+  "Misc": "https://yourcdn.com/misc-banner.png",
+  "Cars": "https://yourcdn.com/cars-banner.png",
+  // "Car Customisation": "..."
+};
+
 // === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
   try {
@@ -98,13 +111,45 @@ function showSection(name) {
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
+
+  // === SHOW SECTION BANNER (desktop only) ===
+  if (window.innerWidth > 900) {
+    updateSectionBanner(name);
+  }
+}
+
+// === SECTION BANNER FUNCTION ===
+function updateSectionBanner(sectionName) {
+  const bannerDiv = document.getElementById("section-banner");
+  if (!bannerDiv) return;
+
+  const url = SECTION_BANNERS[sectionName];
+  if (!url) {
+    bannerDiv.style.display = "none";
+    return;
+  }
+
+  bannerDiv.style.display = "block";
+
+  const newImg = document.createElement("img");
+  newImg.src = url;
+  bannerDiv.appendChild(newImg);
+
+  requestAnimationFrame(() => { newImg.style.opacity = 1; });
+
+  const imgs = Array.from(bannerDiv.querySelectorAll("img"));
+  imgs.forEach(img => {
+    if (img !== newImg) {
+      img.style.opacity = 0;
+      img.addEventListener("transitionend", () => img.remove());
+    }
+  });
 }
 
 // === SEARCH ===
 function initSearch() {
   const input = document.getElementById("search");
   if (!input) return;
-
   input.addEventListener("input", () => {
     const val = input.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card => {
@@ -123,8 +168,7 @@ function initTaxCalculator() {
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-   taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
-
+    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
   });
 }
 
@@ -144,6 +188,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  // Show first section by default
-if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-})
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+});

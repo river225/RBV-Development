@@ -1,12 +1,12 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-<meta charset="UTF-8" /> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-<title>BlockSpin Values</title> 
-<link rel="stylesheet" href="style.css" /> 
-<style> 
-/* Floating buttons at the bottom */ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BlockSpin Values</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+/* Floating buttons at the bottom */
 .bottom-buttons { 
     position: fixed; 
     bottom: 20px; 
@@ -22,12 +22,8 @@
     border-radius: 8px; 
     color: rgb(255, 255, 255); 
 } 
-.discord-btn { 
-    background-color: #5865f2; 
-} 
-.tiktok-btn { 
-    background-color: #FE2C55; 
-} 
+.discord-btn { background-color: #5865f2; } 
+.tiktok-btn { background-color: #FE2C55; } 
 
 /* Header styling */ 
 .site-header { 
@@ -82,66 +78,62 @@
     top: 10px; 
     height: fit-content; 
 } 
-</style> 
-</head> 
-<body> 
+</style>
+</head>
+<body>
 
-<!-- Header --> 
-<header class="site-header"> 
+<!-- Header -->
+<header class="site-header">
 
 <h1 class="blockspin-header">
   Block<span class="spin-word">Spin</span> Values
 </h1>
 
-
-
-    <!---- <h1>
+<!-- Optional alternative header kept as comment -->
+<!---- <h1>
 <span class="block-word">Block</span><span class="spin-word">Spin</span> Values
 </h1> -->
 
+<p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p>
+<p><em>You can suggest value changes or website changes in our discord ! we are currently hiring people good at BlockSpin Values, join discord for more information. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5 </em></p>
+</header>
 
-<p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p> 
-<p><em>You can suggest value changes or website changes in our discord ! we are currently hiring people good at BlockSpin Values, join discord for more information. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5 </em></p> 
-</header> 
-
-<!-- Search bar --> 
+<!-- Search bar -->
 <div class="search-container"> 
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
 </div> 
 
 <div class="main-container"> 
 
-    <!-- Section navigation --> 
-    <nav class="sections-nav" id="sections-nav"></nav> 
+    <!-- Section navigation -->
+    <nav class="sections-nav" id="sections-nav"></nav>
 
-    <!-- Main content area --> 
-    <main id="sections" class="sections"></main> 
+    <div class="sections-wrapper">
+        <!-- Section banner (desktop only) -->
+        <div id="section-banner" class="section-banner"></div>
 
-    <!-- Tax calculator --> 
+        <!-- Main content area -->
+        <main id="sections" class="sections"></main>
+    </div>
+
+    <!-- Tax calculator -->
     <aside class="tax-calculator"> 
         <h2>Tax Calculator</h2> 
         <input type="number" id="taxInput" placeholder="Amount..." /> 
-  <div id="taxResult">
-  Amount to withdraw: <span class="calc-amount">0</span>
-</div>
-
-        <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p> 
-    </aside> 
-
-
-<!--- <div id="taxResult">Amount to withdraw: 0</div> -->
+        <div id="taxResult">
+          Amount to withdraw: <span class="calc-amount">0</span>
+        </div>
+        <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p>
+    </aside>
 
 </div>
 
-<!-- Floating buttons at the bottom --> 
+<!-- Floating buttons at the bottom -->
 <div class="bottom-buttons"> 
 <a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a> 
 <a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a> 
-</div> 
+</div>
 
-<script src="script.js"></script> 
-<!-- your existing content -->
- 
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
 
 <div id="floating-text-left">
@@ -149,5 +141,6 @@
   <div class="discord-line">Join our Discord!</div>
 </div>
 
-</body> 
+<script src="script.js"></script>
+</body>
 </html>
