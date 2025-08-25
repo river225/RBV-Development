@@ -1,5 +1,5 @@
 // === CONFIG ===
-const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
+const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
 const SECTION_NAMES = [
   "Uncommon",
   "Rare",
@@ -57,7 +57,9 @@ function createCard(item) {
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
 
-  const imgTag = img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">` : "";
+  const imgTag = img
+    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
+    : "";
 
   return `
     <div class="card" data-name="${escapeAttr(name)}">
@@ -75,7 +77,6 @@ function createCard(item) {
 
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
-
   const html = `
     <section class="section" id="${slugify(title)}">
       <h2>${title}</h2>
@@ -107,7 +108,7 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // Banner logic only added, nothing else modified
+  // Banner logic: only for desktop
   const banner = document.getElementById("section-banner");
   if (window.innerWidth >= 768) {
     banner.src = SECTION_BANNERS[name] || "";
@@ -146,7 +147,7 @@ function initTaxCalculator() {
 
 // === HELPERS ===
 function safe(str) { return str ?? ""; }
-function escapeAttr(str) { return (str + "").replace(/"/g, "&quot;"); }
+function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
 // === INIT ===

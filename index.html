@@ -22,15 +22,34 @@
     border-radius: 8px;
     color: rgb(255, 255, 255);
 }
-.discord-btn { background-color: #5865f2; }
-.tiktok-btn { background-color: #FE2C55; }
+.discord-btn {
+    background-color: #5865f2;
+}
+.tiktok-btn {
+    background-color: #FE2C55;
+}
+
+/* Floating banner container */
+#section-banner {
+    position: absolute; /* float over content */
+    top: 240px; /* adjust vertical placement */
+    left: 20px;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+    z-index: 10;
+    pointer-events: none;
+    display: none; /* hidden by default */
+}
 </style>
 </head>
 <body>
 
 <!-- Header -->
 <header class="site-header">
-<h1 class="blockspin-header">Block<span class="spin-word">Spin</span> Values</h1>
+<h1 class="blockspin-header">
+  Block<span class="spin-word">Spin</span> Values
+</h1>
 <p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p>
 <p><em>You can suggest value changes or website changes in our discord ! we are currently hiring people good at BlockSpin Values, join discord for more information. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5 </em></p>
 </header>
@@ -40,14 +59,10 @@
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
 </div>
 
-<!-- Main layout -->
 <div class="main-container">
 
-    <!-- Banner + Sections nav wrapper -->
-    <div class="nav-banner-wrapper">
-        <img id="section-banner" alt="Section Banner">
-        <nav class="sections-nav" id="sections-nav"></nav>
-    </div>
+    <!-- Section navigation -->
+    <nav class="sections-nav" id="sections-nav"></nav>
 
     <!-- Main content area -->
     <main id="sections" class="sections"></main>
@@ -63,19 +78,22 @@
     </aside>
 </div>
 
+<!-- Floating banner -->
+<img id="section-banner" alt="Section Banner">
+
 <!-- Floating buttons at the bottom -->
 <div class="bottom-buttons">
 <a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a>
 <a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a>
 </div>
 
-<!-- Floating texts -->
+<script src="script.js"></script>
+
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
 <div id="floating-text-left">
   <div>Want to suggest value changes or trade your items?</div>
   <div class="discord-line">Join our Discord!</div>
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>
