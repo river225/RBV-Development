@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<me<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>BlockSpin Values</title>
 <link rel="stylesheet" href="style.css" />
@@ -24,19 +28,6 @@
 }
 .discord-btn { background-color: #5865f2; }
 .tiktok-btn { background-color: #FE2C55; }
-
-/* Banner Image overrides (top-left of sections) */
-#section-banner {
-    width: 150px;       
-    height: auto;
-    object-fit: contain;
-    position: absolute;
-    top: 16px;          /* adjust vertical position here */
-    left: 16px;         /* distance from left edge */
-    z-index: 10;        
-}
-
-/* Keep any other inline CSS you already had */
 </style>
 </head>
 <body>
@@ -53,13 +44,14 @@
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
 </div>
 
+<!-- Main layout -->
 <div class="main-container">
 
-    <!-- Banner on top-left of sections nav -->
-    <img id="section-banner" alt="Section Banner">
-
-    <!-- Section navigation -->
-    <nav class="sections-nav" id="sections-nav"></nav>
+    <!-- Banner + Sections nav wrapper -->
+    <div class="nav-banner-wrapper">
+        <img id="section-banner" alt="Section Banner">
+        <nav class="sections-nav" id="sections-nav"></nav>
+    </div>
 
     <!-- Main content area -->
     <main id="sections" class="sections"></main>
@@ -89,6 +81,5 @@
 </div>
 
 <script src="script.js"></script>
-<script src="script2.js"></script>
 </body>
 </html>

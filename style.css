@@ -4,7 +4,7 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
 a { color: #fff; text-decoration: none; }
 
 /* Header */
-.site-header { text-align: left; max-width: 1100px; margin: 0 auto 16px; padding: 16px; }
+.site-header { text-align: center; max-width: 1100px; margin: 0 auto 16px; padding: 16px; }
 .header-top { display: flex; align-items: center; justify-content: space-between; }
 .header-buttons { display: flex; gap: 10px; }
 .btn { padding: 8px 12px; border-radius: 8px; border: 1px solid #4a4a4a; background: #3a3a3a; }
@@ -15,10 +15,8 @@ a { color: #fff; text-decoration: none; }
   margin: 0 auto 24px;
   text-align: center;
 }
-
 #search {
   display: inline-block;
-  margin: 0 0 0 100px;
   width: 300px;
   max-width: 90%;
   padding: 12px;
@@ -28,15 +26,31 @@ a { color: #fff; text-decoration: none; }
   color: #fff;
 }
 
-/* === Main layout === */
+/* Main layout */
 .main-container {
     display: flex;
     max-width: 1400px;
     margin: 0 auto;
     gap: 20px;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
+/* Banner + nav wrapper */
+.nav-banner-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Section banner */
+#section-banner {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* Sections nav */
 .sections-nav {
     width: 200px;
     padding: 8px;
@@ -45,23 +59,8 @@ a { color: #fff; text-decoration: none; }
 .sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
 .sections-nav button.active { background: #232324; }
 
-.sections {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* Section banner */
-#section-banner {
-    width: 150px;
-    height: auto;
-    object-fit: contain;
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    z-index: 10;
-}
+/* Sections */
+.sections { flex: 3; display: flex; flex-direction: column; gap: 24px; }
 
 /* Cards */
 .cards { display: flex; flex-wrap: wrap; gap: 16px; }
@@ -90,13 +89,14 @@ a { color: #fff; text-decoration: none; }
 #floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; }
 #floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; }
 
-/* Header animations remain unchanged */
+/* Header animations */
 .blockspin-header { font-size: 4rem; font-weight: bold; text-align: center; color: white; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
 .blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
 
 /* Responsive */
 @media (max-width: 900px) {
   .main-container { flex-direction: column; }
+  .nav-banner-wrapper { flex-direction: row; gap: 10px; justify-content: center; }
   .sections-nav, .tax-calculator { width: 100%; position: relative; }
   .card { flex-direction: column; width: 100%; }
   .card img { width: 100%; height: auto; }
