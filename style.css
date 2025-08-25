@@ -153,27 +153,57 @@ a { color: #fff; text-decoration: none; }
 
 .section { margin-bottom: 40px; }
 
-/* Floating texts */
-#floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
-#floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; }
+/* NON-FLOATING TEXTS */
+#floating-text, #floating-text-left {
+  position: relative; /* removed fixed */
+  bottom: auto;
+  right: auto;
+  left: auto;
+  z-index: auto;
+  margin: 10px 0; /* can hardcode placement */
+}
+
 #floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; }
 
-/* Floating Section Banner */
+/* NON-FLOATING BANNER */
 #floating-section-banner {
-  position: fixed;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+  position: relative; /* removed fixed */
+  top: auto;
+  right: auto;
+  transform: none;
   max-width: 120px;
-  z-index: 1000;
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin: 20px auto; /* adjust manually where you want */
 }
+
 #floating-section-banner img {
   width: 100%;
   height: auto;
   display: block;
 }
+
+/* NON-FLOATING BOTTOM BUTTONS */
+.bottom-buttons {
+  position: relative; /* removed fixed */
+  bottom: auto;
+  left: auto;
+  transform: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0; /* adjust placement manually */
+}
+
+.bottom-buttons .btn {
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  color: rgb(255, 255, 255);
+}
+
+.discord-btn { background-color: #5865f2; }
+.tiktok-btn { background-color: #FE2C55; }
 
 /* Responsive */
 @media (max-width: 900px) {

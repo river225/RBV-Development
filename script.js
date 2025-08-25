@@ -1,4 +1,4 @@
-// === CONFIG ===
+ // === CONFIG ===
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Uncommon",
@@ -8,7 +8,6 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Cars",
-  // "Car Customisation"
 ];
 
 // Map section names to floating banner images
@@ -20,7 +19,6 @@ const sectionImages = {
   "Omega": "path/to/omega.png",
   "Misc": "path/to/misc.png",
   "Cars": "path/to/cars.png",
-  // add other sections here
 };
 
 // === FETCH HELPERS ===
@@ -116,7 +114,7 @@ function showSection(name) {
   if (banner && sectionImages[name]) {
     banner.src = sectionImages[name];
   } else if (banner) {
-    banner.src = ""; // hide if no image
+    banner.src = "";
   }
 }
 
@@ -163,6 +161,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  // Show first section by default
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 });
