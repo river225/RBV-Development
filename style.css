@@ -54,11 +54,13 @@ a { color: #fff; text-decoration: none; }
 
 /* Section banner */
 #section-banner {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    display: none;
-    margin-bottom: 20px;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 10;
 }
 
 /* Cards */
@@ -105,15 +107,4 @@ a { color: #fff; text-decoration: none; }
   .search-container input { width: 90% !important; max-width: 320px !important; text-align: center !important; margin: 0 auto !important; display: block !important; }
   .tax-calculator { display: block !important; margin: 20px auto !important; max-width: 320px !important; text-align: center !important; float: none !important; position: relative !important; top: auto !important; }
   #floating-text, #floating-text-left { display: none !important; }
-}
-
-
-#section-banner {
-    width: 150px;       /* keeps it small */
-    height: auto;
-    object-fit: contain;
-    position: absolute; /* allows precise placement */
-    top: 20px;          /* adjust this to move it higher/lower */
-    left: 20px;         /* distance from the left edge */
-    z-index: 10;        /* make sure it’s above other elements */
 }

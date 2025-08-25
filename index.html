@@ -25,13 +25,15 @@
 .discord-btn { background-color: #5865f2; }
 .tiktok-btn { background-color: #FE2C55; }
 
-/* Banner Image */
+/* Banner Image overrides (top-left of sections) */
 #section-banner {
-    width: 150px;       /* small */
+    width: 150px;       
     height: auto;
     object-fit: contain;
-    display: block;     /* initially visible for layout */
-    margin-right: 20px; /* space between banner and nav */
+    position: absolute;
+    top: 16px;          /* adjust vertical position here */
+    left: 16px;         /* distance from left edge */
+    z-index: 10;        
 }
 
 /* Keep any other inline CSS you already had */
@@ -53,7 +55,7 @@
 
 <div class="main-container">
 
-    <!-- Banner on left of sections nav -->
+    <!-- Banner on top-left of sections nav -->
     <img id="section-banner" alt="Section Banner">
 
     <!-- Section navigation -->
@@ -87,5 +89,6 @@
 </div>
 
 <script src="script.js"></script>
+<script src="script2.js"></script>
 </body>
 </html>
