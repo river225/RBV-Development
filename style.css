@@ -108,14 +108,12 @@ a { color: #fff; text-decoration: none; }
 }
 
 
-/* Base CSS is untouched, your original full CSS goes here ... */
-
-/* Banner CSS added */
 #section-banner {
-    width: 150px;       /* small */
+    width: 150px;       /* keeps it small */
     height: auto;
     object-fit: contain;
-    margin-right: 20px; /* space between banner and nav */
+    position: absolute; /* allows precise placement */
+    top: 20px;          /* adjust this to move it higher/lower */
+    left: 20px;         /* distance from the left edge */
+    z-index: 10;        /* make sure it’s above other elements */
 }
-
-/* All your original CSS remains exactly as it was */
