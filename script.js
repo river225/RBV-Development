@@ -7,7 +7,7 @@ const SECTION_NAMES = [
   "Legendary",
   "Omega",
   "Misc",
-  "Cars",
+  "Vehicle",
   // "Car Customisation"
 ];
 
@@ -18,7 +18,7 @@ const SECTION_BANNERS = {
   "Legendary":{ url: "https://i.imgur.com/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
   "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
   "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
-  "Cars":     { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" }
+  "Vehicle":     { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" }
 };
 
 
