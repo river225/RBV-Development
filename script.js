@@ -7,19 +7,20 @@ const SECTION_NAMES = [
   "Legendary",
   "Omega",
   "Misc",
-  "Cars"
+  "Cars",
+  // "Car Customisation"
 ];
 
-// Map section names to section banner images
-const sectionBanners = {
-  "Uncommon": "path/to/uncommon.png",
-  "Rare": "path/to/rare.png",
-  "Epic": "path/to/epic.png",
-  "Legendary": "path/to/legendary.png",
-  "Omega": "path/to/omega.png",
-  "Misc": "path/to/misc.png",
-  "Cars": "path/to/cars.png"
+const SECTION_BANNERS = {
+  "Uncommon": { url: "https://i.imgur.com/ttWiION.png", width: "160px", top: "226px", left: "53%" },
+  "Rare":     { url: "https://i.imgur.com/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
+  "Epic":     { url: "https://i.imgur.com/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
+  "Legendary":{ url: "https://i.imgur.com/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
+  "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
+  "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
+  "Cars":     { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" }
 };
+
 
 // === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
@@ -78,12 +79,7 @@ function createCard(item) {
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
 
-  // Add section banner above each section (desktop only)
-  const bannerHTML = sectionBanners[title] ? 
-    `<div class="section-banner"><img src="${sectionBanners[title]}" alt="${title} Banner"></div>` : "";
-
   const html = `
-    ${bannerHTML}
     <section class="section" id="${slugify(title)}">
       <h2>${title}</h2>
       <div class="cards">
@@ -106,13 +102,45 @@ function initSectionsNav() {
 }
 
 function showSection(name) {
+  // Show/hide sections
   SECTION_NAMES.forEach(sec => {
     const el = document.getElementById(slugify(sec));
     if (el) el.style.display = sec === name ? "block" : "none";
   });
+
+  // Highlight active nav button
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
+
+  // Banner logic with fade
+  const bannerImg = document.getElementById("banner-img");
+  const bannerContainer = bannerImg.parentElement; // #section-banner
+  const banner = SECTION_BANNERS[name];
+
+  if (banner && banner.url) {
+    // Remove show class to start fade out
+    bannerImg.classList.remove("show");
+
+    // Wait for the CSS transition to finish before changing src
+    setTimeout(() => {
+      bannerImg.src = banner.url;
+      bannerImg.style.display = "block";
+
+      // Apply custom styles
+      bannerImg.style.maxWidth = banner.width || "190px";
+      bannerContainer.style.top = banner.top || "228px";
+      bannerContainer.style.left = banner.left || "50%";
+      bannerContainer.style.transform = "translateX(-50%)";
+
+      // Trigger fade in
+      requestAnimationFrame(() => {
+        bannerImg.classList.add("show");
+      });
+    }, 300); // matches CSS transition duration
+  } else {
+    bannerImg.style.display = "none";
+  }
 }
 
 // === SEARCH ===
@@ -153,10 +181,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSearch();
   initTaxCalculator();
 
+  // Show first section by default
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
     renderSection(sec, items);
   }
 
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+  
 });

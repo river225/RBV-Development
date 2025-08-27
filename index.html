@@ -5,14 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
 <title>BlockSpin Values</title> 
 <link rel="stylesheet" href="style.css" /> 
+<style> 
+/* Floating buttons at the bottom */ 
+.bottom-buttons { 
+    position: fixed; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex; 
+    gap: 15px; 
+} 
+.bottom-buttons .btn { 
+    padding: 12px 20px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    border-radius: 8px; 
+    color: rgb(255, 255, 255); 
+} 
+.discord-btn { 
+    background-color: #5865f2; 
+} 
+.tiktok-btn { 
+    background-color: #FE2C55; 
+} 
+
+/* Header styling */ 
+.site-header { 
+    text-align: center; 
+    padding: 20px 20px 10px 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+} 
+.site-header h1 { 
+    font-size: 4rem; 
+    margin-bottom: 10px; 
+    color: white; 
+} 
+
+/* Search bar */ 
+.search-container { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    margin: 10px 0 20px 0; 
+} 
+.search-container input { 
+    width: 300px; 
+    padding: 10px; 
+    font-size: 1rem; 
+    border-radius: 8px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+} 
+
+/* Main layout */ 
+.main-container { 
+    display: flex; 
+    gap: 20px; 
+    padding: 0 20px 40px 20px; 
+} 
+.sections-nav { 
+    flex: 1; 
+} 
+.sections { 
+    flex: 3; 
+} 
+
+/* Tax calculator */ 
+.tax-calculator { 
+    flex: 1; 
+    padding: 15px; 
+    max-width: 250px; 
+    position: sticky; 
+    top: 10px; 
+    height: fit-content; 
+} 
+
+/* Banner container */
+#section-banner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+#section-banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: none; /* hidden until section is selected */
+}
+</style> 
 </head> 
 <body> 
+
+    <div id="section-banner">
+  <img id="banner-img" src="" alt="Banner">
+</div>
+
 
 <!-- Header --> 
 <header class="site-header"> 
 <h1 class="blockspin-header">
   Block<span class="spin-word">Spin</span> Values
 </h1>
+
 <p>A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.</p> 
 <p><em>You can suggest value changes or website changes in our discord ! we are currently hiring people good at BlockSpin Values, join discord for more information. © 2025 river. All rights reserved. Unofficial site. VERSION 4.7.5 </em></p> 
 </header> 
@@ -21,6 +119,11 @@
 <div class="search-container"> 
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
 </div> 
+
+<!-- Banner container -->
+<div id="section-banner">
+    <a id="banner-link" href="#"><img id="banner-img" src="" alt="Section Banner"></a>
+</div>
 
 <div class="main-container"> 
 
@@ -35,27 +138,27 @@
         <h2>Tax Calculator</h2> 
         <input type="number" id="taxInput" placeholder="Amount..." /> 
         <div id="taxResult">
-          Amount to withdraw: <span class="calc-amount">0</span>
+            Amount to withdraw: <span class="calc-amount">0</span>
         </div>
         <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p> 
     </aside> 
 
 </div>
 
-<!-- Bottom Buttons --> 
+<!-- Floating buttons at the bottom --> 
 <div class="bottom-buttons"> 
 <a class="btn discord-btn" href="https://discord.gg/bU2Y2wA8Sk" target="_blank" rel="noopener">Join Our Trading Discord</a> 
 <a class="btn tiktok-btn" href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank" rel="noopener">Check Out Rivers TikTok</a> 
 </div> 
 
-<!-- Floating Texts -->
+<script src="script.js"></script> 
+
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
+
 <div id="floating-text-left">
   <div>Want to suggest value changes or trade your items?</div>
   <div class="discord-line">Join our Discord!</div>
 </div>
-
-<script src="script.js"></script> 
 
 </body> 
 </html>
