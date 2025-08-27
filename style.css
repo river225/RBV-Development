@@ -226,28 +226,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 
-/* === Floating Section Banner === */
-#section-banner {
-  position: fixed;       /* float above content */
-  z-index: 999;             /* on top of everything */
-  pointer-events: none;     /* click-through */
-}
 
-#banner-img {
-  position: absolute;       /* allows JS to control top/left */
-  display: block;           /* make image visible */
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  opacity: 0;               /* start hidden */
-  transform: scale(0.95);   /* slightly smaller */
-  transition: opacity 0.2s ease, transform 0.2s ease; /* smooth fade + scale */
-}
-
-#banner-img.show {
-  opacity: 1;
-  transform: scale(1);
-}
 
 
 
@@ -261,6 +240,36 @@ a { color: #fff; text-decoration: none; }
 
 html, body {
   overflow-x: hidden !important;
+}
+
+/* === Floating Section Banner (fixed, JS-controlled) === */
+#section-banner {
+  position: absolute !important;        /* stays in place relative to viewport */
+  z-index: 999;           /* above everything else */
+  pointer-events: none;   /* allows clicks to pass through */
+}
+
+#banner-img {
+  position: absolute !important;     /* JS still controls top/left */
+  display: block;         /* make image visible */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  opacity: 0;             /* start hidden */
+  transform: scale(0.95); /* slightly smaller */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#banner-img.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hide banners on mobile + tablets */
+@media (max-width: 1024px) {
+  #section-banner {
+    display: none !important;
+  }
 }
 
 

@@ -132,7 +132,7 @@ function showSection(name) {
       bannerContainer.style.top = banner.top || "228px";
       bannerContainer.style.left = banner.left || "50%";
       bannerContainer.style.transform = "translateX(-50%)";
-
+       bannerContainer.style.position = "absolute";
       // Trigger fade in
       requestAnimationFrame(() => {
         bannerImg.classList.add("show");
