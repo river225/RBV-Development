@@ -228,7 +228,7 @@ a { color: #fff; text-decoration: none; }
 
 /* === Floating Section Banner === */
 #section-banner {
-  position: absolute;       /* float above content */
+  position: fixed;       /* float above content */
   z-index: 999;             /* on top of everything */
   pointer-events: none;     /* click-through */
 }
@@ -261,4 +261,24 @@ a { color: #fff; text-decoration: none; }
 
 html, body {
   overflow-x: hidden !important;
+}
+
+
+/* Hide vertical scrollbar but allow scrolling */
+html, body {
+  overflow-x: hidden !important;  /* prevent horizontal scroll */
+  overflow-y: scroll;             /* allow vertical scrolling */
+}
+
+/* Hide vertical scrollbar for Chrome, Edge, Safari */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Hide vertical scrollbar for Firefox */
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
