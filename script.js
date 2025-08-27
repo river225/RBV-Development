@@ -181,13 +181,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSearch();
   initTaxCalculator();
 
-  // Show first section by default
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
 
   for (const sec of SECTION_NAMES) {
     const items = await fetchSheet(sec);
     renderSection(sec, items);
   }
 
-  
+    // Show first section by default
+  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+
 });
