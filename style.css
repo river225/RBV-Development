@@ -84,6 +84,8 @@ a { color: #fff; text-decoration: none; }
   display: flex; 
   flex-wrap: wrap; 
   gap: 16px; 
+  width: 100%; /* ADD THIS LINE */
+  overflow: hidden; /* ADD THIS LINE */
 }
 
 /* Card */
@@ -138,6 +140,8 @@ a { color: #fff; text-decoration: none; }
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
+  max-width: calc(50% - 16px); /* ADD THIS LINE */
+  overflow: hidden; /* ADD THIS LINE */
 }
 
 .crew-card-content {
@@ -177,6 +181,8 @@ a { color: #fff; text-decoration: none; }
   padding: 10px 0;
   border-bottom: 2px solid #33cce6;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  width: 100%; /* ADD THIS LINE */
+  box-sizing: border-box; /* ADD THIS LINE */
 }
 
 .hidden { 
@@ -225,7 +231,11 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Section spacing */
-.section { margin-bottom: 40px; }
+.section { 
+  margin-bottom: 40px; 
+  overflow: hidden; /* ADD THIS LINE */
+  position: relative; /* ADD THIS LINE */
+}
 
 /* Responsive */
 @media (max-width: 900px) {
