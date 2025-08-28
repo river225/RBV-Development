@@ -129,7 +129,7 @@ function renderCrewLogosSection(items) {
     }
   });
 
-  let html = `<section class="section" id="crew-logo-s"><h2>Crew Logo's</h2>`;
+  let html = `<section class="section" id="${slugify("Crew Logo's")}"><h2>Crew Logo's</h2>`;
   
   Object.keys(grouped).forEach(header => {
     if (grouped[header].length > 0) {
