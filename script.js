@@ -8,7 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Vehicles",
-  // "Car Customisation"
+  "Crew Logo's"
 ];
 
 const SECTION_BANNERS = {
@@ -18,7 +18,8 @@ const SECTION_BANNERS = {
   "Legendary":{ url: "https://i.imgur.com/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
   "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
   "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
-  "Vehicles":     { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" }
+  "Vehicles": { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" },
+   "Crew Logo's": { url: "https://i.imgur.com/UGdzYtH.png", width: "200px", top: "225px", left: "53%" }
 };
 
 
@@ -42,7 +43,7 @@ async function fetchSheet(sheetName) {
       return obj;
     });
 
-    return items.filter(x => String(x["Name"] || "").trim().length > 0);
+    return items.filter(x => String(x["Name"] || x["Header"] || "").trim().length > 0);
   } catch (err) {
     console.error(`Failed to fetch sheet: ${sheetName}`, err);
     return [];
@@ -76,24 +77,92 @@ function createCard(item) {
   `;
 }
 
+function createCrewLogoCard(item) {
+  const name = safe(item["Name"]);
+  const img = safe(item["Image"]);
+  const id = safe(item["ID"]);
+
+  const imgTag = img
+    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
+    : "";
+
+  return `
+    <div class="card crew-logo-card" data-name="${escapeAttr(name)}">
+      <div class="crew-card-content">
+        <h3>${name}</h3>
+        ${imgTag}
+        <div class="crew-id">ID: ${id}</div>
+      </div>
+    </div>
+  `;
+}
+
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
 
-  const html = `
-    <section class="section" id="${slugify(title)}">
-      <h2>${title}</h2>
-      <div class="cards">
-        ${items.map(createCard).join("")}
-      </div>
-    </section>
-  `;
+  if (title === "Crew Logo's") {
+    renderCrewLogosSection(items);
+  } else {
+    const html = `
+      <section class="section" id="${slugify(title)}">
+        <h2>${title}</h2>
+        <div class="cards">
+          ${items.map(createCard).join("")}
+        </div>
+      </section>
+    `;
+    document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  }
+}
+
+function renderCrewLogosSection(items) {
+  // Group items by header
+  const grouped = {};
+  
+  items.forEach(item => {
+    const header = safe(item["Header"]) || "Uncategorized";
+    if (!grouped[header]) {
+      grouped[header] = [];
+    }
+    if (item["Name"]) {
+      grouped[header].push(item);
+    }
+  });
+
+  let html = `<section class="section" id="crew-logo-s"><h2>Crew Logo's</h2>`;
+  
+  Object.keys(grouped).forEach(header => {
+    if (grouped[header].length > 0) {
+      html += `
+        <div class="crew-header">${header}</div>
+        <div class="cards">
+          ${grouped[header].map(createCrewLogoCard).join("")}
+        </div>
+      `;
+    }
+  });
+  
+  html += `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
 // === SECTION NAVIGATION ===
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
-  SECTION_NAMES.forEach(name => {
+  
+  SECTION_NAMES.forEach((name, index) => {
+    // Add gap and "Extras" header before Crew Logo's
+    if (name === "Crew Logo's") {
+      const gap = document.createElement("div");
+      gap.className = "nav-gap";
+      nav.appendChild(gap);
+      
+      const extrasHeader = document.createElement("div");
+      extrasHeader.className = "nav-extras-header";
+      extrasHeader.textContent = "Extras";
+      nav.appendChild(extrasHeader);
+    }
+    
     const btn = document.createElement("button");
     btn.textContent = name;
     btn.addEventListener("click", () => showSection(name));
@@ -113,7 +182,7 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // Banner logic with fade
+  // Banner logic with fade (no banner for Crew Logo's)
   const bannerImg = document.getElementById("banner-img");
   const bannerContainer = bannerImg.parentElement; // #section-banner
   const banner = SECTION_BANNERS[name];

@@ -55,6 +55,22 @@ a { color: #fff; text-decoration: none; }
 .sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
 .sections-nav button.active { background: #232324; }
 
+/* NEW: Extras navigation styling */
+.nav-gap {
+  height: 0px;
+}
+
+.nav-extras-header {
+  color: #33cce6;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #33cce6;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
 .sections {
     flex: 3; /* UPDATED from flex:1 */
     display: flex;
@@ -117,6 +133,52 @@ a { color: #fff; text-decoration: none; }
   margin-bottom: 4px; 
 }
 
+/* NEW: Crew Logo Card Styling */
+.crew-logo-card {
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+}
+
+.crew-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.crew-logo-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.crew-logo-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #2e2e2e;
+}
+
+.crew-id {
+  color: #ffde59;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.crew-header {
+  color: #33cce6;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 30px 0 20px 0;
+  padding: 10px 0;
+  border-bottom: 2px solid #33cce6;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
 .hidden { 
   display: none !important; 
 }
@@ -172,6 +234,7 @@ a { color: #fff; text-decoration: none; }
   .card { flex-direction: column; width: 100%; }
   .card img { width: 100%; height: auto; }
   .card-info { text-align: center; }
+  .crew-logo-card { width: 100%; }
 }
 
 /* Floating texts, header, neon effects, outlines etc. remain untouched */
