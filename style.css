@@ -135,40 +135,41 @@ a { color: #fff; text-decoration: none; }
   margin-bottom: 4px; 
 }
 
-/* NEW: Crew Logo Card Styling */
+/* NEW: Crew Logo Card Styling - SMALLER SIZE */
 .crew-logo-card {
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
-  max-width: calc(50% - 16px); /* ADD THIS LINE */
-  overflow: hidden; /* ADD THIS LINE */
+  max-width: calc(33.33% - 16px); /* CHANGED: from 50% to 33.33% - fits 3 per row */
+  overflow: hidden;
+  padding: 8px; /* ADDED: smaller padding */
 }
 
 .crew-card-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px; /* CHANGED: from 12px to 8px - smaller gap */
 }
 
 .crew-logo-card h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 0.9rem; /* CHANGED: from 1.1rem to 0.9rem - smaller text */
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
 .crew-logo-card img {
-  width: 150px;
-  height: 150px;
+  width: 100px; /* CHANGED: from 150px to 100px - smaller images */
+  height: 100px; /* CHANGED: from 150px to 100px - smaller images */
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 6px; /* CHANGED: from 8px to 6px - smaller border radius */
   background: #2e2e2e;
 }
 
 .crew-id {
   color: #ffde59;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.85rem; /* CHANGED: from 1rem to 0.85rem - smaller text */
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
