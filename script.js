@@ -8,7 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Vehicles",
-  "Crew Logo's"
+  "Crew Logos"
 ];
 
 const SECTION_BANNERS = {
@@ -19,7 +19,7 @@ const SECTION_BANNERS = {
   "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
   "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
   "Vehicles": { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" },
-   "Crew Logo's": { url: "https://i.imgur.com/UGdzYtH.png", width: "200px", top: "225px", left: "53%" }
+   "Crew Logo's": { url: "", width: "200px", top: "225px", left: "53%" }
 };
 
 
