@@ -8,7 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Vehicles",
-  "Crew Logos"
+  "Crew Logo's"
 ];
 
 const SECTION_BANNERS = {
