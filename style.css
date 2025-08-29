@@ -337,16 +337,21 @@ a { color: #fff; text-decoration: none; }
     display: none !important;
   }
 
-  /* Mobile-only: Smaller ID text and copy button */
+    /* Mobile-only: Much smaller ID text and copy button */
   .crew-id {
-    font-size: 0.7rem !important; /* Smaller on mobile */
+    font-size: 0.6rem !important; /* Even smaller on mobile */
   }
   
   .copy-btn {
-    font-size: 0.8rem;
-    padding: 3px 6px;
-    min-width: 25px;
-    height: 20px;
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    min-width: 20px;
+    height: 16px;
+  }
+  
+  .crew-id-container {
+    gap: 4px !important; /* Reduce gap between button and ID */
+    margin-top: 4px !important; /* Less margin */
   }
 }
 
