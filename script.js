@@ -91,7 +91,10 @@ function createCrewLogoCard(item) {
       <div class="crew-card-content">
         <h3>${name}</h3>
         ${imgTag}
-        <div class="crew-id">ID: ${id}</div>
+        <div class="crew-id-container">
+          <button class="copy-btn" onclick="copyToClipboard('${escapeAttr(id)}')" title="Copy ID">📋</button>
+          <div class="crew-id">ID: ${id}</div>
+        </div>
       </div>
     </div>
   `;
@@ -236,6 +239,39 @@ function initTaxCalculator() {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
     taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+  });
+}
+
+// === COPY TO CLIPBOARD ===
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    // Show success feedback
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '✓';
+    btn.style.backgroundColor = '#28a745';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.backgroundColor = '';
+    }, 1500);
+  }).catch(() => {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    
+    // Show success feedback
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '✓';
+    btn.style.backgroundColor = '#28a745';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.backgroundColor = '';
+    }, 1500);
   });
 }
 

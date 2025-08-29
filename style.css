@@ -173,6 +173,40 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
+/* Crew ID container with copy button */
+.crew-id-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.copy-btn {
+  background: #33cce6;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #000;
+  transition: background-color 0.3s ease;
+  min-width: 30px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  background: #29b3cc;
+  transform: scale(1.05);
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
 .crew-header {
   color: #33cce6;
   font-size: 1.5rem;
@@ -301,6 +335,18 @@ a { color: #fff; text-decoration: none; }
   #floating-text,
   #floating-text-left {
     display: none !important;
+  }
+
+  /* Mobile-only: Smaller ID text and copy button */
+  .crew-id {
+    font-size: 0.7rem !important; /* Smaller on mobile */
+  }
+  
+  .copy-btn {
+    font-size: 0.8rem;
+    padding: 3px 6px;
+    min-width: 25px;
+    height: 20px;
   }
 }
 
