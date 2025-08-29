@@ -350,9 +350,20 @@ a { color: #fff; text-decoration: none; }
   }
   
   .crew-id-container {
-    gap: 4px !important; /* Reduce gap between button and ID */
-    margin-top: 4px !important; /* Less margin */
-  }
+  flex-direction: column !important; /* Stack vertically instead of horizontally */
+  align-items: center !important;    /* Center both elements */
+  justify-content: center !important; /* Center the container content */
+  gap: 6px !important;               /* Space between ID and button */
+  margin-top: 4px !important;        /* Less margin */
+}
+
+.crew-id {
+  text-align: center !important;     /* Center the ID text */
+}
+
+.copy-btn {
+  align-self: center !important;     /* Ensure button stays centered */
+}
 }
 
 /* Hide banners on mobile + tablets */
