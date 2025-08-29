@@ -8,7 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Vehicles",
-  "Crew Logo's"
+  "Crew Logos"
 ];
 
 const SECTION_BANNERS = {
@@ -19,7 +19,7 @@ const SECTION_BANNERS = {
   "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
   "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
   "Vehicles": { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "227px", left: "54%" },
-   "Crew Logo's": { url: "", width: "200px", top: "225px", left: "53%" }
+   "Crew Logos": { url: "", width: "200px", top: "225px", left: "53%" }
 };
 
 
@@ -92,8 +92,8 @@ function createCrewLogoCard(item) {
         <h3>${name}</h3>
         ${imgTag}
         <div class="crew-id-container">
-          <button class="copy-btn" onclick="copyToClipboard('${escapeAttr(id)}')" title="Copy ID">📋</button>
           <div class="crew-id">ID: ${id}</div>
+          <button class="copy-btn" onclick="copyToClipboard('${escapeAttr(id)}')" title="Copy ID">📋</button>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@ function createCrewLogoCard(item) {
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
 
-  if (title === "Crew Logo's") {
+  if (title === "Crew Logos") {
     renderCrewLogosSection(items);
   } else {
     const html = `
@@ -132,7 +132,7 @@ function renderCrewLogosSection(items) {
     }
   });
 
-  let html = `<section class="section" id="${slugify("Crew Logo's")}"><h2>Crew Logo's</h2>`;
+  let html = `<section class="section" id="${slugify("Crew Logos")}"><h2>Crew Logos</h2>`;
   
   Object.keys(grouped).forEach(header => {
     if (grouped[header].length > 0) {
@@ -154,8 +154,8 @@ function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
   
   SECTION_NAMES.forEach((name, index) => {
-    // Add gap and "Extras" header before Crew Logo's
-    if (name === "Crew Logo's") {
+    // Add gap and "Extras" header before Crew Logos
+    if (name === "Crew Logos") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
       nav.appendChild(gap);
@@ -185,7 +185,7 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // Banner logic with fade (no banner for Crew Logo's)
+  // Banner logic with fade (no banner for Crew Logos)
   const bannerImg = document.getElementById("banner-img");
   const bannerContainer = bannerImg.parentElement; // #section-banner
   const banner = SECTION_BANNERS[name];
