@@ -136,19 +136,15 @@ function createScammerCard(item) {
   return `
     <div class="card scammer-card" data-name="${escapeAttr(robloxName)}">
       <div class="card-info">
-        <h3><strong>Roblox Name:</strong> ${robloxNameHtml}</h3>
-        <hr>
-        <div><strong>Discord:</strong> ${discordUser}</div>
-        <hr>
-        <div><strong>Reason:</strong> ${reason}</div>
-        <hr>
-        ${evidenceHtml ? `<div><strong>Evidence:</strong> ${evidenceHtml}</div><hr>` : ""}
+        <div class="scammer-field"><strong>Roblox Name:</strong> ${robloxNameHtml}</div>
+        <div class="scammer-field"><strong>Discord:</strong> ${discordUser}</div>
+        <div class="scammer-field"><strong>Reason:</strong> ${reason}</div>
+        ${evidenceHtml ? `<div class="scammer-field"><strong>Evidence:</strong> ${evidenceHtml}</div>` : ""}
         <div>Reported: ${submittedDate}</div>
       </div>
     </div>
   `;
 }
-
 function renderSection(title, items) {
   if (!items || items.length === 0) return;
 
