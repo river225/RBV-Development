@@ -21,7 +21,7 @@ const SECTION_BANNERS = {
   "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
   "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
   "Vehicles": { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
-  "BlockSpin Map": { url: "https://i.imgur.com/A7nujNf.png", width: "200px", top: "228px", left: "54%" },
+  "BlockSpin Map": { url: "", width: "200px", top: "228px", left: "54%" },
   "Crew Logos": { url: "https://i.imgur.com/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
   "Scammer List": { url: "https://i.imgur.com/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
 };
@@ -29,7 +29,7 @@ const SECTION_BANNERS = {
 // ==================== GREEN LINE - BLOCKSPIN MAP SECTION START ====================
 
 // BlockSpin Map Configuration
-const BASE_MAP_IMAGE = "YOUR_MAP_IMAGE_URL_HERE"; // Replace with your map image URL
+const BASE_MAP_IMAGE = "https://i.imgur.com/A7nujNf.png"; // Replace with your map image URL
 
 const MAP_SECTIONS = {
   "Spawn Areas": {
