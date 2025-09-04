@@ -1,3 +1,12 @@
+/* Fix scrollbar issues */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 /* Base */
 * { box-sizing: border-box; }
 html, body { 
@@ -409,27 +418,25 @@ a { color: #fff; text-decoration: none; }
   }
 }
 
-html, body {
-  overflow-x: hidden !important;
-}
-
 /* === FIXED Section Banner (absolute positioning relative to document) === */
 #section-banner {
-  position: absolute !important;  /* FIXED: Changed from fixed to absolute */
-  z-index: 999;           
-  pointer-events: none;   
+  position: absolute !important;
+  z-index: 999;
+  pointer-events: none;
+  top: 0;
+  left: 0;
 }
 
 #banner-img {
-  position: absolute;     
-  display: block;         
-  opacity: 0;             
-  transition: opacity 0.5s ease; 
-  transform: translateX(-50%); 
+  position: absolute;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  transform: translateX(-50%);
 }
 
 #banner-img.show {
-  opacity: 1;             
+  opacity: 1;
 }
 
 /* ==================== GREEN LINE - BLOCKSPIN MAP STYLES START ==================== */

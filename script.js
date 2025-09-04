@@ -21,7 +21,7 @@ const SECTION_BANNERS = {
   "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
   "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
   "Vehicles": { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
-  "BlockSpin Map": { url: "", width: "200px", top: "228px", left: "54%" },
+  "BlockSpin Map": { url: "https://i.imgur.com/YourMapBanner.png", width: "200px", top: "228px", left: "54%" },
   "Crew Logos": { url: "https://i.imgur.com/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
   "Scammer List": { url: "https://i.imgur.com/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
 };
@@ -29,9 +29,25 @@ const SECTION_BANNERS = {
 // ==================== GREEN LINE - BLOCKSPIN MAP SECTION START ====================
 
 // BlockSpin Map Configuration
-const BASE_MAP_IMAGE = "https://i.imgur.com/A7nujNf.png"; // Replace with your map image URL
+const BASE_MAP_IMAGE = "YOUR_MAP_IMAGE_URL_HERE"; // Replace with your map image URL
 
 const MAP_SECTIONS = {
+  "Test Section": {
+    text: {
+      content: "Test Text",
+      top: "5%",
+      left: "20%", 
+      width: "300px"
+    },
+    images: [
+      {
+        image: "https://via.placeholder.com/40x40/ff0000/ffffff?text=T",
+        width: "40px",
+        top: "25%",
+        left: "30%"
+      }
+    ]
+  },
   "Spawn Areas": {
     text: {
       content: "Main Spawn Locations",
@@ -41,28 +57,11 @@ const MAP_SECTIONS = {
     },
     images: [
       {
-        image: "https://i.imgur.com/spawn1.png",
+        image: "https://via.placeholder.com/40x40/00ff00/ffffff?text=S",
         width: "40px",
         top: "25%",
         left: "30%",
-        detailImage: "https://i.imgur.com/spawn-detail1.png"
-      }
-    ]
-  },
-  "Item Locations": {
-    text: {
-      content: "Rare Item Spawns",
-      top: "8%",
-      left: "50%",
-      width: "250px"
-    },
-    images: [
-      {
-        image: "https://i.imgur.com/item1.png",
-        width: "45px", 
-        top: "40%",
-        left: "70%",
-        detailImage: "https://i.imgur.com/item-detail1.png"
+        detailImage: "https://via.placeholder.com/400x300/00ff00/ffffff?text=Spawn+Detail"
       }
     ]
   }
@@ -270,10 +269,12 @@ function renderBlockSpinMapSection() {
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
-  initMapControls();
 }
 
 function initMapControls() {
+  const taxCalculator = document.querySelector('.tax-calculator');
+  if (!taxCalculator) return;
+  
   // Create map controls in the right panel when map section is active
   const controlsHtml = `
     <div class="map-controls">
@@ -284,8 +285,8 @@ function initMapControls() {
     </div>
   `;
   
-  // This will replace calculator when map is active
-  document.querySelector('.tax-calculator').innerHTML = controlsHtml;
+  // Replace calculator content with map controls
+  taxCalculator.innerHTML = controlsHtml;
   
   // Add event listeners
   document.querySelectorAll('.map-control-btn').forEach(btn => {
@@ -410,11 +411,8 @@ function showSection(name) {
   const taxCalculator = document.querySelector('.tax-calculator');
   
   if (name === "BlockSpin Map") {
-    // Map is active - show map controls instead of calculator
-    if (taxCalculator) {
-      taxCalculator.style.display = 'block';
-      // Controls will be added by initMapControls()
-    }
+    // Map is active - initialize map controls
+    initMapControls();
   } else {
     // Regular section - restore calculator
     if (taxCalculator) {
