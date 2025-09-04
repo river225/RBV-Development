@@ -418,13 +418,25 @@ a { color: #fff; text-decoration: none; }
   }
 }
 
+/* Banner container */
+#section-banner {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+#section-banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: none; /* hidden until section is selected */
+}
+
 /* === FIXED Section Banner (absolute positioning relative to document) === */
 #section-banner {
   position: absolute !important;
   z-index: 999;
   pointer-events: none;
-  top: 0;
-  left: 0;
 }
 
 #banner-img {
@@ -478,14 +490,6 @@ a { color: #fff; text-decoration: none; }
 
 .map-image-overlay:hover {
   transform: translate(-50%, -50%) scale(1.1) !important;
-}
-
-.map-text-overlay {
-  color: #33cce6;
-  font-weight: bold;
-  font-size: 1.2rem;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-  pointer-events: none;
 }
 
 .map-controls h2 {
@@ -566,11 +570,40 @@ a { color: #fff; text-decoration: none; }
   transform: scale(1.05);
 }
 
+/* ==================== GREEN LINE - MAP CONTROLS PANEL START ==================== */
+
+.map-controls-panel {
+  width: 240px;
+  padding: 16px;
+  background: #1f2a33;
+  border: 1px solid #33cce6;
+  border-radius: 12px;
+  position: sticky;
+  top: 16px;
+  height: fit-content;
+  margin-left: 20px;
+}
+
+.map-controls-panel h2 {
+  color: #33cce6;
+  margin-top: 0;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+/* ==================== GREEN LINE - MAP CONTROLS PANEL END ==================== */
+
 /* Mobile responsiveness */
 @media (max-width: 900px) {
   .modal-content {
     margin: 20px;
     margin-bottom: 120px;
+  }
+  
+  .map-controls-panel {
+    width: 100%;
+    margin-left: 0;
+    position: relative;
+    top: auto;
   }
 }
 
