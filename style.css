@@ -473,60 +473,86 @@ a { color: #fff; text-decoration: none; }
   }
 }
 
-/* Banner container */
-#section-banner {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto 20px auto;
-    text-align: center;
-}
-#section-banner img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: none; /* hidden until section is selected */
+html, body {
+  overflow-x: hidden !important;
 }
 
-/* === FIXED Section Banner (absolute positioning relative to document) === */
+/* === BANNER FADE TRANSITION - ADDED === */
 #section-banner {
-  position: absolute !important;
-  z-index: 999;
-  pointer-events: none;
+  position: absolute !important;  
+  z-index: 999;           
+  pointer-events: none;   
 }
 
 #banner-img {
-  position: absolute;
-  display: block;
+  position: absolute;     
+  display: block;         
   opacity: 0;
-  transition: opacity 0.5s ease;
-  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
 }
 
 #banner-img.show {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-/* ==================== GREEN LINE - BLOCKSPIN MAP STYLES START ==================== */
+/* Map controls styling */
+.map-controls-panel {
+  width: 240px;
+  padding: 16px;
+  background: #1f2a33;
+  border: 1px solid #33cce6;
+  border-radius: 12px;
+  position: sticky;
+  top: 16px;
+  height: fit-content;
+}
 
-/* Map Section Styles */
-.map-container {
+.map-controls-panel h2 {
+  color: #33cce6;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  margin-top: 0;
+}
+
+.map-control-btn {
+  display: block;
   width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  background: #4a4a4a;
+  border: 1px solid #100101;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  text-align: left;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.map-control-btn.active {
+  background: #232324;
+}
+
+.map-control-btn:hover {
+  background: #5a5a5a;
+}
+
+/* Map container styling */
+.map-container {
   position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .map-image-container {
   position: relative;
   width: 100%;
-  border: 2px solid #4a4a4a;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #2e2e2e;
 }
 
 #base-map {
   width: 100%;
   height: auto;
-  display: block;
+  border-radius: 12px;
 }
 
 #map-overlays {
@@ -540,126 +566,220 @@ a { color: #fff; text-decoration: none; }
 
 .map-image-overlay {
   pointer-events: all;
-  transition: transform 0.2s ease;
+  border-radius: 4px;
 }
 
-.map-image-overlay:hover {
-  transform: translate(-50%, -50%) scale(1.1) !important;
-}
-
-.map-controls h2 {
-  color: #33cce6;
-  margin-top: 0;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-
-.map-control-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 8px;
-  background: #4a4a4a;
-  border: 1px solid #33cce6;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-
-.map-control-btn:hover {
-  background: #5a5a5a;
-  transform: translateY(-2px);
-}
-
-.map-control-btn.active {
-  background: #33cce6;
-  color: #000;
-  box-shadow: 0 0 10px rgba(51, 204, 230, 0.5);
-}
-
-/* Detail Modal */
+/* Map detail modal */
 .map-detail-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 10000;
 }
 
 .modal-content {
   position: relative;
-  max-width: 80%;
-  max-height: 80%;
-  margin-bottom: 100px;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 .modal-content img {
   width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
 
 .modal-back-btn {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  padding: 10px 20px;
+  top: 10px;
+  left: 10px;
   background: #33cce6;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  padding: 8px 12px;
   color: #000;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .modal-back-btn:hover {
   background: #29b3cc;
-  transform: scale(1.05);
 }
 
-/* ==================== GREEN LINE - MAP CONTROLS PANEL START ==================== */
+.map-info-text {
+  text-align: center;
+  color: #33cce6;
+  margin-bottom: 20px;
+  font-style: italic;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
 
+
+
+
+
+
+
+
+
+
+/* Map overlay hover effect - icons get bigger */
+.map-image-overlay {
+  transition: transform 0.2s ease;
+}
+
+.map-image-overlay:hover {
+  transform: translate(-50%, -50%) scale(1.2) !important;
+}
+
+/* Fix modal back button position - bottom right */
+.modal-back-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  top: auto !important;
+  left: auto !important;
+  background: #33cce6;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+
+/* Map controls styling - PURE DARK + CYAN */
 .map-controls-panel {
   width: 240px;
   padding: 16px;
-  background: #1f2a33;
-  border: 1px solid #33cce6;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 50%, #3a3a3a 100%);
+  border: 2px solid #33cce6;
+  border-radius: 15px;
   position: sticky;
   top: 16px;
   height: fit-content;
-  margin-left: 20px;
+  box-shadow: 0 8px 25px rgba(51, 204, 230, 0.2);
 }
 
 .map-controls-panel h2 {
   color: #33cce6;
+  text-shadow: 0 0 8px #33cce6, 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   margin-top: 0;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.map-control-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #4a4a4a 0%, #5a5a5a 50%, #6a6a6a 100%);
+  border: 2px solid #555;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ==================== GREEN LINE - MAP CONTROLS PANEL END ==================== */
-
-/* Mobile responsiveness */
-@media (max-width: 900px) {
-  .modal-content {
-    margin: 20px;
-    margin-bottom: 120px;
-  }
-  
-  .map-controls-panel {
-    width: 100%;
-    margin-left: 0;
-    position: relative;
-    top: auto;
-  }
+.map-control-btn:hover {
+  background: linear-gradient(135deg, #5a5a5a 0%, #6a6a6a 50%, #7a7a7a 100%);
+  border-color: #33cce6;
+  color: #33cce6;
+  text-shadow: 0 0 5px #33cce6, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(51, 204, 230, 0.3);
 }
 
-/* ==================== GREEN LINE - BLOCKSPIN MAP STYLES END ==================== */
+.map-control-btn.active {
+  background: linear-gradient(135deg, #33cce6 0%, #29b3cc 50%, #1f9fb8 100%);
+  border-color: #33cce6;
+  color: #000;
+  text-shadow: none;
+  box-shadow: 0 6px 20px rgba(51, 204, 230, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.map-control-btn.active:hover {
+  background: linear-gradient(135deg, #33cce6 0%, #29b3cc 50%, #1f9fb8 100%);
+  border-color: #33cce6;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(51, 204, 230, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Map overlay hover effect - icons get bigger */
+.map-image-overlay {
+  transition: transform 0.2s ease;
+}
+
+.map-image-overlay:hover {
+  transform: translate(-50%, -50%) scale(1.2) !important;
+}
+
+/* Enhanced modal with larger images */
+.map-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 85%;
+  max-height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img {
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Back button positioned bottom-right - UNCHANGED */
+.modal-back-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  top: auto !important;
+  left: auto !important;
+  background: #33cce6;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.modal-back-btn:hover {
+  background: #29b3cc;
+}

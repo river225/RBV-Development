@@ -29,7 +29,7 @@ const SECTION_BANNERS = {
 // ==================== GREEN LINE - BLOCKSPIN MAP SECTION START ====================
 
 // BlockSpin Map Configuration
-const BASE_MAP_IMAGE = "https://i.imgur.com/1ylg8p1.png"; // Replace with your map image URL
+const BASE_MAP_IMAGE = "https://i.imgur.com/MrP86EC.png"; // Replace with your map image URL
 
 const MAP_SECTIONS = {
   "Test Section": {
@@ -42,14 +42,15 @@ const MAP_SECTIONS = {
       }
     ]
   },
+
   "Spawn Areas": {
     images: [
       {
-        image: "https://via.placeholder.com/40x40/00ff00/ffffff?text=S",
+        image: "https://i.imgur.com/Gc8mi0z.png",
         width: "40px",
         top: "25%",
         left: "30%",
-        detailImage: "https://via.placeholder.com/400x300/00ff00/ffffff?text=Spawn+Detail"
+        detailImage: "https://i.imgur.com/Gc8mi0z.png"
       }
     ]
   }
@@ -180,6 +181,12 @@ function createScammerCard(item) {
 }
 
 function renderSection(title, items) {
+  // Always render BlockSpin Map even if no items
+  if (title === "BlockSpin Map") {
+    renderBlockSpinMapSection();
+    return;
+  }
+
   if (!items || items.length === 0) return;
 
   if (title === "Crew Logos") {
@@ -248,6 +255,7 @@ function renderBlockSpinMapSection() {
   const html = `
     <section class="section map-section" id="${slugify("BlockSpin Map")}">
       <h2>BlockSpin Map</h2>
+      <p class="map-info-text">✨ Interactive map, some icons reveal more information when clicked !</p>
       <div class="map-container">
         <div class="map-image-container">
           <img id="base-map" src="${BASE_MAP_IMAGE}" alt="BlockSpin Map" />
@@ -260,13 +268,20 @@ function renderBlockSpinMapSection() {
 }
 
 function createMapControlsPanel() {
+  const taxCalculator = document.querySelector('.tax-calculator');
+  
+  // Hide the tax calculator for map section
+  if (taxCalculator) {
+    taxCalculator.style.display = 'none';
+  }
+  
   // Remove existing map controls if any
   const existingMapControls = document.querySelector('.map-controls-panel');
   if (existingMapControls) {
     existingMapControls.remove();
   }
   
-  // Create new map controls panel
+  // Create new map controls panel in the same position as tax calculator
   const controlsPanel = document.createElement('div');
   controlsPanel.className = 'map-controls-panel';
   controlsPanel.innerHTML = `
@@ -276,7 +291,7 @@ function createMapControlsPanel() {
     ).join('')}
   `;
   
-  // Insert after the main container
+  // Insert where the tax calculator is
   const mainContainer = document.querySelector('.main-container');
   mainContainer.appendChild(controlsPanel);
   
@@ -286,8 +301,32 @@ function createMapControlsPanel() {
   });
 }
 
+function removeMapControlsPanel() {
+  const mapControls = document.querySelector('.map-controls-panel');
+  if (mapControls) {
+    // Clear all overlays when leaving map section
+    const overlaysContainer = document.getElementById('map-overlays');
+    if (overlaysContainer) {
+      overlaysContainer.innerHTML = '';
+    }
+    
+    mapControls.remove();
+  }
+  
+  // Show the tax calculator again
+  const taxCalculator = document.querySelector('.tax-calculator');
+  if (taxCalculator) {
+    taxCalculator.style.display = 'block';
+  }
+}
+
 function toggleMapSection(sectionName, button) {
   const overlaysContainer = document.getElementById('map-overlays');
+  if (!overlaysContainer) {
+    console.error('Map overlays container not found');
+    return;
+  }
+  
   const existingItems = overlaysContainer.querySelectorAll(`[data-section="${sectionName}"]`);
   
   if (existingItems.length > 0) {
@@ -303,9 +342,19 @@ function toggleMapSection(sectionName, button) {
 
 function showMapSection(sectionName) {
   const overlaysContainer = document.getElementById('map-overlays');
+  if (!overlaysContainer) {
+    console.error('Map overlays container not found');
+    return;
+  }
+  
   const sectionData = MAP_SECTIONS[sectionName];
   
-  if (!sectionData || !sectionData.images) return;
+  if (!sectionData || !sectionData.images) {
+    console.error(`No data found for section: ${sectionName}`);
+    return;
+  }
+  
+  console.log(`Adding ${sectionData.images.length} images for ${sectionName}`);
   
   // Add images only (no text)
   sectionData.images.forEach(imageData => {
@@ -371,7 +420,10 @@ function initSectionsNav() {
   });
 }
 
+// === EXACT WORKING BANNER LOGIC FROM YOUR MAIN SITE ===
 function showSection(name) {
+  console.log(`Showing section: ${name}`);
+  
   // Show/hide sections
   SECTION_NAMES.forEach(sec => {
     const el = document.getElementById(slugify(sec));
@@ -383,41 +435,15 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // ==================== GREEN LINE - MAP LAYOUT HANDLING START ====================
-  // Handle special layout for BlockSpin Map
-  const taxCalculator = document.querySelector('.tax-calculator');
-  
+  // Handle map controls
   if (name === "BlockSpin Map") {
-    // Map is active - completely hide calculator and create new map controls
-    if (taxCalculator) {
-      taxCalculator.style.display = 'none';
-    }
-    // Create map controls panel
+    console.log('Creating map controls panel...');
     createMapControlsPanel();
   } else {
-    // Regular section - show calculator and remove map controls
-    if (taxCalculator) {
-      taxCalculator.style.display = 'block';
-      taxCalculator.innerHTML = `
-        <h2>Tax Calculator</h2> 
-        <input type="number" id="taxInput" placeholder="Amount..." /> 
-        <div id="taxResult">
-            Amount to withdraw: <span class="calc-amount">0</span>
-        </div>
-        <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p>
-      `;
-      // Reinitialize calculator
-      initTaxCalculator();
-    }
-    // Remove map controls if they exist
-    const existingMapControls = document.querySelector('.map-controls-panel');
-    if (existingMapControls) {
-      existingMapControls.remove();
-    }
+    removeMapControlsPanel();
   }
-  // ==================== GREEN LINE - MAP LAYOUT HANDLING END ====================
 
-  // Banner logic
+  // Banner logic - EXACT COPY FROM YOUR WORKING SITE
   const bannerImg = document.getElementById("banner-img");
   const bannerContainer = bannerImg.parentElement;
   const banner = SECTION_BANNERS[name];
@@ -503,21 +529,19 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// === INIT ===
+// === INIT - EXACT COPY FROM YOUR WORKING SITE ===
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log('DOM loaded, initializing...');
+  
   initSectionsNav();
   initSearch();
   initTaxCalculator();
 
   for (const sec of SECTION_NAMES) {
-    // ==================== GREEN LINE - MAP RENDERING START ====================
-    if (sec === "BlockSpin Map") {
-      renderBlockSpinMapSection();
-    } else {
-      const items = await fetchSheet(sec);
-      renderSection(sec, items);
-    }
-    // ==================== GREEN LINE - MAP RENDERING END ====================
+    console.log(`Fetching data for: ${sec}`);
+    const items = await fetchSheet(sec);
+    console.log(`Got ${items.length} items for ${sec}`);
+    renderSection(sec, items);
   }
 
   if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
