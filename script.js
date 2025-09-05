@@ -248,6 +248,7 @@ function renderBlockSpinMapSection() {
   const html = `
     <section class="section map-section" id="${slugify("BlockSpin Map")}">
       <h2>BlockSpin Map</h2>
+      <p style="text-align: center; color: #33cce6; font-weight: bold; margin: 10px 0 20px 0; text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;">|| ✨ Interactive Map, Some mini images can be clicked!</p>
       <div class="map-container">
         <div class="map-image-container">
           <img id="base-map" src="${BASE_MAP_IMAGE}" alt="BlockSpin Map" />
@@ -345,6 +346,19 @@ function closeDetailModal() {
   if (modal) modal.remove();
 }
 
+function resetMapSection() {
+  // Clear all map overlays
+  const overlaysContainer = document.getElementById('map-overlays');
+  if (overlaysContainer) {
+    overlaysContainer.innerHTML = '';
+  }
+  
+  // Deactivate all map control buttons
+  document.querySelectorAll('.map-control-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+}
+
 // ==================== GREEN LINE - BLOCKSPIN MAP FUNCTIONS END ====================
 
 // === SECTION NAVIGATION ===
@@ -372,6 +386,16 @@ function initSectionsNav() {
 }
 
 function showSection(name) {
+  // Check if we're leaving the BlockSpin Map section
+  const currentMapSection = document.getElementById(slugify("BlockSpin Map"));
+  const wasMapActive = currentMapSection && currentMapSection.style.display !== "none";
+  const isLeavingMap = wasMapActive && name !== "BlockSpin Map";
+  
+  // Reset map if leaving map section
+  if (isLeavingMap) {
+    resetMapSection();
+  }
+
   // Show/hide sections
   SECTION_NAMES.forEach(sec => {
     const el = document.getElementById(slugify(sec));
@@ -384,141 +408,123 @@ function showSection(name) {
   });
 
   // ==================== GREEN LINE - MAP LAYOUT HANDLING START ====================
-  // Handle special layout for BlockSpin Map
+
+  // Handle layout for map vs non-map sections
+  const mainContainer = document.querySelector('.main-container');
   const taxCalculator = document.querySelector('.tax-calculator');
   
   if (name === "BlockSpin Map") {
-    // Map is active - completely hide calculator and create new map controls
-    if (taxCalculator) {
-      taxCalculator.style.display = 'none';
+    // Map section: full width, hide calculator
+    mainContainer.style.flexDirection = 'column';
+    if (taxCalculator) taxCalculator.style.display = 'none';
+    
+    // Create map controls if they don't exist
+    if (!document.querySelector('.map-controls-panel')) {
+      createMapControlsPanel();
     }
-    // Create map controls panel
-    createMapControlsPanel();
+    
+    updateBanner("BlockSpin Map");
   } else {
-    // Regular section - show calculator and remove map controls
-    if (taxCalculator) {
-      taxCalculator.style.display = 'block';
-      taxCalculator.innerHTML = `
-        <h2>Tax Calculator</h2> 
-        <input type="number" id="taxInput" placeholder="Amount..." /> 
-        <div id="taxResult">
-            Amount to withdraw: <span class="calc-amount">0</span>
-        </div>
-        <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p>
-      `;
-      // Reinitialize calculator
-      initTaxCalculator();
-    }
-    // Remove map controls if they exist
-    const existingMapControls = document.querySelector('.map-controls-panel');
-    if (existingMapControls) {
-      existingMapControls.remove();
-    }
+    // Regular sections: normal layout, show calculator
+    mainContainer.style.flexDirection = 'row';
+    if (taxCalculator) taxCalculator.style.display = 'block';
+    
+    // Remove map controls
+    const mapControls = document.querySelector('.map-controls-panel');
+    if (mapControls) mapControls.remove();
+    
+    updateBanner(name);
   }
+
   // ==================== GREEN LINE - MAP LAYOUT HANDLING END ====================
+}
 
-  // Banner logic
+// === UTILITIES ===
+function safe(str) { return String(str || "").trim(); }
+function escapeAttr(str) { return safe(str).replace(/"/g, "&quot;"); }
+function slugify(str) { return safe(str).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+
+// === TAX CALCULATOR ===
+function initTaxCalculator() {
+  const input = document.getElementById("taxInput");
+  const result = document.getElementById("taxResult");
+  const amountSpan = result.querySelector(".calc-amount");
+
+  input.addEventListener("input", () => {
+    const val = parseFloat(input.value) || 0;
+    const taxed = Math.ceil(val / 0.9);
+    amountSpan.textContent = taxed.toLocaleString();
+  });
+}
+
+// === SEARCH ===
+function initSearch() {
+  const searchInput = document.getElementById("search");
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    document.querySelectorAll(".card").forEach(card => {
+      const name = (card.dataset.name || "").toLowerCase();
+      const match = name.includes(query);
+      card.classList.toggle("hidden", !match);
+    });
+  });
+}
+
+// === COPY FUNCTION ===
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    // Optional: Show a temporary "Copied!" message
+    console.log('Copied to clipboard:', text);
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+  });
+}
+
+// === BANNER ===
+function updateBanner(sectionName) {
+  const bannerContainer = document.getElementById("section-banner");
   const bannerImg = document.getElementById("banner-img");
-  const bannerContainer = bannerImg.parentElement;
-  const banner = SECTION_BANNERS[name];
-
-  if (banner && banner.url) {
-    bannerImg.classList.remove("show");
-    setTimeout(() => {
-      bannerImg.src = banner.url;
-      bannerImg.style.display = "block";
-      bannerImg.style.maxWidth = banner.width || "190px";
-      bannerContainer.style.top = banner.top || "228px";
-      bannerContainer.style.left = banner.left || "50%";
-      bannerContainer.style.transform = "translateX(-50%)";
-      bannerContainer.style.position = "absolute";
-      requestAnimationFrame(() => {
-        bannerImg.classList.add("show");
-      });
-    }, 300);
+  const bannerLink = document.getElementById("banner-link");
+  
+  if (!bannerContainer || !bannerImg) return;
+  
+  const bannerData = SECTION_BANNERS[sectionName];
+  if (bannerData && bannerData.url) {
+    bannerImg.src = bannerData.url;
+    bannerImg.style.display = "block";
+    bannerImg.style.width = bannerData.width;
+    bannerImg.style.position = "absolute";
+    bannerImg.style.top = bannerData.top;
+    bannerImg.style.left = bannerData.left;
+    bannerImg.style.transform = "translate(-50%, -50%)";
+    bannerImg.style.zIndex = "10";
+    
+    // Set banner link (you can customize this URL)
+    bannerLink.href = "#"; // Replace with actual link if needed
   } else {
     bannerImg.style.display = "none";
   }
 }
 
-// === SEARCH ===
-function initSearch() {
-  const input = document.getElementById("search");
-  if (!input) return;
-
-  input.addEventListener("input", () => {
-    const val = input.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(card => {
-      const name = card.dataset.name.toLowerCase();
-      card.classList.toggle("hidden", !name.includes(val));
-    });
-  });
-}
-
-// === TAX CALCULATOR ===
-function initTaxCalculator() {
-  const taxInput = document.getElementById("taxInput");
-  const taxResult = document.getElementById("taxResult");
-  if (!taxInput || !taxResult) return;
-
-  taxInput.addEventListener("input", () => {
-    const val = parseFloat(taxInput.value) || 0;
-    const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
-  });
-}
-
-// === COPY TO CLIPBOARD ===
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = event.target;
-    const originalText = btn.textContent;
-    btn.textContent = '✓';
-    btn.style.backgroundColor = '#28a745';
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.backgroundColor = '';
-    }, 1500);
-  }).catch(() => {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    
-    const btn = event.target;
-    const originalText = btn.textContent;
-    btn.textContent = '✓';
-    btn.style.backgroundColor = '#28a745';
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.backgroundColor = '';
-    }, 1500);
-  });
-}
-
-// === HELPERS ===
-function safe(str) { return str ?? ""; }
-function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
-function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
-
-// === INIT ===
-document.addEventListener("DOMContentLoaded", async () => {
+// === MAIN INIT ===
+async function init() {
   initSectionsNav();
-  initSearch();
   initTaxCalculator();
+  initSearch();
 
-  for (const sec of SECTION_NAMES) {
-    // ==================== GREEN LINE - MAP RENDERING START ====================
-    if (sec === "BlockSpin Map") {
+  // Fetch and render all sections
+  for (const name of SECTION_NAMES) {
+    if (name === "BlockSpin Map") {
       renderBlockSpinMapSection();
     } else {
-      const items = await fetchSheet(sec);
-      renderSection(sec, items);
+      const items = await fetchSheet(name);
+      renderSection(name, items);
     }
-    // ==================== GREEN LINE - MAP RENDERING END ====================
   }
 
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
-});
+  // Show first section by default
+  showSection(SECTION_NAMES[0]);
+}
+
+// Start when page loads
+document.addEventListener("DOMContentLoaded", init);
