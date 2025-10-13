@@ -788,35 +788,38 @@ html, body {
 .card-left {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
 }
 
 /* Durability control styling - VERTICAL LAYOUT */
 .durability-control {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 2px;
   width: 100%;
+  margin-top: 4px;
+  padding-left: 8px;
 }
 
 .durability-control label {
   font-weight: bold;
   color: #33cce6;
-  font-size: 1.3rem;
-  margin-bottom: 2px;
+  font-size: 1.1rem;
+  margin-bottom: 0;
 }
 
 .durability-input {
-  width: 55px;
-  padding: 4px 6px;
-  border-radius: 5px;
+  width: 48px;
+  padding: 3px 5px;
+  border-radius: 4px;
   border: 2px solid #33cce6;
   background: #2a3945;
   color: #fff;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: bold;
   /* Remove default number arrows */
   -moz-appearance: textfield;
@@ -833,26 +836,26 @@ html, body {
 .durability-max {
   color: #33cce6;
   font-weight: bold;
-  font-size: 0.9rem;
-  margin: 0 4px;
+  font-size: 0.8rem;
+  margin: 0 3px;
 }
 
 .durability-arrows {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .durability-arrows button {
-  width: 22px;
-  height: 18px;
+  width: 20px;
+  height: 16px;
   padding: 0;
   background: #33cce6;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   color: #000;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1;
   font-weight: bold;
 }
@@ -869,5 +872,5 @@ html, body {
 .durability-input-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
