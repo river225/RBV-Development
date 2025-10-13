@@ -789,7 +789,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 4px;  /* Reduced from 8px */
   width: 100%;
 }
 
@@ -798,35 +798,34 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 1px;  /* Reduced from 2px */
   width: 100%;
-  margin-top: 4px;
+  margin-top: 0;  /* Changed from 4px */
   padding-left: 8px;
 }
 
 .durability-control label {
   font-weight: bold;
   color: #33cce6;
-  font-size: 1.1rem;
+  font-size: 1rem;  /* Reduced from 1.1rem */
   margin-bottom: 0;
+  line-height: 1;  /* Tighter line height */
 }
 
 .durability-input {
   width: 48px;
-  padding: 3px 5px;
+  padding: 2px 4px;  /* Reduced padding */
   border-radius: 4px;
   border: 2px solid #33cce6;
   background: #2a3945;
   color: #fff;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;  /* Smaller */
   font-weight: bold;
-  /* Remove default number arrows */
   -moz-appearance: textfield;
   appearance: textfield;
 }
 
-/* Remove number input arrows in Chrome/Safari */
 .durability-input::-webkit-outer-spin-button,
 .durability-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -836,8 +835,9 @@ html, body {
 .durability-max {
   color: #33cce6;
   font-weight: bold;
-  font-size: 0.8rem;
-  margin: 0 3px;
+  font-size: 0.75rem;  /* Smaller */
+  margin: 0 2px;
+  line-height: 1;
 }
 
 .durability-arrows {
@@ -847,15 +847,15 @@ html, body {
 }
 
 .durability-arrows button {
-  width: 20px;
-  height: 16px;
+  width: 18px;  /* Smaller */
+  height: 14px;  /* Smaller */
   padding: 0;
   background: #33cce6;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   color: #000;
-  font-size: 10px;
+  font-size: 9px;  /* Smaller */
   line-height: 1;
   font-weight: bold;
 }
@@ -868,9 +868,8 @@ html, body {
   background: #1e8a9c;
 }
 
-/* Input + arrows container */
 .durability-input-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;  /* Reduced from 4px */
 }
