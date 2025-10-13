@@ -286,9 +286,22 @@ function createCard(item) {
   const afterTax = safe(item["After Tax Value"]);
   const durability = safe(item["Durability"]);
 
-  const imgTag = img
-    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
-    : "";
+  // Check if durability is 0 to add broken overlay
+  let imgTag = "";
+  if (img) {
+    const hasBrokenOverlay = durability && durability.includes('/') && parseInt(durability.split('/')[0]) === 0;
+    
+    if (hasBrokenOverlay) {
+      imgTag = `
+        <div class="img-container">
+          <img src="${img}" alt="${name}" onerror="this.style.display='none'">
+          <div class="broken-overlay"></div>
+        </div>
+      `;
+    } else {
+      imgTag = `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`;
+    }
+  }
 
   let durabilityHTML = '';
   if (durability && durability.includes('/')) {
