@@ -285,13 +285,12 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
-  const durability = safe(item["Durability"]); // NEW: Get from spreadsheet
+  const durability = safe(item["Durability"]);
 
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
     : "";
 
-  // NEW: Only create durability HTML if durability exists
   let durabilityHTML = '';
   if (durability && durability.includes('/')) {
     const maxDurability = durability.split('/')[1] || "100";
@@ -322,11 +321,13 @@ function createCard(item) {
          data-ranged="${escapeAttr(ranged)}" 
          data-aftertax="${escapeAttr(afterTax)}"
          data-max-durability="${durability ? durability.split('/')[1] : '100'}">
-      ${imgTag}
+      <div class="card-left">
+        ${imgTag}
+        ${durabilityHTML}
+      </div>
       <div class="card-info">
         <h3>${name}</h3>
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
-        ${durabilityHTML}
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
