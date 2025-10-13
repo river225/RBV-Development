@@ -825,15 +825,58 @@ function updateCardValues(input) {
 }
 
 function calculateDurabilityValue(originalValue, durabilityPercent) {
-  if (originalValue.includes(' to ')) {
-    const parts = originalValue.split(' to ');
-    const low = parseValue(parts[0]) * durabilityPercent;
-    const high = parseValue(parts[1]) * durabilityPercent;
-    return formatValue(low) + ' to ' + formatValue(high);
-  } else {
-    const value = parseValue(originalValue) * durabilityPercent;
+  if (!originalValue || originalValue === '' || originalValue === 'N/A' || originalValue === '-') {
+    return originalValue || 'N/A';
+  }
+  
+  // Handle range format: "$X to $Y" or "$X-$Y" or any variation
+  if (originalValue.includes(' to ') || originalValue.includes('-')) {
+    const separator = originalValue.includes(' to ') ? ' to ' : '-';
+    const parts = originalValue.split(separator);
+    
+    if (parts.length === 2) {
+      const low = parseValue(parts[0]) * durabilityPercent;
+      const high = parseValue(parts[1]) * durabilityPercent;
+      
+      if (!isNaN(low) && !isNaN(high)) {
+        return formatValue(low) + ' to ' + formatValue(high);
+      }
+    }
+  }
+  
+  // Handle single value
+  const value = parseValue(originalValue) * durabilityPercent;
+  
+  if (!isNaN(value)) {
     return formatValue(value);
   }
+  
+  // If all else fails, return original
+  return originalValue;
+}
+
+function parseValue(str) {
+  if (!str) return 0;
+  
+  // Convert to string and clean it
+  str = str.toString().trim();
+  
+  // Extract just the numeric part (remove $, commas, spaces)
+  str = str.replace(/[$,\s]/g, '');
+  
+  // Handle 'k' (thousands)
+  if (str.toLowerCase().includes('k')) {
+    return parseFloat(str.replace(/k/gi, '')) * 1000;
+  }
+  
+  // Handle 'm' (millions)  
+  if (str.toLowerCase().includes('m')) {
+    return parseFloat(str.replace(/m/gi, '')) * 1000000;
+  }
+  
+  // Just a regular number
+  const num = parseFloat(str);
+  return isNaN(num) ? 0 : num;
 }
 
 function parseValue(str) {
