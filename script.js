@@ -829,7 +829,7 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
     return originalValue || 'N/A';
   }
   
-  // Handle range format
+  // Handle range format (works for both "Ranged Value" AND "After Tax Value")
   if (originalValue.includes(' to ')) {
     const parts = originalValue.split(' to ');
     const low = parseValue(parts[0]) * durabilityPercent;
@@ -845,7 +845,7 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
   // Handle single value
   const value = parseValue(originalValue) * durabilityPercent;
   
-  if (!isNaN(value)) {
+  if (!isNaN(value) && value > 0) {
     return formatLikeOriginal(value, originalValue);
   }
   
@@ -855,25 +855,18 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
 function parseValue(str) {
   if (!str) return 0;
   
-  // Convert to string and clean it
-  str = str.toString().trim();
+  str = str.toString().trim().toLowerCase();
+  str = str.replace(/[$,]/g, ''); // Remove $ and commas
   
-  // Extract just the numeric part (remove $, commas, spaces)
-  str = str.replace(/[$,\s]/g, '');
-  
-  // Handle 'k' (thousands)
-  if (str.toLowerCase().includes('k')) {
-    return parseFloat(str.replace(/k/gi, '')) * 1000;
+  if (str.includes('k')) {
+    return parseFloat(str.replace('k', '')) * 1000;
   }
   
-  // Handle 'm' (millions)  
-  if (str.toLowerCase().includes('m')) {
-    return parseFloat(str.replace(/m/gi, '')) * 1000000;
+  if (str.includes('m')) {
+    return parseFloat(str.replace('m', '')) * 1000000;
   }
   
-  // Just a regular number
-  const num = parseFloat(str);
-  return isNaN(num) ? 0 : num;
+  return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
 }
 
 
