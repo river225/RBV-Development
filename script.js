@@ -876,13 +876,7 @@ function parseValue(str) {
   return isNaN(num) ? 0 : num;
 }
 
-function parseValue(str) {
-  str = str.replace('$', '').replace(/,/g, '');
-  if (str.includes('k')) {
-    return parseFloat(str) * 1000;
-  }
-  return parseFloat(str) || 0;
-}
+
 
 function formatLikeOriginal(num, original) {
   num = Math.round(num);
