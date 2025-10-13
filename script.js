@@ -835,8 +835,35 @@ function updateCardValues(input) {
   card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
   card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
   card.querySelector('.aftertax-value').textContent = calculateDurabilityValue(originalAfterTax, durabilityPercent);
+  
+  // Handle broken overlay
+  const cardLeft = card.querySelector('.card-left');
+  const existingImg = cardLeft.querySelector('img');
+  const existingOverlay = cardLeft.querySelector('.broken-overlay');
+  
+  if (currentDurability === 0) {
+    // Add overlay if not present
+    if (!existingOverlay && existingImg) {
+      // Wrap image in container if not wrapped
+      if (!existingImg.parentElement.classList.contains('img-container')) {
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'img-container';
+        existingImg.parentNode.insertBefore(imgContainer, existingImg);
+        imgContainer.appendChild(existingImg);
+      }
+      
+      // Add overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'broken-overlay';
+      existingImg.parentElement.appendChild(overlay);
+    }
+  } else {
+    // Remove overlay if present
+    if (existingOverlay) {
+      existingOverlay.remove();
+    }
+  }
 }
-
 function calculateDurabilityValue(originalValue, durabilityPercent) {
   if (!originalValue || originalValue === '' || originalValue === 'N/A' || originalValue === '-') {
     return originalValue || 'N/A';
