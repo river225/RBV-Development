@@ -829,11 +829,14 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
     return originalValue || 'N/A';
   }
   
+  // New formula: 20% floor + 80% scaled by durability
+  const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
+  
   // Handle range format (works for both "Ranged Value" AND "After Tax Value")
   if (originalValue.includes(' to ')) {
     const parts = originalValue.split(' to ');
-    const low = parseValue(parts[0]) * durabilityPercent;
-    const high = parseValue(parts[1]) * durabilityPercent;
+    const low = parseValue(parts[0]) * valueMultiplier;
+    const high = parseValue(parts[1]) * valueMultiplier;
     
     if (!isNaN(low) && !isNaN(high)) {
       const lowFormatted = formatLikeOriginal(low, parts[0]);
@@ -843,7 +846,7 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
   }
   
   // Handle single value
-  const value = parseValue(originalValue) * durabilityPercent;
+  const value = parseValue(originalValue) * valueMultiplier;
   
   if (!isNaN(value) && value > 0) {
     return formatLikeOriginal(value, originalValue);
