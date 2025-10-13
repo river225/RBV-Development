@@ -8,55 +8,247 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Vehicles",
-  "BlockSpin Map",
+  // "BlockSpin Map",
   "Crew Logos",
   "Scammer List"
 ];
 
 const SECTION_BANNERS = {
-  "Uncommon": { url: "https://i.imgur.com/ttWiION.png", width: "160px", top: "226px", left: "53%" },
-  "Rare":     { url: "https://i.imgur.com/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
-  "Epic":     { url: "https://i.imgur.com/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
-  "Legendary":{ url: "https://i.imgur.com/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
-  "Omega":    { url: "https://i.imgur.com/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
-  "Misc":     { url: "https://i.imgur.com/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
-  "Vehicles": { url: "https://i.imgur.com/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
+  "Uncommon": { url: "https://i.ibb.co/5Xfj0w2c/ttWiION.png", width: "160px", top: "226px", left: "53%" },
+  "Rare":     { url: "https://i.ibb.co/QvvLmkVq/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
+  "Epic":     { url: "https://i.ibb.co/938SzMHF/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
+  "Legendary":{ url: "https://i.ibb.co/pvsRYDn2/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
+  "Omega":    { url: "https://i.ibb.co/q3whwbx6/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
+  "Misc":     { url: "https://i.ibb.co/Dhdvg41/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
+  "Vehicles": { url: "https://i.ibb.co/MxK5B0sX/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
   "BlockSpin Map": { url: "", width: "200px", top: "228px", left: "54%" },
-  "Crew Logos": { url: "https://i.imgur.com/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
-  "Scammer List": { url: "https://i.imgur.com/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
+  "Crew Logos": { url: "https://i.ibb.co/Td4tMSc/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
+  "Scammer List": { url: "https://i.ibb.co/Zp7BDzzx/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
 };
 
 // ==================== GREEN LINE - BLOCKSPIN MAP SECTION START ====================
 
 // BlockSpin Map Configuration
-const BASE_MAP_IMAGE = "https://i.imgur.com/MrP86EC.png"; // Replace with your map image URL
+const BASE_MAP_IMAGE = "https://i.ibb.co/JwVD8Xpf/MrP86EC.png"; 
 
 const MAP_SECTIONS = {
-  "Test Section": {
+  "Player Spawn Points": {
     images: [
       {
-        image: "https://via.placeholder.com/40x40/ff0000/ffffff?text=T",
-        width: "40px",
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "29%",
+        left: "65%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "30%",
+        left: "17%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "12%",
+        left: "28%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "68%",
+        left: "26%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "80%",
+        left: "55%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "68%",
+        left: "26%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "55%",
+        left: "40%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "79%",
+        left: "38%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "16%",
+        left: "67%",
+        detailImage: ""
+      },
+        {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "38%",
+        left: "47%",
+        detailImage: ""
+      },
+         {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
+        top: "53%",
+        left: "57.5%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/1tzS0dJX/n4PnOKI.png",
+        width: "27px",
         top: "25%",
-        left: "30%"
+        left: "37.5%",
+        detailImage: ""
       }
     ]
   },
 
-  "Spawn Areas": {
+  "Crate Spawn Points": {
     images: [
       {
-        image: "https://i.imgur.com/Gc8mi0z.png",
+        image: "https://i.ibb.co/zhnBxTPv/Screenshot-2025-10-12-at-23-34-55-removebg-preview.png",
+        width: "25px",
+        top: "9%",
+        left: "28%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/zhnBxTPv/Screenshot-2025-10-12-at-23-34-55-removebg-preview.png",
+        width: "25px",
+        top: "8%",
+        left: "60%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/zhnBxTPv/Screenshot-2025-10-12-at-23-34-55-removebg-preview.png",
+        width: "25px",
+        top: "12.5%",
+        left: "46%",
+        detailImage: ""
+      }
+    ]
+  },
+  "NPCS": {
+    images: [
+      {
+        image: "https://i.ibb.co/849Y0wJB/OJCriKp.png", // Rick
+        width: "40px",
+        top: "89%",
+        left: "68%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/twh4PVBm/Dz3MnwZ.png", // Rodrigo
+        width: "43px",
+        top: "89%",
+        left: "56%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/Kx3Cm8yW/4AYwFbt.png", // James
+        width: "56px",
+        top: "69%",
+        left: "53%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/s9k0SKps/KYtfyd9.png", // Urban
+        width: "65px",
+        top: "47%",
+        left: "55%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/gb54dgXn/hCv69fQ.png", // gas station
+        width: "39px",
+        top: "43%",
+        left: "32.5%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/vCSv411N/Rq1vj0r.png", // gun store
+        width: "55px",
+        top: "24.5%",
+        left: "51%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/DH2vqhcD/j3Lf34B.png", // Daniella
+        width: "36px",
+        top: "26.5%",
+        left: "62%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/VcQfLY56/1UjfGH2.png", // Barbershop 
+        width: "39px",
+        top: "21%",
+        left: "37%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/YFZ275hP/rRvRlw1.png", // Jewl shop
+        width: "32px",
+        top: "21%",
+        left: "30%",
+        detailImage: ""
+      },
+       {
+        image: "https://i.ibb.co/yBZtSyM9/pFrqAWq.png", // restaurant
+        width: "33px",
+        top: "21%",
+        left: "25%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/F4FZSP4y/u4gmHx2.png", // clothes shop
+        width: "33px",
+        top: "23%",
+        left: "18%",
+        detailImage: ""
+      },
+      {
+        image: "https://i.ibb.co/x8fdW3WL/5mn4Ync.png", // clothes shop
+        width: "34px",
+        top: "8%",
+        left: "52%",
+        detailImage: ""
+      },
+    ]
+  },
+ 
+  "Structures": {
+    images: [
+      {
+        image: "",
         width: "40px",
         top: "25%",
         left: "30%",
-        detailImage: "https://i.imgur.com/Gc8mi0z.png"
+        detailImage: ""
       }
     ]
   }
 };
 
-// ==================== GREEN LINE - BLOCKSPIN MAP SECTION END ====================
+// ==================== BLOCKSPIN MAP SECTION END ====================
 
 // === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
@@ -93,20 +285,51 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
+  const durability = safe(item["Durability"]); // NEW: Get from spreadsheet
 
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
     : "";
 
+  // NEW: Only create durability HTML if durability exists
+  let durabilityHTML = '';
+  if (durability && durability.includes('/')) {
+    const maxDurability = durability.split('/')[1] || "100";
+    const currentDurability = durability.split('/')[0] || maxDurability;
+    
+    durabilityHTML = `
+      <div class="durability-control">
+        <label>Durability:</label>
+        <input type="number" class="durability-input" 
+               value="${currentDurability}" 
+               max="${maxDurability}" 
+               min="0" 
+               onchange="updateCardValues(this)">
+        <span class="durability-max">/${maxDurability}</span>
+        <div class="durability-arrows">
+          <button onmousedown="adjustDurability(this, 1)" 
+                  ontouchstart="adjustDurability(this, 1)">▲</button>
+          <button onmousedown="adjustDurability(this, -1)" 
+                  ontouchstart="adjustDurability(this, -1)">▼</button>
+        </div>
+      </div>
+    `;
+  }
+
   return `
-    <div class="card" data-name="${escapeAttr(name)}">
+    <div class="card" data-name="${escapeAttr(name)}" 
+         data-avg="${escapeAttr(avg)}" 
+         data-ranged="${escapeAttr(ranged)}" 
+         data-aftertax="${escapeAttr(afterTax)}"
+         data-max-durability="${durability ? durability.split('/')[1] : '100'}">
       ${imgTag}
       <div class="card-info">
         <h3>${name}</h3>
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
-        ${avg ? `<div>Average Value: ${avg}</div>` : ""}
-        ${ranged ? `<div>Ranged Value: ${ranged}</div>` : ""}
-        ${afterTax ? `<div>After Tax Value: ${afterTax}</div>` : ""}
+        ${durabilityHTML}
+        <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
+        <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
+        <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
       </div>
     </div>
   `;
@@ -139,8 +362,9 @@ function createScammerCard(item) {
   const robloxName = safe(item["Roblox Name"]);
   const discordUser = safe(item["Discord User"]);
   const reason = safe(item["Reason"]);
+    const reasonWithLinks = reason.replace(/https?:\/\/\S+/g, match => `<a href="${match}" target="_blank" rel="noopener" class="scammer-link">User Profile</a>`);
   const evidence = safe(item["Evidence"]);
-  const submittedDate = safe(item["Submitted Date"]);
+  const submittedDate = item["Date"] || item["Submitted Date"] || "";
 
   // Handle Roblox name - check if it contains a URL and extract both parts
   let robloxNameHtml;
@@ -172,7 +396,7 @@ function createScammerCard(item) {
       <div class="card-info">
         <div class="scammer-field"><strong>Roblox Name:</strong> ${robloxNameHtml}</div>
         <div class="scammer-field"><strong>Discord:</strong> ${discordUser}</div>
-        <div class="scammer-field"><strong>Reason:</strong> ${reason}</div>
+                <div class="scammer-field"><strong>Reason:</strong> ${reasonWithLinks}</div>
         ${evidenceHtml ? `<div class="scammer-field"><strong>Evidence:</strong> ${evidenceHtml}</div>` : ""}
         <div>Reported: ${submittedDate}</div>
       </div>
@@ -402,7 +626,7 @@ function initSectionsNav() {
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before BlockSpin Map
-    if (name === "BlockSpin Map") {
+    if (name === "Crew Logos") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
       nav.appendChild(gap);
@@ -423,6 +647,14 @@ function initSectionsNav() {
 // === EXACT WORKING BANNER LOGIC FROM YOUR MAIN SITE ===
 function showSection(name) {
   console.log(`Showing section: ${name}`);
+  
+    // Reset durability when switching sections
+  document.querySelectorAll('.durability-input').forEach(input => {
+    const card = input.closest('.card');
+    const maxDurability = card.dataset.maxDurability;
+    input.value = maxDurability;
+    updateCardValues(input);
+  });
   
   // Show/hide sections
   SECTION_NAMES.forEach(sec => {
@@ -523,6 +755,91 @@ function copyToClipboard(text) {
     }, 1500);
   });
 }
+
+// === DURABILITY FUNCTIONS ===
+let durabilityInterval = null;
+let durabilityTimeout = null;
+
+function adjustDurability(btn, direction) {
+  const card = btn.closest('.card');
+  const input = card.querySelector('.durability-input');
+  const maxDurability = parseInt(card.dataset.maxDurability);
+  
+  function adjust() {
+    let newValue = parseInt(input.value) + direction;
+    newValue = Math.max(0, Math.min(newValue, maxDurability));
+    input.value = newValue;
+    updateCardValues(input);
+  }
+  
+  adjust();
+  
+  durabilityTimeout = setTimeout(() => {
+    durabilityInterval = setInterval(adjust, 150);
+  }, 300);
+}
+
+function stopDurabilityAdjust() {
+  if (durabilityInterval) {
+    clearInterval(durabilityInterval);
+    durabilityInterval = null;
+  }
+  if (durabilityTimeout) {
+    clearTimeout(durabilityTimeout);
+    durabilityTimeout = null;
+  }
+}
+
+function updateCardValues(input) {
+  const card = input.closest('.card');
+  const currentDurability = parseInt(input.value);
+  const maxDurability = parseInt(card.dataset.maxDurability);
+  
+  const durabilityPercent = currentDurability / maxDurability;
+  
+  const originalAvg = card.dataset.avg;
+  const originalRanged = card.dataset.ranged;
+  const originalAfterTax = card.dataset.aftertax;
+  
+  card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
+  card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
+  card.querySelector('.aftertax-value').textContent = calculateDurabilityValue(originalAfterTax, durabilityPercent);
+}
+
+function calculateDurabilityValue(originalValue, durabilityPercent) {
+  if (originalValue.includes(' to ')) {
+    const parts = originalValue.split(' to ');
+    const low = parseValue(parts[0]) * durabilityPercent;
+    const high = parseValue(parts[1]) * durabilityPercent;
+    return formatValue(low) + ' to ' + formatValue(high);
+  } else {
+    const value = parseValue(originalValue) * durabilityPercent;
+    return formatValue(value);
+  }
+}
+
+function parseValue(str) {
+  str = str.replace('$', '').replace(/,/g, '');
+  if (str.includes('k')) {
+    return parseFloat(str) * 1000;
+  }
+  return parseFloat(str) || 0;
+}
+
+function formatValue(num) {
+  num = Math.round(num);
+  if (num >= 1000) {
+    const k = (num / 1000).toFixed(1);
+    return '$' + (k.endsWith('.0') ? k.slice(0, -2) : k) + 'k';
+  }
+  return '$' + num.toLocaleString();
+}
+
+document.addEventListener('mouseup', stopDurabilityAdjust);
+document.addEventListener('touchend', stopDurabilityAdjust);
+
+// === HELPERS ===
+
 
 // === HELPERS ===
 function safe(str) { return str ?? ""; }
