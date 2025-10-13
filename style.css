@@ -789,38 +789,38 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;  /* Reduced from 8px */
+  gap: 2px;
   width: 100%;
 }
 
-/* Durability control styling - VERTICAL LAYOUT */
+/* Durability control styling - COMPACT */
 .durability-control {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1px;  /* Reduced from 2px */
+  gap: 1px;
   width: 100%;
-  margin-top: 0;  /* Changed from 4px */
-  padding-left: 8px;
+  margin-top: 0;
+  padding-left: 6px;
 }
 
 .durability-control label {
   font-weight: bold;
   color: #33cce6;
-  font-size: 1rem;  /* Reduced from 1.1rem */
+  font-size: 0.9rem;
   margin-bottom: 0;
-  line-height: 1;  /* Tighter line height */
+  line-height: 1;
 }
 
 .durability-input {
-  width: 48px;
-  padding: 2px 4px;  /* Reduced padding */
-  border-radius: 4px;
+  width: 42px;
+  padding: 1px 3px;
+  border-radius: 3px;
   border: 2px solid #33cce6;
   background: #2a3945;
   color: #fff;
   text-align: center;
-  font-size: 0.75rem;  /* Smaller */
+  font-size: 0.7rem;
   font-weight: bold;
   -moz-appearance: textfield;
   appearance: textfield;
@@ -835,7 +835,7 @@ html, body {
 .durability-max {
   color: #33cce6;
   font-weight: bold;
-  font-size: 0.75rem;  /* Smaller */
+  font-size: 0.7rem;
   margin: 0 2px;
   line-height: 1;
 }
@@ -847,17 +847,20 @@ html, body {
 }
 
 .durability-arrows button {
-  width: 18px;  /* Smaller */
-  height: 14px;  /* Smaller */
+  width: 16px;
+  height: 12px;
   padding: 0;
   background: #33cce6;
   border: none;
-  border-radius: 3px;
+  border-radius: 2px;
   cursor: pointer;
   color: #000;
-  font-size: 9px;  /* Smaller */
+  font-size: 8px;
   line-height: 1;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .durability-arrows button:hover {
@@ -871,5 +874,5 @@ html, body {
 .durability-input-row {
   display: flex;
   align-items: center;
-  gap: 3px;  /* Reduced from 4px */
+  gap: 2px;
 }
