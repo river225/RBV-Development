@@ -829,18 +829,16 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
     return originalValue || 'N/A';
   }
   
-  // Handle range format: "$X to $Y" or "$X-$Y" or any variation
-  if (originalValue.includes(' to ') || originalValue.includes('-')) {
-    const separator = originalValue.includes(' to ') ? ' to ' : '-';
-    const parts = originalValue.split(separator);
+  // Handle range format
+  if (originalValue.includes(' to ')) {
+    const parts = originalValue.split(' to ');
+    const low = parseValue(parts[0]) * durabilityPercent;
+    const high = parseValue(parts[1]) * durabilityPercent;
     
-    if (parts.length === 2) {
-      const low = parseValue(parts[0]) * durabilityPercent;
-      const high = parseValue(parts[1]) * durabilityPercent;
-      
-      if (!isNaN(low) && !isNaN(high)) {
-        return formatValue(low) + ' to ' + formatValue(high);
-      }
+    if (!isNaN(low) && !isNaN(high)) {
+      const lowFormatted = formatLikeOriginal(low, parts[0]);
+      const highFormatted = formatLikeOriginal(high, parts[1]);
+      return lowFormatted + ' to ' + highFormatted;
     }
   }
   
@@ -848,10 +846,9 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
   const value = parseValue(originalValue) * durabilityPercent;
   
   if (!isNaN(value)) {
-    return formatValue(value);
+    return formatLikeOriginal(value, originalValue);
   }
   
-  // If all else fails, return original
   return originalValue;
 }
 
@@ -887,18 +884,33 @@ function parseValue(str) {
   return parseFloat(str) || 0;
 }
 
-function formatValue(num) {
+function formatLikeOriginal(num, original) {
   num = Math.round(num);
-  if (num >= 1000) {
-    const k = (num / 1000).toFixed(1);
-    return '$' + (k.endsWith('.0') ? k.slice(0, -2) : k) + 'k';
+  
+  // Check what format the original was in
+  const wasK = original.toLowerCase().includes('k');
+  const wasM = original.toLowerCase().includes('m');
+  const hadCommas = original.includes(',');
+  
+  if (wasM) {
+    // Original was in millions
+    const m = num / 1000000;
+    return '$' + m.toFixed(1).replace('.0', '') + 'm';
+  } else if (wasK) {
+    // Original was in thousands
+    const k = num / 1000;
+    return '$' + k.toFixed(1).replace('.0', '') + 'k';
+  } else if (hadCommas || num >= 1000) {
+    // Original had commas or number is big enough
+    return '$' + num.toLocaleString();
+  } else {
+    // Simple number
+    return '$' + num;
   }
-  return '$' + num.toLocaleString();
 }
 
 document.addEventListener('mouseup', stopDurabilityAdjust);
 document.addEventListener('touchend', stopDurabilityAdjust);
-
 
 // === HELPERS ===
 function safe(str) { return str ?? ""; }
