@@ -793,8 +793,8 @@ function adjustDurability(btn, direction) {
   adjust();
   
   durabilityTimeout = setTimeout(() => {
-    durabilityInterval = setInterval(adjust, 150);
-  }, 300);
+    durabilityInterval = setInterval(adjust, 50);
+  }, 200);
 }
 
 function stopDurabilityAdjust() {
@@ -855,7 +855,6 @@ function formatValue(num) {
 
 document.addEventListener('mouseup', stopDurabilityAdjust);
 document.addEventListener('touchend', stopDurabilityAdjust);
-
 
 
 // === HELPERS ===
