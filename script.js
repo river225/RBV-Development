@@ -277,7 +277,6 @@ async function fetchSheet(sheetName) {
   }
 }
 
-// === RENDERING ===
 function createCard(item) {
   const name = safe(item["Name"]);
   const img = safe(item["Image URL"]);
@@ -299,17 +298,20 @@ function createCard(item) {
     durabilityHTML = `
       <div class="durability-control">
         <label>Durability:</label>
-        <input type="number" class="durability-input" 
-               value="${currentDurability}" 
-               max="${maxDurability}" 
-               min="0" 
-               onchange="updateCardValues(this)">
-        <span class="durability-max">/${maxDurability}</span>
-        <div class="durability-arrows">
-          <button onmousedown="adjustDurability(this, 1)" 
-                  ontouchstart="adjustDurability(this, 1)">▲</button>
-          <button onmousedown="adjustDurability(this, -1)" 
-                  ontouchstart="adjustDurability(this, -1)">▼</button>
+        <div class="durability-input-row">
+          <input type="number" class="durability-input" 
+                 value="${currentDurability}" 
+                 max="${maxDurability}" 
+                 min="0" 
+                 oninput="enforceMaxDurability(this)"
+                 onchange="updateCardValues(this)">
+          <span class="durability-max">/${maxDurability}</span>
+          <div class="durability-arrows">
+            <button onmousedown="adjustDurability(this, 1)" 
+                    ontouchstart="adjustDurability(this, 1)">▲</button>
+            <button onmousedown="adjustDurability(this, -1)" 
+                    ontouchstart="adjustDurability(this, -1)">▼</button>
+          </div>
         </div>
       </div>
     `;
@@ -761,6 +763,21 @@ function copyToClipboard(text) {
 let durabilityInterval = null;
 let durabilityTimeout = null;
 
+// Prevent typing numbers higher than max
+function enforceMaxDurability(input) {
+  const card = input.closest('.card');
+  const maxDurability = parseInt(card.dataset.maxDurability);
+  let value = parseInt(input.value);
+  
+  if (value > maxDurability) {
+    input.value = maxDurability;
+  } else if (value < 0) {
+    input.value = 0;
+  }
+  
+  updateCardValues(input);
+}
+
 function adjustDurability(btn, direction) {
   const card = btn.closest('.card');
   const input = card.querySelector('.durability-input');
@@ -839,7 +856,6 @@ function formatValue(num) {
 document.addEventListener('mouseup', stopDurabilityAdjust);
 document.addEventListener('touchend', stopDurabilityAdjust);
 
-// === HELPERS ===
 
 
 // === HELPERS ===
