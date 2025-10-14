@@ -959,9 +959,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sectionsContainer = document.getElementById("sections");
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress-text");
-  const loadingStatus = document.getElementById("loading-status");
+
   
-  loadingStatus.textContent = "Initializing...";
+ 
   
   initSectionsNav();
   initSearch();
@@ -972,7 +972,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Fetch all sections at once (parallel)
   const fetchPromises = SECTION_NAMES.map(async (sec) => {
-    loadingStatus.textContent = `Loading ${sec}...`;
+   
     console.log(`Fetching data for: ${sec}`);
     const items = await fetchSheet(sec);
     console.log(`Got ${items.length} items for ${sec}`);
@@ -993,7 +993,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(section, items);
   });
 
-  loadingStatus.textContent = "Complete!";
+  
   showSection("Home");
   sectionsContainer.classList.add("loaded");
   
