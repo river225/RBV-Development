@@ -846,6 +846,11 @@ html, body {
   font-size: 10px;
   line-height: 1;
   font-weight: bold;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .durability-arrows button:hover {
