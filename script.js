@@ -320,10 +320,8 @@ function createCard(item) {
                  onchange="updateCardValues(this)">
           <span class="durability-max">/${maxDurability}</span>
           <div class="durability-arrows">
-            <button onmousedown="adjustDurability(this, 1)" 
-                    ontouchstart="adjustDurability(this, 1)">▲</button>
-            <button onmousedown="adjustDurability(this, -1)" 
-                    ontouchstart="adjustDurability(this, -1)">▼</button>
+            <button onmousedown="adjustDurability(this, 1)">▲</button>
+            <button onmousedown="adjustDurability(this, -1)">▼</button>
           </div>
         </div>
       </div>
