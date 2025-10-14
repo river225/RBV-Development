@@ -952,24 +952,52 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// === INIT - EXACT COPY FROM WORKING SITE ===
+// === INIT - PARALLEL LOADING FOR SPEED ===
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
   
   const sectionsContainer = document.getElementById("sections");
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress-text");
+  const loadingStatus = document.getElementById("loading-status");
+  
+  loadingStatus.textContent = "Initializing...";
   
   initSectionsNav();
   initSearch();
   initTaxCalculator();
 
-  for (const sec of SECTION_NAMES) {
+  const totalSections = SECTION_NAMES.length;
+  let loadedSections = 0;
+
+  // Fetch all sections at once (parallel)
+  const fetchPromises = SECTION_NAMES.map(async (sec) => {
+    loadingStatus.textContent = `Loading ${sec}...`;
     console.log(`Fetching data for: ${sec}`);
     const items = await fetchSheet(sec);
     console.log(`Got ${items.length} items for ${sec}`);
-    renderSection(sec, items);
-  }
+    
+    loadedSections++;
+    const progress = Math.round((loadedSections / totalSections) * 100);
+    progressBar.style.width = progress + '%';
+    progressText.textContent = progress + '%';
+    
+    return { section: sec, items };
+  });
 
+  // Wait for all to finish
+  const results = await Promise.all(fetchPromises);
+  
+  // Render in order
+  results.forEach(({ section, items }) => {
+    renderSection(section, items);
+  });
+
+  loadingStatus.textContent = "Complete!";
   showSection("Home");
   sectionsContainer.classList.add("loaded");
-  document.getElementById('loading-screen').style.display = 'none';
+  
+  setTimeout(() => {
+    document.getElementById('loading-screen').style.display = 'none';
+  }, 300);
 });
