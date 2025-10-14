@@ -791,3 +791,51 @@ html, body {
   pointer-events: none !important;
 }
 
+/* Cyan divider line AFTER Home button */
+#sections-nav button:first-child {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+#sections-nav button:first-child::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #33cce6;
+}
+
+/* Polish section navigation buttons */
+#sections-nav button {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 14px 20px;
+  transition: all 0.3s ease;
+}
+
+/* Active button state - more pronounced */
+#sections-nav button.active {
+  background: linear-gradient(135deg, #33cce6 0%, #2a9fb8 100%);
+  border-color: #33cce6;
+  box-shadow: 0 0 20px rgba(51, 204, 230, 0.4);
+  transform: translateX(5px);
+}
+
+/* Hover effect */
+#sections-nav button:hover:not(.active) {
+  background: #4a4a4a;
+  border-color: #33cce6;
+  transform: translateX(3px);
+}
+
+/* Extras header styling */
+.nav-extras-header {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #33cce6;
+  text-transform: uppercase;
+}
