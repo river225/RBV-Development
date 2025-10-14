@@ -320,8 +320,9 @@ function createCard(item) {
                  onchange="updateCardValues(this)">
           <span class="durability-max">/${maxDurability}</span>
           <div class="durability-arrows">
-            <button onmousedown="adjustDurability(this, 1)">▲</button>
-            <button onmousedown="adjustDurability(this, -1)">▼</button>
+          <button onmousedown="adjustDurability(this, 1)" ontouchstart="adjustDurability(this, 1); event.preventDefault();">▲</button>
+<button onmousedown="adjustDurability(this, -1)" ontouchstart="adjustDurability(this, -1); event.preventDefault();">▼</button>
+            
           </div>
         </div>
       </div>
@@ -810,27 +811,18 @@ function adjustDurability(button, delta) {
   }, 300);
   
   function stopAdjust(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     clearTimeout(timeout);
     clearInterval(interval);
     document.removeEventListener('mouseup', stopAdjust);
     document.removeEventListener('touchend', stopAdjust);
+    document.removeEventListener('touchcancel', stopAdjust);
   }
   
   document.addEventListener('mouseup', stopAdjust);
   document.addEventListener('touchend', stopAdjust);
+  document.addEventListener('touchcancel', stopAdjust);
 }
-function stopDurabilityAdjust() {
-  if (durabilityInterval) {
-    clearInterval(durabilityInterval);
-    durabilityInterval = null;
-  }
-  if (durabilityTimeout) {
-    clearTimeout(durabilityTimeout);
-    durabilityTimeout = null;
-  }
-}
-
 function updateCardValues(input) {
   const card = input.closest('.card');
   const currentDurability = parseInt(input.value);
