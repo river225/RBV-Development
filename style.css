@@ -80,16 +80,17 @@ a { color: #fff; text-decoration: none; }
 .header-buttons { display: flex; gap: 10px; }
 .btn { padding: 8px 12px; border-radius: 8px; border: 1px solid #4a4a4a; background: #3a3a3a; }
 
-/* Search bar */
 .search-container {
   max-width: 1100px;
   margin: 0 auto 24px;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 #search {
-  display: inline-block;
-  margin: 0 0 0 100px; /* slightly more to the right */
+  display: block;
+  margin: 0 auto; /* FIXED: centers the search bar */
   width: 300px;
   max-width: 90%;
   padding: 12px;
@@ -98,6 +99,7 @@ a { color: #fff; text-decoration: none; }
   background: #3a3a3a;
   color: #fff;
 }
+
 
 /* === Main layout changes start === */
 .main-container {
