@@ -14,6 +14,7 @@ const SECTION_NAMES = [
   "Scammer List"
 ];
 
+
 const SECTION_BANNERS = {
   "Home": { url: "", width: "160px", top: "226px", left: "53%" },
   "Uncommon": { url: "https://i.ibb.co/5Xfj0w2c/ttWiION.png", width: "160px", top: "226px", left: "53%" },
@@ -951,9 +952,11 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// === INIT - EXACT COPY FROM YOUR WORKING SITE ===
+// === INIT - EXACT COPY FROM WORKING SITE ===
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
+  
+  const sectionsContainer = document.getElementById("sections");
   
   initSectionsNav();
   initSearch();
@@ -966,5 +969,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-showSection("Home");
+  showSection("Home");
+  sectionsContainer.classList.add("loaded");
 });

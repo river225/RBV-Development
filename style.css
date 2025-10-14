@@ -14,6 +14,16 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Hide sections until loaded */
+.sections {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sections.loaded {
+  opacity: 1;
+}
+
 /* Base */
 * { box-sizing: border-box; }
 html, body { 
