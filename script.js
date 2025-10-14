@@ -792,6 +792,8 @@ function enforceMaxDurability(input) {
 }
 
 function adjustDurability(btn, direction) {
+  event.preventDefault(); // FIX: Prevent both touch and mouse events firing
+  
   const card = btn.closest('.card');
   const input = card.querySelector('.durability-input');
   const maxDurability = parseInt(card.dataset.maxDurability);
