@@ -1,64 +1,16 @@
-/* FORCE REMOVE ALL SCROLLBARS */
+/* Hide all scrollbars */
 ::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 * {
-  -webkit-overflow-scrolling: touch !important;
-  scrollbar-width: none !important; /* Firefox */
-  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-html {
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-body {
-  overflow-x: hidden !important;
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-/* Force hide on any container */
-* {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-*::-webkit-scrollbar {
-  display: none !important;
-  width: 0px !important;
-  background: transparent !important;
-}
-
-*::-webkit-scrollbar-track {
-  display: none !important;
-}
-
-*::-webkit-scrollbar-thumb {
-  display: none !important;
-}
-
-/* Fix scrollbar issues */
-html {
-  overflow-x: hidden;
-}
-
-body {
-  overflow-x: hidden;
-}
-
-/* Fix scrollbar issues */
-html {
-  overflow-x: hidden;
-}
-
-body {
+html, body {
   overflow-x: hidden;
 }
 
