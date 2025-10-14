@@ -320,9 +320,8 @@ function createCard(item) {
                  onchange="updateCardValues(this)">
           <span class="durability-max">/${maxDurability}</span>
           <div class="durability-arrows">
-          <button onmousedown="adjustDurability(this, 1)" ontouchstart="adjustDurability(this, 1); event.preventDefault();">▲</button>
-<button onmousedown="adjustDurability(this, -1)" ontouchstart="adjustDurability(this, -1); event.preventDefault();">▼</button>
-            
+            <button onmousedown="adjustDurability(this, 1)">▲</button>
+            <button onmousedown="adjustDurability(this, -1)">▼</button>
           </div>
         </div>
       </div>
@@ -790,39 +789,38 @@ function enforceMaxDurability(input) {
   updateCardValues(input);
 }
 
-function adjustDurability(button, delta) {
-  const card = button.closest('.card');
+function adjustDurability(btn, direction) {
+  event.preventDefault(); // FIX: Prevent both touch and mouse events firing
+  
+  const card = btn.closest('.card');
   const input = card.querySelector('.durability-input');
   const maxDurability = parseInt(card.dataset.maxDurability);
   
-  let currentValue = parseInt(input.value);
-  currentValue = Math.max(0, Math.min(maxDurability, currentValue + delta));
-  input.value = currentValue;
-  updateCardValues(input);
-  
-  let interval = null;
-  let timeout = setTimeout(() => {
-    interval = setInterval(() => {
-      let val = parseInt(input.value);
-      val = Math.max(0, Math.min(maxDurability, val + delta));
-      input.value = val;
-      updateCardValues(input);
-    }, 30);
-  }, 300);
-  
-  function stopAdjust(e) {
-    if (e) e.preventDefault();
-    clearTimeout(timeout);
-    clearInterval(interval);
-    document.removeEventListener('mouseup', stopAdjust);
-    document.removeEventListener('touchend', stopAdjust);
-    document.removeEventListener('touchcancel', stopAdjust);
+  function adjust() {
+    let newValue = parseInt(input.value) + direction;
+    newValue = Math.max(0, Math.min(newValue, maxDurability));
+    input.value = newValue;
+    updateCardValues(input);
   }
   
-  document.addEventListener('mouseup', stopAdjust);
-  document.addEventListener('touchend', stopAdjust);
-  document.addEventListener('touchcancel', stopAdjust);
+  adjust();
+  
+  durabilityTimeout = setTimeout(() => {
+    durabilityInterval = setInterval(adjust, 50);
+  }, 200);
 }
+
+function stopDurabilityAdjust() {
+  if (durabilityInterval) {
+    clearInterval(durabilityInterval);
+    durabilityInterval = null;
+  }
+  if (durabilityTimeout) {
+    clearTimeout(durabilityTimeout);
+    durabilityTimeout = null;
+  }
+}
+
 function updateCardValues(input) {
   const card = input.closest('.card');
   const currentDurability = parseInt(input.value);
