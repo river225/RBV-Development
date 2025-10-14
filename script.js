@@ -1,6 +1,7 @@
 // === CONFIG ===
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
+  "Home",
   "Uncommon",
   "Rare", 
   "Epic",
@@ -14,6 +15,7 @@ const SECTION_NAMES = [
 ];
 
 const SECTION_BANNERS = {
+  "Home": { url: "", width: "160px", top: "226px", left: "53%" },
   "Uncommon": { url: "https://i.ibb.co/5Xfj0w2c/ttWiION.png", width: "160px", top: "226px", left: "53%" },
   "Rare":     { url: "https://i.ibb.co/QvvLmkVq/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
   "Epic":     { url: "https://i.ibb.co/938SzMHF/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
