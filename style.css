@@ -556,23 +556,6 @@ html, body {
 }
 
 
-
-
-
-
-
-
-
-
-/* Map overlay hover effect - icons get bigger */
-.map-image-overlay {
-  transition: transform 0.2s ease;
-}
-
-.map-image-overlay:hover {
-  transform: translate(-50%, -50%) scale(1.2) !important;
-}
-
 /* Fix modal back button position - bottom right */
 .modal-back-btn {
   position: absolute;
@@ -800,5 +783,11 @@ html, body {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+/* Hide tax calculator for specific sections */
+.tax-calculator.hidden-for-section {
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 

@@ -658,7 +658,7 @@ function initSectionsNav() {
   });
 }
 
-// === EXACT WORKING BANNER LOGIC FROM YOUR MAIN SITE ===
+// === EXACT WORKING BANNER LOGIC FROM MAIN SITE ===
 function showSection(name) {
   console.log(`Showing section: ${name}`);
   
@@ -669,6 +669,17 @@ function showSection(name) {
     input.value = maxDurability;
     updateCardValues(input);
   });
+  
+    // Hide/show tax calculator based on section
+  const taxCalc = document.querySelector('.tax-calculator');
+  if (taxCalc) {
+    const hiddenSections = ['Crew Logos', 'Scammer List'];
+    if (hiddenSections.includes(name)) {
+      taxCalc.classList.add('hidden-for-section');
+    } else {
+      taxCalc.classList.remove('hidden-for-section');
+    }
+  }
   
   // Show/hide sections
   SECTION_NAMES.forEach(sec => {
