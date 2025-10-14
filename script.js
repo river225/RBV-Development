@@ -743,13 +743,17 @@ function initSearch() {
 // === TAX CALCULATOR ===
 function initTaxCalculator() {
   const taxInput = document.getElementById("taxInput");
-  const taxResult = document.getElementById("taxResult");
-  if (!taxInput || !taxResult) return;
+  const taxAmount = document.getElementById("tax-amount");
+  
+  if (!taxInput || !taxAmount) {
+    console.log("Tax calculator elements not found");
+    return;
+  }
 
   taxInput.addEventListener("input", () => {
     const val = parseFloat(taxInput.value) || 0;
     const withdraw = Math.round(val / 0.72);
-    taxResult.innerHTML = `Amount to withdraw: <span class="calc-amount">${withdraw}</span>`;
+    taxAmount.textContent = withdraw.toLocaleString();
   });
 }
 

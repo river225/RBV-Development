@@ -62,8 +62,8 @@
     max-width: 90%;
     padding: 12px; 
     border-radius: 10px; 
-    border: 1px solid #0b0101; 
-    background: #3a3a3a;
+    background: #141d28;
+border: 2px solid #000000;
     color: #fff;
     text-align: left; 
 }
@@ -137,12 +137,22 @@
     <!-- Tax calculator --> 
     <aside class="tax-calculator"> 
         <h2>Tax Calculator</h2> 
-        <input type="number" id="taxInput" placeholder="Amount..." /> 
-        <div id="taxResult">
-            Amount to withdraw: <span class="calc-amount">0</span>
+        
+        <input 
+            type="number" 
+            id="taxInput" 
+            placeholder="Enter amount..."
+        />
+        
+        <div class="tax-result">
+            <h3>Amount to withdraw:</h3>
+            <div class="amount">$<span id="tax-amount">0</span></div>
         </div>
-        <p class="tax-explanation">Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. Same rules apply for trades above 100k, you just respawn multiple times.</p> 
-    </aside> 
+        
+        <div class="instructions">
+            Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
+        </div>
+    </aside>
 
 </div>
 

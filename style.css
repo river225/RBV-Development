@@ -20,7 +20,8 @@ html, body {
   height: 100%; 
   margin: 0; 
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
-  background: #1c1c1c; 
+ background: linear-gradient(180deg, #16202c 0%, #1f2d3d 50%, #16202c 100%);
+background-attachment: fixed;
   color: #fff;
   position: relative; /* THIS IS THE KEY FIX - makes absolute positioning work relative to document */
 }
@@ -46,14 +47,13 @@ a { color: #fff; text-decoration: none; }
 .sections-nav {
     width: 200px;
     padding: 8px;
-    border-right: 2px solid #4a4a4a; /* vertical line */
+    border-right: 3px solid #000000; /* vertical line */
     /* REMOVED: position: sticky; top: 16px; align-self: flex-start; */
 }
 
 /* KEEP these button styles exactly as they are */
-.sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #4a4a4a; border: 1px solid #100101; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; }
-.sections-nav button.active { background: #232324; }
-
+.sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #141d28; border: 3px solid #000000; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; } 
+.sections-nav button:hover:not(.active) { background: #1f2a38 !important; }
 /* NEW: Extras navigation styling */
 .nav-gap {
   height: 0px;
@@ -259,45 +259,108 @@ a { color: #fff; text-decoration: none; }
   display: none !important; 
 }
 
-.tax-calculator { 
-  width: 240px; 
-  padding: 16px; 
-  background: #1f2a33; /* dark slate/charcoal background for contrast */ 
-  border: 1px solid #33cce6; /* softer cyan border */ 
-  border-radius: 12px; 
-  position: sticky; 
-  top: 16px; 
-  height: fit-content; 
-} 
-
-.tax-calculator h2, 
-.tax-calculator #taxResult, 
-.tax-calculator .tax-explanation, 
-.tax-calculator label { 
-  color: #33cce6; /* softer cyan text */ 
-  text-shadow: none; 
-} 
-
-.tax-calculator input { 
-  width: 100%; 
-  padding: 8px; 
-  margin-bottom: 8px; 
-  border-radius: 6px; 
-  border: 1px solid #444; 
-  background: #2a3945; /* slightly lighter than calc background */ 
-  color: #fff; 
+/* Tax Calculator - Compact modern redesign */
+.tax-calculator {
+  background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 240px;
+  width: 240px;
+  box-shadow: 0 8px 32px rgba(51, 204, 230, 0.2);
+  position: sticky;
+  top: 16px;
+  height: fit-content;
 }
 
-/* Dollar sign and number color */
-#taxResult .calc-amount {
-  color: #ffde59; /* yellow number */
-  font-weight: bold;
+.tax-calculator h2 {
+  color: #33cce6;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-#taxResult .calc-amount::before {
-  content: "$";
-  color: #00ff7f; /* green dollar sign */
-  margin-right: 3px;
+.tax-calculator input {
+  width: 100%;
+  background: rgba(51, 204, 230, 0.1);
+  border: 2px solid #33cce6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: white;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.tax-calculator input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.tax-calculator input:focus {
+  outline: none;
+  background: rgba(51, 204, 230, 0.15);
+  border-color: #5bc5de;
+  box-shadow: 0 0 20px rgba(51, 204, 230, 0.3);
+}
+
+/* Remove number input arrows */
+.tax-calculator input[type="number"]::-webkit-inner-spin-button,
+.tax-calculator input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tax-calculator input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.tax-result {
+  background: #1a2532;
+  border: 2px solid #2a3542;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  text-align: left;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.tax-result h3 {
+  color: #6ab5be;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: none;
+}
+
+.tax-result .amount {
+  color: #81e681;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
+  font-family: 'Courier New', monospace;
+}
+
+.tax-calculator .instructions {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: rgba(51, 204, 230, 0.08);
+  border-left: 4px solid #33cce6;
+  padding: 12px;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.tax-calculator .instructions strong {
+  color: #33cce6;
+  font-weight: 600;
 }
 
 /* Section spacing */
@@ -816,12 +879,85 @@ html, body {
   transition: all 0.3s ease;
 }
 
-/* Active button state - more pronounced */
+/* Color-coded active button states - Enhanced gradients with depth */
 #sections-nav button.active {
-  background: linear-gradient(135deg, #33cce6 0%, #2a9fb8 100%);
-  border-color: #33cce6;
-  box-shadow: 0 0 20px rgba(51, 204, 230, 0.4);
+  border-color: currentColor;
+  box-shadow: 0 0 20px currentColor, inset 0 1px 0 rgba(255,255,255,0.2);
   transform: translateX(5px);
+  position: relative;
+}
+
+/* Add shine effect to active buttons */
+#sections-nav button.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+  border-radius: 8px 8px 0 0;
+  pointer-events: none;
+}
+
+/* Home - Soft Cyan REVERSED gradient */
+#sections-nav button:nth-child(1).active {
+  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
+  color: white;
+}
+
+/* Uncommon - Green REVERSED gradient */
+#sections-nav button:nth-child(2).active {
+  background: linear-gradient(135deg, #2c6b2f 0%, #388e3c 25%, #4caf50 50%, #6fd66f 75%, #81e681 100%);
+  color: white;
+}
+
+/* Rare - Blue REVERSED gradient */
+#sections-nav button:nth-child(3).active {
+  background: linear-gradient(135deg, #1e4d7a 0%, #2d6db5 25%, #4a90e2 50%, #73b3f5 75%, #8fc3ff 100%);
+  color: white;
+}
+
+/* Epic - Purple REVERSED gradient */
+#sections-nav button:nth-child(4).active {
+  background: linear-gradient(135deg, #4d3670 0%, #6a4c9e 25%, #8e63ce 50%, #b388ff 75%, #c9a3ff 100%);
+  color: white;
+}
+
+/* Legendary - Orange REVERSED gradient */
+#sections-nav button:nth-child(5).active {
+  background: linear-gradient(135deg, #a66a0a 0%, #d68910 25%, #f39c12 50%, #ffb74d 75%, #ffc870 100%);
+  color: white;
+}
+
+/* Omega - Red REVERSED gradient */
+#sections-nav button:nth-child(6).active {
+  background: linear-gradient(135deg, #8b251f 0%, #c0392b 25%, #e74c3c 50%, #ff6b6b 75%, #ff8080 100%);
+  color: white;
+}
+
+/* Misc - Pink REVERSED gradient */
+#sections-nav button:nth-child(7).active {
+  background: linear-gradient(135deg, #8b1045 0%, #c2185b 25%, #ec407a 50%, #ff8fb3 75%, #ffb3d9 100%);
+  color: white;
+}
+
+/* Vehicles - Yellow/Gold gradient */
+#sections-nav button:nth-child(8).active {
+  background: linear-gradient(135deg, #9b7e0a 0%, #d6a910 25%, #f5c312 50%, #ffdb4d 75%, #ffed70 100%);
+  color: white;
+}
+
+/* Crew Logos - Soft Cyan REVERSED gradient */
+#sections-nav button:nth-child(10).active {
+  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
+  color: white;
+}
+
+/* Scammer List - Soft Cyan REVERSED gradient */
+#sections-nav button:nth-child(11).active {
+  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
+  color: white;
 }
 
 /* Hover effect */
@@ -838,4 +974,20 @@ html, body {
   letter-spacing: 1px;
   color: #33cce6;
   text-transform: uppercase;
+}
+
+/* Cyan divider line AFTER Home button */
+#sections-nav button:first-child {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+#sections-nav button:first-child::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #33cce6;
 }
