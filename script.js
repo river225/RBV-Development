@@ -971,4 +971,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   showSection("Home");
   sectionsContainer.classList.add("loaded");
+  document.getElementById('loading-screen').style.display = 'none';
 });
