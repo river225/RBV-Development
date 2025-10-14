@@ -376,10 +376,10 @@ a { color: #fff; text-decoration: none; }
 /* Section spacing */
 .section { 
   margin-bottom: 40px; 
-  overflow: hidden; /* ADD THIS LINE */
-  position: relative; /* ADD THIS LINE */
+  overflow: hidden;
+  position: relative;
+  display: none;
 }
-
 /* Responsive */
 @media (max-width: 900px) {
   .main-container { flex-direction: column; }
