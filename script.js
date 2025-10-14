@@ -427,6 +427,20 @@ function renderSection(title, items) {
     return;
   }
 
+  // Always render Home section even if no items
+  if (title === "Home") {
+    const html = `
+      <section class="section" id="${slugify(title)}">
+        <h2>${title}</h2>
+        <div class="home-content">
+          <!-- Add your home page content here -->
+        </div>
+      </section>
+    `;
+    document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+    return;
+  }
+
   if (!items || items.length === 0) return;
 
   if (title === "Crew Logos") {
@@ -952,5 +966,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(sec, items);
   }
 
-  if (SECTION_NAMES.length > 0) showSection(SECTION_NAMES[0]);
+showSection("Home");
 });
