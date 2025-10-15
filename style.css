@@ -1084,7 +1084,7 @@ html, body {
     font-size: 1.1rem;
     font-weight: bold;
     margin: 0 0 3px 0;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .top-left-links a { 
@@ -1098,4 +1098,10 @@ html, body {
 .top-left-links a:hover { 
     color: #33cce6;
     text-decoration: underline;
+}
+
+.top-left-links a {
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
 }
