@@ -1151,3 +1151,47 @@ html, body {
     margin-right: 10px !important;
 }
 
+.hero-section {
+  background: #141d28;
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  padding: 50px 40px;
+  text-align: center;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-section h2 {
+  font-size: 2.2rem;
+  color: #33cce6;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.hero-btn {
+  background: #5865f2;
+  color: white;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #4752c4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(51, 204, 230, 0.3);
+}
