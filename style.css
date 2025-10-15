@@ -1066,7 +1066,7 @@ html, body {
 
 /* Fixed top-left links */ 
 .top-left-links { 
-    position: fixed; 
+    position: absolute; 
     top: 20px; 
     left: 20px; 
     background: #33cce6;
@@ -1079,8 +1079,16 @@ html, body {
     z-index: 1000;
 } 
 
+.top-left-links h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    text-decoration: underline;
+}
+
 .top-left-links a { 
-    color: #000;
+    color: #fff;
     text-decoration: none; 
     font-weight: 600; 
     font-size: 0.95rem;
@@ -1088,6 +1096,6 @@ html, body {
 } 
 
 .top-left-links a:hover { 
-    color: #fff;
+    color: #33cce6;
     text-decoration: underline;
 }
