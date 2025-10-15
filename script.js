@@ -692,9 +692,11 @@ function showSection(name) {
   if (taxCalc) {
     const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
     if (hiddenSections.includes(name)) {
-      taxCalc.style.display = 'none';
+      taxCalc.style.visibility = 'hidden';
+      taxCalc.style.opacity = '0';
     } else {
-      taxCalc.style.display = 'block';
+      taxCalc.style.visibility = 'visible';
+      taxCalc.style.opacity = '1';
     }
   }
   
@@ -1010,26 +1012,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('loading-screen').style.display = 'none';
   }, 300);
 
-  // Hide calculator on page load (before any section is selected)
-document.addEventListener('DOMContentLoaded', () => {
-  const taxCalc = document.querySelector('.tax-calculator');
-  if (taxCalc) {
-    taxCalc.style.display = 'none'; // Hide by default
-  }
-});
 });
 
-// Force hide calculator on Home, Crew Logos, and Scammer List
-setInterval(() => {
-  const currentSection = document.querySelector('#sections-nav button.active')?.textContent;
-  const taxCalc = document.querySelector('.tax-calculator');
-  
-  if (taxCalc && currentSection) {
-    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
-    if (hiddenSections.includes(currentSection)) {
-      taxCalc.style.display = 'none';
-    } else {
-      taxCalc.style.display = 'block';
-    }
-  }
-}, 100);

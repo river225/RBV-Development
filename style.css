@@ -338,7 +338,8 @@ a { color: #fff; text-decoration: none; }
   top: 16px;
   height: fit-content;
   transition: none !important; /* Remove all transitions */
-  display: none; /* Hide by default */
+  visibility: hidden;
+  opacity: 0;
 }
 
 
