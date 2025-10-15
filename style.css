@@ -203,9 +203,10 @@ a { color: #fff; text-decoration: none; }
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
-  max-width: calc(33.33% - 16px); /* CHANGED: from 50% to 33.33% - fits 3 per row */
+  max-width: calc(33.33% - 16px);
   overflow: hidden;
-  padding: 8px; /* ADDED: smaller padding */
+  padding: 8px;
+  min-height: 220px; /* Make cards taller */
 }
 
 .crew-card-content {
@@ -222,11 +223,12 @@ a { color: #fff; text-decoration: none; }
 }
 
 .crew-logo-card img {
-  width: 100px; /* CHANGED: from 150px to 100px - smaller images */
-  height: 100px; /* CHANGED: from 150px to 100px - smaller images */
+  width: 100px;
+  height: 100px;
   object-fit: contain;
-  border-radius: 6px; /* CHANGED: from 8px to 6px - smaller border radius */
-  background: #2e2e2e;
+  border-radius: 6px;
+  background: #1f2a38; /* Match normal item cards */
+  padding: 8px; /* Add padding like normal cards */
 }
 
 .crew-id {
@@ -335,6 +337,12 @@ a { color: #fff; text-decoration: none; }
   position: sticky;
   top: 16px;
   height: fit-content;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.tax-calculator.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .tax-calculator h2 {
