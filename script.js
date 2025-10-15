@@ -955,6 +955,15 @@ function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 // === INIT - PARALLEL LOADING FOR SPEED ===
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
+
+  // Safety timeout - force hide loading screen after 15 seconds
+  setTimeout(() => {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen && loadingScreen.style.display !== 'none') {
+      console.warn('Loading timeout - forcing hide');
+      loadingScreen.style.display = 'none';
+    }
+  }, 15000);
   
   const sectionsContainer = document.getElementById("sections");
   const progressBar = document.getElementById("progress-bar");

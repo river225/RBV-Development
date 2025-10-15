@@ -116,13 +116,14 @@ a { color: #fff; text-decoration: none; }
 
 /* Card left section (image area) */
 .card-left {
-  background: #1f2a38; /* Same as section button hover color */
+  background: #1f2a38;
   border-radius: 8px;
-  padding: 10px;
+  padding: 6px; /* Tighter padding around image */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 170px;
 }
 
 .card img { 
@@ -155,12 +156,22 @@ a { color: #fff; text-decoration: none; }
   padding: 4px 10px; 
   border-radius: 6px; 
   border: 2px solid #000000; 
-  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); /* Nice purple gradient */
-  font-size: 0.95rem; 
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  font-size: 0.9rem; 
   font-weight: 600;
   margin-bottom: 6px; 
   width: fit-content;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+/* Make the demand number pop */
+.card-info .badge::after {
+  content: attr(data-demand);
+}
+
+/* Style for just the demand number to make it stand out */
+.badge {
+  font-size: 0.85rem;
 }
 
 /* Value text styling - cleaner, bigger, more pop */
