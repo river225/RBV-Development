@@ -1009,4 +1009,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   setTimeout(() => {
     document.getElementById('loading-screen').style.display = 'none';
   }, 300);
+
+  // Hide calculator on page load (before any section is selected)
+document.addEventListener('DOMContentLoaded', () => {
+  const taxCalc = document.querySelector('.tax-calculator');
+  if (taxCalc) {
+    taxCalc.style.display = 'none'; // Hide by default
+  }
+});
 });
