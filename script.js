@@ -690,7 +690,7 @@ function showSection(name) {
     // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
-    const hiddenSections = ['Crew Logos', 'Scammer List'];
+    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
     if (hiddenSections.includes(name)) {
       taxCalc.classList.add('hidden-for-section');
     } else {
