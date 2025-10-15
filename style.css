@@ -338,6 +338,7 @@ a { color: #fff; text-decoration: none; }
   top: 16px;
   height: fit-content;
   transition: none !important; /* Remove all transitions */
+  display: none; /* Hide by default */
 }
 
 .tax-calculator.hidden {
@@ -1151,7 +1152,3 @@ html, body {
     margin-right: 10px !important;
 }
 
-/* Hide calculator by default */
-.tax-calculator {
-  display: none !important;
-}
