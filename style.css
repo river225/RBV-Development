@@ -1135,12 +1135,10 @@ html, body {
 
 .top-left-links a { 
     color: #fff;
-    text-decoration: none; 
+    text-decoration: underline; 
     font-weight: 600; 
     font-size: 0.95rem;
     transition: color 0.2s ease;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 3px;
     display: flex;
     align-items: center;
 } 
