@@ -341,9 +341,7 @@ a { color: #fff; text-decoration: none; }
   display: none; /* Hide by default */
 }
 
-.tax-calculator.hidden {
-  display: none !important; /* Instant hide */
-}
+
 
 .tax-calculator h2 {
   color: #33cce6;
