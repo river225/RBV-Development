@@ -1150,3 +1150,8 @@ html, body {
     height: 24px !important;
     margin-right: 10px !important;
 }
+
+/* Hide calculator by default */
+.tax-calculator {
+  display: none !important;
+}
