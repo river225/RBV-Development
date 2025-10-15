@@ -1105,3 +1105,46 @@ html, body {
     display: flex;
     align-items: center;
 }
+
+/* Socials wrapper */
+.socials-wrapper {
+    position: absolute; 
+    top: 40px; 
+    left: 20px;
+    z-index: 1000;
+}
+
+.socials-title {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    text-align: left;
+}
+
+/* Fixed top-left links */ 
+.top-left-links { 
+    background: transparent;
+    border: 2px solid #33cce6;
+    border-radius: 0;
+    padding: 10px 15px;
+    display: flex; 
+    flex-direction: column;
+    gap: 5px;
+}
+
+.top-left-links a { 
+    color: #fff;
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 3px;
+    display: flex;
+    align-items: center;
+} 
+
+.top-left-links a:hover { 
+    color: #33cce6;
+}
