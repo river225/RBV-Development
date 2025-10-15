@@ -176,13 +176,19 @@ a { color: #fff; text-decoration: none; }
 
 /* Value text styling - cleaner, bigger, more pop */
 .card-avg, .card-ranged, .card-aftertax {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
   letter-spacing: 0.3px;
   margin-bottom: 4px;
-  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.avg-value, .ranged-value, .aftertax-value {
+  color: #81e681;
+  font-weight: 700;
+  font-size: 1rem;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
 .avg-value, .ranged-value, .aftertax-value {
