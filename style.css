@@ -1116,9 +1116,9 @@ html, body {
 
 .socials-title {
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    margin: 0 0 20px 0;
+    margin: 0 0 15px 0;
     text-align: left;
     text-decoration: underline;
 }
@@ -1128,20 +1128,22 @@ html, body {
     background: transparent;
     border: 3px solid #33cce6;
     border-radius: 0;
-    padding: 30px 40px;
+    padding: 25px 35px;
     display: flex; 
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    width: fit-content;
 }
 
 .top-left-links a { 
     color: #fff;
-    text-decoration: underline; 
+    text-decoration: none; 
     font-weight: 600; 
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     transition: color 0.2s ease;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 } 
 
 .top-left-links a:hover { 
@@ -1149,7 +1151,7 @@ html, body {
 }
 
 .top-left-links a svg {
-    width: 35px !important;
-    height: 35px !important;
+    width: 32px !important;
+    height: 32px !important;
     margin-right: 15px !important;
 }
