@@ -1018,3 +1018,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 });
+
+// Force hide calculator on Home, Crew Logos, and Scammer List
+setInterval(() => {
+  const currentSection = document.querySelector('#sections-nav button.active')?.textContent;
+  const taxCalc = document.querySelector('.tax-calculator');
+  
+  if (taxCalc && currentSection) {
+    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
+    if (hiddenSections.includes(currentSection)) {
+      taxCalc.style.display = 'none';
+    } else {
+      taxCalc.style.display = 'block';
+    }
+  }
+}, 100);
