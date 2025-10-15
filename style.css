@@ -62,7 +62,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* KEEP these button styles exactly as they are */
-.sections-nav button { display: block; width: 100%; padding: 8px; margin-bottom: 8px; background: #141d28; border: 3px solid #000000; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; } 
+.sections-nav button { display: flex; align-items: center; width: 100%; padding: 8px; margin-bottom: 8px; background: #141d28; border: 3px solid #000000; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; min-height: 58px; } 
 .sections-nav button:hover:not(.active) { background: #1f2a38 !important; }
 /* NEW: Extras navigation styling */
 .nav-gap {
@@ -920,11 +920,6 @@ html, body {
   gap: 5px;
 }
 
-/* Hide tax calculator for specific sections */
-.tax-calculator.hidden-for-section {
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
 
 /* Cyan divider line AFTER Home button */
 #sections-nav button:first-child {
