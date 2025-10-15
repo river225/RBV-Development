@@ -692,9 +692,9 @@ function showSection(name) {
   if (taxCalc) {
     const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
     if (hiddenSections.includes(name)) {
-      taxCalc.classList.add('hidden-for-section');
+      taxCalc.style.display = 'none';
     } else {
-      taxCalc.classList.remove('hidden-for-section');
+      taxCalc.style.display = 'block';
     }
   }
   
