@@ -51,12 +51,15 @@
 
 /* Search bar */ 
 .search-container { 
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%; 
     display: flex; 
     justify-content: center; 
     align-items: center;
-    margin: 20px 0;
-    transition: margin 0.3s ease;
+    z-index: 100;
 } 
 #search { 
     width: 400px; 
