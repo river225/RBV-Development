@@ -708,10 +708,14 @@ function showSection(name) {
       searchContainer.style.visibility = 'hidden';
       searchContainer.style.height = '0';
       searchContainer.style.margin = '0';
+    } else if (name === 'BlockSpin Map') {
+      searchContainer.style.visibility = 'visible';
+      searchContainer.style.height = '';
+      searchContainer.style.margin = '80px 0 20px 0';
     } else {
       searchContainer.style.visibility = 'visible';
       searchContainer.style.height = '';
-      searchContainer.style.margin = '';
+      searchContainer.style.margin = '20px 0';
     }
   }
   
