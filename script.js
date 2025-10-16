@@ -16,17 +16,17 @@ const SECTION_NAMES = [
 
 
 const SECTION_BANNERS = {
-  "Home": { url: "", width: "160px", top: "226px", left: "53%" },
-  "Uncommon": { url: "https://i.ibb.co/5Xfj0w2c/ttWiION.png", width: "160px", top: "226px", left: "53%" },
-  "Rare":     { url: "https://i.ibb.co/QvvLmkVq/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
-  "Epic":     { url: "https://i.ibb.co/938SzMHF/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
-  "Legendary":{ url: "https://i.ibb.co/pvsRYDn2/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
-  "Omega":    { url: "https://i.ibb.co/q3whwbx6/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
-  "Misc":     { url: "https://i.ibb.co/Dhdvg41/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
-  "Vehicles": { url: "https://i.ibb.co/MxK5B0sX/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
-  "BlockSpin Map": { url: "", width: "200px", top: "228px", left: "54%" },
-  "Crew Logos": { url: "https://i.ibb.co/Td4tMSc/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
-  "Scammer List": { url: "https://i.ibb.co/Zp7BDzzx/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
+  // "Home": { url: "", width: "160px", top: "226px", left: "53%" },
+  // "Uncommon": { url: "https://i.ibb.co/5Xfj0w2c/ttWiION.png", width: "160px", top: "226px", left: "53%" },
+  // "Rare":     { url: "https://i.ibb.co/QvvLmkVq/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
+  // "Epic":     { url: "https://i.ibb.co/938SzMHF/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
+  // "Legendary":{ url: "https://i.ibb.co/pvsRYDn2/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
+  // "Omega":    { url: "https://i.ibb.co/q3whwbx6/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
+  // "Misc":     { url: "https://i.ibb.co/Dhdvg41/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
+  // "Vehicles": { url: "https://i.ibb.co/MxK5B0sX/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
+  // "BlockSpin Map": { url: "", width: "200px", top: "228px", left: "54%" },
+  // "Crew Logos": { url: "https://i.ibb.co/Td4tMSc/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
+  // "Scammer List": { url: "https://i.ibb.co/Zp7BDzzx/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
 };
 
 // ==================== GREEN LINE - BLOCKSPIN MAP SECTION START ====================
@@ -697,6 +697,21 @@ function showSection(name) {
     } else {
       taxCalc.style.visibility = 'visible';
       taxCalc.style.opacity = '1';
+    }
+  }
+
+    
+  // Hide/show search bar based on section
+  const searchContainer = document.querySelector('.search-container');
+  if (searchContainer) {
+    if (name === 'Home') {
+      searchContainer.style.visibility = 'hidden';
+      searchContainer.style.height = '0';
+      searchContainer.style.margin = '0';
+    } else {
+      searchContainer.style.visibility = 'visible';
+      searchContainer.style.height = '';
+      searchContainer.style.margin = '';
     }
   }
   
