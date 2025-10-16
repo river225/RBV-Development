@@ -705,17 +705,11 @@ function showSection(name) {
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
     if (name === 'Home') {
-      searchContainer.style.visibility = 'hidden';
-      searchContainer.style.height = '0';
-      searchContainer.style.margin = '0';
+      searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
     } else if (name === 'BlockSpin Map') {
-      searchContainer.style.visibility = 'visible';
-      searchContainer.style.height = '';
-      searchContainer.style.margin = '80px 0 20px 0';
+      searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 80px 0 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
     } else {
-      searchContainer.style.visibility = 'visible';
-      searchContainer.style.height = '';
-      searchContainer.style.margin = '20px 0';
+      searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
     }
   }
   
