@@ -706,10 +706,8 @@ function showSection(name) {
   if (searchContainer) {
     if (name === 'Home') {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
-    } else if (name === 'BlockSpin Map') {
-      searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 80px 0 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
     } else {
-      searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
+      searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 80px 0 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
     }
   }
   
