@@ -459,42 +459,20 @@ a { color: #fff; text-decoration: none; }
 #floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
 
 /* Entire header text and animations remain untouched */
-.blockspin-header {
-  font-family: 'Arial Black', sans-serif;
-  font-weight: 900;
-  font-size: 3em;
-  letter-spacing: 3px;
-  margin: 0;
-  text-align: center;
-}
-
-.block-word {
-  color: white;
-  text-shadow: 
-    2px 2px 0 #000,
-    -2px 2px 0 #000,
-    2px -2px 0 #000,
-    -2px -2px 0 #000;
-}
-
-.spin-word {
-  color: #33cce6;
-  text-shadow: 
-    2px 2px 0 #000,
-    -2px 2px 0 #000,
-    2px -2px 0 #000,
-    -2px -2px 0 #000,
-    0 0 20px rgba(51, 204, 230, 0.6);
-}
-
-.values-word {
-  color: white;
-  font-weight: 600;
-  font-size: 0.7em;
-  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-}
+.blockspin-header { font-size: 4rem; font-weight: bold; text-align: center; color: white; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
+.blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
 @keyframes redNeonPulse { 0% { color: #e60000; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 8px #ff1a1a, 0 0 14px #ff3333, 0 0 20px #ff4d4d; } 100% { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 12px #ff3333, 0 0 22px #ff4d4d, 0 0 34px #ff6666, 0 0 46px #ff8080; } }
 @keyframes redFlicker { 0%, 92%, 100% { opacity: 1; } 93% { opacity: 0.7; } 95% { opacity: 0.3; } 97% { opacity: 0.9; } 98% { opacity: 0.6; } 99% { opacity: 1; } }
+.blockspin-header .values-word { 
+  color: #33cce6; 
+  text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #33cce6, 0 0 20px #33cce6, 0 0 30px #5ddff0, 0 0 40px #7ae9f5; 
+  animation: cyanPulse 3s ease-in-out infinite alternate; 
+}
+
+@keyframes cyanPulse { 
+  0% { text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 8px #33cce6, 0 0 16px #33cce6, 0 0 24px #5ddff0; } 
+  100% { text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 14px #33cce6, 0 0 28px #5ddff0, 0 0 42px #7ae9f5; } 
+}
 
 /* Site Bio text and all remaining effects unchanged */
 .site-header p { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
