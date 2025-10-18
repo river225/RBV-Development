@@ -1082,48 +1082,12 @@ html, body {
     z-index: 1000;
 }
 
-.top-left-links h3 {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin: 0 0 3px 0;
-    text-decoration: none;
-}
-
-.top-left-links a { 
-    color: #fff;
-    text-decoration: none; 
-    font-weight: 600; 
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-} 
-
-.top-left-links a:hover { 
-    color: #33cce6;
-    text-decoration: underline;
-}
-
-.top-left-links a {
-    text-decoration: underline;
-    display: flex;
-    align-items: center;
-}
-
 /* Socials wrapper */
 .socials-wrapper {
     position: absolute; 
     top: 20px; 
     left: 20px;
     z-index: 1000;
-}
-
-.socials-title {
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-    text-align: left;
-    text-decoration: underline;
 }
 
 /* Fixed top-left links */ 
@@ -1138,25 +1102,27 @@ html, body {
     width: fit-content;
 }
 
+.socials-title {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    text-align: left;
+    text-decoration: underline;
+}
+
 .top-left-links a { 
     color: #fff;
-    text-decoration: none; 
+    text-decoration: underline; 
     font-weight: 600; 
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     transition: color 0.2s ease;
     display: flex;
     align-items: center;
-    white-space: nowrap;
 } 
 
 .top-left-links a:hover { 
     color: #33cce6;
-}
-
-.top-left-links a svg {
-    width: 24px !important;
-    height: 24px !important;
-    margin-right: 10px !important;
 }
 
 .hero-section {
