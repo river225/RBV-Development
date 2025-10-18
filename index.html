@@ -139,25 +139,6 @@ border: 2px solid #000000;
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
 </div> 
 
-<!-- Tax calculator --> 
-<aside class="tax-calculator"> 
-    <h2>Tax Calculator</h2> 
-    
-    <div class="tax-result">
-        <h3>Amount to withdraw:</h3>
-        <div class="amount">$<span id="tax-amount">0</span></div>
-    </div>
-
-    <input 
-        type="number" 
-        id="taxInput" 
-        placeholder="Enter amount..."
-    />
-    <div class="instructions">
-        Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
-    </div>
-</aside>
-
 <div class="main-container"> 
 
     <!-- Section navigation --> 
@@ -180,6 +161,25 @@ border: 2px solid #000000;
   </div>
       </section>
     </main> 
+
+    <!-- Tax calculator --> 
+    <aside class="tax-calculator"> 
+        <h2>Tax Calculator</h2> 
+        
+        <div class="tax-result">
+    <h3>Amount to withdraw:</h3>
+    <div class="amount">$<span id="tax-amount">0</span></div>
+</div>
+
+<input 
+    type="number" 
+    id="taxInput" 
+    placeholder="Enter amount..."
+/>
+        <div class="instructions">
+            Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
+        </div>
+    </aside>
 
 </div>
 
