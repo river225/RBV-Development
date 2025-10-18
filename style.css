@@ -1278,10 +1278,12 @@ html, body {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
   border: 3px solid #33cce6;
   border-radius: 16px;
-  padding: 30px;
+  padding: 25px 30px;
   max-width: 450px;
   width: 90%;
   box-shadow: 0 8px 32px rgba(51, 204, 230, 0.3);
+  display: flex;
+  flex-direction: column;
 }
 
 .river-links-modal h2 {
@@ -1296,7 +1298,8 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  flex: 1;
 }
 
 .links-list a, .copy-link {
@@ -1324,6 +1327,19 @@ html, body {
 .link-icon {
   font-size: 1.3rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discord-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.roblox-svg {
+  width: 20px;
+  height: 20px;
 }
 
 .link-text {
@@ -1352,9 +1368,79 @@ html, body {
   cursor: pointer;
   transition: all 0.3s ease;
   text-shadow: none;
+  align-self: center;
 }
 
 .close-modal-btn:hover {
   background: #29b3cc;
   transform: scale(1.02);
+}
+
+
+/* About Section */
+.about-section {
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+  padding: 25px 30px;
+  background: #141d28;
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.about-section h3 {
+  font-size: 2rem;
+  color: #33cce6;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(51, 204, 230, 0.5),
+               2px 2px 4px #000;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  color: #fff;
+  line-height: 1.8;
+  text-shadow: 2px 2px 4px #000;
+}
+
+/* Footer */
+.site-footer {
+  background: #0a0f16;
+  border-top: 2px solid #33cce6;
+  padding: 30px 20px;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.footer-content p {
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: #33cce6;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-shadow: 2px 2px 4px #000;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(51, 204, 230, 0.8), 2px 2px 4px #000;
+}
+
+.footer-links span {
+  color: #666;
+  font-size: 0.9rem;
 }
