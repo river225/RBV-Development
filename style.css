@@ -52,7 +52,7 @@ a { color: #fff; text-decoration: none; }
     margin: 0 auto;
     margin-top: 50px;
     gap: 20px;
-    align-items: stretch;
+    align-items: flex-start;
 }
 .sections-nav {
     width: 200px;
