@@ -1025,3 +1025,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+function openRiverLinks(e) {
+  e.preventDefault();
+  const modal = document.createElement('div');
+  modal.className = 'river-links-modal';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h2>River's Links</h2>
+      <div class="links-list">
+        <a href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" target="_blank">
+          <span class="link-icon">📱</span>
+          <span class="link-text">TikTok: @river1_0_</span>
+        </a>
+        <div class="copy-link" onclick="copyToClipboard('_.riverr')">
+          <span class="link-icon">💬</span>
+          <span class="link-text">Discord: _.riverr</span>
+          <span class="copy-icon">📋</span>
+        </div>
+        <div class="copy-link" onclick="copyToClipboard('riverytacc11@gmail.com')">
+          <span class="link-icon">📧</span>
+          <span class="link-text">Email: riverytacc11@gmail.com</span>
+          <span class="copy-icon">📋</span>
+        </div>
+      </div>
+      <button class="close-modal-btn" onclick="this.parentElement.parentElement.remove()">Close</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
