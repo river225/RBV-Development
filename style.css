@@ -1069,7 +1069,7 @@ html, body {
 
 /* Fixed top-left links */ 
 .top-left-links { 
-    position: absolute; 
+    position: fixed; 
     top: 20px; 
     left: 20px; 
     background: transparent;
@@ -1080,11 +1080,12 @@ html, body {
     flex-direction: column;
     gap: 5px;
     z-index: 1000;
+    max-width: 160px;
 }
 
 .top-left-links h3 {
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin: 0 0 3px 0;
     text-decoration: none;
@@ -1092,21 +1093,16 @@ html, body {
 
 .top-left-links a { 
     color: #fff;
-    text-decoration: none; 
+    text-decoration: underline; 
     font-weight: 600; 
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
 } 
 
 .top-left-links a:hover { 
     color: #33cce6;
-    text-decoration: underline;
-}
-
-.top-left-links a {
-    text-decoration: underline;
-    display: flex;
-    align-items: center;
 }
 
 /* Socials wrapper */
