@@ -340,6 +340,11 @@ function createCard(item) {
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" 
+             class="history-icon" 
+             onclick="showHistoryGraph('${escapeAttr(name)}')" 
+             title="View value history"
+             alt="History">
       </div>
       <div class="card-info">
         <h3>${name}</h3>
@@ -1055,3 +1060,131 @@ function openRiverLinks(e) {
   `;
   document.body.appendChild(modal);
 }
+
+// ==================== VALUE HISTORY TRACKING ====================
+
+// Global variable to store history data and chart instance
+let valueHistoryData = [];
+let currentChart = null;
+
+// Fetch value history from Google Sheets
+async function fetchValueHistory() {
+  try {
+    const data = await fetchSheet("Value History");
+    valueHistoryData = data;
+    return data;
+  } catch (err) {
+    console.error("Failed to fetch value history:", err);
+    return [];
+  }
+}
+
+// Show history graph modal
+async function showHistoryGraph(itemName) {
+  const modal = document.getElementById('historyModal');
+  const titleEl = document.getElementById('historyItemName');
+  
+  titleEl.textContent = `${itemName} - Value History`;
+  modal.style.display = 'block';
+  
+  // Fetch history if not already loaded
+  if (valueHistoryData.length === 0) {
+    await fetchValueHistory();
+  }
+  
+  // Filter history for this specific item
+  const itemHistory = valueHistoryData.filter(record => 
+    record["Item Name"] === itemName
+  ).sort((a, b) => new Date(a.Date) - new Date(b.Date));
+  
+  if (itemHistory.length === 0) {
+    alert(`No history data found for ${itemName}. Add entries to the "Value History" sheet in your spreadsheet.`);
+    modal.style.display = 'none';
+    return;
+  }
+  
+  // Prepare data for chart
+  const dates = itemHistory.map(record => record.Date);
+  const values = itemHistory.map(record => parseFloat(record["Average Value"]) || 0);
+  const demands = itemHistory.map(record => record.Demand);
+  
+  // Destroy existing chart if it exists
+  if (currentChart) {
+    currentChart.destroy();
+  }
+  
+  // Create new chart
+  const ctx = document.getElementById('historyChart').getContext('2d');
+  currentChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dates,
+      datasets: [{
+        label: 'Average Value',
+        data: values,
+        borderColor: '#33cce6',
+        backgroundColor: 'rgba(51, 204, 230, 0.1)',
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#33cce6',
+        pointBorderColor: '#000',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 7
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: '#fff',
+            font: { size: 14 }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            afterLabel: function(context) {
+              const index = context.dataIndex;
+              return `Demand: ${demands[index]}`;
+            }
+          },
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          titleColor: '#33cce6',
+          bodyColor: '#fff',
+          borderColor: '#33cce6',
+          borderWidth: 1
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#fff' },
+          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        },
+        y: {
+          ticks: { color: '#fff' },
+          grid: { color: 'rgba(255, 255, 255, 0.1)' },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+// Close modal
+function closeHistoryModal() {
+  document.getElementById('historyModal').style.display = 'none';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  const modal = document.getElementById('historyModal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Load history data on page load
+fetchValueHistory();

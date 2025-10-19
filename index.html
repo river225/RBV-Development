@@ -10,6 +10,7 @@
 <meta property="og:title" content="BlockSpin Values">
 <meta property="og:description" content="A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.">
 <link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style> 
 /* Floating buttons at the bottom */ 
 .bottom-buttons { 
@@ -236,6 +237,7 @@ border: 2px solid #000000;
 
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
 
+
 <div id="floating-text-left">
   <div>Want to suggest Value changes or Crew logos for this site?</div>
   <div class="discord-line">Join our Discord!</div>
@@ -257,6 +259,22 @@ border: 2px solid #000000;
     </div>
   </div>
 </footer>
+</footer>
 
+<!-- History Graph Modal -->
+<div id="historyModal" class="history-modal">
+  <div class="history-modal-content">
+    <div class="history-modal-header">
+      <h2 id="historyItemName">Item Value History</h2>
+      <button class="close-modal" onclick="closeHistoryModal()">&times;</button>
+    </div>
+    <div class="chart-container">
+      <canvas id="historyChart"></canvas>
+    </div>
+  </div>
+</div>
+
+</body> 
+</html>
 </body> 
 </html>
