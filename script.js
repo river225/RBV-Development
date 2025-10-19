@@ -995,9 +995,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress-text");
 
+  // LOAD VALUE HISTORY FIRST!
+  await fetchValueHistory();
+  console.log('Value history loaded:', valueHistoryData.length, 'records');
   
- 
-  
+  // LOAD VALUE HISTORY FIRST!
+await fetchValueHistory();
+console.log('Value history loaded:', valueHistoryData.length, 'records');
+
   initSectionsNav();
   initSearch();
   initTaxCalculator();
