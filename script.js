@@ -340,10 +340,10 @@ function createCard(item) {
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
-        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" 
+        <img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" 
              class="history-icon" 
              onclick="showHistoryGraph('${escapeAttr(name)}')" 
-             title="View value history"
+             title="📊 View value history"
              alt="History">
       </div>
       <div class="card-info">
