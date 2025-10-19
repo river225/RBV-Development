@@ -289,6 +289,9 @@ function createCard(item) {
   const afterTax = safe(item["After Tax Value"]);
   const durability = safe(item["Durability"]);
 
+  // Check if this item has history data
+  const hasHistory = valueHistoryData.some(record => record["Item Name"] === name);
+
   // Check if durability is 0 to add broken overlay
   let imgTag = "";
   if (img) {
@@ -331,20 +334,25 @@ function createCard(item) {
     `;
   }
 
+  // Only add history icon if item has history
+  const historyIcon = hasHistory ? `
+    <img src="https://cdn-icons-png.flaticon.com/512/565/565308.png" 
+         class="history-icon" 
+         onclick="showHistoryGraph('${escapeAttr(name)}')" 
+         title="📊 View value history"
+         alt="History">
+  ` : '';
+
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-aftertax="${escapeAttr(afterTax)}"
          data-max-durability="${durability ? durability.split('/')[1] : '100'}">
+      ${historyIcon}
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
-        <img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" 
-             class="history-icon" 
-             onclick="showHistoryGraph('${escapeAttr(name)}')" 
-             title="📊 View value history"
-             alt="History">
       </div>
       <div class="card-info">
         <h3>${name}</h3>
@@ -1098,10 +1106,27 @@ async function showHistoryGraph(itemName) {
   ).sort((a, b) => new Date(a.Date) - new Date(b.Date));
   
   if (itemHistory.length === 0) {
-    alert(`No history data found for ${itemName}. Add entries to the "Value History" sheet in your spreadsheet.`);
-    modal.style.display = 'none';
+    // Show styled "no data" message instead of chart
+    const ctx = document.getElementById('historyChart');
+    ctx.style.display = 'none';
+    
+    const chartContainer = document.querySelector('.chart-container');
+    chartContainer.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">📊</div>
+        <h3 style="color: #33cce6; font-size: 1.5rem; margin-bottom: 15px; text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;">No History Yet</h3>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; line-height: 1.6;">
+          This item doesn't have any value history tracked yet.<br>
+          Check back later as we continue tracking values!
+        </p>
+      </div>
+    `;
     return;
   }
+  
+  // Reset chart container if it was showing "no data" message
+  const chartContainer = document.querySelector('.chart-container');
+  chartContainer.innerHTML = '<canvas id="historyChart"></canvas>';
   
   // Prepare data for chart
   const dates = itemHistory.map(record => record.Date);
