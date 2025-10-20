@@ -10,7 +10,6 @@
 <meta property="og:title" content="BlockSpin Values">
 <meta property="og:description" content="A Blockspin Community Driven Value List — Maintained by our top trader Value List Team in our discord server and built by river.">
 <link rel="stylesheet" href="style.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style> 
 /* Floating buttons at the bottom */ 
 .bottom-buttons { 
@@ -181,6 +180,87 @@ border: 2px solid #000000;
     <div style="width: 200px; height: 3px; background: linear-gradient(90deg, transparent, #33cce6, transparent); border-radius: 2px;"></div>
   </div>
   
+
+  <!-- Trade Checker Section -->
+<section id="trade-checker" class="section" style="display: none;">
+  <div class="trade-checker-warning">
+    ⚠️ <strong>Disclaimer:</strong> This trade checker uses AI and formulas to analyze trades. Results may not be 100% accurate. Always use your own judgment when trading.
+  </div>
+
+  <div class="trade-checker-container">
+    <!-- Your Side -->
+    <div class="trade-side">
+      <h2 class="trade-side-title">YOUR SIDE</h2>
+      
+      <div class="item-selector">
+        <select id="your-item-select" class="item-dropdown">
+          <option value="">Select Item to Add...</option>
+        </select>
+        <button onclick="addItemToTrade('your')" class="add-item-btn">Add Item +</button>
+      </div>
+
+      <div id="your-items-list" class="items-list"></div>
+
+      <div class="cash-section">
+        <h3>💵 Cash Amount: $<span id="your-cash-display">0</span></h3>
+        <div class="cash-buttons">
+          <button onclick="adjustCash('your', 1000)">+$1K</button>
+          <button onclick="adjustCash('your', 5000)">+$5K</button>
+          <button onclick="adjustCash('your', 10000)">+$10K</button>
+          <button onclick="adjustCash('your', 25000)">+$25K</button>
+          <button onclick="adjustCash('your', -999999)" class="clear-btn">Clear</button>
+        </div>
+      </div>
+
+      <div class="total-value">
+        📊 Your Total: $<span id="your-total">0</span>
+      </div>
+    </div>
+
+    <!-- Their Side -->
+    <div class="trade-side">
+      <h2 class="trade-side-title">THEIR SIDE</h2>
+      
+      <div class="item-selector">
+        <select id="their-item-select" class="item-dropdown">
+          <option value="">Select Item to Add...</option>
+        </select>
+        <button onclick="addItemToTrade('their')" class="add-item-btn">Add Item +</button>
+      </div>
+
+      <div id="their-items-list" class="items-list"></div>
+
+      <div class="cash-section">
+        <h3>💵 Cash Amount: $<span id="their-cash-display">0</span></h3>
+        <div class="cash-buttons">
+          <button onclick="adjustCash('their', 1000)">+$1K</button>
+          <button onclick="adjustCash('their', 5000)">+$5K</button>
+          <button onclick="adjustCash('their', 10000)">+$10K</button>
+          <button onclick="adjustCash('their', 25000)">+$25K</button>
+          <button onclick="adjustCash('their', -999999)" class="clear-btn">Clear</button>
+        </div>
+      </div>
+
+      <div class="total-value">
+        📊 Their Total: $<span id="their-total">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Analysis Result -->
+  <div id="trade-analysis" class="trade-analysis" style="display: none;">
+    <div class="analysis-header">
+      <span id="analysis-verdict" class="verdict"></span>
+    </div>
+    <div id="analysis-content" class="analysis-content"></div>
+  </div>
+
+  <div id="analysis-loading" class="analysis-loading" style="display: none;">
+    🤖 AI is analyzing your trade...
+  </div>
+</section>
+
+
   <!-- About Section -->
   <div class="about-section">
     <h3>What is BlockSpin Values?</h3>
@@ -237,7 +317,6 @@ border: 2px solid #000000;
 
 <div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
 
-
 <div id="floating-text-left">
   <div>Want to suggest Value changes or Crew logos for this site?</div>
   <div class="discord-line">Join our Discord!</div>
@@ -259,22 +338,6 @@ border: 2px solid #000000;
     </div>
   </div>
 </footer>
-</footer>
 
-<!-- History Graph Modal -->
-<div id="historyModal" class="history-modal">
-  <div class="history-modal-content">
-    <div class="history-modal-header">
-      <h2 id="historyItemName">Item Value History</h2>
-      <button class="close-modal" onclick="closeHistoryModal()">&times;</button>
-    </div>
-    <div class="chart-container">
-      <canvas id="historyChart"></canvas>
-    </div>
-  </div>
-</div>
-
-</body> 
-</html>
 </body> 
 </html>

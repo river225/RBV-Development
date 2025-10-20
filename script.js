@@ -11,7 +11,8 @@ const SECTION_NAMES = [
   "Vehicles",
   // "BlockSpin Map",
   "Crew Logos",
-  "Scammer List"
+  "Scammer List",
+  "Trade Checker"
 ];
 
 
@@ -289,9 +290,6 @@ function createCard(item) {
   const afterTax = safe(item["After Tax Value"]);
   const durability = safe(item["Durability"]);
 
-  // Check if this item has history data
-  const hasHistory = valueHistoryData.some(record => record["Item Name"] === name);
-
   // Check if durability is 0 to add broken overlay
   let imgTag = "";
   if (img) {
@@ -334,22 +332,12 @@ function createCard(item) {
     `;
   }
 
-  // Only add history icon if item has history
-  const historyIcon = hasHistory ? `
-    <img src="https://cdn-icons-png.flaticon.com/512/565/565308.png" 
-         class="history-icon" 
-         onclick="showHistoryGraph('${escapeAttr(name)}')" 
-         title="📊 View value history"
-         alt="History">
-  ` : '';
-
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-aftertax="${escapeAttr(afterTax)}"
          data-max-durability="${durability ? durability.split('/')[1] : '100'}">
-      ${historyIcon}
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
@@ -765,6 +753,13 @@ function showSection(name) {
   } else {
     bannerImg.style.display = "none";
   }
+  
+  // Load trade checker data when switching to it
+  if (name === "Trade Checker") {
+    setTimeout(() => {
+      collectTradeCheckerData();
+    }, 500);
+  }
 }
 
 // === SEARCH ===
@@ -995,14 +990,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress-text");
 
-  // LOAD VALUE HISTORY FIRST!
-  await fetchValueHistory();
-  console.log('Value history loaded:', valueHistoryData.length, 'records');
   
-  // LOAD VALUE HISTORY FIRST!
-await fetchValueHistory();
-console.log('Value history loaded:', valueHistoryData.length, 'records');
-
+ 
+  
   initSectionsNav();
   initSearch();
   initTaxCalculator();
@@ -1074,147 +1064,286 @@ function openRiverLinks(e) {
   document.body.appendChild(modal);
 }
 
-// ==================== VALUE HISTORY TRACKING ====================
+// ==================== TRADE CHECKER SECTION START ====================
 
-// Global variable to store history data and chart instance
-let valueHistoryData = [];
-let currentChart = null;
+let tradeData = {
+  your: { items: [], cash: 0 },
+  their: { items: [], cash: 0 }
+};
 
-// Fetch value history from Google Sheets
-async function fetchValueHistory() {
-  try {
-    const data = await fetchSheet("Value History");
-    valueHistoryData = data;
-    return data;
-  } catch (err) {
-    console.error("Failed to fetch value history:", err);
-    return [];
-  }
+let allItemsData = []; // Store all items for trade checker
+let analysisTimeout = null;
+
+// NEW FUNCTION - Collect data from DOM cards
+function collectTradeCheckerData() {
+  allItemsData = []; // Reset
+  
+  // Get all item cards that are NOT crew logos or scammers
+  document.querySelectorAll('.card:not(.crew-logo-card):not(.scammer-card)').forEach(card => {
+    const name = card.dataset.name;
+    const avg = card.dataset.avg;
+    const maxDur = parseInt(card.dataset.maxDurability) || 100;
+    
+    // Find parent section
+    const section = card.closest('.section');
+    let sectionName = 'Unknown';
+    if (section && section.id) {
+      sectionName = section.id.charAt(0).toUpperCase() + section.id.slice(1).replace(/-/g, ' ');
+    }
+    
+    // Get demand from badge if exists
+    const demandBadge = card.querySelector('.badge');
+    let demand = 'Medium';
+    if (demandBadge) {
+      demand = demandBadge.textContent.replace('Demand: ', '').trim();
+    }
+    
+    if (name && avg) {
+      allItemsData.push({
+        name: name,
+        avg: avg.replace(/[^0-9]/g, ''),
+        maxDurability: maxDur,
+        demand: demand,
+        section: sectionName
+      });
+    }
+  });
+  
+  console.log(`✅ Collected ${allItemsData.length} items for Trade Checker`);
+  populateTradeCheckerDropdowns();
 }
 
-// Show history graph modal
-async function showHistoryGraph(itemName) {
-  const modal = document.getElementById('historyModal');
-  const titleEl = document.getElementById('historyItemName');
+// Populate item dropdowns when data is loaded
+function populateTradeCheckerDropdowns() {
+  const yourSelect = document.getElementById('your-item-select');
+  const theirSelect = document.getElementById('their-item-select');
   
-  titleEl.textContent = `${itemName} - Value History`;
-  modal.style.display = 'block';
+  if (!yourSelect || !theirSelect) {
+    console.log('⚠️ Trade Checker dropdowns not found in DOM yet');
+    return;
+  }
+
+  // Clear existing options
+  yourSelect.innerHTML = '<option value="">Select Item to Add...</option>';
+  theirSelect.innerHTML = '<option value="">Select Item to Add...</option>';
+
+  // Group items by section
+  const sections = ['Uncommon', 'Rare', 'Epic', 'Legendary', 'Omega', 'Misc', 'Vehicles'];
   
-  // Fetch history if not already loaded
-  if (valueHistoryData.length === 0) {
-    await fetchValueHistory();
+  sections.forEach(section => {
+    const items = allItemsData.filter(item => item.section === section);
+    if (items.length > 0) {
+      const optgroup1 = document.createElement('optgroup');
+      const optgroup2 = document.createElement('optgroup');
+      optgroup1.label = section;
+      optgroup2.label = section;
+      
+      items.forEach(item => {
+        const option1 = document.createElement('option');
+        const option2 = document.createElement('option');
+        const displayValue = parseInt(item.avg).toLocaleString();
+        option1.value = option2.value = JSON.stringify(item);
+        option1.textContent = option2.textContent = `${item.name} ($${displayValue})`;
+        optgroup1.appendChild(option1);
+        optgroup2.appendChild(option2);
+      });
+      
+      yourSelect.appendChild(optgroup1);
+      theirSelect.appendChild(optgroup2);
+    }
+  });
+  
+  console.log('✅ Trade Checker dropdowns populated');
+}
+
+function addItemToTrade(side) {
+  const selectId = side === 'your' ? 'your-item-select' : 'their-item-select';
+  const select = document.getElementById(selectId);
+  
+  if (!select.value) return;
+  
+  const itemData = JSON.parse(select.value);
+  const maxDurability = itemData.maxDurability || 100;
+  
+  const tradeItem = {
+    id: Date.now() + Math.random(), // Unique ID
+    name: itemData.name,
+    baseValue: parseFloat(itemData.avg.replace(/,/g, '')) || 0,
+    durability: maxDurability,
+    maxDurability: maxDurability,
+    demand: itemData.demand || 'Medium'
+  };
+  
+  tradeData[side].items.push(tradeItem);
+  select.value = ''; // Reset dropdown
+  
+  renderTradeSide(side);
+  updateTotals();
+  triggerAIAnalysis();
+}
+
+function removeItemFromTrade(side, itemId) {
+  tradeData[side].items = tradeData[side].items.filter(item => item.id !== itemId);
+  renderTradeSide(side);
+  updateTotals();
+  triggerAIAnalysis();
+}
+
+function adjustDurability(side, itemId, change) {
+  const item = tradeData[side].items.find(i => i.id === itemId);
+  if (!item) return;
+  
+  item.durability = Math.max(0, Math.min(item.maxDurability, item.durability + change));
+  renderTradeSide(side);
+  updateTotals();
+  triggerAIAnalysis();
+}
+
+function adjustCash(side, amount) {
+  if (amount < 0) {
+    tradeData[side].cash = 0; // Clear
+  } else {
+    tradeData[side].cash = Math.max(0, tradeData[side].cash + amount);
   }
   
-  // Filter history for this specific item
-  const itemHistory = valueHistoryData.filter(record => 
-    record["Item Name"] === itemName
-  ).sort((a, b) => new Date(a.Date) - new Date(b.Date));
+  document.getElementById(`${side}-cash-display`).textContent = tradeData[side].cash.toLocaleString();
+  updateTotals();
+  triggerAIAnalysis();
+}
+
+function renderTradeSide(side) {
+  const listEl = document.getElementById(`${side}-items-list`);
+  if (!listEl) return;
   
-  if (itemHistory.length === 0) {
-    // Show styled "no data" message instead of chart
-    const ctx = document.getElementById('historyChart');
-    ctx.style.display = 'none';
-    
-    const chartContainer = document.querySelector('.chart-container');
-    chartContainer.innerHTML = `
-      <div style="text-align: center; padding: 60px 20px;">
-        <div style="font-size: 4rem; margin-bottom: 20px;">📊</div>
-        <h3 style="color: #33cce6; font-size: 1.5rem; margin-bottom: 15px; text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;">No History Yet</h3>
-        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; line-height: 1.6;">
-          This item doesn't have any value history tracked yet.<br>
-          Check back later as we continue tracking values!
-        </p>
-      </div>
-    `;
+  if (tradeData[side].items.length === 0) {
+    listEl.innerHTML = '<p class="no-items">No items added yet</p>';
     return;
   }
   
-  // Reset chart container if it was showing "no data" message
-  const chartContainer = document.querySelector('.chart-container');
-  chartContainer.innerHTML = '<canvas id="historyChart"></canvas>';
+  listEl.innerHTML = tradeData[side].items.map(item => {
+    const durabilityPercent = (item.durability / item.maxDurability) * 100;
+    const adjustedValue = (item.baseValue * (item.durability / item.maxDurability)).toFixed(0);
+    
+    return `
+      <div class="trade-item-card">
+        <div class="trade-item-header">
+          <h4>${item.name}</h4>
+          <button onclick="removeItemFromTrade('${side}', ${item.id})" class="remove-item-btn">❌</button>
+        </div>
+        <div class="durability-bar-container">
+          <div class="durability-bar">
+            <div class="durability-fill" style="width: ${durabilityPercent}%"></div>
+          </div>
+          <span class="durability-text">${item.durability}/${item.maxDurability}</span>
+        </div>
+        <div class="durability-controls">
+          <button onclick="adjustDurability('${side}', ${item.id}, -10)">▼▼</button>
+          <button onclick="adjustDurability('${side}', ${item.id}, -1)">▼</button>
+          <button onclick="adjustDurability('${side}', ${item.id}, 1)">▲</button>
+          <button onclick="adjustDurability('${side}', ${item.id}, 10)">▲▲</button>
+        </div>
+        <div class="item-value">Value: $${parseInt(adjustedValue).toLocaleString()}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function calculateSideValue(side) {
+  let total = tradeData[side].cash;
   
-  // Prepare data for chart
-  const dates = itemHistory.map(record => record.Date);
-  const values = itemHistory.map(record => parseFloat(record["Average Value"]) || 0);
-  const demands = itemHistory.map(record => record.Demand);
-  
-  // Destroy existing chart if it exists
-  if (currentChart) {
-    currentChart.destroy();
-  }
-  
-  // Create new chart
-  const ctx = document.getElementById('historyChart').getContext('2d');
-  currentChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: dates,
-      datasets: [{
-        label: 'Average Value',
-        data: values,
-        borderColor: '#33cce6',
-        backgroundColor: 'rgba(51, 204, 230, 0.1)',
-        borderWidth: 3,
-        tension: 0.4,
-        fill: true,
-        pointBackgroundColor: '#33cce6',
-        pointBorderColor: '#000',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        pointHoverRadius: 7
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          labels: {
-            color: '#fff',
-            font: { size: 14 }
-          }
-        },
-        tooltip: {
-          callbacks: {
-            afterLabel: function(context) {
-              const index = context.dataIndex;
-              return `Demand: ${demands[index]}`;
-            }
-          },
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleColor: '#33cce6',
-          bodyColor: '#fff',
-          borderColor: '#33cce6',
-          borderWidth: 1
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#fff' },
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
-        },
-        y: {
-          ticks: { color: '#fff' },
-          grid: { color: 'rgba(255, 255, 255, 0.1)' },
-          beginAtZero: true
-        }
-      }
-    }
+  tradeData[side].items.forEach(item => {
+    const adjustedValue = item.baseValue * (item.durability / item.maxDurability);
+    total += adjustedValue;
   });
+  
+  return Math.round(total);
 }
 
-// Close modal
-function closeHistoryModal() {
-  document.getElementById('historyModal').style.display = 'none';
+function updateTotals() {
+  const yourTotal = calculateSideValue('your');
+  const theirTotal = calculateSideValue('their');
+  
+  document.getElementById('your-total').textContent = yourTotal.toLocaleString();
+  document.getElementById('their-total').textContent = theirTotal.toLocaleString();
 }
 
-// Close modal when clicking outside
-window.onclick = function(event) {
-  const modal = document.getElementById('historyModal');
-  if (event.target === modal) {
-    modal.style.display = 'none';
+function triggerAIAnalysis() {
+  // Clear existing timeout
+  if (analysisTimeout) clearTimeout(analysisTimeout);
+  
+  // Only analyze if both sides have something
+  const hasYourItems = tradeData.your.items.length > 0 || tradeData.your.cash > 0;
+  const hasTheirItems = tradeData.their.items.length > 0 || tradeData.their.cash > 0;
+  
+  if (!hasYourItems || !hasTheirItems) {
+    document.getElementById('trade-analysis').style.display = 'none';
+    return;
+  }
+  
+  // Show loading
+  document.getElementById('analysis-loading').style.display = 'block';
+  document.getElementById('trade-analysis').style.display = 'none';
+  
+  // Debounce - wait 1 second after last change
+  analysisTimeout = setTimeout(() => {
+    performAIAnalysis();
+  }, 1000);
+}
+
+async function performAIAnalysis() {
+  const yourTotal = calculateSideValue('your');
+  const theirTotal = calculateSideValue('their');
+  const difference = Math.abs(yourTotal - theirTotal);
+  const percentDiff = yourTotal > 0 ? (difference / yourTotal * 100) : 0;
+  
+  try {
+    // Simple formula-based analysis
+    let verdict, verdictClass, analysis;
+    
+    if (percentDiff < 5) {
+      verdict = "✅ FAIR TRADE";
+      verdictClass = "verdict-fair";
+      analysis = `This trade is fair with only a ${percentDiff.toFixed(1)}% difference ($${difference.toLocaleString()}). Both sides are receiving roughly equal value.`;
+    } else if (percentDiff < 15) {
+      verdict = "⚠️ SLIGHTLY UNFAIR";
+      verdictClass = "verdict-warning";
+      const loser = yourTotal > theirTotal ? "them" : "you";
+      analysis = `This trade slightly favors ${loser === "you" ? "their" : "your"} side by $${difference.toLocaleString()} (${percentDiff.toFixed(1)}%). Consider if the items you're getting are worth the difference.`;
+    } else {
+      verdict = "❌ UNFAIR TRADE";
+      verdictClass = "verdict-bad";
+      const loser = yourTotal > theirTotal ? "You're overpaying" : "They're overpaying";
+      analysis = `${loser} by $${difference.toLocaleString()} (${percentDiff.toFixed(1)}%). This is a significant value difference. ${yourTotal > theirTotal ? "Ask for more items or cash to balance." : "This is heavily in your favor."}`;
+    }
+    
+    // Check for low durability warnings
+    const lowDurabilityItems = [...tradeData.your.items, ...tradeData.their.items]
+      .filter(item => (item.durability / item.maxDurability) < 0.6);
+    
+    if (lowDurabilityItems.length > 0) {
+      analysis += `\n\n⚠️ Low Durability Warning: ${lowDurabilityItems.map(i => i.name).join(', ')} ha${lowDurabilityItems.length > 1 ? 've' : 's'} reduced durability, significantly affecting value.`;
+    }
+    
+    displayAnalysis(verdict, verdictClass, analysis);
+    
+  } catch (error) {
+    console.error('Analysis error:', error);
+    displayAnalysis("⚠️ ANALYSIS ERROR", "verdict-warning", "Could not complete analysis. Please check your values manually.");
   }
 }
 
-// Load history data on page load
-fetchValueHistory();
+function displayAnalysis(verdict, verdictClass, content) {
+  document.getElementById('analysis-loading').style.display = 'none';
+  
+  const analysisEl = document.getElementById('trade-analysis');
+  const verdictEl = document.getElementById('analysis-verdict');
+  const contentEl = document.getElementById('analysis-content');
+  
+  verdictEl.textContent = verdict;
+  verdictEl.className = `verdict ${verdictClass}`;
+  contentEl.textContent = content;
+  
+  analysisEl.style.display = 'block';
+}
+
+// ==================== TRADE CHECKER SECTION END ====================
