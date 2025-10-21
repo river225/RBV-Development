@@ -1074,7 +1074,8 @@ function showSection(name) {
   // Hide/show search bar based on section
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
-    if (name === 'Home') {
+    const hiddenSearchSections = ['Home', 'Trade Checker', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Crate Game'];
+    if (hiddenSearchSections.includes(name)) {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
     } else {
       searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
