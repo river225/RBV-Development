@@ -430,13 +430,11 @@ window.addItemToTrade = async function(itemName, side) {
   const item = ALL_ITEMS_DATA.find(i => i.Name === itemName);
   if (!item) return;
   
-  // Handle durability for guns
+  // Set durability to max by default (no popup)
   let durability = item.Durability;
   if (durability && durability.includes('/')) {
     const maxDur = durability.split('/')[1];
-    const userDur = prompt(`Enter durability for ${item.Name} (max ${maxDur}):`, maxDur);
-    if (userDur === null) return; // Cancelled
-    durability = `${userDur}/${maxDur}`;
+    durability = `${maxDur}/${maxDur}`; // Full durability
   }
   
   const tradeItem = {
@@ -493,6 +491,24 @@ window.updateTradeDurability = function(side, itemId, newDur) {
   updateTradeAnalysis();
 };
 
+// Adjust trade durability with arrows
+window.adjustTradeDurability = function(side, itemId, direction) {
+  const items = side === 'your' ? tradeState.yourSide : tradeState.theirSide;
+  const item = items.find(i => i.id === itemId);
+  if (!item || !item.Durability) return;
+  
+  const [current, max] = item.Durability.split('/').map(Number);
+  let newValue = current + direction;
+  
+  if (newValue < 0) newValue = 0;
+  if (newValue > max) newValue = max;
+  
+  item.Durability = `${newValue}/${max}`;
+  
+  renderTradeSides();
+  updateTradeAnalysis();
+};
+
 // Render trade sides
 function renderTradeSides() {
   renderSide('your', tradeState.yourSide);
@@ -510,13 +526,12 @@ function renderSide(side, items) {
   container.innerHTML = items.map(item => createTradeItemCard(item, side)).join('');
 }
 
-// Create trade item card (compact version)
+// Create trade item card (FULL version)
 function createTradeItemCard(item, side) {
   const hasDurability = item.Durability && item.Durability.includes('/');
   const currentDur = hasDurability ? item.Durability.split('/')[0] : null;
   const maxDur = hasDurability ? item.Durability.split('/')[1] : null;
   
-  // Calculate adjusted value if durability exists
   let displayValue = item["Average Value"];
   if (hasDurability && currentDur && maxDur) {
     const baseValue = parseFloat(item["Average Value"].replace(/[^0-9.]/g, '')) || 0;
@@ -524,26 +539,38 @@ function createTradeItemCard(item, side) {
     displayValue = `$${adjustedValue.toLocaleString()}`;
   }
   
+  let durabilityHTML = '';
+  if (hasDurability) {
+    durabilityHTML = `
+      <div class="trade-durability-control">
+        <label>Durability:</label>
+        <div class="trade-durability-row">
+          <input type="number" class="trade-durability-input" 
+                 value="${currentDur}" 
+                 max="${maxDur}" 
+                 min="0" 
+                 onchange="updateTradeDurability('${side}', ${item.id}, this.value)">
+          <span class="trade-durability-max">/${maxDur}</span>
+          <div class="trade-durability-arrows">
+            <button onclick="adjustTradeDurability('${side}', ${item.id}, 1)">▲</button>
+            <button onclick="adjustTradeDurability('${side}', ${item.id}, -1)">▼</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
   return `
     <div class="trade-item-card">
       <button class="trade-item-remove" onclick="removeTradeItem('${side}', ${item.id})">×</button>
-      <img src="${item['Image URL']}" onerror="this.style.display='none'" />
+      <div class="trade-card-image">
+        <img src="${item['Image URL']}" onerror="this.style.display='none'" />
+      </div>
       <div class="trade-item-info">
         <div class="trade-item-name">${item.Name}</div>
         ${item.Demand ? `<div class="trade-item-demand">Demand: ${item.Demand}</div>` : ''}
         <div class="trade-item-value">${displayValue}</div>
-        ${hasDurability ? `
-          <div class="trade-item-durability">
-            <input 
-              type="number" 
-              value="${currentDur}" 
-              max="${maxDur}" 
-              min="0"
-              onchange="updateTradeDurability('${side}', ${item.id}, this.value)"
-            />
-            <span>/${maxDur}</span>
-          </div>
-        ` : ''}
+        ${durabilityHTML}
       </div>
     </div>
   `;
