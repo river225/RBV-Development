@@ -1060,7 +1060,7 @@ function showSection(name) {
     // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
-    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
+    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
     if (hiddenSections.includes(name)) {
       taxCalc.style.visibility = 'hidden';
       taxCalc.style.opacity = '0';
