@@ -180,17 +180,25 @@ border: 2px solid #000000;
     <div style="width: 200px; height: 3px; background: linear-gradient(90deg, transparent, #33cce6, transparent); border-radius: 2px;"></div>
   </div>
   
-
-  <!-- Trade Checker Section -->
+  <!-- About Section -->
+  <div class="about-section">
+    <h3>What is BlockSpin Values?</h3>
+    <p>BlockSpin Values is the trusted value list for all items in the Roblox game BlockSpin. Our dedicated team of top traders keeps values updated daily to help you make fair trades and avoid scams. Whether you're looking for weapon values, checking crew logos, or calculating taxes, we've got everything you need to trade with confidence.</p>
+  </div>
+  
+  </div>
+      </section>
+      <!-- Trade Checker Section -->
 <section id="trade-checker" class="section" style="display: none;">
+  
   <div class="trade-checker-warning">
-    ⚠️ <strong>Disclaimer:</strong> This trade checker uses AI and formulas to analyze trades. Results may not be 100% accurate. Always use your own judgment when trading.
+    ⚠️ <strong>Disclaimer:</strong> This tool analyzes trades using value estimates and demand data. Always use your own judgment when trading.
   </div>
 
   <div class="trade-checker-container">
     <!-- Your Side -->
     <div class="trade-side">
-      <h2 class="trade-side-title">YOUR SIDE</h2>
+      <h3 class="trade-side-title">YOUR SIDE</h3>
       
       <div class="item-selector">
         <select id="your-item-select" class="item-dropdown">
@@ -202,24 +210,18 @@ border: 2px solid #000000;
       <div id="your-items-list" class="items-list"></div>
 
       <div class="cash-section">
-        <h3>💵 Cash Amount: $<span id="your-cash-display">0</span></h3>
-        <div class="cash-buttons">
-          <button onclick="adjustCash('your', 1000)">+$1K</button>
-          <button onclick="adjustCash('your', 5000)">+$5K</button>
-          <button onclick="adjustCash('your', 10000)">+$10K</button>
-          <button onclick="adjustCash('your', 25000)">+$25K</button>
-          <button onclick="adjustCash('your', -999999)" class="clear-btn">Clear</button>
-        </div>
+        <h4>💵 Cash Amount</h4>
+        <input type="number" id="your-cash-input" class="cash-input" placeholder="Enter cash amount" value="0" min="0">
       </div>
 
       <div class="total-value">
-        📊 Your Total: $<span id="your-total">0</span>
+        📊 Your Total: <span id="your-total">$0</span>
       </div>
     </div>
 
     <!-- Their Side -->
     <div class="trade-side">
-      <h2 class="trade-side-title">THEIR SIDE</h2>
+      <h3 class="trade-side-title">THEIR SIDE</h3>
       
       <div class="item-selector">
         <select id="their-item-select" class="item-dropdown">
@@ -231,44 +233,27 @@ border: 2px solid #000000;
       <div id="their-items-list" class="items-list"></div>
 
       <div class="cash-section">
-        <h3>💵 Cash Amount: $<span id="their-cash-display">0</span></h3>
-        <div class="cash-buttons">
-          <button onclick="adjustCash('their', 1000)">+$1K</button>
-          <button onclick="adjustCash('their', 5000)">+$5K</button>
-          <button onclick="adjustCash('their', 10000)">+$10K</button>
-          <button onclick="adjustCash('their', 25000)">+$25K</button>
-          <button onclick="adjustCash('their', -999999)" class="clear-btn">Clear</button>
-        </div>
+        <h4>💵 Cash Amount</h4>
+        <input type="number" id="their-cash-input" class="cash-input" placeholder="Enter cash amount" value="0" min="0">
       </div>
 
       <div class="total-value">
-        📊 Their Total: $<span id="their-total">0</span>
+        📊 Their Total: <span id="their-total">$0</span>
       </div>
     </div>
   </div>
 
-  <!-- AI Analysis Result -->
-  <div id="trade-analysis" class="trade-analysis" style="display: none;">
+  <!-- Auto-updating Analysis Box -->
+  <div id="trade-analysis" class="trade-analysis">
     <div class="analysis-header">
-      <span id="analysis-verdict" class="verdict"></span>
+      <span id="analysis-verdict" class="verdict fair">Add items to analyze</span>
     </div>
-    <div id="analysis-content" class="analysis-content"></div>
+    <div id="analysis-content" class="analysis-content">
+      Start adding items and cash to both sides to see the trade analysis.
+    </div>
   </div>
 
-  <div id="analysis-loading" class="analysis-loading" style="display: none;">
-    🤖 AI is analyzing your trade...
-  </div>
 </section>
-
-
-  <!-- About Section -->
-  <div class="about-section">
-    <h3>What is BlockSpin Values?</h3>
-    <p>BlockSpin Values is the trusted value list for all items in the Roblox game BlockSpin. Our dedicated team of top traders keeps values updated daily to help you make fair trades and avoid scams. Whether you're looking for weapon values, checking crew logos, or calculating taxes, we've got everything you need to trade with confidence.</p>
-  </div>
-  
-  </div>
-      </section>
     </main> 
 
 

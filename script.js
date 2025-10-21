@@ -691,13 +691,11 @@ function showSection(name) {
     // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
-    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];
+    const hiddenSections = ['Home', 'Crew Logos', 'Scammer List'];  // Add or remove sections here
     if (hiddenSections.includes(name)) {
-      taxCalc.style.visibility = 'hidden';
-      taxCalc.style.opacity = '0';
+      taxCalc.style.display = 'none';  // Completely hide it
     } else {
-      taxCalc.style.visibility = 'visible';
-      taxCalc.style.opacity = '1';
+      taxCalc.style.display = 'block';  // Show it
     }
   }
 
@@ -752,13 +750,6 @@ function showSection(name) {
     }, 300);
   } else {
     bannerImg.style.display = "none";
-  }
-  
-  // Load trade checker data when switching to it
-  if (name === "Trade Checker") {
-    setTimeout(() => {
-      collectTradeCheckerData();
-    }, 500);
   }
 }
 
@@ -1064,286 +1055,324 @@ function openRiverLinks(e) {
   document.body.appendChild(modal);
 }
 
-// ==================== TRADE CHECKER SECTION START ====================
+// ========== TRADE CHECKER FUNCTIONS ==========
 
-let tradeData = {
+let tradeCheckerData = {
   your: { items: [], cash: 0 },
   their: { items: [], cash: 0 }
 };
 
-let allItemsData = []; // Store all items for trade checker
-let analysisTimeout = null;
-
-// NEW FUNCTION - Collect data from DOM cards
+// Collect all items from all sections for trade checker dropdowns
 function collectTradeCheckerData() {
-  allItemsData = []; // Reset
+  const allItems = [];
   
-  // Get all item cards that are NOT crew logos or scammers
-  document.querySelectorAll('.card:not(.crew-logo-card):not(.scammer-card)').forEach(card => {
-    const name = card.dataset.name;
-    const avg = card.dataset.avg;
-    const maxDur = parseInt(card.dataset.maxDurability) || 100;
-    
-    // Find parent section
-    const section = card.closest('.section');
-    let sectionName = 'Unknown';
-    if (section && section.id) {
-      sectionName = section.id.charAt(0).toUpperCase() + section.id.slice(1).replace(/-/g, ' ');
-    }
-    
-    // Get demand from badge if exists
-    const demandBadge = card.querySelector('.badge');
-    let demand = 'Medium';
-    if (demandBadge) {
-      demand = demandBadge.textContent.replace('Demand: ', '').trim();
-    }
-    
-    if (name && avg) {
-      allItemsData.push({
-        name: name,
-        avg: avg.replace(/[^0-9]/g, ''),
-        maxDurability: maxDur,
-        demand: demand,
-        section: sectionName
+  // Sections to pull items from
+  const itemSections = ["Uncommon", "Rare", "Epic", "Legendary", "Omega", "Misc", "Vehicles"];
+  
+  itemSections.forEach(sectionName => {
+    const section = document.getElementById(slugify(sectionName));
+    if (section) {
+      const cards = section.querySelectorAll('.card:not(.crew-logo-card):not(.scammer-card)');
+      cards.forEach(card => {
+        const name = card.dataset.name;
+        const avg = card.dataset.avg;
+        const demandBadge = card.querySelector('.badge');
+        const demand = demandBadge ? demandBadge.textContent : 'Unknown Demand';
+        
+        // Check if item has durability (guns)
+        const durabilityInput = card.querySelector('.durability-input');
+        const hasDurability = durabilityInput !== null;
+        const currentDurability = hasDurability ? parseInt(durabilityInput.value) || 0 : null;
+        const maxDurability = hasDurability ? parseInt(card.dataset.maxDurability) || 0 : null;
+        
+        if (name && avg) {
+          allItems.push({
+            name: name,
+            avgValue: avg,
+            demand: demand,
+            hasDurability: hasDurability,
+            currentDurability: currentDurability,
+            maxDurability: maxDurability
+          });
+        }
       });
     }
   });
   
-  console.log(`✅ Collected ${allItemsData.length} items for Trade Checker`);
-  populateTradeCheckerDropdowns();
+  // Populate both dropdowns
+  populateDropdown('your-item-select', allItems);
+  populateDropdown('their-item-select', allItems);
 }
 
-// Populate item dropdowns when data is loaded
-function populateTradeCheckerDropdowns() {
-  const yourSelect = document.getElementById('your-item-select');
-  const theirSelect = document.getElementById('their-item-select');
+function populateDropdown(selectId, items) {
+  const select = document.getElementById(selectId);
+  if (!select) return;
   
-  if (!yourSelect || !theirSelect) {
-    console.log('⚠️ Trade Checker dropdowns not found in DOM yet');
-    return;
-  }
-
-  // Clear existing options
-  yourSelect.innerHTML = '<option value="">Select Item to Add...</option>';
-  theirSelect.innerHTML = '<option value="">Select Item to Add...</option>';
-
-  // Group items by section
-  const sections = ['Uncommon', 'Rare', 'Epic', 'Legendary', 'Omega', 'Misc', 'Vehicles'];
+  // Clear existing options except first
+  select.innerHTML = '<option value="">Select Item to Add...</option>';
   
-  sections.forEach(section => {
-    const items = allItemsData.filter(item => item.section === section);
-    if (items.length > 0) {
-      const optgroup1 = document.createElement('optgroup');
-      const optgroup2 = document.createElement('optgroup');
-      optgroup1.label = section;
-      optgroup2.label = section;
-      
-      items.forEach(item => {
-        const option1 = document.createElement('option');
-        const option2 = document.createElement('option');
-        const displayValue = parseInt(item.avg).toLocaleString();
-        option1.value = option2.value = JSON.stringify(item);
-        option1.textContent = option2.textContent = `${item.name} ($${displayValue})`;
-        optgroup1.appendChild(option1);
-        optgroup2.appendChild(option2);
-      });
-      
-      yourSelect.appendChild(optgroup1);
-      theirSelect.appendChild(optgroup2);
-    }
+  // Add items
+  items.forEach((item, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = `${item.name} - ${item.avgValue}`;
+    option.dataset.itemData = JSON.stringify(item);
+    select.appendChild(option);
   });
-  
-  console.log('✅ Trade Checker dropdowns populated');
 }
 
 function addItemToTrade(side) {
-  const selectId = side === 'your' ? 'your-item-select' : 'their-item-select';
+  const selectId = `${side}-item-select`;
   const select = document.getElementById(selectId);
+  const selectedOption = select.options[select.selectedIndex];
   
-  if (!select.value) return;
-  
-  const itemData = JSON.parse(select.value);
-  const maxDurability = itemData.maxDurability || 100;
-  
-  const tradeItem = {
-    id: Date.now() + Math.random(), // Unique ID
-    name: itemData.name,
-    baseValue: parseFloat(itemData.avg.replace(/,/g, '')) || 0,
-    durability: maxDurability,
-    maxDurability: maxDurability,
-    demand: itemData.demand || 'Medium'
-  };
-  
-  tradeData[side].items.push(tradeItem);
-  select.value = ''; // Reset dropdown
-  
-  renderTradeSide(side);
-  updateTotals();
-  triggerAIAnalysis();
-}
-
-function removeItemFromTrade(side, itemId) {
-  tradeData[side].items = tradeData[side].items.filter(item => item.id !== itemId);
-  renderTradeSide(side);
-  updateTotals();
-  triggerAIAnalysis();
-}
-
-function adjustDurability(side, itemId, change) {
-  const item = tradeData[side].items.find(i => i.id === itemId);
-  if (!item) return;
-  
-  item.durability = Math.max(0, Math.min(item.maxDurability, item.durability + change));
-  renderTradeSide(side);
-  updateTotals();
-  triggerAIAnalysis();
-}
-
-function adjustCash(side, amount) {
-  if (amount < 0) {
-    tradeData[side].cash = 0; // Clear
-  } else {
-    tradeData[side].cash = Math.max(0, tradeData[side].cash + amount);
-  }
-  
-  document.getElementById(`${side}-cash-display`).textContent = tradeData[side].cash.toLocaleString();
-  updateTotals();
-  triggerAIAnalysis();
-}
-
-function renderTradeSide(side) {
-  const listEl = document.getElementById(`${side}-items-list`);
-  if (!listEl) return;
-  
-  if (tradeData[side].items.length === 0) {
-    listEl.innerHTML = '<p class="no-items">No items added yet</p>';
+  if (!selectedOption || !selectedOption.dataset.itemData) {
     return;
   }
   
-  listEl.innerHTML = tradeData[side].items.map(item => {
-    const durabilityPercent = (item.durability / item.maxDurability) * 100;
-    const adjustedValue = (item.baseValue * (item.durability / item.maxDurability)).toFixed(0);
+  let itemData = JSON.parse(selectedOption.dataset.itemData);
+  
+  // If item has durability, prompt user for durability value
+  if (itemData.hasDurability) {
+    const durability = prompt(`Enter durability for ${itemData.name} (Max: ${itemData.maxDurability}):`, itemData.maxDurability);
     
-    return `
-      <div class="trade-item-card">
-        <div class="trade-item-header">
-          <h4>${item.name}</h4>
-          <button onclick="removeItemFromTrade('${side}', ${item.id})" class="remove-item-btn">❌</button>
-        </div>
-        <div class="durability-bar-container">
-          <div class="durability-bar">
-            <div class="durability-fill" style="width: ${durabilityPercent}%"></div>
-          </div>
-          <span class="durability-text">${item.durability}/${item.maxDurability}</span>
-        </div>
-        <div class="durability-controls">
-          <button onclick="adjustDurability('${side}', ${item.id}, -10)">▼▼</button>
-          <button onclick="adjustDurability('${side}', ${item.id}, -1)">▼</button>
-          <button onclick="adjustDurability('${side}', ${item.id}, 1)">▲</button>
-          <button onclick="adjustDurability('${side}', ${item.id}, 10)">▲▲</button>
-        </div>
-        <div class="item-value">Value: $${parseInt(adjustedValue).toLocaleString()}</div>
-      </div>
-    `;
-  }).join('');
+    if (durability === null) {
+      // User clicked cancel
+      select.selectedIndex = 0;
+      return;
+    }
+    
+    const durabilityValue = parseInt(durability) || itemData.maxDurability;
+    const clampedDurability = Math.min(Math.max(1, durabilityValue), itemData.maxDurability);
+    
+    // Calculate adjusted value based on durability percentage
+    const durabilityPercent = clampedDurability / itemData.maxDurability;
+    const baseValue = parseValue(itemData.avgValue);
+    const adjustedValue = baseValue * durabilityPercent;
+    
+    itemData.currentDurability = clampedDurability;
+    itemData.avgValue = formatValue(adjustedValue);
+    itemData.originalAvg = itemData.avgValue; // Store for display
+  }
+  
+  // Add to data
+  tradeCheckerData[side].items.push(itemData);
+  
+  // Render
+  renderTradeItems(side);
+  updateTotal(side);
+  
+  // Auto-analyze after adding item
+  autoAnalyzeTrade();
+  
+  // Reset dropdown
+  select.selectedIndex = 0;
 }
 
-function calculateSideValue(side) {
-  let total = tradeData[side].cash;
+function renderTradeItems(side) {
+  const container = document.getElementById(`${side}-items-list`);
+  if (!container) return;
   
-  tradeData[side].items.forEach(item => {
-    const adjustedValue = item.baseValue * (item.durability / item.maxDurability);
-    total += adjustedValue;
+  container.innerHTML = '';
+  
+  tradeCheckerData[side].items.forEach((item, index) => {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'trade-item';
+    
+    let durabilityHtml = '';
+    if (item.hasDurability) {
+      const durabilityPercent = ((item.currentDurability / item.maxDurability) * 100).toFixed(0);
+      durabilityHtml = `<div class="trade-item-durability">🔧 ${item.currentDurability}/${item.maxDurability} (${durabilityPercent}%)</div>`;
+    }
+    
+    itemDiv.innerHTML = `
+      <div class="trade-item-info">
+        <div class="trade-item-name">${item.name}</div>
+        <div class="trade-item-value">Value: ${item.avgValue}</div>
+        ${durabilityHtml}
+        ${item.demand ? `<div class="trade-item-demand">${item.demand}</div>` : ''}
+      </div>
+      <button class="remove-item-btn" onclick="removeItemFromTrade('${side}', ${index})">✕</button>
+    `;
+    container.appendChild(itemDiv);
+  });
+}
+
+function removeItemFromTrade(side, index) {
+  tradeCheckerData[side].items.splice(index, 1);
+  renderTradeItems(side);
+  updateTotal(side);
+  
+  // Auto-analyze after removing item
+  autoAnalyzeTrade();
+}
+
+// Update cash display and totals
+document.addEventListener('DOMContentLoaded', function() {
+  const yourCashInput = document.getElementById('your-cash-input');
+  const theirCashInput = document.getElementById('their-cash-input');
+  
+  if (yourCashInput) {
+    yourCashInput.addEventListener('input', function() {
+      const value = parseInt(this.value) || 0;
+      tradeCheckerData.your.cash = value;
+      updateTotal('your');
+      autoAnalyzeTrade();
+    });
+  }
+  
+  if (theirCashInput) {
+    theirCashInput.addEventListener('input', function() {
+      const value = parseInt(this.value) || 0;
+      tradeCheckerData.their.cash = value;
+      updateTotal('their');
+      autoAnalyzeTrade();
+    });
+  }
+});
+
+function parseValue(valueStr) {
+  if (!valueStr) return 0;
+  
+  // Remove $ and commas
+  valueStr = String(valueStr).replace(/[$,]/g, '');
+  
+  // Handle K, M, B
+  if (valueStr.includes('K') || valueStr.includes('k')) {
+    return parseFloat(valueStr) * 1000;
+  } else if (valueStr.includes('M') || valueStr.includes('m')) {
+    return parseFloat(valueStr) * 1000000;
+  } else if (valueStr.includes('B') || valueStr.includes('b')) {
+    return parseFloat(valueStr) * 1000000000;
+  }
+  
+  return parseFloat(valueStr) || 0;
+}
+
+function updateTotal(side) {
+  const items = tradeCheckerData[side].items;
+  const cash = tradeCheckerData[side].cash;
+  
+  let total = cash;
+  
+  items.forEach(item => {
+    total += parseValue(item.avgValue);
   });
   
-  return Math.round(total);
+  const totalSpan = document.getElementById(`${side}-total`);
+  if (totalSpan) {
+    totalSpan.textContent = formatValue(total);
+  }
 }
 
-function updateTotals() {
-  const yourTotal = calculateSideValue('your');
-  const theirTotal = calculateSideValue('their');
-  
-  document.getElementById('your-total').textContent = yourTotal.toLocaleString();
-  document.getElementById('their-total').textContent = theirTotal.toLocaleString();
+function formatValue(num) {
+  if (num >= 1000000000) {
+    return '$' + (num / 1000000000).toFixed(2) + 'B';
+  } else if (num >= 1000000) {
+    return '$' + (num / 1000000).toFixed(2) + 'M';
+  } else if (num >= 1000) {
+    return '$' + (num / 1000).toFixed(2) + 'K';
+  }
+  return '$' + num.toLocaleString();
 }
 
-function triggerAIAnalysis() {
-  // Clear existing timeout
-  if (analysisTimeout) clearTimeout(analysisTimeout);
+// Auto-analyze trade (no button needed)
+function autoAnalyzeTrade() {
+  const yourTotalText = document.getElementById('your-total')?.textContent;
+  const theirTotalText = document.getElementById('their-total')?.textContent;
+  const yourTotal = parseValue(yourTotalText);
+  const theirTotal = parseValue(theirTotalText);
   
-  // Only analyze if both sides have something
-  const hasYourItems = tradeData.your.items.length > 0 || tradeData.your.cash > 0;
-  const hasTheirItems = tradeData.their.items.length > 0 || tradeData.their.cash > 0;
-  
-  if (!hasYourItems || !hasTheirItems) {
-    document.getElementById('trade-analysis').style.display = 'none';
+  if (yourTotal === 0 && theirTotal === 0) {
+    // Reset to default state
+    displayAnalysis('Add items and cash to both sides to see the trade analysis.', 'Waiting for trade data...', 'fair');
     return;
   }
   
-  // Show loading
-  document.getElementById('analysis-loading').style.display = 'block';
-  document.getElementById('trade-analysis').style.display = 'none';
+  // Calculate difference
+  const difference = theirTotal - yourTotal;
+  const percentDiff = yourTotal > 0 ? Math.abs((difference / yourTotal) * 100) : 0;
   
-  // Debounce - wait 1 second after last change
-  analysisTimeout = setTimeout(() => {
-    performAIAnalysis();
-  }, 1000);
+  let analysis = '';
+  let verdict = '';
+  let verdictClass = '';
+  
+  // Simple value-based analysis
+  if (Math.abs(difference) < 50000 || percentDiff < 5) {
+    // Fair trade (less than 50K or 5% difference)
+    verdict = '⚖️ FAIR TRADE';
+    verdictClass = 'fair';
+    
+    analysis = `📊 VALUE BREAKDOWN:\n`;
+    analysis += `Your Side: ${formatValue(yourTotal)}\n`;
+    analysis += `Their Side: ${formatValue(theirTotal)}\n`;
+    analysis += `Difference: ${formatValue(Math.abs(difference))} (${percentDiff.toFixed(1)}%)\n\n`;
+    
+    analysis += `✅ VERDICT:\n`;
+    analysis += `This is a balanced trade. Both sides are nearly equal in value, with only a ${percentDiff.toFixed(1)}% difference. `;
+    analysis += `This is fair for both parties.\n\n`;
+    
+    analysis += `💡 RECOMMENDATION:\n`;
+    analysis += `Accept if you want the items they're offering. The trade is value-neutral.`;
+    
+  } else if (difference > 0) {
+    // You WIN (receiving more)
+    verdict = '🎉 WIN - You Profit!';
+    verdictClass = 'win';
+    
+    analysis = `📊 VALUE BREAKDOWN:\n`;
+    analysis += `Your Side: ${formatValue(yourTotal)}\n`;
+    analysis += `Their Side: ${formatValue(theirTotal)}\n`;
+    analysis += `Your Profit: +${formatValue(difference)} (${percentDiff.toFixed(1)}% gain)\n\n`;
+    
+    analysis += `✅ VERDICT:\n`;
+    analysis += `You're getting the better deal! You'll receive ${formatValue(difference)} more in value than you're giving. `;
+    analysis += `That's a ${percentDiff.toFixed(1)}% profit on this trade.\n\n`;
+    
+    analysis += `💡 RECOMMENDATION:\n`;
+    if (percentDiff > 50) {
+      analysis += `HUGE WIN! Accept this trade immediately - you're profiting massively!`;
+    } else if (percentDiff > 20) {
+      analysis += `Great deal! Definitely accept this trade - solid profit for you.`;
+    } else {
+      analysis += `Good trade. Accept it - you're coming out ahead.`;
+    }
+    
+  } else {
+    // You LOSE (giving more)
+    verdict = '⚠️ LOSS - You Overpay';
+    verdictClass = 'loss';
+    
+    analysis = `📊 VALUE BREAKDOWN:\n`;
+    analysis += `Your Side: ${formatValue(yourTotal)}\n`;
+    analysis += `Their Side: ${formatValue(theirTotal)}\n`;
+    analysis += `Your Loss: -${formatValue(Math.abs(difference))} (${percentDiff.toFixed(1)}% loss)\n\n`;
+    
+    analysis += `⚠️ VERDICT:\n`;
+    analysis += `You're overpaying by ${formatValue(Math.abs(difference))}. That means you're giving ${percentDiff.toFixed(1)}% more value than you're receiving. `;
+    analysis += `The other person is getting the better deal.\n\n`;
+    
+    analysis += `💡 RECOMMENDATION:\n`;
+    if (percentDiff > 50) {
+      analysis += `MAJOR LOSS! Decline this trade or ask them to add ${formatValue(Math.abs(difference))} in value.`;
+    } else if (percentDiff > 20) {
+      analysis += `Bad deal. Consider declining or negotiate - ask them to add more items or cash.`;
+    } else {
+      analysis += `Small loss. Only accept if you really want their specific items for personal use.`;
+    }
+  }
+  
+  displayAnalysis(analysis, verdict, verdictClass);
 }
 
-async function performAIAnalysis() {
-  const yourTotal = calculateSideValue('your');
-  const theirTotal = calculateSideValue('their');
-  const difference = Math.abs(yourTotal - theirTotal);
-  const percentDiff = yourTotal > 0 ? (difference / yourTotal * 100) : 0;
+function displayAnalysis(analysisText, verdict, verdictClass) {
+  const analysisDiv = document.getElementById('trade-analysis');
+  const verdictSpan = document.getElementById('analysis-verdict');
+  const contentDiv = document.getElementById('analysis-content');
   
-  try {
-    // Simple formula-based analysis
-    let verdict, verdictClass, analysis;
-    
-    if (percentDiff < 5) {
-      verdict = "✅ FAIR TRADE";
-      verdictClass = "verdict-fair";
-      analysis = `This trade is fair with only a ${percentDiff.toFixed(1)}% difference ($${difference.toLocaleString()}). Both sides are receiving roughly equal value.`;
-    } else if (percentDiff < 15) {
-      verdict = "⚠️ SLIGHTLY UNFAIR";
-      verdictClass = "verdict-warning";
-      const loser = yourTotal > theirTotal ? "them" : "you";
-      analysis = `This trade slightly favors ${loser === "you" ? "their" : "your"} side by $${difference.toLocaleString()} (${percentDiff.toFixed(1)}%). Consider if the items you're getting are worth the difference.`;
-    } else {
-      verdict = "❌ UNFAIR TRADE";
-      verdictClass = "verdict-bad";
-      const loser = yourTotal > theirTotal ? "You're overpaying" : "They're overpaying";
-      analysis = `${loser} by $${difference.toLocaleString()} (${percentDiff.toFixed(1)}%). This is a significant value difference. ${yourTotal > theirTotal ? "Ask for more items or cash to balance." : "This is heavily in your favor."}`;
-    }
-    
-    // Check for low durability warnings
-    const lowDurabilityItems = [...tradeData.your.items, ...tradeData.their.items]
-      .filter(item => (item.durability / item.maxDurability) < 0.6);
-    
-    if (lowDurabilityItems.length > 0) {
-      analysis += `\n\n⚠️ Low Durability Warning: ${lowDurabilityItems.map(i => i.name).join(', ')} ha${lowDurabilityItems.length > 1 ? 've' : 's'} reduced durability, significantly affecting value.`;
-    }
-    
-    displayAnalysis(verdict, verdictClass, analysis);
-    
-  } catch (error) {
-    console.error('Analysis error:', error);
-    displayAnalysis("⚠️ ANALYSIS ERROR", "verdict-warning", "Could not complete analysis. Please check your values manually.");
+  if (verdictSpan && contentDiv && analysisDiv) {
+    verdictSpan.textContent = verdict;
+    verdictSpan.className = `verdict ${verdictClass}`;
+    contentDiv.textContent = analysisText;
   }
 }
-
-function displayAnalysis(verdict, verdictClass, content) {
-  document.getElementById('analysis-loading').style.display = 'none';
-  
-  const analysisEl = document.getElementById('trade-analysis');
-  const verdictEl = document.getElementById('analysis-verdict');
-  const contentEl = document.getElementById('analysis-content');
-  
-  verdictEl.textContent = verdict;
-  verdictEl.className = `verdict ${verdictClass}`;
-  contentEl.textContent = content;
-  
-  analysisEl.style.display = 'block';
-}
-
-// ==================== TRADE CHECKER SECTION END ====================
