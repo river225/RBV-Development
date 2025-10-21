@@ -1092,10 +1092,11 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-  // Handle Trade Checker
+   // Handle Trade Checker
   if (name === "Trade Checker") {
     const tradeSection = document.getElementById(slugify("Trade Checker"));
     if (tradeSection && !tradeSection.querySelector('.trade-checker-container')) {
+      tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;">Loading Trade Checker...</div>';
       loadAllItemsForTradeChecker().then(() => {
         tradeSection.innerHTML = createTradeCheckerSection();
         setupTradeSearch();
