@@ -48,7 +48,7 @@ a { color: #fff; text-decoration: none; }
 /* === Main layout changes start === */
 .main-container {
     display: flex;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     margin-top: 50px;
     gap: 20px;
