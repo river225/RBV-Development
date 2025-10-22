@@ -1990,3 +1990,13 @@ html, body {
   max-width: none !important;
   margin: 0;
 }
+
+/* Make EVERYTHING in Trade Checker bigger */
+.trade-checker-container {
+  width: 100%;
+  max-width: none !important;
+  margin: 0;
+  transform: scale(1.2);
+  transform-origin: top center;
+  padding: 40px 0;
+}
