@@ -1680,7 +1680,7 @@ html, body {
 
 .trade-money-input label {
   font-weight: bold;
-  color: #33cce6;
+  color: #81e681;
   font-size: 1.1rem;
 }
 
@@ -1688,10 +1688,15 @@ html, body {
   flex: 1;
   padding: 10px;
   background: #141d28;
-  border: 2px solid #33cce6;
+  border: 2px solid #81e681;
   border-radius: 6px;
   color: #fff;
   font-size: 1rem;
+}
+
+.trade-money-input input:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(129, 230, 129, 0.3);
 }
 
 .trade-money-input input::-webkit-inner-spin-button,
