@@ -1603,6 +1603,9 @@ html, body {
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   margin-bottom: 30px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .trade-side {
@@ -1610,6 +1613,7 @@ html, body {
   border: 3px solid #000;
   border-radius: 12px;
   padding: 20px;
+  min-width: 0; /* Allow flexbox to work properly */
 }
 
 .trade-side-title {
@@ -1653,34 +1657,37 @@ html, body {
 .trade-items-container {
   display: flex;
   gap: 15px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
   padding: 15px;
   background: #141d28;
   border-radius: 8px;
-  min-height: 320px;
-  max-height: 320px;
+  height: 400px;
+  min-height: 400px;
+  max-height: 400px;
   align-items: flex-start;
-}
-
-.trade-items-container::-webkit-scrollbar {
-  display: block !important;
-  height: 10px !important;
-}
-
-.trade-items-container {
   scrollbar-width: thin !important;
   scrollbar-color: #33cce6 #0a0f14 !important;
 }
 
+.trade-items-container::-webkit-scrollbar {
+  display: block !important;
+  height: 12px !important;
+}
+
 .trade-items-container::-webkit-scrollbar-track {
-  background: #0a0f14;
-  border-radius: 4px;
+  background: #0a0f14 !important;
+  border-radius: 6px !important;
 }
 
 .trade-items-container::-webkit-scrollbar-thumb {
-  background: #33cce6;
-  border-radius: 4px;
+  background: #33cce6 !important;
+  border-radius: 6px !important;
+  border: 2px solid #0a0f14 !important;
+}
+
+.trade-items-container::-webkit-scrollbar-thumb:hover {
+  background: #5bc5de !important;
 }
 
 .trade-empty-state {
