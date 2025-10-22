@@ -535,9 +535,16 @@ function createTradeItemCard(item, side) {
   
   let displayValue = item["Average Value"];
   if (hasDurability && currentDur && maxDur) {
-    const baseValue = parseFloat(item["Average Value"].replace(/[^0-9.]/g, '')) || 0;
+    let valueStr = item["Average Value"];
+    let baseValue = parseFloat(valueStr.replace(/[^0-9.]/g, '')) || 0;
+    
+    // Handle "k" suffix (250k = 250,000)
+    if (valueStr.toLowerCase().includes('k')) {
+      baseValue *= 1000;
+    }
+    
     const adjustedValue = (parseFloat(currentDur) / parseFloat(maxDur)) * baseValue;
-    displayValue = `$${adjustedValue.toLocaleString()}`;
+    displayValue = `$${Math.round(adjustedValue).toLocaleString()}`;
   }
   
   let durabilityHTML = '';

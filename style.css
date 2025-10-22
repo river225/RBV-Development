@@ -1665,7 +1665,12 @@ html, body {
 
 .trade-items-container::-webkit-scrollbar {
   display: block !important;
-  height: 8px;
+  height: 10px !important;
+}
+
+.trade-items-container {
+  scrollbar-width: thin !important;
+  scrollbar-color: #33cce6 #0a0f14 !important;
 }
 
 .trade-items-container::-webkit-scrollbar-track {
