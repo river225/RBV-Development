@@ -1524,7 +1524,6 @@ html, body {
 
 
 
-
 /* ==================== TRADE CHECKER STYLES ==================== */
 
 .trade-checker-container {
@@ -1559,13 +1558,13 @@ html, body {
   left: 0;
   right: 0;
   background: #1a2532;
-  border: 3px solid #33cce6;
+  border: 2px solid #33cce6;
   border-top: none;
-  border-radius: 0 0 10px 10px;
-  max-height: 400px;
+  border-radius: 0 0 8px 8px;
+  max-height: 300px;
   overflow-y: auto;
   z-index: 1000;
-  display: none;
+  margin-top: -2px;
 }
 
 .trade-search-result {
@@ -1621,6 +1620,32 @@ html, body {
   text-align: center;
   margin: 0 0 15px 0;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+/* Your Side - Green theme */
+.trade-side:first-child {
+  border: 3px solid #81e681;
+}
+
+.trade-side:first-child .trade-side-search {
+  border-color: #81e681;
+}
+
+.trade-side:first-child .trade-side-search:focus {
+  box-shadow: 0 0 15px rgba(129, 230, 129, 0.3);
+}
+
+/* Their Side - Red theme */
+.trade-side:last-child {
+  border: 3px solid #ff6b6b;
+}
+
+.trade-side:last-child .trade-side-search {
+  border-color: #ff6b6b;
+}
+
+.trade-side:last-child .trade-side-search:focus {
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
 }
 
 /* Search bar in each trade side */

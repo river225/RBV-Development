@@ -370,17 +370,54 @@ function setupTradeSearch() {
   const searchInputs = document.querySelectorAll('.trade-side-search');
   
   searchInputs.forEach(input => {
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        const query = e.target.value.toLowerCase().trim();
-        const side = e.target.dataset.side;
-        const match = ALL_ITEMS_DATA.find(item => 
-          item.Name.toLowerCase().includes(query)
-        );
-        if (match) {
-          addItemToTrade(match.Name, side);
-          e.target.value = '';
-        }
+    let resultsDiv = null;
+    
+    input.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const side = e.target.dataset.side;
+      
+      // Remove old results
+      if (resultsDiv) resultsDiv.remove();
+      
+      if (query.length < 2) return;
+      
+      const matches = ALL_ITEMS_DATA.filter(item => 
+        item.Name.toLowerCase().includes(query)
+      ).slice(0, 8);
+      
+      if (matches.length === 0) return;
+      
+      // Create dropdown results
+      resultsDiv = document.createElement('div');
+      resultsDiv.className = 'trade-search-results';
+      resultsDiv.style.position = 'absolute';
+      resultsDiv.style.zIndex = '1000';
+      resultsDiv.innerHTML = matches.map(item => `
+        <div class="trade-search-result" data-name="${escapeAttr(item.Name)}" data-side="${side}">
+          <img src="${item['Image URL']}" onerror="this.style.display='none'" />
+          <span>${item.Name}</span>
+        </div>
+      `).join('');
+      
+      input.parentElement.style.position = 'relative';
+      input.parentElement.appendChild(resultsDiv);
+      
+      // Add click handlers to results
+      resultsDiv.querySelectorAll('.trade-search-result').forEach(result => {
+        result.addEventListener('click', () => {
+          const itemName = result.dataset.name;
+          const itemSide = result.dataset.side;
+          addItemToTrade(itemName, itemSide);
+          input.value = '';
+          if (resultsDiv) resultsDiv.remove();
+        });
+      });
+    });
+    
+    // Close results when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.trade-side') && resultsDiv) {
+        resultsDiv.remove();
       }
     });
   });
