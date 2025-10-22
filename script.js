@@ -605,8 +605,8 @@ function updateTradeAnalysis() {
   const theirValue = calculateSideValue(tradeState.theirSide) + tradeState.theirMoney;
   
   // Update totals
-  document.getElementById('your-total').textContent = `$${yourValue.toLocaleString()}`;
-  document.getElementById('their-total').textContent = `$${theirValue.toLocaleString()}`;
+  document.getElementById('your-total').textContent = `$${Math.round(yourValue).toLocaleString()}`;
+  document.getElementById('their-total').textContent = `$${Math.round(theirValue).toLocaleString()}`;
   
   // Calculate verdict
   const verdictEl = document.getElementById('trade-verdict');
@@ -620,10 +620,10 @@ function updateTradeAnalysis() {
     verdictEl.innerHTML = '✓ Fair Trade';
     verdictEl.className = 'trade-verdict trade-fair';
   } else if (yourValue > theirValue) {
-    verdictEl.innerHTML = `✗ Loss - You're giving $${diff.toLocaleString()} more`;
+    verdictEl.innerHTML = `✗ Loss - You're giving $${Math.round(diff).toLocaleString()} more`;
     verdictEl.className = 'trade-verdict trade-loss';
   } else {
-    verdictEl.innerHTML = `✓ Win - You're getting $${diff.toLocaleString()} more`;
+    verdictEl.innerHTML = `✓ Win - You're getting $${Math.round(diff).toLocaleString()} more`;
     verdictEl.className = 'trade-verdict trade-win';
   }
   

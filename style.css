@@ -1603,9 +1603,8 @@ html, body {
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   margin-bottom: 30px;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
+  width: 100%;
 }
 
 .trade-side {
@@ -1613,7 +1612,7 @@ html, body {
   border: 3px solid #000;
   border-radius: 12px;
   padding: 20px;
-  min-width: 0; /* Allow flexbox to work properly */
+  min-width: 0;
 }
 
 .trade-side-title {
@@ -1662,9 +1661,9 @@ html, body {
   padding: 15px;
   background: #141d28;
   border-radius: 8px;
-  height: 400px;
-  min-height: 400px;
-  max-height: 400px;
+  height: 500px;
+  min-height: 500px;
+  max-height: 500px;
   align-items: flex-start;
   scrollbar-width: thin !important;
   scrollbar-color: #33cce6 #0a0f14 !important;
