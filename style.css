@@ -1533,7 +1533,7 @@ html, body {
   margin: 0;
 }
 
-/* Search Bar */
+/* Search Bar (hidden) */
 .trade-search-wrapper {
   display: none !important;
 }
@@ -1611,7 +1611,7 @@ html, body {
   background: #1a2532;
   border: 3px solid #000;
   border-radius: 12px;
-  padding: 30px;
+  padding: 25px;
   min-width: 0;
 }
 
@@ -1623,27 +1623,50 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
+/* Search bar in each trade side */
+.trade-side-search {
+  width: 100%;
+  padding: 10px 12px;
+  background: #141d28;
+  border: 2px solid #33cce6;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.trade-side-search:focus {
+  outline: none;
+  box-shadow: 0 0 15px rgba(51, 204, 230, 0.3);
+}
+
+.trade-side-search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Money input - now goes AFTER items container */
 .trade-money-input {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 0;
 }
 
 .trade-money-input label {
   font-weight: bold;
   color: #33cce6;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .trade-money-input input {
   flex: 1;
-  padding: 12px;
+  padding: 10px;
   background: #141d28;
   border: 2px solid #33cce6;
   border-radius: 6px;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .trade-money-input input::-webkit-inner-spin-button,
@@ -1652,7 +1675,7 @@ html, body {
   margin: 0;
 }
 
-/* Trade Items Container - FIXED HEIGHT WITH SCROLL */
+/* Trade Items Container - REDUCED HEIGHT */
 .trade-items-container {
   display: flex;
   gap: 20px;
@@ -1661,9 +1684,9 @@ html, body {
   padding: 20px;
   background: #141d28;
   border-radius: 8px;
-  height: 600px;
-  min-height: 600px;
-  max-height: 600px;
+  height: 400px;
+  min-height: 400px;
+  max-height: 400px;
   align-items: flex-start;
   scrollbar-width: thin !important;
   scrollbar-color: #33cce6 #0a0f14 !important;

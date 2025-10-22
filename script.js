@@ -285,22 +285,24 @@ async function loadAllItemsForTradeChecker() {
 function createTradeCheckerSection() {
   return `
     <div class="trade-checker-container">
-      <!-- Search Bar -->
-      <div class="trade-search-wrapper">
-        <input 
-          type="text" 
-          id="trade-search" 
-          placeholder="Search items to add to trade..."
-          autocomplete="off"
-        />
-        <div id="trade-search-results" class="trade-search-results"></div>
-      </div>
-
       <!-- Trade Sides -->
       <div class="trade-sides">
         <!-- Your Side -->
         <div class="trade-side">
           <h3 class="trade-side-title" style="color: #81e681;">Your Side</h3>
+          
+          <input 
+            type="text" 
+            class="trade-side-search" 
+            placeholder="Search items to add..."
+            data-side="your"
+            autocomplete="off"
+          />
+          
+          <div class="trade-items-container" id="your-items">
+            <div class="trade-empty-state">No items added yet</div>
+          </div>
+          
           <div class="trade-money-input">
             <label>Money: $</label>
             <input 
@@ -311,14 +313,24 @@ function createTradeCheckerSection() {
               oninput="updateTradeMoney('your', this.value)"
             />
           </div>
-          <div class="trade-items-container" id="your-items">
-            <div class="trade-empty-state">No items added yet</div>
-          </div>
         </div>
 
         <!-- Their Side -->
         <div class="trade-side">
           <h3 class="trade-side-title" style="color: #ff6b6b;">Their Side</h3>
+          
+          <input 
+            type="text" 
+            class="trade-side-search" 
+            placeholder="Search items to add..."
+            data-side="their"
+            autocomplete="off"
+          />
+          
+          <div class="trade-items-container" id="their-items">
+            <div class="trade-empty-state">No items added yet</div>
+          </div>
+          
           <div class="trade-money-input">
             <label>Money: $</label>
             <input 
@@ -328,9 +340,6 @@ function createTradeCheckerSection() {
               min="0"
               oninput="updateTradeMoney('their', this.value)"
             />
-          </div>
-          <div class="trade-items-container" id="their-items">
-            <div class="trade-empty-state">No items added yet</div>
           </div>
         </div>
       </div>
@@ -358,41 +367,22 @@ function createTradeCheckerSection() {
 
 // Search handler for trade checker
 function setupTradeSearch() {
-  const searchInput = document.getElementById('trade-search');
-  const resultsDiv = document.getElementById('trade-search-results');
+  const searchInputs = document.querySelectorAll('.trade-side-search');
   
-  searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    
-    if (query.length < 2) {
-      resultsDiv.style.display = 'none';
-      return;
-    }
-    
-    const matches = ALL_ITEMS_DATA.filter(item => 
-      item.Name.toLowerCase().includes(query)
-    ).slice(0, 8);
-    
-    if (matches.length === 0) {
-      resultsDiv.style.display = 'none';
-      return;
-    }
-    
-    resultsDiv.innerHTML = matches.map(item => `
-      <div class="trade-search-result" onclick="showSideSelector('${escapeAttr(item.Name)}')">
-        <img src="${item['Image URL']}" onerror="this.style.display='none'" />
-        <span>${item.Name}</span>
-      </div>
-    `).join('');
-    
-    resultsDiv.style.display = 'block';
-  });
-  
-  // Close results when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.trade-search-wrapper')) {
-      resultsDiv.style.display = 'none';
-    }
+  searchInputs.forEach(input => {
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = e.target.value.toLowerCase().trim();
+        const side = e.target.dataset.side;
+        const match = ALL_ITEMS_DATA.find(item => 
+          item.Name.toLowerCase().includes(query)
+        );
+        if (match) {
+          addItemToTrade(match.Name, side);
+          e.target.value = '';
+        }
+      }
+    });
   });
 }
 
