@@ -587,7 +587,13 @@ function createTradeItemCard(item, side) {
 // Calculate total value for a side
 function calculateSideValue(items) {
   return items.reduce((total, item) => {
-    let value = parseFloat(item["Average Value"].replace(/[^0-9.]/g, '')) || 0;
+    let valueStr = item["Average Value"];
+    let value = parseFloat(valueStr.replace(/[^0-9.]/g, '')) || 0;
+    
+    // Handle "k" suffix (250k = 250,000)
+    if (valueStr.toLowerCase().includes('k')) {
+      value *= 1000;
+    }
     
     // Adjust for durability
     if (item.Durability && item.Durability.includes('/')) {
