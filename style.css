@@ -1537,6 +1537,7 @@ html, body {
 .trade-search-wrapper {
   position: relative;
   margin-bottom: 30px;
+  display: none !important;
 }
 
 #trade-search {
@@ -1605,6 +1606,7 @@ html, body {
   margin-bottom: 30px;
   max-width: 100%;
   width: 100%;
+  margin-top: 0;
 }
 
 .trade-side {
@@ -1989,29 +1991,4 @@ html, body {
   width: 100%;
   max-width: none !important;
   margin: 0;
-}
-
-/* Make EVERYTHING in Trade Checker bigger */
-.trade-checker-container {
-  width: 100%;
-  max-width: none !important;
-  margin: 0;
-  transform: scale(1.2);
-  transform-origin: top left;
-  padding: 40px 0;
-  margin-left: -50px;
-}
-
-.section[data-section="Trade Checker"] {
-  overflow: visible !important;
-}
-
-.trade-checker-container {
-  width: 83%;
-  max-width: none !important;
-  margin: 0;
-  transform: scale(1.2);
-  transform-origin: top left;
-  padding: 40px 0;
-  overflow: visible !important;
 }
