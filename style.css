@@ -1535,8 +1535,6 @@ html, body {
 
 /* Search Bar */
 .trade-search-wrapper {
-  position: relative;
-  margin-bottom: 30px;
   display: none !important;
 }
 
@@ -1602,7 +1600,7 @@ html, body {
 .trade-sides {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 40px;
   margin-bottom: 30px;
   max-width: 100%;
   width: 100%;
@@ -1613,12 +1611,12 @@ html, body {
   background: #1a2532;
   border: 3px solid #000;
   border-radius: 12px;
-  padding: 20px;
+  padding: 30px;
   min-width: 0;
 }
 
 .trade-side-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
   margin: 0 0 15px 0;
@@ -1635,17 +1633,17 @@ html, body {
 .trade-money-input label {
   font-weight: bold;
   color: #33cce6;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .trade-money-input input {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   background: #141d28;
   border: 2px solid #33cce6;
   border-radius: 6px;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .trade-money-input input::-webkit-inner-spin-button,
@@ -1657,15 +1655,15 @@ html, body {
 /* Trade Items Container - FIXED HEIGHT WITH SCROLL */
 .trade-items-container {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   overflow-x: auto !important;
   overflow-y: hidden !important;
-  padding: 15px;
+  padding: 20px;
   background: #141d28;
   border-radius: 8px;
-  height: 500px;
-  min-height: 500px;
-  max-height: 500px;
+  height: 600px;
+  min-height: 600px;
+  max-height: 600px;
   align-items: flex-start;
   scrollbar-width: thin !important;
   scrollbar-color: #33cce6 #0a0f14 !important;
@@ -1699,31 +1697,31 @@ html, body {
   margin: auto;
 }
 
-/* Trade Item Card - FULL SIZE */
+/* Trade Item Card - BIGGER SIZE */
 .trade-item-card {
   position: relative;
   flex-shrink: 0;
-  width: 180px;
+  width: 220px;
   background: #1f2a38;
   border: 3px solid #000;
   border-radius: 10px;
-  padding: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .trade-item-remove {
   position: absolute;
   top: -10px;
   right: -10px;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background: #ff4444;
   border: 2px solid #000;
   border-radius: 50%;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -1742,46 +1740,46 @@ html, body {
 .trade-card-image {
   background: #141d28;
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100px;
+  min-height: 140px;
 }
 
 .trade-card-image img {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
 }
 
 .trade-item-info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .trade-item-name {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #fff;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   text-align: center;
 }
 
 .trade-item-demand {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #a855f7;
   font-weight: 600;
   text-align: center;
   background: rgba(168, 85, 247, 0.2);
-  padding: 4px 8px;
+  padding: 5px 10px;
   border-radius: 4px;
   border: 1px solid #a855f7;
 }
 
 .trade-item-value {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #81e681;
   font-weight: bold;
   text-align: center;
@@ -1790,58 +1788,58 @@ html, body {
 
 /* Trade Durability Controls */
 .trade-durability-control {
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid #2a3542;
 }
 
 .trade-durability-control label {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #33cce6;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 
 .trade-durability-row {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .trade-durability-input {
-  width: 60px;
-  padding: 6px;
+  width: 65px;
+  padding: 8px;
   background: #141d28;
   border: 2px solid #33cce6;
   border-radius: 4px;
   color: #fff;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .trade-durability-max {
   color: #888;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .trade-durability-arrows {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   margin-left: auto;
 }
 
 .trade-durability-arrows button {
-  width: 24px;
-  height: 20px;
+  width: 28px;
+  height: 22px;
   background: #33cce6;
   border: 1px solid #000;
   border-radius: 3px;
   color: #000;
-  font-size: 10px;
+  font-size: 11px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1858,13 +1856,13 @@ html, body {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
   border: 3px solid #33cce6;
   border-radius: 12px;
-  padding: 25px;
+  padding: 30px;
 }
 
 .analysis-row {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .analysis-item {
@@ -1875,25 +1873,25 @@ html, body {
   display: block;
   color: #33cce6;
   font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 .analysis-value {
   display: block;
   color: #81e681;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
 }
 
 .trade-verdict {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  padding: 15px;
+  padding: 18px;
   border-radius: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   text-shadow: 2px 2px 0 #000;
 }
 
@@ -1918,8 +1916,8 @@ html, body {
 .demand-insight {
   text-align: center;
   color: #fff;
-  font-size: 1rem;
-  padding: 10px;
+  font-size: 1.1rem;
+  padding: 12px;
   background: rgba(51, 204, 230, 0.1);
   border-radius: 6px;
 }
@@ -1979,16 +1977,4 @@ html, body {
 
 .trade-side-buttons button:last-child:hover {
   background: #ff8888;
-}
-
-/* Make Trade Checker section specifically wider */
-.section[data-section="Trade Checker"] {
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
-.trade-checker-container {
-  width: 100%;
-  max-width: none !important;
-  margin: 0;
 }
