@@ -390,8 +390,6 @@ function setupTradeSearch() {
       // Create dropdown results
       resultsDiv = document.createElement('div');
       resultsDiv.className = 'trade-search-results';
-      resultsDiv.style.position = 'absolute';
-      resultsDiv.style.zIndex = '1000';
       resultsDiv.innerHTML = matches.map(item => `
         <div class="trade-search-result" data-name="${escapeAttr(item.Name)}" data-side="${side}">
           <img src="${item['Image URL']}" onerror="this.style.display='none'" />
@@ -399,8 +397,14 @@ function setupTradeSearch() {
         </div>
       `).join('');
       
-      input.parentElement.style.position = 'relative';
-      input.parentElement.appendChild(resultsDiv);
+      // Create wrapper with relative positioning
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'relative';
+      wrapper.style.width = '100%';
+      
+      // Insert wrapper after the input
+      input.parentNode.insertBefore(wrapper, input.nextSibling);
+      wrapper.appendChild(resultsDiv);
       
       // Add click handlers to results
       resultsDiv.querySelectorAll('.trade-search-result').forEach(result => {
@@ -410,6 +414,7 @@ function setupTradeSearch() {
           addItemToTrade(itemName, itemSide);
           input.value = '';
           if (resultsDiv) resultsDiv.remove();
+          if (wrapper) wrapper.remove();
         });
       });
     });
