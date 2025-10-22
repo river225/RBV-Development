@@ -1997,6 +1997,7 @@ html, body {
   max-width: none !important;
   margin: 0;
   transform: scale(1.2);
-  transform-origin: top center;
+  transform-origin: top left;
   padding: 40px 0;
+  margin-left: -50px;
 }
