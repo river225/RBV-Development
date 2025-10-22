@@ -488,6 +488,7 @@ window.updateTradeDurability = function(side, itemId, newDur) {
   const maxDur = item.Durability.split('/')[1];
   item.Durability = `${newDur}/${maxDur}`;
   
+  renderTradeSides();
   updateTradeAnalysis();
 };
 
