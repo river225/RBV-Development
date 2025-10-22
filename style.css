@@ -1978,3 +1978,15 @@ html, body {
 .trade-side-buttons button:last-child:hover {
   background: #ff8888;
 }
+
+/* Make Trade Checker section specifically wider */
+.section[data-section="Trade Checker"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.trade-checker-container {
+  width: 100%;
+  max-width: none !important;
+  margin: 0;
+}
