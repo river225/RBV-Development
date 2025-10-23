@@ -304,7 +304,7 @@ function createTradeCheckerSection() {
           </div>
           
           <div class="trade-money-input">
-            <label>Money: $</label>
+            <label>Money:</label>
             <input 
               type="number" 
               id="your-money" 
@@ -332,7 +332,7 @@ function createTradeCheckerSection() {
           </div>
           
           <div class="trade-money-input">
-            <label>Money: $</label>
+            <label>Money:</label>
             <input 
               type="number" 
               id="their-money" 
@@ -370,13 +370,6 @@ function setupTradeSearch() {
   const searchInputs = document.querySelectorAll('.trade-side-search');
   
   searchInputs.forEach(input => {
-    const container = document.createElement('div');
-    container.style.position = 'relative';
-    container.style.width = '100%';
-    
-    input.parentNode.insertBefore(container, input);
-    container.appendChild(input);
-    
     let resultsDiv = null;
     
     input.addEventListener('input', (e) => {
@@ -384,16 +377,13 @@ function setupTradeSearch() {
       const side = e.target.dataset.side;
       
       // Remove old results
-      if (resultsDiv) {
-        resultsDiv.remove();
-        resultsDiv = null;
-      }
+      if (resultsDiv) resultsDiv.remove();
       
-      if (query.length < 1) return;
+      if (query.length < 2) return;
       
       const matches = ALL_ITEMS_DATA.filter(item => 
         item.Name.toLowerCase().includes(query)
-      ).slice(0, 10);
+      ).slice(0, 8);
       
       if (matches.length === 0) return;
       
@@ -407,7 +397,14 @@ function setupTradeSearch() {
         </div>
       `).join('');
       
-      container.appendChild(resultsDiv);
+      // Create wrapper with relative positioning
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'relative';
+      wrapper.style.width = '100%';
+      
+      // Insert wrapper after the input
+      input.parentNode.insertBefore(wrapper, input.nextSibling);
+      wrapper.appendChild(resultsDiv);
       
       // Add click handlers to results
       resultsDiv.querySelectorAll('.trade-search-result').forEach(result => {
@@ -416,19 +413,16 @@ function setupTradeSearch() {
           const itemSide = result.dataset.side;
           addItemToTrade(itemName, itemSide);
           input.value = '';
-          if (resultsDiv) {
-            resultsDiv.remove();
-            resultsDiv = null;
-          }
+          if (resultsDiv) resultsDiv.remove();
+          if (wrapper) wrapper.remove();
         });
       });
     });
     
     // Close results when clicking outside
     document.addEventListener('click', (e) => {
-      if (!container.contains(e.target) && resultsDiv) {
+      if (!e.target.closest('.trade-side') && resultsDiv) {
         resultsDiv.remove();
-        resultsDiv = null;
       }
     });
   });
@@ -655,19 +649,25 @@ function updateTradeAnalysis() {
   // Calculate verdict
   const verdictEl = document.getElementById('trade-verdict');
   const diff = Math.abs(yourValue - theirValue);
-  const diffPercent = yourValue > 0 ? (diff / yourValue) * 100 : 0;
+  const diffPercent = theirValue > 0 ? (diff / theirValue) * 100 : 0;
   
   if (yourValue === 0 && theirValue === 0) {
     verdictEl.innerHTML = 'Enter items to analyze the trade';
     verdictEl.className = 'trade-verdict';
+  } else if (yourValue === 0 && theirValue > 0) {
+    verdictEl.innerHTML = `🎉 You Win! They're giving you $${Math.round(theirValue).toLocaleString()}`;
+    verdictEl.className = 'trade-verdict trade-win';
+  } else if (theirValue === 0 && yourValue > 0) {
+    verdictEl.innerHTML = `❌ You're giving them $${Math.round(yourValue).toLocaleString()} for free`;
+    verdictEl.className = 'trade-verdict trade-loss';
   } else if (diffPercent < 5) {
-    verdictEl.innerHTML = '✓ Fair Trade';
+    verdictEl.innerHTML = '✅ Fair Trade';
     verdictEl.className = 'trade-verdict trade-fair';
   } else if (yourValue > theirValue) {
-    verdictEl.innerHTML = `✗ Loss - You're giving $${Math.round(diff).toLocaleString()} more`;
+    verdictEl.innerHTML = `❌ You Lose $${Math.round(diff).toLocaleString()} (${diffPercent.toFixed(1)}%)`;
     verdictEl.className = 'trade-verdict trade-loss';
   } else {
-    verdictEl.innerHTML = `✓ Win - You're getting $${Math.round(diff).toLocaleString()} more`;
+    verdictEl.innerHTML = `🎉 You Win by $${Math.round(diff).toLocaleString()} (${diffPercent.toFixed(1)}%)`;
     verdictEl.className = 'trade-verdict trade-win';
   }
   

@@ -1622,17 +1622,17 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-/* Your Side - Green theme */
+/* Your Side - Blue theme */
 .trade-side:first-child {
-  border: 3px solid #81e681;
+  border: 3px solid #33cce6;
 }
 
 .trade-side:first-child .trade-side-search {
-  border-color: #81e681;
+  border-color: #33cce6;
 }
 
 .trade-side:first-child .trade-side-search:focus {
-  box-shadow: 0 0 15px rgba(129, 230, 129, 0.3);
+  box-shadow: 0 0 15px rgba(51, 204, 230, 0.3);
 }
 
 /* Their Side - Red theme */
