@@ -1219,6 +1219,7 @@ function showSection(name) {
       tradeSummary.style.display = 'none';
     } else {
       // Show tax calc, hide trade summary
+      taxCalc.style.display = '';
       taxCalc.style.visibility = 'visible';
       taxCalc.style.opacity = '1';
       tradeSummary.style.display = 'none';
