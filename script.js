@@ -289,7 +289,7 @@ function createTradeCheckerSection() {
       <div class="trade-sides">
         <!-- Your Side -->
         <div class="trade-side">
-          <h3 class="trade-side-title" style="color: #81e681;">Your Side</h3>
+          <h3 class="trade-side-title" style="color: #33cce6;">Your Side</h3>
           
           <input 
             type="text" 
@@ -664,10 +664,10 @@ function updateTradeAnalysis() {
     verdictEl.innerHTML = '✅ Fair Trade';
     verdictEl.className = 'trade-verdict trade-fair';
   } else if (yourValue > theirValue) {
-    verdictEl.innerHTML = `❌ You Lose $${Math.round(diff).toLocaleString()} (${diffPercent.toFixed(1)}%)`;
+    verdictEl.innerHTML = `❌ You Lose $${Math.round(diff).toLocaleString()}`;
     verdictEl.className = 'trade-verdict trade-loss';
   } else {
-    verdictEl.innerHTML = `🎉 You Win by $${Math.round(diff).toLocaleString()} (${diffPercent.toFixed(1)}%)`;
+    verdictEl.innerHTML = `🎉 You Win by $${Math.round(diff).toLocaleString()}`;
     verdictEl.className = 'trade-verdict trade-win';
   }
   
@@ -677,24 +677,54 @@ function updateTradeAnalysis() {
 
 // Update demand insight
 function updateDemandInsight() {
-  const allItems = [...tradeState.yourSide, ...tradeState.theirSide];
+  const yourItems = tradeState.yourSide;
+  const theirItems = tradeState.theirSide;
   
-  if (allItems.length === 0) {
+  if (yourItems.length === 0 && theirItems.length === 0) {
     document.getElementById('demand-insight').innerHTML = '';
     return;
   }
   
-  const highDemandItems = allItems.filter(i => 
-    i.Demand && (i.Demand.toLowerCase().includes('high') || i.Demand.toLowerCase().includes('popular'))
-  );
+  const demandScore = {
+    'Very High': 5,
+    'High': 4,
+    'Medium': 3,
+    'Standard': 2,
+    'Low': 1
+  };
+  
+  const yourDemandTotal = yourItems.reduce((sum, item) => {
+    const demand = item.Demand || 'Standard';
+    return sum + (demandScore[demand] || 2);
+  }, 0);
+  
+  const theirDemandTotal = theirItems.reduce((sum, item) => {
+    const demand = item.Demand || 'Standard';
+    return sum + (demandScore[demand] || 2);
+  }, 0);
+  
+  const highYours = yourItems.filter(i => {
+    const d = i.Demand || '';
+    return d === 'Very High' || d === 'High';
+  }).length;
+  
+  const highTheirs = theirItems.filter(i => {
+    const d = i.Demand || '';
+    return d === 'Very High' || d === 'High';
+  }).length;
   
   let insight = '';
-  if (highDemandItems.length > 2) {
-    insight = '🔥 This trade includes several high-demand items';
-  } else if (highDemandItems.length > 0) {
-    insight = '📊 Some items in this trade have good demand';
+  
+  if (yourDemandTotal > theirDemandTotal + 3) {
+    insight = `📊 Your items have much better demand (${highYours} high-demand vs ${highTheirs})`;
+  } else if (theirDemandTotal > yourDemandTotal + 3) {
+    insight = `📊 Their items have much better demand (${highTheirs} high-demand vs ${highYours})`;
+  } else if (yourDemandTotal > theirDemandTotal) {
+    insight = `📊 Your items have slightly better demand`;
+  } else if (theirDemandTotal > yourDemandTotal) {
+    insight = `📊 Their items have slightly better demand`;
   } else {
-    insight = '📉 Most items have standard demand';
+    insight = `📊 Both sides have equal demand levels`;
   }
   
   document.getElementById('demand-insight').innerHTML = insight;
