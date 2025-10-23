@@ -2024,3 +2024,126 @@ html, body {
 .trade-side-buttons button:last-child:hover {
   background: #ff8888;
 }
+
+/* Trade Summary Boxes (replaces tax calc on Trade Checker page) */
+.trade-summary-container {
+  width: 240px;
+  position: sticky;
+  top: 16px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trade-summary-box {
+  background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(51, 204, 230, 0.2);
+}
+
+.trade-summary-box.their-side {
+  border-color: #ff6b6b;
+  box-shadow: 0 8px 32px rgba(255, 107, 107, 0.2);
+}
+
+.trade-summary-box h3 {
+  color: #33cce6;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.trade-summary-box.their-side h3 {
+  color: #ff6b6b;
+}
+
+.trade-summary-items {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trade-summary-item {
+  background: #1a2532;
+  border: 1px solid #2a3542;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.trade-summary-item:hover {
+  background: #2a3542;
+  border-color: #33cce6;
+}
+
+.trade-summary-item-name {
+  color: #fff;
+  font-size: 0.85rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.trade-summary-remove {
+  background: #ff4444;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.trade-summary-remove:hover {
+  background: #ff6666;
+  transform: scale(1.1);
+}
+
+.trade-summary-empty {
+  color: #666;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px 10px;
+  font-style: italic;
+}
+
+/* Scrollbar styling for summary items */
+.trade-summary-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.trade-summary-items::-webkit-scrollbar-track {
+  background: #1a2532;
+  border-radius: 3px;
+}
+
+.trade-summary-items::-webkit-scrollbar-thumb {
+  background: #33cce6;
+  border-radius: 3px;
+}
+
+.trade-summary-items::-webkit-scrollbar-thumb:hover {
+  background: #5bc5de;
+}

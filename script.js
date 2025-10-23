@@ -364,6 +364,61 @@ function createTradeCheckerSection() {
   `;
 }
 
+// Create trade summary boxes for sidebar
+function createTradeSummaryBoxes() {
+  return `
+    <div class="trade-summary-container">
+      <!-- Your Side Summary -->
+      <div class="trade-summary-box">
+        <h3>Your Side</h3>
+        <div class="trade-summary-items" id="summary-your-items">
+          <div class="trade-summary-empty">No items added</div>
+        </div>
+      </div>
+      
+      <!-- Their Side Summary -->
+      <div class="trade-summary-box their-side">
+        <h3>Their Side</h3>
+        <div class="trade-summary-items" id="summary-their-items">
+          <div class="trade-summary-empty">No items added</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Update summary boxes when items change
+function updateTradeSummary() {
+  const yourSummary = document.getElementById('summary-your-items');
+  const theirSummary = document.getElementById('summary-their-items');
+  
+  if (!yourSummary || !theirSummary) return;
+  
+  // Update Your Side
+  if (tradeState.yourSide.length === 0) {
+    yourSummary.innerHTML = '<div class="trade-summary-empty">No items added</div>';
+  } else {
+    yourSummary.innerHTML = tradeState.yourSide.map(item => `
+      <div class="trade-summary-item">
+        <span class="trade-summary-item-name">${item.Name}</span>
+        <button class="trade-summary-remove" onclick="removeTradeItem('your', ${item.id})">×</button>
+      </div>
+    `).join('');
+  }
+  
+  // Update Their Side
+  if (tradeState.theirSide.length === 0) {
+    theirSummary.innerHTML = '<div class="trade-summary-empty">No items added</div>';
+  } else {
+    theirSummary.innerHTML = tradeState.theirSide.map(item => `
+      <div class="trade-summary-item">
+        <span class="trade-summary-item-name">${item.Name}</span>
+        <button class="trade-summary-remove" onclick="removeTradeItem('their', ${item.id})">×</button>
+      </div>
+    `).join('');
+  }
+}
+
 // Search handler for trade checker
 function setupTradeSearch() {
   const searchInputs = document.querySelectorAll('.trade-side-search');
@@ -482,6 +537,7 @@ window.addItemToTrade = async function(itemName, side) {
   
   renderTradeSides();
   updateTradeAnalysis();
+  updateTradeSummary();
   
   // Clear search
   document.getElementById('trade-search').value = '';
@@ -498,6 +554,7 @@ window.removeTradeItem = function(side, itemId) {
   
   renderTradeSides();
   updateTradeAnalysis();
+  updateTradeSummary();
 };
 
 // Update money values
