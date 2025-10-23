@@ -364,28 +364,7 @@ function createTradeCheckerSection() {
   `;
 }
 
-// Create trade summary boxes for sidebar
-function createTradeSummaryBoxes() {
-  return `
-    <div class="trade-summary-container">
-      <!-- Your Side Summary -->
-      <div class="trade-summary-box">
-        <h3>Your Side</h3>
-        <div class="trade-summary-items" id="summary-your-items">
-          <div class="trade-summary-empty">No items added</div>
-        </div>
-      </div>
-      
-      <!-- Their Side Summary -->
-      <div class="trade-summary-box their-side">
-        <h3>Their Side</h3>
-        <div class="trade-summary-items" id="summary-their-items">
-          <div class="trade-summary-empty">No items added</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
+
 
 // Update summary boxes when items change
 function updateTradeSummary() {
@@ -1222,16 +1201,27 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-    // Hide/show tax calculator based on section
+    // Hide/show tax calculator OR show trade summary based on section
   const taxCalc = document.querySelector('.tax-calculator');
-  if (taxCalc) {
-    const hiddenSections = ['Home', 'Blockspin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
-    if (hiddenSections.includes(name)) {
+  const tradeSummary = document.querySelector('.trade-summary-container');
+
+  if (taxCalc && tradeSummary) {
+    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
+    
+    if (name === 'Trade Checker') {
+      // Show trade summary, hide tax calc
+      taxCalc.style.display = 'none';
+      tradeSummary.style.display = 'flex';
+    } else if (hiddenSections.includes(name)) {
+      // Hide both
       taxCalc.style.visibility = 'hidden';
       taxCalc.style.opacity = '0';
+      tradeSummary.style.display = 'none';
     } else {
+      // Show tax calc, hide trade summary
       taxCalc.style.visibility = 'visible';
       taxCalc.style.opacity = '1';
+      tradeSummary.style.display = 'none';
     }
   }
 
