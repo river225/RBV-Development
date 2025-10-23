@@ -1966,14 +1966,7 @@ html, body {
   color: #ff6b6b;
 }
 
-.demand-insight {
-  text-align: center;
-  color: #fff;
-  font-size: 1.1rem;
-  padding: 12px;
-  background: rgba(51, 204, 230, 0.1);
-  border-radius: 6px;
-}
+
 
 /* Side Selector Modal */
 .trade-side-modal {
