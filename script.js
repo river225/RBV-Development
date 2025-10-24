@@ -364,40 +364,6 @@ function createTradeCheckerSection() {
   `;
 }
 
-
-
-// Update summary boxes when items change
-function updateTradeSummary() {
-  const yourSummary = document.getElementById('summary-your-items');
-  const theirSummary = document.getElementById('summary-their-items');
-  
-  if (!yourSummary || !theirSummary) return;
-  
-  // Update Your Side
-  if (tradeState.yourSide.length === 0) {
-    yourSummary.innerHTML = '<div class="trade-summary-empty">No items added</div>';
-  } else {
-    yourSummary.innerHTML = tradeState.yourSide.map(item => `
-      <div class="trade-summary-item">
-        <span class="trade-summary-item-name">${item.Name}</span>
-        <button class="trade-summary-remove" onclick="removeTradeItem('your', ${item.id})">×</button>
-      </div>
-    `).join('');
-  }
-  
-  // Update Their Side
-  if (tradeState.theirSide.length === 0) {
-    theirSummary.innerHTML = '<div class="trade-summary-empty">No items added</div>';
-  } else {
-    theirSummary.innerHTML = tradeState.theirSide.map(item => `
-      <div class="trade-summary-item">
-        <span class="trade-summary-item-name">${item.Name}</span>
-        <button class="trade-summary-remove" onclick="removeTradeItem('their', ${item.id})">×</button>
-      </div>
-    `).join('');
-  }
-}
-
 // Search handler for trade checker
 function setupTradeSearch() {
   const searchInputs = document.querySelectorAll('.trade-side-search');
@@ -516,7 +482,6 @@ window.addItemToTrade = async function(itemName, side) {
   
   renderTradeSides();
   updateTradeAnalysis();
-  updateTradeSummary();
   
   // Clear search
   document.getElementById('trade-search').value = '';
@@ -533,7 +498,6 @@ window.removeTradeItem = function(side, itemId) {
   
   renderTradeSides();
   updateTradeAnalysis();
-  updateTradeSummary();
 };
 
 // Update money values
@@ -1201,28 +1165,16 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-    // Hide/show tax calculator OR show trade summary based on section
+    // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
-  const tradeSummary = document.querySelector('.trade-summary-container');
-
-  if (taxCalc && tradeSummary) {
-    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
-    
-    if (name === 'Trade Checker') {
-      // Show trade summary, hide tax calc
-      taxCalc.style.display = 'none';
-      tradeSummary.style.display = 'flex';
-    } else if (hiddenSections.includes(name)) {
-      // Hide both
+  if (taxCalc) {
+    const hiddenSections = ['Home', 'Blockspin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
+    if (hiddenSections.includes(name)) {
       taxCalc.style.visibility = 'hidden';
       taxCalc.style.opacity = '0';
-      tradeSummary.style.display = 'none';
     } else {
-      // Show tax calc, hide trade summary
-      taxCalc.style.display = 'block';
       taxCalc.style.visibility = 'visible';
       taxCalc.style.opacity = '1';
-      tradeSummary.style.display = 'none';
     }
   }
 
