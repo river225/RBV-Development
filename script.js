@@ -543,7 +543,9 @@ window.addItemToTrade = async function(itemName, side) {
   
   renderTradeSides();
   updateTradeAnalysis();
-  updateSummaryBoxes();
+  if (document.getElementById('summary-your-items')) {
+    updateSummaryBoxes();
+  }
   
   // Clear search
   document.getElementById('trade-search').value = '';
@@ -560,7 +562,9 @@ window.removeTradeItem = function(side, itemId) {
   
   renderTradeSides();
   updateTradeAnalysis();
-  updateSummaryBoxes(); // ADD THIS LINE
+  if (document.getElementById('summary-your-items')) {
+    updateSummaryBoxes();
+  }
 };
 
 // Update money values
