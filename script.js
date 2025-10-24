@@ -1168,13 +1168,11 @@ function showSection(name) {
     // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
-    const hiddenSections = ['Home', 'Blockspin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
+    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
     if (hiddenSections.includes(name)) {
-      taxCalc.style.visibility = 'hidden';
-      taxCalc.style.opacity = '0';
+      taxCalc.style.display = 'none';
     } else {
-      taxCalc.style.visibility = 'visible';
-      taxCalc.style.opacity = '1';
+      taxCalc.style.display = 'block';
     }
   }
 
