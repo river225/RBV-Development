@@ -269,7 +269,6 @@ function createTradeSummaryBoxes() {
       <div class="trade-summary-items" id="summary-your-items">
         <div class="trade-summary-empty">No items added</div>
       </div>
-      <div class="trade-summary-total">Total: $<span id="summary-your-total">0</span></div>
     </div>
     
     <div class="trade-summary-box their-side">
@@ -277,7 +276,6 @@ function createTradeSummaryBoxes() {
       <div class="trade-summary-items" id="summary-their-items">
         <div class="trade-summary-empty">No items added</div>
       </div>
-      <div class="trade-summary-total">Total: $<span id="summary-their-total">0</span></div>
     </div>
   `;
   
@@ -533,6 +531,7 @@ window.removeTradeItem = function(side, itemId) {
   
   renderTradeSides();
   updateTradeAnalysis();
+  updateSummaryBoxes(); // ADD THIS LINE
 };
 
 // Update money values
@@ -762,6 +761,32 @@ function updateDemandInsight() {
   }
   
   document.getElementById('demand-insight').innerHTML = insight;
+
+}
+
+function updateSummaryBoxes() {
+  updateSummaryBox('your', tradeState.yourSide);
+  updateSummaryBox('their', tradeState.theirSide);
+}
+
+function updateSummaryBox(side, items) {
+  const containerId = side === 'your' ? 'summary-your-items' : 'summary-their-items';
+  const container = document.getElementById(containerId);
+  
+  if (!container) return;
+  
+  if (items.length === 0) {
+    container.innerHTML = '<div class="trade-summary-empty">No items added</div>';
+    return;
+  }
+  
+  container.innerHTML = items.map(item => `
+    <div class="trade-summary-item">
+      <img src="${item['Image URL']}" onerror="this.style.display='none'" />
+      <span class="trade-summary-item-name">${item.Name}</span>
+      <button class="trade-summary-remove" onclick="removeTradeItem('${side}', ${item.id})">×</button>
+    </div>
+  `).join('');
 }
 
 // ==================== TRADE CHECKER SECTION END ====================
