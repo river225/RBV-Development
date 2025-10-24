@@ -325,9 +325,33 @@ function updateSummaryBox(side, items) {
   `).join('');
 }
 
-function removeTradeSummaryBoxes() {
-  const boxes = document.querySelector('.trade-summary-boxes');
-  if (boxes) boxes.remove();
+function updateSummaryBoxes() {
+  const summaryYour = document.getElementById('summary-your-items');
+  const summaryTheir = document.getElementById('summary-their-items');
+  
+  if (!summaryYour || !summaryTheir || typeof tradeState === 'undefined') return;
+  
+  updateSummaryBox('your', tradeState.yourSide);
+  updateSummaryBox('their', tradeState.theirSide);
+}
+
+function updateSummaryBox(side, items) {
+  const containerId = side === 'your' ? 'summary-your-items' : 'summary-their-items';
+  const container = document.getElementById(containerId);
+  
+  if (!container) return;
+  
+  if (!items || items.length === 0) {
+    container.innerHTML = '<div class="trade-summary-empty">No items added</div>';
+    return;
+  }
+  
+  container.innerHTML = items.map(item => `
+    <div class="trade-summary-item">
+      <span class="trade-summary-item-name">${item.Name}</span>
+      <button class="trade-summary-remove" onclick="removeTradeItem('${side}', ${item.id})">×</button>
+    </div>
+  `).join('');
 }
 
 // ==================== BLOCKSPIN MAP SECTION END ====================
