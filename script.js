@@ -1025,8 +1025,10 @@ function createMapControlsPanel() {
   `;
   
   // Insert where the tax calculator is
-  const mainContainer = document.querySelector('.main-container');
-  mainContainer.appendChild(controlsPanel);
+  const taxCalculator = document.querySelector('.tax-calculator');
+  if (taxCalculator && taxCalculator.parentElement) {
+    taxCalculator.parentElement.insertBefore(controlsPanel, taxCalculator.nextSibling);
+  }
   
   // Add event listeners
   document.querySelectorAll('.map-control-btn').forEach(btn => {
@@ -1165,14 +1167,16 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-    // Hide/show tax calculator based on section
+   // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
     const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
     if (hiddenSections.includes(name)) {
-      taxCalc.style.display = 'none';
+      taxCalc.style.visibility = 'hidden';
+      taxCalc.style.opacity = '0';
     } else {
-      taxCalc.style.display = 'block';
+      taxCalc.style.visibility = 'visible';
+      taxCalc.style.opacity = '1';
     }
   }
 
@@ -1210,6 +1214,8 @@ function showSection(name) {
       });
     }
   }
+
+  
 
   // Banner logic - EXACT COPY FROM YOUR WORKING SITE
   const bannerImg = document.getElementById("banner-img");
