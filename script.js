@@ -1119,6 +1119,7 @@ function createMapControlsPanel() {
   // Create new map controls panel in the same position as tax calculator
   const controlsPanel = document.createElement('div');
   controlsPanel.className = 'map-controls-panel';
+  controlsPanel.style.top = '200px';
   controlsPanel.innerHTML = `
     <h2>Map Layers</h2>
     ${Object.keys(MAP_SECTIONS).map(section => 
