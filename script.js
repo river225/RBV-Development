@@ -13,7 +13,7 @@ const SECTION_NAMES = [
   // EXTRAS
   "Trade Checker",
   "BlockSpin Map",
-  "Crate Game",
+  // "Crate Game",
   "Crew Logos",
   "Scammer List"
 ];
@@ -1119,7 +1119,7 @@ function createMapControlsPanel() {
   // Create new map controls panel in the same position as tax calculator
   const controlsPanel = document.createElement('div');
   controlsPanel.className = 'map-controls-panel';
-  controlsPanel.style.top = '400px';
+  controlsPanel.style.top = '800px';
   controlsPanel.innerHTML = `
     <h2>Map Layers</h2>
     ${Object.keys(MAP_SECTIONS).map(section => 
