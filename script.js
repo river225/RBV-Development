@@ -255,6 +255,41 @@ const MAP_SECTIONS = {
   }
 };
 
+function createTradeSummaryBoxes() {
+  // Remove existing boxes if any
+  const existing = document.querySelector('.trade-summary-boxes');
+  if (existing) existing.remove();
+  
+  // Create the boxes container
+  const boxesContainer = document.createElement('div');
+  boxesContainer.className = 'trade-summary-boxes';
+  boxesContainer.innerHTML = `
+    <div class="trade-summary-box your-side">
+      <h3>Your Side</h3>
+      <div class="trade-summary-items" id="summary-your-items">
+        <div class="trade-summary-empty">No items added</div>
+      </div>
+      <div class="trade-summary-total">Total: $<span id="summary-your-total">0</span></div>
+    </div>
+    
+    <div class="trade-summary-box their-side">
+      <h3>Their Side</h3>
+      <div class="trade-summary-items" id="summary-their-items">
+        <div class="trade-summary-empty">No items added</div>
+      </div>
+      <div class="trade-summary-total">Total: $<span id="summary-their-total">0</span></div>
+    </div>
+  `;
+  
+  // Add to page
+  document.body.appendChild(boxesContainer);
+}
+
+function removeTradeSummaryBoxes() {
+  const boxes = document.querySelector('.trade-summary-boxes');
+  if (boxes) boxes.remove();
+}
+
 // ==================== BLOCKSPIN MAP SECTION END ====================
 
 // ==================== TRADE CHECKER SECTION START ====================
@@ -1220,6 +1255,13 @@ function showSection(name) {
     createMapControlsPanel();
   } else {
     removeMapControlsPanel();
+  }
+
+    // Handle Trade Summary Boxes
+  if (name === "Trade Checker") {
+    createTradeSummaryBoxes();
+  } else {
+    removeTradeSummaryBoxes();
   }
 
   // Banner logic - EXACT COPY FROM YOUR WORKING SITE
