@@ -1024,13 +1024,13 @@ function createMapControlsPanel() {
     ).join('')}
   `;
   
-  // Insert where the tax calculator is
-  const taxCalculator = document.querySelector('.tax-calculator');
-  if (taxCalculator && taxCalculator.parentElement) {
-    taxCalculator.parentElement.insertBefore(controlsPanel, taxCalculator.nextSibling);
+  // INSERT IT INTO THE PAGE
+  const mainContainer = document.querySelector('.main-container');
+  if (mainContainer) {
+    mainContainer.appendChild(controlsPanel);
   }
   
-  // Add event listeners
+  // Add event listeners AFTER adding to DOM
   document.querySelectorAll('.map-control-btn').forEach(btn => {
     btn.addEventListener('click', () => toggleMapSection(btn.dataset.section, btn));
   });
@@ -1215,7 +1215,12 @@ function showSection(name) {
     }
   }
 
-  
+  // Handle BlockSpin Map
+  if (name === "BlockSpin Map") {
+    createMapControlsPanel();
+  } else {
+    removeMapControlsPanel();
+  }
 
   // Banner logic - EXACT COPY FROM YOUR WORKING SITE
   const bannerImg = document.getElementById("banner-img");

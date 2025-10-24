@@ -2024,3 +2024,118 @@ html, body {
 .trade-side-buttons button:last-child:hover {
   background: #ff8888;
 }
+
+/* Trade Summary Boxes - appear on Trade Checker page */
+.trade-summary-boxes {
+  position: absolute;
+  right: 20px;
+  top: 260px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 100;
+}
+
+.trade-summary-box {
+  background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.trade-summary-box.your-side {
+  border: 2px solid #33cce6;
+  box-shadow: 0 8px 32px rgba(51, 204, 230, 0.2);
+}
+
+.trade-summary-box.their-side {
+  border: 2px solid #ff6b6b;
+  box-shadow: 0 8px 32px rgba(255, 107, 107, 0.2);
+}
+
+.trade-summary-box h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.trade-summary-box.your-side h3 {
+  color: #33cce6;
+}
+
+.trade-summary-box.their-side h3 {
+  color: #ff6b6b;
+}
+
+.trade-summary-items {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.trade-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.trade-summary-item img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.trade-summary-item-name {
+  flex: 1;
+  color: #fff;
+  font-weight: 500;
+}
+
+.trade-summary-remove {
+  background: #ff4444;
+  border: none;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.trade-summary-remove:hover {
+  background: #ff6666;
+  transform: scale(1.1);
+}
+
+.trade-summary-total {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #81e681;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.trade-summary-empty {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  padding: 20px 0;
+}
