@@ -575,16 +575,6 @@ html, body {
 }
 
 /* Map controls styling */
-.map-controls-panel {
-  width: 240px;
-  padding: 16px;
-  background: #1f2a33;
-  border: 1px solid #33cce6;
-  border-radius: 12px;
-  position: sticky;
-  top: 16px;
-  height: fit-content;
-}
 
 .map-controls-panel h2 {
   color: #33cce6;
@@ -725,7 +715,7 @@ html, body {
   background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 50%, #3a3a3a 100%);
   border: 2px solid #33cce6;
   border-radius: 15px;
-  position: sticky;
+  position: static;
   top: 16px;
   height: fit-content;
   box-shadow: 0 8px 25px rgba(51, 204, 230, 0.2);
