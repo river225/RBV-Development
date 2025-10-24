@@ -283,46 +283,9 @@ function createTradeSummaryBoxes() {
   document.body.appendChild(boxesContainer);
 }
 
-function updateSummaryBoxes() {
-  // Safety check - only update if we're on Trade Checker page
-  const summaryYour = document.getElementById('summary-your-items');
-  const summaryTheir = document.getElementById('summary-their-items');
-  
-  if (!summaryYour || !summaryTheir) {
-    console.log('Summary boxes not found, skipping update');
-    return;
-  }
-  
-  if (typeof tradeState === 'undefined') {
-    console.log('tradeState not defined yet');
-    return;
-  }
-  
-  updateSummaryBox('your', tradeState.yourSide);
-  updateSummaryBox('their', tradeState.theirSide);
-}
-
-function updateSummaryBox(side, items) {
-  const containerId = side === 'your' ? 'summary-your-items' : 'summary-their-items';
-  const container = document.getElementById(containerId);
-  
-  if (!container) {
-    console.log(`Container ${containerId} not found`);
-    return;
-  }
-  
-  if (!items || items.length === 0) {
-    container.innerHTML = '<div class="trade-summary-empty">No items added</div>';
-    return;
-  }
-  
-  container.innerHTML = items.map(item => `
-    <div class="trade-summary-item">
-      <img src="${item['Image URL'] || ''}" onerror="this.style.display='none'" />
-      <span class="trade-summary-item-name">${item.Name || 'Unknown'}</span>
-      <button class="trade-summary-remove" onclick="removeTradeItem('${side}', ${item.id})">×</button>
-    </div>
-  `).join('');
+function removeTradeSummaryBoxes() {
+  const boxes = document.querySelector('.trade-summary-boxes');
+  if (boxes) boxes.remove();
 }
 
 function updateSummaryBoxes() {
@@ -353,7 +316,6 @@ function updateSummaryBox(side, items) {
     </div>
   `).join('');
 }
-
 // ==================== BLOCKSPIN MAP SECTION END ====================
 
 // ==================== TRADE CHECKER SECTION START ====================
@@ -581,6 +543,7 @@ window.addItemToTrade = async function(itemName, side) {
   
   renderTradeSides();
   updateTradeAnalysis();
+  updateSummaryBoxes();
   
   // Clear search
   document.getElementById('trade-search').value = '';
