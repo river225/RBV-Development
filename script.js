@@ -743,11 +743,14 @@ function updateTradeAnalysis() {
 
 // Update demand insight
 function updateDemandInsight() {
+  const insightEl = document.getElementById('demand-insight');
+  if (!insightEl) return; // Safety check - element doesn't exist yet
+  
   const yourItems = tradeState.yourSide;
   const theirItems = tradeState.theirSide;
   
   if (yourItems.length === 0 && theirItems.length === 0) {
-    document.getElementById('demand-insight').innerHTML = '';
+    insightEl.innerHTML = '';
     return;
   }
   
@@ -793,8 +796,9 @@ function updateDemandInsight() {
     insight = `📊 Both sides have equal demand levels`;
   }
   
-  document.getElementById('demand-insight').innerHTML = insight;
-
+  if (insightEl) {
+    insightEl.innerHTML = insight;
+  }
 }
 
 function updateSummaryBoxes() {
