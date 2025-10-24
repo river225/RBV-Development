@@ -2028,13 +2028,14 @@ html, body {
 /* Trade Summary Boxes (replaces tax calc on Trade Checker page) */
 .trade-summary-container {
   width: 240px;
-  position: sticky;
-  top: 16px;
+  position: absolute;
+  right: 20px;
+  top: 260px;
   height: fit-content;
-  display: none; /* Changed from flex to none */
+  display: none;
   flex-direction: column;
   gap: 20px;
-  flex-shrink: 0; /* ADD THIS LINE */
+  z-index: 100;
 }
 
 .trade-summary-box {
