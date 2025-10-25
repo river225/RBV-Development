@@ -716,7 +716,7 @@ html, body {
   border: 2px solid #33cce6;
   border-radius: 15px;
   position: absolute;
-  top: 900px;
+  top: 1300px;
   height: fit-content;
   box-shadow: 0 8px 25px rgba(51, 204, 230, 0.2);
 }
