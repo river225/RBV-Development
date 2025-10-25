@@ -715,8 +715,8 @@ html, body {
   background: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 50%, #3a3a3a 100%);
   border: 2px solid #33cce6;
   border-radius: 15px;
-  position: static;
-  top: 16px;
+  position: absolute;
+  top: 900px;
   height: fit-content;
   box-shadow: 0 8px 25px rgba(51, 204, 230, 0.2);
 }
