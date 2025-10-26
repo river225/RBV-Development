@@ -2019,7 +2019,7 @@ html, body {
 .trade-summary-boxes {
   position: absolute;
   right: 20px;
-  top: 217px;
+  top: 215px;
   width: 240px;
   display: flex;
   flex-direction: column;
