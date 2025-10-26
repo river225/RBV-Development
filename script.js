@@ -1669,7 +1669,7 @@ let VALUE_HISTORY_DATA = [];
 // Fetch value history from Google Sheets
 async function fetchValueHistory() {
   try {
-    const data = await fetchSheet("Value History");
+    const data = await fetchSheet("History");
     VALUE_HISTORY_DATA = data;
     console.log("Value history loaded:", VALUE_HISTORY_DATA.length, "entries");
   } catch (error) {
