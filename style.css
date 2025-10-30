@@ -2121,7 +2121,7 @@ html, body {
 .richest-players-header {
   text-align: center;
   margin-bottom: 30px;
-  margin-top: -45px;
+  margin-top: 0px;
   padding: 0 20px;
 }
 
