@@ -1182,11 +1182,10 @@ function renderScammerSection(items) {
 }
 
 
-async function renderRichestPlayersSection(items) {
-  const content = await createRichestPlayersSection(items);
+function renderRichestPlayersSection(items) {
   const html = `
     <section class="section" id="${slugify("💰 Richest Players")}">
-      ${content}
+      ${createRichestPlayersSection(items)}
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
