@@ -868,9 +868,16 @@ function createRichestPlayersSection(data) {
   }
 
   const intro = `
-    <div class="richest-intro">
+    <div class="richest-players-header">
       <h2>Top 50 Richest Players in BlockSpin</h2>
-      <p>This leaderboard showcases the wealthiest players in the game based on their total net worth. Rankings are updated regularly by our team. Compete to reach the top!</p>
+      <p class="richest-intro">This leaderboard showcases the wealthiest players in the game based on their total net worth. Rankings are updated regularly by our team. Compete to reach the top!</p>
+      
+      <input 
+        type="text" 
+        class="richest-search" 
+        placeholder="🔍 Search players by name..."
+        oninput="filterRichestPlayers(this.value)"
+      />
     </div>
   `;
 
@@ -882,7 +889,7 @@ function createRichestPlayersSection(data) {
     const playerName = player['Player Name'] || player.Name || 'Unknown';
 
     return `
-      <div class="richest-card ${rankSize}" style="border-color: ${rankColor};">
+      <div class="richest-card ${rankSize}" style="border-color: ${rankColor};" data-player-name="${playerName}">
         <div class="rank-badge" style="background: ${rankColor};">
           #${rank}
         </div>
@@ -895,6 +902,20 @@ function createRichestPlayersSection(data) {
   }).join('');
 
   return intro + '<div class="richest-container">' + cards + '</div>';
+}
+
+function filterRichestPlayers(query) {
+  const searchTerm = query.toLowerCase().trim();
+  const cards = document.querySelectorAll('.richest-card');
+  
+  cards.forEach(card => {
+    const playerName = card.dataset.playerName.toLowerCase();
+    if (playerName.includes(searchTerm)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 }
 
 // ==================== RICHEST PLAYERS SECTION END ====================

@@ -2119,14 +2119,14 @@ html, body {
 
 /* ==================== RICHEST PLAYERS STYLES ==================== */
 
-.richest-intro {
+.richest-players-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   margin-top: 60px;
   padding: 0 20px;
 }
 
-.richest-intro h2 {
+.richest-players-header h2 {
   color: #FFD700;
   font-size: 2.5rem;
   font-weight: bold;
@@ -2134,13 +2134,38 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-.richest-intro p {
+.richest-intro {
   color: #fff;
   font-size: 1.1rem;
   line-height: 1.6;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 25px auto;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.richest-search {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  border: 2px solid #ffd700;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.richest-search:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #33cce6;
+  box-shadow: 0 0 15px rgba(51, 204, 230, 0.5);
+}
+
+.richest-search::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .richest-container {
@@ -2149,7 +2174,7 @@ html, body {
   gap: 16px;
   width: 100%;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
 }
 
 .richest-card {
