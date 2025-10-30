@@ -12,10 +12,10 @@ const SECTION_NAMES = [
   
   // EXTRAS
   "Trade Checker",
-  "BlockSpin Map",
   "Crate Game",
-  "Crew Logos",
+  "BlockSpin Map",
   "💰 Richest Players",
+  "Crew Logos",
   "Scammer List"
 ];
 
@@ -838,7 +838,12 @@ function updateSummaryBox(side, items) {
 // ==================== RICHEST PLAYERS SECTION START ====================
 
 function formatNetWorth(value) {
-  const num = parseFloat(value);
+  // Remove dollar signs, commas, and any other non-numeric characters except decimal point
+  const cleanValue = String(value).replace(/[$,]/g, '');
+  const num = parseFloat(cleanValue);
+  
+  if (isNaN(num)) return '$0';
+  
   if (num >= 1000000) {
     return `$${(num / 1000000).toFixed(2)}M`;
   } else if (num >= 1000) {
@@ -851,10 +856,9 @@ function getRankColor(rank) {
   if (rank === 1) return '#FFD700'; // Gold
   if (rank === 2) return '#C0C0C0'; // Silver
   if (rank === 3) return '#CD7F32'; // Bronze
-  if (rank >= 4 && rank <= 10) return '#ff9500'; // Orange
-  return '#a855f7'; // Purple
+  if (rank >= 4 && rank <= 10) return '#4A90E2'; // Blue
+  return '#8B5CF6'; // Less neon purple
 }
-
 function getRankSize(rank) {
   if (rank === 1) return 'rank-1';
   if (rank === 2) return 'rank-2';
