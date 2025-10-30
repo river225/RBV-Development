@@ -851,7 +851,7 @@ function getRankColor(rank) {
   if (rank === 1) return '#FFD700'; // Gold
   if (rank === 2) return '#C0C0C0'; // Silver
   if (rank === 3) return '#CD7F32'; // Bronze
-  if (rank >= 4 && rank <= 10) return '#33cce6'; // Cyan
+  if (rank >= 4 && rank <= 10) return '#ff9500'; // Orange
   return '#a855f7'; // Purple
 }
 
@@ -895,7 +895,7 @@ function createRichestPlayersSection(data) {
         </div>
         <div class="player-info">
           <div class="player-name">${playerName}</div>
-          <div class="player-worth">${formattedWorth}</div>
+          <div class="player-worth"><span style="color: #fff; font-size: 0.9em;">Net Worth: </span>${formattedWorth}</div>
         </div>
       </div>
     `;
