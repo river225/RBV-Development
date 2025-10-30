@@ -15,6 +15,7 @@ const SECTION_NAMES = [
   "BlockSpin Map",
   "Crate Game",
   "Crew Logos",
+  "💰 Richest Players",
   "Scammer List"
 ];
 
@@ -833,6 +834,71 @@ function updateSummaryBox(side, items) {
 
 // ==================== TRADE CHECKER SECTION END ====================
 
+
+// ==================== RICHEST PLAYERS SECTION START ====================
+
+function formatNetWorth(value) {
+  const num = parseFloat(value);
+  if (num >= 1000000) {
+    return `$${(num / 1000000).toFixed(2)}M`;
+  } else if (num >= 1000) {
+    return `$${(num / 1000).toFixed(2)}K`;
+  }
+  return `$${num.toLocaleString()}`;
+}
+
+function getRankColor(rank) {
+  if (rank === 1) return '#FFD700'; // Gold
+  if (rank === 2) return '#C0C0C0'; // Silver
+  if (rank === 3) return '#CD7F32'; // Bronze
+  if (rank >= 4 && rank <= 10) return '#33cce6'; // Cyan
+  return '#a855f7'; // Purple
+}
+
+function getRankSize(rank) {
+  if (rank === 1) return 'rank-1';
+  if (rank === 2) return 'rank-2';
+  if (rank === 3) return 'rank-3';
+  return 'rank-default';
+}
+
+function createRichestPlayersSection(data) {
+  if (!data || data.length === 0) {
+    return '<p style="text-align: center; color: #888;">No leaderboard data available.</p>';
+  }
+
+  const intro = `
+    <div class="richest-intro">
+      <h2>Top 50 Richest Players in BlockSpin</h2>
+      <p>This leaderboard showcases the wealthiest players in the game based on their total net worth. Rankings are updated regularly by our team. Compete to reach the top!</p>
+    </div>
+  `;
+
+  const cards = data.map((player, index) => {
+    const rank = index + 1;
+    const rankColor = getRankColor(rank);
+    const rankSize = getRankSize(rank);
+    const formattedWorth = formatNetWorth(player['Net Worth'] || player.NetWorth || 0);
+    const playerName = player['Player Name'] || player.Name || 'Unknown';
+
+    return `
+      <div class="richest-card ${rankSize}" style="border-color: ${rankColor};">
+        <div class="rank-badge" style="background: ${rankColor};">
+          #${rank}
+        </div>
+        <div class="player-info">
+          <div class="player-name">${playerName}</div>
+          <div class="player-worth">${formattedWorth}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  return intro + '<div class="richest-container">' + cards + '</div>';
+}
+
+// ==================== RICHEST PLAYERS SECTION END ====================
+
 // === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
   try {
@@ -1024,7 +1090,9 @@ function renderSection(title, items) {
 
   if (!items || items.length === 0) return;
 
-  if (title === "Crew Logos") {
+  if (title === "💰 Richest Players") {
+    renderRichestPlayersSection(items);
+  } else if (title === "Crew Logos") {
     renderCrewLogosSection(items);
   } else if (title === "Scammer List") {
     renderScammerSection(items);
@@ -1079,6 +1147,16 @@ function renderScammerSection(items) {
       <div class="cards">
         ${items.map(createScammerCard).join("")}
       </div>
+    </section>
+  `;
+  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+}
+
+
+function renderRichestPlayersSection(items) {
+  const html = `
+    <section class="section" id="${slugify("💰 Richest Players")}">
+      ${createRichestPlayersSection(items)}
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -1272,7 +1350,7 @@ function showSection(name) {
    // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
-    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game'];
+    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game', '💰 Richest Players'];
     if (hiddenSections.includes(name)) {
       taxCalc.style.visibility = 'hidden';
       taxCalc.style.opacity = '0';
@@ -1286,7 +1364,7 @@ function showSection(name) {
   // Hide/show search bar based on section
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
-    const hiddenSearchSections = ['Home', 'Trade Checker', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Crate Game'];
+    const hiddenSearchSections = ['Home', 'Trade Checker', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Crate Game', '💰 Richest Players'];
     if (hiddenSearchSections.includes(name)) {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
     } else {
