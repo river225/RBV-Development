@@ -833,8 +833,6 @@ function updateSummaryBox(side, items) {
 }
 
 // ==================== TRADE CHECKER SECTION END ====================
-
-
 // ==================== RICHEST PLAYERS SECTION START ====================
 
 function formatNetWorth(value) {
@@ -893,6 +891,7 @@ function createRichestPlayersSection(data) {
     const formattedWorth = formatNetWorth(player['Net Worth'] || player.NetWorth || 0);
     const playerName = player['Player Name'] || player.Name || 'Unknown';
     
+    // Create Roblox search URL
     const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
 
     return `
@@ -902,8 +901,8 @@ function createRichestPlayersSection(data) {
         </div>
         <div class="player-info">
           <div class="player-name">${playerName}</div>
-          <a href="${robloxSearchUrl}" target="_blank" rel="noopener" class="profile-link">View Profile 🔗</a>
           <div class="player-worth"><span style="color: #fff; font-size: 0.9em;">Net Worth: </span>${formattedWorth}</div>
+          <a href="${robloxSearchUrl}" target="_blank" rel="noopener" class="profile-link">View Profile 🔗</a>
         </div>
       </div>
     `;
