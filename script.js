@@ -919,7 +919,7 @@ async function fetchSheet(sheetName) {
       return obj;
     });
 
-    return items.filter(x => String(x["Name"] || x["Header"] || x["Roblox Name"] || "").trim().length > 0);
+     return items.filter(x => String(x["Name"] || x["Header"] || x["Roblox Name"] || x["Player Name"] || "").trim().length > 0);
   } catch (err) {
     console.error(`Failed to fetch sheet: ${sheetName}`, err);
     return [];
