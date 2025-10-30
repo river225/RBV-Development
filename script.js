@@ -1676,18 +1676,20 @@ document.addEventListener("DOMContentLoaded", async () => {
    
     console.log(`Fetching data for: ${sec}`);
     // Map section name to sheet name
+    const sheetName = sec === "💰 Richest Players" ? "RichestPlayers" : sec;
+    console.log(`Sheet name being fetched: "${sheetName}"`);
+    
     let items;
-    if (sec === "💰 Richest Players") {
-      try {
-        items = await fetchSheet("RichestPlayers");
-      } catch (error) {
-        console.error("Failed to load RichestPlayers:", error);
-        items = [];
+    try {
+      items = await fetchSheet(sheetName);
+      console.log(`Got ${items.length} items for ${sec}`);
+      if (sec === "💰 Richest Players") {
+        console.log("RichestPlayers raw data:", items);
       }
-    } else {
-      items = await fetchSheet(sec);
+    } catch (error) {
+      console.error(`Failed to load ${sheetName}:`, error);
+      items = [];
     }
-    console.log(`Got ${items.length} items for ${sec}`);
     
     loadedSections++;
     const progress = Math.round((loadedSections / totalSections) * 100);
