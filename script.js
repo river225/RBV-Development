@@ -867,23 +867,7 @@ function getRankSize(rank) {
   return 'rank-default';
 }
 
-async function getRobloxUserId(username) {
-  try {
-    const response = await fetch(`https://users.roblox.com/v1/usernames/users`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
-    });
-    
-    const data = await response.json();
-    return data.data?.[0]?.id || null;
-  } catch (error) {
-    console.error(`Failed to get user ID for ${username}:`, error);
-    return null;
-  }
-}
-
-async function createRichestPlayersSection(data) {
+function createRichestPlayersSection(data) {
   if (!data || data.length === 0) {
     return '<p style="text-align: center; color: #888;">No leaderboard data available.</p>';
   }
@@ -902,24 +886,14 @@ async function createRichestPlayersSection(data) {
     </div>
   `;
 
-  const playersWithIds = await Promise.all(
-    data.map(async (player) => {
-      const username = player['Player Name'] || player.Name || 'Unknown';
-      const userId = await getRobloxUserId(username);
-      return { ...player, userId };
-    })
-  );
-
-  const cards = playersWithIds.map((player, index) => {
+  const cards = data.map((player, index) => {
     const rank = index + 1;
     const rankColor = getRankColor(rank);
     const rankSize = getRankSize(rank);
     const formattedWorth = formatNetWorth(player['Net Worth'] || player.NetWorth || 0);
     const playerName = player['Player Name'] || player.Name || 'Unknown';
     
-    const profileUrl = player.userId 
-      ? `https://www.roblox.com/users/${player.userId}/profile`
-      : `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
+    const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
 
     return `
       <div class="richest-card ${rankSize}" style="border-color: ${rankColor};" data-player-name="${playerName}">
@@ -928,7 +902,7 @@ async function createRichestPlayersSection(data) {
         </div>
         <div class="player-info">
           <div class="player-name">${playerName}</div>
-          <a href="${profileUrl}" target="_blank" rel="noopener" class="profile-link">View Profile 🔗</a>
+          <a href="${robloxSearchUrl}" target="_blank" rel="noopener" class="profile-link">View Profile 🔗</a>
           <div class="player-worth"><span style="color: #fff; font-size: 0.9em;">Net Worth: </span>${formattedWorth}</div>
         </div>
       </div>
