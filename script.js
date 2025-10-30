@@ -1674,10 +1674,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fetch all sections at once (parallel)
   const fetchPromises = SECTION_NAMES.map(async (sec) => {
    
-   console.log(`Fetching data for: ${sec}`);
-// Map section name to sheet name
-const sheetName = sec === "💰 Richest Players" ? "RichestPlayers" : sec;
-const items = await fetchSheet(sheetName);
+    console.log(`Fetching data for: ${sec}`);
+    // Map section name to sheet name
+    let items;
+    if (sec === "💰 Richest Players") {
+      try {
+        items = await fetchSheet("RichestPlayers");
+      } catch (error) {
+        console.error("Failed to load RichestPlayers:", error);
+        items = [];
+      }
+    } else {
+      items = await fetchSheet(sec);
+    }
     console.log(`Got ${items.length} items for ${sec}`);
     
     loadedSections++;
