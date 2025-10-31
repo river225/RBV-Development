@@ -1011,6 +1011,12 @@ html, body {
   color: white;
 }
 
+/* Trade Checker - Blue/Red angled split gradient */
+#sections-nav button:nth-child(9).active {
+  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 15%, #3a9fb0 30%, #5bc5de 45%, #8b251f 55%, #c0392b 70%, #e74c3c 85%, #ff6b6b 100%);
+  color: white;
+}
+
 /* Crew Logos - Soft Cyan REVERSED gradient */
 #sections-nav button:nth-child(10).active {
   background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
@@ -2326,23 +2332,3 @@ html, body {
   text-decoration: underline;
 }
 
-/* Trade Checker Button Gradient */
-.sections-nav button[data-section="Trade Checker"] {
-  background: linear-gradient(90deg, #33cce6 0%, #33cce6 50%, #ff6b6b 50%, #ff6b6b 100%) !important;
-}
-
-.sections-nav button[data-section="Trade Checker"]:hover {
-  background: linear-gradient(90deg, #33cce6 0%, #33cce6 50%, #ff6b6b 50%, #ff6b6b 100%) !important;
-  opacity: 0.9;
-}
-
-.sections-nav button[data-section="Trade Checker"].active {
-  background: linear-gradient(90deg, #33cce6 0%, #33cce6 50%, #ff6b6b 50%, #ff6b6b 100%) !important;
-}
-
-/* Trade Checker Background */
-.trade-side {
-  background: #1a2532 !important;
-  border-radius: 12px;
-  padding: 20px;
-}
