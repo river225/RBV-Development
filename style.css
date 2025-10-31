@@ -2325,3 +2325,24 @@ html, body {
   opacity: 0.7;
   text-decoration: underline;
 }
+
+/* Trade Checker Button Gradient */
+.sections-nav button[data-section="Trade Checker"] {
+  background: linear-gradient(90deg, #33cce6 0%, #33cce6 50%, #ff6b6b 50%, #ff6b6b 100%) !important;
+}
+
+.sections-nav button[data-section="Trade Checker"]:hover {
+  background: linear-gradient(90deg, #33cce6 0%, #33cce6 50%, #ff6b6b 50%, #ff6b6b 100%) !important;
+  opacity: 0.9;
+}
+
+.sections-nav button[data-section="Trade Checker"].active {
+  background: linear-gradient(90deg, #33cce6 0%, #33cce6 50%, #ff6b6b 50%, #ff6b6b 100%) !important;
+}
+
+/* Trade Checker Background */
+.trade-side {
+  background: #1a2532 !important;
+  border-radius: 12px;
+  padding: 20px;
+}

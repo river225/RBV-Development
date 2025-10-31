@@ -12,6 +12,7 @@ const SECTION_NAMES = [
   
   // EXTRAS
   "Trade Checker",
+
   // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos",
@@ -872,7 +873,7 @@ function createRichestPlayersSection(data) {
   const intro = `
     <div class="richest-players-header">
       <h2>Top 50 Richest Players in BlockSpin</h2>
-      <p class="richest-intro">This leaderboard showcases the wealthiest players in the game based on their total net worth. Rankings are updated regularly by our team. Compete to reach the top!</p>
+      <p class="richest-intro">This leaderboard highlights the wealthiest players in the game, ranked by the total value of their in-game assets. The data is sourced from the official BlockSpin Richest Players spreadsheet.</p>
       
       <input 
         type="text" 
