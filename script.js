@@ -1343,8 +1343,12 @@ function closeDetailModal() {
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
   
+  // Track if we're in extras section
+  let inExtras = false;
+  let extrasContainer = null;
+  
   SECTION_NAMES.forEach((name, index) => {
-    // Add gap and "Extras" header before BlockSpin Map
+    // Add gap and "Extras" header before Trade Checker
     if (name === "Trade Checker") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
@@ -1352,14 +1356,27 @@ function initSectionsNav() {
       
       const extrasHeader = document.createElement("div");
       extrasHeader.className = "nav-extras-header";
-      extrasHeader.textContent = "Extras";
+      extrasHeader.textContent = "EXTRAS";
       nav.appendChild(extrasHeader);
+      
+      // Create container for 2-column extras buttons
+      extrasContainer = document.createElement("div");
+      extrasContainer.className = "nav-extras-container";
+      nav.appendChild(extrasContainer);
+      
+      inExtras = true;
     }
     
     const btn = document.createElement("button");
     btn.textContent = name;
     btn.addEventListener("click", () => showSection(name));
-    nav.appendChild(btn);
+    
+    // Add to extras container if in extras section, otherwise add to nav
+    if (inExtras && extrasContainer) {
+      extrasContainer.appendChild(btn);
+    } else {
+      nav.appendChild(btn);
+    }
   });
 }
 
