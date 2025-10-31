@@ -74,9 +74,9 @@ a { color: #fff; text-decoration: none; }
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  margin: 10px 0 5px 0;
-  padding: 8px 0 5px 0;
-  border-bottom: 1px solid #33cce6;
+  margin: 10px 0 12px 0;
+  padding: 8px 0 0 0;
+  border-bottom: none;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
