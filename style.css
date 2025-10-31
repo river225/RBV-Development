@@ -74,8 +74,8 @@ a { color: #fff; text-decoration: none; }
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  margin: 10px 0;
-  padding: 8px 0;
+  margin: 10px 0 5px 0;
+  padding: 8px 0 5px 0;
   border-bottom: 1px solid #33cce6;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
@@ -83,8 +83,9 @@ a { color: #fff; text-decoration: none; }
 .nav-extras-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 0;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-right: 4px;
 }
 
 .nav-extras-container button {
