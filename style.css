@@ -1012,7 +1012,7 @@ html, body {
 }
 
 /* Trade Checker - Blue/Red angled split gradient */
-#sections-nav button:nth-child(11).active {
+#sections-nav button:nth-of-type(9).active {
   background: linear-gradient(135deg, #2d7a8a 0%, #3a9fb0 20%, #5bc5de 40%, #ff4444 60%, #ff6b6b 80%, #ff8888 100%);
   color: white;
 }
