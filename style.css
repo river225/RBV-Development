@@ -1005,9 +1005,9 @@ html, body {
   color: white;
 }
 
-/* Vehicles - Yellow/Gold gradient */
+/* Vehicles - Teal/Turquoise gradient */
 #sections-nav button:nth-child(8).active {
-  background: linear-gradient(135deg, #9b7e0a 0%, #d6a910 25%, #f5c312 50%, #ffdb4d 75%, #ffed70 100%);
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 25%, #718096 50%, #a0aec0 75%, #cbd5e0 100%);
   color: white;
 }
 
@@ -1015,39 +1015,34 @@ html, body {
 #sections-nav button:nth-child(11).active {
   background: linear-gradient(135deg, #2d7a8a 0%, #3a9fb0 20%, #5bc5de 40%, #ff4444 60%, #ff6b6b 80%, #ff8888 100%);
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Richest Players - Grey with money rain animation */
+
+/* Richest Players */
 #sections-nav button:nth-child(12).active {
-  background: #3a3a3a;
+  background: linear-gradient(135deg, #9b7e0a 0%, #d6a910 25%, #f5c312 50%, #ffdb4d 75%, #ffed70 100%);
   color: white;
   position: relative;
   overflow: hidden;
 }
 
 #sections-nav button:nth-child(12).active::after {
-  content: '💰💵💸💰💵💸💰💵💸💰💵💸';
+  content: '';
   position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  font-size: 1.5rem;
-  animation: moneyRain 3s linear infinite;
-  pointer-events: none;
-  letter-spacing: 10px;
+  top: -50%;
+  left: -50%;
+  width: 30%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(25deg);
+  animation: lightSweep 2.5s infinite;
 }
 
-@keyframes moneyRain {
-  0% {
-    top: -100%;
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0.7;
-  }
+@keyframes lightSweep {
+  0% { left: -50%; }
+  100% { left: 150%; }
 }
+
 
 /* Crew Logos - Soft Cyan REVERSED gradient */
 #sections-nav button:nth-child(13).active {
