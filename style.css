@@ -85,17 +85,19 @@ a { color: #fff; text-decoration: none; }
   grid-template-columns: 1fr 1fr;
   gap: 6px;
   margin-bottom: 8px;
-  padding-right: 4px;
+  width: calc(100% - 8px);
+  max-width: 100%;
 }
 
 .nav-extras-container button {
   width: 100%;
-  font-size: 0.85rem;
-  min-height: 45px;
-  padding: 4px;
+  font-size: 0.8rem;
+  min-height: 42px;
+  padding: 4px 2px;
   justify-content: center;
   text-align: center;
   margin-bottom: 0;
+  box-sizing: border-box;
 }
 
 .sections {
