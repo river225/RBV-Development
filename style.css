@@ -84,16 +84,17 @@ a { color: #fff; text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .nav-extras-container button {
   width: 100%;
-  font-size: 0.9rem;
-  min-height: 50px;
-  padding: 6px;
+  font-size: 0.85rem;
+  min-height: 45px;
+  padding: 4px;
   justify-content: center;
   text-align: center;
+  margin-bottom: 0;
 }
 
 .sections {
