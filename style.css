@@ -2359,3 +2359,77 @@ html, body {
   text-decoration: underline;
 }
 
+
+.info-footer-section {
+  margin: 50px auto 0;
+  padding: 35px 20px;
+  text-align: center;
+  border-top: 2px solid rgba(91, 197, 222, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.info-footer-section > * {
+  transform: translateX(-13px);
+}
+
+.info-footer-link {
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 8px 15px;
+  white-space: nowrap;
+}
+
+/* Trading Guide - Red */
+.info-footer-link:nth-child(1) {
+  color: #ff4444;
+}
+
+.info-footer-link:nth-child(1):hover {
+  color: #ff6666;
+  text-decoration: underline;
+}
+
+/* About Us - Aurora */
+.info-footer-link:nth-child(3) {
+  background: linear-gradient(90deg, #00ffff, #7dd3fc, #a78bfa, #fb7185, #00ffff);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: auroraFlow 5s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(125, 211, 252, 0.6));
+}
+
+.info-footer-link:nth-child(3):hover {
+  animation: auroraFlow 2.5s linear infinite;
+  text-decoration: underline;
+  filter: drop-shadow(0 0 12px rgba(125, 211, 252, 0.8)) brightness(1.3);
+}
+
+@keyframes auroraFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+
+/* FAQ - Purple */
+.info-footer-link:nth-child(5) {
+  color: #b380ff;
+}
+
+.info-footer-link:nth-child(5):hover {
+  color: #c9a3ff;
+  text-decoration: underline;
+}
+
+.info-separator {
+  color: #5bc5de;
+  margin: 0 20px;
+  font-size: 1.4rem;
+}
