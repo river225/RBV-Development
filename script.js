@@ -1020,9 +1020,21 @@ function createCard(item) {
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
+                
+        <div class="bottom-prices">
+          <div class="repair-price">
+            <span class="price-label">Repair Price:</span>
+            <span class="price-value repair-value">$12,500</span>
+          </div>
+          <div class="pawn-price">
+            <span class="price-label">Pawn Price:</span>
+            <span class="price-value pawn-value">$300,000</span>
+          </div>
+        </div>
       </div>
     </div>
   `;
+
 }
 
 function createCrewLogoCard(item) {
