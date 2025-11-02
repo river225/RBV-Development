@@ -118,20 +118,21 @@ a { color: #fff; text-decoration: none; }
 .card-left {
   background: #1f2a38;
   border-radius: 8px;
-  padding: 6px; /* Tighter padding around image */
+  padding: 4px; /* CHANGED: from 6px to 4px - tighter padding */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-width: 170px;
+  justify-content: flex-start; /* CHANGED: from center to flex-start - moves up */
+  min-width: 140px; /* CHANGED: from 170px to 140px - narrower */
 }
 
 .card img { 
-  width: 150px; 
-  height: 150px; 
+  width: 120px; /* CHANGED: from 150px to 120px - smaller image */
+  height: 120px; /* CHANGED: from 150px to 120px - smaller image */
   object-fit: contain; 
   border-radius: 8px; 
   background: transparent;
+  margin-top: 4px; /* NEW: add small top margin */
 }
 
 .card-info { 
