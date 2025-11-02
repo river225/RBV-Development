@@ -107,6 +107,7 @@ a { color: #fff; text-decoration: none; }
   padding: 12px; 
   background: #141d28; /* Same as section buttons when not clicked */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 220px; /* ADD THIS LINE */
 }
 
 .card:hover {
@@ -118,21 +119,20 @@ a { color: #fff; text-decoration: none; }
 .card-left {
   background: #1f2a38;
   border-radius: 8px;
-  padding: 4px; /* CHANGED: from 6px to 4px - tighter padding */
+  padding: 6px; /* Tighter padding around image */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* CHANGED: from center to flex-start - moves up */
-  min-width: 140px; /* CHANGED: from 170px to 140px - narrower */
+  justify-content: center;
+  min-width: 170px;
 }
 
 .card img { 
-  width: 120px; /* CHANGED: from 150px to 120px - smaller image */
-  height: 120px; /* CHANGED: from 150px to 120px - smaller image */
+  width: 150px; 
+  height: 150px; 
   object-fit: contain; 
   border-radius: 8px; 
   background: transparent;
-  margin-top: 4px; /* NEW: add small top margin */
 }
 
 .card-info { 
