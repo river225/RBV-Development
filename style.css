@@ -140,7 +140,6 @@ a { color: #fff; text-decoration: none; }
   flex-direction: column; 
   gap: 8px;
   justify-content: center;
-  min-height: 340px; /* ADD THIS LINE - makes the info section taller */
 }
 
 .card-info h3 { 
