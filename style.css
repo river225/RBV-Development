@@ -107,7 +107,6 @@ a { color: #fff; text-decoration: none; }
   padding: 12px; 
   background: #141d28; /* Same as section buttons when not clicked */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 220px; /* ADD THIS LINE */
 }
 
 .card:hover {
@@ -141,6 +140,7 @@ a { color: #fff; text-decoration: none; }
   flex-direction: column; 
   gap: 8px;
   justify-content: center;
+  min-height: 240px; /* ADD THIS LINE - makes the info section taller */
 }
 
 .card-info h3 { 
