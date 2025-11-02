@@ -961,6 +961,8 @@ function createCard(item) {
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
   const durability = safe(item["Durability"]);
+  const internalValue = safe(item["Internal Value"]);
+
 
   // Check if durability is 0 to add broken overlay
   let imgTag = "";
@@ -1002,17 +1004,35 @@ function createCard(item) {
         </div>
       </div>
     `;
+    
   }
 
+    // Calculate initial repair price
+  let repairPrice = 0;
+  if (durability && durability.includes('/') && internalValue) {
+    const maxDurability = parseInt(durability.split('/')[1]) || 100;
+    const currentDurability = parseInt(durability.split('/')[0]) || maxDurability;
+    const missingDurability = maxDurability - currentDurability;
+    const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+    repairPrice = Math.round(missingDurability * (internalVal / maxDurability) * 0.7);
+  }
+  
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-aftertax="${escapeAttr(afterTax)}"
-         data-max-durability="${durability ? durability.split('/')[1] : '100'}">
+         data-max-durability="${durability ? durability.split('/')[1] : '100'}"
+         data-internal-value="${escapeAttr(internalValue)}">
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
+        ${durability && internalValue ? `
+          <div class="repair-price-display">
+            <span class="repair-label">Repair Price:</span>
+            <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+          </div>
+        ` : ''}
       </div>
       <div class="card-info">
         <h3>${name}</h3>
@@ -1020,21 +1040,9 @@ function createCard(item) {
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
-                
-        <div class="bottom-prices">
-          <div class="repair-price">
-            <span class="price-label">Repair Price:</span>
-            <span class="price-value repair-value">$12,500</span>
-          </div>
-          <div class="pawn-price">
-            <span class="price-label">Pawn Price:</span>
-            <span class="price-value pawn-value">$300,000</span>
-          </div>
-        </div>
       </div>
     </div>
   `;
-
 }
 
 function createCrewLogoCard(item) {

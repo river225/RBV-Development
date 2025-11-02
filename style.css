@@ -199,42 +199,7 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-/* Bottom prices section - positioned at bottom of card */
-.bottom-prices {
-  display: flex;
-  gap: 20px;
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 2px solid rgba(51, 204, 230, 0.3);
-  justify-content: space-between;
-}
 
-.repair-price, .pawn-price {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.price-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #b8b8b8;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-
-.price-value {
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.repair-value {
-  color: #ff9944; /* Orange for repair */
-}
-
-.pawn-value {
-  color: #ffde59; /* Yellow/gold for pawn */
-}
 
 /* NEW: Crew Logo Card Styling - SMALLER SIZE */
 .crew-logo-card {
@@ -2470,4 +2435,28 @@ html, body {
   color: #5bc5de;
   margin: 0 20px;
   font-size: 1.4rem;
+}
+
+/* Repair Price Display */
+.repair-price-display {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 2px solid rgba(51, 204, 230, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.repair-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #b8b8b8;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.repair-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff9944;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
