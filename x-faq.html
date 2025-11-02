@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: #141d28;
+            border: 3px solid #000000;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .back-btn-top {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #33cce6;
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .back-btn-top:hover {
+            background: #5bc5de;
+        }
+        
+        .faq-header {
+            font-size: 4rem;
+            color: #33cce6;
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+            text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+        }
+        
+        .faq-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+        
+        .faq-item {
+            background: #1f2a38;
+            border: 2px solid #33cce6;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: #5bc5de;
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #33cce6;
+            font-weight: 600;
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            color: #33cce6;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 25px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 25px 20px 25px;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            color: #fff;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin: 30px auto;
+            padding: 12px 30px;
+            background: #33cce6;
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .back-btn:hover {
+            background: #5bc5de;
+        }
+    </style>
+</head>
+<body>
+    <div class="faq-container">
+        <a href="index.html" class="back-btn-top">← Back</a>
+        
+        <h1 class="faq-header">FAQ</h1>
+        <p class="faq-intro">Have questions? We've got answers! Click on any question below to expand.</p>
+        
+        <!-- FAQ Items -->
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How often are item values updated?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>We aim to constantly update our values based on market trends and in-game changes such as new content that can affect a items value.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Are the values accurate for trading?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, Our value list team is always working hard to ensure they are providing the best item values for you!</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How can I suggest a value change?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+        
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>Who maintains this website?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>This website was founded and maintained by river, a BlockSpin QA Tester and Content Creator.</p>
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>What does "Demand" mean?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>An items demand refers to how sought after the item is, this is a important factor of items as it can help determine if you will be able to easily sell something. Demand can also add to a items value.</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>What does "Average Value" mean?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Average Value refers to the typical and standard pricing for a item.</p>
+            </div>
+        </div>
+    
+          <div class="faq-item">
+            <div class="faq-question">
+                <h3>What does "Ranged Value" mean?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Often placing a Average Value can be difficult for a item as different players sell & buy it for different pricing. Thus Ranged Value tries to cover more ground and is an extra depth to Average Value.</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>What does "After Tax Value" mean?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>How do I use the Tax Calculator?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>What is the Trade Checker and how do I use it?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>How much tax does BlockSpin take on trades?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>How much tax does BlockSpin take on trades?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How do I report a scammer?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>Can I get removed from the scammer list?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+
+         <div class="faq-item">
+            <div class="faq-question">
+                <h3>How do I add my crew logo to the website?</h3>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>INCOMPLETE</p>
+            </div>
+        </div>
+
+     
+    
+        <!-- Add more FAQ items as needed -->
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // FAQ Accordion functionality - Multiple items can be open at once
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Just toggle current item - don't close others
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
