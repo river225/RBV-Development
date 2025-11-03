@@ -2224,184 +2224,82 @@ html, body {
 
 /* ==================== RICHEST PLAYERS SECTION CSS ==================== */
 
-.richest-players-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.richest-players-header h2 {
-  color: #33cce6;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.richest-intro {
-  color: #fff;
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-
-.richest-search {
-  width: 100%;
-  max-width: 500px;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border: 2px solid #33cce6;
-  border-radius: 8px;
-  background: rgba(51, 204, 230, 0.1);
-  color: white;
-  margin-top: 15px;
-}
-
-.richest-search::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.richest-search:focus {
-  outline: none;
-  background: rgba(51, 204, 230, 0.2);
-  box-shadow: 0 0 20px rgba(51, 204, 230, 0.3);
-}
-
-.richest-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-
-.richest-card {
+.rp-card {
   display: flex;
   align-items: center;
-  gap: 25px;
-  padding: 20px 30px;
-  background: rgba(30, 30, 45, 0.6);
-  border: 2px solid;
+  gap: 15px;
+  padding: 12px 16px;
+  background: #141d28;
+  border: 3px solid #000000;
   border-radius: 12px;
-  transition: all 0.3s ease;
-  min-height: 100px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 12px;
 }
 
-.richest-card:hover {
-  transform: translateX(5px);
-  background: rgba(40, 40, 55, 0.8);
+.rp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.rank-badge {
-  min-width: 70px;
-  width: 70px;
-  height: 70px;
+.rp-card .rank-badge {
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: bold;
   color: #000;
   flex-shrink: 0;
   text-shadow: none;
 }
 
-.player-info {
+.rp-card .player-info {
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 15px;
   flex: 1;
   flex-wrap: nowrap;
 }
 
-.player-name {
-  font-size: 24px;
-  font-weight: bold;
-  color: #fff;
-  min-width: 220px;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.player-level {
+.rp-card .player-name {
   font-size: 16px;
-  min-width: 110px;
+  font-weight: 700;
+  color: #fff;
+  min-width: 150px;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-.player-worth {
-  font-size: 22px;
-  font-weight: bold;
-  min-width: 200px;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+.rp-card .player-level {
+  font-size: 13px;
+  min-width: 80px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 
-.player-worth span {
-  color: #81e681;
+.rp-card .player-worth {
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 120px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-.profile-link {
+.rp-card .profile-link {
   margin-left: auto;
-  padding: 10px 18px;
+  padding: 6px 12px;
   background: rgba(74, 144, 226, 0.2);
-  border: 2px solid #4A90E2;
-  border-radius: 8px;
+  border: 1px solid #4A90E2;
+  border-radius: 6px;
   color: #4A90E2;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 12px;
   white-space: nowrap;
-  transition: all 0.3s ease;
-  text-shadow: none;
 }
 
-.profile-link:hover {
+.rp-card .profile-link:hover {
   background: rgba(74, 144, 226, 0.4);
-  transform: scale(1.05);
 }
-
-/* Special sizing for top 3 ranks */
-.rank-1 {
-  min-height: 110px;
-}
-
-.rank-1 .rank-badge {
-  width: 80px;
-  height: 80px;
-  font-size: 32px;
-}
-
-.rank-1 .player-name {
-  font-size: 28px;
-}
-
-.rank-2 {
-  min-height: 105px;
-}
-
-.rank-2 .rank-badge {
-  width: 75px;
-  height: 75px;
-  font-size: 30px;
-}
-
-.rank-2 .player-name {
-  font-size: 26px;
-}
-
-.rank-3 {
-  min-height: 100px;
-}
-
-.rank-3 .rank-badge {
-  width: 72px;
-  height: 72px;
-  font-size: 29px;
-}
-
-.rank-3 .player-name {
-  font-size: 25px;
-}
-
-/* ==================== END RICHEST PLAYERS SECTION CSS ==================== */
 
 
 .info-footer-section {
