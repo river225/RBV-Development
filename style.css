@@ -2224,210 +2224,83 @@ html, body {
 
 /* ==================== RICHEST PLAYERS SECTION CSS ==================== */
 
-.richest-players-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.richest-players-header h2 {
-  color: #33cce6;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.richest-intro {
-  color: #fff;
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-
-.richest-search {
-  width: 100%;
-  max-width: 500px;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border: 2px solid #33cce6;
-  border-radius: 8px;
-  background: rgba(51, 204, 230, 0.1);
-  color: white;
-  margin-top: 15px;
-}
-
-.richest-search::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.richest-search:focus {
-  outline: none;
-  background: rgba(51, 204, 230, 0.2);
-  box-shadow: 0 0 20px rgba(51, 204, 230, 0.3);
-}
-
-.richest-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.richest-container .richest-card {
+.rp-card {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #1a2332 0%, #2a3444 100%);
-  border: 3px solid;
-  border-radius: 12px;
-  padding: 16px 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   gap: 20px;
-  width: 100%;
+  padding: 14px 20px;
+  background: rgba(30, 30, 45, 0.6);
+  border: 2px solid;
+  border-radius: 12px;
+  transition: all 0.3s ease;
   box-sizing: border-box;
 }
 
-.richest-container .richest-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+.rp-card:hover {
+  transform: translateX(5px);
+  background: rgba(40, 40, 55, 0.8);
 }
 
-.richest-container .richest-card.rank-1 {
-  padding: 20px 24px;
-  min-height: 100px;
-}
-
-.richest-container .richest-card.rank-1 .rank-badge {
-  font-size: 2.5rem;
-  width: 80px;
-  height: 80px;
-}
-
-.richest-container .richest-card.rank-1 .player-name {
-  font-size: 2rem;
-}
-
-.richest-container .richest-card.rank-1 .player-worth {
-  font-size: 1.8rem;
-}
-
-.richest-container .richest-card.rank-2 {
-  padding: 20px 24px;
-  min-height: 85px;
-}
-
-.richest-container .richest-card.rank-2 .rank-badge {
-  font-size: 2rem;
-  width: 70px;
-  height: 70px;
-}
-
-.richest-container .richest-card.rank-2 .player-name {
-  font-size: 1.7rem;
-}
-
-.richest-container .richest-card.rank-2 .player-worth {
-  font-size: 1.5rem;
-}
-
-.richest-container .richest-card.rank-3 {
-  padding: 18px 22px;
-  min-height: 75px;
-}
-
-.richest-container .richest-card.rank-3 .rank-badge {
-  font-size: 1.7rem;
-  width: 60px;
-  height: 60px;
-}
-
-.richest-container .richest-card.rank-3 .player-name {
-  font-size: 1.5rem;
-}
-
-.richest-container .richest-card.rank-3 .player-worth {
-  font-size: 1.3rem;
-}
-
-.richest-container .richest-card.rank-default {
-  padding: 14px 18px;
-  min-height: 65px;
-}
-
-.richest-container .richest-card.rank-default .rank-badge {
-  font-size: 1.4rem;
+.rp-card .rank-badge {
+  min-width: 50px;
   width: 50px;
   height: 50px;
-}
-
-.richest-container .richest-card.rank-default .player-name {
-  font-size: 1.2rem;
-}
-
-.richest-container .richest-card.rank-default .player-worth {
-  font-size: 1.1rem;
-}
-
-.richest-container .rank-badge {
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  font-size: 20px;
   font-weight: bold;
   color: #000;
-  text-shadow: none;
   flex-shrink: 0;
+  text-shadow: none;
 }
 
-.richest-container .player-info {
-  flex: 1;
+.rp-card .player-info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 20px;
+  flex: 1;
 }
 
-.richest-container .player-name {
+.rp-card .player-name {
+  font-size: 18px;
   font-weight: bold;
   color: #fff;
+  min-width: 160px;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-.richest-container .player-level {
-  margin: 4px 0;
-  font-size: 0.95rem;
+.rp-card .player-level {
+  font-size: 14px;
+  min-width: 90px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 
-.richest-container .player-level span:last-child {
-  color: #33cce6 !important;
-  font-weight: bold !important;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-
-.richest-container .player-worth {
+.rp-card .player-worth {
+  font-size: 16px;
   font-weight: bold;
+  min-width: 140px;
   color: #81e681;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   font-family: 'Courier New', monospace;
 }
 
-.richest-container .profile-link {
+.rp-card .profile-link {
+  margin-left: auto;
+  padding: 6px 12px;
+  background: rgba(74, 144, 226, 0.2);
+  border: 1px solid #4A90E2;
+  border-radius: 6px;
   color: #4A90E2;
   text-decoration: none;
-  font-size: 0.9em;
-  margin-top: 5px;
-  display: inline-block;
-  transition: opacity 0.2s;
+  font-size: 13px;
   white-space: nowrap;
 }
 
-.richest-container .profile-link:hover {
-  opacity: 0.7;
-  text-decoration: underline;
+.rp-card .profile-link:hover {
+  background: rgba(74, 144, 226, 0.4);
 }
-
-/* ==================== END RICHEST PLAYERS SECTION CSS ==================== */
 
 .info-footer-section {
   margin: 50px auto 0;
