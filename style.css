@@ -105,7 +105,7 @@ a { color: #fff; text-decoration: none; }
   border: 3px solid #000000; /* Nice black outline */
   border-radius: 12px; 
   padding: 12px; 
-  padding-bottom: 40px; /* ADD THIS LINE - pushes bottom edge down */
+  padding-bottom: 55px; /* ADD THIS LINE - pushes bottom edge down */
   background: #141d28; /* Same as section buttons when not clicked */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -2436,26 +2436,29 @@ html, body {
   margin: 0 20px;
   font-size: 1.4rem;
 }
+
+
 /* Repair Price Display */
 .repair-price-display {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
+  bottom: 12px;
+  left: 12px;
   display: flex;
   flex-direction: column;
   gap: 2px;
   text-align: left;
+  z-index: 10;
 }
 
 .repair-label {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #b8b8b8;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
 .repair-value {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #ff9944;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
