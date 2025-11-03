@@ -1027,13 +1027,13 @@ function createCard(item) {
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
-        ${durability && internalValue ? `
-          <div class="repair-price-display">
-            <span class="repair-label">Repair Price:</span>
-            <span class="repair-value">$${repairPrice.toLocaleString()}</span>
-          </div>
-        ` : ''}
       </div>
+      ${durability && internalValue ? `
+        <div class="repair-price-display">
+          <span class="repair-label">Repair Price:</span>
+          <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+        </div>
+      ` : ''}
       <div class="card-info">
         <h3>${name}</h3>
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
@@ -1606,6 +1606,17 @@ function updateCardValues(input) {
   card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
   card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
   card.querySelector('.aftertax-value').textContent = calculateDurabilityValue(originalAfterTax, durabilityPercent);
+  
+  // Update repair price
+  const internalValue = card.dataset.internalValue;
+  const repairValueElement = card.querySelector('.repair-value');
+  
+  if (repairValueElement && internalValue) {
+    const missingDurability = maxDurability - currentDurability;
+    const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+    const repairPrice = Math.round(missingDurability * (internalVal / maxDurability) * 0.7);
+    repairValueElement.textContent = '$' + repairPrice.toLocaleString();
+  }
 }
 
 function calculateDurabilityValue(originalValue, durabilityPercent) {
