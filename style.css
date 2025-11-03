@@ -2241,6 +2241,76 @@ html, body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
+/* Rank 1 - Biggest */
+.rp-card.rank-1 {
+  padding: 18px 22px;
+}
+
+.rp-card.rank-1 .rank-badge {
+  width: 70px;
+  height: 70px;
+  font-size: 26px;
+}
+
+.rp-card.rank-1 .player-name {
+  font-size: 22px;
+}
+
+.rp-card.rank-1 .player-level {
+  font-size: 16px;
+}
+
+.rp-card.rank-1 .player-worth {
+  font-size: 20px;
+}
+
+/* Rank 2 - Second biggest */
+.rp-card.rank-2 {
+  padding: 16px 20px;
+}
+
+.rp-card.rank-2 .rank-badge {
+  width: 65px;
+  height: 65px;
+  font-size: 24px;
+}
+
+.rp-card.rank-2 .player-name {
+  font-size: 20px;
+}
+
+.rp-card.rank-2 .player-level {
+  font-size: 15px;
+}
+
+.rp-card.rank-2 .player-worth {
+  font-size: 18px;
+}
+
+/* Rank 3 - Third biggest */
+.rp-card.rank-3 {
+  padding: 14px 18px;
+}
+
+.rp-card.rank-3 .rank-badge {
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+}
+
+.rp-card.rank-3 .player-name {
+  font-size: 18px;
+}
+
+.rp-card.rank-3 .player-level {
+  font-size: 14px;
+}
+
+.rp-card.rank-3 .player-worth {
+  font-size: 17px;
+}
+
+/* Default (rank 4+) - Standard size */
 .rp-card .rank-badge {
   min-width: 50px;
   width: 50px;
