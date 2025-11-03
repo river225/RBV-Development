@@ -186,21 +186,29 @@ a { color: #fff; text-decoration: none; }
   margin-bottom: 4px;
 }
 
-.avg-value, .ranged-value, .aftertax-value {
-  color: #81e681;
-  font-weight: 700;
-  font-size: 1rem;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.avg-value, .ranged-value, .aftertax-value {
-  color: #81e681;
+/* Average Value - */
+.avg-value {
+  color: #00ff00; 
   font-weight: 700;
   font-size: 1.05rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
+/* Ranged Value -  */
+.ranged-value {
+  color: #E6E65C;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
 
+/* After Tax Value - */
+.aftertax-value {
+  color: #FF5C5C; 
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
 
 /* NEW: Crew Logo Card Styling - SMALLER SIZE */
 .crew-logo-card {
@@ -2443,7 +2451,7 @@ html, body {
 .repair-price-display {
   position: absolute;
   bottom: 5px;
-  left: 20px;
+  left: 40px;
   display: flex !important;
   flex-direction: column;
   gap: 2px;
@@ -2470,7 +2478,7 @@ html, body {
 .pawn-amount-display {
   position: absolute;
   bottom: 5px;
-  left: 150px; /* Moved to the right */
+  left: 130px; /* Moved to the right */
   display: flex !important;
   flex-direction: column;
   gap: 2px;
