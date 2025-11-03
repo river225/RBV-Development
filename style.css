@@ -2441,11 +2441,12 @@ html, body {
   font-size: 1.4rem;
 }
 
+
 /* Repair Price Display */
 .repair-price-display {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
+  bottom: 55px;
+  left: 20px;
   display: flex !important;
   flex-direction: column;
   gap: 2px;
