@@ -2470,7 +2470,7 @@ html, body {
 .pawn-amount-display {
   position: absolute;
   bottom: 5px;
-  left: 200px; /* Moved to the right */
+  left: 150px; /* Moved to the right */
   display: flex !important;
   flex-direction: column;
   gap: 2px;
