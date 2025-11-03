@@ -871,8 +871,8 @@ function createRichestPlayersSection(data) {
 
   const intro = `
     <div class="richest-players-header">
-      <h2>Top 50 Richest Players in BlockSpin</h2>
-      <p class="richest-intro">This leaderboard highlights the wealthiest players in the game, ranked by the total value of their in-game assets. The data is sourced from the official BlockSpin Richest Players spreadsheet.</p>
+      <h2>Top 1000 Richest Players in BlockSpin</h2>
+      <p class="richest-intro">This leaderboard highlights the wealthiest players in the game, ranked by the total value of their in-game assets. Rankings start at #2 and go to #1000.</p>
       
       <input 
         type="text" 
@@ -884,11 +884,12 @@ function createRichestPlayersSection(data) {
   `;
 
   const cards = data.map((player, index) => {
-    const rank = index + 1;
+    const rank = index + 2; // Start at rank 2
     const rankColor = getRankColor(rank);
     const rankSize = getRankSize(rank);
-    const formattedWorth = formatNetWorth(player['Net Worth'] || player.NetWorth || 0);
-    const playerName = player['Player Name'] || player.Name || 'Unknown';
+    const formattedWorth = formatNetWorth(player['Networth'] || player['Net Worth'] || 0);
+    const playerName = player['Roblox Username'] || player['Player Name'] || player.Name || 'Unknown';
+    const level = player['Level'] || 'N/A';
     
     // Create Roblox search URL
     const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
@@ -900,6 +901,7 @@ function createRichestPlayersSection(data) {
         </div>
         <div class="player-info">
           <div class="player-name">${playerName}</div>
+          <div class="player-level"><span style="color: #fff; font-size: 0.9em;">Level: </span><span style="color: #33cce6; font-weight: bold;">${level}</span></div>
           <div class="player-worth"><span style="color: #fff; font-size: 0.9em;">Net Worth: </span>${formattedWorth}</div>
           <a href="${robloxSearchUrl}" target="_blank" rel="noopener" class="profile-link">View Profile 🔗</a>
         </div>
@@ -923,7 +925,6 @@ function filterRichestPlayers(query) {
     }
   });
 }
-
 // ==================== RICHEST PLAYERS SECTION END ====================
 
 // === FETCH HELPERS ===
@@ -949,6 +950,36 @@ async function fetchSheet(sheetName) {
      return items.filter(x => String(x["Name"] || x["Header"] || x["Roblox Name"] || x["Player Name"] || "").trim().length > 0);
   } catch (err) {
     console.error(`Failed to fetch sheet: ${sheetName}`, err);
+    return [];
+  }
+}
+
+// Special fetch for Richest Players from different spreadsheet
+async function fetchRichestPlayers() {
+  try {
+    const RICHEST_SPREADSHEET_ID = "1nfWrJcFkVCZ-Yr0mWmCCjQoQgUD3_-W2Qsy4XD4NT3k";
+    const base = `https://docs.google.com/spreadsheets/d/${RICHEST_SPREADSHEET_ID}/gviz/tq`;
+    const url = `${base}?tqx=out:json&headers=1`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.substring(47, text.length - 2));
+
+    const cols = json.table.cols.map(c => c.label?.trim() || "");
+    const rows = json.table.rows || [];
+    const items = rows.map(r => {
+      const obj = {};
+      cols.forEach((label, i) => {
+        const cell = r.c?.[i];
+        obj[label] = cell ? (cell.f ?? cell.v ?? "") : "";
+      });
+      return obj;
+    });
+
+    // Filter out empty rows and return rows 2-1000 (index 1-999)
+    const validItems = items.filter(x => String(x["Roblox Username"] || "").trim().length > 0);
+    return validItems.slice(0, 999); // Get first 999 rows (ranks 2-1000)
+  } catch (err) {
+    console.error('Failed to fetch Richest Players', err);
     return [];
   }
 }
@@ -1782,19 +1813,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   const fetchPromises = SECTION_NAMES.map(async (sec) => {
    
     console.log(`Fetching data for: ${sec}`);
-    // Map section name to sheet name
-    const sheetName = sec === "💰 Richest Players" ? "RichestPlayers" : sec;
-    console.log(`Sheet name being fetched: "${sheetName}"`);
     
     let items;
     try {
-      items = await fetchSheet(sheetName);
-      console.log(`Got ${items.length} items for ${sec}`);
+      // Use NEW spreadsheet for Richest Players, OLD spreadsheet for everything else
       if (sec === "💰 Richest Players") {
+        items = await fetchRichestPlayers(); // NEW spreadsheet
+        console.log(`Got ${items.length} items for ${sec} from NEW spreadsheet`);
         console.log("RichestPlayers raw data:", items);
+      } else {
+        items = await fetchSheet(sec); // OLD spreadsheet
+        console.log(`Got ${items.length} items for ${sec} from OLD spreadsheet`);
       }
     } catch (error) {
-      console.error(`Failed to load ${sheetName}:`, error);
+      console.error(`Failed to load ${sec}:`, error);
       items = [];
     }
     

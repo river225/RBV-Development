@@ -2350,6 +2350,18 @@ html, body {
     flex-direction: column;
     text-align: center;
   }
+
+  /* Player Level styling in Richest Players */
+.player-level {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+.player-level span:last-child {
+  color: #33cce6 !important;
+  font-weight: bold !important;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
   
   .player-info {
     flex-direction: column;
