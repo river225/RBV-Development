@@ -959,7 +959,7 @@ async function fetchRichestPlayers() {
   try {
     const RICHEST_SPREADSHEET_ID = "1nfWrJcFkVCZ-Yr0mWmCCjQoQgUD3_-W2Qsy4XD4NT3k";
     const base = `https://docs.google.com/spreadsheets/d/${RICHEST_SPREADSHEET_ID}/gviz/tq`;
-    const url = `${base}?tqx=out:json&headers=1`;
+    const url = `${base}?tqx=out:json&range=A2:Z1000&headers=0`;
     const res = await fetch(url);
     const text = await res.text();
     const json = JSON.parse(text.substring(47, text.length - 2));
@@ -977,7 +977,7 @@ async function fetchRichestPlayers() {
 
     // Filter out empty rows and return rows 2-1000 (index 1-999)
     const validItems = items.filter(x => String(x["Roblox Username"] || "").trim().length > 0);
-    return validItems.slice(1, 1000); // Skip header row, get actual player data
+    return validItems;
   } catch (err) {
     console.error('Failed to fetch Richest Players', err);
     return [];
