@@ -2466,24 +2466,29 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
-/* Pawn Amount Display */
+/* Pawn Amount Display - positioned to the RIGHT of durability */
 .pawn-amount-display {
   position: absolute;
-  bottom: 38px; /* Moved up to be above Repair Price */
-  left: 12px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+  bottom: 5px;
+  left: 200px; /* Moved to the right */
+  display: flex !important;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .pawn-label {
-  color: #fff;
-  margin-right: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
 .pawn-value {
-  color: #00ff00; /* Changed to bright green */
+  font-size: 1.3rem;
   font-weight: 700;
-  font-size: 1.05rem;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+  color: #00ff00; /* Bright green */
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
