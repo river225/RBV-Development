@@ -1265,9 +1265,9 @@ function renderScammerSection(items) {
 }
 
 
-function renderRichestPlayersSection(items) {
+ function renderRichestPlayersSection(items) {
   const html = `
-    <section class="section" id="${slugify("💰 Richest Players")}">
+    <section class="section" id="richest-players">
       ${createRichestPlayersSection(items)}
     </section>
   `;
