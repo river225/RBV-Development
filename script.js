@@ -1025,7 +1025,26 @@ if (durability && durability.includes('/') && internalValue) {
   repairPrice = `$${repairPrice.toLocaleString()}`;
 }
 
+  // Calculate exact pawn amount (money formatted)
+let pawnAmount = 0;
+if (durability && durability.includes('/') && internalValue) {
+  const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
+
+  // Convert internal value (handles "$" and "k")
+  const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) *
+                      (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+
+  // Pawn formula: (internalValue * 0.3) - ((maxDurability - currentDurability) * ((internalValue * 0.3) / maxDurability / 1.43))
+  const baseValue = internalVal * 0.3;
+  const missingDurability = maxDurability - currentDurability;
+  const deduction = missingDurability * ((internalVal * 0.3) / maxDurability / 1.43);
   
+  const rawPawn = baseValue - deduction;
+  pawnAmount = Math.round(rawPawn);
+
+  // Format as money (e.g. "$1,095")
+  pawnAmount = `$${pawnAmount.toLocaleString()}`;
+}
   
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
@@ -1042,6 +1061,12 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="repair-price-display">
           <span class="repair-label">Repair Price:</span>
           <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+        </div>
+      ` : ''}
+            ${durability && internalValue ? `
+        <div class="pawn-amount-display">
+          <span class="pawn-label">Pawn Amount:</span>
+          <span class="pawn-value">${pawnAmount}</span>
         </div>
       ` : ''}
       <div class="card-info">
@@ -1063,7 +1088,6 @@ function createCrewLogoCard(item) {
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
     : "";
-
   return `
     <div class="card crew-logo-card" data-name="${escapeAttr(name)}">
       <div class="crew-card-content">
@@ -1628,6 +1652,21 @@ function updateCardValues(input) {
     repairValueElement.textContent = '$' + repairPrice.toLocaleString();
   }
 }
+
+  // Update pawn amount
+  const pawnValueElement = card.querySelector('.pawn-value');
+  
+  if (pawnValueElement && internalValue) {
+    const missingDurability = maxDurability - currentDurability;
+    const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+    
+    // Pawn formula
+    const baseValue = internalVal * 0.3;
+    const deduction = missingDurability * ((internalVal * 0.3) / maxDurability / 1.43);
+    const pawnPrice = Math.round(baseValue - deduction);
+    
+    pawnValueElement.textContent = '$' + pawnPrice.toLocaleString();
+  }
 
 function calculateDurabilityValue(originalValue, durabilityPercent) {
   if (!originalValue || originalValue === '' || originalValue === 'N/A' || originalValue === '-') {

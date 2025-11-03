@@ -2466,4 +2466,25 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
+/* Pawn Amount Display */
+.pawn-amount-display {
+  position: absolute;
+  bottom: 65px;
+  left: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.pawn-label {
+  color: #fff;
+  margin-right: 5px;
+}
+
+.pawn-value {
+  color: #81e681;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
 
