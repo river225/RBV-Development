@@ -2271,138 +2271,163 @@ html, body {
   flex-direction: column;
   gap: 15px;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.richest-card {
+.richest-container .richest-card {
   display: flex;
   align-items: center;
-  gap: 25px;
-  padding: 20px 30px;
-  background: rgba(30, 30, 45, 0.6);
-  border: 2px solid;
+  background: linear-gradient(135deg, #1a2332 0%, #2a3444 100%);
+  border: 3px solid;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  padding: 16px 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.richest-container .richest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+}
+
+.richest-container .richest-card.rank-1 {
+  padding: 20px 24px;
   min-height: 100px;
 }
 
-.richest-card:hover {
-  transform: translateX(5px);
-  background: rgba(40, 40, 55, 0.8);
+.richest-container .richest-card.rank-1 .rank-badge {
+  font-size: 2.5rem;
+  width: 80px;
+  height: 80px;
 }
 
-.rank-badge {
-  min-width: 70px;
+.richest-container .richest-card.rank-1 .player-name {
+  font-size: 2rem;
+}
+
+.richest-container .richest-card.rank-1 .player-worth {
+  font-size: 1.8rem;
+}
+
+.richest-container .richest-card.rank-2 {
+  padding: 20px 24px;
+  min-height: 85px;
+}
+
+.richest-container .richest-card.rank-2 .rank-badge {
+  font-size: 2rem;
   width: 70px;
   height: 70px;
-  border-radius: 50%;
+}
+
+.richest-container .richest-card.rank-2 .player-name {
+  font-size: 1.7rem;
+}
+
+.richest-container .richest-card.rank-2 .player-worth {
+  font-size: 1.5rem;
+}
+
+.richest-container .richest-card.rank-3 {
+  padding: 18px 22px;
+  min-height: 75px;
+}
+
+.richest-container .richest-card.rank-3 .rank-badge {
+  font-size: 1.7rem;
+  width: 60px;
+  height: 60px;
+}
+
+.richest-container .richest-card.rank-3 .player-name {
+  font-size: 1.5rem;
+}
+
+.richest-container .richest-card.rank-3 .player-worth {
+  font-size: 1.3rem;
+}
+
+.richest-container .richest-card.rank-default {
+  padding: 14px 18px;
+  min-height: 65px;
+}
+
+.richest-container .richest-card.rank-default .rank-badge {
+  font-size: 1.4rem;
+  width: 50px;
+  height: 50px;
+}
+
+.richest-container .richest-card.rank-default .player-name {
+  font-size: 1.2rem;
+}
+
+.richest-container .richest-card.rank-default .player-worth {
+  font-size: 1.1rem;
+}
+
+.richest-container .rank-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  border-radius: 50%;
   font-weight: bold;
   color: #000;
-  flex-shrink: 0;
   text-shadow: none;
+  flex-shrink: 0;
 }
 
-.player-info {
-  display: flex;
-  align-items: center;
-  gap: 35px;
+.richest-container .player-info {
   flex: 1;
-  flex-wrap: nowrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
-.player-name {
-  font-size: 24px;
+.richest-container .player-name {
   font-weight: bold;
   color: #fff;
-  min-width: 220px;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.player-level {
-  font-size: 16px;
-  min-width: 110px;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-.player-worth {
-  font-size: 22px;
+.richest-container .player-level {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+.richest-container .player-level span:last-child {
+  color: #33cce6 !important;
+  font-weight: bold !important;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.richest-container .player-worth {
   font-weight: bold;
-  min-width: 200px;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.player-worth span {
   color: #81e681;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  font-family: 'Courier New', monospace;
 }
 
-.profile-link {
-  margin-left: auto;
-  padding: 10px 18px;
-  background: rgba(74, 144, 226, 0.2);
-  border: 2px solid #4A90E2;
-  border-radius: 8px;
+.richest-container .profile-link {
   color: #4A90E2;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.9em;
+  margin-top: 5px;
+  display: inline-block;
+  transition: opacity 0.2s;
   white-space: nowrap;
-  transition: all 0.3s ease;
-  text-shadow: none;
 }
 
-.profile-link:hover {
-  background: rgba(74, 144, 226, 0.4);
-  transform: scale(1.05);
-}
-
-/* Special sizing for top 3 ranks */
-.rank-1 {
-  min-height: 110px;
-}
-
-.rank-1 .rank-badge {
-  width: 80px;
-  height: 80px;
-  font-size: 32px;
-}
-
-.rank-1 .player-name {
-  font-size: 28px;
-}
-
-.rank-2 {
-  min-height: 105px;
-}
-
-.rank-2 .rank-badge {
-  width: 75px;
-  height: 75px;
-  font-size: 30px;
-}
-
-.rank-2 .player-name {
-  font-size: 26px;
-}
-
-.rank-3 {
-  min-height: 100px;
-}
-
-.rank-3 .rank-badge {
-  width: 72px;
-  height: 72px;
-  font-size: 29px;
-}
-
-.rank-3 .player-name {
-  font-size: 25px;
+.richest-container .profile-link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
 }
 
 /* ==================== END RICHEST PLAYERS SECTION CSS ==================== */
-
 
 .info-footer-section {
   margin: 50px auto 0;
