@@ -1602,7 +1602,7 @@ function adjustDurability(btn, direction) {
   const maxDurability = parseInt(card.dataset.maxDurability);
   
   function adjust() {
-    let newValue = parseInt(input.value) + direction;
+    let newValue = (parseInt(input.value) || 0) + direction;
     newValue = Math.max(0, Math.min(newValue, maxDurability));
     input.value = newValue;
     updateCardValues(input);
