@@ -977,7 +977,7 @@ async function fetchRichestPlayers() {
 
     // Filter out empty rows and return rows 2-1000 (index 1-999)
     const validItems = items.filter(x => String(x["Roblox Username"] || "").trim().length > 0);
-    return validItems.slice(1, 1000);
+    return validItems;
   } catch (err) {
     console.error('Failed to fetch Richest Players', err);
     return [];
@@ -1267,7 +1267,7 @@ function renderScammerSection(items) {
 
  function renderRichestPlayersSection(items) {
   const html = `
-    <section class="section" id="richest-players">
+    <section class="section" id="${slugify("💰 Richest Players")}">
       ${createRichestPlayersSection(items)}
     </section>
   `;
