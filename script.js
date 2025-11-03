@@ -1651,8 +1651,8 @@ function updateCardValues(input) {
     const repairPrice = Math.round(missingDurability * (internalVal / maxDurability) * 0.7);
     repairValueElement.textContent = '$' + repairPrice.toLocaleString();
   }
-}
 
+    
   // Update pawn amount
   const pawnValueElement = card.querySelector('.pawn-value');
   
@@ -1667,6 +1667,9 @@ function updateCardValues(input) {
     
     pawnValueElement.textContent = '$' + pawnPrice.toLocaleString();
   }
+  
+}
+
 
 function calculateDurabilityValue(originalValue, durabilityPercent) {
   if (!originalValue || originalValue === '' || originalValue === 'N/A' || originalValue === '-') {
