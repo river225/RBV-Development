@@ -1007,17 +1007,25 @@ function createCard(item) {
     
   }
 
-    // Calculate initial repair price
-  let repairPrice = 0;
-  if (durability && durability.includes('/') && internalValue) {
-    const maxDurability = parseInt(durability.split('/')[1]) || 100;
-    const currentDurability = parseInt(durability.split('/')[0]) || maxDurability;
-    const missingDurability = maxDurability - currentDurability;
-    const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
-    repairPrice = Math.round(missingDurability * (internalVal / maxDurability) * 0.7);
+   // Calculate exact repair price (money formatted)
+let repairPrice = 0;
+if (durability && durability.includes('/') && internalValue) {
+  const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
+  const missingDurability = maxDurability - currentDurability;
 
- 
-  }
+  // Convert internal value (handles "$" and "k")
+  const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) *
+                      (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+
+  // Use tested divisor (1.43) for accuracy
+  const rawRepair = missingDurability * (internalVal / maxDurability / 1.43);
+  repairPrice = Math.round(rawRepair);
+
+  // Format as money (e.g. "$1,095")
+  repairPrice = `$${repairPrice.toLocaleString()}`;
+}
+
+  
   
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
