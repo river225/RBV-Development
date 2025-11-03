@@ -2442,7 +2442,7 @@ html, body {
 /* Repair Price Display */
 .repair-price-display {
   position: absolute;
-  bottom: 12px;
+  bottom: 8px;
   left: 20px;
   display: flex !important;
   flex-direction: column;
