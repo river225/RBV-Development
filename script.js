@@ -1628,7 +1628,7 @@ function stopDurabilityAdjust() {
 
 function updateCardValues(input) {
   const card = input.closest('.card');
-  const currentDurability = parseInt(input.value);
+  const currentDurability = parseInt(input.value) || 0; // Fixed: Default to 0 if empty
   const maxDurability = parseInt(card.dataset.maxDurability);
   
   const durabilityPercent = currentDurability / maxDurability;
@@ -1648,11 +1648,10 @@ function updateCardValues(input) {
   if (repairValueElement && internalValue) {
     const missingDurability = maxDurability - currentDurability;
     const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
-    const repairPrice = Math.round(missingDurability * (internalVal / maxDurability) * 0.7);
-    repairValueElement.textContent = '$' + repairPrice.toLocaleString();
+    const repairPrice = Math.round(missingDurability * (internalVal / maxDurability / 1.43));
+    repairValueElement.textContent = '$' + (isNaN(repairPrice) ? 0 : repairPrice).toLocaleString(); // Fixed: Shows $0 instead of NaN
   }
-
-    
+  
   // Update pawn amount
   const pawnValueElement = card.querySelector('.pawn-value');
   
@@ -1665,11 +1664,9 @@ function updateCardValues(input) {
     const deduction = missingDurability * ((internalVal * 0.3) / maxDurability / 1.43);
     const pawnPrice = Math.round(baseValue - deduction);
     
-    pawnValueElement.textContent = '$' + pawnPrice.toLocaleString();
+    pawnValueElement.textContent = '$' + (isNaN(pawnPrice) ? 0 : pawnPrice).toLocaleString(); // Fixed: Shows $0 instead of NaN
   }
-  
 }
-
 
 function calculateDurabilityValue(originalValue, durabilityPercent) {
   if (!originalValue || originalValue === '' || originalValue === 'N/A' || originalValue === '-') {
