@@ -119,12 +119,15 @@ a { color: #fff; text-decoration: none; }
 .card-left {
   background: #1f2a38;
   border-radius: 8px;
-  padding: 6px; /* Tighter padding around image */
+  padding: 6px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-width: 170px;
+  position: relative;
+  min-height: 240px;
 }
 
 .card img { 
