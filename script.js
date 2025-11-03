@@ -872,7 +872,7 @@ function createRichestPlayersSection(data) {
   const intro = `
     <div class="richest-players-header">
       <h2>Top 1000 Richest Players in BlockSpin</h2>
-      <p class="richest-intro">This leaderboard highlights the wealthiest players in the game, ranked by the total value of their in-game assets. Rankings start at #2 and go to #1000.</p>
+      <p class="richest-intro">This lis the Offical BlockSpin eaderboard showing the wealthiest players in the game, Ranked by the total value of their in-game assets. Rankings go to #1000. This leaderboard updates hourly</p>
       
       <input 
         type="text" 
@@ -884,7 +884,7 @@ function createRichestPlayersSection(data) {
   `;
 
   const cards = data.map((player, index) => {
-    const rank = index + 2; // Start at rank 2
+    const rank = index + 1; // Start at rank 1
     const rankColor = getRankColor(rank);
     const rankSize = getRankSize(rank);
     const formattedWorth = formatNetWorth(player['Networth'] || player['Net Worth'] || 0);
@@ -977,7 +977,7 @@ async function fetchRichestPlayers() {
 
     // Filter out empty rows and return rows 2-1000 (index 1-999)
     const validItems = items.filter(x => String(x["Roblox Username"] || "").trim().length > 0);
-    return validItems.slice(0, 999); // Get first 999 rows (ranks 2-1000)
+    return validItems.slice(1, 1000); // Skip header row, get actual player data
   } catch (err) {
     console.error('Failed to fetch Richest Players', err);
     return [];
