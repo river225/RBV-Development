@@ -2469,7 +2469,7 @@ html, body {
 /* Pawn Amount Display */
 .pawn-amount-display {
   position: absolute;
-  bottom: 65px;
+  bottom: 38px; /* Moved up to be above Repair Price */
   left: 12px;
   font-size: 0.95rem;
   font-weight: 700;
@@ -2482,9 +2482,8 @@ html, body {
 }
 
 .pawn-value {
-  color: #81e681;
+  color: #00ff00; /* Changed to bright green */
   font-weight: 700;
   font-size: 1.05rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
-
