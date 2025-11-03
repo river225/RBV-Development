@@ -1015,6 +1015,18 @@ function createCard(item) {
     const missingDurability = maxDurability - currentDurability;
     const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
     repairPrice = Math.round(missingDurability * (internalVal / maxDurability) * 0.7);
+
+  // Calculate pawn price
+let pawnPrice = 0;
+if (durability && durability.includes('/')) {
+  const maxDurability = parseInt(durability.split('/')[1]) || 100;
+  const currentDurability = parseInt(durability.split('/')[0]) || maxDurability;
+  const fullPawnValue = parseFloat(item['Pawn Amount']?.replace(/[$,k]/gi, '')) * (item['Pawn Amount']?.toLowerCase().includes('k') ? 1000 : 1) || 0;
+  
+  if (fullPawnValue > 0) {
+    pawnPrice = Math.round(fullPawnValue - ((maxDurability - currentDurability) * (fullPawnValue / maxDurability / 1.43)));
+  }
+}
   }
   
   return `
@@ -1028,10 +1040,21 @@ function createCard(item) {
         ${imgTag}
         ${durabilityHTML}
       </div>
-      ${durability && internalValue ? `
-        <div class="repair-price-display">
-          <span class="repair-label">Repair Price:</span>
-          <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+      ${durability && (internalValue || item['Pawn Amount']) ? `
+        <div class="card-repair-pawn-container">
+          ${internalValue ? `
+            <div class="card-repair">
+              <span class="repair-label">Repair Price:</span>
+              <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+            </div>
+          ` : ''}
+          ${internalValue && item['Pawn Amount'] ? '<div class="card-divider"></div>' : ''}
+          ${item['Pawn Amount'] ? `
+            <div class="card-pawn">
+              <span class="pawn-label">Pawn Amount:</span>
+              <span class="pawn-value">$${pawnPrice.toLocaleString()}</span>
+            </div>
+          ` : ''}
         </div>
       ` : ''}
       <div class="card-info">
