@@ -108,6 +108,7 @@ a { color: #fff; text-decoration: none; }
   padding-bottom: 55px; /* ADD THIS LINE - pushes bottom edge down */
   background: #141d28; /* Same as section buttons when not clicked */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .card:hover {
