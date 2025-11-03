@@ -2436,26 +2436,26 @@ html, body {
   margin: 0 20px;
   font-size: 1.4rem;
 }
-
 /* Repair Price Display */
 .repair-price-display {
-  margin-top: 10px;
-  padding-top: 8px;
-  border-top: 2px solid rgba(51, 204, 230, 0.3);
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  text-align: left;
 }
 
 .repair-label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #b8b8b8;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
 .repair-value {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #ff9944;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;

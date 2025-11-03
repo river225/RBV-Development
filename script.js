@@ -1027,13 +1027,13 @@ function createCard(item) {
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
+        ${durability && internalValue ? `
+          <div class="repair-price-display">
+            <span class="repair-label">Repair Price:</span>
+            <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+          </div>
+        ` : ''}
       </div>
-      ${durability && internalValue ? `
-        <div class="repair-price-display">
-          <span class="repair-label">Repair Price:</span>
-          <span class="repair-value">$${repairPrice.toLocaleString()}</span>
-        </div>
-      ` : ''}
       <div class="card-info">
         <h3>${name}</h3>
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
