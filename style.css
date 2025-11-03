@@ -188,7 +188,7 @@ a { color: #fff; text-decoration: none; }
 
 /* Average Value - */
 .avg-value {
-  color: #00ff00; 
+  color: #81e681; 
   font-weight: 700;
   font-size: 1.05rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -2451,7 +2451,7 @@ html, body {
 .repair-price-display {
   position: absolute;
   bottom: 5px;
-  left: 40px;
+  left: 20px;
   display: flex !important;
   flex-direction: column;
   gap: 2px;
@@ -2497,6 +2497,6 @@ html, body {
 .pawn-value {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #00ff00; /* Bright green */
+  color: #81E681; 
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
