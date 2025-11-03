@@ -196,7 +196,7 @@ a { color: #fff; text-decoration: none; }
 
 /* Ranged Value -  */
 .ranged-value {
-  color: #E6E65C;
+  color: #E6C15F;
   font-weight: 700;
   font-size: 1.05rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -2497,6 +2497,6 @@ html, body {
 .pawn-value {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #81E681; 
+  color: #5FD8C1; 
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
