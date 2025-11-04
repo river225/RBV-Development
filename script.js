@@ -850,13 +850,13 @@ function formatNetWorth(value) {
 }
 
 function getRankColor(rank) {
-  if (rank === 1) return '#FFD700';        // 🥇 Gold (keep vibrant for #1)
-  if (rank >= 2 && rank <= 3) return '#C0C0C0';    // 🥈 Silver (good brightness)
-  if (rank >= 4 && rank <= 10) return '#CD7F32';   // 🥉 Bronze (classic bronze)
-  if (rank >= 11 && rank <= 100) return '#5B9BD5'; // 🔵 Medium Blue (not too neon)
-  if (rank >= 101 && rank <= 300) return '#8B5CF6'; // 🟣 Medium Purple (your original)
-  if (rank >= 301 && rank <= 600) return '#48BB78'; // 🟢 Medium Green (balanced)
-  return '#A0A0A0'; // ⚪ Light Gray (601-1000)
+  if (rank === 1) return '#FFD700';        // 🥇 Gold
+  if (rank === 2) return '#C0C0C0';        // 🥈 Silver
+  if (rank === 3) return '#CD7F32';        // 🥉 Bronze
+  if (rank >= 4 && rank <= 25) return '#5B9BD5';   // 🔵 Blue (4-25)
+  if (rank >= 26 && rank <= 100) return '#8B5CF6'; // 🟣 Purple (26-100)
+  if (rank >= 101 && rank <= 500) return '#48BB78'; // 🟢 Green (101-500)
+  return '#A0A0A0'; // ⚪ Gray (501-1000)
 }
 
 function getRankSize(rank) {
