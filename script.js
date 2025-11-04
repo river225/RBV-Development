@@ -850,17 +850,17 @@ function formatNetWorth(value) {
 }
 
 function getRankColor(rank) {
-  if (rank === 1) return '#FFD700'; // Gold
-  if (rank === 2) return '#C0C0C0'; // Silver
-  if (rank === 3) return '#CD7F32'; // Bronze
-  if (rank >= 4 && rank <= 10) return '#4A90E2'; // Blue
-  return '#8B5CF6'; // Less neon purple
+  if (rank === 1) return '#FFD700';        // 🥇 Gold (keep vibrant for #1)
+  if (rank >= 2 && rank <= 3) return '#C0C0C0';    // 🥈 Silver (good brightness)
+  if (rank >= 4 && rank <= 10) return '#CD7F32';   // 🥉 Bronze (classic bronze)
+  if (rank >= 11 && rank <= 100) return '#5B9BD5'; // 🔵 Medium Blue (not too neon)
+  if (rank >= 101 && rank <= 300) return '#8B5CF6'; // 🟣 Medium Purple (your original)
+  if (rank >= 301 && rank <= 600) return '#48BB78'; // 🟢 Medium Green (balanced)
+  return '#A0A0A0'; // ⚪ Light Gray (601-1000)
 }
 
 function getRankSize(rank) {
-  if (rank === 1) return 'rank-1';
-  if (rank === 2) return 'rank-2';
-  if (rank === 3) return 'rank-3';
+  // No longer using size variations - all cards same size
   return 'rank-default';
 }
 
