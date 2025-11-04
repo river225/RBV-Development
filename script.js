@@ -884,9 +884,8 @@ function createRichestPlayersSection(data) {
   `;
 
   const cards = data.map((player, index) => {
-    const rank = index + 1; // Start at rank 1
+    const rank = index + 1;
     const rankColor = getRankColor(rank);
-    const rankSize = getRankSize(rank);
     const formattedWorth = formatNetWorth(player['Networth'] || player['Net Worth'] || 0);
     const playerName = player['Roblox Username'] || player['Player Name'] || player.Name || 'Unknown';
     const level = player['Level'] || 'N/A';
@@ -895,7 +894,7 @@ function createRichestPlayersSection(data) {
     const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
 
     return `
-      <div class="richest-card ${rankSize}" style="border-color: ${rankColor};" data-player-name="${playerName}">
+      <div class="richest-card" style="border-color: ${rankColor};" data-player-name="${playerName}">
         <div class="rank-badge" style="background: ${rankColor};">
           #${rank}
         </div>
