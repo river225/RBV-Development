@@ -2162,7 +2162,65 @@ html, body {
   padding: 20px 0;
 }
 
-/* ==================== RICHEST PLAYERS SECTION CSS ==================== */
+
+/* ==================== RICHEST PLAYERS STYLES ==================== */
+.richest-players-header {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  padding: 0 20px;
+}
+
+.richest-players-header h2 {
+  color: #FFD700;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.richest-intro {
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 25px auto;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.richest-search {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  background: #141d28;
+  color: #ffffff;
+  text-align: left;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.richest-search:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #33cce6;
+  box-shadow: 0 0 15px rgba(51, 204, 230, 0.5);
+}
+
+.richest-search::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.richest-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0px 0 auto;
+}
 
 .richest-card {
   display: flex;
@@ -2281,6 +2339,20 @@ html, body {
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
+.player-worth {
+  font-weight: bold;
+  color: #81e681;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  font-family: 'Courier New', monospace;
+}
+
+@media (max-width: 768px) {
+  .richest-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Player Level styling in Richest Players */
 .player-level {
   margin: 4px 0;
   font-size: 0.95rem;
@@ -2291,12 +2363,11 @@ html, body {
   font-weight: bold !important;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
-
-.player-worth {
-  font-weight: bold;
-  color: #81e681;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-  font-family: 'Courier New', monospace;
+  
+  .player-info {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .profile-link {
