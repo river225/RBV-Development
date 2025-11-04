@@ -853,14 +853,17 @@ function getRankColor(rank) {
   if (rank === 1) return '#FFD700';        // 🥇 Gold
   if (rank === 2) return '#C0C0C0';        // 🥈 Silver
   if (rank === 3) return '#CD7F32';        // 🥉 Bronze
-  if (rank >= 4 && rank <= 25) return '#5B9BD5';   // 🔵 Blue (4-25)
-  if (rank >= 26 && rank <= 100) return '#8B5CF6'; // 🟣 Purple (26-100)
+  if (rank >= 4 && rank <= 25) return '#8B5CF6';   // 🟣 Purple (4-25)
+  if (rank >= 26 && rank <= 100) return '#F97316'; // 🟠 Orange (26-100)
   if (rank >= 101 && rank <= 500) return '#48BB78'; // 🟢 Green (101-500)
   return '#A0A0A0'; // ⚪ Gray (501-1000)
 }
 
 function getRankSize(rank) {
-  // No longer using size variations - all cards same size
+  if (rank === 1) return 'rank-1';
+  if (rank === 2) return 'rank-2';
+  if (rank === 3) return 'rank-3';
+  if (rank >= 4 && rank <= 25) return 'rank-top25';
   return 'rank-default';
 }
 
@@ -894,7 +897,7 @@ function createRichestPlayersSection(data) {
     const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
 
     return `
-      <div class="richest-card" style="border-color: ${rankColor};" data-player-name="${playerName}">
+      <div class="richest-card ${getRankSize(rank)}" style="border-color: ${rankColor};" data-player-name="${playerName}">
         <div class="rank-badge" style="background: ${rankColor};">
           #${rank}
         </div>

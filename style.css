@@ -2371,6 +2371,115 @@ html, body {
   text-decoration: underline;
 }
 
+/* ==================== RICHEST PLAYERS STYLES END  ==================== */
+
+/* Base richest card - default size for ranks 26+ */
+.richest-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1a2332 0%, #2a3444 100%);
+  border: 3px solid;
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 20px;
+}
+
+/* Rank 1 - Biggest */
+.richest-card.rank-1 {
+  padding: 24px 20px;
+  min-height: 100px;
+}
+
+.richest-card.rank-1 .rank-badge {
+  font-size: 2.5rem;
+  width: 70px;
+  height: 70px;
+}
+
+.richest-card.rank-1 .player-name {
+  font-size: 1.8rem;
+}
+
+.richest-card.rank-1 .player-worth {
+  font-size: 1.6rem;
+}
+
+/* Rank 2 - Second biggest */
+.richest-card.rank-2 {
+  padding: 22px 20px;
+  min-height: 90px;
+}
+
+.richest-card.rank-2 .rank-badge {
+  font-size: 2.2rem;
+  width: 65px;
+  height: 65px;
+}
+
+.richest-card.rank-2 .player-name {
+  font-size: 1.6rem;
+}
+
+.richest-card.rank-2 .player-worth {
+  font-size: 1.4rem;
+}
+
+/* Rank 3 - Third biggest */
+.richest-card.rank-3 {
+  padding: 20px 20px;
+  min-height: 80px;
+}
+
+.richest-card.rank-3 .rank-badge {
+  font-size: 2rem;
+  width: 60px;
+  height: 60px;
+}
+
+.richest-card.rank-3 .player-name {
+  font-size: 1.4rem;
+}
+
+.richest-card.rank-3 .player-worth {
+  font-size: 1.3rem;
+}
+
+/* Ranks 4-25 - Medium size */
+.richest-card.rank-top25 {
+  padding: 18px 20px;
+  min-height: 70px;
+}
+
+.richest-card.rank-top25 .rank-badge {
+  font-size: 1.7rem;
+  width: 55px;
+  height: 55px;
+}
+
+.richest-card.rank-top25 .player-name {
+  font-size: 1.25rem;
+}
+
+.richest-card.rank-top25 .player-worth {
+  font-size: 1.15rem;
+}
+
+/* Ranks 26+ - Default/smallest */
+.richest-card.rank-default .rank-badge {
+  font-size: 1.4rem;
+  width: 50px;
+  height: 50px;
+}
+
+.richest-card.rank-default .player-name {
+  font-size: 1.1rem;
+}
+
+.richest-card.rank-default .player-worth {
+  font-size: 1rem;
+}
+
 
 .info-footer-section {
   margin: 50px auto 0;
