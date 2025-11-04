@@ -2218,7 +2218,7 @@ html, body {
   gap: 16px;
   width: 100%;
   max-width: 900px;
-  margin: 0px 0 auto;
+  margin: 0 auto;
 }
 
 .richest-card {
@@ -2345,13 +2345,6 @@ html, body {
   font-family: 'Courier New', monospace;
 }
 
-@media (max-width: 768px) {
-  .richest-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  /* Player Level styling in Richest Players */
 .player-level {
   margin: 4px 0;
   font-size: 0.95rem;
@@ -2361,12 +2354,6 @@ html, body {
   color: #33cce6 !important;
   font-weight: bold !important;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-  
-  .player-info {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
 
 .profile-link {
@@ -2381,6 +2368,42 @@ html, body {
 .profile-link:hover {
   opacity: 0.7;
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .richest-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .player-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.sections-nav {
+  width: 200px;
+  min-width: 200px;
+  flex-shrink: 0;
+  padding: 8px;
+  border-right: 3px solid #000000;
+}
+
+.sections-nav button { 
+  display: flex; 
+  align-items: center; 
+  width: 100%; 
+  min-width: 184px;
+  padding: 8px; 
+  margin-bottom: 8px; 
+  background: #141d28; 
+  border: 3px solid #000000; 
+  border-radius: 6px; 
+  cursor: pointer; 
+  color: #fff; 
+  text-align: left; 
+  min-height: 58px;
 }
 
 
