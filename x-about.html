@@ -185,66 +185,7 @@
             color: #6bc76b;
         }
         
-        /* Scam Investigation Team - Cyan with arrow-style corners */
-        .team-card.scam-team {
-            background: linear-gradient(135deg, #1a2a33 0%, #1f2a38 50%, #1a2a33 100%);
-            border-color: #33cce6;
-        }
         
-        .team-card.scam-team::before {
-            background: radial-gradient(circle at top right, #33cce6, transparent 70%),
-                        radial-gradient(circle at bottom left, #33cce6, transparent 70%);
-        }
-        
-        .team-card.scam-team h3 {
-            color: #33cce6;
-            border: 2px solid #33cce6;
-            border-radius: 0px;
-            clip-path: polygon(
-                10px 0%, calc(100% - 10px) 0%, 100% 10px,
-                100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%,
-                0% calc(100% - 10px), 0% 10px
-            );
-        }
-        
-        .team-card.scam-team h3::before,
-        .team-card.scam-team h3::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-        }
-        
-        .team-card.scam-team h3::before {
-            top: -2px;
-            left: -2px;
-            border-width: 0 12px 12px 0;
-            border-color: transparent #33cce6 transparent transparent;
-        }
-        
-        .team-card.scam-team h3::after {
-            bottom: -2px;
-            right: -2px;
-            border-width: 12px 0 0 12px;
-            border-color: transparent transparent transparent #33cce6;
-        }
-        
-        .team-card.scam-team .team-divider {
-            background: #33cce6;
-        }
-        
-        .team-card.scam-team .team-label {
-            color: #33cce6;
-        }
-        
-        .team-card.scam-team .team-members a {
-            color: #33cce6;
-        }
-        
-        .team-card.scam-team .team-members {
-            color: #33cce6;
-        }
         
         /* Website Testing Team - Orange with notched corners */
         .team-card.testing-team {
@@ -451,33 +392,6 @@
                 <div class="team-members">
                     <div>Team Member 1</div>
                     <div><a href="https://www.roblox.com/users/123456789/profile" target="_blank">Team Member 2</a></div>
-                    <div>Team Member 3</div>
-                    <div>Team Member 4</div>
-                    <!-- Add more members as needed, wrap in <a> tag to make clickable -->
-                </div>
-            </div>
-            
-            <!-- Scam Investigation Team -->
-            <div class="team-card scam-team">
-                <h3>Scam Investigation Team</h3>
-                <p class="team-description">Investigates reported scammers, verifies evidence, and places them on our scammer list to help keep the trading community safe.</p>
-                
-                <div class="team-divider"></div>
-                
-                <div class="team-label">Manager:</div>
-                <div class="team-members" style="display: block;">
-                    G White
-                    <!-- To make clickable, replace above line with:
-                    <a href="https://www.roblox.com/users/USERID/profile" target="_blank">G White</a>
-                    -->
-                </div>
-                
-                <div class="team-divider"></div>
-                
-                <div class="team-label">Team Members:</div>
-                <div class="team-members">
-                    <div>Team Member 1</div>
-                    <div>Team Member 2</div>
                     <div>Team Member 3</div>
                     <div>Team Member 4</div>
                     <!-- Add more members as needed, wrap in <a> tag to make clickable -->
