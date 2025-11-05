@@ -1888,3 +1888,54 @@ function openRiverLinks(e) {
   `;
   document.body.appendChild(modal);
 }
+
+// Fetch and display top donators
+async function loadTopDonators() {
+  try {
+    const donators = await fetchSheet("Top Donate");
+    const donatorList = document.getElementById('donator-list');
+    
+    if (!donatorList) return;
+    
+    if (!donators || donators.length === 0) {
+      donatorList.innerHTML = '<div class="donator-loading">No donators yet</div>';
+      return;
+    }
+    
+    // Take top 10 only
+    const top10 = donators.slice(0, 10);
+    
+    donatorList.innerHTML = top10.map((donator, index) => {
+      const rank = index + 1;
+      const name = donator.Name || 'Anonymous';
+      const donation = donator.Donation || '0';
+      const profile = donator['User Profile'] || '#';
+      
+      // Format donation amount
+      const formattedDonation = donation.startsWith('$') ? donation : `$${donation}`;
+      
+      return `
+        <div class="donator-item">
+          <div class="donator-rank">${rank}</div>
+          <div class="donator-info">
+            <div class="donator-name">${name}</div>
+            <div class="donator-amount">${formattedDonation}</div>
+            ${profile !== '#' ? `<a href="${profile}" target="_blank" class="donator-profile">View Profile 🔗</a>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+  } catch (error) {
+    console.error('Error loading donators:', error);
+    const donatorList = document.getElementById('donator-list');
+    if (donatorList) {
+      donatorList.innerHTML = '<div class="donator-loading">Failed to load donators</div>';
+    }
+  }
+}
+
+// Auto-load donators when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  loadTopDonators();
+});
