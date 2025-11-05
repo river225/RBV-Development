@@ -2610,6 +2610,28 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
+
+/* Top Donators Box Styling */
+.donator-box-home {
+  background: rgba(20, 25, 35, 0.95);
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  padding: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(51, 204, 230, 0.3);
+}
+
+.donator-box-home h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #33cce6;
+  text-align: center;
+  border-bottom: 1px solid rgba(51, 204, 230, 0.3);
+  padding-bottom: 10px;
+}
+
 .donator-scroll {
   overflow-y: auto;
   flex: 1;
@@ -2617,6 +2639,20 @@ html, body {
   flex-direction: column;
   gap: 6px;
   padding: 4px 0;
+}
+
+.donator-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.donator-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.donator-scroll::-webkit-scrollbar-thumb {
+  background: #33cce6;
+  border-radius: 3px;
 }
 
 .donator-item {
