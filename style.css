@@ -2617,7 +2617,11 @@ html, body {
   border: 2px solid #FFD700;
   border-radius: 8px;
   padding: 12px;
-  height: 100%;
+  position: absolute;
+  right: 17px;
+  top: 548px;
+  bottom: 17px;
+  width: 468px;
   display: flex;
   flex-direction: column;
 }
@@ -2646,7 +2650,7 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   padding: 0 8px 0 0;
   margin-top: 10px;
 }
@@ -2671,17 +2675,17 @@ html, body {
 
 .donator-item {
   border-radius: 8px;
-  padding: 12px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  transition: all 0.2s ease;
+  gap: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .donator-item:hover {
-  transform: translateX(3px);
-  filter: brightness(1.15);
+  transform: scale(1.05);
 }
 
 /* Rank 1 - Gold */
@@ -2691,33 +2695,45 @@ html, body {
   box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
 }
 
+.donator-item:nth-child(1):hover {
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.8);
+}
+
 .donator-item:nth-child(1) .donator-rank {
   background: #DAA520;
   color: #000;
 }
 
-/* Rank 2 - Gold */
+/* Rank 2 - Silver */
 .donator-item:nth-child(2) {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.2));
-  border: 2px solid #DAA520;
-  box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
+  background: linear-gradient(135deg, rgba(169, 169, 169, 0.3), rgba(128, 128, 128, 0.2));
+  border: 2px solid #A9A9A9;
+  box-shadow: 0 0 12px rgba(169, 169, 169, 0.4);
+}
+
+.donator-item:nth-child(2):hover {
+  box-shadow: 0 0 20px rgba(169, 169, 169, 0.8);
 }
 
 .donator-item:nth-child(2) .donator-rank {
-  background: #DAA520;
+  background: #A9A9A9;
   color: #000;
 }
 
-/* Rank 3 - Gold */
+/* Rank 3 - Bronze */
 .donator-item:nth-child(3) {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.2));
-  border: 2px solid #DAA520;
-  box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.3), rgba(160, 82, 45, 0.2));
+  border: 2px solid #CD7F32;
+  box-shadow: 0 0 12px rgba(205, 127, 50, 0.4);
+}
+
+.donator-item:nth-child(3):hover {
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.8);
 }
 
 .donator-item:nth-child(3) .donator-rank {
-  background: #DAA520;
-  color: #000;
+  background: #CD7F32;
+  color: #fff;
 }
 
 /* Rank 4 - Royal Blue */
@@ -2725,6 +2741,10 @@ html, body {
   background: linear-gradient(135deg, rgba(65, 105, 225, 0.3), rgba(25, 25, 112, 0.2));
   border: 2px solid #4169E1;
   box-shadow: 0 0 12px rgba(65, 105, 225, 0.4);
+}
+
+.donator-item:nth-child(4):hover {
+  box-shadow: 0 0 20px rgba(65, 105, 225, 0.8);
 }
 
 .donator-item:nth-child(4) .donator-rank {
@@ -2739,6 +2759,10 @@ html, body {
   box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
 }
 
+.donator-item:nth-child(5):hover {
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+}
+
 .donator-item:nth-child(5) .donator-rank {
   background: #8A2BE2;
   color: #fff;
@@ -2749,6 +2773,10 @@ html, body {
   background: linear-gradient(135deg, rgba(46, 139, 87, 0.3), rgba(34, 139, 34, 0.2));
   border: 2px solid #2E8B57;
   box-shadow: 0 0 12px rgba(46, 139, 87, 0.4);
+}
+
+.donator-item:nth-child(6):hover {
+  box-shadow: 0 0 20px rgba(46, 139, 87, 0.8);
 }
 
 .donator-item:nth-child(6) .donator-rank {
@@ -2763,6 +2791,10 @@ html, body {
   box-shadow: 0 0 12px rgba(220, 20, 60, 0.4);
 }
 
+.donator-item:nth-child(7):hover {
+  box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+}
+
 .donator-item:nth-child(7) .donator-rank {
   background: #DC143C;
   color: #fff;
@@ -2773,6 +2805,10 @@ html, body {
   background: linear-gradient(135deg, rgba(32, 178, 170, 0.3), rgba(0, 139, 139, 0.2));
   border: 2px solid #20B2AA;
   box-shadow: 0 0 12px rgba(32, 178, 170, 0.4);
+}
+
+.donator-item:nth-child(8):hover {
+  box-shadow: 0 0 20px rgba(32, 178, 170, 0.8);
 }
 
 .donator-item:nth-child(8) .donator-rank {
@@ -2787,6 +2823,10 @@ html, body {
   box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
 }
 
+.donator-item:nth-child(9):hover {
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+}
+
 .donator-item:nth-child(9) .donator-rank {
   background: #00BFFF;
   color: #000;
@@ -2799,16 +2839,36 @@ html, body {
   box-shadow: 0 0 12px rgba(183, 110, 121, 0.4);
 }
 
+.donator-item:nth-child(10):hover {
+  box-shadow: 0 0 20px rgba(183, 110, 121, 0.8);
+}
+
 .donator-item:nth-child(10) .donator-rank {
   background: #B76E79;
   color: #fff;
 }
 
+/* Rank 11+ - Blue */
+.donator-item:nth-child(n+11) {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(37, 99, 235, 0.15));
+  border: 2px solid #3B82F6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.donator-item:nth-child(n+11):hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+}
+
+.donator-item:nth-child(n+11) .donator-rank {
+  background: #3B82F6;
+  color: #fff;
+}
+
 .donator-rank {
   font-weight: bold;
-  font-size: 0.85rem;
-  width: 28px;
-  height: 28px;
+  font-size: 0.75rem;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2820,14 +2880,14 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   min-width: 0;
 }
 
 .donator-name {
   color: #fff;
   font-weight: bold;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2836,12 +2896,12 @@ html, body {
 .donator-amount {
   color: #4ade80;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 
 .donator-profile {
   color: #5bc5de;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
