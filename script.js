@@ -1849,7 +1849,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   
-  showSection("Home");
+  showSection("Home"); 
+loadTopDonators();
+
   sectionsContainer.classList.add("loaded");
   
   setTimeout(() => {
@@ -1898,7 +1900,7 @@ async function loadTopDonators() {
     if (!donatorList) return;
     
     if (!donators || donators.length === 0) {
-      donatorList.innerHTML = '<div class="donator-loading">Thank you to our generous supporters!</div>';
+      donatorList.innerHTML = '<div class="donator-loading">No donators yet</div>';
       return;
     }
     
@@ -1934,8 +1936,3 @@ async function loadTopDonators() {
     }
   }
 }
-
-// Auto-load donators when page loads
-document.addEventListener('DOMContentLoaded', () => {
-  loadTopDonators();
-});
