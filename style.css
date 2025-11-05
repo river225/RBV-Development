@@ -2610,33 +2610,108 @@ html, body {
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
-/* Top Donators Box */
-.donator-box-home {
-  background: linear-gradient(135deg, #1a2332 0%, #243140 100%);
-  border: 3px solid #FFD700;
-  border-radius: 12px;
-  padding: 14px;
-  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
-  height: 100%;
+.donator-scroll {
+  overflow-y: auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
 }
 
-.donator-box-home h3 {
-  color: #FFD700;
-  font-size: 1.2rem;
+.donator-item {
+  background: #141d28;
+  border: 2px solid #2a3542;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.donator-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.3);
+  border-color: #FFD700;
+}
+
+.donator-rank {
+  background: #FFD700;
+  color: #000;
   font-weight: bold;
-  text-align: center;
-  margin: 0 0 6px 0;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+  font-size: 0.85rem;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.donator-description {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.75rem;
-  text-align: center;
-  margin: 0 0 12px 0;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #FFD700;
+/* Top 3 special colors */
+.donator-item:nth-child(1) .donator-rank {
+  background: #FFD700; /* Gold */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.donator-item:nth-child(2) .donator-rank {
+  background: #C0C0C0; /* Silver */
+  box-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+}
+
+.donator-item:nth-child(3) .donator-rank {
+  background: #CD7F32; /* Bronze */
+  box-shadow: 0 0 10px rgba(205, 127, 50, 0.5);
+}
+
+.donator-item:nth-child(n+4) .donator-rank {
+  background: #8B5CF6; /* Purple for 4-10 */
+}
+
+.donator-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.donator-name {
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
   text-shadow: 1px 1px 0 #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.donator-amount {
+  color: #81e681;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.donator-profile {
+  color: #33cce6;
+  font-size: 0.7rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.donator-profile:hover {
+  color: #5bc5de;
+  text-decoration: underline;
+}
+
+.donator-loading {
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 20px;
 }
