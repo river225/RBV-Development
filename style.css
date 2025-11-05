@@ -2623,19 +2623,19 @@ html, body {
 }
 
 .donator-box-home h3 {
-  margin: 0 0 8px 0;
-  font-size: 15px;
+  margin: 0 0 10px 0;
+  font-size: 18px;
   color: #FFD700;
   text-align: center;
   font-weight: bold;
 }
 
 .donator-description {
-  margin: 0 0 8px 0;
-  font-size: 11px;
+  margin: 0 0 10px 0;
+  font-size: 13px;
   color: #fff;
   text-align: center;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #FFD700;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.8),
                0 0 5px rgba(255, 215, 0, 0.3);
@@ -2675,13 +2675,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
-  cursor: pointer;
-}
-
-.donator-item:hover {
-  transform: scale(1.05);
 }
 
 /* Rank 1 - Gold */
@@ -2689,10 +2683,6 @@ html, body {
   background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.2));
   border: 2px solid #DAA520;
   box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
-}
-
-.donator-item:nth-child(1):hover {
-  box-shadow: 0 0 20px rgba(218, 165, 32, 0.8);
 }
 
 .donator-item:nth-child(1) .donator-rank {
@@ -2707,10 +2697,6 @@ html, body {
   box-shadow: 0 0 12px rgba(169, 169, 169, 0.4);
 }
 
-.donator-item:nth-child(2):hover {
-  box-shadow: 0 0 20px rgba(169, 169, 169, 0.8);
-}
-
 .donator-item:nth-child(2) .donator-rank {
   background: #A9A9A9;
   color: #000;
@@ -2721,10 +2707,6 @@ html, body {
   background: linear-gradient(135deg, rgba(205, 127, 50, 0.3), rgba(160, 82, 45, 0.2));
   border: 2px solid #CD7F32;
   box-shadow: 0 0 12px rgba(205, 127, 50, 0.4);
-}
-
-.donator-item:nth-child(3):hover {
-  box-shadow: 0 0 20px rgba(205, 127, 50, 0.8);
 }
 
 .donator-item:nth-child(3) .donator-rank {
@@ -2739,10 +2721,6 @@ html, body {
   box-shadow: 0 0 12px rgba(65, 105, 225, 0.4);
 }
 
-.donator-item:nth-child(4):hover {
-  box-shadow: 0 0 20px rgba(65, 105, 225, 0.8);
-}
-
 .donator-item:nth-child(4) .donator-rank {
   background: #4169E1;
   color: #fff;
@@ -2753,10 +2731,6 @@ html, body {
   background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.2));
   border: 2px solid #8A2BE2;
   box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
-}
-
-.donator-item:nth-child(5):hover {
-  box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
 }
 
 .donator-item:nth-child(5) .donator-rank {
@@ -2771,10 +2745,6 @@ html, body {
   box-shadow: 0 0 12px rgba(46, 139, 87, 0.4);
 }
 
-.donator-item:nth-child(6):hover {
-  box-shadow: 0 0 20px rgba(46, 139, 87, 0.8);
-}
-
 .donator-item:nth-child(6) .donator-rank {
   background: #2E8B57;
   color: #fff;
@@ -2785,10 +2755,6 @@ html, body {
   background: linear-gradient(135deg, rgba(220, 20, 60, 0.3), rgba(139, 0, 0, 0.2));
   border: 2px solid #DC143C;
   box-shadow: 0 0 12px rgba(220, 20, 60, 0.4);
-}
-
-.donator-item:nth-child(7):hover {
-  box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
 }
 
 .donator-item:nth-child(7) .donator-rank {
@@ -2803,10 +2769,6 @@ html, body {
   box-shadow: 0 0 12px rgba(32, 178, 170, 0.4);
 }
 
-.donator-item:nth-child(8):hover {
-  box-shadow: 0 0 20px rgba(32, 178, 170, 0.8);
-}
-
 .donator-item:nth-child(8) .donator-rank {
   background: #20B2AA;
   color: #fff;
@@ -2817,10 +2779,6 @@ html, body {
   background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(30, 144, 255, 0.2));
   border: 2px solid #00BFFF;
   box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
-}
-
-.donator-item:nth-child(9):hover {
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
 }
 
 .donator-item:nth-child(9) .donator-rank {
@@ -2835,10 +2793,6 @@ html, body {
   box-shadow: 0 0 12px rgba(183, 110, 121, 0.4);
 }
 
-.donator-item:nth-child(10):hover {
-  box-shadow: 0 0 20px rgba(183, 110, 121, 0.8);
-}
-
 .donator-item:nth-child(10) .donator-rank {
   background: #B76E79;
   color: #fff;
@@ -2849,10 +2803,6 @@ html, body {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(37, 99, 235, 0.15));
   border: 2px solid #3B82F6;
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-}
-
-.donator-item:nth-child(n+11):hover {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
 }
 
 .donator-item:nth-child(n+11) .donator-rank {
