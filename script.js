@@ -1914,7 +1914,7 @@ async function loadTopDonators() {
       const profile = donator['User Profile'] || '#';
       
       // Format donation amount
-      const formattedDonation = donation.startsWith('$') ? donation : `$${donation}`;
+     formattedDonation: donation
       
       return `
         <div class="donator-item">
