@@ -1898,7 +1898,7 @@ async function loadTopDonators() {
     if (!donatorList) return;
     
     if (!donators || donators.length === 0) {
-      donatorList.innerHTML = '<div class="donator-loading">No donators yet</div>';
+      donatorList.innerHTML = '<div class="donator-loading">Thank you to our generous supporters!</div>';
       return;
     }
     
