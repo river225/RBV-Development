@@ -2614,29 +2614,29 @@ html, body {
 /* Top Donators Box Styling */
 .donator-box-home {
   background: rgba(20, 25, 35, 0.95);
-  border: 2px solid #00d9ff;
-  border-radius: 12px;
-  padding: 15px;
+  border: 2px solid #FFD700;
+  border-radius: 8px;
+  padding: 12px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
 }
 
 .donator-box-home h3 {
   margin: 0 0 8px 0;
-  font-size: 16px;
-  color: #00d9ff;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 217, 255, 0.3);
-  padding-bottom: 10px;
+  font-size: 15px;
+  color: #FFD700;
+  text-align: left;
+  border-bottom: 1px solid #FFD700;
+  padding-bottom: 8px;
+  font-weight: bold;
 }
 
 .donator-description {
-  margin: 0 0 12px 0;
-  font-size: 12px;
+  margin: 0 0 10px 0;
+  font-size: 11px;
   color: #aaa;
-  text-align: center;
+  text-align: left;
 }
 
 .donator-scroll {
@@ -2644,143 +2644,108 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 4px 0;
+  gap: 6px;
+  padding: 0;
 }
 
 .donator-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .donator-scroll::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  background: transparent;
 }
 
 .donator-scroll::-webkit-scrollbar-thumb {
-  background: #00d9ff;
-  border-radius: 3px;
+  background: #FFD700;
+  border-radius: 2px;
 }
 
 .donator-item {
-  background: rgba(20, 29, 40, 0.9);
-  border: 2px solid #2a3542;
-  border-radius: 10px;
-  padding: 12px;
+  background: rgba(30, 40, 50, 0.6);
+  border: 1px solid #3a4a5a;
+  border-radius: 6px;
+  padding: 8px 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  gap: 10px;
+  transition: background 0.2s ease;
   flex-shrink: 0;
 }
 
 .donator-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4);
-  border-color: #00d9ff;
+  background: rgba(40, 50, 60, 0.8);
 }
 
 .donator-rank {
   background: #FFD700;
   color: #000;
   font-weight: bold;
-  font-size: 0.9rem;
-  width: 32px;
-  height: 32px;
+  font-size: 0.8rem;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Top 3 special colors */
-.donator-item:nth-child(1) {
-  border-color: #FFD700;
-  background: rgba(255, 215, 0, 0.08);
-}
-
 .donator-item:nth-child(1) .donator-rank {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-}
-
-.donator-item:nth-child(2) {
-  border-color: #C0C0C0;
-  background: rgba(192, 192, 192, 0.08);
+  background: #FFD700;
 }
 
 .donator-item:nth-child(2) .donator-rank {
-  background: linear-gradient(135deg, #E8E8E8, #C0C0C0);
-  box-shadow: 0 0 15px rgba(192, 192, 192, 0.6);
-}
-
-.donator-item:nth-child(3) {
-  border-color: #CD7F32;
-  background: rgba(205, 127, 50, 0.08);
+  background: #C0C0C0;
 }
 
 .donator-item:nth-child(3) .donator-rank {
-  background: linear-gradient(135deg, #CD7F32, #B8732D);
-  box-shadow: 0 0 15px rgba(205, 127, 50, 0.6);
-}
-
-.donator-item:nth-child(n+4) {
-  border-color: #8B5CF6;
-  background: rgba(139, 92, 246, 0.08);
+  background: #CD7F32;
 }
 
 .donator-item:nth-child(n+4) .donator-rank {
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+  background: #8B5CF6;
 }
 
 .donator-info {
-  width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .donator-name {
   color: #fff;
   font-weight: bold;
-  font-size: 0.95rem;
-  text-shadow: 1px 1px 2px #000;
+  font-size: 0.85rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
 }
 
 .donator-amount {
   color: #4ade80;
-  font-weight: 700;
-  font-size: 0.9rem;
-  text-shadow: 1px 1px 2px #000;
+  font-weight: 600;
+  font-size: 0.8rem;
 }
 
 .donator-profile {
-  color: #00d9ff;
-  font-size: 0.75rem;
+  color: #5bc5de;
+  font-size: 0.7rem;
   text-decoration: none;
-  transition: color 0.3s ease;
-  display: inline-block;
-  margin-top: 2px;
+  transition: opacity 0.2s ease;
 }
 
 .donator-profile:hover {
-  color: #5bc5de;
+  opacity: 0.8;
   text-decoration: underline;
 }
 
 .donator-loading {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  font-size: 0.85rem;
-  padding: 20px;
+  font-size: 0.8rem;
+  padding: 15px;
 }
