@@ -854,7 +854,7 @@ function getRankColor(rank) {
   if (rank === 2) return '#C0C0C0';        // 🥈 Silver
   if (rank === 3) return '#CD7F32';        // 🥉 Bronze
   if (rank >= 4 && rank <= 25) return '#8B5CF6';   // 🟣 Purple (4-25)
-  if (rank >= 26 && rank <= 100) return '#F0C800'; // 💛 Yellow (26-100)
+  if (rank >= 26 && rank <= 100) return '#EC4899'; // 💖 Pink (26-100)
   if (rank >= 101 && rank <= 500) return '#48BB78'; // 🟢 Green (101-500)
   return '#A0A0A0'; // ⚪ Gray (501-1000)
 }
@@ -866,6 +866,7 @@ function getRankSize(rank) {
   if (rank >= 4 && rank <= 25) return 'rank-top25';
   return 'rank-default';
 }
+
 function createRichestPlayersSection(data) {
   if (!data || data.length === 0) {
     return '<p style="text-align: center; color: #888;">No leaderboard data available.</p>';
