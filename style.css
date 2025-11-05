@@ -2646,23 +2646,23 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 0 4px 0 0;
+  gap: 8px;
+  padding: 0 8px 0 0;
   margin-top: 10px;
 }
 
 .donator-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .donator-scroll::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
 }
 
 .donator-scroll::-webkit-scrollbar-thumb {
   background: #DAA520;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .donator-scroll::-webkit-scrollbar-thumb:hover {
@@ -2670,26 +2670,25 @@ html, body {
 }
 
 .donator-item {
-  border-radius: 6px;
-  padding: 6px 10px;
+  border-radius: 8px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   transition: all 0.2s ease;
   flex-shrink: 0;
-  min-height: 36px;
 }
 
 .donator-item:hover {
-  transform: translateX(2px);
+  transform: translateX(3px);
   filter: brightness(1.15);
 }
 
 /* Rank 1 - Gold */
 .donator-item:nth-child(1) {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.25), rgba(184, 134, 11, 0.15));
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.2));
   border: 2px solid #DAA520;
-  box-shadow: 0 0 10px rgba(218, 165, 32, 0.35);
+  box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
 }
 
 .donator-item:nth-child(1) .donator-rank {
@@ -2697,35 +2696,35 @@ html, body {
   color: #000;
 }
 
-/* Rank 2 - Silver */
+/* Rank 2 - Gold */
 .donator-item:nth-child(2) {
-  background: linear-gradient(135deg, rgba(169, 169, 169, 0.25), rgba(128, 128, 128, 0.15));
-  border: 2px solid #A9A9A9;
-  box-shadow: 0 0 10px rgba(169, 169, 169, 0.35);
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.2));
+  border: 2px solid #DAA520;
+  box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
 }
 
 .donator-item:nth-child(2) .donator-rank {
-  background: #A9A9A9;
+  background: #DAA520;
   color: #000;
 }
 
-/* Rank 3 - Bronze */
+/* Rank 3 - Gold */
 .donator-item:nth-child(3) {
-  background: linear-gradient(135deg, rgba(205, 127, 50, 0.25), rgba(160, 82, 45, 0.15));
-  border: 2px solid #CD7F32;
-  box-shadow: 0 0 10px rgba(205, 127, 50, 0.35);
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.2));
+  border: 2px solid #DAA520;
+  box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
 }
 
 .donator-item:nth-child(3) .donator-rank {
-  background: #CD7F32;
-  color: #fff;
+  background: #DAA520;
+  color: #000;
 }
 
 /* Rank 4 - Royal Blue */
 .donator-item:nth-child(4) {
-  background: linear-gradient(135deg, rgba(65, 105, 225, 0.25), rgba(25, 25, 112, 0.15));
+  background: linear-gradient(135deg, rgba(65, 105, 225, 0.3), rgba(25, 25, 112, 0.2));
   border: 2px solid #4169E1;
-  box-shadow: 0 0 10px rgba(65, 105, 225, 0.35);
+  box-shadow: 0 0 12px rgba(65, 105, 225, 0.4);
 }
 
 .donator-item:nth-child(4) .donator-rank {
@@ -2733,35 +2732,35 @@ html, body {
   color: #fff;
 }
 
-/* Rank 5 - Emerald Green */
+/* Rank 5 - Amethyst Purple */
 .donator-item:nth-child(5) {
-  background: linear-gradient(135deg, rgba(46, 139, 87, 0.25), rgba(34, 139, 34, 0.15));
-  border: 2px solid #2E8B57;
-  box-shadow: 0 0 10px rgba(46, 139, 87, 0.35);
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.2));
+  border: 2px solid #8A2BE2;
+  box-shadow: 0 0 12px rgba(138, 43, 226, 0.4);
 }
 
 .donator-item:nth-child(5) .donator-rank {
-  background: #2E8B57;
+  background: #8A2BE2;
   color: #fff;
 }
 
-/* Rank 6 - Amethyst Purple */
+/* Rank 6 - Emerald Green */
 .donator-item:nth-child(6) {
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.25), rgba(75, 0, 130, 0.15));
-  border: 2px solid #8A2BE2;
-  box-shadow: 0 0 10px rgba(138, 43, 226, 0.35);
+  background: linear-gradient(135deg, rgba(46, 139, 87, 0.3), rgba(34, 139, 34, 0.2));
+  border: 2px solid #2E8B57;
+  box-shadow: 0 0 12px rgba(46, 139, 87, 0.4);
 }
 
 .donator-item:nth-child(6) .donator-rank {
-  background: #8A2BE2;
+  background: #2E8B57;
   color: #fff;
 }
 
 /* Rank 7 - Crimson Red */
 .donator-item:nth-child(7) {
-  background: linear-gradient(135deg, rgba(220, 20, 60, 0.25), rgba(139, 0, 0, 0.15));
+  background: linear-gradient(135deg, rgba(220, 20, 60, 0.3), rgba(139, 0, 0, 0.2));
   border: 2px solid #DC143C;
-  box-shadow: 0 0 10px rgba(220, 20, 60, 0.35);
+  box-shadow: 0 0 12px rgba(220, 20, 60, 0.4);
 }
 
 .donator-item:nth-child(7) .donator-rank {
@@ -2771,9 +2770,9 @@ html, body {
 
 /* Rank 8 - Teal */
 .donator-item:nth-child(8) {
-  background: linear-gradient(135deg, rgba(32, 178, 170, 0.25), rgba(0, 139, 139, 0.15));
+  background: linear-gradient(135deg, rgba(32, 178, 170, 0.3), rgba(0, 139, 139, 0.2));
   border: 2px solid #20B2AA;
-  box-shadow: 0 0 10px rgba(32, 178, 170, 0.35);
+  box-shadow: 0 0 12px rgba(32, 178, 170, 0.4);
 }
 
 .donator-item:nth-child(8) .donator-rank {
@@ -2783,9 +2782,9 @@ html, body {
 
 /* Rank 9 - Deep Sky Blue */
 .donator-item:nth-child(9) {
-  background: linear-gradient(135deg, rgba(0, 191, 255, 0.25), rgba(30, 144, 255, 0.15));
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(30, 144, 255, 0.2));
   border: 2px solid #00BFFF;
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
 }
 
 .donator-item:nth-child(9) .donator-rank {
@@ -2795,9 +2794,9 @@ html, body {
 
 /* Rank 10 - Rose Gold */
 .donator-item:nth-child(10) {
-  background: linear-gradient(135deg, rgba(183, 110, 121, 0.25), rgba(205, 92, 92, 0.15));
+  background: linear-gradient(135deg, rgba(183, 110, 121, 0.3), rgba(205, 92, 92, 0.2));
   border: 2px solid #B76E79;
-  box-shadow: 0 0 10px rgba(183, 110, 121, 0.35);
+  box-shadow: 0 0 12px rgba(183, 110, 121, 0.4);
 }
 
 .donator-item:nth-child(10) .donator-rank {
@@ -2807,9 +2806,9 @@ html, body {
 
 .donator-rank {
   font-weight: bold;
-  font-size: 0.75rem;
-  width: 22px;
-  height: 22px;
+  font-size: 0.85rem;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2820,38 +2819,31 @@ html, body {
 .donator-info {
   flex: 1;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
   min-width: 0;
 }
 
 .donator-name {
   color: #fff;
   font-weight: bold;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 0 0 auto;
-  max-width: 40%;
 }
 
 .donator-amount {
   color: #4ade80;
   font-weight: 600;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  flex: 0 0 auto;
+  font-size: 0.85rem;
 }
 
 .donator-profile {
   color: #5bc5de;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-decoration: none;
   transition: opacity 0.2s ease;
-  white-space: nowrap;
-  flex: 0 0 auto;
-  margin-left: auto;
 }
 
 .donator-profile:hover {
