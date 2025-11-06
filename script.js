@@ -695,7 +695,7 @@ function createTradeItemCard(item, side) {
                  value="${currentDur}" 
                  max="${maxDur}" 
                  min="0" 
-                 onchange="updateTradeDurability('${side}', ${item.id}, this.value)">
+                 oninput="updateTradeDurability('${side}', ${item.id}, this.value)">
           <span class="trade-durability-max">/${maxDur}</span>
           <div class="trade-durability-arrows">
             <button onmousedown="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, 1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()" ontouchstart="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, 1)" ontouchend="stopTradeDurabilityAdjust()">▲</button>
