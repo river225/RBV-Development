@@ -12,7 +12,7 @@ const SECTION_NAMES = [
   
   // EXTRAS
   "Trade Checker",
-  "BlockSpin Map",
+ // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos"
 ];
