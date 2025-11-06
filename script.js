@@ -539,7 +539,8 @@ window.addItemToTrade = async function(itemName, side) {
     tradeState.theirSide.push(tradeItem);
   }
   
-  renderTradeSides();
+  // DON'T re-render - just update the value display
+  updateTradeCardValue(side, itemId);
   updateTradeAnalysis();
   if (document.getElementById('summary-your-items')) {
     updateSummaryBoxes();
@@ -609,9 +610,37 @@ window.updateTradeDurability = function(side, itemId, newDur, maxDur) {
   
   item.Durability = `${durValue}/${maxDur}`;
   
-  renderTradeSides();
+  updateTradeCardValue(side, itemId);
   updateTradeAnalysis();
 };
+
+// Update just ONE card's value without re-rendering
+function updateTradeCardValue(side, itemId) {
+  const items = side === 'your' ? tradeState.yourSide : tradeState.theirSide;
+  const item = items.find(i => i.id === itemId);
+  if (!item) return;
+  
+  const card = document.querySelector(`[data-trade-item-id="${itemId}"]`);
+  if (!card) return;
+  
+  let valueStr = item["Average Value"];
+  let baseValue = parseFloat(valueStr.replace(/[^0-9.]/g, '')) || 0;
+  if (valueStr.toLowerCase().includes('k')) {
+    baseValue *= 1000;
+  }
+  
+  if (item.Durability && item.Durability.includes('/')) {
+    const [current, max] = item.Durability.split('/').map(Number);
+    const durabilityPercent = current / max;
+    const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
+    baseValue = baseValue * valueMultiplier;
+  }
+  
+  const valueEl = card.querySelector('.trade-item-value');
+  if (valueEl) {
+    valueEl.textContent = `$${Math.round(baseValue).toLocaleString()}`;
+  }
+}
 
 // Adjust trade durability with arrows
 let tradeDurabilityInterval = null;
@@ -716,7 +745,7 @@ function createTradeItemCard(item, side) {
   }
   
   return `
-    <div class="trade-item-card">
+    <div class="trade-item-card" data-trade-item-id="${item.id}">
       <button class="trade-item-remove" onclick="removeTradeItem('${side}', ${item.id})">×</button>
       <div class="trade-card-image">
         <img src="${item['Image URL']}" onerror="this.style.display='none'" />
