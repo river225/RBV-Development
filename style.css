@@ -2863,3 +2863,22 @@ html, body {
   font-size: 0.8rem;
   padding: 15px;
 }
+
+/* Hide number input arrows for trade durability */
+.trade-durability-input::-webkit-outer-spin-button,
+.trade-durability-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.trade-durability-input {
+  -moz-appearance: textfield;
+}
+
+/* Prevent text selection on durability arrows */
+.trade-durability-arrows button {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

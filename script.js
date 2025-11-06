@@ -367,11 +367,10 @@ function createTradeCheckerSection() {
           <div class="trade-money-input">
             <label>Money:</label>
             <input 
-              type="number" 
+              type="text" 
               id="your-money" 
               value="0" 
-              min="0"
-              oninput="updateTradeMoney('your', this.value)"
+              oninput="sanitizeMoneyInput(this, 'your')"
             />
           </div>
         </div>
@@ -395,11 +394,10 @@ function createTradeCheckerSection() {
           <div class="trade-money-input">
             <label>Money:</label>
             <input 
-              type="number" 
+              type="text" 
               id="their-money" 
               value="0" 
-              min="0"
-              oninput="updateTradeMoney('their', this.value)"
+              oninput="sanitizeMoneyInput(this, 'their')"
             />
           </div>
         </div>
@@ -577,6 +575,22 @@ window.updateTradeMoney = function(side, value) {
   updateTradeAnalysis();
 };
 
+// Sanitize money input (prevent cursor jump)
+function sanitizeMoneyInput(input, side) {
+  const cursorPos = input.selectionStart;
+  const oldValue = input.value;
+  const newValue = oldValue.replace(/[^\d]/g, '');
+  
+  // Only update if value changed (prevents cursor jump)
+  if (oldValue !== newValue) {
+    input.value = newValue;
+    // Restore cursor position
+    input.setSelectionRange(cursorPos - 1, cursorPos - 1);
+  }
+  
+  updateTradeMoney(side, input.value);
+}
+
 // Update item durability in trade
 window.updateTradeDurability = function(side, itemId, newDur) {
   const items = side === 'your' ? tradeState.yourSide : tradeState.theirSide;
@@ -684,8 +698,8 @@ function createTradeItemCard(item, side) {
                  onchange="updateTradeDurability('${side}', ${item.id}, this.value)">
           <span class="trade-durability-max">/${maxDur}</span>
           <div class="trade-durability-arrows">
-            <button onmousedown="adjustTradeDurability('${side}', ${item.id}, 1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()">▲</button>
-            <button onmousedown="adjustTradeDurability('${side}', ${item.id}, -1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()">▼</button>
+            <button onmousedown="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, 1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()" ontouchstart="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, 1)" ontouchend="stopTradeDurabilityAdjust()">▲</button>
+            <button onmousedown="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, -1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()" ontouchstart="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, -1)" ontouchend="stopTradeDurabilityAdjust()">▼</button>
           </div>
         </div>
       </div>
@@ -1600,12 +1614,28 @@ function initTaxCalculator() {
   }
 
   taxInput.addEventListener("input", function(e) {
-    // Only allow digits - remove everything else
-    e.target.value = e.target.value.replace(/[^\d]/g, '');
+    const cursorPos = e.target.selectionStart;
+    const oldValue = e.target.value;
+    const newValue = oldValue.replace(/[^\d]/g, '');
+    
+    // Only update if value changed (prevents cursor jump)
+    if (oldValue !== newValue) {
+      e.target.value = newValue;
+      // Restore cursor position
+      e.target.setSelectionRange(cursorPos - 1, cursorPos - 1);
+    }
     
     const val = parseFloat(e.target.value) || 0;
     const withdraw = Math.round(val / 0.72);
     taxAmount.textContent = withdraw.toLocaleString();
+  });
+  
+  // Prevent paste of invalid characters
+  taxInput.addEventListener('paste', function(e) {
+    e.preventDefault();
+    const paste = (e.clipboardData || window.clipboardData).getData('text');
+    const cleaned = paste.replace(/[^\d]/g, '');
+    document.execCommand('insertText', false, cleaned);
   });
 }
 
