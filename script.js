@@ -434,12 +434,10 @@ function setupTradeSearch() {
       const query = e.target.value.toLowerCase().trim();
       const side = e.target.dataset.side;
       
-      // Remove old results and wrapper
-      const oldWrapper = input.parentNode.querySelector('.trade-search-wrapper');
-      if (oldWrapper) oldWrapper.remove();
+      // Remove old results
+      if (resultsDiv) resultsDiv.remove();
       
-      // Show results with just 1 letter
-      if (query.length < 1) return;
+      if (query.length < 2) return;
       
       const matches = ALL_ITEMS_DATA.filter(item => 
         item.Name.toLowerCase().includes(query)
@@ -459,7 +457,6 @@ function setupTradeSearch() {
       
       // Create wrapper with relative positioning
       const wrapper = document.createElement('div');
-      wrapper.className = 'trade-search-wrapper';
       wrapper.style.position = 'relative';
       wrapper.style.width = '100%';
       
@@ -467,10 +464,9 @@ function setupTradeSearch() {
       input.parentNode.insertBefore(wrapper, input.nextSibling);
       wrapper.appendChild(resultsDiv);
       
-      // Add click handlers to results (use mousedown to prevent input blur)
+      // Add click handlers to results
       resultsDiv.querySelectorAll('.trade-search-result').forEach(result => {
-        result.addEventListener('mousedown', (e) => {
-          e.preventDefault(); // Prevent input from losing focus
+        result.addEventListener('click', () => {
           const itemName = result.dataset.name;
           const itemSide = result.dataset.side;
           addItemToTrade(itemName, itemSide);
@@ -604,8 +600,21 @@ window.updateTradeDurability = function(side, itemId, newDur) {
   const maxDur = item.Durability.split('/')[1];
   item.Durability = `${newDur}/${maxDur}`;
   
+  // Store which input was focused
+  const activeElement = document.activeElement;
+  const wasInputFocused = activeElement && activeElement.classList.contains('trade-durability-input');
+  
   renderTradeSides();
   updateTradeAnalysis();
+  
+  // Restore focus to the durability input after re-render
+  if (wasInputFocused) {
+    const newInput = document.querySelector(`input.trade-durability-input[value="${newDur}"]`);
+    if (newInput) {
+      newInput.focus();
+      newInput.setSelectionRange(newInput.value.length, newInput.value.length);
+    }
+  }
 };
 
 // Adjust trade durability with arrows
