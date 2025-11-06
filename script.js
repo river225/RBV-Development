@@ -591,21 +591,43 @@ window.updateTradeDurability = function(side, itemId, newDur) {
 };
 
 // Adjust trade durability with arrows
+let tradeDurabilityInterval = null;
+let tradeDurabilityTimeout = null;
+
 window.adjustTradeDurability = function(side, itemId, direction) {
   const items = side === 'your' ? tradeState.yourSide : tradeState.theirSide;
   const item = items.find(i => i.id === itemId);
   if (!item || !item.Durability) return;
   
-  const [current, max] = item.Durability.split('/').map(Number);
-  let newValue = current + direction;
+  function adjust() {
+    const [current, max] = item.Durability.split('/').map(Number);
+    let newValue = current + direction;
+    
+    if (newValue < 0) newValue = 0;
+    if (newValue > max) newValue = max;
+    
+    item.Durability = `${newValue}/${max}`;
+    
+    renderTradeSides();
+    updateTradeAnalysis();
+  }
   
-  if (newValue < 0) newValue = 0;
-  if (newValue > max) newValue = max;
+  adjust();
   
-  item.Durability = `${newValue}/${max}`;
-  
-  renderTradeSides();
-  updateTradeAnalysis();
+  tradeDurabilityTimeout = setTimeout(() => {
+    tradeDurabilityInterval = setInterval(adjust, 50);
+  }, 200);
+};
+
+window.stopTradeDurabilityAdjust = function() {
+  if (tradeDurabilityInterval) {
+    clearInterval(tradeDurabilityInterval);
+    tradeDurabilityInterval = null;
+  }
+  if (tradeDurabilityTimeout) {
+    clearTimeout(tradeDurabilityTimeout);
+    tradeDurabilityTimeout = null;
+  }
 };
 
 // Render trade sides
@@ -641,7 +663,11 @@ function createTradeItemCard(item, side) {
       baseValue *= 1000;
     }
     
-    const adjustedValue = (parseFloat(currentDur) / parseFloat(maxDur)) * baseValue;
+    // Use 20% floor formula (same as regular cards)
+    const durabilityPercent = parseFloat(currentDur) / parseFloat(maxDur);
+    const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
+    const adjustedValue = baseValue * valueMultiplier;
+    
     displayValue = `$${Math.round(adjustedValue).toLocaleString()}`;
   }
   
@@ -658,8 +684,8 @@ function createTradeItemCard(item, side) {
                  onchange="updateTradeDurability('${side}', ${item.id}, this.value)">
           <span class="trade-durability-max">/${maxDur}</span>
           <div class="trade-durability-arrows">
-            <button onclick="adjustTradeDurability('${side}', ${item.id}, 1)">▲</button>
-            <button onclick="adjustTradeDurability('${side}', ${item.id}, -1)">▼</button>
+            <button onmousedown="adjustTradeDurability('${side}', ${item.id}, 1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()">▲</button>
+            <button onmousedown="adjustTradeDurability('${side}', ${item.id}, -1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()">▼</button>
           </div>
         </div>
       </div>
@@ -693,10 +719,12 @@ function calculateSideValue(items) {
       value *= 1000;
     }
     
-    // Adjust for durability
+    // Adjust for durability (20% floor formula)
     if (item.Durability && item.Durability.includes('/')) {
       const [current, max] = item.Durability.split('/').map(Number);
-      value = (current / max) * value;
+      const durabilityPercent = current / max;
+      const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
+      value = value * valueMultiplier;
     }
     
     return total + value;
