@@ -592,29 +592,25 @@ function sanitizeMoneyInput(input, side) {
 }
 
 // Update item durability in trade
-window.updateTradeDurability = function(side, itemId, newDur) {
-  const items = side === 'your' ? tradeState.yourSide : tradeState.theirSide;
+window.updateTradeDurability = function(side, itemId, newDur, maxDur) {
+   const items = side === 'your' ? tradeState.yourSide : tradeState.theirSide;
   const item = items.find(i => i.id === itemId);
   if (!item) return;
   
-  const maxDur = item.Durability.split('/')[1];
-  item.Durability = `${newDur}/${maxDur}`;
+  // Get max durability from item if not provided
+  if (!maxDur) {
+    maxDur = item.Durability.split('/')[1];
+  }
   
-  // Store which input was focused
-  const activeElement = document.activeElement;
-  const wasInputFocused = activeElement && activeElement.classList.contains('trade-durability-input');
+  // Enforce limits
+  let durValue = parseInt(newDur) || 0;
+  if (durValue < 0) durValue = 0;
+  if (durValue > maxDur) durValue = maxDur;
+  
+  item.Durability = `${durValue}/${maxDur}`;
   
   renderTradeSides();
   updateTradeAnalysis();
-  
-  // Restore focus to the durability input after re-render
-  if (wasInputFocused) {
-    const newInput = document.querySelector(`input.trade-durability-input[value="${newDur}"]`);
-    if (newInput) {
-      newInput.focus();
-      newInput.setSelectionRange(newInput.value.length, newInput.value.length);
-    }
-  }
 };
 
 // Adjust trade durability with arrows
@@ -708,7 +704,7 @@ function createTradeItemCard(item, side) {
                  value="${currentDur}" 
                  max="${maxDur}" 
                  min="0" 
-                 oninput="updateTradeDurability('${side}', ${item.id}, this.value)">
+                 oninput="updateTradeDurability('${side}', ${item.id}, this.value, ${maxDur})">
           <span class="trade-durability-max">/${maxDur}</span>
           <div class="trade-durability-arrows">
             <button onmousedown="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, 1)" onmouseup="stopTradeDurabilityAdjust()" onmouseleave="stopTradeDurabilityAdjust()" ontouchstart="event.preventDefault(); adjustTradeDurability('${side}', ${item.id}, 1)" ontouchend="stopTradeDurabilityAdjust()">▲</button>
