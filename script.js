@@ -12,28 +12,12 @@ const SECTION_NAMES = [
   
   // EXTRAS
   "Trade Checker",
-  // "BlockSpin Map",
+  "BlockSpin Map",
   "💰 Richest Players",
-  "Crew Logos",
-  "Scammer List"
+  "Crew Logos"
 ];
 
-
-const SECTION_BANNERS = {
-  // "Home": { url: "", width: "160px", top: "226px", left: "53%" },
-  // "Uncommon": { url: "https://i.ibb.co/5Xfj0w2c/ttWiION.png", width: "160px", top: "226px", left: "53%" },
-  // "Rare":     { url: "https://i.ibb.co/QvvLmkVq/ZShOTJY.png", width: "260px", top: "210px", left: "50%" },
-  // "Epic":     { url: "https://i.ibb.co/938SzMHF/qMjGPBl.png", width: "310px", top: "200px", left: "50%" },
-  // "Legendary":{ url: "https://i.ibb.co/pvsRYDn2/mdjOAS1.png", width: "217px", top: "227px", left: "53%" },
-  // "Omega":    { url: "https://i.ibb.co/q3whwbx6/LT1i1kR.png", width: "140px", top: "234px", left: "56%" },
-  // "Misc":     { url: "https://i.ibb.co/Dhdvg41/0WvIuZo.png", width: "200px", top: "235px", left: "53%" },
-  // "Vehicles": { url: "https://i.ibb.co/MxK5B0sX/UGdzYtH.png", width: "218px", top: "228px", left: "54%" },
-  // "BlockSpin Map": { url: "", width: "200px", top: "228px", left: "54%" },
-  // "Crew Logos": { url: "https://i.ibb.co/Td4tMSc/SoIuFWy.png", width: "162px", top: "228px", left: "54%" },
-  // "Scammer List": { url: "https://i.ibb.co/Zp7BDzzx/bQeLrpx.png", width: "140px", top: "243px", left: "56%" }
-};
-
-// ==================== GREEN LINE - BLOCKSPIN MAP SECTION START ====================
+// ==================== BLOCKSPIN MAP SECTION START ====================
 
 // BlockSpin Map Configuration
 const BASE_MAP_IMAGE = "https://i.ibb.co/JwVD8Xpf/MrP86EC.png"; 
@@ -1259,8 +1243,7 @@ function renderSection(title, items) {
     renderRichestPlayersSection(items);
   } else if (title === "Crew Logos") {
     renderCrewLogosSection(items);
-  } else if (title === "Scammer List") {
-    renderScammerSection(items);
+ 
   } else {
     const html = `
       <section class="section" id="${slugify(title)}">
@@ -1515,7 +1498,7 @@ function showSection(name) {
    // Hide/show tax calculator based on section
   const taxCalc = document.querySelector('.tax-calculator');
   if (taxCalc) {
-    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Trade Checker', 'Crate Game', '💰 Richest Players'];
+    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Trade Checker', 'Crate Game', '💰 Richest Players'];
     if (hiddenSections.includes(name)) {
       taxCalc.style.visibility = 'hidden';
       taxCalc.style.opacity = '0';
@@ -1529,7 +1512,7 @@ function showSection(name) {
   // Hide/show search bar based on section
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
-    const hiddenSearchSections = ['Home', 'Trade Checker', 'BlockSpin Map', 'Crew Logos', 'Scammer List', 'Crate Game', '💰 Richest Players'];
+    const hiddenSearchSections = ['Home', 'Trade Checker', 'BlockSpin Map', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
     if (hiddenSearchSections.includes(name)) {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
     } else {
@@ -1574,28 +1557,6 @@ function showSection(name) {
     removeTradeSummaryBoxes();
   }
 
-  // Banner logic - EXACT COPY FROM YOUR WORKING SITE
-  const bannerImg = document.getElementById("banner-img");
-  const bannerContainer = bannerImg.parentElement;
-  const banner = SECTION_BANNERS[name];
-
-  if (banner && banner.url) {
-    bannerImg.classList.remove("show");
-    setTimeout(() => {
-      bannerImg.src = banner.url;
-      bannerImg.style.display = "block";
-      bannerImg.style.maxWidth = banner.width || "190px";
-      bannerContainer.style.top = banner.top || "228px";
-      bannerContainer.style.left = banner.left || "50%";
-      bannerContainer.style.transform = "translateX(-50%)";
-      bannerContainer.style.position = "absolute";
-      requestAnimationFrame(() => {
-        bannerImg.classList.add("show");
-      });
-    }, 300);
-  } else {
-    bannerImg.style.display = "none";
-  }
 }
 
 // === SEARCH ===

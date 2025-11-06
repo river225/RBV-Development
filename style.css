@@ -298,40 +298,7 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; /* ADD THIS LINE */
 }
 
-/* Scammer Card Styling - matches other cards with red outline */
-.scammer-card {
-  background: #4a4a4a; /* Same as other cards */
-  border: 1px solid #cc4444; /* Red outline instead of default border */
-}
 
-.scammer-card:hover {
-  transform: translateY(-10px); /* Same hover effect as other cards */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Same shadow as other cards */
-}
-
-.scammer-warning {
-  color: #ff6b6b;
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-/* Remove scammer icon */
-.scammer-icon {
-  display: none;
-}
-
-/* Scammer card links styling */
-.scammer-link {
-  color: #4da6ff !important;
-  text-decoration: underline !important;
-  font-size: 0.9rem;
-}
-
-.scammer-link:hover {
-  color: #66b3ff !important;
-  text-decoration: underline !important;
-}
 
 .hidden { 
   display: none !important; 
@@ -553,36 +520,6 @@ a { color: #fff; text-decoration: none; }
 }
 }
 
-/* Hide banners on mobile + tablets */
-@media (max-width: 1024px) {
-  #section-banner {
-    display: none !important;
-  }
-}
-
-html, body {
-  overflow-x: hidden !important;
-}
-
-/* === BANNER FADE TRANSITION - ADDED === */
-#section-banner {
-  position: absolute !important;  
-  top: 180px !important;
-  z-index: 999;           
-  pointer-events: none;   
-}
-
-#banner-img {
-  position: absolute;     
-  display: block;         
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#banner-img.show {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
 
 /* Map controls styling */
 
@@ -1058,12 +995,6 @@ html, body {
 
 /* Crew Logos - Soft Cyan REVERSED gradient */
 #sections-nav button:nth-child(13).active {
-  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
-  color: white;
-}
-
-/* Scammer List - Soft Cyan REVERSED gradient */
-#sections-nav button:nth-child(14).active {
   background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
   color: white;
 }
