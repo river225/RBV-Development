@@ -1571,10 +1571,32 @@ function initTaxCalculator() {
     return;
   }
 
-  taxInput.addEventListener("input", () => {
-    const val = parseFloat(taxInput.value) || 0;
-    const withdraw = Math.round(val / 0.72);
-    taxAmount.textContent = withdraw.toLocaleString();
+  taxInput.addEventListener("input", function(e) {
+    // Remove all non-digit characters except commas
+    let value = e.target.value.replace(/[^\d,]/g, '');
+    
+    // Remove all commas to get the actual number
+    let numValue = value.replace(/,/g, '');
+    
+    // Update the input with formatted value (add commas back)
+    if (numValue) {
+      e.target.value = Number(numValue).toLocaleString();
+      
+      // Calculate tax (28% tax means divide by 0.72)
+      const withdraw = Math.round(numValue / 0.72);
+      taxAmount.textContent = withdraw.toLocaleString();
+    } else {
+      e.target.value = '';
+      taxAmount.textContent = '0';
+    }
+  });
+
+  // Prevent paste of invalid characters
+  taxInput.addEventListener('paste', function(e) {
+    e.preventDefault();
+    let paste = (e.clipboardData || window.clipboardData).getData('text');
+    let cleaned = paste.replace(/[^\d,]/g, '');
+    document.execCommand('insertText', false, cleaned);
   });
 }
 
