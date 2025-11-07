@@ -93,13 +93,17 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s ease;
             padding: 0 25px;
+            opacity: 0;
         }
         
         .faq-item.active .faq-answer {
-            max-height: 500px;
+            max-height: 800px;
             padding: 0 25px 20px 25px;
+            opacity: 1;
         }
         
         .faq-answer p {
@@ -210,7 +214,7 @@
                 <span class="faq-icon">+</span>
             </div>
             <div class="faq-answer">
-                <p>After Tax Value refers to the additional amount of cash you need to give someone to cover the game’s tax. Each time a player drops money, the game takes a small cut as tax.</p>
+                <p>After Tax Value refers to the additional amount of cash you need to give someone to cover the game's tax. Each time a player drops money, the game takes a small cut as tax.</p>
             </div>
         </div>
 
@@ -220,7 +224,7 @@
                 <span class="faq-icon">+</span>
             </div>
             <div class="faq-answer">
-                <p>Simply enter the amount of cash you want the other person to receive. The Tax Calculator automatically adds the extra amount lost to the game’s tax and shows you the total you need to give, ensuring they receive the exact amount you intended.</p>
+                <p>Simply enter the amount of cash you want the other person to receive. The Tax Calculator automatically adds the extra amount lost to the game's tax and shows you the total you need to give, ensuring they receive the exact amount you intended.</p>
             </div>
         </div>
 
@@ -278,5 +282,21 @@
             });
         });
     </script>
+
+    <footer class="site-footer">
+  <div class="footer-content">
+    <p>© 2025 BlockSpin Values</p>
+    <div class="footer-links">
+      <a href="z-contact.html">Contact River</a>
+      <span>•</span>
+      <a href="z-terms.html">Terms of Service</a>
+      <span>•</span>
+      <a href="z-privacy.html">Privacy Policy</a>
+      <span>•</span>
+      <a href="z-report.html">Report an Issue</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
