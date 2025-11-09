@@ -1054,8 +1054,12 @@ function createCard(item) {
     const maxDurability = durability.split('/')[1] || "100";
     const currentDurability = durability.split('/')[0] || maxDurability;
     
+    // Check if "Durability Invisible" column is set to "Yes"
+    const durabilityInvisible = safe(item["Durability Invisible"]);
+    const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === 'yes') ? 'style="opacity: 0;"' : '';
+    
     durabilityHTML = `
-      <div class="durability-control">
+      <div class="durability-control" ${invisibleStyle}>
         <label>Durability:</label>
         <div class="durability-input-row">
           <input type="number" class="durability-input" 
