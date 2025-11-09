@@ -128,10 +128,10 @@ a { color: #fff; text-decoration: none; }
 .card-left::after {
   content: '';
   position: absolute;
-  bottom: 65px;
-  left: 60px;
-  width: 120px;
-  height: 42px;
+  bottom: 80px;
+  left: 95px;
+  width: 150px;
+  height: 52px;
   background-image: url('https://i.ibb.co/twmgLx3X/Chat-GPT-Image-Nov-8-2025-05-25-11-AM.png');
   background-size: contain;
   background-repeat: no-repeat;
