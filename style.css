@@ -117,10 +117,10 @@ a { color: #fff; text-decoration: none; }
   content: '';
   position: absolute;
   bottom: 8px;
-  right: -15px;
+  left: 8px;
   width: 180px;
   height: 60px;
-  background-image: url('https://i.ibb.co/XZ1d8kJh/Chat-GPT-Image-Nov-8-2025-05-25-11-AM.png');
+  background-image: url('https://i.ibb.co/twmgLx3X/Chat-GPT-Image-Nov-8-2025-05-25-11-AM.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
