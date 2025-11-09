@@ -128,10 +128,10 @@ a { color: #fff; text-decoration: none; }
 .card-left::after {
   content: '';
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  width: 60px;
-  height: 20px;
+  bottom: 15px;
+  left: 15px;
+  width: 100px;
+  height: 35px;
   background-image: url('https://i.ibb.co/twmgLx3X/Chat-GPT-Image-Nov-8-2025-05-25-11-AM.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -146,17 +146,7 @@ a { color: #fff; text-decoration: none; }
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Card left section (image area) */
-.card-left {
-  background: #1f2a38;
-  border-radius: 8px;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 170px;
-}
+
 
 .card img { 
   width: 150px; 
