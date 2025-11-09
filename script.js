@@ -1050,13 +1050,14 @@ function createCard(item) {
   }
 
   let durabilityHTML = '';
+  
+  // Check if "Durability Invisible" is set to "Yes"
+  const durabilityInvisible = safe(item["Durability Invisible"]);
+  const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === 'yes') ? 'style="opacity: 0;"' : '';
+  
   if (durability && durability.includes('/')) {
     const maxDurability = durability.split('/')[1] || "100";
     const currentDurability = durability.split('/')[0] || maxDurability;
-    
-    // Check if "Durability Invisible" column is set to "Yes"
-    const durabilityInvisible = safe(item["Durability Invisible"]);
-    const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === 'yes') ? 'style="opacity: 0;"' : '';
     
     durabilityHTML = `
       <div class="durability-control" ${invisibleStyle}>
