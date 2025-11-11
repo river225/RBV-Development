@@ -2843,4 +2843,43 @@ a { color: #fff; text-decoration: none; }
     overflow-y: auto !important;
   }
 
+  /* Hide socials box on mobile */
+.socials-wrapper,
+.top-left-links {
+  display: none !important;
+}
+
+/* Fix welcome section width */
+.hero-section {
+  width: 95% !important;
+  max-width: 95% !important;
+  margin: 0 auto !important;
+  padding: 15px !important;
+  box-sizing: border-box;
+}
+
+.hero-section h2 {
+  font-size: 2rem !important;
+  margin-top: 10px !important;
+}
+
+.hero-subtitle {
+  font-size: 0.9rem !important;
+}
+
+.about-section {
+  width: 95% !important;
+  margin: 20px auto !important;
+  padding: 15px !important;
+}
+
+.about-section h3 {
+  font-size: 1.3rem !important;
+}
+
+.about-section p {
+  font-size: 0.85rem !important;
+  line-height: 1.5 !important;
+}
+
 }
