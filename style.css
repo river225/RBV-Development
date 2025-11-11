@@ -2849,37 +2849,63 @@ a { color: #fff; text-decoration: none; }
   display: none !important;
 }
 
-/* Fix welcome section width */
+/* Fix welcome section - remove borders and adjust width */
 .hero-section {
-  width: 95% !important;
-  max-width: 95% !important;
+  width: 90% !important;
+  max-width: 90% !important;
   margin: 0 auto !important;
-  padding: 15px !important;
-  box-sizing: border-box;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  border: none !important;
 }
 
 .hero-section h2 {
-  font-size: 2rem !important;
+  font-size: 1.8rem !important;
   margin-top: 10px !important;
+  margin-bottom: 10px !important;
 }
 
 .hero-subtitle {
-  font-size: 0.9rem !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
 }
 
+/* Fix button container */
+.hero-section > div[style*="display: flex"] {
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.hero-btn,
+.hero-tiktok-btn {
+  width: 100% !important;
+  max-width: 250px !important;
+  margin: 0 auto !important;
+  font-size: 0.9rem !important;
+  padding: 10px 15px !important;
+}
+
+/* Fix about section */
 .about-section {
-  width: 95% !important;
-  margin: 20px auto !important;
-  padding: 15px !important;
+  width: 90% !important;
+  margin: 15px auto !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
 }
 
 .about-section h3 {
-  font-size: 1.3rem !important;
+  font-size: 1.2rem !important;
 }
 
 .about-section p {
-  font-size: 0.85rem !important;
+  font-size: 0.8rem !important;
   line-height: 1.5 !important;
+}
+
+/* Hide decorative lines */
+.hero-section > div[style*="width: 200px"] {
+  display: none !important;
 }
 
 }
