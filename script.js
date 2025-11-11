@@ -2003,20 +2003,20 @@ if (menuToggle) {
   });
 }
 
-const announcementBox = document.querySelector('.announcement-box');
-const topDonatorsBox = document.querySelector('.top-donators');
+const announcementBox = document.querySelector('.announcement-box-home');
+const topDonatorsBox = document.querySelector('.donator-box-home');
 
 if (window.innerWidth <= 768) {
   if (announcementBox) {
     announcementBox.classList.add('collapsed');
-    announcementBox.querySelector('h2').addEventListener('click', () => {
+    announcementBox.querySelector('h3').addEventListener('click', () => {
       announcementBox.classList.toggle('collapsed');
     });
   }
   
   if (topDonatorsBox) {
     topDonatorsBox.classList.add('collapsed');
-    topDonatorsBox.querySelector('h2').addEventListener('click', () => {
+    topDonatorsBox.querySelector('h3').addEventListener('click', () => {
       topDonatorsBox.classList.toggle('collapsed');
     });
   }
