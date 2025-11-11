@@ -1,4 +1,4 @@
-// === CONFIG ===
+// CONFIG
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Home",
@@ -17,7 +17,7 @@ const SECTION_NAMES = [
   "Crew Logos"
 ];
 
-// ==================== BLOCKSPIN MAP SECTION START ====================
+// BLOCKSPIN MAP SECTION START 
 
 // BlockSpin Map Configuration
 const BASE_MAP_IMAGE = "https://i.ibb.co/JwVD8Xpf/MrP86EC.png"; 
@@ -300,9 +300,9 @@ function updateSummaryBox(side, items) {
     </div>
   `).join('');
 }
-// ==================== BLOCKSPIN MAP SECTION END ====================
+// BLOCKSPIN MAP SECTION END 
 
-// ==================== TRADE CHECKER SECTION START ====================
+// TRADE CHECKER SECTION START
 
 // Global storage for all items data (loaded from sheets)
 let ALL_ITEMS_DATA = [];
@@ -475,7 +475,7 @@ function showSideSelector(itemName) {
   const item = ALL_ITEMS_DATA.find(i => i.Name === itemName);
   if (!item) return;
   
-  // Create modal overlay
+  // modal overlay
   const modal = document.createElement('div');
   modal.className = 'trade-side-modal';
   modal.innerHTML = `
@@ -654,7 +654,7 @@ function renderSide(side, items) {
   container.innerHTML = items.map(item => createTradeItemCard(item, side)).join('');
 }
 
-// Create trade item card (FULL version)
+// Create trade item card
 function createTradeItemCard(item, side) {
   const hasDurability = item.Durability && item.Durability.includes('/');
   const currentDur = hasDurability ? item.Durability.split('/')[0] : null;
@@ -670,7 +670,7 @@ function createTradeItemCard(item, side) {
       baseValue *= 1000;
     }
     
-    // Use 20% floor formula (same as regular cards)
+    // Use 20% floor formula 
     const durabilityPercent = parseFloat(currentDur) / parseFloat(maxDur);
     const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
     const adjustedValue = baseValue * valueMultiplier;
@@ -779,7 +779,7 @@ function updateTradeAnalysis() {
 // Update demand insight
 function updateDemandInsight() {
   const insightEl = document.getElementById('demand-insight');
-  if (!insightEl) return; // Safety check - element doesn't exist yet
+  if (!insightEl) return; // Safety check 
   
   const yourItems = tradeState.yourSide;
   const theirItems = tradeState.theirSide;
@@ -866,8 +866,8 @@ function updateSummaryBox(side, items) {
   `).join('');
 }
 
-// ==================== TRADE CHECKER SECTION END ====================
-// ==================== RICHEST PLAYERS SECTION START ====================
+// TRADE CHECKER SECTION END
+// RICHEST PLAYERS SECTION START
 
 function formatNetWorth(value) {
   // Remove dollar signs, commas, and any other non-numeric characters except decimal point
@@ -962,7 +962,7 @@ function filterRichestPlayers(query) {
     }
   });
 }
-// ==================== RICHEST PLAYERS SECTION END ====================
+// RICHEST PLAYERS SECTION END 
 
 // === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
@@ -1094,7 +1094,7 @@ if (durability && durability.includes('/') && internalValue) {
   const rawRepair = missingDurability * (internalVal / maxDurability / 1.43);
   repairPrice = Math.round(rawRepair);
 
-  // Format as money (e.g. "$1,095")
+  // Format as money 
   repairPrice = `$${repairPrice.toLocaleString()}`;
 }
 
@@ -1115,7 +1115,7 @@ if (durability && durability.includes('/') && internalValue) {
   const rawPawn = baseValue - deduction;
   pawnAmount = Math.round(rawPawn);
 
-  // Format as money (e.g. "$1,095")
+  // Format as money
   pawnAmount = `$${pawnAmount.toLocaleString()}`;
 }
   
@@ -1315,7 +1315,7 @@ function renderScammerSection(items) {
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
-// ==================== GREEN LINE - BLOCKSPIN MAP FUNCTIONS START ====================
+//  BLOCKSPIN MAP FUNCTIONS START
 
 function renderBlockSpinMapSection() {
   const html = `
@@ -1357,7 +1357,7 @@ function createMapControlsPanel() {
     ).join('')}
   `;
   
-  // INSERT IT INTO THE PAGE
+  
   const mainContainer = document.querySelector('.main-container');
   if (mainContainer) {
     mainContainer.appendChild(controlsPanel);
@@ -1424,7 +1424,7 @@ function showMapSection(sectionName) {
   
   console.log(`Adding ${sectionData.images.length} images for ${sectionName}`);
   
-  // Add images only (no text)
+  // Add images only 
   sectionData.images.forEach(imageData => {
     const imageElement = document.createElement('img');
     imageElement.src = imageData.image;
@@ -1462,9 +1462,9 @@ function closeDetailModal() {
   if (modal) modal.remove();
 }
 
-// ==================== GREEN LINE - BLOCKSPIN MAP FUNCTIONS END ====================
+// GREEN LINE - BLOCKSPIN MAP FUNCTIONS END 
 
-// === SECTION NAVIGATION ===
+// SECTION NAVIGATION 
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
   
@@ -1488,7 +1488,7 @@ function initSectionsNav() {
   });
 }
 
-// === EXACT WORKING BANNER LOGIC FROM MAIN SITE ===
+//  BANNER LOGIC FROM MAIN SITE
 function showSection(name) {
   console.log(`Showing section: ${name}`);
   
@@ -1564,7 +1564,7 @@ function showSection(name) {
 
 }
 
-// === SEARCH ===
+// SEARCH 
 function initSearch() {
   const input = document.getElementById("search");
   if (!input) return;
@@ -1578,7 +1578,7 @@ function initSearch() {
   });
 }
 
-// === TAX CALCULATOR ===
+// TAX CALCULATOR 
 function initTaxCalculator() {
   const taxInput = document.getElementById("taxInput");
   const taxAmount = document.getElementById("tax-amount");
@@ -1614,7 +1614,7 @@ function initTaxCalculator() {
   });
 }
 
-// === COPY TO CLIPBOARD ===
+// COPY TO CLIPBOARD
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => {
     const btn = event.target;
@@ -1644,7 +1644,7 @@ function copyToClipboard(text) {
   });
 }
 
-// === DURABILITY FUNCTIONS ===
+// DURABILITY FUNCTIONS 
 let durabilityInterval = null;
 let durabilityTimeout = null;
 
@@ -1664,7 +1664,7 @@ function enforceMaxDurability(input) {
 }
 
 function adjustDurability(btn, direction) {
-  event.preventDefault(); // FIX: Prevent both touch and mouse events firing
+  event.preventDefault(); // Prevent both touch and mouse events firing
   
   const card = btn.closest('.card');
   const input = card.querySelector('.durability-input');
@@ -1815,12 +1815,12 @@ function formatLikeOriginal(num, original) {
 document.addEventListener('mouseup', stopDurabilityAdjust);
 document.addEventListener('touchend', stopDurabilityAdjust);
 
-// === HELPERS ===
+// HELPERS 
 function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// === INIT - PARALLEL LOADING FOR SPEED ===
+// INIT - PARALLEL LOADING FOR SPEED 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
 

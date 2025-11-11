@@ -1,3 +1,7 @@
+/* ============================================================
+   DESKTOP STYLES
+   ============================================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 /* Hide all scrollbars */
@@ -35,7 +39,7 @@ html, body {
  background: linear-gradient(180deg, #16202c 0%, #1f2d3d 50%, #16202c 100%);
 background-attachment: fixed;
   color: #fff;
-  position: relative; /* THIS IS THE KEY FIX - makes absolute positioning work relative to document */
+  position: relative; 
 }
 a { color: #fff; text-decoration: none; }
 
@@ -47,7 +51,7 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* === Main layout changes start === */
+/* Main layout changes start */
 .main-container {
     display: flex;
     max-width: 1600px;
@@ -60,13 +64,13 @@ a { color: #fff; text-decoration: none; }
     width: 200px;
     padding: 8px;
     border-right: 3px solid #000000; /* vertical line */
-    /* REMOVED: position: sticky; top: 16px; align-self: flex-start; */
+    
 }
 
-/* KEEP these button styles exactly as they are */
+
 .sections-nav button { display: flex; align-items: center; width: 100%; padding: 8px; margin-bottom: 8px; background: #141d28; border: 3px solid #000000; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; min-height: 58px; } 
 .sections-nav button:hover:not(.active) { background: #1f2a38 !important; }
-/* NEW: Extras navigation styling */
+
 .nav-gap {
   height: 0px;
 }
@@ -88,15 +92,15 @@ a { color: #fff; text-decoration: none; }
     flex-direction: column;
     gap: 24px;
 }
-/* === Main layout changes end === */
+/*  Main layout changes end  */
 
 /* Cards container */
 .cards { 
   display: flex; 
   flex-wrap: wrap; 
   gap: 16px; 
-  width: 100%; /* ADD THIS LINE */
-  overflow: hidden; /* ADD THIS LINE */
+  width: 100%;
+  overflow: hidden; 
 }
 
 /* Card */
@@ -104,11 +108,11 @@ a { color: #fff; text-decoration: none; }
   flex: 1 1 calc(50% - 16px); 
   display: flex; 
   gap: 16px; 
-  border: 3px solid #000000; /* Nice black outline */
+  border: 3px solid #000000; 
   border-radius: 12px; 
   padding: 12px; 
-  padding-bottom: 60px; /* ADD THIS LINE - pushes bottom edge down */
-  background: #141d28; /* Same as section buttons when not clicked */
+  padding-bottom: 60px;
+  background: #141d28; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
@@ -166,10 +170,10 @@ a { color: #fff; text-decoration: none; }
 
 .card-info h3 { 
   margin: 0; 
-  font-size: 1.3rem; /* Bigger font */
-  font-weight: 700; /* Bolder */
+  font-size: 1.3rem; 
+  font-weight: 700; 
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; /* Black outline */
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; 
   letter-spacing: 0.5px;
 }
 
@@ -186,17 +190,17 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-/* Make the demand number pop */
+
 .card-info .badge::after {
   content: attr(data-demand);
 }
 
-/* Style for just the demand number to make it stand out */
+
 .badge {
   font-size: 0.85rem;
 }
 
-/* Value text styling - cleaner, bigger, more pop */
+/* Value text styling */
 .card-avg, .card-ranged, .card-aftertax {
   font-size: 0.95rem;
   font-weight: 700;
@@ -230,7 +234,7 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-/* NEW: Crew Logo Card Styling - SMALLER SIZE */
+
 .crew-logo-card {
   flex-direction: column;
   text-align: center;
@@ -238,19 +242,19 @@ a { color: #fff; text-decoration: none; }
   max-width: calc(33.33% - 16px);
   overflow: hidden;
   padding: 8px;
-  min-height: 220px; /* Make cards taller */
+  min-height: 220px;
 }
 
 .crew-card-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* CHANGED: from 12px to 8px - smaller gap */
+  gap: 8px; 
 }
 
 .crew-logo-card h3 {
   margin: 0;
-  font-size: 0.9rem; /* CHANGED: from 1.1rem to 0.9rem - smaller text */
+  font-size: 0.9rem; 
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
@@ -259,14 +263,14 @@ a { color: #fff; text-decoration: none; }
   height: 100px;
   object-fit: contain;
   border-radius: 6px;
-  background: #1f2a38; /* Match normal item cards */
-  padding: 8px; /* Add padding like normal cards */
+  background: #1f2a38; 
+  padding: 8px; 
 }
 
 .crew-id {
   color: #ffde59;
   font-weight: bold;
-  font-size: 0.85rem; /* CHANGED: from 1rem to 0.85rem - smaller text */
+  font-size: 0.85rem; 
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
@@ -314,8 +318,8 @@ a { color: #fff; text-decoration: none; }
   padding: 10px 0;
   border-bottom: 2px solid #33cce6;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-  width: 100%; /* ADD THIS LINE */
-  box-sizing: border-box; /* ADD THIS LINE */
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
 
@@ -324,7 +328,7 @@ a { color: #fff; text-decoration: none; }
   display: none !important; 
 }
 
-/* Tax Calculator - Compact modern redesign */
+/* Tax Calculator */
 .tax-calculator {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
   border: 2px solid #33cce6;
@@ -336,7 +340,7 @@ a { color: #fff; text-decoration: none; }
   position: sticky;
   top: 16px;
   height: fit-content;
-  transition: none !important; /* Remove all transitions */
+  transition: none !important; 
   visibility: hidden;
   opacity: 0;
 }
@@ -451,13 +455,11 @@ a { color: #fff; text-decoration: none; }
   .crew-logo-card { width: 100%; }
 }
 
-/* Floating texts, header, neon effects, outlines etc. remain untouched */
 #floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
 .card-info label, .card-info .section-label, .tax-calculator label { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
 #floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
 #floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
 
-/* Entire header text and animations remain untouched */
 .blockspin-header { font-size: 12rem; font-weight: normal; text-align: center; color: white; font-family: 'Paytone One', sans-serif; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
 .blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
 @keyframes redNeonPulse { 0% { color: #e60000; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 8px #ff1a1a, 0 0 14px #ff3333, 0 0 20px #ff4d4d; } 100% { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 12px #ff3333, 0 0 22px #ff4d4d, 0 0 34px #ff6666, 0 0 46px #ff8080; } }
@@ -467,14 +469,13 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #33E6E6, 0 0 40px #66FFFF; 
 }
 
-/* Site Bio text and all remaining effects unchanged */
 .site-header p { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .sections-nav button { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 #floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 
-/* === MOBILE ONLY: Center search bar, calculator, and hide floating texts === */
+
 @media (max-width: 767px) {
   /* Center search bar */
   .search-container {
@@ -500,19 +501,18 @@ a { color: #fff; text-decoration: none; }
     max-width: 320px !important;
     text-align: center !important;
     float: none !important;
-    position: relative !important; /* override sticky */
+    position: relative !important; 
     top: auto !important;
   }
 
-  /* Hide floating green & white texts */
   #floating-text,
   #floating-text-left {
     display: none !important;
   }
 
-    /* Mobile-only: Much smaller ID text and copy button */
+    
   .crew-id {
-    font-size: 0.6rem !important; /* Even smaller on mobile */
+    font-size: 0.6rem !important; 
   }
   
   .copy-btn {
@@ -523,19 +523,19 @@ a { color: #fff; text-decoration: none; }
   }
   
   .crew-id-container {
-  flex-direction: column !important; /* Stack vertically instead of horizontally */
-  align-items: center !important;    /* Center both elements */
-  justify-content: center !important; /* Center the container content */
-  gap: 6px !important;               /* Space between ID and button */
-  margin-top: 4px !important;        /* Less margin */
+  flex-direction: column !important; 
+  align-items: center !important;   
+  justify-content: center !important; 
+  gap: 6px !important;              
+  margin-top: 4px !important;      
 }
 
 .crew-id {
-  text-align: center !important;     /* Center the ID text */
+  text-align: center !important;    
 }
 
 .copy-btn {
-  align-self: center !important;     /* Ensure button stays centered */
+  align-self: center !important;     
 }
 }
 
@@ -640,7 +640,7 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* Map controls styling - PURE DARK + CYAN */
+/* Map controls styling */
 .map-controls-panel {
   width: 240px;
   padding: 16px;
@@ -746,7 +746,7 @@ a { color: #fff; text-decoration: none; }
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Back button positioned bottom-right - UNCHANGED */
+/* Back button positioned bottom-right */
 .modal-back-btn {
   position: absolute;
   bottom: 10px;
@@ -767,7 +767,7 @@ a { color: #fff; text-decoration: none; }
   background: #29b3cc;
 }
 
-/* Durability control styling - COMPACT */
+/* Durability control styling  */
 .durability-control {
   display: flex;
   flex-direction: column;
@@ -851,7 +851,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 
-/* Cyan divider line AFTER Home button */
+/* Cyan divider line */
 #sections-nav button:first-child {
   margin-bottom: 15px;
   position: relative;
@@ -876,7 +876,7 @@ a { color: #fff; text-decoration: none; }
   transition: all 0.3s ease;
 }
 
-/* Color-coded active button states - Enhanced gradients with depth */
+/* Color-coded active button states */
 #sections-nav button.active {
   border-color: currentColor;
   box-shadow: 0 0 20px currentColor, inset 0 1px 0 rgba(255,255,255,0.2);
@@ -1000,7 +1000,7 @@ a { color: #fff; text-decoration: none; }
   text-transform: uppercase;
 }
 
-/* Cyan divider line AFTER Home button */
+/* Cyan divider line  */
 #sections-nav button:first-child {
   margin-bottom: 15px;
   position: relative;
@@ -1474,7 +1474,7 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* ==================== TRADE CHECKER STYLES ==================== */
+/* TRADE CHECKER STYLES  */
 
 .trade-checker-container {
   width: 100%;
@@ -1619,7 +1619,7 @@ a { color: #fff; text-decoration: none; }
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Money input - now goes AFTER items container */
+/* Money input */
 .trade-money-input {
   display: flex;
   align-items: center;
@@ -1655,7 +1655,7 @@ a { color: #fff; text-decoration: none; }
   margin: 0;
 }
 
-/* Trade Items Container - REDUCED HEIGHT */
+/* Trade Items Container */
 .trade-items-container {
   display: flex;
   gap: 20px;
@@ -1700,7 +1700,7 @@ a { color: #fff; text-decoration: none; }
   margin: auto;
 }
 
-/* Trade Item Card - BIGGER SIZE */
+/* Trade Item Card */
 .trade-item-card {
   position: relative;
   flex-shrink: 0;
@@ -1975,7 +1975,7 @@ a { color: #fff; text-decoration: none; }
   background: #ff8888;
 }
 
-/* Trade Summary Boxes - appear on Trade Checker page */
+/* Trade Summary Boxes */
 .trade-summary-boxes {
   position: absolute;
   right: 20px;
@@ -2079,7 +2079,7 @@ a { color: #fff; text-decoration: none; }
   padding: 20px 0;
 }
 
-/* ==================== RICHEST PLAYERS STYLES ==================== */
+/* RICHEST PLAYERS STYLES */
 .richest-players-header {
   text-align: center;
   margin-bottom: 30px;
@@ -2288,9 +2288,9 @@ a { color: #fff; text-decoration: none; }
   text-decoration: underline;
 }
 
-/* ==================== RICHEST PLAYERS STYLES END  ==================== */
+/* RICHEST PLAYERS STYLES END */
 
-/* Base richest card - default size for ranks 26+ */
+/* Base richest card */
 .richest-card {
   display: flex;
   align-items: center;
@@ -2423,7 +2423,7 @@ a { color: #fff; text-decoration: none; }
   white-space: nowrap;
 }
 
-/* Trading Guide - Red */
+/* Trading Guide */
 .info-footer-link:nth-child(1) {
   color: #ff4444;
 }
@@ -2433,7 +2433,7 @@ a { color: #fff; text-decoration: none; }
   text-decoration: underline;
 }
 
-/* About Us - Aurora */
+/* About Us */
 .info-footer-link:nth-child(3) {
   background: linear-gradient(90deg, #00ffff, #7dd3fc, #a78bfa, #fb7185, #00ffff);
   background-size: 300% 100%;
@@ -2456,7 +2456,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 
-/* FAQ - Purple */
+/* FAQ */
 .info-footer-link:nth-child(5) {
   color: #b380ff;
 }
@@ -2500,11 +2500,11 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
-/* Pawn Amount Display - positioned to the RIGHT of durability */
+/* Pawn Amount Display */
 .pawn-amount-display {
   position: absolute;
   bottom: 5px;
-  left: 130px; /* Moved to the right */
+  left: 130px; 
   display: flex !important;
   flex-direction: column;
   gap: 2px;
@@ -2800,3 +2800,6 @@ a { color: #fff; text-decoration: none; }
   -ms-user-select: none;
 }
 
+/* ============================================================
+   MOBILE STYLES
+   ============================================================ */
