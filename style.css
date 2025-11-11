@@ -2748,6 +2748,11 @@ a { color: #fff; text-decoration: none; }
    MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */
 
+/* Arrow button - HIDE on desktop */
+.mobile-box-toggle {
+  display: none;
+}
+
 @media (max-width: 768px) {
   
   .hamburger-menu {
@@ -2773,15 +2778,8 @@ a { color: #fff; text-decoration: none; }
   }
 
   .hamburger-menu.hidden {
-  display: none;
-}
-  
-/* Arrow button to toggle boxes - HIDE on desktop */
-.mobile-box-toggle {
-  display: none;
-}
-
-@media (max-width: 768px) {
+    display: none;
+  }
   
   /* Show arrow button only on mobile */
   .mobile-box-toggle {
@@ -2818,6 +2816,31 @@ a { color: #fff; text-decoration: none; }
   .mobile-box-toggle.open {
     right: 280px;
   }
-}
+
+  /* Stack boxes vertically and limit height */
+  aside[style*="top: 208px"] {
+    top: 250px !important;
+    height: auto !important;
+    max-height: 280px !important;
+  }
+
+  aside[style*="top: 548px"] {
+    top: 540px !important;
+    height: auto !important;
+    max-height: 280px !important;
+  }
+
+  .announcement-box-home,
+  .donator-box-home {
+    height: 100% !important;
+    max-height: 280px !important;
+    overflow-y: auto !important;
+  }
+
+  .announcement-scroll,
+  .donator-scroll {
+    max-height: 200px !important;
+    overflow-y: auto !important;
+  }
 
 }
