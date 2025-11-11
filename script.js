@@ -2009,20 +2009,17 @@ if (window.innerWidth <= 768) {
   toggleBtn.innerHTML = '◀';
   document.body.appendChild(toggleBtn);
   
-  const announcementBox = document.querySelector('.announcement-box-home');
-  const donatorBox = document.querySelector('.donator-box-home');
+  const asides = document.querySelectorAll('aside[style*="right: 17px"]');
   
   toggleBtn.addEventListener('click', () => {
-    const isOpen = announcementBox.classList.contains('open');
+    const isOpen = asides[0].classList.contains('open');
     
     if (isOpen) {
-      announcementBox.classList.remove('open');
-      donatorBox.classList.remove('open');
+      asides.forEach(aside => aside.classList.remove('open'));
       toggleBtn.classList.remove('open');
       toggleBtn.innerHTML = '◀';
     } else {
-      announcementBox.classList.add('open');
-      donatorBox.classList.add('open');
+      asides.forEach(aside => aside.classList.add('open'));
       toggleBtn.classList.add('open');
       toggleBtn.innerHTML = '▶';
     }

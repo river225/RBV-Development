@@ -2776,40 +2776,48 @@ a { color: #fff; text-decoration: none; }
   display: none;
 }
   
-/* Arrow button to toggle boxes */
+/* Arrow button to toggle boxes - HIDE on desktop */
 .mobile-box-toggle {
-  display: block;
-  position: fixed;
-  right: 0;
-  top: 250px;
-  background: #33cce6;
-  color: #16202c;
-  border: none;
-  padding: 15px 8px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 8px 0 0 8px;
-  z-index: 1001;
-  transition: right 0.3s ease;
+  display: none;
 }
 
-/* Boxes slide in/out from right */
-.announcement-box-home,
-.donator-box-home {
-  position: fixed;
-  right: -280px;
-  transition: right 0.3s ease;
-  z-index: 1000;
-}
+@media (max-width: 768px) {
+  
+  /* Show arrow button only on mobile */
+  .mobile-box-toggle {
+    display: block;
+    position: fixed;
+    right: 0;
+    top: 300px;
+    background: #33cce6;
+    color: #16202c;
+    border: none;
+    padding: 20px 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px 0 0 8px;
+    z-index: 1001;
+    transition: right 0.3s ease;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.3);
+  }
 
-.announcement-box-home.open,
-.donator-box-home.open {
-  right: 10px;
-}
+  /* Hide boxes off-screen by default on mobile */
+  aside[style*="right: 17px"] {
+    position: fixed !important;
+    right: -300px !important;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+  
+  aside[style*="right: 17px"].open {
+    right: 10px !important;
+  }
 
-/* Move arrow when boxes are open */
-.mobile-box-toggle.open {
-  right: 270px;
+  /* Move arrow when boxes are open */
+  .mobile-box-toggle.open {
+    right: 280px;
+  }
 }
 
 }
