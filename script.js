@@ -1994,12 +1994,11 @@ if (menuToggle) {
     menuToggle.classList.remove('hidden');
   });
   
-  const sectionButtons = document.querySelectorAll('.sections-nav button');
-  sectionButtons.forEach(button => {
-    button.addEventListener('click', () => {
+  sectionsNav.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
       sectionsNav.classList.remove('active');
       menuOverlay.classList.remove('active');
       menuToggle.classList.remove('hidden');
-    });
+    }
   });
 }
