@@ -2778,35 +2778,37 @@ a { color: #fff; text-decoration: none; }
   
 .announcement-box-home,
 .donator-box-home {
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+  position: fixed;
+  right: -280px;
+  transition: right 0.3s ease;
+  z-index: 1000;
 }
 
-.announcement-box-home.collapsed,
-.donator-box-home.collapsed {
-  max-height: 50px;
+.announcement-box-home.open,
+.donator-box-home.open {
+  right: 10px;
 }
 
 .announcement-box-home h3,
 .donator-box-home h3 {
   cursor: pointer;
   position: relative;
-  padding-right: 30px;
+  padding-left: 30px;
   user-select: none;
 }
 
-.announcement-box-home h3::after,
-.donator-box-home h3::after {
-  content: '▼';
+.announcement-box-home h3::before,
+.donator-box-home h3::before {
+  content: '◀';
   position: absolute;
-  right: 10px;
+  left: 10px;
   transition: transform 0.3s ease;
   font-size: 0.8em;
 }
 
-.announcement-box-home.collapsed h3::after,
-.donator-box-home.collapsed h3::after {
-  transform: rotate(-90deg);
+.announcement-box-home.open h3::before,
+.donator-box-home.open h3::before {
+  transform: rotate(180deg);
 }
 
 }
