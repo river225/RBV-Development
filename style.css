@@ -2713,6 +2713,63 @@ a { color: #fff; text-decoration: none; }
   -ms-user-select: none;
 }
 
+/* Hamburger menu - HIDDEN on desktop */
+.hamburger-menu {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2000;
+  background: #4a4a4a;
+  border: 2px solid #33cce6;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.8rem;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1500;
+}
+
+.menu-overlay.active {
+  display: block;
+}
+
 /* ============================================================
-   MOBILE STYLES
+   MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */
+
+@media (max-width: 768px) {
+  
+  .hamburger-menu {
+    display: block;
+  }
+  
+  .sections-nav {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #1c1c1c;
+    border-right: 2px solid #33cce6;
+    z-index: 1999;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding-top: 60px;
+  }
+  
+  .sections-nav.active {
+    left: 0;
+  }
+  
+}

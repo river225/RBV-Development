@@ -1972,3 +1972,24 @@ async function loadTopDonators() {
     }
   }
 }
+
+/* ============================================================
+   MOBILE MENU FUNCTIONALITY
+   ============================================================ */
+
+// Mobile menu toggle
+const menuToggle = document.getElementById('mobile-menu-toggle');
+const menuOverlay = document.getElementById('mobile-menu-overlay');
+const sectionsNav = document.querySelector('.sections-nav');
+
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    sectionsNav.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+  });
+  
+  menuOverlay.addEventListener('click', () => {
+    sectionsNav.classList.remove('active');
+    menuOverlay.classList.remove('active');
+  });
+}
