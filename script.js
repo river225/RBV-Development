@@ -2010,6 +2010,29 @@ if (window.innerWidth <= 768) {
   document.body.appendChild(toggleBtn);
   
   const asides = document.querySelectorAll('aside[style*="right: 17px"]');
+  const homeSection = document.getElementById('home');
+  
+  // Hide arrow by default
+  toggleBtn.style.display = 'none';
+  
+  // Show arrow only when home section is visible
+  const observer = new MutationObserver(() => {
+    if (homeSection.style.display !== 'none') {
+      toggleBtn.style.display = 'block';
+    } else {
+      toggleBtn.style.display = 'none';
+      asides.forEach(aside => aside.classList.remove('open'));
+      toggleBtn.classList.remove('open');
+      toggleBtn.innerHTML = '◀';
+    }
+  });
+  
+  observer.observe(homeSection, { attributes: true, attributeFilter: ['style'] });
+  
+  // Initial check
+  if (homeSection.style.display !== 'none') {
+    toggleBtn.style.display = 'block';
+  }
   
   toggleBtn.addEventListener('click', () => {
     const isOpen = asides[0].classList.contains('open');
