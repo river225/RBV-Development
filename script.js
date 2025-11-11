@@ -2003,3 +2003,28 @@ if (menuToggle) {
   });
 }
 
+if (window.innerWidth <= 768) {
+  const toggleBtn = document.createElement('button');
+  toggleBtn.className = 'mobile-box-toggle';
+  toggleBtn.innerHTML = '◀';
+  document.body.appendChild(toggleBtn);
+  
+  const announcementBox = document.querySelector('.announcement-box-home');
+  const donatorBox = document.querySelector('.donator-box-home');
+  
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = announcementBox.classList.contains('open');
+    
+    if (isOpen) {
+      announcementBox.classList.remove('open');
+      donatorBox.classList.remove('open');
+      toggleBtn.classList.remove('open');
+      toggleBtn.innerHTML = '◀';
+    } else {
+      announcementBox.classList.add('open');
+      donatorBox.classList.add('open');
+      toggleBtn.classList.add('open');
+      toggleBtn.innerHTML = '▶';
+    }
+  });
+}

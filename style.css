@@ -2776,4 +2776,40 @@ a { color: #fff; text-decoration: none; }
   display: none;
 }
   
+/* Arrow button to toggle boxes */
+.mobile-box-toggle {
+  display: block;
+  position: fixed;
+  right: 0;
+  top: 250px;
+  background: #33cce6;
+  color: #16202c;
+  border: none;
+  padding: 15px 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 8px 0 0 8px;
+  z-index: 1001;
+  transition: right 0.3s ease;
+}
+
+/* Boxes slide in/out from right */
+.announcement-box-home,
+.donator-box-home {
+  position: fixed;
+  right: -280px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.announcement-box-home.open,
+.donator-box-home.open {
+  right: 10px;
+}
+
+/* Move arrow when boxes are open */
+.mobile-box-toggle.open {
+  right: 270px;
+}
+
 }
