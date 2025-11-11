@@ -2776,39 +2776,4 @@ a { color: #fff; text-decoration: none; }
   display: none;
 }
   
-.announcement-box-home,
-.donator-box-home {
-  position: fixed;
-  right: -280px;
-  transition: right 0.3s ease;
-  z-index: 1000;
-}
-
-.announcement-box-home.open,
-.donator-box-home.open {
-  right: 10px;
-}
-
-.announcement-box-home h3,
-.donator-box-home h3 {
-  cursor: pointer;
-  position: relative;
-  padding-left: 30px;
-  user-select: none;
-}
-
-.announcement-box-home h3::before,
-.donator-box-home h3::before {
-  content: '◀';
-  position: absolute;
-  left: 10px;
-  transition: transform 0.3s ease;
-  font-size: 0.8em;
-}
-
-.announcement-box-home.open h3::before,
-.donator-box-home.open h3::before {
-  transform: rotate(180deg);
-}
-
 }

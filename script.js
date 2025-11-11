@@ -2003,19 +2003,3 @@ if (menuToggle) {
   });
 }
 
-const announcementBox = document.querySelector('.announcement-box-home');
-const topDonatorsBox = document.querySelector('.donator-box-home');
-
-if (window.innerWidth <= 768) {
-  if (announcementBox) {
-    announcementBox.querySelector('h3').addEventListener('click', () => {
-      announcementBox.classList.toggle('open');
-    });
-  }
-  
-  if (topDonatorsBox) {
-    topDonatorsBox.querySelector('h3').addEventListener('click', () => {
-      topDonatorsBox.classList.toggle('open');
-    });
-  }
-}
