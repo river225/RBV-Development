@@ -445,16 +445,6 @@ a { color: #fff; text-decoration: none; }
   display: none;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .main-container { flex-direction: column; }
-  .sections-nav, .tax-calculator { width: 100%; position: relative; }
-  .card { flex-direction: column; width: 100%; }
-  .card img { width: 100%; height: auto; }
-  .card-info { text-align: center; }
-  .crew-logo-card { width: 100%; }
-}
-
 #floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
 .card-info label, .card-info .section-label, .tax-calculator label { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
 #floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
@@ -474,71 +464,6 @@ a { color: #fff; text-decoration: none; }
 #floating-text { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .tax-calculator h2, .tax-calculator #taxResult, .tax-calculator .tax-explanation, .tax-calculator label { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
 .card-info h3, .card-info .badge, .card-info div:not(.discord-line):not(.demand):not(.demand-number) { text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000; }
-
-
-@media (max-width: 767px) {
-  /* Center search bar */
-  .search-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 20px auto !important;
-    width: 100% !important;
-  }
-
-  .search-container input {
-    width: 90% !important;
-    max-width: 320px !important;
-    text-align: center !important;
-    margin: 0 auto !important;
-    display: block !important;
-  }
-
-  /* Center calculator */
-  .tax-calculator {
-    display: block !important;
-    margin: 20px auto !important;
-    max-width: 320px !important;
-    text-align: center !important;
-    float: none !important;
-    position: relative !important; 
-    top: auto !important;
-  }
-
-  #floating-text,
-  #floating-text-left {
-    display: none !important;
-  }
-
-    
-  .crew-id {
-    font-size: 0.6rem !important; 
-  }
-  
-  .copy-btn {
-    font-size: 0.7rem;
-    padding: 2px 4px;
-    min-width: 20px;
-    height: 16px;
-  }
-  
-  .crew-id-container {
-  flex-direction: column !important; 
-  align-items: center !important;   
-  justify-content: center !important; 
-  gap: 6px !important;              
-  margin-top: 4px !important;      
-}
-
-.crew-id {
-  text-align: center !important;    
-}
-
-.copy-btn {
-  align-self: center !important;     
-}
-}
-
 
 /* Map controls styling */
 
@@ -2260,18 +2185,6 @@ a { color: #fff; text-decoration: none; }
   color: #81e681;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   font-family: 'Courier New', monospace;
-}
-
-@media (max-width: 768px) {
-  .richest-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .player-info {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
 
 .profile-link {
