@@ -1976,6 +1976,7 @@ async function loadTopDonators() {
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
+
 const menuToggle = document.getElementById('mobile-menu-toggle');
 const menuOverlay = document.getElementById('mobile-menu-overlay');
 const sectionsNav = document.querySelector('.sections-nav');
