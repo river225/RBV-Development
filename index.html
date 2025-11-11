@@ -90,9 +90,6 @@ border: 2px solid #000000;
 </head> 
 <body> 
 
-  <button id="mobile-menu-toggle" class="hamburger-menu">☰</button>
-<div id="mobile-menu-overlay" class="menu-overlay"></div>
-
 <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #16202c 0%, #1f2d3d 50%, #16202c 100%); display: flex; align-items: center; justify-content: center; z-index: 9999;">
   <div style="text-align: center; width: 400px; max-width: 90%;">
     <h2 style="color: #33cce6; font-size: 2rem; margin-bottom: 30px;">Loading BlockSpin Values...</h2>
@@ -113,7 +110,7 @@ border: 2px solid #000000;
  
 </header> 
 
-<!-- Search bar -->
+<!-- Search bar --> 
 <div class="search-container"> 
 <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
 </div> 
@@ -135,27 +132,13 @@ border: 2px solid #000000;
             <div class="announcement-scroll">
               <div class="announcement-item">
                 <p class="announcement-date">Oct 18, 2025</p>
-                <p class="announcement-text">Welcome to BlockSpin Values! Values are updated daily by our Value List Team.</p>
+                <p class="announcement-text">Welcome to BlockSpin Values! Values are updated daily by our top trader team.</p>
               </div>
 
             
             </div>
           </div>
         </aside>
-       
-
-<!-- Top Donators Box -->
-<aside style="position: absolute; right: 17px; top: 548px; width: 260px; height: 450px; z-index: 50;">
-  <div class="donator-box-home">
-    <h3>💰 Top Donators</h3>
-<p class="donator-description">Thank you to our generous supporters! Join our Discord to support!</p>
-    
-    <div class="donator-scroll" id="donator-list">
-      <div class="donator-loading">Loading donators...</div>
-    </div>
-  </div>
-</aside>
-
         <div class="hero-section">
   <h2 style="font-size: 3rem; margin-top: -20px; margin-bottom: 15px;">Welcome to BlockSpin Values</h2>
   <p class="hero-subtitle">Your trusted value list for all BlockSpin items and trades</p>
@@ -170,28 +153,24 @@ border: 2px solid #000000;
   </div>
   
 
+<!-- Top Donators Box (Home Only) -->
+<aside style="position: absolute; right: 17px; top: 548px; width: 260px; height: 450px; z-index: 50;">
+  <div class="donator-box-home">
+    <h3>💰 Top Donators</h3>
+<p class="donator-description">Thank you to our generous supporters! Join our Discord to support!</p>
+    
+    <div class="donator-scroll" id="donator-list">
+      <div class="donator-loading">Loading donators...</div>
+    </div>
+  </div>
+</aside>
 
 
-<div class="mobile-home-content">
-  <h2>Welcome to BlockSpin Values</h2>
-  <p class="subtitle">Your trusted value list for all BlockSpin items and trades</p>
-  <p class="founder">Founded and maintained by <a href="#" onclick="openRiverLinks(event)">river</a></p>
-  
-  <div class="mobile-btn-group">
-    <a href="https://discord.gg/QbapryYUUx" class="mobile-btn mobile-discord-btn" target="_blank">Join Our Trading Discord</a>
-    <a href="https://www.tiktok.com/@river1_0_?_t=ZN-8yzOC1THAus&_r=1" class="mobile-btn mobile-tiktok-btn" target="_blank">Check Out Rivers TikTok</a>
-  </div>
-  
-  <div class="mobile-info-box">
-    <h3>What is BlockSpin Values?</h3>
-    <p>BlockSpin Values is the trusted value list for all items in the Roblox game BlockSpin. Our dedicated team of top traders keeps values updated daily to help you make fair trades.</p>
-  </div>
-</div>
 
   <!-- About Section -->
   <div class="about-section">
     <h3>What is BlockSpin Values?</h3>
-    <p>BlockSpin Values is the trusted value list for all items in the Roblox game BlockSpin. Our dedicated team of top traders keeps values updated daily to help you make fair trades. Whether you're looking for weapon values, checking crew logos, or calculating taxes, we've got everything you need to trade with confidence.</p>
+    <p>BlockSpin Values is the trusted value list for all items in the Roblox game BlockSpin. Our dedicated team of top traders keeps values updated daily to help you make fair trades and avoid scams. Whether you're looking for weapon values, checking crew logos, or calculating taxes, we've got everything you need to trade with confidence.</p>
   
   </div>
   <!-- Info Footer Links -->
@@ -224,7 +203,7 @@ border: 2px solid #000000;
     placeholder="Enter amount..."
 />
         <div class="instructions">
-            Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Tip: resetting & also leaving the game lets you drop more cash.</strong>
+            Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
         </div>
     </aside>
 
@@ -250,6 +229,13 @@ border: 2px solid #000000;
 </div> 
 
 <script src="script.js"></script> 
+
+<div id="floating-text">Use Referral Code 1563R2 For $500 In Game!</div>
+
+<div id="floating-text-left">
+  <div>Want to suggest Value changes or Crew logos for this site?</div>
+  <div class="discord-line">Join our Discord!</div>
+</div>
 
 
 <!-- Footer -->
