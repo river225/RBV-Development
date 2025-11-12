@@ -2747,7 +2747,6 @@ a { color: #fff; text-decoration: none; }
   display: block;
 }
 
-
 /* ============================================================
    MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */
@@ -2875,6 +2874,7 @@ a { color: #fff; text-decoration: none; }
   #home {
     width: 100% !important;
     overflow-x: hidden !important;
+    padding-bottom: 20px !important;
   }
 
   /* Hide desktop hero on mobile */
@@ -2889,6 +2889,7 @@ a { color: #fff; text-decoration: none; }
     width: 100%;
     padding: 20px 0;
     text-align: center;
+    margin-top: -50px;
   }
 
   .mobile-home-content h2 {
@@ -3030,14 +3031,6 @@ a { color: #fff; text-decoration: none; }
     top: 100px !important;
   }
 
-  .mobile-home-content {
-    margin-top: -50px;
-  }
-
-  @media (max-width: 768px) {
-  
-  /* ... your existing mobile styles ... */
-
   /* Richest Players Section - Mobile Fixes */
   .richest-intro {
     text-align: center !important;
@@ -3076,11 +3069,5 @@ a { color: #fff; text-decoration: none; }
     margin: 20px auto !important;
     max-width: 90% !important;
   }
-
-  .mobile-home-content {
-    margin-top: -50px;
-  }
-
-}
 
 }
