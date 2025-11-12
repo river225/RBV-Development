@@ -2967,4 +2967,21 @@ a { color: #fff; text-decoration: none; }
     line-height: 1.6;
   }
 
+  /* Hide mobile donator box on desktop */
+.donator-box-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Hide desktop donator box on mobile */
+  .hero-section aside {
+    display: none !important;
+  }
+  
+  /* Show mobile donator box */
+  .donator-box-mobile {
+    display: block !important;
+  }
+}
+
 }
