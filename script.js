@@ -1932,25 +1932,24 @@ async function loadTopDonators() {
   try {
     const donators = await fetchSheet("Top Donate");
     const donatorList = document.getElementById('donator-list');
-    
-    if (!donatorList) return;
+    const mobileDonatorList = document.getElementById('mobile-donator-list');
     
     if (!donators || donators.length === 0) {
-      donatorList.innerHTML = '<div class="donator-loading">No donators yet</div>';
+      const noDonatorsHTML = '<div class="donator-loading">No donators yet</div>';
+      if (donatorList) donatorList.innerHTML = noDonatorsHTML;
+      if (mobileDonatorList) mobileDonatorList.innerHTML = noDonatorsHTML;
       return;
     }
     
-    // Take top 10 only
     const top10 = donators.slice(0, 10);
     
-    donatorList.innerHTML = top10.map((donator, index) => {
+    const donatorsHTML = top10.map((donator, index) => {
       const rank = index + 1;
       const name = donator.Name || 'Anonymous';
       const donation = donator.Donation || '0';
       const profile = donator['User Profile'] || '#';
       
-      // Format donation amount
-     const formattedDonation = donation;
+      const formattedDonation = donation;
       
       return `
         <div class="donator-item">
@@ -1964,12 +1963,16 @@ async function loadTopDonators() {
       `;
     }).join('');
     
+    if (donatorList) donatorList.innerHTML = donatorsHTML;
+    if (mobileDonatorList) mobileDonatorList.innerHTML = donatorsHTML;
+    
   } catch (error) {
     console.error('Error loading donators:', error);
+    const errorHTML = '<div class="donator-loading">Failed to load donators</div>';
     const donatorList = document.getElementById('donator-list');
-    if (donatorList) {
-      donatorList.innerHTML = '<div class="donator-loading">Failed to load donators</div>';
-    }
+    const mobileDonatorList = document.getElementById('mobile-donator-list');
+    if (donatorList) donatorList.innerHTML = errorHTML;
+    if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
 }
 
