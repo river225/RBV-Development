@@ -3002,4 +3002,22 @@ a { color: #fff; text-decoration: none; }
   overflow-y: auto;
 }
 
+.site-header {
+  padding: 10px 20px 5px 20px !important;
+  margin-bottom: 0 !important;
+}
+
+.blockspin-header {
+  font-size: 3rem !important;
+  margin-bottom: 10px !important;
+}
+
+.search-container {
+  top: 100px !important;
+}
+
+.mobile-home-content {
+  margin-top: -30px;
+}
+
 }
