@@ -2967,6 +2967,33 @@ a { color: #fff; text-decoration: none; }
     line-height: 1.6;
   }
 
-  
+  .mobile-donator-box {
+  width: 90%;
+  max-width: 350px;
+  margin: 25px auto 0 auto;
+  padding: 20px;
+  background: rgba(51, 204, 230, 0.1);
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+}
+
+.mobile-donator-box h3 {
+  font-size: 1.3rem;
+  color: #ffd700;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.mobile-donator-description {
+  font-size: 0.75rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.mobile-donator-scroll {
+  max-height: 250px;
+  overflow-y: auto;
+}
 
 }
