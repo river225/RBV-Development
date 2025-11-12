@@ -3034,4 +3034,53 @@ a { color: #fff; text-decoration: none; }
     margin-top: -50px;
   }
 
+  @media (max-width: 768px) {
+  
+  /* ... your existing mobile styles ... */
+
+  /* Richest Players Section - Mobile Fixes */
+  .richest-intro {
+    text-align: center !important;
+    padding: 20px 15px !important;
+    margin-top: -50px !important;
+  }
+
+  .richest-intro h2 {
+    font-size: 2rem !important;
+    text-align: center !important;
+  }
+
+  .richest-intro p {
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Fix richest player card text size */
+  .richest-card h3,
+  .richest-card .player-name {
+    font-size: 1.1rem !important;
+  }
+
+  .richest-card .player-value,
+  .richest-card .value-text {
+    font-size: 0.95rem !important;
+  }
+
+  .richest-card .rank-number {
+    font-size: 1.8rem !important;
+  }
+
+  /* Search bar for richest players */
+  .richest-search {
+    margin: 20px auto !important;
+    max-width: 90% !important;
+  }
+
+  .mobile-home-content {
+    margin-top: -50px;
+  }
+
+}
+
 }
