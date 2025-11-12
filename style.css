@@ -2978,6 +2978,8 @@ a { color: #fff; text-decoration: none; }
   background: rgba(20, 25, 35, 0.95);
   border: 2px solid #FFD700;
   border-radius: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .mobile-donator-box h3 {
@@ -3000,6 +3002,8 @@ a { color: #fff; text-decoration: none; }
 .mobile-donator-scroll {
   max-height: 400px;
   overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .site-header {
