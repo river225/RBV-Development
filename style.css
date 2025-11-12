@@ -2747,6 +2747,7 @@ a { color: #fff; text-decoration: none; }
   display: block;
 }
 
+
 /* ============================================================
    MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */
@@ -2971,57 +2972,66 @@ a { color: #fff; text-decoration: none; }
   }
 
   .mobile-donator-box {
-  width: 90%;
-  max-width: 350px;
-  margin: 25px auto 0 auto;
-  padding: 20px;
-  background: rgba(20, 25, 35, 0.95);
-  border: 2px solid #FFD700;
-  border-radius: 12px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
+    width: 90%;
+    max-width: 350px;
+    margin: 25px auto 0 auto;
+    padding: 20px;
+    background: rgba(20, 25, 35, 0.95);
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
 
-.mobile-donator-box h3 {
-  font-size: 1.5rem;
-  color: #ffd700;
-  margin-bottom: 12px;
-  text-align: center;
-  font-weight: bold;
-}
+  .mobile-donator-box h3 {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+  }
 
-.mobile-donator-description {
-  font-size: 0.85rem;
-  color: #fff;
-  text-align: center;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #ffd700;
-}
+  .mobile-donator-description {
+    font-size: 0.85rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ffd700;
+  }
 
-.mobile-donator-scroll {
-  max-height: 400px;
-  overflow-y: auto;
-  width: 100%;
-  box-sizing: border-box;
-}
+  .mobile-donator-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-.site-header {
-  padding: 10px 20px 5px 20px !important;
-  margin-bottom: 0 !important;
-}
+  /* FIX - Make donator items full width */
+  .donator-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
 
-.blockspin-header {
-  font-size: 3rem !important;
-  margin-bottom: 10px !important;
-}
+  .site-header {
+    padding: 10px 20px 5px 20px !important;
+    margin-bottom: 0 !important;
+  }
 
-.search-container {
-  top: 100px !important;
-}
+  .blockspin-header {
+    font-size: 3rem !important;
+    margin-bottom: 10px !important;
+  }
 
-.mobile-home-content {
-  margin-top: -30px;
-}
+  .search-container {
+    top: 100px !important;
+  }
+
+  .mobile-home-content {
+    margin-top: -30px;
+  }
 
 }
