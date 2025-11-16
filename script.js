@@ -11,7 +11,7 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
-  // "Trade Checker",
+   "Trade Checker",
  // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos"
@@ -1470,7 +1470,7 @@ function initSectionsNav() {
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before BlockSpin Map
-    if (name === "Trade Checker") {
+    if (name === "Trade checker") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
       nav.appendChild(gap);
@@ -1536,17 +1536,17 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-   // Handle Trade Checker
-  if (name === "Trade Checker") {
-    const tradeSection = document.getElementById(slugify("Trade Checker"));
-    if (tradeSection && !tradeSection.querySelector('.trade-checker-container')) {
-      tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;">Loading Trade Checker...</div>';
-      loadAllItemsForTradeChecker().then(() => {
-        tradeSection.innerHTML = createTradeCheckerSection();
-        setupTradeSearch();
-      });
-    }
+ // Handle Trade Checker
+if (name === "Trade Checker") {
+  const tradeSection = document.getElementById(slugify("Trade Checker"));
+  if (tradeSection && !tradeSection.querySelector('.trade-checker-container')) {
+    tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;">Loading Trade Checker...</div>';
+    loadAllItemsForTradeChecker().then(() => {
+      tradeSection.innerHTML = createTradeCheckerSection();
+      setupTradeSearch();
+    });
   }
+}
 
   // Handle BlockSpin Map
   if (name === "BlockSpin Map") {
