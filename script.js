@@ -302,6 +302,7 @@ function updateSummaryBox(side, items) {
 }
 // BLOCKSPIN MAP SECTION END 
 
+/* 
 // TRADE CHECKER SECTION START
 
 // Global storage for all items data (loaded from sheets)
@@ -864,9 +865,9 @@ function updateSummaryBox(side, items) {
       <button class="trade-summary-remove" onclick="removeTradeItem('${side}', ${item.id})">×</button>
     </div>
   `).join('');
-}
+} 
 
-// TRADE CHECKER SECTION END
+// TRADE CHECKER SECTION END */
 // RICHEST PLAYERS SECTION START
 
 function formatNetWorth(value) {
@@ -1975,6 +1976,57 @@ async function loadTopDonators() {
     if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
 }
+
+// QUICK STATS BOX FUNCTIONALITY
+async function loadQuickStats() {
+  // Discord Members
+  try {
+    const discordResponse = await fetch('https://discord.com/api/v10/invites/QbapryYUUx?with_counts=true');
+    const discordData = await discordResponse.json();
+    document.getElementById('discord-count').textContent = discordData.approximate_member_count.toLocaleString();
+  } catch (error) {
+    console.error('Discord count error:', error);
+    document.getElementById('discord-count').textContent = '1,000+';
+  }
+
+  // Website Visits (CountAPI)
+  try {
+    const visitResponse = await fetch('https://api.countapi.xyz/hit/blockspin-values/visits');
+    const visitData = await visitResponse.json();
+    document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
+  } catch (error) {
+    console.error('Visit count error:', error);
+    document.getElementById('visit-count').textContent = '1,000+';
+  }
+
+  // Total Items (count from all loaded sheets)
+  try {
+    const sheets = ["Uncommon", "Rare", "Epic", "Legendary", "Omega", "Misc", "Vehicles"];
+    let totalItems = 0;
+    
+    for (const sheet of sheets) {
+      const items = await fetchSheet(sheet);
+      totalItems += items.length;
+    }
+    
+    document.getElementById('total-items').textContent = totalItems.toLocaleString();
+  } catch (error) {
+    console.error('Total items error:', error);
+    document.getElementById('total-items').textContent = '100+';
+  }
+
+  // Last Updated (Today's date)
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('last-updated').textContent = dateStr;
+}
+
+// Call it after a short delay to ensure elements exist
+setTimeout(() => {
+  if (document.getElementById('discord-count')) {
+    loadQuickStats();
+  }
+}, 500);
 
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
