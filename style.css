@@ -3142,6 +3142,7 @@ body {
   font-size: 5rem;
   color: #33cce6;
   text-align: center;
+  margin-top: 200px;
   margin-bottom: 20px;
   font-weight: bold;
   text-shadow: 
@@ -3168,13 +3169,8 @@ body {
 
 #trade-checker {
   min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 40px;
+  padding: 40px;
 }
-
 /* ============================================================
    MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */
