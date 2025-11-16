@@ -2028,12 +2028,6 @@ a { color: #fff; text-decoration: none; }
   margin: 0 auto;
 }
 
-.richest-search:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #33cce6;
-  box-shadow: 0 0 15px rgba(51, 204, 230, 0.5);
-}
 
 .richest-search::placeholder {
   color: rgba(255, 255, 255, 0.6);
