@@ -1976,9 +1976,7 @@ async function loadTopDonators() {
     if (donatorList) donatorList.innerHTML = errorHTML;
     if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
-}
-
-// QUICK STATS BOX FUNCTIONALITY
+}// QUICK STATS BOX FUNCTIONALITY
 async function loadQuickStats() {
   // Discord Members
   try {
@@ -1989,37 +1987,17 @@ async function loadQuickStats() {
     console.error('Discord count error:', error);
     document.getElementById('discord-count').textContent = '1,000+';
   }
-// Website Visits (GoatCounter - free, reliable alternative)
-try {
-  const counterKey = 'blockspin-values-counter';
-  const visitResponse = await fetch(`https://api.countapi.dev/hit/blockspin/${counterKey}`, {
-    method: 'GET'
-  });
-  
-  const visitData = await visitResponse.json();
-  
-  if (visitData && visitData.count) {
-    document.getElementById('visit-count').textContent = visitData.count.toLocaleString();
-  } else {
-    throw new Error('Invalid response');
-  }
-} catch (error) {
-  console.error('Visit count error:', error);
-  
-  // Fallback to second alternative
+
+  // Website Visits - Using counterapi.com (CountAPI replacement)
   try {
-    const response = await fetch('https://api.countapi.dev/get/blockspin/blockspin-values-counter');
-    const data = await response.json();
-    
-    if (data && data.count) {
-      document.getElementById('visit-count').textContent = data.count.toLocaleString();
-    } else {
-      document.getElementById('visit-count').textContent = '5,000+';
-    }
-  } catch {
+    const visitResponse = await fetch('https://api.counterapi.com/v1/blockspin-values/visits/up');
+    const visitData = await visitResponse.json();
+    document.getElementById('visit-count').textContent = visitData.count.toLocaleString();
+  } catch (error) {
+    console.error('Visit count error:', error);
     document.getElementById('visit-count').textContent = '5,000+';
   }
-}
+
   // Total Items (count from all loaded sheets)
   try {
     const sheets = ["Uncommon", "Rare", "Epic", "Legendary", "Omega", "Misc", "Vehicles"];
