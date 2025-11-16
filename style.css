@@ -338,7 +338,7 @@ a { color: #fff; text-decoration: none; }
   width: 240px;
   box-shadow: 0 8px 32px rgba(51, 204, 230, 0.2);
   position: sticky;
-  top: 110px;
+  top: 115px;
   height: fit-content;
   transition: none !important; 
   visibility: hidden;
