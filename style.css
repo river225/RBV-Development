@@ -2519,8 +2519,8 @@ a { color: #fff; text-decoration: none; }
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  width: 95%;
-  max-width: 240px;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Rank 1 - Gold */
