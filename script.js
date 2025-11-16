@@ -2029,69 +2029,7 @@ setTimeout(() => {
   }
 }, 500);
 
-// Back to Top button for Richest Players section
-(function() {
-  // Create button
-  const backToTopButton = document.createElement('button');
-  backToTopButton.className = 'richest-back-to-top';
-  backToTopButton.textContent = '↑ Back to Top';
-  
-  // Click handler
-  backToTopButton.addEventListener('click', function() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-  
-  // Add to page
-  document.body.appendChild(backToTopButton);
-  
-  // Show/hide based on active section
-  function checkSection() {
-    const richestSection = document.getElementById('💰 Richest Players');
-    if (richestSection && richestSection.style.display === 'block') {
-      backToTopButton.style.display = 'block';
-    } else {
-      backToTopButton.style.display = 'none';
-    }
-  }
-  
-  // Check continuously
-  setInterval(checkSection, 100);
-  
-  // Initial check
-  setTimeout(checkSection, 500);
-})();
 
-// Create Back to Top button
-const backBtn = document.createElement('div');
-backBtn.innerHTML = '↑ Back to Top';
-backBtn.style.cssText = `
-  position: fixed;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, #33cce6 0%, #5bc5de 100%);
-  color: #000;
-  padding: 15px 25px;
-  border-radius: 8px;
-  border: 2px solid #000;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(51, 204, 230, 0.4);
-  display: none;
-`;
-backBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-document.body.appendChild(backBtn);
-
-// Show only on Richest Players section
-setInterval(() => {
-  const richest = document.getElementById('💰 Richest Players');
-  backBtn.style.display = (richest && richest.style.display === 'block') ? 'block' : 'none';
-}, 100);
 
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
