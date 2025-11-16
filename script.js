@@ -1976,7 +1976,9 @@ async function loadTopDonators() {
     if (donatorList) donatorList.innerHTML = errorHTML;
     if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
-}// QUICK STATS BOX FUNCTIONALITY
+}
+
+// QUICK STATS BOX FUNCTIONALITY
 async function loadQuickStats() {
   // Discord Members
   try {
@@ -1988,11 +1990,11 @@ async function loadQuickStats() {
     document.getElementById('discord-count').textContent = '1,000+';
   }
 
-  // Website Visits - Using counterapi.com (CountAPI replacement)
+  // Website Visits - Using Abacus (Free CountAPI alternative)
   try {
-    const visitResponse = await fetch('https://api.counterapi.com/v1/blockspin-values/visits/up');
+    const visitResponse = await fetch('https://abacus.jasoncameron.dev/hit/blockspin-values/visits');
     const visitData = await visitResponse.json();
-    document.getElementById('visit-count').textContent = visitData.count.toLocaleString();
+    document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
   } catch (error) {
     console.error('Visit count error:', error);
     document.getElementById('visit-count').textContent = '5,000+';
