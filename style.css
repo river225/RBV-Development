@@ -3202,37 +3202,32 @@ body {
   padding: 100px 40px;
 }
 
-/* Back to Top Button for Richest Players */
-.back-to-top-richest {
+.richest-back-to-top {
   position: fixed;
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
   background: linear-gradient(135deg, #33cce6 0%, #5bc5de 100%);
   color: #000;
-  padding: 12px 20px;
+  padding: 15px 25px;
   border-radius: 8px;
   border: 2px solid #000;
   font-weight: bold;
-  font-size: 0.95rem;
+  font-size: 1rem;
   cursor: pointer;
-  z-index: 999;
+  z-index: 1000;
   box-shadow: 0 4px 15px rgba(51, 204, 230, 0.4);
   transition: all 0.3s ease;
-  display: none; /* Hidden by default */
+  display: none;
   text-shadow: none;
+  white-space: nowrap;
 }
 
-.back-to-top-richest:hover {
+.richest-back-to-top:hover {
   background: linear-gradient(135deg, #5bc5de 0%, #33cce6 100%);
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 6px 20px rgba(51, 204, 230, 0.6);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 25px rgba(51, 204, 230, 0.7);
 }
-
-.back-to-top-richest.show {
-  display: block;
-}
-
 /* ============================================================
    MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */

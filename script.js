@@ -2029,50 +2029,40 @@ setTimeout(() => {
   }
 }, 500);
 
-// Back to Top Button for Richest Players Section
-function initBackToTopButton() {
-  // Create the button
-  const backToTopBtn = document.createElement('button');
-  backToTopBtn.className = 'back-to-top-richest';
-  backToTopBtn.innerHTML = '↑ Back to Top';
-  backToTopBtn.onclick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-  document.body.appendChild(backToTopBtn);
-
-  // Show/hide based on scroll and active section
-  function updateButtonVisibility() {
-    const richestSection = document.querySelector('section#\\💰\\ Richest\\ Players');
-    const isRichestActive = richestSection && window.getComputedStyle(richestSection).display !== 'none';
-    const scrolled = window.scrollY > 300;
-
-    if (isRichestActive && scrolled) {
-      backToTopBtn.classList.add('show');
-    } else {
-      backToTopBtn.classList.remove('show');
-    }
-  }
-
-  window.addEventListener('scroll', updateButtonVisibility);
+// Back to Top button for Richest Players section
+(function() {
+  // Create button
+  const backToTopButton = document.createElement('button');
+  backToTopButton.className = 'richest-back-to-top';
+  backToTopButton.textContent = '↑ Back to Top';
   
-  // Also check when sections change
-  const observer = new MutationObserver(updateButtonVisibility);
-  observer.observe(document.getElementById('sections'), {
-    attributes: true,
-    subtree: true,
-    attributeFilter: ['class', 'style']
+  // Click handler
+  backToTopButton.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   });
   
+  // Add to page
+  document.body.appendChild(backToTopButton);
+  
+  // Show/hide based on active section
+  function checkSection() {
+    const richestSection = document.getElementById('💰 Richest Players');
+    if (richestSection && richestSection.style.display === 'block') {
+      backToTopButton.style.display = 'block';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  }
+  
+  // Check continuously
+  setInterval(checkSection, 100);
+  
   // Initial check
-  setTimeout(updateButtonVisibility, 500);
-}
-
-// Initialize when page loads
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initBackToTopButton);
-} else {
-  initBackToTopButton();
-}
+  setTimeout(checkSection, 500);
+})();
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
