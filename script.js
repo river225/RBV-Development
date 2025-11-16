@@ -2028,6 +2028,36 @@ setTimeout(() => {
     loadQuickStats();
   }
 }, 500);
+
+// Back to Top Button for Richest Players Section
+function initBackToTopButton() {
+  // Create the button
+  const backToTopBtn = document.createElement('button');
+  backToTopBtn.className = 'back-to-top-richest';
+  backToTopBtn.innerHTML = '↑ Back to Top';
+  backToTopBtn.onclick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  document.body.appendChild(backToTopBtn);
+
+  // Show/hide based on scroll and active section
+  window.addEventListener('scroll', () => {
+    const richestSection = document.getElementById('💰 Richest Players');
+    const isRichestActive = richestSection && !richestSection.classList.contains('hidden');
+    const scrolled = window.scrollY > 300;
+
+    if (isRichestActive && scrolled) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  initBackToTopButton();
+});
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
