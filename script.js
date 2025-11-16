@@ -1989,37 +1989,37 @@ async function loadQuickStats() {
     console.error('Discord count error:', error);
     document.getElementById('discord-count').textContent = '1,000+';
   }
-
-  // Website Visits - Try multiple counter services
+// Website Visits (GoatCounter - free, reliable alternative)
+try {
+  const counterKey = 'blockspin-values-counter';
+  const visitResponse = await fetch(`https://api.countapi.dev/hit/blockspin/${counterKey}`, {
+    method: 'GET'
+  });
+  
+  const visitData = await visitResponse.json();
+  
+  if (visitData && visitData.count) {
+    document.getElementById('visit-count').textContent = visitData.count.toLocaleString();
+  } else {
+    throw new Error('Invalid response');
+  }
+} catch (error) {
+  console.error('Visit count error:', error);
+  
+  // Fallback to second alternative
   try {
-    // First try CountAPI
-    const visitResponse = await fetch('https://api.countapi.xyz/hit/blockspin-values/visits');
-    const visitData = await visitResponse.json();
+    const response = await fetch('https://api.countapi.dev/get/blockspin/blockspin-values-counter');
+    const data = await response.json();
     
-    if (visitData && visitData.value) {
-      document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
+    if (data && data.count) {
+      document.getElementById('visit-count').textContent = data.count.toLocaleString();
     } else {
-      throw new Error('Invalid CountAPI response');
-    }
-  } catch (error) {
-    console.error('Visit count error:', error);
-    
-    // Fallback: Try alternative counter API
-    try {
-      const altResponse = await fetch('https://api.countapi.xyz/get/blockspin-values/visits');
-      const altData = await altResponse.json();
-      
-      if (altData && altData.value) {
-        document.getElementById('visit-count').textContent = altData.value.toLocaleString() + '+';
-      } else {
-        document.getElementById('visit-count').textContent = '5,000+';
-      }
-    } catch (altError) {
-      console.error('Fallback counter also failed:', altError);
       document.getElementById('visit-count').textContent = '5,000+';
     }
+  } catch {
+    document.getElementById('visit-count').textContent = '5,000+';
   }
-
+}
   // Total Items (count from all loaded sheets)
   try {
     const sheets = ["Uncommon", "Rare", "Epic", "Legendary", "Omega", "Misc", "Vehicles"];
