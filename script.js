@@ -1541,7 +1541,8 @@ function showSection(name) {
   if (name === "Trade Checker") {
     const tradeSection = document.getElementById(slugify("Trade Checker"));
     if (tradeSection && !tradeSection.querySelector('.trade-checker-container')) {
-      tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;">Coming soonn</div>';
+tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;"><strong>Error 503:</strong> Service temporarily unavailable<br>Reason: Maintenance Restriction<br>Developer: Daphnèe</div>';
+
       loadAllItemsForTradeChecker().then(() => {
         tradeSection.innerHTML = createTradeCheckerSection();
         setupTradeSearch();
