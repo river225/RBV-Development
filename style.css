@@ -2189,6 +2189,14 @@ a { color: #fff; text-decoration: none; }
 /* RICHEST PLAYERS STYLES END */
 
 /* Base richest card */
+
+/* Center Richest Players leaderboard */
+.richest-card {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .richest-card {
   display: flex;
   align-items: center;
