@@ -11,7 +11,7 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
-  "Trade Checker",
+  // "Trade Checker",
  // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos"
@@ -1975,6 +1975,54 @@ async function loadTopDonators() {
     if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
 }
+
+// Quick Stats functionality
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // 1. Discord Members - Live count from API
+  const discordCount = document.getElementById('discord-count');
+  fetch('https://discord.com/api/v9/invites/QbapryYUUx?with_counts=true')
+    .then(response => response.json())
+    .then(data => {
+      discordCount.textContent = data.approximate_member_count.toLocaleString();
+    })
+    .catch(error => {
+      discordCount.textContent = '2,450+'; // Fallback if API fails
+    });
+  
+  // 2. Website Visits - Global counter via CountAPI
+  const visitCountEl = document.getElementById('visit-count');
+  
+  fetch('https://api.countapi.xyz/hit/blockspin-values/visits')
+    .then(response => response.json())
+    .then(data => {
+      visitCountEl.textContent = data.value.toLocaleString();
+    })
+    .catch(error => {
+      visitCountEl.textContent = '1,000+'; // Fallback if API fails
+    });
+  
+  // 3. Total Items - Count from loaded data
+  const totalItemsEl = document.getElementById('total-items');
+  
+  // Wait for items to load, then count them
+  async function updateTotalItems() {
+    await loadAllItemsForTradeChecker();
+    totalItemsEl.textContent = ALL_ITEMS_DATA.length.toLocaleString();
+  }
+  updateTotalItems();
+  
+  // 4. Last Updated
+  const lastUpdatedEl = document.getElementById('last-updated');
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+  lastUpdatedEl.textContent = formattedDate;
+  
+});
 
 /* ============================================================
    MOBILE MENU FUNCTIONALITY

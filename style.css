@@ -54,7 +54,7 @@ a { color: #fff; text-decoration: none; }
 /* Main layout changes start */
 .main-container {
     display: flex;
-    max-width: 1600px;
+    max-width: 1800px;  /* Increased from 1600px */
     margin: 0 auto;
     margin-top: 50px;
     gap: 20px;
@@ -3046,6 +3046,110 @@ body {
   font-style: italic;
   font-size: 1.05rem;
 }
+/* Home page layout with sidebar */
+.home-page-clean {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.home-content-main {
+  flex: 1;
+  min-width: 0; /* Prevents flex overflow */
+}
+
+/* Home page layout with sidebar */
+.home-page-clean {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.home-content-main {
+  flex: 1;
+  min-width: 0;
+}
+ 
+/* Quick Stats Box */
+.quick-stats-box {
+  background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 8px 32px rgba(51, 204, 230, 0.2);
+  position: absolute;
+  right: -320px;
+  top: 70px;
+  height: fit-content;
+}
+
+.quick-stats-box h2 {
+  color: #33cce6;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(51, 204, 230, 0.05);
+  border: 1px solid rgba(51, 204, 230, 0.2);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: rgba(51, 204, 230, 0.1);
+  border-color: rgba(51, 204, 230, 0.4);
+  transform: translateX(5px);
+}
+
+.stat-item:last-child {
+  margin-bottom: 0;
+}
+
+.stat-icon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(51, 204, 230, 0.1);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  color: #6ab5be;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(51, 204, 230, 0.3);
+}
+
 /* ============================================================
    MOBILE STYLES (iPhone 12 Pro & Similar Phones)
    ============================================================ */
@@ -3326,10 +3430,9 @@ body {
     margin-bottom: 10px !important;
   }
 
-.search-container {
-  top: 60px !important;
-  transform: translateY(-40px) !important;
-}
+  .search-container {
+    top: 100px !important;
+  }
 
   /* Richest Players Section - Mobile Fixes */
   .richest-intro {
