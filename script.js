@@ -2041,9 +2041,9 @@ function initBackToTopButton() {
   document.body.appendChild(backToTopBtn);
 
   // Show/hide based on scroll and active section
-  window.addEventListener('scroll', () => {
-    const richestSection = document.getElementById('💰 Richest Players');
-    const isRichestActive = richestSection && !richestSection.classList.contains('hidden');
+  function updateButtonVisibility() {
+    const richestSection = document.querySelector('section#\\💰\\ Richest\\ Players');
+    const isRichestActive = richestSection && window.getComputedStyle(richestSection).display !== 'none';
     const scrolled = window.scrollY > 300;
 
     if (isRichestActive && scrolled) {
@@ -2051,13 +2051,28 @@ function initBackToTopButton() {
     } else {
       backToTopBtn.classList.remove('show');
     }
+  }
+
+  window.addEventListener('scroll', updateButtonVisibility);
+  
+  // Also check when sections change
+  const observer = new MutationObserver(updateButtonVisibility);
+  observer.observe(document.getElementById('sections'), {
+    attributes: true,
+    subtree: true,
+    attributeFilter: ['class', 'style']
   });
+  
+  // Initial check
+  setTimeout(updateButtonVisibility, 500);
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize when page loads
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBackToTopButton);
+} else {
   initBackToTopButton();
-});
+}
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
