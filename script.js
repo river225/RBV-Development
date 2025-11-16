@@ -11,7 +11,7 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
-   "Trade Checker",
+  "Trade Checker",
  // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos"
@@ -1470,7 +1470,7 @@ function initSectionsNav() {
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before BlockSpin Map
-    if (name === "Trade checker") {
+    if (name === "Trade Checker") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
       nav.appendChild(gap);
@@ -1536,17 +1536,17 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
- // Handle Trade Checker
-if (name === "Trade Checker") {
-  const tradeSection = document.getElementById(slugify("Trade Checker"));
-  if (tradeSection && !tradeSection.querySelector('.trade-checker-container')) {
-    tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;">Loading Trade Checker...</div>';
-    loadAllItemsForTradeChecker().then(() => {
-      tradeSection.innerHTML = createTradeCheckerSection();
-      setupTradeSearch();
-    });
+   // Handle Trade Checker
+  if (name === "Trade Checker") {
+    const tradeSection = document.getElementById(slugify("Trade Checker"));
+    if (tradeSection && !tradeSection.querySelector('.trade-checker-container')) {
+      tradeSection.innerHTML = '<div style="text-align: center; padding: 50px; color: #33cce6;">Loading Trade Checker...</div>';
+      loadAllItemsForTradeChecker().then(() => {
+        tradeSection.innerHTML = createTradeCheckerSection();
+        setupTradeSearch();
+      });
+    }
   }
-}
 
   // Handle BlockSpin Map
   if (name === "BlockSpin Map") {
@@ -1975,54 +1975,6 @@ async function loadTopDonators() {
     if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
 }
-
-// Quick Stats functionality
-document.addEventListener('DOMContentLoaded', function() {
-  
-  // 1. Discord Members - Live count from API
-  const discordCount = document.getElementById('discord-count');
-  fetch('https://discord.com/api/v9/invites/QbapryYUUx?with_counts=true')
-    .then(response => response.json())
-    .then(data => {
-      discordCount.textContent = data.approximate_member_count.toLocaleString();
-    })
-    .catch(error => {
-      discordCount.textContent = '2,450+'; // Fallback if API fails
-    });
-  
-  // 2. Website Visits - Global counter via CountAPI
-  const visitCountEl = document.getElementById('visit-count');
-  
-  fetch('https://api.countapi.xyz/hit/blockspin-values/visits')
-    .then(response => response.json())
-    .then(data => {
-      visitCountEl.textContent = data.value.toLocaleString();
-    })
-    .catch(error => {
-      visitCountEl.textContent = '1,000+'; // Fallback if API fails
-    });
-  
-  // 3. Total Items - Count from loaded data
-  const totalItemsEl = document.getElementById('total-items');
-  
-  // Wait for items to load, then count them
-  async function updateTotalItems() {
-    await loadAllItemsForTradeChecker();
-    totalItemsEl.textContent = ALL_ITEMS_DATA.length.toLocaleString();
-  }
-  updateTotalItems();
-  
-  // 4. Last Updated
-  const lastUpdatedEl = document.getElementById('last-updated');
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  });
-  lastUpdatedEl.textContent = formattedDate;
-  
-});
 
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
