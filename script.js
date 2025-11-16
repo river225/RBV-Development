@@ -1990,14 +1990,33 @@ async function loadQuickStats() {
     document.getElementById('discord-count').textContent = '1,000+';
   }
 
-  // Website Visits (CountAPI)
+  // Website Visits (using localStorage as backup)
   try {
-    const visitResponse = await fetch('https://api.countapi.xyz/hit/blockspin-values/visits');
+    const visitResponse = await fetch('https://api.countapi.xyz/hit/blockspin-values/visits', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (!visitResponse.ok) throw new Error('CountAPI failed');
+    
     const visitData = await visitResponse.json();
-    document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
+    if (visitData && visitData.value) {
+      document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
+      localStorage.setItem('lastVisitCount', visitData.value);
+    } else {
+      throw new Error('Invalid response');
+    }
   } catch (error) {
     console.error('Visit count error:', error);
-    document.getElementById('visit-count').textContent = '1,000+';
+    // Try to use last known count from localStorage
+    const lastCount = localStorage.getItem('lastVisitCount');
+    if (lastCount) {
+      document.getElementById('visit-count').textContent = parseInt(lastCount).toLocaleString() + '+';
+    } else {
+      document.getElementById('visit-count').textContent = '1,000+';
+    }
   }
 
   // Total Items (count from all loaded sheets)
