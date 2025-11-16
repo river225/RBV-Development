@@ -1990,32 +1990,33 @@ async function loadQuickStats() {
     document.getElementById('discord-count').textContent = '1,000+';
   }
 
-  // Website Visits (using localStorage as backup)
+  // Website Visits - Try multiple counter services
   try {
-    const visitResponse = await fetch('https://api.countapi.xyz/hit/blockspin-values/visits', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-    
-    if (!visitResponse.ok) throw new Error('CountAPI failed');
-    
+    // First try CountAPI
+    const visitResponse = await fetch('https://api.countapi.xyz/hit/blockspin-values/visits');
     const visitData = await visitResponse.json();
+    
     if (visitData && visitData.value) {
       document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
-      localStorage.setItem('lastVisitCount', visitData.value);
     } else {
-      throw new Error('Invalid response');
+      throw new Error('Invalid CountAPI response');
     }
   } catch (error) {
     console.error('Visit count error:', error);
-    // Try to use last known count from localStorage
-    const lastCount = localStorage.getItem('lastVisitCount');
-    if (lastCount) {
-      document.getElementById('visit-count').textContent = parseInt(lastCount).toLocaleString() + '+';
-    } else {
-      document.getElementById('visit-count').textContent = '1,000+';
+    
+    // Fallback: Try alternative counter API
+    try {
+      const altResponse = await fetch('https://api.countapi.xyz/get/blockspin-values/visits');
+      const altData = await altResponse.json();
+      
+      if (altData && altData.value) {
+        document.getElementById('visit-count').textContent = altData.value.toLocaleString() + '+';
+      } else {
+        document.getElementById('visit-count').textContent = '5,000+';
+      }
+    } catch (altError) {
+      console.error('Fallback counter also failed:', altError);
+      document.getElementById('visit-count').textContent = '5,000+';
     }
   }
 
@@ -2047,7 +2048,6 @@ setTimeout(() => {
     loadQuickStats();
   }
 }, 500);
-
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
