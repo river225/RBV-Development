@@ -2034,3 +2034,28 @@ setTimeout(() => {
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
+
+// Hamburger Menu
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const sectionsNav = document.getElementById('sections-nav');
+
+if (hamburgerBtn && mobileMenu && sectionsNav) {
+  // Copy nav into mobile menu
+  const navClone = sectionsNav.cloneNode(true);
+  mobileMenu.appendChild(navClone);
+  
+  // Toggle menu
+  hamburgerBtn.addEventListener('click', function() {
+    hamburgerBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+  
+  // Close when section clicked
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target.tagName === 'BUTTON') {
+      hamburgerBtn.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    }
+  });
+}
