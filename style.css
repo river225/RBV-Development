@@ -3200,7 +3200,12 @@ body {
   padding: 100px 40px;
 } 
 
-
+/* Hide mobile-only elements on desktop */
+.tax-calc-toggle,
+.tax-calculator-mobile,
+.mobile-top-links {
+  display: none;
+}
 /* ============================================================
    MOBILE STYLES - iPhone 14 Pro Max (430px and below)
    ============================================================ */
@@ -3524,5 +3529,5 @@ body {
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
   }
-  
+
 }
