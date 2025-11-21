@@ -3418,7 +3418,6 @@ body {
     font-size: 1.2rem;
     padding: 18px 30px;
   }
-
   /* ============================================ */
   /* MOBILE TAX CALCULATOR */
   /* ============================================ */
@@ -3449,15 +3448,15 @@ body {
     position: fixed;
     right: -350px;
     top: 0;
-    width: 320px;
+    width: 300px;
     height: 100vh;
-    background: #0d1117;
-    border-left: 3px solid #d4a027;
-    padding: 80px 20px 20px 20px;
+    background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+    border-left: 2px solid #33cce6;
+    padding: 80px 16px 20px 16px;
     overflow-y: auto;
     z-index: 950;
     transition: right 0.3s ease;
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.6);
+    box-shadow: -8px 0 32px rgba(51, 204, 230, 0.3);
   }
   
   .mobile-tax-calc.active {
@@ -3473,59 +3472,94 @@ body {
     background: #ff4444;
     border: 2px solid #000;
     border-radius: 50%;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #fff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 1;
+    font-weight: bold;
   }
   
   .mobile-tax-calc h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: #d4a027;
+    color: #33cce6;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
     text-align: center;
-    font-family: 'Paytone One', sans-serif;
-    text-shadow: 2px 2px 0 #000;
-  }
-  
-  .mobile-tax-calc .tax-result {
-    background: #1c2937;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border: 2px solid #d4a027;
-  }
-  
-  .mobile-tax-calc .tax-result h3 {
-    font-size: 1rem;
-    color: #d4a027;
-    margin: 0 0 10px 0;
-  }
-  
-  .mobile-tax-calc .tax-result .amount {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #4ade80;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   }
   
   .mobile-tax-calc input {
     width: 100%;
-    padding: 15px;
-    font-size: 1.1rem;
-    background: #1c2937;
-    border: 2px solid #d4a027;
+    background: rgba(51, 204, 230, 0.1);
+    border: 2px solid #33cce6;
     border-radius: 8px;
-    color: #fff;
-    margin-bottom: 15px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: white;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  
+  .mobile-tax-calc input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .mobile-tax-calc input:focus {
+    outline: none;
+    background: rgba(51, 204, 230, 0.15);
+    border-color: #5bc5de;
+    box-shadow: 0 0 20px rgba(51, 204, 230, 0.3);
+  }
+  
+  .mobile-tax-calc .tax-result {
+    background: #1a2532;
+    border: 2px solid #2a3542;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 12px 0;
+    text-align: left;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  .mobile-tax-calc .tax-result h3 {
+    color: #6ab5be;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: none;
+  }
+  
+  .mobile-tax-calc .tax-result .amount {
+    color: #81e681;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
+    font-family: 'Courier New', monospace;
   }
   
   .mobile-tax-calc .instructions {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
     line-height: 1.6;
+    background: rgba(51, 204, 230, 0.08);
+    border-left: 4px solid #33cce6;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   }
-
+  
+  .mobile-tax-calc .instructions strong {
+    color: #33cce6;
+    font-weight: 600;
+  } 
+  
 }
