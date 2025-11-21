@@ -2056,9 +2056,9 @@ if (window.innerWidth <= 430) {
   }
 }
 
-// ============================================================
+// ============================================
 // MOBILE TAX CALCULATOR
-// ============================================================
+// ============================================
 
 if (window.innerWidth <= 430) {
   const arrow = document.getElementById('mobile-calc-arrow');
@@ -2067,51 +2067,57 @@ if (window.innerWidth <= 430) {
   const input = document.getElementById('mobile-tax-input');
   const amount = document.getElementById('mobile-tax-amount');
   
-  if (arrow && calc && closeBtn && input && amount) {
-    // Open calculator
-    arrow.addEventListener('click', () => {
-      calc.classList.add('active');
+  // Sections where calculator should appear
+  const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
+  
+  // Open calculator
+  arrow.addEventListener('click', () => {
+    calc.classList.add('active');
+  });
+  
+  // Close calculator
+  closeBtn.addEventListener('click', () => {
+    calc.classList.remove('active');
+  });
+  
+  // Calculate tax
+  input.addEventListener('input', (e) => {
+    const value = parseFloat(e.target.value) || 0;
+    const result = Math.ceil(value / 0.72);
+    amount.textContent = result.toLocaleString();
+  });
+  
+  // Show/hide arrow based on active section
+  function updateArrowVisibility() {
+    const sections = document.querySelectorAll('.sections > section');
+    let activeSection = null;
+    
+    sections.forEach(section => {
+      if (section.style.display !== 'none' && section.style.display !== '') {
+        activeSection = section.id;
+      }
     });
     
-    // Close calculator
-    closeBtn.addEventListener('click', () => {
+    if (calcSections.includes(activeSection)) {
+      arrow.style.display = 'flex';
+    } else {
+      arrow.style.display = 'none';
       calc.classList.remove('active');
-    });
-    
-    // Calculate tax
-    input.addEventListener('input', (e) => {
-      const value = parseFloat(e.target.value) || 0;
-      const result = Math.ceil(value / 0.72);
-      amount.textContent = result.toLocaleString();
-    });
-    
-    // Show arrow only on specific sections
-    function updateArrowVisibility() {
-      const sections = document.querySelectorAll('.sections > section');
-      let activeSection = null;
-      
-      sections.forEach(section => {
-        if (section.style.display !== 'none') {
-          activeSection = section.id;
-        }
-      });
-      
-      const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
-      
-      if (calcSections.includes(activeSection)) {
-        arrow.style.display = 'flex';
-      } else {
-        arrow.style.display = 'none';
-        calc.classList.remove('active');
-      }
     }
-    
-    updateArrowVisibility();
-    
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.sections-nav button') || e.target.closest('.mobile-menu-overlay button')) {
-        setTimeout(updateArrowVisibility, 100);
-      }
+  }
+  
+  // Check on page load
+  updateArrowVisibility();
+  
+  // Check when sections change
+  const observer = new MutationObserver(updateArrowVisibility);
+  const sectionsContainer = document.querySelector('.sections');
+  if (sectionsContainer) {
+    observer.observe(sectionsContainer, { 
+      childList: true, 
+      subtree: true, 
+      attributes: true, 
+      attributeFilter: ['style'] 
     });
   }
 }
