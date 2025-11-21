@@ -3203,9 +3203,12 @@ body {
 /* Hide mobile-only elements on desktop */
 .tax-calc-toggle,
 .tax-calculator-mobile,
-.mobile-top-links {
+.mobile-top-links,
+.mobile-calc-arrow,
+.mobile-tax-calc {
   display: none;
 }
+
 /* ============================================================
    MOBILE STYLES - iPhone 14 Pro Max (430px and below)
    ============================================================ */
@@ -3213,9 +3216,9 @@ body {
 @media screen and (max-width: 430px) {
   
   /* Hide desktop tax calculator on mobile */
-.tax-calculator {
-  display: none !important;
-}
+  .tax-calculator {
+    display: none !important;
+  }
 
   /* Remove container padding that causes left offset */
   .main-container {
@@ -3416,27 +3419,13 @@ body {
     padding: 18px 30px;
   }
 
-/* ============================================ */
-/* MOBILE TAX CALCULATOR - MOBILE ONLY */
-/* ============================================ */
-
-/* Hide on desktop by default */
-.mobile-calc-arrow,
-.mobile-tax-calc {
-  display: none;
-}
-
-/* Show ONLY on mobile (430px and below) */
-@media screen and (max-width: 430px) {
-  
-  /* Hide desktop tax calculator on mobile */
-  .tax-calculator {
-    display: none !important;
-  }
+  /* ============================================ */
+  /* MOBILE TAX CALCULATOR */
+  /* ============================================ */
   
   /* Blue arrow button - floats on right side */
   .mobile-calc-arrow {
-    display: none; /* Hidden by default, JS shows it on certain sections */
+    display: flex !important;
     position: fixed;
     right: 20px;
     top: 50%;
@@ -3456,7 +3445,7 @@ body {
   
   /* Tax calculator panel - slides from right */
   .mobile-tax-calc {
-    display: block;
+    display: block !important;
     position: fixed;
     right: -350px;
     top: 0;
@@ -3471,12 +3460,10 @@ body {
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.6);
   }
   
-  /* When active, slide in */
   .mobile-tax-calc.active {
     right: 0;
   }
   
-  /* Close button (red X) */
   .mobile-calc-close {
     position: absolute;
     top: 20px;
@@ -3495,7 +3482,6 @@ body {
     line-height: 1;
   }
   
-  /* Calculator styling */
   .mobile-tax-calc h2 {
     font-size: 1.8rem;
     margin-bottom: 20px;
@@ -3541,6 +3527,5 @@ body {
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
   }
-}
 
 }
