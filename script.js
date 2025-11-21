@@ -2030,15 +2030,11 @@ setTimeout(() => {
 }, 500);
 
 
-
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
 
 if (window.innerWidth <= 430) {
-  
-  if (window.innerWidth <= 430) {
-  
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const sectionsNav = document.getElementById('sections-nav');
@@ -2059,30 +2055,35 @@ if (window.innerWidth <= 430) {
       }
     });
   }
-  
 }
-  
-// Mobile Tax Calculator Toggle
+
+// ============================================================
+// MOBILE TAX CALCULATOR (430px and below only)
+// ============================================================
+
 const taxCalcToggleMobile = document.getElementById('tax-calc-toggle-mobile');
 const taxCalcCloseMobile = document.getElementById('tax-calc-close-mobile');
 const taxCalculatorMobile = document.getElementById('tax-calculator-mobile');
+const taxInputMobile = document.getElementById('taxInputMobile');
+const taxAmountMobile = document.getElementById('tax-amount-mobile');
 
+// Click to open calculator
 if (taxCalcToggleMobile && taxCalculatorMobile) {
   taxCalcToggleMobile.addEventListener('click', () => {
+    console.log('Blue arrow clicked - opening calculator');
     taxCalculatorMobile.classList.add('active');
   });
 }
 
+// Click X to close calculator
 if (taxCalcCloseMobile && taxCalculatorMobile) {
   taxCalcCloseMobile.addEventListener('click', () => {
+    console.log('Close button clicked');
     taxCalculatorMobile.classList.remove('active');
   });
 }
 
 // Mobile tax calculation
-const taxInputMobile = document.getElementById('taxInputMobile');
-const taxAmountMobile = document.getElementById('tax-amount-mobile');
-
 if (taxInputMobile && taxAmountMobile) {
   taxInputMobile.addEventListener('input', (e) => {
     const value = parseFloat(e.target.value) || 0;
@@ -2134,5 +2135,3 @@ document.addEventListener('click', (e) => {
 
 // Run on window resize
 window.addEventListener('resize', updateMobileCalcVisibility);
-
-}
