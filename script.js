@@ -2029,7 +2029,6 @@ setTimeout(() => {
   }
 }, 500);
 
-
 /* ============================================================
    MOBILE MENU FUNCTIONALITY
    ============================================================ */
@@ -2061,77 +2060,90 @@ if (window.innerWidth <= 430) {
 // MOBILE TAX CALCULATOR (430px and below only)
 // ============================================================
 
-const taxCalcToggleMobile = document.getElementById('tax-calc-toggle-mobile');
-const taxCalcCloseMobile = document.getElementById('tax-calc-close-mobile');
-const taxCalculatorMobile = document.getElementById('tax-calculator-mobile');
-const taxInputMobile = document.getElementById('taxInputMobile');
-const taxAmountMobile = document.getElementById('tax-amount-mobile');
+// Wait for DOM to fully load before attaching events
+document.addEventListener('DOMContentLoaded', function() {
+  const taxCalcToggleMobile = document.getElementById('tax-calc-toggle-mobile');
+  const taxCalcCloseMobile = document.getElementById('tax-calc-close-mobile');
+  const taxCalculatorMobile = document.getElementById('tax-calculator-mobile');
+  const taxInputMobile = document.getElementById('taxInputMobile');
+  const taxAmountMobile = document.getElementById('tax-amount-mobile');
 
-// Click to open calculator
-if (taxCalcToggleMobile && taxCalculatorMobile) {
-  taxCalcToggleMobile.addEventListener('click', () => {
-    console.log('Blue arrow clicked - opening calculator');
-    taxCalculatorMobile.classList.add('active');
+  console.log('Mobile tax elements:', {
+    toggle: taxCalcToggleMobile,
+    close: taxCalcCloseMobile,
+    calc: taxCalculatorMobile,
+    input: taxInputMobile,
+    amount: taxAmountMobile
   });
-}
 
-// Click X to close calculator
-if (taxCalcCloseMobile && taxCalculatorMobile) {
-  taxCalcCloseMobile.addEventListener('click', () => {
-    console.log('Close button clicked');
-    taxCalculatorMobile.classList.remove('active');
-  });
-}
+  // Click to open calculator
+  if (taxCalcToggleMobile && taxCalculatorMobile) {
+    taxCalcToggleMobile.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Blue arrow clicked - opening calculator');
+      taxCalculatorMobile.classList.add('active');
+    });
+  }
 
-// Mobile tax calculation
-if (taxInputMobile && taxAmountMobile) {
-  taxInputMobile.addEventListener('input', (e) => {
-    const value = parseFloat(e.target.value) || 0;
-    const result = Math.ceil(value / 0.9);
-    taxAmountMobile.textContent = result.toLocaleString();
-  });
-}
-
-// Show/Hide Mobile Tax Calculator Button based on active section
-function updateMobileCalcVisibility() {
-  const taxCalcButton = document.getElementById('tax-calc-toggle-mobile');
-  
-  if (!taxCalcButton) return;
-  
-  // Get the currently active section
-  const sections = document.querySelectorAll('.sections > section');
-  let activeSection = null;
-  
-  sections.forEach(section => {
-    if (section.style.display !== 'none') {
-      activeSection = section.id;
-    }
-  });
-  
-  // List of sections where calculator should appear
-  const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle'];
-  
-  // Show button only on those sections and only on mobile
-  if (calcSections.includes(activeSection) && window.innerWidth <= 430) {
-    taxCalcButton.style.display = 'flex';
-  } else {
-    taxCalcButton.style.display = 'none';
-    // Also close the calculator if it's open
-    if (taxCalculatorMobile) {
+  // Click X to close calculator
+  if (taxCalcCloseMobile && taxCalculatorMobile) {
+    taxCalcCloseMobile.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Close button clicked');
       taxCalculatorMobile.classList.remove('active');
+    });
+  }
+
+  // Mobile tax calculation
+  if (taxInputMobile && taxAmountMobile) {
+    taxInputMobile.addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value) || 0;
+      const result = Math.ceil(value / 0.9);
+      taxAmountMobile.textContent = result.toLocaleString();
+    });
+  }
+
+  // Show/Hide Mobile Tax Calculator Button based on active section
+  function updateMobileCalcVisibility() {
+    const taxCalcButton = document.getElementById('tax-calc-toggle-mobile');
+    
+    if (!taxCalcButton) return;
+    
+    // Get the currently active section
+    const sections = document.querySelectorAll('.sections > section');
+    let activeSection = null;
+    
+    sections.forEach(section => {
+      if (section.style.display !== 'none') {
+        activeSection = section.id;
+      }
+    });
+    
+    // List of sections where calculator should appear
+    const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle'];
+    
+    // Show button only on those sections and only on mobile
+    if (calcSections.includes(activeSection) && window.innerWidth <= 430) {
+      taxCalcButton.style.display = 'flex';
+    } else {
+      taxCalcButton.style.display = 'none';
+      // Also close the calculator if it's open
+      if (taxCalculatorMobile) {
+        taxCalculatorMobile.classList.remove('active');
+      }
     }
   }
-}
 
-// Run on page load
-updateMobileCalcVisibility();
+  // Run on page load
+  updateMobileCalcVisibility();
 
-// Run whenever a section button is clicked
-document.addEventListener('click', (e) => {
-  if (e.target.closest('.sections-nav button') || e.target.closest('.mobile-menu-overlay button')) {
-    setTimeout(updateMobileCalcVisibility, 100);
-  }
+  // Run whenever a section button is clicked
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.sections-nav button') || e.target.closest('.mobile-menu-overlay button')) {
+      setTimeout(updateMobileCalcVisibility, 100);
+    }
+  });
+
+  // Run on window resize
+  window.addEventListener('resize', updateMobileCalcVisibility);
 });
-
-// Run on window resize
-window.addEventListener('resize', updateMobileCalcVisibility);
