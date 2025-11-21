@@ -2107,7 +2107,8 @@ if (window.innerWidth <= 430) {
       let activeSection = null;
       
       sections.forEach(section => {
-        if (section.style.display !== 'none' && section.style.display !== '') {
+        const computedStyle = window.getComputedStyle(section);
+        if (computedStyle.display === 'block') {
           activeSection = section.id;
         }
       });

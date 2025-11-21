@@ -3452,11 +3452,12 @@ body {
     height: 100vh;
     background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
     border-left: 2px solid #33cce6;
-    padding: 80px 16px 20px 16px;
+    padding: 70px 16px 40px 16px;
     overflow-y: auto;
     z-index: 950;
     transition: right 0.3s ease;
     box-shadow: -8px 0 32px rgba(51, 204, 230, 0.3);
+    box-sizing: border-box;
   }
   
   .mobile-tax-calc.active {
@@ -3465,14 +3466,14 @@ body {
   
   .mobile-calc-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     width: 40px;
     height: 40px;
     background: #ff4444;
-    border: 2px solid #000;
+    border: 3px solid #fff;
     border-radius: 50%;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #fff;
     cursor: pointer;
     display: flex;
@@ -3480,6 +3481,8 @@ body {
     justify-content: center;
     line-height: 1;
     font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   }
   
   .mobile-tax-calc h2 {
