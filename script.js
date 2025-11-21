@@ -2061,63 +2061,82 @@ if (window.innerWidth <= 430) {
 // ============================================
 
 if (window.innerWidth <= 430) {
-  const arrow = document.getElementById('mobile-calc-arrow');
-  const calc = document.getElementById('mobile-tax-calc');
-  const closeBtn = document.getElementById('mobile-calc-close');
-  const input = document.getElementById('mobile-tax-input');
-  const amount = document.getElementById('mobile-tax-amount');
-  
-  // Sections where calculator should appear
-  const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
-  
-  // Open calculator
-  arrow.addEventListener('click', () => {
-    calc.classList.add('active');
-  });
-  
-  // Close calculator
-  closeBtn.addEventListener('click', () => {
-    calc.classList.remove('active');
-  });
-  
-  // Calculate tax
-  input.addEventListener('input', (e) => {
-    const value = parseFloat(e.target.value) || 0;
-    const result = Math.ceil(value / 0.72);
-    amount.textContent = result.toLocaleString();
-  });
-  
-  // Show/hide arrow based on active section
-  function updateArrowVisibility() {
-    const sections = document.querySelectorAll('.sections > section');
-    let activeSection = null;
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    const arrow = document.getElementById('mobile-calc-arrow');
+    const calc = document.getElementById('mobile-tax-calc');
+    const closeBtn = document.getElementById('mobile-calc-close');
+    const input = document.getElementById('mobile-tax-input');
+    const amount = document.getElementById('mobile-tax-amount');
     
-    sections.forEach(section => {
-      if (section.style.display !== 'none' && section.style.display !== '') {
-        activeSection = section.id;
-      }
-    });
+    // Debug: Check if elements exist
+    console.log('Arrow:', arrow);
+    console.log('Calc:', calc);
+    console.log('Close:', closeBtn);
     
-    if (calcSections.includes(activeSection)) {
-      arrow.style.display = 'flex';
-    } else {
-      arrow.style.display = 'none';
-      calc.classList.remove('active');
+    if (!arrow || !calc || !closeBtn || !input || !amount) {
+      console.error('Mobile tax calculator elements not found!');
+      return;
     }
-  }
-  
-  // Check on page load
-  updateArrowVisibility();
-  
-  // Check when sections change
-  const observer = new MutationObserver(updateArrowVisibility);
-  const sectionsContainer = document.querySelector('.sections');
-  if (sectionsContainer) {
-    observer.observe(sectionsContainer, { 
-      childList: true, 
-      subtree: true, 
-      attributes: true, 
-      attributeFilter: ['style'] 
+    
+    // Sections where calculator should appear
+    const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
+    
+    // Open calculator
+    arrow.addEventListener('click', () => {
+      console.log('Arrow clicked!');
+      calc.classList.add('active');
     });
-  }
+    
+    // Close calculator
+    closeBtn.addEventListener('click', () => {
+      console.log('Close clicked!');
+      calc.classList.remove('active');
+    });
+    
+    // Calculate tax
+    input.addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value) || 0;
+      const result = Math.ceil(value / 0.72);
+      amount.textContent = result.toLocaleString();
+    });
+    
+    // Show/hide arrow based on active section
+    function updateArrowVisibility() {
+      const sections = document.querySelectorAll('.sections > section');
+      let activeSection = null;
+      
+      sections.forEach(section => {
+        if (section.style.display !== 'none' && section.style.display !== '') {
+          activeSection = section.id;
+        }
+      });
+      
+      console.log('Active section:', activeSection);
+      
+      if (calcSections.includes(activeSection)) {
+        arrow.style.display = 'flex';
+        console.log('Showing arrow');
+      } else {
+        arrow.style.display = 'none';
+        calc.classList.remove('active');
+        console.log('Hiding arrow');
+      }
+    }
+    
+    // Check on page load
+    updateArrowVisibility();
+    
+    // Check when sections change
+    const observer = new MutationObserver(updateArrowVisibility);
+    const sectionsContainer = document.querySelector('.sections');
+    if (sectionsContainer) {
+      observer.observe(sectionsContainer, { 
+        childList: true, 
+        subtree: true, 
+        attributes: true, 
+        attributeFilter: ['style'] 
+      });
+    }
+  });
 }
