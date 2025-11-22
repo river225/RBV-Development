@@ -2057,99 +2057,87 @@ if (window.innerWidth <= 430) {
 }
 
 // ============================================
-// MOBILE TAX CALCULATOR - CENTERED POPUP
+// MOBILE TAX CALCULATOR
 // ============================================
 
 if (window.innerWidth <= 430) {
-  setTimeout(() => {
-    const arrow = document.querySelector('.mobile-calc-arrow');
-    const calc = document.querySelector('.mobile-tax-calc');
-    const backdrop = document.querySelector('.mobile-calc-backdrop');
-    const closeBtn = document.querySelector('.mobile-calc-close');
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    const arrow = document.getElementById('mobile-calc-arrow');
+    const calc = document.getElementById('mobile-tax-calc');
+    const closeBtn = document.getElementById('mobile-calc-close');
     const input = document.getElementById('mobile-tax-input');
     const amount = document.getElementById('mobile-tax-amount');
     
-    if (!arrow || !calc) {
-      console.error('Mobile calc elements missing');
+    // Debug: Check if elements exist
+    console.log('Arrow:', arrow);
+    console.log('Calc:', calc);
+    console.log('Close:', closeBtn);
+    
+    if (!arrow || !calc || !closeBtn || !input || !amount) {
+      console.error('Mobile tax calculator elements not found!');
       return;
     }
     
+    // Sections where calculator should appear
     const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
     
-    // Show calculator elements
-    arrow.style.display = 'flex';
-    calc.style.display = 'block';
-    if (backdrop) backdrop.style.display = 'block';
-    
-    // Open calc
+    // Open calculator
     arrow.addEventListener('click', () => {
+      console.log('Arrow clicked!');
       calc.classList.add('active');
-      if (backdrop) backdrop.classList.add('active');
     });
     
-    // Close calc - X button
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        calc.classList.remove('active');
-        if (backdrop) backdrop.classList.remove('active');
-      });
-    }
-    
-    // Close calc - backdrop click
-    if (backdrop) {
-      backdrop.addEventListener('click', () => {
-        calc.classList.remove('active');
-        backdrop.classList.remove('active');
-      });
-    }
+    // Close calculator
+    closeBtn.addEventListener('click', () => {
+      console.log('Close clicked!');
+      calc.classList.remove('active');
+    });
     
     // Calculate tax
-    if (input && amount) {
-      input.addEventListener('input', (e) => {
-        const value = parseFloat(e.target.value) || 0;
-        const result = Math.ceil(value / 0.72);
-        amount.textContent = result.toLocaleString();
-      });
-    }
+    input.addEventListener('input', (e) => {
+      const value = parseFloat(e.target.value) || 0;
+      const result = Math.ceil(value / 0.72);
+      amount.textContent = result.toLocaleString();
+    });
     
-    // Show/hide arrow by section
-    function checkSection() {
-      let currentSection = 'home';
-      const allSections = document.querySelectorAll('.sections > section');
+    // Show/hide arrow based on active section
+    function updateArrowVisibility() {
+      const sections = document.querySelectorAll('.sections > section');
+      let activeSection = null;
       
-      allSections.forEach(sec => {
-        if (window.getComputedStyle(sec).display === 'block') {
-          currentSection = sec.id;
+      sections.forEach(section => {
+        const computedStyle = window.getComputedStyle(section);
+        if (computedStyle.display === 'block') {
+          activeSection = section.id;
         }
       });
       
-      if (calcSections.includes(currentSection)) {
+      console.log('Active section:', activeSection);
+      
+      if (calcSections.includes(activeSection)) {
         arrow.style.display = 'flex';
+        console.log('Showing arrow');
       } else {
         arrow.style.display = 'none';
         calc.classList.remove('active');
-        if (backdrop) backdrop.classList.remove('active');
+        console.log('Hiding arrow');
       }
     }
     
-    checkSection();
+    // Check on page load
+    updateArrowVisibility();
     
-    // Watch for section changes
-    const observer = new MutationObserver(checkSection);
-    const sectionsDiv = document.querySelector('.sections');
-    if (sectionsDiv) {
-      observer.observe(sectionsDiv, { 
+    // Check when sections change
+    const observer = new MutationObserver(updateArrowVisibility);
+    const sectionsContainer = document.querySelector('.sections');
+    if (sectionsContainer) {
+      observer.observe(sectionsContainer, { 
         childList: true, 
         subtree: true, 
         attributes: true, 
         attributeFilter: ['style'] 
       });
     }
-    
-    // Also check on clicks
-    document.addEventListener('click', () => {
-      setTimeout(checkSection, 100);
-    });
-    
-  }, 500);
+  });
 }

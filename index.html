@@ -326,30 +326,29 @@ We’ve launched a complete site redesign, and items will now display both their
 <span>•</span>
 <a href="z-report.html">Report an Issue</a>
     </div>
-    </div>
+  </div>
 </footer>
 
-<!-- Mobile Tax Calculator -->
-<div class="mobile-calc-backdrop" id="mobile-calc-backdrop"></div>
 
-<div class="mobile-calc-arrow" id="mobile-calc-arrow">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+</body>
+<!-- Mobile Tax Calculator (Mobile Only - Fixed Position) -->
+<button class="mobile-calc-arrow" id="mobile-calc-arrow">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
   </svg>
-</div>
+</button>
 
-<div class="mobile-tax-calc" id="mobile-tax-calc">
-  <div class="mobile-calc-close" id="mobile-calc-close">×</div>
-  <h2>TAX CALCULATOR</h2>
+<aside class="mobile-tax-calc" id="mobile-tax-calc">
+  <button class="mobile-calc-close" id="mobile-calc-close">×</button>
+  <h2>Tax Calculator</h2>
   <div class="tax-result">
-    <h3>AMOUNT TO WITHDRAW:</h3>
+    <h3>Amount to withdraw:</h3>
     <div class="amount">$<span id="mobile-tax-amount">0</span></div>
   </div>
   <input type="number" id="mobile-tax-input" placeholder="Enter amount..." />
   <div class="instructions">
     Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
   </div>
-</div>
-
-</body>
+</aside>
+</body> 
 </html>
