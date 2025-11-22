@@ -348,6 +348,66 @@
 .back-btn:hover {
     background: #5bc5de;
 }
+
+/* Mobile responsive fixes */
+@media screen and (max-width: 430px) {
+    .about-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .back-btn-top {
+        top: 10px;
+        left: 10px;
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+    
+    .about-header {
+        font-size: 2.5rem;
+        margin-top: 50px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    .teams-container {
+        flex-direction: column;
+        gap: 30px;
+        max-width: 100%;
+    }
+    
+    .team-card {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .team-card h3 {
+        font-size: 1.5rem;
+        padding: 15px;
+    }
+    
+    .team-description {
+        font-size: 1rem;
+    }
+    
+    .team-members {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        font-size: 1rem;
+    }
+    
+    .founder-info {
+        font-size: 1.5rem;
+    }
+    
+    .mission-section p {
+        font-size: 1.1rem;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -412,7 +472,7 @@
                 <div class="team-label">Manager:</div>
                 <div class="team-members" style="display: block;">
                     
-                    To make clickable, replace above line with:
+                   
                     <a href="https://www.roblox.com/users/5597065792/profile" target="_blank">Dynasty</a>
             
                 </div>
@@ -481,7 +541,7 @@
       <span>•</span>
       <a href="z-privacy.html">Privacy Policy</a>
       <span>•</span>
-      <a href="z-report.html">Report an Issue</a>
+    
     </div>
   </div>
 </footer>
