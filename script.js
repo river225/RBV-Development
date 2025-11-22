@@ -2080,7 +2080,7 @@ if (window.innerWidth <= 430) {
     }
     
     // Sections where calculator should appear
-    const calcSections = ['uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
+    const calcSections = ['home', 'uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
     
     // Open calculator
     arrow.addEventListener('click', () => {

@@ -3319,7 +3319,7 @@ body {
   .mobile-top-links {
     display: block;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     font-size: 1.1rem;
     font-weight: 600;
     color: #fff;
@@ -3327,7 +3327,11 @@ body {
     border-radius: 12px;
     margin: 0px;
     margin-left: 0px; 
-    margin-right: 80px; 
+    margin-right: 0px;
+    height: 60px;                      
+    display: flex;                      
+    align-items: center;              
+    justify-content: center;             
   }
   
   .mobile-top-links a {
