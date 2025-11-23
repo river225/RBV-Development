@@ -3621,11 +3621,32 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-  /* Scale down Richest Player section */
-  #richest-player {
-    transform: scale(0.75) !important;
-    transform-origin: top center !important;
-    width: 133% !important;
-    margin-left: -16.5% !important;
+  /* Make Richest Player content smaller */
+  #richest-player h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  #richest-player p {
+    font-size: 0.85rem !important;
+  }
+  
+  #richest-player .leaderboard-item {
+    padding: 10px 8px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  #richest-player .rank-badge {
+    width: 45px !important;
+    height: 45px !important;
+    font-size: 1.3rem !important;
+  }
+  
+  #richest-player .player-name {
+    font-size: 1rem !important;
+  }
+  
+  #richest-player .player-level,
+  #richest-player .player-networth {
+    font-size: 0.8rem !important;
   }
 }
