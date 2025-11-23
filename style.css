@@ -3615,6 +3615,17 @@ body {
   #home h2 {
     color: inherit !important;
   }
+  
+  /* Keep Richest Players titles visible */
+  #richest-players h2,
+  section[data-section="richest-players"] h2 {
+    color: inherit !important;
+  }
+  
+  /* Keep home page titles visible */
+  #home h2 {
+    color: inherit !important;
+  }
 
     /* Keep footer at bottom for short sections only */
   .sections {
