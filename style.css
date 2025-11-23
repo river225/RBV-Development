@@ -3606,13 +3606,10 @@ body {
   }
 
 
-    /* Move section titles UP on mobile */
+  /* Hide section titles on mobile */
   .section-title,
   h2.section-title,
   .items-section h2 {
-    position: relative !important;
-    top: -180px !important;        /* Move title UP above search bar */
-    margin-bottom: -140px !important;  /* Prevent extra space below */
-    text-align: center !important;
+    display: none !important;
   }
 }
