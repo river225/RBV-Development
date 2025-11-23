@@ -3621,4 +3621,28 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
+  \  /* Fix Richest Player section on mobile */
+  #richest-player .leaderboard-item {
+    padding: 15px 10px !important;
+    font-size: 0.85rem !important;
+  }
+  
+  #richest-player .player-name {
+    font-size: 1.1rem !important;
+    max-width: 140px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  #richest-player .player-level,
+  #richest-player .player-networth {
+    font-size: 0.9rem !important;
+  }
+  
+  #richest-player .rank-badge {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.5rem !important;
+  }
+  
 }
