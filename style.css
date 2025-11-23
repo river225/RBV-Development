@@ -3612,4 +3612,21 @@ body {
   .items-section h2 {
     display: none !important;
   }
+
+    /* Keep footer at bottom even with few items */
+  body {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .main-container {
+    flex: 1 !important;
+    min-height: calc(100vh - 300px) !important;
+  }
+  
+  .site-footer {
+    margin-top: auto !important;
+  }
+  
 }
