@@ -3620,8 +3620,12 @@ body {
   .sections {
     min-height: calc(100vh - 250px) !important;
   }
-  /* Zoom out Richest Player section to see more */
+
+  /* Scale down Richest Player section */
   #richest-player {
-    zoom: 0.75 !important;
+    transform: scale(0.75) !important;
+    transform-origin: top center !important;
+    width: 133% !important;
+    margin-left: -16.5% !important;
   }
 }
