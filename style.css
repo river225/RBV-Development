@@ -3606,27 +3606,19 @@ body {
   }
 
 
-  /* Hide section titles on mobile */
-  .section-title,
-  h2.section-title,
-  .items-section h2 {
+  /* Hide ALL section titles on mobile */
+  .sections h2 {
     display: none !important;
   }
+  
+  /* But keep home page titles visible */
+  #home h2 {
+    display: block !important;
+  }
 
-    /* Keep footer at bottom even with few items */
-  body {
-    min-height: 100vh !important;
-    display: flex !important;
-    flex-direction: column !important;
+    /* Keep footer at bottom for short sections only */
+  .sections {
+    min-height: calc(100vh - 250px) !important;
   }
-  
-  .main-container {
-    flex: 1 !important;
-    min-height: calc(100vh - 300px) !important;
-  }
-  
-  .site-footer {
-    margin-top: auto !important;
-  }
-  
+
 }
