@@ -3595,4 +3595,13 @@ body {
     font-weight: 600;
   } 
   
+  /* Search bar adjustments for mobile */
+  .search-container {
+    top: 160px !important;         /* Force it down */
+  }
+  
+  #search {
+    width: 280px !important;       /* Make it smaller */
+    font-size: 0.9rem !important;  /* Smaller text */
+  }
 }
