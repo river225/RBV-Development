@@ -3597,7 +3597,7 @@ body {
   
   /* Search bar adjustments for mobile */
   .search-container {
-    top: 160px !important;         /* Force it down */
+    top: 168px !important;         /* Force it down */
   }
   
   #search {
@@ -3606,14 +3606,14 @@ body {
   }
 
 
-  /* Hide ALL section titles on mobile */
+  /* Make section title TEXT invisible but keep all spacing */
   .sections h2 {
-    display: none !important;
+    color: transparent !important;
   }
   
-  /* But keep home page titles visible */
+  /* Keep home page titles visible */
   #home h2 {
-    display: block !important;
+    color: inherit !important;
   }
 
     /* Keep footer at bottom for short sections only */
