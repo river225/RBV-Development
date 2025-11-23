@@ -3621,30 +3621,15 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-  /* Force zoom out on Richest Player section */
-  #richest-player * {
-    font-size: 0.7em !important;
+  /* Zoom out RICHEST PLAYER section on mobile */
+  section[data-section="richest-player"],
+  .sections > section:has([class*="leaderboard"]) {
+    font-size: 0.65rem !important;
+    padding: 5px !important;
   }
   
-  #richest-player {
-    padding: 10px !important;
-  }
-  
-  #richest-player .leaderboard-container {
+  section[data-section="richest-player"] *,
+  .sections > section:has([class*="leaderboard"]) * {
     max-width: 100% !important;
-    padding: 0 5px !important;
   }
-  
-  #richest-player .leaderboard-item {
-    min-height: auto !important;
-    padding: 8px 6px !important;
-    margin: 6px 0 !important;
-  }
-  
-  #richest-player .rank-badge {
-    width: 40px !important;
-    height: 40px !important;
-    min-width: 40px !important;
-    font-size: 1.2em !important;
-  } 
 }
