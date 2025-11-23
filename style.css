@@ -3621,15 +3621,5 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-  /* Zoom out RICHEST PLAYER section on mobile */
-  section[data-section="richest-player"],
-  .sections > section:has([class*="leaderboard"]) {
-    font-size: 0.65rem !important;
-    padding: 5px !important;
-  }
-  
-  section[data-section="richest-player"] *,
-  .sections > section:has([class*="leaderboard"]) * {
-    max-width: 100% !important;
-  }
+
 }
