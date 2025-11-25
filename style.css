@@ -3606,37 +3606,13 @@ body {
   }
 
 
-  /* Hide ONLY item rarity section titles on mobile */
+  /* Center ALL item section titles */
   .sections > section:not(#home) > h2 {
-    color: transparent !important;
-  }
-  
-  /* BUT keep specific sections visible */
-  section[data-section*="richest"] h2,
-  section[data-section*="Richest"] h2,
-  section[data-section*="trade"] h2,
-  section[data-section*="Trade"] h2,
-  section[data-section*="crew"] h2,
-  section[data-section*="Crew"] h2,
-  section[data-section*="map"] h2,
-  section[data-section*="Map"] h2 {
-    color: inherit !important;
-  }
-  
-  /* Keep home page titles visible */
-  #home h2 {
-    color: inherit !important;
-  }
-  
-  /* Keep Richest Players titles visible */
-  #richest-players h2,
-  section[data-section="richest-players"] h2 {
-    color: inherit !important;
-  }
-  
-  /* Keep home page titles visible */
-  #home h2 {
-    color: inherit !important;
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    position: relative !important;
+    top: 0px !important;  /* Change this to move UP/DOWN */
   }
 
     /* Keep footer at bottom for short sections only */
