@@ -3606,20 +3606,15 @@ body {
   }
 
 
-  /* Make section title TEXT invisible but keep all spacing */
-  .sections h2 {
+  /* Make ONLY item section titles invisible */
+  section[data-section="uncommon"] h2,
+  section[data-section="rare"] h2,
+  section[data-section="epic"] h2,
+  section[data-section="legendary"] h2,
+  section[data-section="omega"] h2,
+  section[data-section="misc"] h2,
+  section[data-section="vehicles"] h2 {
     color: transparent !important;
-  }
-  
-  /* Keep home page titles visible */
-  #home h2 {
-    color: inherit !important;
-  }
-  
-  /* Keep Richest Players titles visible */
-  #richest-players h2,
-  section[data-section="richest-players"] h2 {
-    color: inherit !important;
   }
   
   /* Keep home page titles visible */
