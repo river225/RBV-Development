@@ -3606,15 +3606,21 @@ body {
   }
 
 
-  /* Make ONLY item section titles invisible */
-  section[data-section="uncommon"] h2,
-  section[data-section="rare"] h2,
-  section[data-section="epic"] h2,
-  section[data-section="legendary"] h2,
-  section[data-section="omega"] h2,
-  section[data-section="misc"] h2,
-  section[data-section="vehicles"] h2 {
+  /* Hide ONLY item rarity section titles on mobile */
+  .sections > section:not(#home) > h2 {
     color: transparent !important;
+  }
+  
+  /* BUT keep specific sections visible */
+  section[data-section*="richest"] h2,
+  section[data-section*="Richest"] h2,
+  section[data-section*="trade"] h2,
+  section[data-section*="Trade"] h2,
+  section[data-section*="crew"] h2,
+  section[data-section*="Crew"] h2,
+  section[data-section*="map"] h2,
+  section[data-section*="Map"] h2 {
+    color: inherit !important;
   }
   
   /* Keep home page titles visible */
