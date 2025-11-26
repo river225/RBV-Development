@@ -3629,14 +3629,6 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-  /* Zoom out the ENTIRE richest players section */
-  section[data-section="richest-players"],
-  #richest-players {
-    transform: scale(0.7) !important;
-    transform-origin: top center !important;
-    width: 142.85% !important;
-    margin-left: -21.42% !important;
-    margin-right: -21.42% !important;
-  }
-  
+
+
 }
