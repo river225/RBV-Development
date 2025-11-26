@@ -3631,7 +3631,7 @@ body {
 
 
 section[id$="richest-players"] {
-    transform: scale(1);
+    transform: scale(0.90);
     transform-origin: top center;
 }
 
