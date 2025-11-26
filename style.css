@@ -3629,6 +3629,12 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
+/* Mobile zoom-out for Richest Players section only */
+#richest-players {
+    transform: scale(0.85);
+    transform-origin: top center;
+    width: 100%;
+}
 
 
 }
