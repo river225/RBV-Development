@@ -3606,13 +3606,15 @@ body {
   }
 
 
-  /* Center ALL item section titles */
+  /* Center ALL item section titles - VISIBLE VERSION */
   .sections > section:not(#home) > h2 {
     text-align: center !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     position: relative !important;
-    top: 50px !important;  /* Change this to move UP/DOWN */
+    top: -30px !important;  /* Moved UP 30px - change this number */
+    color: white !important;  /* Make sure it's visible */
+    font-size: 2rem !important;  /* Make it bigger so you can see it */
   }
 
     /* Keep footer at bottom for short sections only */
