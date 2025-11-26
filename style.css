@@ -3607,23 +3607,14 @@ body {
 
 
 
-  /* Center ALL item section titles - with safe spacing */
   .sections > section:not(#home) > h2 {
     text-align: center !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     position: relative !important;
-    top: -50px !important;  /* Adjust this to move up/down */
-    color: white !important;
-    font-size: 2rem !important;
-    padding-top: 10px !important;  /* Prevents cutoff at top */
-    overflow: visible !important;
-  }
-  
-  /* Add padding to sections so titles don't get cut off */
-  .sections > section:not(#home) {
-    padding-top: 20px !important;
-    overflow: visible !important;
+    top: 10px !important; 
+    color: white !important;  
+    font-size: 2rem !important; 
   }
 
     /* Keep footer at bottom for short sections only */
