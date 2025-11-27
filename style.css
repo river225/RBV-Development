@@ -3629,10 +3629,23 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-
+/* FULL ZOOM + PERFECT CENTERING FOR RICHEST PLAYERS (MOBILE) */
 section[id$="richest-players"] {
-    transform: scale(0.90);
+    transform: scale(0.55);
     transform-origin: top center;
+
+    /* Center the whole section visually */
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Prevent the scaled section from being cut off */
+    position: relative;
+}
+
+/* Prevent horizontal overflow */
+section[id$="richest-players"] * {
+    max-width: 100% !important;
 }
 
 
