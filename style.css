@@ -3629,23 +3629,27 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-
+  /* RICHEST PLAYERS — FULL ZOOM + TRUE CENTERING */
 section[id$="richest-players"] {
-    transform: scale(0.55);        /* zoom-out level */
-    transform-origin: top center;
-    
-    /* center the entire page */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    /* ensure the scaled content is still treated as normal width */
     width: 100%;
-    margin: 0 auto;
     position: relative;
+
+    /* shrink entire page */
+    transform: scale(0.55);
+
+    /* anchor top-left so translate works consistently */
+    transform-origin: top left;
+
+    /* center horizontally based on scale */
+    /* formula: (1 - scale) / 2 * 100  →  (1 - 0.55) / 2 = 0.225 → 22.5% */
+    translate: 22.5% 0;
+
+    /* flex is not needed for centering once we use translate */
+    display: block;
+    margin: 0 auto;
 }
 
-/* prevent sideways stretching after scaling */
+/* prevent width overflow */
 section[id$="richest-players"] * {
     max-width: 100% !important;
 }
