@@ -3629,21 +3629,12 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-/* ============================================================
-   RICHEST PLAYERS — ZOOMED OUT + PERFECT CENTERING (MOBILE)
-   ============================================================ */
-
 section[id$="richest-players"] {
     width: 100vw;
     position: relative;
-
-    /* zoom level */
     --rp-scale: 0.80;
-
     transform: scale(var(--rp-scale));
     transform-origin: top left;
-
-    /* auto center */
     margin-left: calc((100vw - (100vw * var(--rp-scale))) / 2);
 }
 
@@ -3655,21 +3646,12 @@ html, body {
     overflow-x: hidden;
 }
 
-
-/* ============================================================
-   RICHEST PLAYERS — CLEAN MOBILE CARD LAYOUT (FINAL)
-   ============================================================ */
-
-/* full vertical layout */
 section[id$="richest-players"] .richest-card {
     display: flex !important;
     flex-direction: column !important;
     gap: 6px;
     padding: 14px 16px;
 }
-
-
-/* ---- LINE 1: Rank + Name (only the name is big) ---- */
 
 section[id$="richest-players"] .card-top {
     display: flex !important;
@@ -3685,29 +3667,20 @@ section[id$="richest-players"] .rank-badge {
 }
 
 section[id$="richest-players"] .player-name {
-    font-size: 1.25rem !important;   /* bigger name */
+    font-size: 1.25rem !important;
     font-weight: 600;
     line-height: 1.2;
 }
-
-
-/* ---- LINE 2: Level ---- */
 
 section[id$="richest-players"] .player-level {
     font-size: 0.95rem !important;
     opacity: 0.9;
 }
 
-
-/* ---- LINE 3: Net Worth ---- */
-
 section[id$="richest-players"] .player-worth {
     font-size: 0.95rem !important;
     opacity: 0.9;
 }
-
-
-/* ---- LINE 4: View Profile ---- */
 
 section[id$="richest-players"] .view-profile {
     font-size: 0.95rem !important;
@@ -3715,7 +3688,6 @@ section[id$="richest-players"] .view-profile {
     display: inline-block !important;
     margin-top: 2px;
 }
-
 
 
 }
