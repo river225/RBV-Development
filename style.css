@@ -3629,17 +3629,19 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-  /* RICHEST PLAYERS — ZOOMED OUT + CENTERED */
+/* RICHEST PLAYERS — ZOOMED OUT + CENTERED */
 section[id$="richest-players"] {
-    width: 100vw;                  /* base width for centering calc */
+    width: 100vw;
     position: relative;
 
-    /* zoom level */
-    transform: scale(0.80);
+    /* zoom level – change this only */
+    --rp-scale: 0.80;
+
+    transform: scale(var(--rp-scale));
     transform-origin: top left;
 
-    /* center the scaled content: (1 - 0.55) / 2 = 0.225 → 22.5vw */
-    margin-left: 22.5vw;
+    /* auto-center based on scale */
+    margin-left: calc((100vw - (100vw * var(--rp-scale))) / 2);
 }
 
 /* prevent sideways stretching/overflow inside */
