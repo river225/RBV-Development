@@ -3654,5 +3654,50 @@ html, body {
     overflow-x: hidden;
 }
 
+/* ============================
+   RICHEST PLAYERS — MOBILE CARD FIX
+   Compact stacked layout, name big, stats smaller
+   ============================ */
+
+section[id$="richest-players"] .richest-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;                      /* tight spacing */
+    padding: 12px 14px;            /* slim padding */
+}
+
+/* Name stays large as usual */
+section[id$="richest-players"] .player-name {
+    font-size: 1.2rem;             /* same visual priority */
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Rank badge remains unchanged */
+section[id$="richest-players"] .rank-badge {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+}
+
+/* Level + Net Worth row (slightly smaller) */
+section[id$="richest-players"] .player-stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 2px;
+    font-size: 0.90rem;           /* OPTION C */
+    opacity: 0.9;
+}
+
+/* Small "View Profile" on its own line */
+section[id$="richest-players"] .view-profile {
+    font-size: 0.85rem;           /* OPTION C */
+    opacity: 0.85;
+    margin-top: 2px;
+    display: block;
+}
+
 
 }
