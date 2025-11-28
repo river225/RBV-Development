@@ -3637,83 +3637,83 @@ section[id$="richest-players"] {
     width: 100vw;
     position: relative;
 
-    /* zoom level – edit this only if you want bigger or smaller */
+    /* zoom level */
     --rp-scale: 0.80;
 
     transform: scale(var(--rp-scale));
     transform-origin: top left;
 
-    /* auto-center based on scale */
+    /* auto center */
     margin-left: calc((100vw - (100vw * var(--rp-scale))) / 2);
 }
 
-/* prevent overflow inside */
 section[id$="richest-players"] * {
     max-width: 100% !important;
 }
 
-/* safety */
 html, body {
     overflow-x: hidden;
 }
 
 
 /* ============================================================
-   RICHEST PLAYERS — MOBILE CARD LAYOUT (STACKED + COMPACT)
+   RICHEST PLAYERS — CLEAN MOBILE CARD LAYOUT (FINAL)
    ============================================================ */
 
-/* force stacked layout */
+/* full vertical layout */
 section[id$="richest-players"] .richest-card {
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
     gap: 6px;
     padding: 14px 16px;
 }
 
-/* ensure the internal card rows stop using left/right flex layout */
-section[id$="richest-players"] .card-top,
-section[id$="richest-players"] .card-content,
-section[id$="richest-players"] .card-right {
-    width: 100% !important;
-    display: block !important;
+
+/* ---- LINE 1: Rank + Name (only the name is big) ---- */
+
+section[id$="richest-players"] .card-top {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
 }
 
-/* big username */
-section[id$="richest-players"] .player-name {
-    font-size: 1.25rem !important;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0;
-}
-
-/* rank badge */
 section[id$="richest-players"] .rank-badge {
     width: 46px !important;
     height: 46px !important;
     font-size: 1.35rem !important;
-    margin-bottom: 2px;
+    flex-shrink: 0;
 }
 
-/* stats row under name */
-section[id$="richest-players"] .player-stats-row {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 10px;
-    font-size: 0.90rem !important;
+section[id$="richest-players"] .player-name {
+    font-size: 1.25rem !important;   /* bigger name */
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+/* ---- LINE 2: Level ---- */
+
+section[id$="richest-players"] .player-level {
+    font-size: 0.95rem !important;
     opacity: 0.9;
-    width: 100% !important;
 }
 
-/* view profile as own line */
+
+/* ---- LINE 3: Net Worth ---- */
+
+section[id$="richest-players"] .player-worth {
+    font-size: 0.95rem !important;
+    opacity: 0.9;
+}
+
+
+/* ---- LINE 4: View Profile ---- */
+
 section[id$="richest-players"] .view-profile {
-    font-size: 0.85rem !important;
-    opacity: 0.85;
-    display: block !important;
+    font-size: 0.95rem !important;
+    opacity: 0.9;
+    display: inline-block !important;
     margin-top: 2px;
-    width: 100% !important;
-    text-align: left !important;
 }
 
 
