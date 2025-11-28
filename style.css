@@ -3629,12 +3629,15 @@ body {
     min-height: calc(100vh - 250px) !important;
   }
 
-/* RICHEST PLAYERS — ZOOMED OUT + CENTERED */
+/* ============================================================
+   RICHEST PLAYERS — ZOOMED OUT + PERFECT CENTERING (MOBILE)
+   ============================================================ */
+
 section[id$="richest-players"] {
     width: 100vw;
     position: relative;
 
-    /* zoom level – change this only */
+    /* zoom level – edit this only if you want bigger or smaller */
     --rp-scale: 0.80;
 
     transform: scale(var(--rp-scale));
@@ -3644,59 +3647,73 @@ section[id$="richest-players"] {
     margin-left: calc((100vw - (100vw * var(--rp-scale))) / 2);
 }
 
-/* prevent sideways stretching/overflow inside */
+/* prevent overflow inside */
 section[id$="richest-players"] * {
     max-width: 100% !important;
 }
 
-/* safety: no horizontal scroll */
+/* safety */
 html, body {
     overflow-x: hidden;
 }
 
-/* ============================
-   RICHEST PLAYERS — MOBILE CARD FIX
-   Compact stacked layout, name big, stats smaller
-   ============================ */
 
+/* ============================================================
+   RICHEST PLAYERS — MOBILE CARD LAYOUT (STACKED + COMPACT)
+   ============================================================ */
+
+/* force stacked layout */
 section[id$="richest-players"] .richest-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;                      /* tight spacing */
-    padding: 12px 14px;            /* slim padding */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px;
+    padding: 14px 16px;
 }
 
-/* Name stays large as usual */
+/* ensure the internal card rows stop using left/right flex layout */
+section[id$="richest-players"] .card-top,
+section[id$="richest-players"] .card-content,
+section[id$="richest-players"] .card-right {
+    width: 100% !important;
+    display: block !important;
+}
+
+/* big username */
 section[id$="richest-players"] .player-name {
-    font-size: 1.2rem;             /* same visual priority */
+    font-size: 1.25rem !important;
     font-weight: 600;
     line-height: 1.2;
+    margin: 0;
 }
 
-/* Rank badge remains unchanged */
+/* rank badge */
 section[id$="richest-players"] .rank-badge {
-    width: 48px;
-    height: 48px;
-    font-size: 1.4rem;
+    width: 46px !important;
+    height: 46px !important;
+    font-size: 1.35rem !important;
+    margin-bottom: 2px;
 }
 
-/* Level + Net Worth row (slightly smaller) */
+/* stats row under name */
 section[id$="richest-players"] .player-stats-row {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 10px;
-    row-gap: 2px;
-    font-size: 0.90rem;           /* OPTION C */
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px;
+    font-size: 0.90rem !important;
     opacity: 0.9;
+    width: 100% !important;
 }
 
-/* Small "View Profile" on its own line */
+/* view profile as own line */
 section[id$="richest-players"] .view-profile {
-    font-size: 0.85rem;           /* OPTION C */
+    font-size: 0.85rem !important;
     opacity: 0.85;
+    display: block !important;
     margin-top: 2px;
-    display: block;
+    width: 100% !important;
+    text-align: left !important;
 }
 
 
