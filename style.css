@@ -2980,7 +2980,7 @@ body {
   margin-top: 40px;
 }
 
-/* Announcements & Donators Boxes - EXACT MATCH */
+/* Announcements & Donators Boxes */
 .home-column {
   background: #0d1117;
   border: 3px solid #d4a027;
@@ -3209,9 +3209,7 @@ body {
   display: none;
 }
 
-/* ============================================================
-   MOBILE STYLES - iPhone 14 Pro Max (430px and below)
-   ============================================================ */
+/* MOBILE STYLES */
 
 @media screen and (max-width: 430px) {
   
@@ -3422,9 +3420,8 @@ body {
     font-size: 1.2rem;
     padding: 18px 30px;
   }
-  /* ============================================ */
+  
   /* MOBILE TAX CALCULATOR */
-  /* ============================================ */
   
     /* Backdrop overlay */
   .mobile-calc-backdrop {
@@ -3466,7 +3463,7 @@ body {
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
   }
   
-  /* Tax calculator panel - slides from right */
+  /* Tax calculator panel */
   .mobile-tax-calc {
     display: block !important;
     position: fixed;
@@ -3636,10 +3633,19 @@ section[id$="richest-players"] {
     transform: scale(var(--rp-scale));
     transform-origin: top left;
     margin-left: calc((100vw - (100vw * var(--rp-scale))) / 2);
+    pointer-events: auto !important;
 }
 
 section[id$="richest-players"] * {
     max-width: 100% !important;
+    pointer-events: auto !important;
+}
+
+section[id$="richest-players"] .richest-search {
+    touch-action: manipulation !important;
+    font-size: 16px !important;
+    min-height: 44px !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 html, body {
@@ -3656,7 +3662,9 @@ section[id$="richest-players"] .richest-card {
 section[id$="richest-players"] .card-top {
     display: flex !important;
     align-items: center;
+    justify-content: flex-start !important;
     gap: 12px;
+    width: 100%;
 }
 
 section[id$="richest-players"] .rank-badge {
@@ -3664,6 +3672,8 @@ section[id$="richest-players"] .rank-badge {
     height: 46px !important;
     font-size: 1.35rem !important;
     flex-shrink: 0;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
 }
 
 section[id$="richest-players"] .player-name {
@@ -3682,11 +3692,9 @@ section[id$="richest-players"] .player-worth {
     opacity: 0.9;
 }
 
-section[id$="richest-players"] .view-profile {
-    font-size: 0.95rem !important;
-    opacity: 0.9;
-    display: inline-block !important;
-    margin-top: 2px;
+section[id$="richest-players"] .view-profile,
+section[id$="richest-players"] .profile-link {
+    display: none !important;
 }
 
 

@@ -910,14 +910,14 @@ function createRichestPlayersSection(data) {
 
   const intro = `
     <div class="richest-players-header">
-      <h2>Top 1000 Richest Players in BlockSpin</h2>
-      <p class="richest-intro">This list is the Offical BlockSpin leaderboard showing the wealthiest players in the game, Ranked by the total value of their in-game assets. Rankings go to #1000. This leaderboard updates hourly</p>
+      <h2>Top 1,000 Richest Players in BlockSpin</h2>
+      <p class="richest-intro">This list is the Offical BlockSpin leaderboard showing the wealthiest players in the game, Ranked by the total value of their in-game assets. Rankings go to #1000. This leaderboard updates hourly. Note this section is in BETA, issues may occure.</p>
       
       <input 
         type="text" 
         class="richest-search" 
-        placeholder="🔍 Search players by name..."
-        oninput="filterRichestPlayers(this.value)"
+        id="richest-search-input"
+        placeholder="🔍 Search players by username..."
       />
     </div>
   `;
@@ -955,11 +955,11 @@ function filterRichestPlayers(query) {
   const cards = document.querySelectorAll('.richest-card');
   
   cards.forEach(card => {
-    const playerName = card.dataset.playerName.toLowerCase();
+    const playerName = (card.dataset.playerName || '').toLowerCase();
     if (playerName.includes(searchTerm)) {
-      card.style.display = 'flex';
+      card.style.setProperty('display', 'flex', 'important');
     } else {
-      card.style.display = 'none';
+      card.style.setProperty('display', 'none', 'important');
     }
   });
 }
@@ -1314,6 +1314,16 @@ function renderScammerSection(items) {
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  
+  // Add event listener after HTML is inserted
+  setTimeout(() => {
+    const searchInput = document.getElementById('richest-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        filterRichestPlayers(e.target.value);
+      });
+    }
+  }, 100);
 }
 
 //  BLOCKSPIN MAP FUNCTIONS START
@@ -2029,9 +2039,7 @@ setTimeout(() => {
   }
 }, 500);
 
-/* ============================================================
-   MOBILE MENU FUNCTIONALITY
-   ============================================================ */
+/* MOBILE MENU FUNCTIONALITY */
 
 if (window.innerWidth <= 430) {
   const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -2056,9 +2064,8 @@ if (window.innerWidth <= 430) {
   }
 }
 
-// ============================================
+
 // MOBILE TAX CALCULATOR
-// ============================================
 
 if (window.innerWidth <= 430) {
   // Wait for DOM to be fully loaded
