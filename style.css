@@ -3701,7 +3701,8 @@ section[id$="richest-players"] .profile-link {
 }
 
 .tax-calculator {
-  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 .mobile-tax-calc, .mobile-calc-arrow {
   display: none !important;
