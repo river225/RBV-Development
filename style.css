@@ -3700,10 +3700,17 @@ section[id$="richest-players"] .profile-link {
 
 }
 
-.tax-calculator {
-  opacity: 0;
-  pointer-events: none;
+/* HIDE TAX CALCULATOR - KEEP SPACE ON DESKTOP */
+.tax-calculator * {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
+
+.tax-calculator {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .mobile-tax-calc, .mobile-calc-arrow {
   display: none !important;
 }
