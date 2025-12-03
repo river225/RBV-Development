@@ -3699,3 +3699,7 @@ section[id$="richest-players"] .profile-link {
 
 
 }
+
+.tax-calculator, .mobile-tax-calc, .mobile-calc-arrow {
+  display: none !important;
+}
