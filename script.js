@@ -1126,6 +1126,7 @@ if (durability && durability.includes('/') && internalValue) {
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-aftertax="${escapeAttr(afterTax)}"
+         data-quantum="${escapeAttr(quantum)}"
          data-max-durability="${durability ? durability.split('/')[1] : '100'}"
          data-internal-value="${escapeAttr(internalValue)}">
       <div class="card-left">
@@ -1719,11 +1720,21 @@ function updateCardValues(input) {
   const originalAvg = card.dataset.avg;
   const originalRanged = card.dataset.ranged;
   const originalAfterTax = card.dataset.aftertax;
-  
+  const originalQuantum = card.dataset.quantum;
+
   card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
   card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
   card.querySelector('.aftertax-value').textContent = calculateDurabilityValue(originalAfterTax, durabilityPercent);
-  
+    
+  if (card.querySelector('.quantum-value')) {
+    const quantumValue = calculateDurabilityValue(originalQuantum, durabilityPercent);
+    const roundedQuantum = quantumValue.replace(/\$[\d,]+(\.\d+)?/, (match) => {
+      const num = parseFloat(match.replace(/[$,]/g, ''));
+      return '$' + Math.round(num).toLocaleString();
+    });
+    card.querySelector('.quantum-value').textContent = roundedQuantum;
+  }
+
   // Update repair price
   const internalValue = card.dataset.internalValue;
   const repairValueElement = card.querySelector('.repair-value');
