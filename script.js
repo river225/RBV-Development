@@ -1029,6 +1029,7 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
+  const quantum = safe(item["Quantum Value"]);
   const durability = safe(item["Durability"]);
   const internalValue = safe(item["Internal Value"]);
 
@@ -1149,6 +1150,7 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
+        <div class="card-quantum">Quantum Value: <span class="quantum-value">${quantum}</span></div>
       </div>
     </div>
   `;

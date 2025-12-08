@@ -201,7 +201,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Value text styling */
-.card-avg, .card-ranged, .card-aftertax {
+.card-avg, .card-ranged, .card-aftertax, .card-quantum {
   font-size: 0.95rem;
   font-weight: 700;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
@@ -234,6 +234,13 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
+/* Quantum Value - White color */
+.quantum-value {
+  color: #FFFFFF; 
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
 
 .crew-logo-card {
   flex-direction: column;
