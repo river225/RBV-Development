@@ -1151,7 +1151,7 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
-        <div class="card-quantum">Quantum Value: <span class="quantum-value">${quantum}</span></div>
+        <div class="card-quantum">Quantum Tools: <span class="quantum-value">${quantum}</span></div>
       </div>
     </div>
   `;
@@ -1730,7 +1730,7 @@ function updateCardValues(input) {
     const quantumValue = calculateDurabilityValue(originalQuantum, durabilityPercent);
     const roundedQuantum = quantumValue.replace(/\$[\d,]+(\.\d+)?/, (match) => {
       const num = parseFloat(match.replace(/[$,]/g, ''));
-      return '$' + Math.round(num).toLocaleString();
+      return Math.round(num).toLocaleString();
     });
     card.querySelector('.quantum-value').textContent = roundedQuantum;
   }
