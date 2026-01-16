@@ -348,8 +348,9 @@ a { color: #fff; text-decoration: none; }
   top: 118px;
   height: fit-content;
   transition: none !important; 
-  visibility: hidden;
-  opacity: 0;
+  visibility: visible;
+  opacity: 1;
+
 }
 
 

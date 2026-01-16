@@ -2161,3 +2161,8 @@ if (window.innerWidth <= 430) {
     }
   });
 }
+
+// INIT TAX CALCULATOR
+document.addEventListener("DOMContentLoaded", () => {
+  initTaxCalculator();
+});
