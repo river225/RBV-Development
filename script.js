@@ -11,7 +11,7 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
-  "Trade Checker",
+  // "Trade Checker",
  // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos"
