@@ -3221,10 +3221,6 @@ body {
 
 @media screen and (max-width: 430px) {
   
-  /* Hide desktop tax calculator on mobile */
-  .tax-calculator {
-    display: none !important;
-  }
 
   /* Remove container padding that causes left offset */
   .main-container {
