@@ -1514,18 +1514,7 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-   // Hide/show tax calculator based on section
-  const taxCalc = document.querySelector('.tax-calculator');
-  if (taxCalc) {
-    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Trade Checker', 'Crate Game', '💰 Richest Players'];
-    if (hiddenSections.includes(name)) {
-      taxCalc.style.visibility = 'hidden';
-      taxCalc.style.opacity = '0';
-    } else {
-      taxCalc.style.visibility = 'visible';
-      taxCalc.style.opacity = '1';
-    }
-  }
+
 
     
   // Hide/show search bar based on section
