@@ -15,10 +15,10 @@ const SECTION_NAMES = [
   "Crew Logos"
 ];
 
-// Tax calculator (new rules: 40k drop → 29,091 received; max 30k per drop)
+// Tax calculator: 40k drop → 29,091 received (confirmed). Above 40k (e.g. 41,250) still gives 29,091. MAX 40K PER DROP.
 const TAX_RECEIVE_RATIO = 29091 / 40000;
-const TAX_MAX_DROP = 30000;
-const TAX_RECEIVE_PER_30K = Math.round(30000 * TAX_RECEIVE_RATIO);
+const TAX_MAX_DROP = 40000;
+const TAX_RECEIVE_PER_40K = 29091;
 
 // RICHEST PLAYERS SECTION START
 
@@ -575,19 +575,21 @@ function getTaxBreakdown(amountWant) {
   if (totalWithdraw <= TAX_MAX_DROP) {
     return { totalWithdraw, lines: ['Withdraw the amount above and drop once.'], singleDrop: true };
   }
-  const full30kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
-  const receivedFromFull = full30kCount * TAX_RECEIVE_PER_30K;
+  const full40kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
+  const receivedFromFull = full40kCount * TAX_RECEIVE_PER_40K;
   const lastReceive = want - receivedFromFull;
   const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
   const lines = [
-    'Withdraw $30,000 and drop.',
-    'Repeat ' + full30kCount.toLocaleString() + ' times.',
-    'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.'
+    'Withdraw $40,000 and drop.',
+    'Repeat ' + full40kCount.toLocaleString() + ' times.'
   ];
+  if (lastWithdraw > 0) {
+    lines.push('Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.');
+  }
   return { totalWithdraw, lines, singleDrop: false };
 }
 
-// TAX CALCULATOR (new rules: 30k max per drop, multi-drop breakdown)
+// TAX CALCULATOR (40k max per drop, multi-drop breakdown)
 function initTaxCalculator() {
   const taxInput = document.getElementById("taxInput");
   const taxAmount = document.getElementById("tax-amount");
