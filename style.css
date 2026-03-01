@@ -96,7 +96,7 @@ a { color: #fff; text-decoration: none; }
 /* Search bar: out of flow so it doesn't push section content down */
 .search-container {
     position: absolute;
-    top: 35px;
+    top: 25px;
     left: 0;
     right: 0;
     display: flex;
