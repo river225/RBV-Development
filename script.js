@@ -1988,56 +1988,6 @@ async function loadTopDonators() {
   }
 }
 
-// QUICK STATS BOX FUNCTIONALITY
-async function loadQuickStats() {
-  // Discord Members
-  try {
-    const discordResponse = await fetch('https://discord.com/api/v10/invites/QbapryYUUx?with_counts=true');
-    const discordData = await discordResponse.json();
-    document.getElementById('discord-count').textContent = discordData.approximate_member_count.toLocaleString();
-  } catch (error) {
-    console.error('Discord count error:', error);
-    document.getElementById('discord-count').textContent = '1,000+';
-  }
-
-  // Website Visits - Using Abacus (Free CountAPI alternative)
-  try {
-    const visitResponse = await fetch('https://abacus.jasoncameron.dev/hit/blockspin-values/visits');
-    const visitData = await visitResponse.json();
-    document.getElementById('visit-count').textContent = visitData.value.toLocaleString();
-  } catch (error) {
-    console.error('Visit count error:', error);
-    document.getElementById('visit-count').textContent = '5,000+';
-  }
-
-  // Total Items (count from all loaded sheets)
-  try {
-    const sheets = ["Uncommon", "Rare", "Epic", "Legendary", "Omega", "Misc", "Vehicles"];
-    let totalItems = 0;
-    
-    for (const sheet of sheets) {
-      const items = await fetchSheet(sheet);
-      totalItems += items.length;
-    }
-    
-    document.getElementById('total-items').textContent = totalItems.toLocaleString();
-  } catch (error) {
-    console.error('Total items error:', error);
-    document.getElementById('total-items').textContent = '100+';
-  }
-
-  // Last Updated (Today's date)
-  const today = new Date();
-  const dateStr = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  document.getElementById('last-updated').textContent = dateStr;
-}
-
-// Call it after a short delay to ensure elements exist
-setTimeout(() => {
-  if (document.getElementById('discord-count')) {
-    loadQuickStats();
-  }
-}, 500);
 
 /* MOBILE MENU FUNCTIONALITY */
 
