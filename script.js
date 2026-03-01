@@ -573,15 +573,15 @@ function getTaxBreakdown(amountWant) {
   if (want <= 0) return { totalWithdraw: 0, lines: [], singleDrop: true };
   const totalWithdraw = Math.round(want / TAX_RECEIVE_RATIO);
   if (totalWithdraw <= TAX_MAX_DROP) {
-    return { totalWithdraw, lines: ['Drop once.'], singleDrop: true };
+    return { totalWithdraw, lines: ['Withdraw the amount above and drop once.'], singleDrop: true };
   }
   const full30kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
   const receivedFromFull = full30kCount * TAX_RECEIVE_PER_30K;
   const lastReceive = want - receivedFromFull;
   const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
   const lines = [
-    full30kCount + '× 30k',
-    'Then $' + lastWithdraw.toLocaleString() + ' → $' + lastReceive.toLocaleString()
+    'Withdraw $30,000 and drop. Repeat ' + full30kCount.toLocaleString() + ' times (wait 1 min between each drop).',
+    'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once. You receive $' + lastReceive.toLocaleString() + ' from this final drop.'
   ];
   return { totalWithdraw, lines, singleDrop: false };
 }
@@ -607,7 +607,7 @@ function initTaxCalculator() {
         taxBreakdown.innerHTML = '';
         return;
       }
-      taxBreakdown.innerHTML = '<span class="tax-how-label">How to drop:</span><br>' +
+      taxBreakdown.innerHTML = '<span class="tax-how-label">How to drop this much:</span><br>' +
         b.lines.map(function(line) { return line + '<br>'; }).join('');
     }
   }
@@ -1069,13 +1069,13 @@ if (window.innerWidth <= 430) {
           breakdownEl.innerHTML = '';
           return;
         }
-        breakdownEl.innerHTML = '<span class="tax-how-label">How to drop:</span><br>' +
+        breakdownEl.innerHTML = '<span class="tax-how-label">How to drop this much:</span><br>' +
           b.lines.map(function(line) { return line + '<br>'; }).join('');
       }
     }
     input.addEventListener('input', updateMobileTax);
     updateMobileTax();
-    
+
     // Show/hide arrow based on active section
     function updateArrowVisibility() {
       const sections = document.querySelectorAll('.sections > section');
