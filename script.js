@@ -580,8 +580,10 @@ function getTaxBreakdown(amountWant) {
   const lastReceive = want - receivedFromFull;
   const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
   const lines = [
-    'Withdraw $30,000 and drop. Repeat ' + full30kCount.toLocaleString() + ' times.',
-    'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once. You receive $' + lastReceive.toLocaleString() + ' from this final drop.'
+    'Withdraw $30,000 and drop.',
+    'Repeat ' + full30kCount.toLocaleString() + ' times.',
+    'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.',
+    'You receive $' + lastReceive.toLocaleString() + ' from this final drop.'
   ];
   return { totalWithdraw, lines, singleDrop: false };
 }
