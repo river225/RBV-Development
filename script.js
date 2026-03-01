@@ -15,6 +15,11 @@ const SECTION_NAMES = [
   "Crew Logos"
 ];
 
+// Tax calculator (new rules: 40k drop → 29,091 received; max 30k per drop)
+const TAX_RECEIVE_RATIO = 29091 / 40000;
+const TAX_MAX_DROP = 30000;
+const TAX_RECEIVE_PER_30K = Math.round(30000 * TAX_RECEIVE_RATIO);
+
 // RICHEST PLAYERS SECTION START
 
 function formatNetWorth(value) {
@@ -563,40 +568,69 @@ function initSearch() {
   });
 }
 
-// TAX CALCULATOR 
+function getTaxBreakdown(amountWant) {
+  const want = Math.round(Number(amountWant) || 0);
+  if (want <= 0) return { totalWithdraw: 0, lines: [], singleDrop: true };
+  const totalWithdraw = Math.round(want / TAX_RECEIVE_RATIO);
+  if (totalWithdraw <= TAX_MAX_DROP) {
+    return { totalWithdraw, lines: ['Drop once.'], singleDrop: true };
+  }
+  const full30kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
+  const receivedFromFull = full30kCount * TAX_RECEIVE_PER_30K;
+  const lastReceive = want - receivedFromFull;
+  const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
+  const lines = [
+    full30kCount + '× 30k',
+    'Then $' + lastWithdraw.toLocaleString() + ' → $' + lastReceive.toLocaleString()
+  ];
+  return { totalWithdraw, lines, singleDrop: false };
+}
+
+// TAX CALCULATOR (new rules: 30k max per drop, multi-drop breakdown)
 function initTaxCalculator() {
   const taxInput = document.getElementById("taxInput");
   const taxAmount = document.getElementById("tax-amount");
-  
+  const taxBreakdown = document.getElementById("tax-breakdown");
+
   if (!taxInput || !taxAmount) {
     console.log("Tax calculator elements not found");
     return;
+  }
+
+  function update() {
+    const raw = taxInput.value.replace(/[^\d]/g, '');
+    const want = parseInt(raw, 10) || 0;
+    const b = getTaxBreakdown(want);
+    taxAmount.textContent = b.totalWithdraw.toLocaleString();
+    if (taxBreakdown) {
+      if (b.totalWithdraw <= 0) {
+        taxBreakdown.innerHTML = '';
+        return;
+      }
+      taxBreakdown.innerHTML = '<span class="tax-how-label">How to drop:</span><br>' +
+        b.lines.map(function(line) { return line + '<br>'; }).join('');
+    }
   }
 
   taxInput.addEventListener("input", function(e) {
     const cursorPos = e.target.selectionStart;
     const oldValue = e.target.value;
     const newValue = oldValue.replace(/[^\d]/g, '');
-    
-    // Only update if value changed (prevents cursor jump)
     if (oldValue !== newValue) {
       e.target.value = newValue;
-      // Restore cursor position
-      e.target.setSelectionRange(cursorPos - 1, cursorPos - 1);
+      e.target.setSelectionRange(Math.max(0, cursorPos - 1), Math.max(0, cursorPos - 1));
     }
-    
-    const val = parseFloat(e.target.value) || 0;
-    const withdraw = Math.round(val / 0.72);
-    taxAmount.textContent = withdraw.toLocaleString();
+    update();
   });
-  
-  // Prevent paste of invalid characters
+
   taxInput.addEventListener('paste', function(e) {
     e.preventDefault();
     const paste = (e.clipboardData || window.clipboardData).getData('text');
-    const cleaned = paste.replace(/[^\d]/g, '');
+    const cleaned = (paste || '').replace(/[^\d]/g, '');
     document.execCommand('insertText', false, cleaned);
   });
+
+  update();
 }
 
 // COPY TO CLIPBOARD
@@ -1024,12 +1058,23 @@ if (window.innerWidth <= 430) {
       calc.classList.remove('active');
     });
     
-    // Calculate tax
-    input.addEventListener('input', (e) => {
-      const value = parseFloat(e.target.value) || 0;
-      const result = Math.ceil(value / 0.72);
-      amount.textContent = result.toLocaleString();
-    });
+    const breakdownEl = document.getElementById('mobile-tax-breakdown');
+
+    function updateMobileTax() {
+      const want = parseInt((input.value || '').replace(/[^\d]/g, ''), 10) || 0;
+      const b = getTaxBreakdown(want);
+      amount.textContent = b.totalWithdraw.toLocaleString();
+      if (breakdownEl) {
+        if (b.totalWithdraw <= 0) {
+          breakdownEl.innerHTML = '';
+          return;
+        }
+        breakdownEl.innerHTML = '<span class="tax-how-label">How to drop:</span><br>' +
+          b.lines.map(function(line) { return line + '<br>'; }).join('');
+      }
+    }
+    input.addEventListener('input', updateMobileTax);
+    updateMobileTax();
     
     // Show/hide arrow based on active section
     function updateArrowVisibility() {

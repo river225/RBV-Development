@@ -263,18 +263,14 @@ We’ve launched a complete site redesign, and items will now display both their
           
         <h2>Tax Calculator</h2> 
         
-        <div class="tax-result">
-    <h3>Amount to withdraw:</h3>
+           <div class="tax-result">
+    <h3>Withdraw:</h3>
     <div class="amount">$<span id="tax-amount">0</span></div>
+    <div id="tax-breakdown" class="tax-breakdown"></div>
 </div>
-
-<input 
-    type="number" 
-    id="taxInput" 
-    placeholder="Enter amount..."
-/>
-        <div class="instructions">
-            Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
+<input type="number" id="taxInput" placeholder="Enter amount..." />
+        <div class="tax-reminders">
+            <strong>BlockSpin Plus</strong> required. Wait <strong>1 min</strong> between drops. Resetter: don’t leave in combat — wait until after respawn.
         </div>
     </aside>
 
@@ -311,13 +307,14 @@ We’ve launched a complete site redesign, and items will now display both their
 <aside class="mobile-tax-calc" id="mobile-tax-calc">
   <button class="mobile-calc-close" id="mobile-calc-close">×</button>
   <h2>Tax Calculator</h2>
-  <div class="tax-result">
-    <h3>Amount to withdraw:</h3>
+   <div class="tax-result">
+    <h3>Withdraw:</h3>
     <div class="amount">$<span id="mobile-tax-amount">0</span></div>
+    <div id="mobile-tax-breakdown" class="tax-breakdown"></div>
   </div>
   <input type="number" id="mobile-tax-input" placeholder="Enter amount..." />
-  <div class="instructions">
-    Enter the amount you want the other person to get. The calculator tells you how much to withdraw to cover taxes. <strong>Same rules apply for trades above 100k, you just respawn multiple times.</strong>
+  <div class="tax-reminders">
+    <strong>BlockSpin Plus</strong> required. Wait <strong>1 min</strong> between drops. Resetter: don’t leave in combat — wait until after respawn.
   </div>
 </aside>
 </body> 
