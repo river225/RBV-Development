@@ -201,7 +201,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Value text styling */
-.card-avg, .card-ranged, .card-aftertax, .card-quantum {
+.card-avg, .card-ranged, .card-aftertax {
   font-size: 0.95rem;
   font-weight: 700;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
@@ -234,13 +234,6 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-/* Quantum Value - White color */
-.quantum-value {
-  color: #FFFFFF; 
-  font-weight: 700;
-  font-size: 1.05rem;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
 
 .crew-logo-card {
   flex-direction: column;
@@ -331,6 +324,10 @@ a { color: #fff; text-decoration: none; }
 
 
 
+.hidden { 
+  display: none !important; 
+}
+
 /* Tax Calculator */
 .tax-calculator {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
@@ -344,9 +341,8 @@ a { color: #fff; text-decoration: none; }
   top: 118px;
   height: fit-content;
   transition: none !important; 
-  visibility: visible;
-  opacity: 1;
-
+  visibility: hidden;
+  opacity: 0;
 }
 
 
@@ -3217,6 +3213,10 @@ body {
 
 @media screen and (max-width: 430px) {
   
+  /* Hide desktop tax calculator on mobile */
+  .tax-calculator {
+    display: none !important;
+  }
 
   /* Remove container padding that causes left offset */
   .main-container {

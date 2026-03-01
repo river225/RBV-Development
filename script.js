@@ -1,5 +1,5 @@
 // CONFIG
-const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
+const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
 const SECTION_NAMES = [
   "Home",
   "Uncommon",
@@ -11,7 +11,7 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
-  // "Trade Checker",
+  "Trade Checker",
  // "BlockSpin Map",
   "💰 Richest Players",
   "Crew Logos"
@@ -1029,7 +1029,6 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const afterTax = safe(item["After Tax Value"]);
-  const quantum = safe(item["Quantum Value"]);
   const durability = safe(item["Durability"]);
   const internalValue = safe(item["Internal Value"]);
 
@@ -1126,7 +1125,6 @@ if (durability && durability.includes('/') && internalValue) {
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-aftertax="${escapeAttr(afterTax)}"
-         data-quantum="${escapeAttr(quantum)}"
          data-max-durability="${durability ? durability.split('/')[1] : '100'}"
          data-internal-value="${escapeAttr(internalValue)}">
       <div class="card-left">
@@ -1151,7 +1149,6 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
-        <div class="card-quantum">Quantum Tools: <span class="quantum-value">${quantum}</span></div>
       </div>
     </div>
   `;
@@ -1514,7 +1511,18 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-
+   // Hide/show tax calculator based on section
+  const taxCalc = document.querySelector('.tax-calculator');
+  if (taxCalc) {
+    const hiddenSections = ['Home', 'BlockSpin Map', 'Crew Logos', 'Trade Checker', 'Crate Game', '💰 Richest Players'];
+    if (hiddenSections.includes(name)) {
+      taxCalc.style.visibility = 'hidden';
+      taxCalc.style.opacity = '0';
+    } else {
+      taxCalc.style.visibility = 'visible';
+      taxCalc.style.opacity = '1';
+    }
+  }
 
     
   // Hide/show search bar based on section
@@ -1709,21 +1717,11 @@ function updateCardValues(input) {
   const originalAvg = card.dataset.avg;
   const originalRanged = card.dataset.ranged;
   const originalAfterTax = card.dataset.aftertax;
-  const originalQuantum = card.dataset.quantum;
-
+  
   card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
   card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
   card.querySelector('.aftertax-value').textContent = calculateDurabilityValue(originalAfterTax, durabilityPercent);
-    
-  if (card.querySelector('.quantum-value')) {
-    const quantumValue = calculateDurabilityValue(originalQuantum, durabilityPercent);
-    const roundedQuantum = quantumValue.replace(/\$[\d,]+(\.\d+)?/, (match) => {
-      const num = parseFloat(match.replace(/[$,]/g, ''));
-      return Math.round(num).toLocaleString();
-    });
-    card.querySelector('.quantum-value').textContent = roundedQuantum;
-  }
-
+  
   // Update repair price
   const internalValue = card.dataset.internalValue;
   const repairValueElement = card.querySelector('.repair-value');
@@ -2150,8 +2148,3 @@ if (window.innerWidth <= 430) {
     }
   });
 }
-
-// INIT TAX CALCULATOR
-document.addEventListener("DOMContentLoaded", () => {
-  initTaxCalculator();
-});
