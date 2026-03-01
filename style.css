@@ -2712,7 +2712,7 @@ section[id$="richest-players"] .profile-link {
 }
 .tax-reminders {
   font-size: 0.75rem;
-  line-height: 1.35;
+  line-height: 1.65;
   color: rgba(255,255,255,0.85);
   margin-top: 10px;
   padding: 8px;
@@ -2720,7 +2720,14 @@ section[id$="richest-players"] .profile-link {
   border-left: 3px solid #33cce6;
   border-radius: 4px;
 }
-.tax-reminders strong {
+.tax-reminders .tax-warning-title {
+  color: #8B2500;
+  font-size: 1.1rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.tax-reminders strong:not(.tax-warning-title) {
   color: #33cce6;
 }
 
