@@ -580,7 +580,7 @@ function getTaxBreakdown(amountWant) {
   const lastReceive = want - receivedFromFull;
   const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
   const lines = [
-    'Withdraw $30,000 and drop. Repeat ' + full30kCount.toLocaleString() + ' times (wait 1 min between each drop).',
+    'Withdraw $30,000 and drop. Repeat ' + full30kCount.toLocaleString() + ' times.',
     'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once. You receive $' + lastReceive.toLocaleString() + ' from this final drop.'
   ];
   return { totalWithdraw, lines, singleDrop: false };
@@ -856,8 +856,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress-text");
 
-  
- 
   
   initSectionsNav();
   initSearch();
