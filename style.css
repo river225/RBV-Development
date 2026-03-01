@@ -91,6 +91,7 @@ a { color: #fff; text-decoration: none; }
     display: flex;
     flex-direction: column;
     gap: 24px;
+    padding-top: 60px;
 }
 /*  Main layout changes end  */
 
