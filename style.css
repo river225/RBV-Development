@@ -94,6 +94,12 @@ a { color: #fff; text-decoration: none; }
 }
 /*  Main layout changes end  */
 
+/* Search bar - push down from top of content area */
+.search-container {
+  margin-top: 40px;
+}
+
+
 /* Cards container */
 .cards { 
   display: flex; 
