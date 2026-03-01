@@ -582,8 +582,7 @@ function getTaxBreakdown(amountWant) {
   const lines = [
     'Withdraw $30,000 and drop.',
     'Repeat ' + full30kCount.toLocaleString() + ' times.',
-    'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.',
-    'You receive $' + lastReceive.toLocaleString() + ' from this final drop.'
+    'Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.'
   ];
   return { totalWithdraw, lines, singleDrop: false };
 }
