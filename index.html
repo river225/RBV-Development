@@ -54,16 +54,14 @@
     color: white; 
 } 
 
-/* Search bar */ 
+/* Search bar - centered in content column */
 .search-container { 
-    position: absolute;
-    top: 90px;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%; 
     display: flex; 
     justify-content: center; 
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
     z-index: 100;
 } 
 #search { 
@@ -159,11 +157,6 @@ border: 2px solid #000000;
  
 </header> 
 
-<!-- Search bar --> 
-<div class="search-container"> 
-<input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
-</div> 
-
 <div class="main-container"> 
 
     <!-- Section navigation --> 
@@ -171,6 +164,10 @@ border: 2px solid #000000;
 
     <!-- Main content area --> 
     <main id="sections" class="sections">
+     <!-- Search bar (centered in content column) -->
+     <div class="search-container"> 
+       <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
+     </div>
      <section id="home" style="display: block;">
   
   <!-- New Clean Home Page -->
