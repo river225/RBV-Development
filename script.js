@@ -80,13 +80,14 @@ function createRichestPlayersSection(data) {
     const formattedWorth = formatNetWorth(player['Networth'] || player['Net Worth'] || 0);
     const playerName = player['Roblox Username'] || player['Player Name'] || player.Name || 'Unknown';
     const level = player['Level'] || 'N/A';
+    const rankClass = ("" + rank).length >= 3 ? "rank-long" : "";
     
     // Create Roblox search URL
     const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
 
     return `
       <div class="richest-card ${getRankSize(rank)}" style="border-color: ${rankColor};" data-player-name="${playerName}">
-        <div class="rank-badge" style="background: ${rankColor};">
+        <div class="rank-badge ${rankClass}" style="background: ${rankColor};">
           #${rank}
         </div>
         <div class="player-info">

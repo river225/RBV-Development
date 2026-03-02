@@ -2648,6 +2648,10 @@ section[id$="richest-players"] .rank-badge {
     margin-left: 0 !important;
 }
 
+section[id$="richest-players"] .rank-badge.rank-long {
+    font-size: 1.0rem !important;
+}
+
 section[id$="richest-players"] .player-name {
     font-size: 1.25rem !important;
     font-weight: 600;
@@ -2914,7 +2918,7 @@ body[data-theme="red"] .crew-header {
   border-bottom-color: #e08a8a !important;
 }
 body[data-theme="red"] .crew-logo-card {
-  border-color: #e08a8a !important;
+  border-color: #000000 !important;
 }
 body[data-theme="red"] .crew-logo-card img {
   background: #3a1919 !important;
@@ -2933,7 +2937,6 @@ body[data-theme="red"] .richest-search {
 }
 body[data-theme="red"] .richest-card {
   background: linear-gradient(135deg, #2c1616 0%, #3a1919 100%) !important;
-  border-color: #e08a8a !important;
 }
 body[data-theme="red"] .profile-link {
   color: #f0b0b0 !important;
@@ -3303,7 +3306,7 @@ body[data-theme="purple"] .crew-header {
   border-bottom-color: #b89ae8 !important;
 }
 body[data-theme="purple"] .crew-logo-card {
-  border-color: #b89ae8 !important;
+  border-color: #000000 !important;
 }
 body[data-theme="purple"] .crew-logo-card img {
   background: #301f44 !important;
@@ -3322,7 +3325,6 @@ body[data-theme="purple"] .richest-search {
 }
 body[data-theme="purple"] .richest-card {
   background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
-  border-color: #b89ae8 !important;
 }
 body[data-theme="purple"] .profile-link {
   color: #d3bff5 !important;
@@ -3653,7 +3655,7 @@ body[data-theme="pink"] .crew-header {
   border-bottom-color: #c898a8 !important;
 }
 body[data-theme="pink"] .crew-logo-card {
-  border-color: #c898a8 !important;
+  border-color: #000000 !important;
 }
 body[data-theme="pink"] .crew-logo-card img {
   background: #4a3540 !important;
@@ -3672,7 +3674,6 @@ body[data-theme="pink"] .richest-search {
 }
 body[data-theme="pink"] .richest-card {
   background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
-  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .profile-link {
   color: #d8b0c0 !important;
