@@ -1168,23 +1168,22 @@ function initInstallApp() {
   window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();
     deferredInstallPrompt = e;
-    if (installBtn) {
-      installBtn.style.display = 'inline-flex';
-      if (installIos) installIos.style.display = 'none';
-    }
+    if (installBtn) installBtn.style.display = 'inline-flex';
+    if (installIos) installIos.style.display = 'none';
   });
 
   if (installBtn) {
     installBtn.addEventListener('click', function() {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      deferredInstallPrompt.userChoice.then(function(choice) {
-        if (choice.outcome === 'accepted') {
-          installBtn.textContent = 'Added!';
-          trackIconInstall();
-        }
-        deferredInstallPrompt = null;
-      });
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(function(choice) {
+          if (choice.outcome === 'accepted') {
+            installBtn.textContent = 'Added!';
+            trackIconInstall();
+          }
+          deferredInstallPrompt = null;
+        });
+      }
     });
   }
 

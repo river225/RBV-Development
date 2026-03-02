@@ -2092,16 +2092,20 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   gap: 24px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 8px;
+  width: 100%;
 }
 .home-top-left {
   flex: 1 1 auto;
+  min-width: 0;
 }
 .install-app-top-right {
   flex-shrink: 0;
+  margin-left: auto;
   text-align: right;
-  max-width: 280px;
+  width: 260px;
+  max-width: 260px;
 }
 .install-app-top-right .install-app-text {
   text-align: right;
@@ -2114,6 +2118,21 @@ body {
 .install-app-top-right .install-app-ios {
   text-align: right;
   margin-top: 8px;
+}
+@media screen and (max-width: 768px) {
+  .home-top-row {
+    flex-wrap: wrap;
+  }
+  .install-app-top-right {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+  }
+  .install-app-top-right .install-app-text,
+  .install-app-top-right .install-app-ios {
+    text-align: left;
+  }
 }
 
 .home-two-columns {
