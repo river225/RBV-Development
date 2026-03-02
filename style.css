@@ -2704,20 +2704,20 @@ section[id$="richest-players"] .profile-link {
    Item cards + section button outlines = black. Section buttons have unique per-section colors (like original). */
 
 body[data-theme="pink"] {
-  background: linear-gradient(180deg, #2e2228 0%, #3a2830 50%, #2e2228 100%) !important;
+  background: linear-gradient(180deg, #4a3540 0%, #5a4050 50%, #4a3540 100%) !important;
   background-attachment: fixed !important;
 }
 
 /* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
 body[data-theme="pink"] .top-navbar {
-  background: linear-gradient(180deg, #251a20 0%, #2e2228 100%) !important;
-  border-bottom-color: #a87888 !important;
+  background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
+  border-bottom-color: #c898a8 !important;
 }
 body[data-theme="pink"] .nav-separator {
-  color: #987078 !important;
+  color: #b88898 !important;
 }
 body[data-theme="pink"] .nav-left a:hover {
-  color: #d0a8b4 !important;
+  color: #e8c0d0 !important;
 }
 
 /* ---- Item sections: black outlines; unique color per button (like original) ---- */
@@ -2725,332 +2725,284 @@ body[data-theme="pink"] #sections-nav,
 body[data-theme="pink"] .sections-nav {
   border-right-color: #000000 !important;
 }
-body[data-theme="pink"] #sections-nav button,
-body[data-theme="pink"] .sections-nav button {
-  background: #251a20 !important;
+body[data-theme="pink"] #sections-nav button:not(.active),
+body[data-theme="pink"] .sections-nav button:not(.active) {
+  background: #3d2a35 !important;
   border-color: #000000 !important;
 }
 body[data-theme="pink"] #sections-nav button:hover:not(.active),
 body[data-theme="pink"] .sections-nav button:hover:not(.active) {
-  background: #2e2228 !important;
+  background: #4a3540 !important;
   border-color: #000000 !important;
 }
 body[data-theme="pink"] #sections-nav button.active,
 body[data-theme="pink"] .sections-nav button.active {
   border-color: #000000 !important;
 }
-/* Home - soft pink (counterpart to cyan) */
-body[data-theme="pink"] #sections-nav button:nth-child(1).active {
-  background: linear-gradient(135deg, #5a4050 0%, #785868 25%, #987078 50%, #b88898 75%, #d0a8b4 100%) !important;
-  color: white !important;
-}
-/* Uncommon - sage/mint pink (counterpart to green) */
-body[data-theme="pink"] #sections-nav button:nth-child(2).active {
-  background: linear-gradient(135deg, #4a5048 0%, #5a6858 25%, #708870 50%, #90a890 75%, #b0c0b0 100%) !important;
-  color: white !important;
-}
-/* Rare - soft blue-pink (counterpart to blue) */
-body[data-theme="pink"] #sections-nav button:nth-child(3).active {
-  background: linear-gradient(135deg, #504860 0%, #686078 25%, #807890 50%, #a098b0 75%, #c0b8d0 100%) !important;
-  color: white !important;
-}
-/* Epic - lavender pink (counterpart to purple) */
-body[data-theme="pink"] #sections-nav button:nth-child(4).active {
-  background: linear-gradient(135deg, #584858 0%, #706070 25%, #887888 50%, #a898a8 75%, #c8b8c8 100%) !important;
-  color: white !important;
-}
-/* Legendary - warm peach pink (counterpart to orange) */
-body[data-theme="pink"] #sections-nav button:nth-child(5).active {
-  background: linear-gradient(135deg, #684838 0%, #886048 25%, #a87858 50%, #c89878 75%, #e0b898 100%) !important;
-  color: white !important;
-}
-/* Omega - rose (counterpart to red) */
-body[data-theme="pink"] #sections-nav button:nth-child(6).active {
-  background: linear-gradient(135deg, #682838 0%, #884050 25%, #a85868 50%, #c87888 75%, #e098a0 100%) !important;
-  color: white !important;
-}
-/* Misc - pink (slightly different shade) */
-body[data-theme="pink"] #sections-nav button:nth-child(7).active {
-  background: linear-gradient(135deg, #581838 0%, #783050 25%, #984868 50%, #b86888 75%, #d888a8 100%) !important;
-  color: white !important;
-}
-/* Vehicles - warm gray-pink (counterpart to gray) */
-body[data-theme="pink"] #sections-nav button:nth-child(8).active {
-  background: linear-gradient(135deg, #484048 0%, #605860 25%, #787078 50%, #988890 75%, #b8a8b0 100%) !important;
-  color: white !important;
-}
-/* Richest Players - soft gold-pink */
-body[data-theme="pink"] #sections-nav button:nth-child(11).active {
-  background: linear-gradient(135deg, #685038 0%, #886848 25%, #a88058 50%, #c89870 75%, #e0b088 100%) !important;
-  color: white !important;
-}
-/* Crew Logos - same as Home (soft pink) */
-body[data-theme="pink"] #sections-nav button:nth-child(12).active {
-  background: linear-gradient(135deg, #5a4050 0%, #785868 25%, #987078 50%, #b88898 75%, #d0a8b4 100%) !important;
-  color: white !important;
-}
+/* Keep exact same inner colors as original – do not override active button backgrounds (cyan, green, blue, etc.) */
 body[data-theme="pink"] .nav-extras-header {
-  color: #c098a8 !important;
-  border-bottom-color: #a87888 !important;
+  color: #d8b0c0 !important;
+  border-bottom-color: #c898a8 !important;
 }
 
 body[data-theme="pink"] #search {
-  background: #251a20 !important;
-  border-color: #a87888 !important;
+  background: #3d2a35 !important;
+  border-color: #c898a8 !important;
 }
 
 /* ---- What is BlockSpin Values (counterpart: cyan tint → pink tint) ---- */
 body[data-theme="pink"] .what-is-section {
-  background: rgba(168, 120, 136, 0.12) !important;
-  border: 2px solid #a87888 !important;
+  background: rgba(200, 150, 170, 0.2) !important;
+  border: 2px solid #c898a8 !important;
 }
 body[data-theme="pink"] .what-is-section h2 {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
+/* Home divider: force pink (max specificity so it overrides base cyan) */
 body[data-theme="pink"] .home-divider,
 body[data-theme="pink"] #home .home-divider,
 body[data-theme="pink"] .home-page-clean .home-divider,
-body[data-theme="pink"] div.home-divider {
-  background: linear-gradient(90deg, transparent, #b88898, transparent) !important;
+body[data-theme="pink"] div.home-divider,
+body[data-theme="pink"] section#home .home-page-clean .home-content-main .home-divider {
+  background: linear-gradient(90deg, transparent, #d0a8b8, transparent) !important;
+  background-image: linear-gradient(90deg, transparent, #d0a8b8, transparent) !important;
 }
 
-/* ---- Home columns: brighter outline + same color for headers ---- */
+/* ---- Home columns: rose gold (pink-yellow) for outline + both headers ---- */
 body[data-theme="pink"] .home-column {
-  background: #1e161a !important;
-  border: 3px solid #d0a8b4 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+  background: #352830 !important;
+  border: 3px solid #d0a898 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
-body[data-theme="pink"] .home-column:first-child h2 {
-  color: #d0a8b4 !important;
-}
+body[data-theme="pink"] .home-column:first-child h2,
 body[data-theme="pink"] .home-column:last-child h2 {
-  color: #d0a8b4 !important;
+  color: #d0a898 !important;
 }
 
 /* ---- Item cards: black outline ---- */
 body[data-theme="pink"] .card {
-  background: linear-gradient(135deg, #251a20 0%, #2e2228 100%) !important;
+  background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
   border-color: #000000 !important;
 }
 body[data-theme="pink"] .card-left {
-  background: #2a1e26 !important;
+  background: #4a3540 !important;
   border-color: #000000 !important;
 }
 body[data-theme="pink"] .card-info .badge {
-  background: linear-gradient(135deg, #b07888 0%, #c090a0 50%, #c8a0b0 100%) !important;
+  background: linear-gradient(135deg, #c890a0 0%, #d8a8b8 50%, #e0b8c8 100%) !important;
 }
 body[data-theme="pink"] .durability-control label {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .durability-input {
-  border-color: #a87888 !important;
-  background: #251a20 !important;
+  border-color: #c898a8 !important;
+  background: #3d2a35 !important;
 }
 
 /* ---- Tax calculator (counterpart of cyan theme) ---- */
 body[data-theme="pink"] .tax-calculator {
-  background: linear-gradient(135deg, #251a20 0%, #2a1e24 50%, #2e2228 100%) !important;
-  border-color: #a87888 !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(135deg, #3d2a35 0%, #4a3540 50%, #4a3540 100%) !important;
+  border-color: #c898a8 !important;
+  box-shadow: 0 8px 32px rgba(200, 150, 170, 0.25) !important;
 }
 body[data-theme="pink"] .tax-calculator h2 {
-  color: #c8a8b4 !important;
+  color: #e0c0d0 !important;
 }
 body[data-theme="pink"] .tax-calculator label {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .tax-calculator input {
-  background: rgba(168, 120, 136, 0.12) !important;
-  border-color: #a87888 !important;
+  background: rgba(200, 150, 170, 0.18) !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .tax-calculator input:focus {
-  background: rgba(184, 136, 152, 0.18) !important;
-  border-color: #c098a8 !important;
-  box-shadow: 0 0 12px rgba(168, 120, 136, 0.2) !important;
+  background: rgba(216, 176, 192, 0.25) !important;
+  border-color: #d8b0c0 !important;
+  box-shadow: 0 0 14px rgba(200, 150, 170, 0.3) !important;
 }
 body[data-theme="pink"] .tax-result {
-  background: #1e161a !important;
-  border-color: #987068 !important;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+  background: #352830 !important;
+  border-color: #b88898 !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 body[data-theme="pink"] .tax-result h3 {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .tax-result .amount {
-  color: #d0b8c0 !important;
+  color: #e8d0d8 !important;
   text-shadow: none !important;
 }
 body[data-theme="pink"] .tax-how-label {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .tax-breakdown {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 body[data-theme="pink"] .tax-reminders {
-  background: rgba(168, 120, 136, 0.1) !important;
-  border-left-color: #a87888 !important;
+  background: rgba(200, 150, 170, 0.15) !important;
+  border-left-color: #c898a8 !important;
 }
 body[data-theme="pink"] .tax-reminders strong {
-  color: #b88898 !important;
+  color: #d0a8b8 !important;
 }
 
 /* ---- Announcements ---- */
 body[data-theme="pink"] .announcement-box-home {
-  background: #1e161a !important;
-  border-color: #987068 !important;
+  background: #352830 !important;
+  border-color: #b88898 !important;
 }
 body[data-theme="pink"] .announcement-box-home h3 {
-  color: #d0a090 !important;
+  color: #e0b8a8 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-track {
-  background: #251a20 !important;
+  background: #3d2a35 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb {
-  background: #a87888 !important;
+  background: #c898a8 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
-  background: #b88898 !important;
+  background: #d0a8b8 !important;
 }
 body[data-theme="pink"] .announcement-item {
-  background: #251a20 !important;
-  border-left-color: #a87888 !important;
+  background: #3d2a35 !important;
+  border-left-color: #c898a8 !important;
 }
 body[data-theme="pink"] .announcement-item-clean {
-  background: #251a20 !important;
-  border-left: 5px solid #987068 !important;
+  background: #3d2a35 !important;
+  border-left: 5px solid #b88898 !important;
 }
 body[data-theme="pink"] .announcement-item-clean .announcement-date {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .announcement-date {
-  color: #b88898 !important;
+  color: #d0a8b8 !important;
 }
 
 /* ---- Top Donators ---- */
 body[data-theme="pink"] .donator-box-home {
-  background: rgba(37, 26, 32, 0.95) !important;
-  border: 2px solid #c8a878 !important;
+  background: rgba(53, 40, 48, 0.95) !important;
+  border: 2px solid #d0a898 !important;
 }
 body[data-theme="pink"] .donator-box-home h3 {
-  color: #c8a878 !important;
+  color: #d0a898 !important;
 }
 body[data-theme="pink"] .donator-description {
-  border-bottom-color: #a87888 !important;
+  border-bottom-color: #c898a8 !important;
 }
 
 /* ---- Feature items ---- */
 body[data-theme="pink"] .feature-item {
-  background: #251a20 !important;
-  border-color: #a87888 !important;
+  background: #3d2a35 !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .feature-item:hover {
-  background: #2e2228 !important;
-  border-color: #b88898 !important;
+  background: #4a3540 !important;
+  border-color: #d0a8b8 !important;
 }
 
 /* ---- Crew / copy ---- */
 body[data-theme="pink"] .crew-header {
-  color: #c098a8 !important;
-  border-bottom-color: #a87888 !important;
+  color: #d8b0c0 !important;
+  border-bottom-color: #c898a8 !important;
 }
 body[data-theme="pink"] .crew-logo-card {
-  border-color: #a87888 !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .crew-logo-card img {
-  background: #2a1e26 !important;
+  background: #4a3540 !important;
 }
 body[data-theme="pink"] .copy-btn {
-  background: linear-gradient(135deg, #987068 0%, #a87888 100%) !important;
+  background: linear-gradient(135deg, #b88898 0%, #c898a8 100%) !important;
 }
 body[data-theme="pink"] .copy-btn:hover {
-  background: linear-gradient(135deg, #a87888 0%, #b88898 100%) !important;
+  background: linear-gradient(135deg, #c898a8 0%, #d0a8b8 100%) !important;
 }
 
 /* ---- Richest players ---- */
 body[data-theme="pink"] .richest-search {
-  background: #251a20 !important;
-  border-color: #a87888 !important;
+  background: #3d2a35 !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .richest-card {
-  border-color: #a87888 !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .profile-link {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 
 /* ---- Loading ---- */
 body[data-theme="pink"] #loading-screen {
-  background: linear-gradient(180deg, #261a20 0%, #2d2026 50%, #261a20 100%) !important;
+  background: linear-gradient(180deg, #4a3540 0%, #5a4050 50%, #4a3540 100%) !important;
 }
 body[data-theme="pink"] #loading-screen > div > div {
-  border-color: #a87888 !important;
-  background: #251a20 !important;
+  border-color: #c898a8 !important;
+  background: #3d2a35 !important;
 }
 body[data-theme="pink"] #progress-bar {
-  background: linear-gradient(90deg, #987068, #a87888, #b88898) !important;
+  background: linear-gradient(90deg, #b88898, #c898a8, #d0a8b8) !important;
 }
 body[data-theme="pink"] #progress-text,
 body[data-theme="pink"] #loading-screen h2 {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 
 /* ---- Legal / contact / about / faq / guide ---- */
 body[data-theme="pink"] .legal-page,
 body[data-theme="pink"] .contact-page {
-  background: linear-gradient(135deg, #251a20 0%, #2e2228 100%) !important;
-  border-color: #a87888 !important;
+  background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .legal-page h1,
 body[data-theme="pink"] .contact-page h1 {
-  color: #c8a8b4 !important;
+  color: #e0c0d0 !important;
 }
 body[data-theme="pink"] .about-container,
 body[data-theme="pink"] .faq-container,
 body[data-theme="pink"] .guide-container {
-  background: linear-gradient(135deg, #251a20 0%, #2e2228 100%) !important;
-  border-color: #a87888 !important;
+  background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
+  border-color: #c898a8 !important;
 }
 body[data-theme="pink"] .back-btn-top {
-  background: linear-gradient(135deg, #987068 0%, #a87888 100%) !important;
+  background: linear-gradient(135deg, #b88898 0%, #c898a8 100%) !important;
 }
 body[data-theme="pink"] .faq-item {
-  border-color: #987068 !important;
+  border-color: #b88898 !important;
 }
 body[data-theme="pink"] .faq-item.active {
-  border-color: #c098a8 !important;
+  border-color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .faq-question h3 {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 
 /* ---- Footer ---- */
 body[data-theme="pink"] .site-footer {
-  background: linear-gradient(180deg, #251a20 0%, #2e2228 100%) !important;
-  border-top-color: #a87888 !important;
+  background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
+  border-top-color: #c898a8 !important;
 }
 body[data-theme="pink"] .footer-links a {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .footer-links a:hover {
-  color: #d0a8b4 !important;
+  color: #e8c0d0 !important;
   text-shadow: 2px 2px 4px #000 !important;
 }
 body[data-theme="pink"] .footer-links span {
-  color: #987078 !important;
+  color: #b88898 !important;
 }
 
 /* ---- Info footer section ---- */
 body[data-theme="pink"] .info-footer-section {
-  border-top-color: rgba(168, 120, 136, 0.35) !important;
+  border-top-color: rgba(200, 150, 170, 0.45) !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(1) {
-  color: #987068 !important;
+  color: #b88898 !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(1):hover {
-  color: #d0a090 !important;
+  color: #e0b8a8 !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(3) {
-  background: linear-gradient(90deg, #c8a8b4, #b88898, #a87888, #c098a8, #c8a8b4) !important;
+  background: linear-gradient(90deg, #e0c0d0, #d0a8b8, #c898a8, #d8b0c0, #e0c0d0) !important;
   background-size: 300% 100% !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -3061,60 +3013,65 @@ body[data-theme="pink"] .info-footer-link:nth-child(3):hover {
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)) brightness(1.05) !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(5) {
-  color: #c098a8 !important;
+  color: #d8b0c0 !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(5):hover {
-  color: #d0a8b4 !important;
+  color: #e8c0d0 !important;
 }
 body[data-theme="pink"] .info-separator {
-  color: #a87888 !important;
+  color: #c898a8 !important;
 }
 
 /* ---- Mobile ---- */
 @media screen and (max-width: 430px) {
   body[data-theme="pink"] .hamburger-menu {
-    background: #251a20 !important;
-    border-color: #a87888 !important;
+    background: #3d2a35 !important;
+    border-color: #c898a8 !important;
   }
   body[data-theme="pink"] .hamburger-menu span {
-    background: #c098a8 !important;
+    background: #d8b0c0 !important;
   }
   body[data-theme="pink"] .mobile-menu-overlay {
-    background: linear-gradient(180deg, #251a20 0%, #2e2228 100%) !important;
-    border-right-color: #a87888 !important;
+    background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
+    border-right-color: #c898a8 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc {
-    background: linear-gradient(135deg, #251a20 0%, #2a1e24 50%, #2e2228 100%) !important;
-    border-color: #a87888 !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+    background: linear-gradient(135deg, #3d2a35 0%, #4a3540 50%, #4a3540 100%) !important;
+    border-color: #c898a8 !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc h2 {
-    color: #c8a8b4 !important;
+    color: #e0c0d0 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc input {
-    background: rgba(168, 120, 136, 0.12) !important;
-    border-color: #a87888 !important;
+    background: rgba(200, 150, 170, 0.18) !important;
+    border-color: #c898a8 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc input:focus {
-    background: rgba(184, 136, 152, 0.18) !important;
-    border-color: #c098a8 !important;
-    box-shadow: 0 0 12px rgba(168, 120, 136, 0.2) !important;
+    background: rgba(216, 176, 192, 0.25) !important;
+    border-color: #d8b0c0 !important;
+    box-shadow: 0 0 14px rgba(200, 150, 170, 0.3) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result {
-    background: #251a20 !important;
-    border-color: #987068 !important;
+    background: #352830 !important;
+    border-color: #b88898 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result h3 {
-    color: #c098a8 !important;
+    color: #d8b0c0 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result .amount {
-    color: #d0b8c0 !important;
+    color: #e8d0d8 !important;
     text-shadow: none !important;
   }
   body[data-theme="pink"] .mobile-calc-close {
-    background: #987068 !important;
-    border-color: #a87888 !important;
+    background: #b88898 !important;
+    border-color: #c898a8 !important;
   }
+}
+
+/* Force home divider to pink (repeat at end of theme so it wins cascade) */
+body[data-theme="pink"] .home-divider {
+  background: linear-gradient(90deg, transparent, #d0a8b8, transparent) !important;
 }
 
 .theme-switcher {
@@ -3143,7 +3100,7 @@ body[data-theme="pink"] .info-separator {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
 }
 .theme-switcher-btn[data-theme="pink"] {
-  background: linear-gradient(135deg, #a87888 0%, #b88898 100%);
+  background: linear-gradient(135deg, #c898a8 0%, #d0a8b8 100%);
 }
 /* ========== PINK WEBSITE THEME END ========== */
 

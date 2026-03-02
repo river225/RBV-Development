@@ -1111,9 +1111,21 @@ if (window.innerWidth <= 430) {
 }
 
 /* ========== PINK WEBSITE THEME - theme switcher (remove with theme section in style.css) ========== */
+function applyPinkThemeDividers() {
+  var isPink = document.body.getAttribute('data-theme') === 'pink';
+  var pinkGradient = 'linear-gradient(90deg, transparent, #d0a8b8, transparent)';
+  document.querySelectorAll('.home-divider').forEach(function(el) {
+    if (isPink) {
+      el.style.setProperty('background', pinkGradient, 'important');
+    } else {
+      el.style.removeProperty('background');
+    }
+  });
+}
 function initThemeSwitcher() {
   var saved = localStorage.getItem('bsv-theme') || 'default';
   document.body.setAttribute('data-theme', saved === 'pink' ? 'pink' : '');
+  applyPinkThemeDividers();
   var wrap = document.getElementById('theme-switcher');
   if (!wrap) return;
   var btns = wrap.querySelectorAll('.theme-switcher-btn');
@@ -1124,11 +1136,15 @@ function initThemeSwitcher() {
       document.body.setAttribute('data-theme', theme === 'pink' ? 'pink' : '');
       localStorage.setItem('bsv-theme', theme);
       btns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-theme') === theme); });
+      applyPinkThemeDividers();
     });
   });
 }
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initThemeSwitcher);
+  document.addEventListener('DOMContentLoaded', function() {
+    initThemeSwitcher();
+    applyPinkThemeDividers();
+  });
 } else {
   initThemeSwitcher();
 }
