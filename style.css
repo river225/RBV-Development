@@ -2709,7 +2709,7 @@ body[data-theme="red"] {
 /* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
 body[data-theme="red"] .top-navbar {
   background: linear-gradient(180deg, #261010 0%, #3a1919 100%) !important;
-  border-bottom-color: #e08a8a !important;
+  border-bottom-color: #000000 !important;
 }
 body[data-theme="red"] .nav-separator {
   color: #e08a8a !important;
@@ -3090,7 +3090,7 @@ body[data-theme="pink"] {
 /* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
 body[data-theme="pink"] .top-navbar {
   background: linear-gradient(180deg, #302228 0%, #3d2a35 100%) !important;
-  border-bottom-color: #c898a8 !important;
+  border-bottom-color: #000000 !important;
 }
 body[data-theme="pink"] .nav-separator {
   color: #b88898 !important;
