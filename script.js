@@ -1125,7 +1125,7 @@ function applyPinkThemeDividers() {
 function initThemeSwitcher() {
   var saved = localStorage.getItem('bsv-theme') || 'default';
   // Apply saved theme: '' for default, or specific theme name (e.g. 'red', 'pink')
-  if (saved === 'pink' || saved === 'red') {
+  if (saved === 'pink' || saved === 'red' || saved === 'purple') {
     document.body.setAttribute('data-theme', saved);
   } else {
     document.body.removeAttribute('data-theme');

@@ -3078,6 +3078,339 @@ body[data-theme="red"] .info-separator {
   }
 }
 
+/* Medium purple theme, no neon. Same shade structure as original (color counterpart).
+   UNCHANGED: BlockSpin Values header text, Discord/TikTok icons, .avg-value, .ranged-value, .pawn-value, .repair. */
+
+body[data-theme="purple"] {
+  background: linear-gradient(180deg, #231633 0%, #2f1f40 50%, #231633 100%) !important;
+  background-attachment: fixed !important;
+}
+
+/* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
+body[data-theme="purple"] .top-navbar {
+  background: linear-gradient(180deg, #1f1230 0%, #2d1b42 100%) !important;
+  border-bottom-color: #000000 !important;
+}
+body[data-theme="purple"] .nav-separator {
+  color: #b89ae8 !important;
+}
+body[data-theme="purple"] .nav-left a:hover {
+  color: #e6d9ff !important;
+}
+
+/* ---- Item sections: black outlines; unique color per button (like original) ---- */
+body[data-theme="purple"] #sections-nav,
+body[data-theme="purple"] .sections-nav {
+  border-right-color: #000000 !important;
+}
+body[data-theme="purple"] #sections-nav button:not(.active),
+body[data-theme="purple"] .sections-nav button:not(.active) {
+  background: #261835 !important;
+  border-color: #000000 !important;
+}
+body[data-theme="purple"] #sections-nav button:hover:not(.active),
+body[data-theme="purple"] .sections-nav button:hover:not(.active) {
+  background: #301f44 !important;
+  border-color: #000000 !important;
+}
+body[data-theme="purple"] #sections-nav button.active,
+body[data-theme="purple"] .sections-nav button.active {
+  border-color: #000000 !important;
+}
+body[data-theme="purple"] #sections-nav button:first-child::after {
+  background: #b89ae8 !important;
+}
+body[data-theme="purple"] .nav-extras-header {
+  color: #d3bff5 !important;
+  border-bottom-color: #b89ae8 !important;
+}
+
+body[data-theme="purple"] #search {
+  background: #261835 !important;
+  border-color: #b89ae8 !important;
+}
+
+/* ---- What is BlockSpin Values ---- */
+body[data-theme="purple"] .what-is-section {
+  background: rgba(184, 154, 232, 0.2) !important;
+  border: 2px solid #b89ae8 !important;
+}
+body[data-theme="purple"] .what-is-section h2 {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .home-divider,
+body[data-theme="purple"] #home .home-divider,
+body[data-theme="purple"] .home-page-clean .home-divider {
+  background: linear-gradient(90deg, transparent, #b89ae8, transparent) !important;
+  background-image: linear-gradient(90deg, transparent, #b89ae8, transparent) !important;
+}
+
+/* ---- Home columns ---- */
+body[data-theme="purple"] .home-column {
+  background: #261835 !important;
+  border: 3px solid #b89ae8 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+}
+body[data-theme="purple"] .home-column:first-child h2,
+body[data-theme="purple"] .home-column:last-child h2 {
+  color: #b89ae8 !important;
+}
+
+/* ---- Item cards ---- */
+body[data-theme="purple"] .card {
+  background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
+  border-color: #000000 !important;
+}
+body[data-theme="purple"] .card-left {
+  background: #301f44 !important;
+  border-color: #000000 !important;
+}
+body[data-theme="purple"] .card-info .badge {
+  background: linear-gradient(135deg, #9b78f0 0%, #b89ae8 50%, #d3bff5 100%) !important;
+}
+body[data-theme="purple"] .durability-control label {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .durability-input {
+  border-color: #b89ae8 !important;
+  background: #261835 !important;
+}
+body[data-theme="purple"] .durability-max {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .durability-arrows button {
+  background: #b89ae8 !important;
+  color: #140c24 !important;
+}
+body[data-theme="purple"] .durability-arrows button:hover {
+  background: #c7a4ff !important;
+}
+body[data-theme="purple"] .durability-arrows button:active {
+  background: #9b78f0 !important;
+}
+
+/* ---- Tax calculator ---- */
+body[data-theme="purple"] .tax-calculator {
+  background: linear-gradient(135deg, #261835 0%, #301f44 50%, #301f44 100%) !important;
+  border-color: #b89ae8 !important;
+  box-shadow: 0 8px 32px rgba(184, 154, 232, 0.25) !important;
+}
+body[data-theme="purple"] .tax-calculator h2 {
+  color: #e2d3ff !important;
+}
+body[data-theme="purple"] .tax-calculator label {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .tax-calculator input {
+  background: rgba(184, 154, 232, 0.18) !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .tax-calculator input:focus {
+  background: rgba(211, 191, 245, 0.25) !important;
+  border-color: #d3bff5 !important;
+  box-shadow: 0 0 14px rgba(184, 154, 232, 0.3) !important;
+}
+body[data-theme="purple"] .tax-result {
+  background: #261835 !important;
+  border-color: #8e6ce0 !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+body[data-theme="purple"] .tax-result h3 {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .tax-result .amount {
+  color: #f2eaff !important;
+  text-shadow: none !important;
+}
+body[data-theme="purple"] .tax-how-label {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .tax-breakdown {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+body[data-theme="purple"] .tax-reminders {
+  background: rgba(184, 154, 232, 0.15) !important;
+  border-left-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .tax-reminders strong {
+  color: #c7a4ff !important;
+}
+
+/* ---- Announcements ---- */
+body[data-theme="purple"] .announcement-box-home {
+  background: #261835 !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .announcement-box-home h3 {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .announcement-scroll::-webkit-scrollbar-track {
+  background: #261835 !important;
+}
+body[data-theme="purple"] .announcement-scroll::-webkit-scrollbar-thumb {
+  background: #b89ae8 !important;
+}
+body[data-theme="purple"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
+  background: #c7a4ff !important;
+}
+body[data-theme="purple"] .announcement-item {
+  background: #261835 !important;
+  border-left-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .announcement-item-clean {
+  background: #261835 !important;
+  border-left: 5px solid #b89ae8 !important;
+}
+body[data-theme="purple"] .announcement-item-clean .announcement-date,
+body[data-theme="purple"] .announcement-date {
+  color: #b89ae8 !important;
+}
+
+/* ---- Top Donators ---- */
+body[data-theme="purple"] .donator-box-home {
+  background: rgba(38, 24, 53, 0.95) !important;
+  border: 2px solid #b89ae8 !important;
+}
+body[data-theme="purple"] .donator-box-home h3 {
+  color: #b89ae8 !important;
+}
+body[data-theme="purple"] .donator-description {
+  border-bottom-color: #b89ae8 !important;
+}
+
+/* ---- Feature items ---- */
+body[data-theme="purple"] .feature-item {
+  background: #261835 !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .feature-item:hover {
+  background: #301f44 !important;
+  border-color: #c7a4ff !important;
+}
+
+/* ---- Crew / copy ---- */
+body[data-theme="purple"] .crew-header {
+  color: #d3bff5 !important;
+  border-bottom-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .crew-logo-card {
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .crew-logo-card img {
+  background: #301f44 !important;
+}
+body[data-theme="purple"] .copy-btn {
+  background: linear-gradient(135deg, #8e6ce0 0%, #b89ae8 100%) !important;
+}
+body[data-theme="purple"] .copy-btn:hover {
+  background: linear-gradient(135deg, #b89ae8 0%, #c7a4ff 100%) !important;
+}
+
+/* ---- Richest players ---- */
+body[data-theme="purple"] .richest-search {
+  background: #261835 !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .richest-card {
+  background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .profile-link {
+  color: #d3bff5 !important;
+}
+
+/* ---- Loading ---- */
+body[data-theme="purple"] #loading-screen {
+  background: linear-gradient(180deg, #231633 0%, #2f1f40 50%, #231633 100%) !important;
+}
+body[data-theme="purple"] #loading-screen > div > div {
+  border-color: #b89ae8 !important;
+  background: #261835 !important;
+}
+body[data-theme="purple"] #progress-bar {
+  background: linear-gradient(90deg, #8e6ce0, #b89ae8, #c7a4ff) !important;
+}
+body[data-theme="purple"] #progress-text,
+body[data-theme="purple"] #loading-screen h2 {
+  color: #d3bff5 !important;
+}
+
+/* ---- Legal / contact / about / faq / guide ---- */
+body[data-theme="purple"] .legal-page,
+body[data-theme="purple"] .contact-page {
+  background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .legal-page h1,
+body[data-theme="purple"] .contact-page h1 {
+  color: #e2d3ff !important;
+}
+body[data-theme="purple"] .about-container,
+body[data-theme="purple"] .faq-container,
+body[data-theme="purple"] .guide-container {
+  background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .back-btn-top {
+  background: linear-gradient(135deg, #8e6ce0 0%, #b89ae8 100%) !important;
+}
+body[data-theme="purple"] .faq-item {
+  border-color: #8e6ce0 !important;
+}
+body[data-theme="purple"] .faq-item.active {
+  border-color: #d3bff5 !important;
+}
+body[data-theme="purple"] .faq-question h3 {
+  color: #d3bff5 !important;
+}
+
+/* ---- Footer ---- */
+body[data-theme="purple"] .site-footer {
+  background: linear-gradient(180deg, #1f1230 0%, #2d1b42 100%) !important;
+  border-top-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .footer-links a {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .footer-links a:hover {
+  color: #e6d9ff !important;
+  text-shadow: 2px 2px 4px #000 !important;
+}
+body[data-theme="purple"] .footer-links span {
+  color: #b89ae8 !important;
+}
+
+/* ---- Info footer section ---- */
+body[data-theme="purple"] .info-footer-section {
+  border-top-color: rgba(184, 154, 232, 0.45) !important;
+}
+body[data-theme="purple"] .info-footer-link:nth-child(1) {
+  color: #b89ae8 !important;
+}
+body[data-theme="purple"] .info-footer-link:nth-child(1):hover {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .info-footer-link:nth-child(3) {
+  background: linear-gradient(90deg, #e2d3ff, #c7a4ff, #b89ae8, #d3bff5, #e2d3ff) !important;
+  background-size: 300% 100% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)) !important;
+}
+body[data-theme="purple"] .info-footer-link:nth-child(3):hover {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)) brightness(1.05) !important;
+}
+body[data-theme="purple"] .info-footer-link:nth-child(5) {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .info-footer-link:nth-child(5):hover {
+  color: #e6d9ff !important;
+}
+body[data-theme="purple"] .info-separator {
+  color: #b89ae8 !important;
+}
+
 /* Medium pink theme, no neon. Same shade structure as original (color counterpart).
    UNCHANGED: BlockSpin Values header text, Discord/TikTok icons, .avg-value, .ranged-value, .pawn-value, .repair.
    Item cards + section button outlines = black. Section buttons have unique per-section colors (like original). */
@@ -3501,6 +3834,9 @@ body[data-theme="pink"] .home-divider {
 }
 .theme-switcher-btn[data-theme="pink"] {
   background: linear-gradient(135deg, #c898a8 0%, #d0a8b8 100%);
+}
+.theme-switcher-btn[data-theme="purple"] {
+  background: linear-gradient(135deg, #6a4ad9 0%, #8d6fff 100%);
 }
 /* ========== PINK WEBSITE THEME END ========== */
 
