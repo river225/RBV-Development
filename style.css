@@ -2088,7 +2088,7 @@ body {
 
 .home-two-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   margin-top: 40px;
 }
@@ -2115,9 +2115,69 @@ body {
   color: #ffa500;
 }
 
-/* Top Donators heading - YELLOW */
-.home-column:last-child h2 {
+/* Top Donators heading (middle column) - YELLOW */
+.home-column:nth-child(2) h2 {
   color: #ffde59;
+}
+
+/* Add to Home Screen column (right) - cyan to match site */
+.install-app-column h2 {
+  color: #33cce6;
+}
+.install-app-text {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 16px 0;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.install-app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  background: linear-gradient(135deg, #33cce6 0%, #29b3cc 100%);
+  border: 2px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.install-app-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(51, 204, 230, 0.4);
+}
+.install-app-ios {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+}
+
+body[data-theme="red"] .install-app-btn {
+  background: linear-gradient(135deg, #e08a8a 0%, #d07070 100%) !important;
+  border-color: #000 !important;
+}
+body[data-theme="red"] .install-app-btn:hover {
+  box-shadow: 0 4px 12px rgba(224, 138, 138, 0.4) !important;
+}
+body[data-theme="pink"] .install-app-btn {
+  background: linear-gradient(135deg, #c898a8 0%, #b88898 100%) !important;
+  border-color: #000 !important;
+}
+body[data-theme="pink"] .install-app-btn:hover {
+  box-shadow: 0 4px 12px rgba(200, 150, 170, 0.4) !important;
+}
+body[data-theme="purple"] .install-app-btn {
+  background: linear-gradient(135deg, #b89ae8 0%, #9b78f0 100%) !important;
+  border-color: #000 !important;
+}
+body[data-theme="purple"] .install-app-btn:hover {
+  box-shadow: 0 4px 12px rgba(184, 154, 232, 0.4) !important;
 }
 
 .donator-subtitle {
@@ -2772,7 +2832,8 @@ body[data-theme="red"] .home-column {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 body[data-theme="red"] .home-column:first-child h2,
-body[data-theme="red"] .home-column:last-child h2 {
+body[data-theme="red"] .home-column:nth-child(2) h2,
+body[data-theme="red"] .install-app-column h2 {
   color: #e0a090 !important;
 }
 
@@ -2974,6 +3035,15 @@ body[data-theme="red"] .guide-container {
 body[data-theme="red"] .back-btn-top {
   background: linear-gradient(135deg, #d07070 0%, #e08a8a 100%) !important;
 }
+body[data-theme="red"] .icon-stats-container {
+  background: linear-gradient(135deg, #2c1616 0%, #3a1919 100%) !important;
+  border-color: #e08a8a !important;
+}
+body[data-theme="red"] .icon-stats-container h1,
+body[data-theme="red"] .icon-stats-row .value { color: #f0b0b0 !important; }
+body[data-theme="red"] .icon-stats-row { border-color: rgba(224, 138, 138, 0.3) !important; }
+body[data-theme="red"] .icon-stats-link { color: #f0b0b0 !important; }
+body[data-theme="red"] .icon-stats-link:hover { color: #ffd4d4 !important; }
 body[data-theme="red"] .faq-item {
   border-color: #d07070 !important;
 }
@@ -3152,7 +3222,8 @@ body[data-theme="purple"] .home-column {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 body[data-theme="purple"] .home-column:first-child h2,
-body[data-theme="purple"] .home-column:last-child h2 {
+body[data-theme="purple"] .home-column:nth-child(2) h2,
+body[data-theme="purple"] .install-app-column h2 {
   color: #b89ae8 !important;
 }
 
@@ -3354,6 +3425,15 @@ body[data-theme="purple"] .guide-container {
 body[data-theme="purple"] .back-btn-top {
   background: linear-gradient(135deg, #8e6ce0 0%, #b89ae8 100%) !important;
 }
+body[data-theme="purple"] .icon-stats-container {
+  background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .icon-stats-container h1,
+body[data-theme="purple"] .icon-stats-row .value { color: #d3bff5 !important; }
+body[data-theme="purple"] .icon-stats-row { border-color: rgba(184, 154, 232, 0.3) !important; }
+body[data-theme="purple"] .icon-stats-link { color: #d3bff5 !important; }
+body[data-theme="purple"] .icon-stats-link:hover { color: #e6d9ff !important; }
 body[data-theme="purple"] .faq-item {
   border-color: #8e6ce0 !important;
 }
@@ -3491,7 +3571,8 @@ body[data-theme="pink"] .home-column {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 body[data-theme="pink"] .home-column:first-child h2,
-body[data-theme="pink"] .home-column:last-child h2 {
+body[data-theme="pink"] .home-column:nth-child(2) h2,
+body[data-theme="pink"] .install-app-column h2 {
   color: #d0a898 !important;
 }
 
@@ -3695,6 +3776,15 @@ body[data-theme="pink"] .guide-container {
 body[data-theme="pink"] .back-btn-top {
   background: linear-gradient(135deg, #b88898 0%, #c898a8 100%) !important;
 }
+body[data-theme="pink"] .icon-stats-container {
+  background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
+  border-color: #c898a8 !important;
+}
+body[data-theme="pink"] .icon-stats-container h1,
+body[data-theme="pink"] .icon-stats-row .value { color: #d8b0c0 !important; }
+body[data-theme="pink"] .icon-stats-row { border-color: rgba(200, 150, 170, 0.3) !important; }
+body[data-theme="pink"] .icon-stats-link { color: #d8b0c0 !important; }
+body[data-theme="pink"] .icon-stats-link:hover { color: #e8c0d0 !important; }
 body[data-theme="pink"] .faq-item {
   border-color: #b88898 !important;
 }
