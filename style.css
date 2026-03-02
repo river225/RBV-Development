@@ -2710,7 +2710,7 @@ body[data-theme="pink"] {
 
 /* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
 body[data-theme="pink"] .top-navbar {
-  background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
+  background: linear-gradient(180deg, #302228 0%, #3d2a35 100%) !important;
   border-bottom-color: #c898a8 !important;
 }
 body[data-theme="pink"] .nav-separator {
@@ -2866,7 +2866,7 @@ body[data-theme="pink"] .tax-reminders strong {
 /* ---- Announcements ---- */
 body[data-theme="pink"] .announcement-box-home {
   background: #352830 !important;
-  border-color: #b88898 !important;
+  border-color: #d0a898 !important;
 }
 body[data-theme="pink"] .announcement-box-home h3 {
   color: #e0b8a8 !important;
@@ -2882,17 +2882,17 @@ body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
 }
 body[data-theme="pink"] .announcement-item {
   background: #3d2a35 !important;
-  border-left-color: #c898a8 !important;
+  border-left-color: #d0a898 !important;
 }
 body[data-theme="pink"] .announcement-item-clean {
   background: #3d2a35 !important;
-  border-left: 5px solid #b88898 !important;
+  border-left: 5px solid #d0a898 !important;
 }
 body[data-theme="pink"] .announcement-item-clean .announcement-date {
-  color: #d8b0c0 !important;
+  color: #d0a898 !important;
 }
 body[data-theme="pink"] .announcement-date {
-  color: #d0a8b8 !important;
+  color: #d0a898 !important;
 }
 
 /* ---- Top Donators ---- */
@@ -2994,7 +2994,7 @@ body[data-theme="pink"] .faq-question h3 {
 
 /* ---- Footer ---- */
 body[data-theme="pink"] .site-footer {
-  background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
+  background: linear-gradient(180deg, #302228 0%, #3d2a35 100%) !important;
   border-top-color: #c898a8 !important;
 }
 body[data-theme="pink"] .footer-links a {
