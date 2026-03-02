@@ -1217,6 +1217,12 @@ function trackIconActive() {
   fetch(url, { mode: "no-cors" }).catch(function() {});
 }
 
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js').catch(function() {});
+  }
+}
+
 function getIconStats() {
   if (!ICON_STATS_SCRIPT_URL) return Promise.resolve({ totalDownloads: 0, activeUsers: 0, error: "Not configured" });
   var url = ICON_STATS_SCRIPT_URL + "?action=stats";
@@ -1232,8 +1238,10 @@ if (document.readyState === 'loading') {
     initThemeSwitcher();
     applyPinkThemeDividers();
     initInstallApp();
+    registerServiceWorker();
   });
 } else {
   initThemeSwitcher();
   initInstallApp();
+  registerServiceWorker();
 }
