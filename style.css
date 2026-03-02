@@ -2703,14 +2703,14 @@ section[id$="richest-players"] .profile-link {
 /* Does NOT change: .avg-value, .ranged-value, .pawn-value, .repair-value/repair-label, or white text. Multiple pink shades used for full theme. */
 
 body[data-theme="pink"] {
-  background: linear-gradient(180deg, #0f080c 0%, #1a0f14 25%, #2d1a24 50%, #1a0f14 75%, #0f080c 100%) !important;
+  background: linear-gradient(180deg, #1e1620 0%, #2a1e28 50%, #1e1620 100%) !important;
   background-attachment: fixed !important;
 }
 
 /* ---- Header (full pink theme) ---- */
 body[data-theme="pink"] .top-navbar {
-  background: linear-gradient(180deg, #1a0f14 0%, #251820 100%) !important;
-  border-bottom-color: #FF6A7E !important;
+  background: linear-gradient(180deg, #251a22 0%, #2e2028 100%) !important;
+  border-bottom-color: #FF7EB9 !important;
 }
 body[data-theme="pink"] .nav-separator {
   color: #b86a7e !important;
@@ -2744,16 +2744,16 @@ body[data-theme="pink"] .sections-nav {
   border-right-color: #FF6FAE !important;
 }
 body[data-theme="pink"] .sections-nav button {
-  background: #1a0f14 !important;
-  border-color: #FF6A7E !important;
-}
-body[data-theme="pink"] .sections-nav button:hover:not(.active) {
-  background: #251820 !important;
+  background: #1e1620 !important;
   border-color: #FF7EB9 !important;
 }
-body[data-theme="pink"] .sections-nav button.active {
-  background: linear-gradient(135deg, #2d1a24 0%, #38202a 100%) !important;
+body[data-theme="pink"] .sections-nav button:hover:not(.active) {
+  background: #2a1e28 !important;
   border-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .sections-nav button.active {
+  background: linear-gradient(135deg, #2e2028 0%, #3a2432 100%) !important;
+  border-color: #FF9ECF !important;
 }
 body[data-theme="pink"] .nav-extras-header {
   color: #FF9ECF !important;
@@ -2761,17 +2761,42 @@ body[data-theme="pink"] .nav-extras-header {
 }
 
 body[data-theme="pink"] #search {
-  background: #1a0f14 !important;
-  border-color: #FF6FAE !important;
+  background: #1e1620 !important;
+  border-color: #FF8FC4 !important;
+}
+
+/* ---- What is BlockSpin Values (same structure as original: subtle tint + border) ---- */
+body[data-theme="pink"] .what-is-section {
+  background: rgba(255, 143, 196, 0.08) !important;
+  border: 2px solid #FF8FC4 !important;
+}
+body[data-theme="pink"] .what-is-section h2 {
+  color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .home-divider {
+  background: linear-gradient(90deg, transparent, #FF8FC4, transparent) !important;
+}
+
+/* ---- Home two columns: Announcements & Top Donators (same shading as original) ---- */
+body[data-theme="pink"] .home-column {
+  background: #151218 !important;
+  border: 3px solid #E8A0B8 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+body[data-theme="pink"] .home-column:first-child h2 {
+  color: #FFB3D9 !important;
+}
+body[data-theme="pink"] .home-column:last-child h2 {
+  color: #FFC9E8 !important;
 }
 
 /* ---- Cards ---- */
 body[data-theme="pink"] .card {
-  background: linear-gradient(135deg, #251820 0%, #2d1a24 100%) !important;
-  border-color: #FF6A7E !important;
+  background: linear-gradient(135deg, #251a22 0%, #2e2028 100%) !important;
+  border-color: #FF7EB9 !important;
 }
 body[data-theme="pink"] .card-left {
-  background: #2d1f28 !important;
+  background: #2a1e28 !important;
 }
 body[data-theme="pink"] .card-info .badge {
   background: linear-gradient(135deg, #FF5CA2 0%, #FF7EB9 50%, #FF8FC4 100%) !important;
@@ -2781,14 +2806,14 @@ body[data-theme="pink"] .durability-control label {
 }
 body[data-theme="pink"] .durability-input {
   border-color: #FF7EB9 !important;
-  background: #251820 !important;
+  background: #251a22 !important;
 }
 
 /* ---- Tax calculator (full: box, inputs, result, breakdown, reminders) ---- */
 body[data-theme="pink"] .tax-calculator {
-  background: linear-gradient(135deg, #1a0f14 0%, #251820 50%, #2d1a24 100%) !important;
+  background: linear-gradient(135deg, #1e1620 0%, #251a22 50%, #2e2028 100%) !important;
   border-color: #FF8FC4 !important;
-  box-shadow: 0 8px 32px rgba(255, 106, 126, 0.25) !important;
+  box-shadow: 0 8px 32px rgba(255, 143, 196, 0.2) !important;
 }
 body[data-theme="pink"] .tax-calculator h2 {
   color: #FF9ECF !important;
@@ -2806,9 +2831,9 @@ body[data-theme="pink"] .tax-calculator input:focus {
   box-shadow: 0 0 20px rgba(255, 127, 185, 0.35) !important;
 }
 body[data-theme="pink"] .tax-result {
-  background: #1a0f14 !important;
-  border-color: #FF6FAE !important;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+  background: #1e1620 !important;
+  border-color: #FF8FC4 !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 body[data-theme="pink"] .tax-result h3 {
   color: #FF9ECF !important;
@@ -2831,53 +2856,58 @@ body[data-theme="pink"] .tax-reminders strong {
   color: #FF8FC4 !important;
 }
 
-/* ---- Announcements ---- */
+/* ---- Announcements (same structure as original: box + list items) ---- */
 body[data-theme="pink"] .announcement-box-home {
-  background: linear-gradient(135deg, #1a0f14 0%, #251820 100%) !important;
-  border-color: #FF7EB9 !important;
+  background: #151218 !important;
+  border-color: #FFB3D9 !important;
 }
 body[data-theme="pink"] .announcement-box-home h3 {
-  color: #FF9ECF !important;
+  color: #FFB3D9 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-track {
-  background: #1a0f14 !important;
+  background: #1e1620 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb {
-  background: #FF6FAE !important;
+  background: #FF8FC4 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
   background: #FF9ECF !important;
 }
 body[data-theme="pink"] .announcement-item {
-  background: #251820 !important;
+  background: #1e1620 !important;
   border-left-color: #FF8FC4 !important;
 }
 body[data-theme="pink"] .announcement-item-clean {
-  background: #2d1f28 !important;
+  background: #1e1620 !important;
+  border-left: 5px solid #E8A0B8 !important;
+}
+body[data-theme="pink"] .announcement-item-clean .announcement-date {
+  color: #FFB3D9 !important;
 }
 body[data-theme="pink"] .announcement-date {
   color: #FF8FC4 !important;
 }
 
+/* ---- Top Donators box (same structure as original: semi-transparent + accent border) ---- */
 body[data-theme="pink"] .donator-box-home {
-  background: linear-gradient(135deg, #251820 0%, #2d1a24 100%) !important;
-  border-color: #FF8FC4 !important;
+  background: rgba(30, 22, 28, 0.95) !important;
+  border: 2px solid #FFC9E8 !important;
 }
 body[data-theme="pink"] .donator-box-home h3 {
-  color: #FF9ECF !important;
+  color: #FFC9E8 !important;
 }
 body[data-theme="pink"] .donator-description {
-  border-bottom-color: #FF7EB9 !important;
+  border-bottom-color: #FF8FC4 !important;
 }
 
 /* ---- Feature items ---- */
 body[data-theme="pink"] .feature-item {
-  background: #2d1f28 !important;
-  border-color: #FF6A7E !important;
+  background: #251a22 !important;
+  border-color: #FF7EB9 !important;
 }
 body[data-theme="pink"] .feature-item:hover {
-  background: #38202a !important;
-  border-color: #FF7EB9 !important;
+  background: #2e2028 !important;
+  border-color: #FF8FC4 !important;
 }
 
 /* ---- Crew / copy ---- */
@@ -2900,11 +2930,11 @@ body[data-theme="pink"] .copy-btn:hover {
 
 /* ---- Richest players ---- */
 body[data-theme="pink"] .richest-search {
-  background: #1a0f14 !important;
-  border-color: #FF7EB9 !important;
+  background: #1e1620 !important;
+  border-color: #FF8FC4 !important;
 }
 body[data-theme="pink"] .richest-card {
-  border-color: #FF6FAE !important;
+  border-color: #FF8FC4 !important;
 }
 body[data-theme="pink"] .profile-link {
   color: #FF9ECF !important;
@@ -2912,11 +2942,11 @@ body[data-theme="pink"] .profile-link {
 
 /* ---- Loading ---- */
 body[data-theme="pink"] #loading-screen {
-  background: linear-gradient(180deg, #0f080c 0%, #1a0f14 50%, #2d1a24 100%) !important;
+  background: linear-gradient(180deg, #1e1620 0%, #2a1e28 50%, #1e1620 100%) !important;
 }
 body[data-theme="pink"] #loading-screen > div > div {
   border-color: #FF8FC4 !important;
-  background: #251820 !important;
+  background: #251a22 !important;
 }
 body[data-theme="pink"] #progress-bar {
   background: linear-gradient(90deg, #FF6A7E, #FF8FC4, #FF9ECF) !important;
@@ -2929,7 +2959,7 @@ body[data-theme="pink"] #loading-screen h2 {
 /* ---- Legal / contact / about / faq / guide ---- */
 body[data-theme="pink"] .legal-page,
 body[data-theme="pink"] .contact-page {
-  background: linear-gradient(135deg, #251820 0%, #2d1a24 100%) !important;
+  background: linear-gradient(135deg, #251a22 0%, #2e2028 100%) !important;
   border-color: #FF8FC4 !important;
 }
 body[data-theme="pink"] .legal-page h1,
@@ -2939,8 +2969,8 @@ body[data-theme="pink"] .contact-page h1 {
 body[data-theme="pink"] .about-container,
 body[data-theme="pink"] .faq-container,
 body[data-theme="pink"] .guide-container {
-  background: linear-gradient(135deg, #251820 0%, #2d1a24 100%) !important;
-  border-color: #FF7EB9 !important;
+  background: linear-gradient(135deg, #251a22 0%, #2e2028 100%) !important;
+  border-color: #FF8FC4 !important;
 }
 body[data-theme="pink"] .back-btn-top {
   background: linear-gradient(135deg, #FF7EB9 0%, #FF8FC4 100%) !important;
@@ -2957,7 +2987,7 @@ body[data-theme="pink"] .faq-question h3 {
 
 /* ---- Footer ---- */
 body[data-theme="pink"] .site-footer {
-  background: linear-gradient(180deg, #1a0f14 0%, #251820 100%) !important;
+  background: linear-gradient(180deg, #251a22 0%, #2e2028 100%) !important;
   border-top-color: #FF8FC4 !important;
 }
 body[data-theme="pink"] .footer-links a {
@@ -3005,20 +3035,20 @@ body[data-theme="pink"] .info-separator {
 /* ---- Mobile: hamburger + menu + tax calc (full pink) ---- */
 @media screen and (max-width: 430px) {
   body[data-theme="pink"] .hamburger-menu {
-    background: #1a0f14 !important;
-    border-color: #FF7EB9 !important;
+    background: #251a22 !important;
+    border-color: #FF8FC4 !important;
   }
   body[data-theme="pink"] .hamburger-menu span {
     background: #FF8FC4 !important;
   }
   body[data-theme="pink"] .mobile-menu-overlay {
-    background: linear-gradient(180deg, #1a0f14 0%, #251820 100%) !important;
+    background: linear-gradient(180deg, #251a22 0%, #2e2028 100%) !important;
     border-right-color: #FF8FC4 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc {
-    background: linear-gradient(135deg, #1a0f14 0%, #251820 50%, #2d1a24 100%) !important;
+    background: linear-gradient(135deg, #1e1620 0%, #251a22 50%, #2e2028 100%) !important;
     border-color: #FF8FC4 !important;
-    box-shadow: 0 20px 60px rgba(255, 92, 162, 0.35) !important;
+    box-shadow: 0 20px 60px rgba(255, 143, 196, 0.25) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc h2 {
     color: #FF9ECF !important;
@@ -3033,8 +3063,8 @@ body[data-theme="pink"] .info-separator {
     box-shadow: 0 0 20px rgba(255, 127, 185, 0.35) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result {
-    background: #1a0f14 !important;
-    border-color: #FF6FAE !important;
+    background: #1e1620 !important;
+    border-color: #FF8FC4 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result h3 {
     color: #FF9ECF !important;
