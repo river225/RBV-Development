@@ -2739,6 +2739,10 @@ body[data-theme="pink"] #sections-nav button.active,
 body[data-theme="pink"] .sections-nav button.active {
   border-color: #000000 !important;
 }
+/* Cyan line under Home button (divides home section from rest) → pink */
+body[data-theme="pink"] #sections-nav button:first-child::after {
+  background: #c898a8 !important;
+}
 /* Keep exact same inner colors as original – do not override active button backgrounds (cyan, green, blue, etc.) */
 body[data-theme="pink"] .nav-extras-header {
   color: #d8b0c0 !important;
@@ -2797,6 +2801,19 @@ body[data-theme="pink"] .durability-control label {
 body[data-theme="pink"] .durability-input {
   border-color: #c898a8 !important;
   background: #3d2a35 !important;
+}
+body[data-theme="pink"] .durability-max {
+  color: #d8b0c0 !important;
+}
+body[data-theme="pink"] .durability-arrows button {
+  background: #c898a8 !important;
+  color: #1a1218 !important;
+}
+body[data-theme="pink"] .durability-arrows button:hover {
+  background: #d0a8b8 !important;
+}
+body[data-theme="pink"] .durability-arrows button:active {
+  background: #b88898 !important;
 }
 
 /* ---- Tax calculator (counterpart of cyan theme) ---- */
