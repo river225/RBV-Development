@@ -335,36 +335,35 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; 
 }
 
-/* Crew logos: horizontal scroll row with visible scrollbar (card layout unchanged) */
-#crew-logos {
-  min-width: 0; /* allow section to shrink so layout doesn't break; row scrolls inside */
+/* Crew logos: scroll wrapper contains overflow so page layout stays the same; only the row scrolls */
+.crew-cards-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 12px;
+  scrollbar-width: auto;
+  scrollbar-color: #33cce6 #1a2332;
+}
+.crew-cards-scroll-wrapper::-webkit-scrollbar {
+  height: 12px;
+}
+.crew-cards-scroll-wrapper::-webkit-scrollbar-track {
+  background: #1a2332;
+  border-radius: 6px;
+}
+.crew-cards-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: #33cce6;
+  border-radius: 6px;
+}
+.crew-cards-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #29b3cc;
 }
 .crew-cards-row {
   display: flex;
   flex-wrap: nowrap;
   gap: 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 100%;
-  min-width: 0; /* allow row to shrink so scrollbar appears instead of expanding page */
-  max-width: 100%;
-  padding-bottom: 12px;
-  scrollbar-width: auto;
-  scrollbar-color: #33cce6 #1a2332;
-}
-.crew-cards-row::-webkit-scrollbar {
-  height: 12px;
-}
-.crew-cards-row::-webkit-scrollbar-track {
-  background: #1a2332;
-  border-radius: 6px;
-}
-.crew-cards-row::-webkit-scrollbar-thumb {
-  background: #33cce6;
-  border-radius: 6px;
-}
-.crew-cards-row::-webkit-scrollbar-thumb:hover {
-  background: #29b3cc;
+  width: max-content;
+  min-height: 0;
 }
 .crew-cards-row .crew-logo-card {
   flex: 0 0 auto;
@@ -2963,16 +2962,16 @@ body[data-theme="pink"] .crew-logo-card {
 body[data-theme="pink"] .crew-logo-card img {
   background: #4a3540 !important;
 }
-body[data-theme="pink"] .crew-cards-row {
+body[data-theme="pink"] .crew-cards-scroll-wrapper {
   scrollbar-color: #c898a8 #3d2a35;
 }
-body[data-theme="pink"] .crew-cards-row::-webkit-scrollbar-track {
+body[data-theme="pink"] .crew-cards-scroll-wrapper::-webkit-scrollbar-track {
   background: #3d2a35 !important;
 }
-body[data-theme="pink"] .crew-cards-row::-webkit-scrollbar-thumb {
+body[data-theme="pink"] .crew-cards-scroll-wrapper::-webkit-scrollbar-thumb {
   background: #c898a8 !important;
 }
-body[data-theme="pink"] .crew-cards-row::-webkit-scrollbar-thumb:hover {
+body[data-theme="pink"] .crew-cards-scroll-wrapper::-webkit-scrollbar-thumb:hover {
   background: #d0a8b8 !important;
 }
 body[data-theme="pink"] .copy-btn {
