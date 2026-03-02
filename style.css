@@ -2878,21 +2878,14 @@ body[data-theme="pink"] .faq-question h3 {
 }
 
 .theme-switcher {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  z-index: 500;
   display: flex;
   gap: 8px;
   align-items: center;
-  pointer-events: none;
-}
-.theme-switcher .theme-switcher-btn {
-  pointer-events: auto;
+  margin-right: 12px;
 }
 .theme-switcher-btn {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 2px solid #333;
   cursor: pointer;
