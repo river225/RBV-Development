@@ -2699,245 +2699,241 @@ section[id$="richest-players"] .profile-link {
 }
 
 /* ========== PINK WEBSITE THEME START ========== */
-/* Optional theme. To remove: delete from here down to PINK WEBSITE THEME END, remove theme-switcher div from all HTML, remove initThemeSwitcher() from script.js. */
-/* Does NOT change: .avg-value, .ranged-value, .pawn-value, .repair-value/repair-label, or white text. Multiple pink shades used for full theme. */
+/* Palette only: #F8C8DC #F6C1D1 #F4B6C8 #F2A7C0 #EFA3C5 #EF43C5. No neon. Does NOT change: white text, header "Values" part, .avg-value, .ranged-value, .pawn-value, .repair. */
 
 body[data-theme="pink"] {
   background: linear-gradient(180deg, #1e1620 0%, #2a1e28 50%, #1e1620 100%) !important;
   background-attachment: fixed !important;
 }
 
-/* ---- Header (full pink theme) ---- */
+/* ---- Header (Values left unchanged - no override for .nav-title span[style*="33cce6"]) ---- */
 body[data-theme="pink"] .top-navbar {
   background: linear-gradient(180deg, #251a22 0%, #2e2028 100%) !important;
-  border-bottom-color: #FF7EB9 !important;
+  border-bottom-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .nav-separator {
-  color: #b86a7e !important;
+  color: #F2A7C0 !important;
 }
 body[data-theme="pink"] .nav-left a:hover {
-  color: #FF9ECF !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .nav-discord {
-  background: rgba(255, 110, 174, 0.15) !important;
-  color: #FF9ECF !important;
+  background: rgba(242, 167, 192, 0.2) !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .nav-discord:hover {
-  background: rgba(255, 110, 174, 0.25) !important;
+  background: rgba(244, 182, 200, 0.3) !important;
 }
 body[data-theme="pink"] .nav-tiktok {
-  background: rgba(255, 92, 162, 0.2) !important;
-  color: #FF7EB9 !important;
+  background: rgba(239, 163, 197, 0.2) !important;
+  color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .nav-tiktok:hover {
-  background: rgba(255, 92, 162, 0.35) !important;
+  background: rgba(242, 167, 192, 0.35) !important;
 }
 body[data-theme="pink"] .nav-title span[style*="ff1a1a"] {
-  color: #FF6A7E !important;
-}
-body[data-theme="pink"] .nav-title span[style*="33cce6"] {
-  color: #FF8FC4 !important;
+  color: #F2A7C0 !important;
 }
 
 /* ---- Left nav / sections ---- */
 body[data-theme="pink"] .sections-nav {
-  border-right-color: #FF6FAE !important;
+  border-right-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .sections-nav button {
   background: #1e1620 !important;
-  border-color: #FF7EB9 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .sections-nav button:hover:not(.active) {
   background: #2a1e28 !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .sections-nav button.active {
   background: linear-gradient(135deg, #2e2028 0%, #3a2432 100%) !important;
-  border-color: #FF9ECF !important;
+  border-color: #F8C8DC !important;
 }
 body[data-theme="pink"] .nav-extras-header {
-  color: #FF9ECF !important;
-  border-bottom-color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
+  border-bottom-color: #F4B6C8 !important;
 }
 
 body[data-theme="pink"] #search {
   background: #1e1620 !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F4B6C8 !important;
 }
 
-/* ---- What is BlockSpin Values (same structure as original: subtle tint + border) ---- */
+/* ---- What is BlockSpin Values ---- */
 body[data-theme="pink"] .what-is-section {
-  background: rgba(255, 143, 196, 0.08) !important;
-  border: 2px solid #FF8FC4 !important;
+  background: rgba(244, 182, 200, 0.1) !important;
+  border: 2px solid #F4B6C8 !important;
 }
 body[data-theme="pink"] .what-is-section h2 {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .home-divider {
-  background: linear-gradient(90deg, transparent, #FF8FC4, transparent) !important;
+  background: linear-gradient(90deg, transparent, #F4B6C8, transparent) !important;
 }
 
-/* ---- Home two columns: Announcements & Top Donators (same shading as original) ---- */
+/* ---- Home two columns: Announcements & Top Donators ---- */
 body[data-theme="pink"] .home-column {
   background: #151218 !important;
-  border: 3px solid #E8A0B8 !important;
+  border: 3px solid #F2A7C0 !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 body[data-theme="pink"] .home-column:first-child h2 {
-  color: #FFB3D9 !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .home-column:last-child h2 {
-  color: #FFC9E8 !important;
+  color: #F8C8DC !important;
 }
 
 /* ---- Cards ---- */
 body[data-theme="pink"] .card {
   background: linear-gradient(135deg, #251a22 0%, #2e2028 100%) !important;
-  border-color: #FF7EB9 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .card-left {
   background: #2a1e28 !important;
 }
 body[data-theme="pink"] .card-info .badge {
-  background: linear-gradient(135deg, #FF5CA2 0%, #FF7EB9 50%, #FF8FC4 100%) !important;
+  background: linear-gradient(135deg, #EFA3C5 0%, #F4B6C8 50%, #F6C1D1 100%) !important;
 }
 body[data-theme="pink"] .durability-control label {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .durability-input {
-  border-color: #FF7EB9 !important;
+  border-color: #F4B6C8 !important;
   background: #251a22 !important;
 }
 
-/* ---- Tax calculator (full: box, inputs, result, breakdown, reminders) ---- */
+/* ---- Tax calculator ---- */
 body[data-theme="pink"] .tax-calculator {
   background: linear-gradient(135deg, #1e1620 0%, #251a22 50%, #2e2028 100%) !important;
-  border-color: #FF8FC4 !important;
-  box-shadow: 0 8px 32px rgba(255, 143, 196, 0.2) !important;
+  border-color: #F4B6C8 !important;
+  box-shadow: 0 8px 32px rgba(242, 167, 192, 0.15) !important;
 }
 body[data-theme="pink"] .tax-calculator h2 {
-  color: #FF9ECF !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .tax-calculator label {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .tax-calculator input {
-  background: rgba(255, 127, 185, 0.12) !important;
-  border-color: #FF7EB9 !important;
+  background: rgba(244, 182, 200, 0.1) !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .tax-calculator input:focus {
-  background: rgba(255, 143, 196, 0.18) !important;
-  border-color: #FF9ECF !important;
-  box-shadow: 0 0 20px rgba(255, 127, 185, 0.35) !important;
+  background: rgba(246, 193, 209, 0.15) !important;
+  border-color: #F8C8DC !important;
+  box-shadow: 0 0 16px rgba(242, 167, 192, 0.2) !important;
 }
 body[data-theme="pink"] .tax-result {
   background: #1e1620 !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F2A7C0 !important;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 body[data-theme="pink"] .tax-result h3 {
-  color: #FF9ECF !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .tax-result .amount {
-  color: #FFB3D9 !important;
-  text-shadow: 0 0 10px rgba(255, 179, 217, 0.4) !important;
+  color: #F8C8DC !important;
+  text-shadow: none !important;
 }
 body[data-theme="pink"] .tax-how-label {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .tax-breakdown {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 body[data-theme="pink"] .tax-reminders {
-  background: rgba(255, 106, 126, 0.1) !important;
-  border-left-color: #FF6FAE !important;
+  background: rgba(244, 182, 200, 0.08) !important;
+  border-left-color: #F2A7C0 !important;
 }
 body[data-theme="pink"] .tax-reminders strong {
-  color: #FF8FC4 !important;
+  color: #F4B6C8 !important;
 }
 
-/* ---- Announcements (same structure as original: box + list items) ---- */
+/* ---- Announcements ---- */
 body[data-theme="pink"] .announcement-box-home {
   background: #151218 !important;
-  border-color: #FFB3D9 !important;
+  border-color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .announcement-box-home h3 {
-  color: #FFB3D9 !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-track {
   background: #1e1620 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb {
-  background: #FF8FC4 !important;
+  background: #F4B6C8 !important;
 }
 body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
-  background: #FF9ECF !important;
+  background: #F6C1D1 !important;
 }
 body[data-theme="pink"] .announcement-item {
   background: #1e1620 !important;
-  border-left-color: #FF8FC4 !important;
+  border-left-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .announcement-item-clean {
   background: #1e1620 !important;
-  border-left: 5px solid #E8A0B8 !important;
+  border-left: 5px solid #F2A7C0 !important;
 }
 body[data-theme="pink"] .announcement-item-clean .announcement-date {
-  color: #FFB3D9 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .announcement-date {
-  color: #FF8FC4 !important;
+  color: #F4B6C8 !important;
 }
 
-/* ---- Top Donators box (same structure as original: semi-transparent + accent border) ---- */
+/* ---- Top Donators box ---- */
 body[data-theme="pink"] .donator-box-home {
   background: rgba(30, 22, 28, 0.95) !important;
-  border: 2px solid #FFC9E8 !important;
+  border: 2px solid #F8C8DC !important;
 }
 body[data-theme="pink"] .donator-box-home h3 {
-  color: #FFC9E8 !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .donator-description {
-  border-bottom-color: #FF8FC4 !important;
+  border-bottom-color: #F4B6C8 !important;
 }
 
 /* ---- Feature items ---- */
 body[data-theme="pink"] .feature-item {
   background: #251a22 !important;
-  border-color: #FF7EB9 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .feature-item:hover {
   background: #2e2028 !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F6C1D1 !important;
 }
 
 /* ---- Crew / copy ---- */
 body[data-theme="pink"] .crew-header {
-  color: #FF9ECF !important;
-  border-bottom-color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
+  border-bottom-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .crew-logo-card {
-  border-color: #FF7EB9 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .crew-logo-card img {
-  background: #2d1f28 !important;
+  background: #2a1e28 !important;
 }
 body[data-theme="pink"] .copy-btn {
-  background: linear-gradient(135deg, #FF7EB9 0%, #FF8FC4 100%) !important;
+  background: linear-gradient(135deg, #F2A7C0 0%, #F4B6C8 100%) !important;
 }
 body[data-theme="pink"] .copy-btn:hover {
-  background: linear-gradient(135deg, #FF8FC4 0%, #FF9ECF 100%) !important;
+  background: linear-gradient(135deg, #F4B6C8 0%, #F6C1D1 100%) !important;
 }
 
 /* ---- Richest players ---- */
 body[data-theme="pink"] .richest-search {
   background: #1e1620 !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .richest-card {
-  border-color: #FF8FC4 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .profile-link {
-  color: #FF9ECF !important;
+  color: #F6C1D1 !important;
 }
 
 /* ---- Loading ---- */
@@ -2945,137 +2941,137 @@ body[data-theme="pink"] #loading-screen {
   background: linear-gradient(180deg, #1e1620 0%, #2a1e28 50%, #1e1620 100%) !important;
 }
 body[data-theme="pink"] #loading-screen > div > div {
-  border-color: #FF8FC4 !important;
+  border-color: #F4B6C8 !important;
   background: #251a22 !important;
 }
 body[data-theme="pink"] #progress-bar {
-  background: linear-gradient(90deg, #FF6A7E, #FF8FC4, #FF9ECF) !important;
+  background: linear-gradient(90deg, #EFA3C5, #F4B6C8, #F6C1D1) !important;
 }
 body[data-theme="pink"] #progress-text,
 body[data-theme="pink"] #loading-screen h2 {
-  color: #FF9ECF !important;
+  color: #F6C1D1 !important;
 }
 
 /* ---- Legal / contact / about / faq / guide ---- */
 body[data-theme="pink"] .legal-page,
 body[data-theme="pink"] .contact-page {
   background: linear-gradient(135deg, #251a22 0%, #2e2028 100%) !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .legal-page h1,
 body[data-theme="pink"] .contact-page h1 {
-  color: #FF9ECF !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .about-container,
 body[data-theme="pink"] .faq-container,
 body[data-theme="pink"] .guide-container {
   background: linear-gradient(135deg, #251a22 0%, #2e2028 100%) !important;
-  border-color: #FF8FC4 !important;
+  border-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .back-btn-top {
-  background: linear-gradient(135deg, #FF7EB9 0%, #FF8FC4 100%) !important;
+  background: linear-gradient(135deg, #F2A7C0 0%, #F4B6C8 100%) !important;
 }
 body[data-theme="pink"] .faq-item {
-  border-color: #FF6FAE !important;
+  border-color: #F2A7C0 !important;
 }
 body[data-theme="pink"] .faq-item.active {
-  border-color: #FF9ECF !important;
+  border-color: #F8C8DC !important;
 }
 body[data-theme="pink"] .faq-question h3 {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 
 /* ---- Footer ---- */
 body[data-theme="pink"] .site-footer {
   background: linear-gradient(180deg, #251a22 0%, #2e2028 100%) !important;
-  border-top-color: #FF8FC4 !important;
+  border-top-color: #F4B6C8 !important;
 }
 body[data-theme="pink"] .footer-links a {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .footer-links a:hover {
-  color: #FFB3D9 !important;
-  text-shadow: 0 0 10px rgba(255, 143, 196, 0.8), 2px 2px 4px #000 !important;
+  color: #F8C8DC !important;
+  text-shadow: 2px 2px 4px #000 !important;
 }
 body[data-theme="pink"] .footer-links span {
-  color: #b86a7e !important;
+  color: #F2A7C0 !important;
 }
 
-/* ---- Info footer section (Trading Guide / About / FAQ links) ---- */
+/* ---- Info footer section ---- */
 body[data-theme="pink"] .info-footer-section {
-  border-top-color: rgba(255, 143, 196, 0.4) !important;
+  border-top-color: rgba(244, 182, 200, 0.4) !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(1) {
-  color: #FF6A7E !important;
+  color: #F2A7C0 !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(1):hover {
-  color: #FF9ECF !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(3) {
-  background: linear-gradient(90deg, #FF9ECF, #FF7EB9, #FF5CA2, #FF8FC4, #FF9ECF) !important;
+  background: linear-gradient(90deg, #F8C8DC, #F4B6C8, #EFA3C5, #F6C1D1, #F8C8DC) !important;
   background-size: 300% 100% !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
-  filter: drop-shadow(0 0 8px rgba(255, 127, 185, 0.6)) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)) !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(3):hover {
-  filter: drop-shadow(0 0 12px rgba(255, 143, 196, 0.8)) brightness(1.3) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)) brightness(1.05) !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(5) {
-  color: #FF8FC4 !important;
+  color: #F6C1D1 !important;
 }
 body[data-theme="pink"] .info-footer-link:nth-child(5):hover {
-  color: #FFB3D9 !important;
+  color: #F8C8DC !important;
 }
 body[data-theme="pink"] .info-separator {
-  color: #FF7EB9 !important;
+  color: #F4B6C8 !important;
 }
 
-/* ---- Mobile: hamburger + menu + tax calc (full pink) ---- */
+/* ---- Mobile ---- */
 @media screen and (max-width: 430px) {
   body[data-theme="pink"] .hamburger-menu {
     background: #251a22 !important;
-    border-color: #FF8FC4 !important;
+    border-color: #F4B6C8 !important;
   }
   body[data-theme="pink"] .hamburger-menu span {
-    background: #FF8FC4 !important;
+    background: #F6C1D1 !important;
   }
   body[data-theme="pink"] .mobile-menu-overlay {
     background: linear-gradient(180deg, #251a22 0%, #2e2028 100%) !important;
-    border-right-color: #FF8FC4 !important;
+    border-right-color: #F4B6C8 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc {
     background: linear-gradient(135deg, #1e1620 0%, #251a22 50%, #2e2028 100%) !important;
-    border-color: #FF8FC4 !important;
-    box-shadow: 0 20px 60px rgba(255, 143, 196, 0.25) !important;
+    border-color: #F4B6C8 !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc h2 {
-    color: #FF9ECF !important;
+    color: #F8C8DC !important;
   }
   body[data-theme="pink"] .mobile-tax-calc input {
-    background: rgba(255, 127, 185, 0.12) !important;
-    border-color: #FF7EB9 !important;
+    background: rgba(244, 182, 200, 0.1) !important;
+    border-color: #F4B6C8 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc input:focus {
-    background: rgba(255, 143, 196, 0.18) !important;
-    border-color: #FF9ECF !important;
-    box-shadow: 0 0 20px rgba(255, 127, 185, 0.35) !important;
+    background: rgba(246, 193, 209, 0.15) !important;
+    border-color: #F8C8DC !important;
+    box-shadow: 0 0 16px rgba(242, 167, 192, 0.2) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result {
     background: #1e1620 !important;
-    border-color: #FF8FC4 !important;
+    border-color: #F4B6C8 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result h3 {
-    color: #FF9ECF !important;
+    color: #F6C1D1 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc .tax-result .amount {
-    color: #FFB3D9 !important;
-    text-shadow: 0 0 10px rgba(255, 179, 217, 0.4) !important;
+    color: #F8C8DC !important;
+    text-shadow: none !important;
   }
   body[data-theme="pink"] .mobile-calc-close {
-    background: #FF6A7E !important;
-    border-color: #FF9ECF !important;
+    background: #F2A7C0 !important;
+    border-color: #F6C1D1 !important;
   }
 }
 
@@ -3105,7 +3101,7 @@ body[data-theme="pink"] .info-separator {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
 }
 .theme-switcher-btn[data-theme="pink"] {
-  background: linear-gradient(135deg, #FF7EB9 0%, #FF5CA2 100%);
+  background: linear-gradient(135deg, #F4B6C8 0%, #EFA3C5 100%);
 }
 /* ========== PINK WEBSITE THEME END ========== */
 
