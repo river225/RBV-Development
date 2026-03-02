@@ -105,6 +105,16 @@ a { color: #fff; text-decoration: none; }
     z-index: 100;
     margin: 0;
 }
+/* Search bars: black border in all themes */
+#search {
+  border: 2px solid #000000;
+  border-radius: 8px;
+  background: #2a3945;
+  color: #fff;
+}
+#search::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
 /*  Main layout changes end  */
 
 /* Cards container */
@@ -672,10 +682,10 @@ a { color: #fff; text-decoration: none; }
   color: white;
 }
 
-/* Hover effect */
+/* Hover effect - no cyan outline */
 #sections-nav button:hover:not(.active) {
   background: #4a4a4a;
-  border-color: #33cce6;
+  border-color: #000000;
   transform: translateX(3px);
 }
 
@@ -2751,7 +2761,7 @@ body[data-theme="red"] .nav-extras-header {
 
 body[data-theme="red"] #search {
   background: #2c1616 !important;
-  border-color: #e08a8a !important;
+  border-color: #000000 !important;
 }
 
 /* ---- What is BlockSpin Values ---- */
@@ -2933,7 +2943,7 @@ body[data-theme="red"] .copy-btn:hover {
 /* ---- Richest players ---- */
 body[data-theme="red"] .richest-search {
   background: #2c1616 !important;
-  border-color: #e08a8a !important;
+  border-color: #000000 !important;
 }
 body[data-theme="red"] .richest-card {
   background: linear-gradient(135deg, #2c1616 0%, #3a1919 100%) !important;
@@ -3139,7 +3149,7 @@ body[data-theme="purple"] .nav-extras-header {
 
 body[data-theme="purple"] #search {
   background: #261835 !important;
-  border-color: #b89ae8 !important;
+  border-color: #000000 !important;
 }
 
 /* ---- What is BlockSpin Values ---- */
@@ -3321,7 +3331,7 @@ body[data-theme="purple"] .copy-btn:hover {
 /* ---- Richest players ---- */
 body[data-theme="purple"] .richest-search {
   background: #261835 !important;
-  border-color: #b89ae8 !important;
+  border-color: #000000 !important;
 }
 body[data-theme="purple"] .richest-card {
   background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
@@ -3483,7 +3493,7 @@ body[data-theme="pink"] .nav-extras-header {
 
 body[data-theme="pink"] #search {
   background: #3d2a35 !important;
-  border-color: #c898a8 !important;
+  border-color: #000000 !important;
 }
 
 /* ---- What is BlockSpin Values (counterpart: cyan tint → pink tint) ---- */
@@ -3670,7 +3680,7 @@ body[data-theme="pink"] .copy-btn:hover {
 /* ---- Richest players ---- */
 body[data-theme="pink"] .richest-search {
   background: #3d2a35 !important;
-  border-color: #c898a8 !important;
+  border-color: #000000 !important;
 }
 body[data-theme="pink"] .richest-card {
   background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
