@@ -336,6 +336,9 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Crew logos: horizontal scroll row with visible scrollbar (card layout unchanged) */
+#crew-logos {
+  min-width: 0; /* allow section to shrink so layout doesn't break; row scrolls inside */
+}
 .crew-cards-row {
   display: flex;
   flex-wrap: nowrap;
@@ -343,6 +346,8 @@ a { color: #fff; text-decoration: none; }
   overflow-x: auto;
   overflow-y: hidden;
   width: 100%;
+  min-width: 0; /* allow row to shrink so scrollbar appears instead of expanding page */
+  max-width: 100%;
   padding-bottom: 12px;
   scrollbar-width: auto;
   scrollbar-color: #33cce6 #1a2332;
