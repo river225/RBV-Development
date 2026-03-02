@@ -1028,7 +1028,7 @@ a { color: #fff; text-decoration: none; }
 /* Footer */
 .site-footer {
   background: #0a0f16;
-  border-top: 2px solid #33cce6;
+  border-top: 2px solid #000000;
   padding: 30px 20px;
   margin-top: 60px;
   text-align: center;
@@ -2086,49 +2086,6 @@ body {
   margin: 0;
 }
 
-/* Top row: welcome/social only (install block is fixed, out of flow) */
-.home-top-row {
-  margin-bottom: 8px;
-  width: 100%;
-}
-.home-top-left {
-  width: 100%;
-}
-
-/* Install CTA: fixed top-right, floats in place when scrolling, does not push header */
-.install-app-top-right {
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  z-index: 100;
-  text-align: right;
-  width: 240px;
-}
-.install-app-top-right .install-app-text {
-  text-align: right;
-  margin: 0 0 10px 0;
-}
-.install-app-top-right .install-app-btn {
-  width: auto;
-  min-width: 180px;
-}
-.install-app-top-right .install-app-ios {
-  text-align: right;
-  margin-top: 8px;
-}
-@media screen and (max-width: 768px) {
-  .install-app-top-right {
-    position: static;
-    width: 100%;
-    margin-top: 16px;
-    text-align: left;
-  }
-  .install-app-top-right .install-app-text,
-  .install-app-top-right .install-app-ios {
-    text-align: left;
-  }
-}
-
 .home-two-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2161,62 +2118,6 @@ body {
 /* Top Donators heading - YELLOW */
 .home-column:last-child h2 {
   color: #ffde59;
-}
-
-.install-app-text {
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 16px 0;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.4;
-}
-.install-app-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #000;
-  background: linear-gradient(135deg, #33cce6 0%, #29b3cc 100%);
-  border: 2px solid #000;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.install-app-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(51, 204, 230, 0.4);
-}
-.install-app-ios {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin: 0;
-  text-align: center;
-}
-
-body[data-theme="red"] .install-app-btn {
-  background: linear-gradient(135deg, #e08a8a 0%, #d07070 100%) !important;
-  border-color: #000 !important;
-}
-body[data-theme="red"] .install-app-btn:hover {
-  box-shadow: 0 4px 12px rgba(224, 138, 138, 0.4) !important;
-}
-body[data-theme="pink"] .install-app-btn {
-  background: linear-gradient(135deg, #c898a8 0%, #b88898 100%) !important;
-  border-color: #000 !important;
-}
-body[data-theme="pink"] .install-app-btn:hover {
-  box-shadow: 0 4px 12px rgba(200, 150, 170, 0.4) !important;
-}
-body[data-theme="purple"] .install-app-btn {
-  background: linear-gradient(135deg, #b89ae8 0%, #9b78f0 100%) !important;
-  border-color: #000 !important;
-}
-body[data-theme="purple"] .install-app-btn:hover {
-  box-shadow: 0 4px 12px rgba(184, 154, 232, 0.4) !important;
 }
 
 .donator-subtitle {
@@ -2807,7 +2708,7 @@ body[data-theme="red"] {
 
 /* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
 body[data-theme="red"] .top-navbar {
-  background: linear-gradient(180deg, #261010 0%, #3a1919 100%) !important;
+  background: linear-gradient(180deg, #1c0b0b 0%, #2b1212 100%) !important;
   border-bottom-color: #000000 !important;
 }
 body[data-theme="red"] .nav-separator {
@@ -3094,8 +2995,8 @@ body[data-theme="red"] .faq-question h3 {
 
 /* ---- Footer ---- */
 body[data-theme="red"] .site-footer {
-  background: linear-gradient(180deg, #261010 0%, #3a1919 100%) !important;
-  border-top-color: #e08a8a !important;
+  background: linear-gradient(180deg, #1c0b0b 0%, #2b1212 100%) !important;
+  border-top-color: #000000 !important;
 }
 body[data-theme="red"] .footer-links a {
   color: #f0b0b0 !important;
@@ -3196,7 +3097,7 @@ body[data-theme="purple"] {
 
 /* ---- Header: navbar only; do NOT change .nav-title (BlockSpin Values) or .nav-discord / .nav-tiktok ---- */
 body[data-theme="purple"] .top-navbar {
-  background: linear-gradient(180deg, #1f1230 0%, #2d1b42 100%) !important;
+  background: linear-gradient(180deg, #160d26 0%, #221637 100%) !important;
   border-bottom-color: #000000 !important;
 }
 body[data-theme="purple"] .nav-separator {
@@ -3483,8 +3384,8 @@ body[data-theme="purple"] .faq-question h3 {
 
 /* ---- Footer ---- */
 body[data-theme="purple"] .site-footer {
-  background: linear-gradient(180deg, #1f1230 0%, #2d1b42 100%) !important;
-  border-top-color: #b89ae8 !important;
+  background: linear-gradient(180deg, #160d26 0%, #221637 100%) !important;
+  border-top-color: #000000 !important;
 }
 body[data-theme="purple"] .footer-links a {
   color: #d3bff5 !important;
@@ -3834,7 +3735,7 @@ body[data-theme="pink"] .faq-question h3 {
 /* ---- Footer ---- */
 body[data-theme="pink"] .site-footer {
   background: linear-gradient(180deg, #302228 0%, #3d2a35 100%) !important;
-  border-top-color: #c898a8 !important;
+  border-top-color: #000000 !important;
 }
 body[data-theme="pink"] .footer-links a {
   color: #d8b0c0 !important;

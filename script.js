@@ -1,8 +1,5 @@
 // CONFIG
 const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
-// Icon statistics: set these after deploying the Apps Script (see IconStats-Setup.md)
-var ICON_STATS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyr-or8NB63d4T9EQNRRGIccYeTUv2VZ9kRn_UzRN1OaaddtWqNMyM5rnFdxvLA7K3h/exec";
-var ICON_STATS_KEY = "A7K9Q2X4M8";         // optional secret to prevent spam (set same in Apps Script)
 const SECTION_NAMES = [
   "Home",
   "Uncommon",
@@ -1153,95 +1150,12 @@ function initThemeSwitcher() {
     });
   });
 }
-/* ========== Add to Home Screen / Install app prompt ========== */
-var deferredInstallPrompt = null;
-
-function initInstallApp() {
-  var installBtn = document.getElementById('install-app-btn');
-  var installIos = document.getElementById('install-app-ios');
-  if (!installBtn && !installIos) return;
-
-  function isIos() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  }
-
-  window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault();
-    deferredInstallPrompt = e;
-    if (installBtn) installBtn.style.display = 'inline-flex';
-    if (installIos) installIos.style.display = 'none';
-  });
-
-  if (installBtn) {
-    installBtn.addEventListener('click', function() {
-      if (deferredInstallPrompt) {
-        deferredInstallPrompt.prompt();
-        deferredInstallPrompt.userChoice.then(function(choice) {
-          if (choice.outcome === 'accepted') {
-            installBtn.textContent = 'Added!';
-            trackIconInstall();
-          }
-          deferredInstallPrompt = null;
-        });
-      } else {
-        alert('Use your browser menu (\u22EE or \u22EF) and choose "Add to Home Screen" or "Install app".');
-      }
-    });
-  }
-
-  trackIconActive();
-
-  if (isIos() && installIos) {
-    installIos.style.display = 'block';
-    if (installBtn) installBtn.style.display = 'none';
-  }
-}
-
-function trackIconInstall() {
-  if (!ICON_STATS_SCRIPT_URL) return;
-  var url = ICON_STATS_SCRIPT_URL + "?action=install";
-  if (ICON_STATS_KEY) url += "&key=" + encodeURIComponent(ICON_STATS_KEY);
-  fetch(url, { mode: "no-cors" }).catch(function() {});
-}
-
-function trackIconActive() {
-  if (!ICON_STATS_SCRIPT_URL) return;
-  var key = "bsv_icon_active_last";
-  var last = 0;
-  try { last = parseInt(localStorage.getItem(key) || "0", 10); } catch (e) {}
-  var now = Date.now();
-  if (now - last < 24 * 60 * 60 * 1000) return; // once per 24h
-  try { localStorage.setItem(key, String(now)); } catch (e) {}
-  var url = ICON_STATS_SCRIPT_URL + "?action=active";
-  if (ICON_STATS_KEY) url += "&key=" + encodeURIComponent(ICON_STATS_KEY);
-  fetch(url, { mode: "no-cors" }).catch(function() {});
-}
-
-function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js').catch(function() {});
-  }
-}
-
-function getIconStats() {
-  if (!ICON_STATS_SCRIPT_URL) return Promise.resolve({ totalDownloads: 0, activeUsers: 0, error: "Not configured" });
-  var url = ICON_STATS_SCRIPT_URL + "?action=stats";
-  return fetch(url).then(function(r) { return r.json(); }).then(function(d) {
-    return { totalDownloads: d.totalDownloads || 0, activeUsers: d.activeUsers || 0 };
-  }).catch(function() {
-    return { totalDownloads: 0, activeUsers: 0, error: "Could not load" };
-  });
-}
-
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function() {
     initThemeSwitcher();
     applyPinkThemeDividers();
-    initInstallApp();
-    registerServiceWorker();
   });
 } else {
   initThemeSwitcher();
-  initInstallApp();
-  registerServiceWorker();
+  applyPinkThemeDividers();
 }
