@@ -1109,3 +1109,26 @@ if (window.innerWidth <= 430) {
     }
   });
 }
+
+/* ========== PINK WEBSITE THEME - theme switcher (remove with theme section in style.css) ========== */
+function initThemeSwitcher() {
+  var saved = localStorage.getItem('bsv-theme') || 'default';
+  document.body.setAttribute('data-theme', saved === 'pink' ? 'pink' : '');
+  var wrap = document.getElementById('theme-switcher');
+  if (!wrap) return;
+  var btns = wrap.querySelectorAll('.theme-switcher-btn');
+  btns.forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-theme') === (saved === 'pink' ? 'pink' : 'default'));
+    btn.addEventListener('click', function() {
+      var theme = this.getAttribute('data-theme');
+      document.body.setAttribute('data-theme', theme === 'pink' ? 'pink' : '');
+      localStorage.setItem('bsv-theme', theme);
+      btns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-theme') === theme); });
+    });
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initThemeSwitcher);
+} else {
+  initThemeSwitcher();
+}

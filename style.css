@@ -2698,3 +2698,219 @@ section[id$="richest-players"] .profile-link {
   color: #33cce6;
 }
 
+/* ========== PINK WEBSITE THEME START ========== */
+/* Optional theme. To remove: delete from here down to PINK WEBSITE THEME END, remove theme-switcher div from all HTML, remove initThemeSwitcher() from script.js. */
+/* Does NOT change: header, average/ranged/pawn/repair value colors, white text. Does NOT affect any functionality (only colors/appearance). Theme switcher z-index is below hamburger/menu so all site features stay clickable. */
+
+body[data-theme="pink"] {
+  background: linear-gradient(180deg, #1a0f14 0%, #2d1a24 50%, #1a0f14 100%) !important;
+  background-attachment: fixed !important;
+}
+
+body[data-theme="pink"] .sections-nav {
+  border-right-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .sections-nav button {
+  background: #251820 !important;
+  border-color: #FF6A7E !important;
+}
+body[data-theme="pink"] .sections-nav button:hover:not(.active) {
+  background: #2d1f28 !important;
+}
+body[data-theme="pink"] .sections-nav button.active {
+  background: #38202a !important;
+  border-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .nav-extras-header {
+  color: #FF8FC4 !important;
+  border-bottom-color: #FF8FC4 !important;
+}
+
+body[data-theme="pink"] #search {
+  background: #251820 !important;
+  border-color: #FF7EB9 !important;
+}
+
+body[data-theme="pink"] .card {
+  background: #251820 !important;
+  border-color: #FF6A7E !important;
+}
+body[data-theme="pink"] .card-left {
+  background: #2d1f28 !important;
+}
+
+body[data-theme="pink"] .card-info .badge {
+  background: linear-gradient(135deg, #FF5CA2 0%, #FF8FC4 100%) !important;
+}
+
+body[data-theme="pink"] .tax-calculator {
+  background: linear-gradient(135deg, #251820 0%, #38202a 100%) !important;
+  border-color: #FF8FC4 !important;
+  box-shadow: 0 8px 32px rgba(255, 127, 185, 0.2) !important;
+}
+body[data-theme="pink"] .tax-calculator h2,
+body[data-theme="pink"] .tax-how-label {
+  color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .tax-reminders {
+  background: rgba(255, 143, 196, 0.08) !important;
+  border-left-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .tax-reminders strong {
+  color: #FF7EB9 !important;
+}
+
+body[data-theme="pink"] .announcement-box-home {
+  background: #1a0f14 !important;
+  border-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .announcement-box-home h3 {
+  color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-track {
+  background: #251820 !important;
+}
+body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb {
+  background: #FF7EB9 !important;
+}
+body[data-theme="pink"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
+  background: #FF9ECF !important;
+}
+body[data-theme="pink"] .announcement-item {
+  background: #251820 !important;
+  border-left-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .announcement-item-clean {
+  background: #2d1f28 !important;
+}
+body[data-theme="pink"] .announcement-date {
+  color: #FF8FC4 !important;
+}
+
+body[data-theme="pink"] .donator-box-home {
+  background: rgba(37, 24, 32, 0.95) !important;
+  border-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .donator-box-home h3 {
+  color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .donator-description {
+  border-bottom-color: #FF7EB9 !important;
+}
+
+body[data-theme="pink"] .feature-item {
+  background: #2d1f28 !important;
+  border-color: #FF6A7E !important;
+}
+body[data-theme="pink"] .feature-item:hover {
+  background: #38202a !important;
+}
+
+body[data-theme="pink"] .crew-header {
+  color: #FF8FC4 !important;
+  border-bottom-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .crew-logo-card {
+  border-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .crew-logo-card img {
+  background: #2d1f28 !important;
+}
+body[data-theme="pink"] .copy-btn {
+  background: #FF8FC4 !important;
+}
+body[data-theme="pink"] .copy-btn:hover {
+  background: #FF7EB9 !important;
+}
+
+body[data-theme="pink"] .richest-search {
+  background: #251820 !important;
+  border-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .richest-card {
+  border-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .profile-link {
+  color: #FF8FC4 !important;
+}
+
+body[data-theme="pink"] #loading-screen {
+  background: linear-gradient(180deg, #1a0f14 0%, #2d1a24 50%, #1a0f14 100%) !important;
+}
+body[data-theme="pink"] #loading-screen > div > div {
+  border-color: #FF8FC4 !important;
+  background: #251820 !important;
+}
+body[data-theme="pink"] #progress-bar {
+  background: linear-gradient(90deg, #FF8FC4, #FF9ECF) !important;
+}
+body[data-theme="pink"] #progress-text,
+body[data-theme="pink"] #loading-screen h2 {
+  color: #FF8FC4 !important;
+}
+
+body[data-theme="pink"] .legal-page,
+body[data-theme="pink"] .contact-page {
+  background: #251820 !important;
+  border-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .legal-page h1,
+body[data-theme="pink"] .contact-page h1 {
+  color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .about-container,
+body[data-theme="pink"] .faq-container,
+body[data-theme="pink"] .guide-container {
+  background: #251820 !important;
+  border-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .back-btn-top {
+  background: #FF8FC4 !important;
+}
+body[data-theme="pink"] .faq-item {
+  border-color: #FF7EB9 !important;
+}
+body[data-theme="pink"] .faq-item.active {
+  border-color: #FF8FC4 !important;
+}
+body[data-theme="pink"] .faq-question h3 {
+  color: #FF8FC4 !important;
+}
+
+.theme-switcher {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 500;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+.theme-switcher .theme-switcher-btn {
+  pointer-events: auto;
+}
+.theme-switcher-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.theme-switcher-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.theme-switcher-btn.active {
+  box-shadow: 0 0 0 2px #fff;
+}
+.theme-switcher-btn[data-theme="default"] {
+  background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+}
+.theme-switcher-btn[data-theme="pink"] {
+  background: linear-gradient(135deg, #FF7EB9 0%, #FF5CA2 100%);
+}
+/* ========== PINK WEBSITE THEME END ========== */
+

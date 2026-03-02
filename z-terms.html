@@ -67,7 +67,10 @@
   </style>
 </head>
 <body>
-
+  <div class="theme-switcher" id="theme-switcher" aria-label="Theme">
+    <button type="button" class="theme-switcher-btn active" data-theme="default" title="Default theme" aria-label="Default theme"></button>
+    <button type="button" class="theme-switcher-btn" data-theme="pink" title="Pink theme" aria-label="Pink theme"></button>
+  </div>
   <nav class="top-navbar">
   <div class="nav-container-full">
     <div class="nav-left">
@@ -145,5 +148,8 @@
     </div>
   </div>
 </footer>
+  <script>
+  (function(){ var s=localStorage.getItem('bsv-theme')||'default'; document.body.setAttribute('data-theme',s==='pink'?'pink':''); var w=document.getElementById('theme-switcher'); if(w){ var b=w.querySelectorAll('.theme-switcher-btn'); b.forEach(function(btn){ btn.classList.toggle('active',btn.getAttribute('data-theme')===(s==='pink'?'pink':'default')); btn.onclick=function(){ var t=this.getAttribute('data-theme'); document.body.setAttribute('data-theme',t==='pink'?'pink':''); localStorage.setItem('bsv-theme',t); b.forEach(function(x){ x.classList.toggle('active',x.getAttribute('data-theme')===t); }); }; }); } })();
+  </script>
 </body>
 </html>
