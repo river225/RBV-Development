@@ -335,33 +335,6 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; 
 }
 
-/* Crew logos: horizontal scroll on the cards row, cards keep their original layout size */
-#crew-logos .cards {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 12px;
-  scrollbar-width: auto;
-  scrollbar-color: #33cce6 #1a2332;
-}
-#crew-logos .cards::-webkit-scrollbar {
-  height: 12px;
-}
-#crew-logos .cards::-webkit-scrollbar-track {
-  background: #1a2332;
-  border-radius: 6px;
-}
-#crew-logos .cards::-webkit-scrollbar-thumb {
-  background: #33cce6;
-  border-radius: 6px;
-}
-#crew-logos .cards::-webkit-scrollbar-thumb:hover {
-  background: #29b3cc;
-}
-#crew-logos .cards .crew-logo-card {
-  flex: 0 0 auto; /* prevent shrinking so card size stays consistent; extra cards scroll */
-}
-
 .hidden { 
   display: none !important; 
 }
