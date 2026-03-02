@@ -1183,6 +1183,8 @@ function initInstallApp() {
           }
           deferredInstallPrompt = null;
         });
+      } else {
+        alert('Use your browser menu (\u22EE or \u22EF) and choose "Add to Home Screen" or "Install app".');
       }
     });
   }

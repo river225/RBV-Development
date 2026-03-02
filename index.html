@@ -167,7 +167,14 @@ border: 2px solid #000000;
     
     <div class="home-content-main">
     
-    <!-- Top row: welcome/social left, install CTA right -->
+    <!-- Install CTA: fixed top-right (floats, does not push header) -->
+    <div class="install-app-top-right">
+      <p class="install-app-text">Click below to get our website as an icon on your homescreen!</p>
+      <button type="button" class="install-app-btn" id="install-app-btn">Add to Home Screen</button>
+      <p class="install-app-ios" id="install-app-ios" style="display: none;">On iPhone/iPad: tap <strong>Share</strong> then <strong>Add to Home Screen</strong>.</p>
+    </div>
+
+    <!-- Top row: welcome/social -->
     <div class="home-top-row">
       <div class="home-top-left">
         <div class="welcome-header">
@@ -183,11 +190,6 @@ border: 2px solid #000000;
             Join Our Trading Discord
           </a>
         </div>
-      </div>
-      <div class="install-app-top-right">
-        <p class="install-app-text">Click below to get our website as an icon on your homescreen!</p>
-        <button type="button" class="install-app-btn" id="install-app-btn">Add to Home Screen</button>
-        <p class="install-app-ios" id="install-app-ios" style="display: none;">On iPhone/iPad: tap <strong>Share</strong> then <strong>Add to Home Screen</strong>.</p>
       </div>
     </div>
 

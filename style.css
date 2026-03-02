@@ -2086,26 +2086,23 @@ body {
   margin: 0;
 }
 
-/* Top row: welcome/social left, install CTA right (no box) */
+/* Top row: welcome/social only (install block is fixed, out of flow) */
 .home-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  flex-wrap: nowrap;
   margin-bottom: 8px;
   width: 100%;
 }
 .home-top-left {
-  flex: 1 1 auto;
-  min-width: 0;
+  width: 100%;
 }
+
+/* Install CTA: fixed top-right, floats in place when scrolling, does not push header */
 .install-app-top-right {
-  flex-shrink: 0;
-  margin-left: auto;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 100;
   text-align: right;
-  width: 260px;
-  max-width: 260px;
+  width: 240px;
 }
 .install-app-top-right .install-app-text {
   text-align: right;
@@ -2120,13 +2117,10 @@ body {
   margin-top: 8px;
 }
 @media screen and (max-width: 768px) {
-  .home-top-row {
-    flex-wrap: wrap;
-  }
   .install-app-top-right {
-    margin-left: 0;
+    position: static;
     width: 100%;
-    max-width: 100%;
+    margin-top: 16px;
     text-align: left;
   }
   .install-app-top-right .install-app-text,
