@@ -63,7 +63,7 @@ function createRichestPlayersSection(data) {
   const intro = `
     <div class="richest-players-header">
       <h2>Top 1,000 Richest Players in BlockSpin</h2>
-      <p class="richest-intro">This list is the Offical BlockSpin leaderboard showing the wealthiest players in the game, Ranked by the total value of their in-game assets. Rankings go to #1000. This leaderboard updates hourly. Note this section is in BETA, issues may occure.</p>
+      <p class="richest-intro">This list is the Official BlockSpin leaderboard showing the wealthiest players in the game, Ranked by the total value of their in-game assets. Rankings go to #1000. This leaderboard updates hourly. Note this section is in BETA, issues may occur.</p>
       
       <input 
         type="text" 
@@ -180,7 +180,6 @@ function createCard(item) {
   const demand = safe(item["Demand"]);
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
-  const afterTax = safe(item["After Tax Value"]);
   const durability = safe(item["Durability"]);
   const internalValue = safe(item["Internal Value"]);
 
@@ -276,7 +275,6 @@ if (durability && durability.includes('/') && internalValue) {
     <div class="card" data-name="${escapeAttr(name)}" 
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
-         data-aftertax="${escapeAttr(afterTax)}"
          data-max-durability="${durability ? durability.split('/')[1] : '100'}"
          data-internal-value="${escapeAttr(internalValue)}">
       <div class="card-left">
@@ -289,18 +287,12 @@ if (durability && durability.includes('/') && internalValue) {
           <span class="repair-value">$${repairPrice.toLocaleString()}</span>
         </div>
       ` : ''}
-            ${durability && internalValue ? `
-        <div class="pawn-amount-display">
-          <span class="pawn-label">Pawn Amount:</span>
-          <span class="pawn-value">${pawnAmount}</span>
-        </div>
-      ` : ''}
       <div class="card-info">
         <h3>${name}</h3>
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
-        <div class="card-aftertax">After Tax Value: <span class="aftertax-value">${afterTax}</span></div>
+        ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
       </div>
     </div>
   `;
@@ -726,11 +718,9 @@ function updateCardValues(input) {
   
   const originalAvg = card.dataset.avg;
   const originalRanged = card.dataset.ranged;
-  const originalAfterTax = card.dataset.aftertax;
   
   card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
   card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
-  card.querySelector('.aftertax-value').textContent = calculateDurabilityValue(originalAfterTax, durabilityPercent);
   
   // Update repair price
   const internalValue = card.dataset.internalValue;
@@ -767,7 +757,7 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
   // New formula: 20% floor + 80% scaled by durability
   const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
   
-  // Handle range format (works for both "Ranged Value" AND "After Tax Value")
+  // Handle range format (works for "Ranged Value")
   if (originalValue.includes(' to ')) {
     const parts = originalValue.split(' to ');
     const low = parseValue(parts[0]) * valueMultiplier;
@@ -818,13 +808,13 @@ function formatLikeOriginal(num, original) {
   const hadCommas = original.includes(',');
   
   if (wasM) {
-    // Original was in millions
-    const m = num / 1000000;
-    return '$' + m.toFixed(1).replace('.0', '') + 'm';
+    // Original was in millions — round to whole number
+    const m = Math.round(num / 1000000);
+    return '$' + m + 'm';
   } else if (wasK) {
-    // Original was in thousands
-    const k = num / 1000;
-    return '$' + k.toFixed(1).replace('.0', '') + 'k';
+    // Original was in thousands — round to whole number
+    const k = Math.round(num / 1000);
+    return '$' + k + 'k';
   } else if (hadCommas || num >= 1000) {
     // Original had commas or number is big enough
     return '$' + num.toLocaleString();

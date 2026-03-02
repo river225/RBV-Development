@@ -149,7 +149,7 @@ a { color: #fff; text-decoration: none; }
   left: 45px;
   width: 150px;
   height: 52px;
-  background-image: url('https://i.ibb.co/gZQzvDp1/qu-Ohyw-V8.webp" alt=');
+  background-image: url('https://i.ibb.co/gZQzvDp1/qu-Ohyw-V8.webp');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -214,7 +214,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Value text styling */
-.card-avg, .card-ranged, .card-aftertax {
+.card-avg, .card-ranged, .card-pawn {
   font-size: 0.95rem;
   font-weight: 700;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
@@ -239,9 +239,9 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
-/* After Tax Value - */
-.aftertax-value {
-  color: #FF5C5C; 
+/* Pawn Amount (inline in card-info) */
+.card-pawn .pawn-value {
+  color: #5ec7c2;
   font-weight: 700;
   font-size: 1.05rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -1585,32 +1585,6 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
-/* Pawn Amount Display */
-.pawn-amount-display {
-  position: absolute;
-  bottom: 5px;
-  left: 130px; 
-  display: flex !important;
-  flex-direction: column;
-  gap: 2px;
-  text-align: left;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.pawn-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffffff;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
-}
-
-.pawn-value {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #5ec7c2; 
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
-}
 
 
 /* Top Donators Box Styling */
