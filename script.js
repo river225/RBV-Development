@@ -426,7 +426,7 @@ function renderCrewLogosSection(items) {
     if (grouped[header].length > 0) {
       html += `
         <div class="crew-header">${header}</div>
-        <div class="cards">
+        <div class="cards crew-cards-row">
           ${grouped[header].map(createCrewLogoCard).join("")}
         </div>
       `;
