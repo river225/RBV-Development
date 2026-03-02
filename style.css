@@ -2086,9 +2086,39 @@ body {
   margin: 0;
 }
 
+/* Top row: welcome/social left, install CTA right (no box) */
+.home-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.home-top-left {
+  flex: 1 1 auto;
+}
+.install-app-top-right {
+  flex-shrink: 0;
+  text-align: right;
+  max-width: 280px;
+}
+.install-app-top-right .install-app-text {
+  text-align: right;
+  margin: 0 0 10px 0;
+}
+.install-app-top-right .install-app-btn {
+  width: auto;
+  min-width: 180px;
+}
+.install-app-top-right .install-app-ios {
+  text-align: right;
+  margin-top: 8px;
+}
+
 .home-two-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
   margin-top: 40px;
 }
@@ -2115,15 +2145,11 @@ body {
   color: #ffa500;
 }
 
-/* Top Donators heading (middle column) - YELLOW */
-.home-column:nth-child(2) h2 {
+/* Top Donators heading - YELLOW */
+.home-column:last-child h2 {
   color: #ffde59;
 }
 
-/* Add to Home Screen column (right) - cyan to match site */
-.install-app-column h2 {
-  color: #33cce6;
-}
 .install-app-text {
   color: rgba(255, 255, 255, 0.9);
   margin: 0 0 16px 0;
@@ -2832,8 +2858,7 @@ body[data-theme="red"] .home-column {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 body[data-theme="red"] .home-column:first-child h2,
-body[data-theme="red"] .home-column:nth-child(2) h2,
-body[data-theme="red"] .install-app-column h2 {
+body[data-theme="red"] .home-column:last-child h2 {
   color: #e0a090 !important;
 }
 
@@ -3222,8 +3247,7 @@ body[data-theme="purple"] .home-column {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 body[data-theme="purple"] .home-column:first-child h2,
-body[data-theme="purple"] .home-column:nth-child(2) h2,
-body[data-theme="purple"] .install-app-column h2 {
+body[data-theme="purple"] .home-column:last-child h2 {
   color: #b89ae8 !important;
 }
 
@@ -3571,8 +3595,7 @@ body[data-theme="pink"] .home-column {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
 }
 body[data-theme="pink"] .home-column:first-child h2,
-body[data-theme="pink"] .home-column:nth-child(2) h2,
-body[data-theme="pink"] .install-app-column h2 {
+body[data-theme="pink"] .home-column:last-child h2 {
   color: #d0a898 !important;
 }
 
