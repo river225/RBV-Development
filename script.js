@@ -571,9 +571,11 @@ function getTaxBreakdown(amountWant) {
   const receivedFromFull = full40kCount * TAX_RECEIVE_PER_40K;
   const lastReceive = want - receivedFromFull;
   const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
+  const moreCount = full40kCount - 1;
+  const moreTimes = moreCount === 1 ? '1 more time' : moreCount.toLocaleString() + ' more times';
   const lines = [
     'Withdraw $40,000 and drop.',
-    'Repeat ' + full40kCount.toLocaleString() + ' times.'
+    'Repeat ' + moreTimes + '.'
   ];
   if (lastWithdraw > 0) {
     lines.push('Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.');
