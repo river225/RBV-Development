@@ -2701,10 +2701,10 @@ section[id$="richest-players"] .profile-link {
 /* ========== PINK WEBSITE THEME START ========== */
 /* Medium pink theme, no neon. Same shade structure as original (color counterpart).
    UNCHANGED: BlockSpin Values header text, Discord/TikTok icons, .avg-value, .ranged-value, .pawn-value, .repair.
-   Item cards + section outlines = white. */
+   Item cards + section button outlines = black. Section buttons have unique per-section colors (like original). */
 
 body[data-theme="pink"] {
-  background: linear-gradient(180deg, #261a20 0%, #2d2026 50%, #261a20 100%) !important;
+  background: linear-gradient(180deg, #2e2228 0%, #3a2830 50%, #2e2228 100%) !important;
   background-attachment: fixed !important;
 }
 
@@ -2720,21 +2720,74 @@ body[data-theme="pink"] .nav-left a:hover {
   color: #d0a8b4 !important;
 }
 
-/* ---- Item sections: white outlines ---- */
+/* ---- Item sections: black outlines; unique color per button (like original) ---- */
+body[data-theme="pink"] #sections-nav,
 body[data-theme="pink"] .sections-nav {
-  border-right-color: #ffffff !important;
+  border-right-color: #000000 !important;
 }
+body[data-theme="pink"] #sections-nav button,
 body[data-theme="pink"] .sections-nav button {
   background: #251a20 !important;
-  border-color: #ffffff !important;
+  border-color: #000000 !important;
 }
+body[data-theme="pink"] #sections-nav button:hover:not(.active),
 body[data-theme="pink"] .sections-nav button:hover:not(.active) {
   background: #2e2228 !important;
-  border-color: #ffffff !important;
+  border-color: #000000 !important;
 }
+body[data-theme="pink"] #sections-nav button.active,
 body[data-theme="pink"] .sections-nav button.active {
-  background: linear-gradient(135deg, #2e2228 0%, #3a2830 100%) !important;
-  border-color: #ffffff !important;
+  border-color: #000000 !important;
+}
+/* Home - soft pink (counterpart to cyan) */
+body[data-theme="pink"] #sections-nav button:nth-child(1).active {
+  background: linear-gradient(135deg, #5a4050 0%, #785868 25%, #987078 50%, #b88898 75%, #d0a8b4 100%) !important;
+  color: white !important;
+}
+/* Uncommon - sage/mint pink (counterpart to green) */
+body[data-theme="pink"] #sections-nav button:nth-child(2).active {
+  background: linear-gradient(135deg, #4a5048 0%, #5a6858 25%, #708870 50%, #90a890 75%, #b0c0b0 100%) !important;
+  color: white !important;
+}
+/* Rare - soft blue-pink (counterpart to blue) */
+body[data-theme="pink"] #sections-nav button:nth-child(3).active {
+  background: linear-gradient(135deg, #504860 0%, #686078 25%, #807890 50%, #a098b0 75%, #c0b8d0 100%) !important;
+  color: white !important;
+}
+/* Epic - lavender pink (counterpart to purple) */
+body[data-theme="pink"] #sections-nav button:nth-child(4).active {
+  background: linear-gradient(135deg, #584858 0%, #706070 25%, #887888 50%, #a898a8 75%, #c8b8c8 100%) !important;
+  color: white !important;
+}
+/* Legendary - warm peach pink (counterpart to orange) */
+body[data-theme="pink"] #sections-nav button:nth-child(5).active {
+  background: linear-gradient(135deg, #684838 0%, #886048 25%, #a87858 50%, #c89878 75%, #e0b898 100%) !important;
+  color: white !important;
+}
+/* Omega - rose (counterpart to red) */
+body[data-theme="pink"] #sections-nav button:nth-child(6).active {
+  background: linear-gradient(135deg, #682838 0%, #884050 25%, #a85868 50%, #c87888 75%, #e098a0 100%) !important;
+  color: white !important;
+}
+/* Misc - pink (slightly different shade) */
+body[data-theme="pink"] #sections-nav button:nth-child(7).active {
+  background: linear-gradient(135deg, #581838 0%, #783050 25%, #984868 50%, #b86888 75%, #d888a8 100%) !important;
+  color: white !important;
+}
+/* Vehicles - warm gray-pink (counterpart to gray) */
+body[data-theme="pink"] #sections-nav button:nth-child(8).active {
+  background: linear-gradient(135deg, #484048 0%, #605860 25%, #787078 50%, #988890 75%, #b8a8b0 100%) !important;
+  color: white !important;
+}
+/* Richest Players - soft gold-pink */
+body[data-theme="pink"] #sections-nav button:nth-child(11).active {
+  background: linear-gradient(135deg, #685038 0%, #886848 25%, #a88058 50%, #c89870 75%, #e0b088 100%) !important;
+  color: white !important;
+}
+/* Crew Logos - same as Home (soft pink) */
+body[data-theme="pink"] #sections-nav button:nth-child(12).active {
+  background: linear-gradient(135deg, #5a4050 0%, #785868 25%, #987078 50%, #b88898 75%, #d0a8b4 100%) !important;
+  color: white !important;
 }
 body[data-theme="pink"] .nav-extras-header {
   color: #c098a8 !important;
@@ -2754,31 +2807,34 @@ body[data-theme="pink"] .what-is-section {
 body[data-theme="pink"] .what-is-section h2 {
   color: #c098a8 !important;
 }
-body[data-theme="pink"] .home-divider {
-  background: linear-gradient(90deg, transparent, #a87888, transparent) !important;
+body[data-theme="pink"] .home-divider,
+body[data-theme="pink"] #home .home-divider,
+body[data-theme="pink"] .home-page-clean .home-divider,
+body[data-theme="pink"] div.home-divider {
+  background: linear-gradient(90deg, transparent, #b88898, transparent) !important;
 }
 
-/* ---- Home columns ---- */
+/* ---- Home columns: brighter outline + same color for headers ---- */
 body[data-theme="pink"] .home-column {
   background: #1e161a !important;
-  border: 3px solid #987068 !important;
+  border: 3px solid #d0a8b4 !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 body[data-theme="pink"] .home-column:first-child h2 {
-  color: #d0a090 !important;
+  color: #d0a8b4 !important;
 }
 body[data-theme="pink"] .home-column:last-child h2 {
-  color: #c8a878 !important;
+  color: #d0a8b4 !important;
 }
 
-/* ---- Item cards: white outline; same shade structure as original ---- */
+/* ---- Item cards: black outline ---- */
 body[data-theme="pink"] .card {
   background: linear-gradient(135deg, #251a20 0%, #2e2228 100%) !important;
-  border-color: #ffffff !important;
+  border-color: #000000 !important;
 }
 body[data-theme="pink"] .card-left {
   background: #2a1e26 !important;
-  border-color: #ffffff !important;
+  border-color: #000000 !important;
 }
 body[data-theme="pink"] .card-info .badge {
   background: linear-gradient(135deg, #b07888 0%, #c090a0 50%, #c8a0b0 100%) !important;
