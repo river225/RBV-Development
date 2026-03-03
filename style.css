@@ -2662,6 +2662,9 @@ section[id$="richest-players"] .rank-badge.rank-long {
     font-size: 1.0rem !important;
 }
 
+body[data-theme="red"] section[id$="richest-players"] .rank-badge {
+    filter: brightness(1.2);
+}
 section[id$="richest-players"] .player-name {
     font-size: 1.25rem !important;
     font-weight: 600;
@@ -2888,11 +2891,11 @@ body[data-theme="red"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
   background: #f09090 !important;
 }
 body[data-theme="red"] .announcement-item {
-  background: #2c1616 !important;
+  background: #3a1919 !important;
   border-left-color: #e0a090 !important;
 }
 body[data-theme="red"] .announcement-item-clean {
-  background: #2c1616 !important;
+  background: #3a1919 !important;
   border-left: 5px solid #e0a090 !important;
 }
 body[data-theme="red"] .announcement-item-clean .announcement-date,
@@ -3276,11 +3279,11 @@ body[data-theme="purple"] .announcement-scroll::-webkit-scrollbar-thumb:hover {
   background: #c7a4ff !important;
 }
 body[data-theme="purple"] .announcement-item {
-  background: #261835 !important;
+  background: #301f44 !important;
   border-left-color: #b89ae8 !important;
 }
 body[data-theme="purple"] .announcement-item-clean {
-  background: #261835 !important;
+  background: #301f44 !important;
   border-left: 5px solid #b89ae8 !important;
 }
 body[data-theme="purple"] .announcement-item-clean .announcement-date,
