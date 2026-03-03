@@ -450,51 +450,96 @@ a { color: #fff; text-decoration: none; }
   display: none;
 }
 
-/* Legendary section: horizontal strip at bottom (yellow, white text, all themes) */
+/* Legendary section: horizontal strip at bottom — gradients, texture, animation */
 .legendary-banner {
   width: 100%;
   min-height: 0;
-  padding: 14px 24px;
-  background: #d4a017;
-  color: #fff;
-  border-radius: 10px;
-  border: 2px solid #b8860b;
-  margin-top: 20px;
+  padding: 18px 28px;
+  margin-top: 24px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px 24px;
+  gap: 20px 32px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  box-shadow:
+    0 4px 20px rgba(184, 134, 11, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #c9a227 0%, #d4a017 25%, #e6b422 50%, #d4a017 75%, #b8860b 100%);
+  background-size: 200% 200%;
+  animation: legendary-banner-shine 8s ease-in-out infinite;
+  color: #fff;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.legendary-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  border-radius: inherit;
 }
 .legendary-banner-text {
   margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
 }
 .legendary-banner-btn {
   display: inline-block;
-  padding: 8px 16px;
-  background: #fff;
-  color: #b8860b;
+  padding: 10px 20px;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 700;
   font-size: 0.9rem;
-  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.03em;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+  color: #8b6914;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .legendary-banner-btn:hover {
-  background: #f0f0f0;
-  color: #8b6914;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, #fff 0%, #eee 100%);
+  color: #6b5012;
+}
+.legendary-banner-btn:active {
+  transform: translateY(0);
 }
 .legendary-banner-members {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
 }
 .legendary-banner-members #discord-member-count {
-  font-weight: 700;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes legendary-banner-shine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 #floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
