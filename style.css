@@ -2988,7 +2988,7 @@ body[data-theme="red"] .about-container,
 body[data-theme="red"] .faq-container,
 body[data-theme="red"] .guide-container {
   background: linear-gradient(135deg, #2c1616 0%, #3a1919 100%) !important;
-  border-color: #e08a8a !important;
+  border-color: #000000 !important;
 }
 body[data-theme="red"] .about-title,
 body[data-theme="red"] .about-container .about-section h2 {
@@ -2996,9 +2996,9 @@ body[data-theme="red"] .about-container .about-section h2 {
 }
 body[data-theme="red"] .about-container .about-section {
   background: rgba(44, 22, 22, 0.95) !important;
-  border-radius: 10px !important;
-  border: 2px solid rgba(224, 138, 138, 0.85) !important;
-  padding: 16px 20px !important;
+  border-radius: 12px !important;
+  border: 2px solid #000000 !important;
+  padding: 25px 30px !important;
 }
 body[data-theme="red"] .about-container .about-section ul li,
 body[data-theme="red"] .about-container .about-section p,
@@ -3394,7 +3394,7 @@ body[data-theme="purple"] .about-container,
 body[data-theme="purple"] .faq-container,
 body[data-theme="purple"] .guide-container {
   background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
-  border-color: #b89ae8 !important;
+  border-color: #000000 !important;
 }
 body[data-theme="purple"] .about-title,
 body[data-theme="purple"] .about-container .about-section h2 {
@@ -3402,9 +3402,9 @@ body[data-theme="purple"] .about-container .about-section h2 {
 }
 body[data-theme="purple"] .about-container .about-section {
   background: rgba(38, 24, 53, 0.95) !important;
-  border-radius: 10px !important;
-  border: 2px solid rgba(184, 154, 232, 0.85) !important;
-  padding: 16px 20px !important;
+  border-radius: 12px !important;
+  border: 2px solid #000000 !important;
+  padding: 25px 30px !important;
 }
 body[data-theme="purple"] .about-container .about-section ul li,
 body[data-theme="purple"] .about-container .about-section p,
@@ -3761,7 +3761,7 @@ body[data-theme="pink"] .about-container,
 body[data-theme="pink"] .faq-container,
 body[data-theme="pink"] .guide-container {
   background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
-  border-color: #c898a8 !important;
+  border-color: #000000 !important;
 }
 body[data-theme="pink"] .about-title,
 body[data-theme="pink"] .about-container .about-section h2 {
@@ -3769,9 +3769,9 @@ body[data-theme="pink"] .about-container .about-section h2 {
 }
 body[data-theme="pink"] .about-container .about-section {
   background: rgba(61, 42, 53, 0.95) !important;
-  border-radius: 10px !important;
-  border: 2px solid rgba(200, 152, 168, 0.85) !important;
-  padding: 16px 20px !important;
+  border-radius: 12px !important;
+  border: 2px solid #000000 !important;
+  padding: 25px 30px !important;
 }
 body[data-theme="pink"] .about-container .about-section ul li,
 body[data-theme="pink"] .about-container .about-section p,
