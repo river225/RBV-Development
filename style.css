@@ -451,7 +451,6 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Legendary section: horizontal strip at bottom — gradients, texture, animation */
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 .legendary-banner {
   width: 100%;
   min-height: 0;
@@ -459,10 +458,10 @@ a { color: #fff; text-decoration: none; }
   margin-top: 24px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 20px 32px;
+  gap: 20px 24px;
   position: relative;
   overflow: visible;
   border-radius: 14px;
@@ -492,18 +491,21 @@ a { color: #fff; text-decoration: none; }
 }
 .legendary-banner-text {
   margin: 0;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  line-height: 1.2;
-  font-weight: 400;
+  font-size: clamp(0.95rem, 1.8vw + 0.7rem, 1.35rem);
+  line-height: 1.25;
+  font-weight: 700;
   letter-spacing: 0.02em;
-  font-family: "Bebas Neue", "Arial Narrow", Arial, sans-serif;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
   position: relative;
   z-index: 1;
   white-space: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .legendary-banner-btn {
   display: inline-block;
+  flex-shrink: 0;
   padding: 12px 24px;
   text-decoration: none;
   border-radius: 12px;
@@ -548,6 +550,7 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 .legendary-banner-members #discord-member-count {
   font-size: 1.4rem;
