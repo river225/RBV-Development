@@ -394,7 +394,8 @@ function renderSection(title, items) {
     renderRichestPlayersSection(items);
   } else if (title === "Crew Logos") {
     renderCrewLogosSection(items);
- 
+  } else if (title === "Legendary") {
+    renderLegendarySectionWithBanner(items);
   } else {
     const html = `
       <section class="section" id="${slugify(title)}">
@@ -406,6 +407,40 @@ function renderSection(title, items) {
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
   }
+}
+
+function renderLegendarySectionWithBanner(items) {
+  const html = `
+    <section class="section" id="${slugify("Legendary")}">
+      <h2>Legendary</h2>
+      <div class="legendary-banner-wrap">
+        <div class="cards">
+          ${items.map(createCard).join("")}
+        </div>
+        <div class="legendary-banner">
+          <p class="legendary-banner-text">We giveaway 1 legendary gun in our discord server every day!</p>
+          <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+          <p class="legendary-banner-members"><span id="discord-member-count">—</span> members</p>
+        </div>
+      </div>
+    </section>
+  `;
+  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  fetchDiscordMemberCount();
+}
+
+function fetchDiscordMemberCount() {
+  var el = document.getElementById("discord-member-count");
+  if (!el) return;
+  fetch("https://discord.com/api/v10/invites/QbapryYUUx?with_counts=true")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var n = data.approximate_member_count;
+      if (typeof n === "number" && !isNaN(n)) {
+        el.textContent = n.toLocaleString();
+      }
+    })
+    .catch(function () {});
 }
 
 function renderCrewLogosSection(items) {
