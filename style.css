@@ -495,47 +495,95 @@ a { color: #fff; text-decoration: none; }
   line-height: 1.35;
   font-weight: 700;
   letter-spacing: 0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
   position: relative;
   z-index: 1;
 }
+.legendary-banner-btn-wrap {
+  position: relative;
+  display: inline-block;
+}
+.legendary-confetti {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  border-radius: 1px;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--cf, #ffd700);
+}
+.legendary-banner-btn-wrap:hover .legendary-confetti {
+  animation: legendary-confetti-burst 0.6s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.03s);
+}
+.legendary-confetti:nth-child(5n+1) { --cf: #ffd700; }
+.legendary-confetti:nth-child(5n+2) { --cf: #fff; }
+.legendary-confetti:nth-child(5n+3) { --cf: #ffec8b; }
+.legendary-confetti:nth-child(5n+4) { --cf: #ffa500; }
+.legendary-confetti:nth-child(5n+5) { --cf: #ffe4b5; }
 .legendary-banner-btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 12px 24px;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   letter-spacing: 0.03em;
   position: relative;
-  z-index: 1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
-  color: #8b6914;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  background: linear-gradient(145deg, #fff 0%, #f8f4e8 30%, #f0e6c8 60%, #e8dcb8 100%);
+  color: #5c4a1a;
+  border: none;
+  outline: 3px solid #000;
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 0 0 2px #8b6914,
+    0 0 0 4px #000,
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 .legendary-banner-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  background: linear-gradient(180deg, #fff 0%, #eee 100%);
-  color: #6b5012;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.95),
+    0 0 0 2px #8b6914,
+    0 0 0 4px #000,
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: linear-gradient(145deg, #fff 0%, #faf6eb 25%, #f5ecd8 55%, #ede0c4 100%);
+  color: #4a3a14;
 }
 .legendary-banner-btn:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 .legendary-banner-members {
   margin: 0;
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
   position: relative;
   z-index: 1;
 }
 .legendary-banner-members #discord-member-count {
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+}
+@keyframes legendary-confetti-burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x, 0), var(--y, 0)) scale(0.3);
+  }
 }
 @keyframes legendary-banner-shine {
   0%, 100% { background-position: 0% 50%; }
