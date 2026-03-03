@@ -2949,7 +2949,7 @@ body[data-theme="red"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="red"] .richest-card {
-  background: linear-gradient(135deg, #321616 0%, #3f1c1c 100%) !important;
+  background: linear-gradient(135deg, #291212 0%, #351717 100%) !important;
 }
 body[data-theme="red"] .profile-link {
   color: #f0b0b0 !important;
@@ -3337,7 +3337,7 @@ body[data-theme="purple"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="purple"] .richest-card {
-  background: linear-gradient(135deg, #241537 0%, #2f1c45 100%) !important;
+  background: linear-gradient(135deg, #1e1230 0%, #28183c 100%) !important;
 }
 body[data-theme="purple"] .profile-link {
   color: #d3bff5 !important;
