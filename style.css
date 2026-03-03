@@ -2253,6 +2253,7 @@ body {
   opacity: 0;
   width: 240px;
   max-width: 240px;
+  margin-top: 30px;
   background: #050807;
   border: 1px solid #15803d;
   border-radius: 10px;
@@ -2968,18 +2969,7 @@ body[data-theme="red"] .home-column:first-child h2 {
 body[data-theme="red"] .home-column:last-child h2 {
   color: #e0a090 !important;
 }
-body[data-theme="red"] .home-value-changes,
-body[data-theme="red"] .home-value-changes h2 {
-  border-color: #22c55e !important;
-  background: #0d1410 !important;
-  color: #22c55e !important;
-}
-body[data-theme="red"] .value-change-item {
-  background: #152018 !important;
-  border-left-color: #22c55e !important;
-}
-body[data-theme="red"] .value-change-title { color: #4ade80 !important; }
-body[data-theme="red"] .value-change-date { color: #22c55e !important; }
+/* Use base value-changes colors in all themes */
 
 /* ---- Item cards ---- */
 body[data-theme="red"] .card {
@@ -3386,18 +3376,7 @@ body[data-theme="purple"] .home-column:first-child h2,
 body[data-theme="purple"] .home-column:last-child h2 {
   color: #b89ae8 !important;
 }
-body[data-theme="purple"] .home-value-changes,
-body[data-theme="purple"] .home-value-changes h2 {
-  border-color: #22c55e !important;
-  background: #0d1410 !important;
-  color: #22c55e !important;
-}
-body[data-theme="purple"] .value-change-item {
-  background: #152018 !important;
-  border-left-color: #22c55e !important;
-}
-body[data-theme="purple"] .value-change-title { color: #4ade80 !important; }
-body[data-theme="purple"] .value-change-date { color: #22c55e !important; }
+/* (value-changes box uses base colors across themes) */
 
 /* ---- Item cards ---- */
 body[data-theme="purple"] .card {
@@ -3763,18 +3742,7 @@ body[data-theme="pink"] .home-column:first-child h2,
 body[data-theme="pink"] .home-column:last-child h2 {
   color: #d0a898 !important;
 }
-body[data-theme="pink"] .home-value-changes,
-body[data-theme="pink"] .home-value-changes h2 {
-  border-color: #22c55e !important;
-  background: #0d1410 !important;
-  color: #22c55e !important;
-}
-body[data-theme="pink"] .value-change-item {
-  background: #152018 !important;
-  border-left-color: #22c55e !important;
-}
-body[data-theme="pink"] .value-change-title { color: #4ade80 !important; }
-body[data-theme="pink"] .value-change-date { color: #22c55e !important; }
+/* (value-changes box uses base colors across themes) */
 
 /* ---- Item cards: black outline ---- */
 body[data-theme="pink"] .card {

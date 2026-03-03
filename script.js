@@ -138,7 +138,21 @@ async function fetchSheet(sheetName) {
       return obj;
     });
 
-     return items.filter(x => String(x["Name"] || x["Header"] || x["Roblox Name"] || x["Player Name"] || "").trim().length > 0);
+    // For most sheets we filter out blank rows using the Name/Header-style columns.
+    // For \"Recent Value Changes\" we want ALL rows and will filter separately.
+    if (sheetName === "Recent Value Changes") {
+      return items;
+    }
+
+    return items.filter(x =>
+      String(
+        x["Name"] ||
+        x["Header"] ||
+        x["Roblox Name"] ||
+        x["Player Name"] ||
+        ""
+      ).trim().length > 0
+    );
   } catch (err) {
     console.error(`Failed to fetch sheet: ${sheetName}`, err);
     return [];
