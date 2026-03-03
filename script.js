@@ -413,15 +413,13 @@ function renderLegendarySectionWithBanner(items) {
   const html = `
     <section class="section" id="${slugify("Legendary")}">
       <h2>Legendary</h2>
-      <div class="legendary-banner-wrap">
-        <div class="cards">
-          ${items.map(createCard).join("")}
-        </div>
-        <div class="legendary-banner">
-          <p class="legendary-banner-text">We giveaway 1 legendary gun in our discord server every day!</p>
-          <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
-          <p class="legendary-banner-members"><span id="discord-member-count">—</span> members</p>
-        </div>
+      <div class="cards">
+        ${items.map(createCard).join("")}
+      </div>
+      <div class="legendary-banner">
+        <p class="legendary-banner-text">We giveaway 1 legendary gun in our discord server every day!</p>
+        <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+        <p class="legendary-banner-members"><span id="discord-member-count">—</span> members</p>
       </div>
     </section>
   `;
