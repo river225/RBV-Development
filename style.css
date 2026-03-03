@@ -2824,6 +2824,44 @@ body[data-theme="red"] .durability-arrows button:active {
 }
 
 /* ---- Tax calculator ---- */
+body[data-theme="red"] .tax-calculator {
+  background: linear-gradient(135deg, #2c1616 0%, #3a1919 50%, #3a1919 100%) !important;
+  border-color: #e08a8a !important;
+  box-shadow: 0 8px 32px rgba(224, 138, 138, 0.25) !important;
+}
+body[data-theme="red"] .tax-calculator h2 {
+  color: #f0c0c0 !important;
+}
+body[data-theme="red"] .tax-calculator label {
+  color: #f0b0b0 !important;
+}
+body[data-theme="red"] .tax-calculator input {
+  background: rgba(224, 138, 138, 0.18) !important;
+  border-color: #e08a8a !important;
+}
+body[data-theme="red"] .tax-calculator input:focus {
+  background: rgba(240, 176, 176, 0.25) !important;
+  border-color: #f0b0b0 !important;
+  box-shadow: none !important;
+}
+body[data-theme="red"] .tax-result {
+  background: #2a1515 !important;
+  border-color: #d07070 !important;
+  box-shadow: none !important;
+}
+body[data-theme="red"] .tax-result h3 {
+  color: #f0b0b0 !important;
+}
+body[data-theme="red"] .tax-result .amount {
+  color: #ffe0e0 !important;
+  text-shadow: none !important;
+}
+body[data-theme="red"] .tax-how-label {
+  color: #f0b0b0 !important;
+}
+body[data-theme="red"] .tax-breakdown {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
 body[data-theme="red"] .tax-reminders {
   background: rgba(224, 138, 138, 0.15) !important;
   border-left-color: #e08a8a !important;
@@ -3176,6 +3214,28 @@ body[data-theme="purple"] .durability-arrows button:active {
 /* ---- Tax calculator ---- */
 body[data-theme="purple"] .tax-calculator {
   background: linear-gradient(135deg, #261835 0%, #301f44 50%, #301f44 100%) !important;
+  border-color: #b89ae8 !important;
+  box-shadow: 0 8px 32px rgba(184, 154, 232, 0.25) !important;
+}
+body[data-theme="purple"] .tax-calculator h2 {
+  color: #e2d3ff !important;
+}
+body[data-theme="purple"] .tax-calculator label {
+  color: #d3bff5 !important;
+}
+body[data-theme="purple"] .tax-calculator input {
+  background: rgba(184, 154, 232, 0.18) !important;
+  border-color: #b89ae8 !important;
+}
+body[data-theme="purple"] .tax-calculator input:focus {
+  background: rgba(211, 191, 245, 0.25) !important;
+  border-color: #d3bff5 !important;
+  box-shadow: none !important;
+}
+body[data-theme="purple"] .tax-result {
+  background: #261835 !important;
+  border-color: #8e6ce0 !important;
+  box-shadow: none !important;
 }
 body[data-theme="purple"] .tax-result h3 {
   color: #d3bff5 !important;
@@ -3501,6 +3561,28 @@ body[data-theme="pink"] .durability-arrows button:active {
 /* ---- Tax calculator (counterpart of cyan theme) ---- */
 body[data-theme="pink"] .tax-calculator {
   background: linear-gradient(135deg, #3d2a35 0%, #4a3540 50%, #4a3540 100%) !important;
+  border-color: #c898a8 !important;
+  box-shadow: 0 8px 32px rgba(200, 150, 170, 0.25) !important;
+}
+body[data-theme="pink"] .tax-calculator h2 {
+  color: #e0c0d0 !important;
+}
+body[data-theme="pink"] .tax-calculator label {
+  color: #d8b0c0 !important;
+}
+body[data-theme="pink"] .tax-calculator input {
+  background: rgba(200, 150, 170, 0.18) !important;
+  border-color: #c898a8 !important;
+}
+body[data-theme="pink"] .tax-calculator input:focus {
+  background: rgba(216, 176, 192, 0.25) !important;
+  border-color: #d8b0c0 !important;
+  box-shadow: none !important;
+}
+body[data-theme="pink"] .tax-result {
+  background: #352830 !important;
+  border-color: #b88898 !important;
+  box-shadow: none !important;
 }
 body[data-theme="pink"] .tax-result h3 {
   color: #d8b0c0 !important;
