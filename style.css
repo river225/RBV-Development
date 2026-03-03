@@ -4279,13 +4279,14 @@ body[data-theme="soft-pink"] .welcome-header h1,
 body[data-theme="soft-pink"] .announcement-box-home h3,
 body[data-theme="soft-pink"] .nav-extras-header,
 body[data-theme="soft-pink"] .donator-box-home h3,
-body[data-theme="soft-pink"] .tax-calculator h2,
+body[data-theme="soft-pink"] .tax-calculator h2 {
+  color: #4b284f !important;           /* Deep Plum text */
+  -webkit-text-stroke: 1px #9f63aa;    /* lighter plum outline */
+}
 body[data-theme="soft-pink"] .announcement-item-clean .announcement-date,
 body[data-theme="soft-pink"] .announcement-date {
-  text-shadow: 1px 1px 0 #8c4f97,
-               -1px 1px 0 #8c4f97,
-               1px -1px 0 #8c4f97,
-               -1px -1px 0 #8c4f97 !important;
+  color: #4b284f !important;
+  -webkit-text-stroke: 0.6px #9f63aa;
 }
 /* ========== SOFT PINK WEBSITE THEME END ========== */
 
