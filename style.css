@@ -3914,6 +3914,10 @@ body[data-theme="soft-pink"] .what-is-section {
 body[data-theme="soft-pink"] .what-is-section h2 {
   color: #4b284f !important;
 }
+body[data-theme="soft-pink"] .what-is-section p {
+  color: #4b284f !important;
+  text-shadow: none !important;
+}
 body[data-theme="soft-pink"] .home-divider,
 body[data-theme="soft-pink"] #home .home-divider,
 body[data-theme="soft-pink"] .home-page-clean .home-divider,
@@ -4011,6 +4015,9 @@ body[data-theme="soft-pink"] .tax-reminders {
 }
 body[data-theme="soft-pink"] .tax-reminders strong {
   color: #6a3b72 !important;
+}
+body[data-theme="soft-pink"] .tax-reminders {
+  color: #4b284f !important;
 }
 body[data-theme="soft-pink"] .announcement-box-home {
   background: #f8eef4 !important;
