@@ -2946,7 +2946,7 @@ body[data-theme="red"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="red"] .richest-card {
-  background: linear-gradient(135deg, #2c1616 0%, #3a1919 100%) !important;
+  background: linear-gradient(135deg, #190b0b 0%, #241010 100%) !important;
 }
 body[data-theme="red"] .profile-link {
   color: #f0b0b0 !important;
@@ -3319,7 +3319,7 @@ body[data-theme="purple"] .crew-logo-card {
   border-color: #000000 !important;
 }
 body[data-theme="purple"] .crew-logo-card img {
-  background: #301f44 !important;
+  background: #1c102a !important;
 }
 body[data-theme="purple"] .copy-btn {
   background: linear-gradient(135deg, #8e6ce0 0%, #b89ae8 100%) !important;
@@ -3334,7 +3334,7 @@ body[data-theme="purple"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="purple"] .richest-card {
-  background: linear-gradient(135deg, #261835 0%, #301f44 100%) !important;
+  background: linear-gradient(135deg, #1a0f26 0%, #221331 100%) !important;
 }
 body[data-theme="purple"] .profile-link {
   color: #d3bff5 !important;
