@@ -1113,11 +1113,11 @@ if (window.innerWidth <= 430) {
 
 /* ========== PINK WEBSITE THEME - theme switcher (remove with theme section in style.css) ========== */
 function applyPinkThemeDividers() {
-  var isPink = document.body.getAttribute('data-theme') === 'pink';
-  var pinkGradient = 'linear-gradient(90deg, transparent, #d0a8b8, transparent)';
+  var theme = document.body.getAttribute('data-theme');
+  var gradient = theme === 'pink' ? 'linear-gradient(90deg, transparent, #d0a8b8, transparent)' : (theme === 'soft-pink' ? 'linear-gradient(90deg, transparent, #e0c4d0, transparent)' : null);
   document.querySelectorAll('.home-divider').forEach(function(el) {
-    if (isPink) {
-      el.style.setProperty('background', pinkGradient, 'important');
+    if (gradient) {
+      el.style.setProperty('background', gradient, 'important');
     } else {
       el.style.removeProperty('background');
     }
@@ -1126,7 +1126,7 @@ function applyPinkThemeDividers() {
 function initThemeSwitcher() {
   var saved = localStorage.getItem('bsv-theme') || 'default';
   // Apply saved theme: '' for default, or specific theme name (e.g. 'red', 'pink')
-  if (saved === 'pink' || saved === 'red' || saved === 'purple') {
+  if (saved === 'pink' || saved === 'red' || saved === 'purple' || saved === 'soft-pink') {
     document.body.setAttribute('data-theme', saved);
   } else {
     document.body.removeAttribute('data-theme');
