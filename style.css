@@ -451,6 +451,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Legendary section: horizontal strip at bottom — gradients, texture, animation */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
 .legendary-banner {
   width: 100%;
   min-height: 0;
@@ -463,7 +464,7 @@ a { color: #fff; text-decoration: none; }
   justify-content: center;
   gap: 20px 32px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 14px;
   border: 1px solid rgba(255, 215, 0, 0.4);
   box-shadow:
@@ -491,34 +492,41 @@ a { color: #fff; text-decoration: none; }
 }
 .legendary-banner-text {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.35;
-  font-weight: 700;
+  font-size: clamp(1.1rem, 2.2vw + 0.8rem, 1.6rem);
+  line-height: 1.3;
+  font-weight: 600;
   letter-spacing: 0.02em;
+  font-family: "Fredoka", "Comic Sans MS", "Comic Neue", cursive;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
   position: relative;
   z-index: 1;
+  flex: 1;
+  min-width: 200px;
 }
 .legendary-banner-btn-wrap {
   position: relative;
   display: inline-block;
+  overflow: visible;
 }
 .legendary-confetti {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
-  margin-top: -3px;
-  border-radius: 1px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  margin-top: -4px;
+  border-radius: 2px;
   pointer-events: none;
   opacity: 0;
   background: var(--cf, #ffd700);
+  z-index: 10;
+  will-change: left, top, opacity;
 }
 .legendary-banner-btn-wrap:hover .legendary-confetti {
-  animation: legendary-confetti-burst 0.6s ease-out forwards;
-  animation-delay: calc(var(--i) * 0.03s);
+  opacity: 1;
+  animation: legendary-confetti-burst 0.7s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.025s);
 }
 .legendary-confetti:nth-child(5n+1) { --cf: #ffd700; }
 .legendary-confetti:nth-child(5n+2) { --cf: #fff; }
@@ -564,25 +572,36 @@ a { color: #fff; text-decoration: none; }
 }
 .legendary-banner-members {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0 1px 0 #000, 1px 0 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
   position: relative;
   z-index: 1;
 }
 .legendary-banner-members #discord-member-count {
+  font-size: 1.4rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+  font-family: inherit;
 }
 @keyframes legendary-confetti-burst {
   0% {
     opacity: 1;
-    transform: translate(0, 0) scale(1);
+    left: 50%;
+    top: 50%;
+    margin-left: -4px;
+    margin-top: -4px;
+    transform: scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(var(--x, 0), var(--y, 0)) scale(0.3);
+    left: calc(50% + var(--x, 0));
+    top: calc(50% + var(--y, 0));
+    margin-left: -4px;
+    margin-top: -4px;
+    transform: scale(0.5);
   }
 }
 @keyframes legendary-banner-shine {
