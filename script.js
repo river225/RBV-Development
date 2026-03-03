@@ -418,21 +418,7 @@ function renderLegendarySectionWithBanner(items) {
       </div>
       <div class="legendary-banner">
         <p class="legendary-banner-text">We giveaway 1 legendary gun in our discord server every day!</p>
-        <span class="legendary-banner-btn-wrap">
-          <span class="legendary-confetti" style="--i:0;--x:-8px;--y:-12px;"></span>
-          <span class="legendary-confetti" style="--i:1;--x:10px;--y:-8px;"></span>
-          <span class="legendary-confetti" style="--i:2;--x:-6px;--y:10px;"></span>
-          <span class="legendary-confetti" style="--i:3;--x:12px;--y:6px;"></span>
-          <span class="legendary-confetti" style="--i:4;--x:-14px;--y:2px;"></span>
-          <span class="legendary-confetti" style="--i:5;--x:4px;--y:-14px;"></span>
-          <span class="legendary-confetti" style="--i:6;--x:8px;--y:12px;"></span>
-          <span class="legendary-confetti" style="--i:7;--x:-10px;--y:-4px;"></span>
-          <span class="legendary-confetti" style="--i:8;--x:0px;--y:-16px;"></span>
-          <span class="legendary-confetti" style="--i:9;--x:-12px;--y:8px;"></span>
-          <span class="legendary-confetti" style="--i:10;--x:14px;--y:-10px;"></span>
-          <span class="legendary-confetti" style="--i:11;--x:6px;--y:14px;"></span>
-          <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
-        </span>
+        <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
         <p class="legendary-banner-members"><span id="discord-member-count">—</span> members</p>
       </div>
     </section>
