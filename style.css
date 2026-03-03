@@ -3501,28 +3501,6 @@ body[data-theme="pink"] .durability-arrows button:active {
 /* ---- Tax calculator (counterpart of cyan theme) ---- */
 body[data-theme="pink"] .tax-calculator {
   background: linear-gradient(135deg, #3d2a35 0%, #4a3540 50%, #4a3540 100%) !important;
-  border-color: #c898a8 !important;
-  box-shadow: 0 8px 32px rgba(200, 150, 170, 0.25) !important;
-}
-body[data-theme="pink"] .tax-calculator h2 {
-  color: #e0c0d0 !important;
-}
-body[data-theme="pink"] .tax-calculator label {
-  color: #d8b0c0 !important;
-}
-body[data-theme="pink"] .tax-calculator input {
-  background: rgba(200, 150, 170, 0.18) !important;
-  border-color: #c898a8 !important;
-}
-body[data-theme="pink"] .tax-calculator input:focus {
-  background: rgba(216, 176, 192, 0.25) !important;
-  border-color: #d8b0c0 !important;
-  box-shadow: none !important;
-}
-body[data-theme="pink"] .tax-result {
-  background: #352830 !important;
-  border-color: #b88898 !important;
-  box-shadow: none !important;
 }
 body[data-theme="pink"] .tax-result h3 {
   color: #d8b0c0 !important;
