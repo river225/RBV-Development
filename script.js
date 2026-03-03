@@ -541,16 +541,31 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-   // Hide/show tax calculator based on section
+   // Hide/show tax calculator and home value changes based on section (same slot: one or the other)
   const taxCalc = document.querySelector('.tax-calculator');
+  const homeValueChanges = document.getElementById('home-value-changes');
+  const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+  const isHome = name === 'Home';
   if (taxCalc) {
-    const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
     if (hiddenSections.includes(name)) {
       taxCalc.style.visibility = 'hidden';
       taxCalc.style.opacity = '0';
+      taxCalc.style.display = isHome ? 'none' : 'block'; // free the slot on Home for value changes
     } else {
       taxCalc.style.visibility = 'visible';
       taxCalc.style.opacity = '1';
+      taxCalc.style.display = 'block';
+    }
+  }
+  if (homeValueChanges) {
+    if (isHome) {
+      homeValueChanges.style.visibility = 'visible';
+      homeValueChanges.style.opacity = '1';
+      homeValueChanges.style.display = 'block';
+    } else {
+      homeValueChanges.style.visibility = 'hidden';
+      homeValueChanges.style.opacity = '0';
+      homeValueChanges.style.display = 'none';
     }
   }
 
@@ -931,8 +946,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   
-  showSection("Home"); 
-loadTopDonators();
+  showSection("Home");
+  loadTopDonators();
+  loadValueChanges();
 
   sectionsContainer.classList.add("loaded");
   
@@ -1019,6 +1035,44 @@ async function loadTopDonators() {
     const mobileDonatorList = document.getElementById('mobile-donator-list');
     if (donatorList) donatorList.innerHTML = errorHTML;
     if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
+  }
+}
+
+// Fetch and display recent value changes from spreadsheet (sheet: "Recent Value Changes", columns: Title, Date, Text)
+async function loadValueChanges() {
+  var listEl = document.getElementById('value-changes-list');
+  if (!listEl) return;
+  try {
+    var rows = await fetchSheet("Recent Value Changes");
+    if (!rows || rows.length === 0) {
+      listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
+      return;
+    }
+    var filtered = rows.filter(function (r) {
+      var t = (r.Title || r.Date || r.Text || '').toString().trim();
+      return t.length > 0;
+    });
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
+      return;
+    }
+    var html = filtered.map(function (r) {
+      var title = (r.Title || '').toString().trim();
+      var date = (r.Date || '').toString().trim();
+      var text = (r.Text || '').toString().trim();
+      var titleEsc = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      var dateEsc = date.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      var textEsc = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/\n/g, '<br>');
+      return '<div class="value-change-item">' +
+        (titleEsc ? '<p class="value-change-title">' + titleEsc + '</p>' : '') +
+        (dateEsc ? '<p class="value-change-date">' + dateEsc + '</p>' : '') +
+        (textEsc ? '<p class="value-change-text">' + textEsc + '</p>' : '') +
+        '</div>';
+    }).join('');
+    listEl.innerHTML = html;
+  } catch (err) {
+    console.error('Error loading value changes:', err);
+    listEl.innerHTML = '<div class="value-changes-loading">Failed to load value changes.</div>';
   }
 }
 
