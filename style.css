@@ -453,17 +453,20 @@ a { color: #fff; text-decoration: none; }
 /* Legendary section: horizontal strip at bottom — gradients, texture, animation */
 .legendary-banner {
   width: 100%;
+  max-width: 100%;
   min-height: 0;
   padding: 18px 28px;
   margin-top: 24px;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 20px 24px;
   position: relative;
   overflow: visible;
+  flex-shrink: 0;
+  box-sizing: border-box;
   border-radius: 14px;
   border: 1px solid rgba(255, 215, 0, 0.4);
   box-shadow:
@@ -561,6 +564,11 @@ a { color: #fff; text-decoration: none; }
 @keyframes legendary-banner-shine {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+/* Prevent Legendary item cards from shrinking on small displays (banner no longer steals space) */
+#legendary .cards .card {
+  min-width: min(100%, 280px);
 }
 
 #floating-text { position: fixed; bottom: 10px; right: 10px; color: rgb(26, 216, 26); font-weight: bold; z-index: 1000; }
@@ -2263,7 +2271,7 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 .home-value-changes .value-changes-heading {
-  font-size: 0.8rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
