@@ -2246,14 +2246,14 @@ body {
   color: #ffde59;
 }
 
-/* Recent Value Changes aside (right column on Home, aligned with website header) */
+/* Recent Value Changes aside (right column on Home, in line with "Welcome to..." header) */
 .home-value-changes {
   display: none;
   visibility: hidden;
   opacity: 0;
   width: 240px;
   max-width: 240px;
-  margin-top: 40px;
+  margin-top: 50px;
   align-self: flex-start;
   background: #050807;
   border: 1px solid #15803d;
@@ -2278,12 +2278,30 @@ body {
 }
 .value-change-item {
   padding: 10px;
-  background: #0d1117;
+  background: #1a2332;
+  border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 5px;
   margin-bottom: 10px;
 }
 .value-change-item:last-child {
   margin-bottom: 0;
+}
+/* Color-coded embeds (spreadsheet column "Color": green, orange, red, or blue) */
+.value-change-item--green {
+  border-left: 4px solid #166534;
+  background: #1a2332;
+}
+.value-change-item--orange {
+  border-left: 4px solid #9a3412;
+  background: #231f1a;
+}
+.value-change-item--red {
+  border-left: 4px solid #991b1b;
+  background: #251a1a;
+}
+.value-change-item--blue {
+  border-left: 4px solid #1e3a5f;
+  background: #1a1f2e;
 }
 .value-change-title {
   color: #4ade80;
@@ -2294,7 +2312,7 @@ body {
 }
 .value-change-date {
   color: #86efac;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
   margin-bottom: 6px;
 }

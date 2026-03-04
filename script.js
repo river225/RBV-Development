@@ -1070,14 +1070,17 @@ async function loadValueChanges() {
       listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
       return;
     }
+    var colorMap = { green: 'green', orange: 'orange', red: 'red', blue: 'blue' };
     var html = filtered.map(function (r) {
       var title = (r.Title || '').toString().trim();
       var date = (r.Date || '').toString().trim();
       var text = (r.Text || '').toString().trim();
+      var color = (r.Color || '').toString().trim().toLowerCase();
+      var colorClass = colorMap[color] ? ' value-change-item--' + colorMap[color] : '';
       var titleEsc = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       var dateEsc = date.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       var textEsc = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/\n/g, '<br>');
-      return '<div class="value-change-item">' +
+      return '<div class="value-change-item' + colorClass + '">' +
         (titleEsc ? '<p class="value-change-title">' + titleEsc + '</p>' : '') +
         (dateEsc ? '<p class="value-change-date">' + dateEsc + '</p>' : '') +
         (textEsc ? '<p class="value-change-text">' + textEsc + '</p>' : '') +
