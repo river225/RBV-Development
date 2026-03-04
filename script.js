@@ -432,7 +432,7 @@ function renderLegendarySectionWithBanner(items) {
       </div>
       <div class="legendary-banner">
         <p class="legendary-banner-text">We giveaway 1 legendary gun in our discord server every day!</p>
-        <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+        <a href="https://discord.gg/scgqMpPAC6" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
         <p class="legendary-banner-members"><span id="discord-member-count">—</span> members</p>
       </div>
     </section>
