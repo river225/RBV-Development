@@ -2278,7 +2278,7 @@ body {
 }
 .value-change-item {
   padding: 10px;
-  background: #1a2332;
+  background: #000000;
   border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 5px;
   margin-bottom: 10px;
@@ -2286,38 +2286,34 @@ body {
 .value-change-item:last-child {
   margin-bottom: 0;
 }
-/* Color-coded embeds (spreadsheet column "Color": green, orange, red, or blue) */
+/* Color column only affects left border (green, orange, red, or blue) */
 .value-change-item--green {
   border-left: 4px solid #166534;
-  background: #1a2332;
 }
 .value-change-item--orange {
   border-left: 4px solid #9a3412;
-  background: #231f1a;
 }
 .value-change-item--red {
   border-left: 4px solid #991b1b;
-  background: #251a1a;
 }
 .value-change-item--blue {
   border-left: 4px solid #1e3a5f;
-  background: #1a1f2e;
 }
 .value-change-title {
-  color: #4ade80;
+  color: #ffffff;
   font-size: 1.15rem;
   font-weight: 700;
   margin: 0 0 4px 0;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 .value-change-date {
-  color: #86efac;
+  color: #ffffff;
   font-size: 0.7rem;
   font-weight: 600;
   margin-bottom: 6px;
 }
 .value-change-text {
-  color: rgba(255, 255, 255, 0.95);
+  color: #ffffff;
   font-size: 0.9rem;
   line-height: 1.45;
   margin: 0;
