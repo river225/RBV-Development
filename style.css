@@ -2246,14 +2246,15 @@ body {
   color: #ffde59;
 }
 
-/* Recent Value Changes aside (right column on Home, non-sticky, softer green) */
+/* Recent Value Changes aside (right column on Home, aligned with website header) */
 .home-value-changes {
   display: none;
   visibility: hidden;
   opacity: 0;
   width: 240px;
   max-width: 240px;
-  margin-top: 30px;
+  margin-top: 40px;
+  align-self: flex-start;
   background: #050807;
   border: 1px solid #15803d;
   border-radius: 10px;
@@ -2277,8 +2278,7 @@ body {
 }
 .value-change-item {
   padding: 10px;
-  background: #0b1410;
-  border-left: 3px solid #15803d;
+  background: #0d1117;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -2286,8 +2286,8 @@ body {
   margin-bottom: 0;
 }
 .value-change-title {
-  color: #bbf7d0;
-  font-size: 0.9rem;
+  color: #4ade80;
+  font-size: 1.15rem;
   font-weight: 700;
   margin: 0 0 4px 0;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
