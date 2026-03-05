@@ -188,7 +188,8 @@ a { color: #fff; text-decoration: none; }
   display: flex; 
   flex-direction: column; 
   gap: 8px;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 10px;
 }
 
 .card-info h3 { 
@@ -237,7 +238,7 @@ a { color: #fff; text-decoration: none; }
 .avg-value {
   color: #81e681; 
   font-weight: 850;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
@@ -245,7 +246,7 @@ a { color: #fff; text-decoration: none; }
 .ranged-value {
   color: #E6C15F;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
