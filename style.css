@@ -2249,6 +2249,25 @@ body {
   color: #ffa500;
 }
 
+/* Announcements heading icon */
+.home-heading-with-icon {
+  position: relative;
+  padding-left: 40px;
+}
+.home-heading-with-icon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  background-image: url("https://i.ibb.co/20SshwSg/dfsawefsvdbsadfsv.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* Top Donators heading - YELLOW */
 .home-column:last-child h2 {
   color: #ffde59;
