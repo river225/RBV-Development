@@ -2252,20 +2252,42 @@ body {
 /* Announcements heading icon */
 .home-heading-with-icon {
   position: relative;
-  padding-left: 40px;
 }
 .home-heading-with-icon::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: 4px; /* nudge slightly left */
   top: 50%;
   transform: translateY(-50%);
-  width: 28px;
-  height: 28px;
+  width: 56px;
+  height: 56px;
   background-image: url("https://i.ibb.co/20SshwSg/dfsawefsvdbsadfsv.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Home header subtitle icon (matches Announcements float style) */
+.welcome-subtitle-with-icon {
+  position: relative;
+  display: inline-block;
+}
+.welcome-subtitle-with-icon::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url("https://i.ibb.co/GBPrrD4/ffsdgfdghgfdgbn.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Top Donators heading - YELLOW */
@@ -2280,7 +2302,7 @@ body {
   opacity: 0;
   width: 260px;
   max-width: 260px;
-  margin-top: 58px;
+  margin-top: 68px;
   margin-right: 12px;
   align-self: flex-start;
   background: #0d1117; /* same as .home-column (Announcements box) */
