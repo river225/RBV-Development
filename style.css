@@ -2310,8 +2310,8 @@ body {
   position: absolute;
   top: 10px;
   right: 12px;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -2331,16 +2331,16 @@ body {
 }
 /* Color column: left accent only (green, orange, red, blue) */
 .value-change-item--green {
-  border-left: 3px solid #22c55e; /* slightly thinner green */
+  border-left: none; /* color indicated by icon only */
 }
 .value-change-item--orange {
-  border-left: 3px solid #facc15; /* slightly thinner yellow/orange */
+  border-left: none;
 }
 .value-change-item--red {
-  border-left: 3px solid #f97373; /* slightly thinner red */
+  border-left: none;
 }
 .value-change-item--blue {
-  border-left: 3px solid #3b82f6; /* slightly thinner blue */
+  border-left: none;
 }
 .value-change-title {
   color: #f9fafb;

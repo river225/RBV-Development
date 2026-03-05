@@ -139,8 +139,8 @@ async function fetchSheet(sheetName) {
     });
 
     // For most sheets we filter out blank rows using the Name/Header-style columns.
-    // For \"Recent Value Changes\" we want ALL rows and will filter separately.
-    if (sheetName === "Recent Value Changes") {
+    // For "Website Configs" (value changes) we want ALL rows and will filter separately.
+    if (sheetName === "Website Configs") {
       return items;
     }
 
@@ -1052,12 +1052,12 @@ async function loadTopDonators() {
   }
 }
 
-// Fetch and display recent value changes from spreadsheet (sheet: "Recent Value Changes", columns: Title, Date, Text)
+// Fetch and display recent value changes from spreadsheet (sheet: "Website Configs", columns: Title, Date, Text, Color)
 async function loadValueChanges() {
   var listEl = document.getElementById('value-changes-list');
   if (!listEl) return;
   try {
-    var rows = await fetchSheet("Recent Value Changes");
+    var rows = await fetchSheet("Website Configs");
     if (!rows || rows.length === 0) {
       listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
       return;
