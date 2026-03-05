@@ -2280,7 +2280,7 @@ body {
   margin: 0 0 18px 0;
   padding-bottom: 0;
   border-bottom: none;
-  text-align: left;
+  text-align: center;
 }
 .value-changes-list {
   max-height: 60vh;
@@ -2324,23 +2324,23 @@ body {
   background-image: url("https://i.ibb.co/hw5N064/efwfwfw.png");
 }
 .value-change-icon.value-change-item--red {
-  background-image: url("https://i.ibb.co/LDpM7twf/eferfd.png");
+  background-image: url("https://i.ibb.co/zTqjp2yV/Screenshot-2026-03-05-at-12-00-09-removebg-preview.png");
 }
 .value-change-icon.value-change-item--blue {
   background-image: url("https://i.ibb.co/NdPKhGmx/fergbrge.png");
 }
 /* Color column: left accent + icon (green, orange, red, blue) */
 .value-change-item.value-change-item--green {
-  border-left: 4px solid #22c55e;
+  border-left: 4px solid #a2e82d;
 }
 .value-change-item.value-change-item--orange {
-  border-left: 4px solid #facc15;
+  border-left: 4px solid #ffc106;
 }
 .value-change-item.value-change-item--red {
-  border-left: 4px solid #f97373;
+  border-left: 4px solid #f83019;
 }
 .value-change-item.value-change-item--blue {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #2ab3cd;
 }
 .value-change-title {
   color: #f9fafb;
