@@ -2081,7 +2081,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 .nav-title {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
   font-family: 'Paytone One', sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -2314,6 +2314,7 @@ body {
 .welcome-subtitle-with-icon {
   position: relative;
   display: inline-block;
+  padding-left: 0;
 }
 .welcome-subtitle-with-icon::before {
   content: "";
