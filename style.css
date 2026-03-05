@@ -491,10 +491,14 @@ a { color: #fff; text-decoration: none; }
 
 .tax-result .amount {
   color: #81e681;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
   text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
   font-family: 'Courier New', monospace;
+  max-width: 100%;
+  display: block;
+  overflow-wrap: anywhere;
+  word-break: break-all;
 }
 
 
