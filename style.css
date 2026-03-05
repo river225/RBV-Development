@@ -2272,12 +2272,12 @@ body {
     0 4px 12px rgba(0, 0, 0, 0.6);
 }
 .home-value-changes .value-changes-heading {
-  font-size: 1.35rem; /* bigger header */
+  font-size: 1.55rem; /* larger header to better fill box */
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   text-transform: none;
   color: #ffa500; /* match Announcements heading tone */
-  margin: 0 0 16px 0;
+  margin: 0 0 18px 0;
   padding-bottom: 0;
   border-bottom: none;
   text-align: left;
@@ -2329,18 +2329,18 @@ body {
 .value-change-icon.value-change-item--blue {
   background-image: url("https://i.ibb.co/NdPKhGmx/fergbrge.png");
 }
-/* Color column: left accent only (green, orange, red, blue) */
-.value-change-item--green {
-  border-left: none; /* color indicated by icon only */
+/* Color column: left accent + icon (green, orange, red, blue) */
+.value-change-item.value-change-item--green {
+  border-left: 4px solid #22c55e;
 }
-.value-change-item--orange {
-  border-left: none;
+.value-change-item.value-change-item--orange {
+  border-left: 4px solid #facc15;
 }
-.value-change-item--red {
-  border-left: none;
+.value-change-item.value-change-item--red {
+  border-left: 4px solid #f97373;
 }
-.value-change-item--blue {
-  border-left: none;
+.value-change-item.value-change-item--blue {
+  border-left: 4px solid #3b82f6;
 }
 .value-change-title {
   color: #f9fafb;
