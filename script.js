@@ -199,21 +199,10 @@ function createCard(item) {
   const internalValue = safe(item["Internal Value"]);
 
 
-  // Check if durability is 0 to add broken overlay
+  // Simple image tag (no broken overlay handling)
   let imgTag = "";
   if (img) {
-    const hasBrokenOverlay = durability && durability.includes('/') && parseInt(durability.split('/')[0]) === 0;
-    
-    if (hasBrokenOverlay) {
-      imgTag = `
-        <div class="img-container">
-          <img src="${img}" alt="${name}" onerror="this.style.display='none'">
-          <div class="broken-overlay"></div>
-        </div>
-      `;
-    } else {
-      imgTag = `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`;
-    }
+    imgTag = `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`;
   }
 
   let durabilityHTML = '';
