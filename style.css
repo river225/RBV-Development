@@ -2254,7 +2254,7 @@ body {
   color: #ffde59;
 }
 
-/* Recent Value Changes aside — professional card style */
+/* Recent Value Changes aside — refined card style */
 .home-value-changes {
   display: none;
   visibility: hidden;
@@ -2264,76 +2264,80 @@ body {
   margin-top: 58px;
   margin-right: 12px;
   align-self: flex-start;
-  background: #161b22;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 18px 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(145deg, #1b2431 0%, #1f2937 50%, #111827 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 20px 18px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.6);
 }
 .home-value-changes .value-changes-heading {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+  font-weight: 650;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0 0 14px 0;
+  color: #38bdf8; /* bright cyan accent */
+  margin: 0 0 16px 0;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
 }
 .value-changes-list {
   max-height: 60vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px; /* more space between cards */
 }
 .value-changes-loading {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.875rem;
+  color: rgba(226, 232, 240, 0.7);
+  font-size: 0.9rem;
 }
 .value-change-item {
-  padding: 12px 14px 12px 16px;
-  background: #21262d;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  padding: 14px 16px 14px 18px;
+  background: #111827; /* slightly lighter than global bg, darker than panel */
+  border-radius: 10px;
   margin-bottom: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.3); /* subtle border */
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(15, 23, 42, 0.9); /* faint glow ring */
 }
 .value-change-item:last-child {
   margin-bottom: 0;
 }
 /* Color column: left accent only (green, orange, red, blue) */
 .value-change-item--green {
-  border-left: 3px solid #2da44e;
+  border-left: 4px solid #22c55e; /* brighter green */
 }
 .value-change-item--orange {
-  border-left: 3px solid #d4a72c;
+  border-left: 4px solid #facc15; /* brighter yellow/orange */
 }
 .value-change-item--red {
-  border-left: 3px solid #cf222e;
+  border-left: 4px solid #f97373; /* softer bright red */
 }
 .value-change-item--blue {
-  border-left: 3px solid #0969da;
+  border-left: 4px solid #3b82f6; /* brighter blue */
 }
 .value-change-title {
-  color: #e6edf3;
-  font-size: 0.95rem;
-  font-weight: 600;
+  color: #f9fafb;
+  font-size: 1rem;
+  font-weight: 700;
   margin: 0 0 4px 0;
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
 .value-change-date {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(148, 163, 184, 0.9);
   font-size: 0.7rem;
   font-weight: 500;
   margin-bottom: 6px;
   letter-spacing: 0.02em;
 }
 .value-change-text {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.8125rem;
-  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.9);
+  font-size: 0.86rem;
+  line-height: 1.55;
   margin: 0;
 }
 
