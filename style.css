@@ -193,7 +193,7 @@ a { color: #fff; text-decoration: none; }
 
 .card-info h3 { 
   margin: 0; 
-  font-size: 1.3rem; 
+  font-size: 1.5rem; 
   font-weight: 700; 
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; 
@@ -224,20 +224,20 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Value text styling */
-.card-avg, .card-ranged, .card-pawn {
-  font-size: 0.95rem;
+.card-avg, .card-ranged, .card-pawn, .card-repair {
+  font-size: 1.05rem;
   font-weight: 700;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
   letter-spacing: 0.3px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 /* Average Value - */
 .avg-value {
   color: #81e681; 
   font-weight: 850;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
@@ -245,7 +245,7 @@ a { color: #fff; text-decoration: none; }
 .ranged-value {
   color: #E6C15F;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
@@ -253,7 +253,7 @@ a { color: #fff; text-decoration: none; }
 .card-pawn .pawn-value {
   color: #5ec7c2;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
@@ -660,7 +660,7 @@ a { color: #fff; text-decoration: none; }
 .durability-control label {
   font-weight: bold;
   color: #33cce6;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin-bottom: 0;
 }
 
@@ -672,7 +672,7 @@ a { color: #fff; text-decoration: none; }
   background: #2a3945;
   color: #fff;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: bold;
   -moz-appearance: textfield;
   appearance: textfield;
@@ -1745,27 +1745,8 @@ a { color: #fff; text-decoration: none; }
 
 
 /* Repair Price Display */
-.repair-price-display {
-  position: absolute;
-  bottom: 5px;
-  left: 20px;
-  display: flex !important;
-  flex-direction: column;
-  gap: 2px;
-  text-align: left;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.repair-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #ffffff;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
-}
-
 .repair-value {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #ff9944;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;

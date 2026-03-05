@@ -247,7 +247,7 @@ function createCard(item) {
     
   }
 
-   // Calculate exact repair price (money formatted)
+  // Calculate exact repair price (numeric; format later in template)
 let repairPrice = 0;
 if (durability && durability.includes('/') && internalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
@@ -260,9 +260,6 @@ if (durability && durability.includes('/') && internalValue) {
   // Use tested divisor (1.43) for accuracy
   const rawRepair = missingDurability * (internalVal / maxDurability / 1.43);
   repairPrice = Math.round(rawRepair);
-
-  // Format as money 
-  repairPrice = `$${repairPrice.toLocaleString()}`;
 }
 
   // Calculate exact pawn amount (money formatted)
@@ -296,18 +293,17 @@ if (durability && durability.includes('/') && internalValue) {
         ${imgTag}
         ${durabilityHTML}
       </div>
-      ${durability && internalValue ? `
-        <div class="repair-price-display">
-          <span class="repair-label">Repair Price:</span>
-          <span class="repair-value">$${repairPrice.toLocaleString()}</span>
-        </div>
-      ` : ''}
       <div class="card-info">
         <h3>${name}</h3>
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
+        ${durability && internalValue ? `
+          <div class="card-repair">
+            Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+          </div>
+        ` : ''}
       </div>
     </div>
   `;
