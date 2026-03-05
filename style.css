@@ -2254,7 +2254,7 @@ body {
   color: #ffde59;
 }
 
-/* Recent Value Changes aside — refined card style */
+/* Recent Changes aside — match Announcements styling */
 .home-value-changes {
   display: none;
   visibility: hidden;
@@ -2264,23 +2264,23 @@ body {
   margin-top: 58px;
   margin-right: 12px;
   align-self: flex-start;
-  background: #0b1220;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 20px 18px;
+  background: #0d1117; /* same as .home-column (Announcements box) */
+  border: 3px solid #d4a027; /* same border as Announcements */
+  border-radius: 16px;
+  padding: 24px 20px;
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(0, 0, 0, 0.6);
+    0 4px 12px rgba(0, 0, 0, 0.6);
 }
 .home-value-changes .value-changes-heading {
-  font-size: 1.0rem;
-  font-weight: 650;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #22a2e2; /* slightly toned-down cyan accent */
-  margin: 0 0 10px 0;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.35); /* simple, full-width but thin line */
+  font-size: 1.35rem; /* bigger header */
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  color: #ffa500; /* match Announcements heading tone */
+  margin: 0 0 16px 0;
+  padding-bottom: 0;
+  border-bottom: none;
+  text-align: left;
 }
 .value-changes-list {
   max-height: 60vh;
@@ -2294,14 +2294,12 @@ body {
   font-size: 0.9rem;
 }
 .value-change-item {
-  padding: 14px 16px 14px 18px;
-  background: linear-gradient(145deg, #1b2431 0%, #1f2937 50%, #111827 100%); /* gradient moved to cards */
+  padding: 16px;
+  background: #1c2937; /* same as .announcement-item-clean */
   border-radius: 10px;
   margin-bottom: 0;
-  border: 1px solid rgba(148, 163, 184, 0.3); /* subtle border */
-  box-shadow:
-    0 4px 10px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(15, 23, 42, 0.9); /* faint glow ring */
+  border: none;
+  box-shadow: none;
 }
 .value-change-item:last-child {
   margin-bottom: 0;
