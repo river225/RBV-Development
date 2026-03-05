@@ -156,7 +156,7 @@ a { color: #fff; text-decoration: none; }
 .card-left::after {
   content: '';
   position: absolute;
-  bottom: 85px;
+  bottom: 95px;
   left: 45px;
   width: 150px;
   height: 52px;
