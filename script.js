@@ -453,20 +453,22 @@ function renderCrewLogosSection(items) {
     }
   });
 
-  let html = `<section class="section" id="${slugify("Crew Logos")}"><h2>Crew Logos</h2>`;
+  let html = `<section class="section crew-logos-section" id="${slugify("Crew Logos")}"><h2>Crew Logos</h2><div class="crew-logos-layout">`;
   
   Object.keys(grouped).forEach(header => {
     if (grouped[header].length > 0) {
       html += `
-        <div class="crew-header">${header}</div>
-        <div class="cards">
-          ${grouped[header].map(createCrewLogoCard).join("")}
+        <div class="crew-logos-group">
+          <div class="crew-logos-group-title crew-header">${header}</div>
+          <div class="crew-logos-row">
+            ${grouped[header].map(createCrewLogoCard).join("")}
+          </div>
         </div>
       `;
     }
   });
   
-  html += `</section>`;
+  html += `</div></section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 

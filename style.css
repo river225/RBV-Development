@@ -347,6 +347,49 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; 
 }
 
+/* Crew Logos section: horizontal scroll layout (scoped, does not affect rest of site) */
+#crew-logos.crew-logos-section .crew-logos-layout {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+#crew-logos.crew-logos-section .crew-logos-group {
+  margin-bottom: 28px;
+}
+#crew-logos.crew-logos-section .crew-logos-group:last-child {
+  margin-bottom: 0;
+}
+#crew-logos.crew-logos-section .crew-logos-group-title {
+  color: #33cce6;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 12px 0;
+  padding: 10px 0;
+  border-bottom: 2px solid #33cce6;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+  width: 100%;
+  box-sizing: border-box;
+}
+#crew-logos.crew-logos-section .crew-logos-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0 12px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+#crew-logos.crew-logos-section .crew-logos-row .crew-logo-card {
+  flex: 0 0 auto;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  margin: 0;
+}
+
 .hidden { 
   display: none !important; 
 }
