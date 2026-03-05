@@ -2277,10 +2277,20 @@ body {
   font-weight: 650;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: #38bdf8; /* bright cyan accent */
+  color: #22a2e2; /* slightly toned-down cyan accent */
   margin: 0 0 16px 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+  padding-bottom: 8px;
+  position: relative;
+}
+.home-value-changes .value-changes-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22a2e2, rgba(34, 162, 226, 0));
 }
 .value-changes-list {
   max-height: 60vh;
@@ -2295,7 +2305,7 @@ body {
 }
 .value-change-item {
   padding: 14px 16px 14px 18px;
-  background: #111827; /* slightly lighter than global bg, darker than panel */
+  background: #1f2937; /* lighter than panel for clearer separation */
   border-radius: 10px;
   margin-bottom: 0;
   border: 1px solid rgba(148, 163, 184, 0.3); /* subtle border */
@@ -2308,35 +2318,35 @@ body {
 }
 /* Color column: left accent only (green, orange, red, blue) */
 .value-change-item--green {
-  border-left: 4px solid #22c55e; /* brighter green */
+  border-left: 3px solid #22c55e; /* slightly thinner green */
 }
 .value-change-item--orange {
-  border-left: 4px solid #facc15; /* brighter yellow/orange */
+  border-left: 3px solid #facc15; /* slightly thinner yellow/orange */
 }
 .value-change-item--red {
-  border-left: 4px solid #f97373; /* softer bright red */
+  border-left: 3px solid #f97373; /* slightly thinner red */
 }
 .value-change-item--blue {
-  border-left: 4px solid #3b82f6; /* brighter blue */
+  border-left: 3px solid #3b82f6; /* slightly thinner blue */
 }
 .value-change-title {
   color: #f9fafb;
-  font-size: 1rem;
+  font-size: 1.02rem;
   font-weight: 700;
   margin: 0 0 4px 0;
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
 .value-change-date {
-  color: rgba(148, 163, 184, 0.9);
-  font-size: 0.7rem;
+  color: rgba(148, 163, 184, 0.75);
+  font-size: 0.68rem;
   font-weight: 500;
   margin-bottom: 6px;
   letter-spacing: 0.02em;
 }
 .value-change-text {
   color: rgba(226, 232, 240, 0.9);
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   line-height: 1.55;
   margin: 0;
 }
