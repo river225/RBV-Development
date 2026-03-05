@@ -2254,7 +2254,7 @@ body {
   color: #ffde59;
 }
 
-/* Recent Changes aside — match Announcements styling */
+/* Value Changes aside — match Announcements styling */
 .home-value-changes {
   display: none;
   visibility: hidden;
@@ -2296,6 +2296,7 @@ body {
 .value-change-item {
   padding: 16px;
   background: #1c2937; /* same as .announcement-item-clean */
+  position: relative; /* for top-right icon */
   border-radius: 10px;
   margin-bottom: 0;
   border: none;
@@ -2303,6 +2304,30 @@ body {
 }
 .value-change-item:last-child {
   margin-bottom: 0;
+}
+/* Top-right icons per color */
+.value-change-icon {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.95;
+}
+.value-change-icon.value-change-item--green {
+  background-image: url("https://i.ibb.co/jZq4P62C/idfedwedfwedwfrmage.png");
+}
+.value-change-icon.value-change-item--orange {
+  background-image: url("https://i.ibb.co/hw5N064/efwfwfw.png");
+}
+.value-change-icon.value-change-item--red {
+  background-image: url("https://i.ibb.co/LDpM7twf/eferfd.png");
+}
+.value-change-icon.value-change-item--blue {
+  background-image: url("https://i.ibb.co/NdPKhGmx/fergbrge.png");
 }
 /* Color column: left accent only (green, orange, red, blue) */
 .value-change-item--green {

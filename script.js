@@ -1081,6 +1081,7 @@ async function loadValueChanges() {
       var dateEsc = date.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       var textEsc = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/\n/g, '<br>');
       return '<div class="value-change-item' + colorClass + '">' +
+        '<div class="value-change-icon' + colorClass + '"></div>' +
         (titleEsc ? '<p class="value-change-title">' + titleEsc + '</p>' : '') +
         (dateEsc ? '<p class="value-change-date">' + dateEsc + '</p>' : '') +
         (textEsc ? '<p class="value-change-text">' + textEsc + '</p>' : '') +
