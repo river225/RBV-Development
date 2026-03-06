@@ -71,6 +71,7 @@ a { color: #fff; text-decoration: none; }
 .sections-nav button { display: flex; align-items: center; width: 100%; padding: 8px; margin-bottom: 8px; background: #141d28; border: 3px solid #000000; border-radius: 6px; cursor: pointer; color: #fff; text-align: left; min-height: 58px; } 
 .sections-nav button:hover:not(.active) { background: #1f2a38 !important; }
 
+/* Row with two half-width buttons in nav (used for Crew Logos + empty slot) */
 .nav-gap {
   height: 0px;
 }
@@ -341,53 +342,9 @@ a { color: #fff; text-decoration: none; }
   text-align: center;
   margin: 30px 0 20px 0;
   padding: 10px 0;
-  border-bottom: 2px solid #33cce6;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   width: 100%; 
   box-sizing: border-box; 
-}
-
-/* Crew Logos section: horizontal scroll layout (scoped, does not affect rest of site) */
-#crew-logos.crew-logos-section .crew-logos-layout {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-#crew-logos.crew-logos-section .crew-logos-group {
-  margin-bottom: 28px;
-}
-#crew-logos.crew-logos-section .crew-logos-group:last-child {
-  margin-bottom: 0;
-}
-#crew-logos.crew-logos-section .crew-logos-group-title {
-  color: #33cce6;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin: 0 0 12px 0;
-  padding: 10px 0;
-  border-bottom: 2px solid #33cce6;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-  width: 100%;
-  box-sizing: border-box;
-}
-#crew-logos.crew-logos-section .crew-logos-row {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 8px 0 12px 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-}
-#crew-logos.crew-logos-section .crew-logos-row .crew-logo-card {
-  flex: 0 0 auto;
-  width: 200px;
-  min-width: 200px;
-  max-width: 200px;
-  margin: 0;
 }
 
 .hidden { 
@@ -779,22 +736,6 @@ a { color: #fff; text-decoration: none; }
   gap: 5px;
 }
 
-
-/* Cyan divider line */
-#sections-nav button:first-child {
-  margin-bottom: 15px;
-  position: relative;
-}
-
-#sections-nav button:first-child::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #33cce6;
-}
 
 /* Polish section navigation buttons */
 #sections-nav button {
@@ -1576,6 +1517,240 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* RICHEST PLAYERS STYLES END */
+
+/* TRADE LIST SECTION */
+.trade-list-section {
+  display: none;
+}
+
+.trade-list-intro {
+  color: #ccc;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.trade-list-search-wrap {
+  position: relative;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.trade-list-search {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background: #141d28;
+  color: #fff;
+}
+
+.trade-list-search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.trade-list-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: #1a2532;
+  border: 2px solid #000;
+  border-radius: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.trade-list-search-results.open {
+  display: block;
+}
+
+.trade-list-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #fff;
+  border-bottom: 1px solid #2a3444;
+  transition: background 0.2s;
+}
+
+.trade-list-result:hover {
+  background: #252f3d;
+}
+
+.trade-list-result img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.trade-list-no-results {
+  padding: 14px;
+  color: #888;
+  text-align: center;
+}
+
+.trade-list-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.trade-list-box {
+  background: #141d28;
+  border: 3px solid #000;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 280px;
+}
+
+.trade-list-box-want { border-color: #33cce6; }
+.trade-list-box-give { border-color: #ff6b6b; }
+
+.trade-list-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+}
+
+.trade-list-box-want h3 { color: #33cce6; }
+.trade-list-box-give h3 { color: #ff6b6b; }
+
+.trade-list-total {
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.trade-list-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 120px;
+}
+
+.trade-list-empty {
+  color: #666;
+  font-size: 0.95rem;
+  padding: 20px;
+  text-align: center;
+}
+
+.trade-list-card-wrapper {
+  position: relative;
+}
+
+.trade-list-card-wrapper .trade-list-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: #c00;
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.trade-list-card-wrapper .trade-list-remove:hover {
+  background: #e00;
+}
+
+.trade-list-qty {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 5;
+  background: #33cce6;
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.trade-list-section .card {
+  margin-bottom: 0;
+}
+
+.trade-list-add-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.trade-list-add-modal-content {
+  background: #1a2532;
+  border: 3px solid #33cce6;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.trade-list-add-modal-content p {
+  margin: 0 0 20px 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.trade-list-add-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.trade-list-add-buttons button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.trade-list-add-buttons button:first-child {
+  background: #33cce6;
+  color: #000;
+}
+
+.trade-list-add-buttons button:nth-child(2) {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+.trade-list-modal-cancel {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .trade-list-boxes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* TRADE LIST SECTION END */
 
 /* Base richest card */
 
@@ -2385,8 +2560,8 @@ body {
   display: none;
   visibility: hidden;
   opacity: 0;
-  width: 260px;
-  max-width: 260px;
+  width: 240px;
+  max-width: 240px;
   margin-top: 68px;
   margin-right: 12px;
   align-self: flex-start;

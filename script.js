@@ -11,6 +11,7 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
+  "Trade List",
   "💰 Richest Players",
   "Crew Logos"
 ];
@@ -187,6 +188,17 @@ async function fetchRichestPlayers() {
     console.error('Failed to fetch Richest Players', err);
     return [];
   }
+}
+
+// Trade List: combine all item sheets for search
+async function fetchAllItemsForTradeList() {
+  const sheets = ["Uncommon", "Rare", "Epic", "Legendary", "Omega", "Misc", "Vehicles"];
+  const all = [];
+  for (const sheet of sheets) {
+    const items = await fetchSheet(sheet);
+    all.push(...items);
+  }
+  return all;
 }
 
 function createCard(item) {
@@ -387,6 +399,11 @@ function renderSection(title, items) {
     return;
   }
 
+  if (title === "Trade List") {
+    renderTradeListSection(items || []);
+    return;
+  }
+
   if (!items || items.length === 0) return;
 
   if (title === "💰 Richest Players") {
@@ -453,22 +470,20 @@ function renderCrewLogosSection(items) {
     }
   });
 
-  let html = `<section class="section crew-logos-section" id="${slugify("Crew Logos")}"><h2>Crew Logos</h2><div class="crew-logos-layout">`;
+  let html = `<section class="section" id="${slugify("Crew Logos")}"><h2>Crew Logos</h2>`;
   
   Object.keys(grouped).forEach(header => {
     if (grouped[header].length > 0) {
       html += `
-        <div class="crew-logos-group">
-          <div class="crew-logos-group-title crew-header">${header}</div>
-          <div class="crew-logos-row">
-            ${grouped[header].map(createCrewLogoCard).join("")}
-          </div>
+        <div class="crew-header">${header}</div>
+        <div class="cards">
+          ${grouped[header].map(createCrewLogoCard).join("")}
         </div>
       `;
     }
   });
   
-  html += `</div></section>`;
+  html += `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
@@ -505,6 +520,316 @@ function renderScammerSection(items) {
   }, 100);
 }
 
+// TRADE LIST SECTION
+const TRADE_LIST_STORAGE_KEY = "blockspin_trade_list";
+
+let TRADE_LIST_ALL_ITEMS = [];
+
+function getNumericValueWithDurability(originalValue, durabilityPercent) {
+  if (!originalValue || originalValue === "" || originalValue === "N/A" || originalValue === "-") return 0;
+  const valueMultiplier = 0.20 + 0.80 * durabilityPercent;
+  if (typeof originalValue === "string" && originalValue.includes(" to ")) {
+    const parts = originalValue.split(" to ");
+    const low = parseValue(parts[0]) * valueMultiplier;
+    const high = parseValue(parts[1]) * valueMultiplier;
+    return (low + high) / 2;
+  }
+  return parseValue(originalValue) * valueMultiplier;
+}
+
+function createTradeListCard(entry, side) {
+  const item = entry.item;
+  const name = safe(item["Name"]);
+  const img = safe(item["Image URL"]);
+  const demand = safe(item["Demand"]);
+  const avg = safe(item["Average Value"]);
+  const ranged = safe(item["Ranged Value"]);
+  const internalValue = safe(item["Internal Value"]);
+  const durability = entry.durability || item["Durability"] || "";
+  const maxDurability = durability && durability.includes("/") ? durability.split("/")[1] : "100";
+  const currentDurability = durability && durability.includes("/") ? durability.split("/")[0] : maxDurability;
+  const durabilityInvisible = safe(item["Durability Invisible"]);
+  const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === "yes") ? 'style="opacity: 0;"' : "";
+
+  let imgTag = img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">` : "";
+  let durabilityHTML = "";
+  if (durability && durability.includes("/")) {
+    durabilityHTML = `
+      <div class="durability-control" ${invisibleStyle}>
+        <label>Durability:</label>
+        <div class="durability-input-row">
+          <input type="number" class="durability-input"
+                 value="${currentDurability}" max="${maxDurability}" min="0"
+                 oninput="enforceMaxDurability(this)" onchange="updateCardValues(this); tradeListSaveAndUpdateTotals();">
+          <span class="durability-max">/${maxDurability}</span>
+          <div class="durability-arrows">
+            <button type="button" onmousedown="adjustDurability(this, 1)">▲</button>
+            <button type="button" onmousedown="adjustDurability(this, -1)">▼</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  let repairPrice = 0;
+  if (durability && durability.includes("/") && internalValue) {
+    const [cur, max] = durability.split("/").map(v => parseInt(v) || 0);
+    const missing = max - cur;
+    const internalVal = parseFloat(String(internalValue).replace(/[$,k]/gi, "")) * (String(internalValue).toLowerCase().includes("k") ? 1000 : 1);
+    repairPrice = Math.round(missing * (internalVal / max / 1.43));
+  }
+  let pawnAmount = 0;
+  if (durability && durability.includes("/") && internalValue) {
+    const [cur, max] = durability.split("/").map(v => parseInt(v) || 0);
+    const internalVal = parseFloat(String(internalValue).replace(/[$,k]/gi, "")) * (String(internalValue).toLowerCase().includes("k") ? 1000 : 1);
+    const baseValue = internalVal * 0.3;
+    const deduction = (max - cur) * ((internalVal * 0.3) / max / 1.43);
+    pawnAmount = Math.round(baseValue - deduction);
+  }
+
+  const qty = entry.quantity || 1;
+  const qtyBadge = qty > 1 ? `<span class="trade-list-qty">×${qty}</span>` : "";
+
+  return `
+    <div class="trade-list-card-wrapper" data-trade-entry-id="${entry.id}" data-side="${side}">
+      <button type="button" class="trade-list-remove" onclick="tradeListRemoveEntry('${side}', '${entry.id}')" aria-label="Remove">×</button>
+      ${qtyBadge}
+      <div class="card trade-list-card" data-name="${escapeAttr(name)}"
+           data-avg="${escapeAttr(avg)}" data-ranged="${escapeAttr(ranged)}"
+           data-max-durability="${maxDurability}" data-internal-value="${escapeAttr(internalValue)}">
+        <div class="card-left">
+          ${imgTag}
+          ${durabilityHTML}
+        </div>
+        <div class="card-info">
+          <h3>${name}</h3>
+          ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
+          <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
+          <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
+          ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">$${pawnAmount.toLocaleString()}</span></div>` : ""}
+          ${durability && internalValue ? `<div class="card-repair">Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span></div>` : ""}
+        </div>
+      </div>
+    </div>`;
+}
+
+function tradeListGetState() {
+  try {
+    const raw = localStorage.getItem(TRADE_LIST_STORAGE_KEY);
+    if (!raw) return { want: [], give: [] };
+    const parsed = JSON.parse(raw);
+    return { want: parsed.want || [], give: parsed.give || [] };
+  } catch (e) {
+    return { want: [], give: [] };
+  }
+}
+
+function tradeListSaveState(state) {
+  try {
+    const toSave = {
+      want: state.want.map(e => ({
+        id: e.id,
+        quantity: e.quantity,
+        durability: e.durability,
+        itemName: e.item["Name"],
+        item: e.item
+      })),
+      give: state.give.map(e => ({
+        id: e.id,
+        quantity: e.quantity,
+        durability: e.durability,
+        itemName: e.item["Name"],
+        item: e.item
+      }))
+    };
+    localStorage.setItem(TRADE_LIST_STORAGE_KEY, JSON.stringify(toSave));
+  } catch (e) {}
+}
+
+function tradeListComputeSideTotal(entries) {
+  let total = 0;
+  entries.forEach(entry => {
+    const dur = entry.durability || entry.item["Durability"] || "";
+    const [cur, max] = dur.includes("/") ? dur.split("/").map(Number) : [1, 1];
+    const pct = max > 0 ? cur / max : 1;
+    const numVal = getNumericValueWithDurability(entry.item["Average Value"], pct);
+    total += numVal * (entry.quantity || 1);
+  });
+  return total;
+}
+
+function tradeListRenderBoxes() {
+  const state = tradeListGetState();
+  const wantEl = document.getElementById("trade-list-want-cards");
+  const giveEl = document.getElementById("trade-list-give-cards");
+  const wantTotalEl = document.getElementById("trade-list-want-total");
+  const giveTotalEl = document.getElementById("trade-list-give-total");
+  if (!wantEl || !giveEl) return;
+
+  wantEl.innerHTML = state.want.length === 0
+    ? '<div class="trade-list-empty">No items yet. Search above and add to this side.</div>'
+    : state.want.map(e => createTradeListCard(e, "want")).join("");
+  giveEl.innerHTML = state.give.length === 0
+    ? '<div class="trade-list-empty">No items yet. Search above and add to this side.</div>'
+    : state.give.map(e => createTradeListCard(e, "give")).join("");
+
+  const wantTotal = tradeListComputeSideTotal(state.want);
+  const giveTotal = tradeListComputeSideTotal(state.give);
+  if (wantTotalEl) wantTotalEl.textContent = "$" + Math.round(wantTotal).toLocaleString();
+  if (giveTotalEl) giveTotalEl.textContent = "$" + Math.round(giveTotal).toLocaleString();
+}
+
+function tradeListSyncStateFromDom() {
+  const state = tradeListGetState();
+  ["want", "give"].forEach(side => {
+    state[side].forEach(entry => {
+      const wrap = document.querySelector(`.trade-list-card-wrapper[data-side="${side}"][data-trade-entry-id="${entry.id}"]`);
+      if (!wrap) return;
+      const input = wrap.querySelector(".durability-input");
+      if (input) {
+        const max = input.getAttribute("max") || "100";
+        entry.durability = input.value + "/" + max;
+      }
+    });
+  });
+  return state;
+}
+
+function tradeListSaveAndUpdateTotals() {
+  const state = tradeListSyncStateFromDom();
+  tradeListSaveState(state);
+  tradeListRenderBoxes();
+}
+
+window.tradeListRemoveEntry = function(side, id) {
+  const state = tradeListGetState();
+  if (side === "want") state.want = state.want.filter(e => e.id !== id);
+  else state.give = state.give.filter(e => e.id !== id);
+  tradeListSaveState(state);
+  tradeListRenderBoxes();
+};
+
+window.tradeListAddToSide = function(side, item, quantity, durability) {
+  const state = tradeListGetState();
+  let dur = durability || item["Durability"] || "";
+  if (dur && dur.includes("/")) {
+    const max = dur.split("/")[1] || "100";
+    dur = max + "/" + max;
+  }
+  const qty = quantity || 1;
+  const arr = side === "want" ? state.want : state.give;
+  const existing = arr.find(e => e.item["Name"] === item["Name"] && (e.durability || "") === dur);
+  if (existing) {
+    existing.quantity = (existing.quantity || 1) + qty;
+  } else {
+    arr.push({
+      id: "tl_" + Date.now() + "_" + Math.random().toString(36).slice(2),
+      item: item,
+      quantity: qty,
+      durability: dur
+    });
+  }
+  tradeListSaveState(state);
+  tradeListRenderBoxes();
+  const modal = document.getElementById("trade-list-add-modal");
+  if (modal) modal.remove();
+};
+
+function renderTradeListSection(allItems) {
+  TRADE_LIST_ALL_ITEMS = allItems || [];
+  const sectionId = slugify("Trade List");
+  const existing = document.getElementById(sectionId);
+  if (existing) return;
+
+  const html = `
+    <section class="section trade-list-section" id="${sectionId}">
+      <h2>Trade List</h2>
+      <p class="trade-list-intro">Build your trade post below. Search for items and add them to &quot;What I want&quot; or &quot;What I'll give&quot;. Screenshot the two boxes to share your trade.</p>
+      <div class="trade-list-search-wrap">
+        <input type="text" class="trade-list-search" id="trade-list-search" placeholder="Search items to add..." autocomplete="off" />
+        <div class="trade-list-search-results" id="trade-list-search-results"></div>
+      </div>
+      <div class="trade-list-boxes">
+        <div class="trade-list-box trade-list-box-want">
+          <h3>What I want</h3>
+          <div class="trade-list-total">Total: <span id="trade-list-want-total">$0</span></div>
+          <div class="trade-list-cards" id="trade-list-want-cards"></div>
+        </div>
+        <div class="trade-list-box trade-list-box-give">
+          <h3>What I'll give</h3>
+          <div class="trade-list-total">Total: <span id="trade-list-give-total">$0</span></div>
+          <div class="trade-list-cards" id="trade-list-give-cards"></div>
+        </div>
+      </div>
+    </section>
+  `;
+  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+
+  tradeListRenderBoxes();
+
+  const searchInput = document.getElementById("trade-list-search");
+  const resultsDiv = document.getElementById("trade-list-search-results");
+  if (searchInput && resultsDiv) {
+    searchInput.addEventListener("input", function() {
+      const q = this.value.trim().toLowerCase();
+      if (q.length < 2) {
+        resultsDiv.innerHTML = "";
+        resultsDiv.classList.remove("open");
+        return;
+      }
+      const matches = TRADE_LIST_ALL_ITEMS.filter(it =>
+        String(it["Name"] || "").toLowerCase().includes(q)
+      ).slice(0, 10);
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = "<div class=\"trade-list-no-results\">No items found</div>";
+        resultsDiv.classList.add("open");
+        return;
+      }
+      resultsDiv.innerHTML = matches.map(it => {
+        const name = safe(it["Name"]);
+        const img = safe(it["Image URL"]);
+        return `<div class="trade-list-result" data-item-name="${escapeAttr(it["Name"] || "")}">
+          ${img ? `<img src="${img}" alt="" onerror="this.style.display='none'">` : ""}
+          <span>${name}</span>
+        </div>`;
+      }).join("");
+      resultsDiv.classList.add("open");
+      resultsDiv.querySelectorAll(".trade-list-result").forEach(el => {
+        el.addEventListener("click", function() {
+          const itemName = this.getAttribute("data-item-name");
+          if (!itemName) return;
+          const item = TRADE_LIST_ALL_ITEMS.find(it => it["Name"] === itemName);
+          if (!item) return;
+          searchInput.value = "";
+          resultsDiv.innerHTML = "";
+          resultsDiv.classList.remove("open");
+          const modal = document.createElement("div");
+          modal.id = "trade-list-add-modal";
+          modal.className = "trade-list-add-modal";
+          modal.innerHTML = `
+            <div class="trade-list-add-modal-content">
+              <p>Add &quot;${safe(item["Name"])}&quot; to which side?</p>
+              <div class="trade-list-add-buttons">
+                <button type="button" onclick="tradeListAddToSide('want', window.__tradeListPendingItem)">What I want</button>
+                <button type="button" onclick="tradeListAddToSide('give', window.__tradeListPendingItem)">What I'll give</button>
+                <button type="button" class="trade-list-modal-cancel" onclick="this.closest('.trade-list-add-modal').remove()">Cancel</button>
+              </div>
+            </div>
+          `;
+          modal.addEventListener("click", function(e) {
+            if (e.target === modal) modal.remove();
+          });
+          window.__tradeListPendingItem = item;
+          document.body.appendChild(modal);
+        });
+      });
+    });
+    document.addEventListener("click", function closeResults(e) {
+      if (!searchInput.contains(e.target) && !resultsDiv.contains(e.target)) {
+        resultsDiv.classList.remove("open");
+      }
+    });
+  }
+}
 
 // SECTION NAVIGATION 
 function initSectionsNav() {
@@ -512,7 +837,7 @@ function initSectionsNav() {
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
-    if (name === "💰 Richest Players") {
+    if (name === "Trade List") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
       nav.appendChild(gap);
@@ -522,7 +847,7 @@ function initSectionsNav() {
       extrasHeader.textContent = "Extras";
       nav.appendChild(extrasHeader);
     }
-    
+
     const btn = document.createElement("button");
     btn.textContent = name;
     btn.addEventListener("click", () => showSection(name));
@@ -545,7 +870,7 @@ function showSection(name) {
    // Hide/show tax calculator and home value changes based on section (same slot: one or the other)
   const taxCalc = document.querySelector('.tax-calculator');
   const homeValueChanges = document.getElementById('home-value-changes');
-  const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+  const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players', 'Trade List'];
   const isHome = name === 'Home';
   if (taxCalc) {
     if (hiddenSections.includes(name)) {
@@ -574,7 +899,7 @@ function showSection(name) {
   // Hide/show search bar based on section
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
-    const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+    const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players', 'Trade List'];
     if (hiddenSearchSections.includes(name)) {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
     } else {
@@ -920,7 +1245,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (sec === "💰 Richest Players") {
         items = await fetchRichestPlayers(); // NEW spreadsheet
         console.log(`Got ${items.length} items for ${sec} from NEW spreadsheet`);
-        console.log("RichestPlayers raw data:", items);
+      } else if (sec === "Trade List") {
+        items = await fetchAllItemsForTradeList();
+        console.log(`Got ${items.length} items for Trade List`);
       } else {
         items = await fetchSheet(sec); // OLD spreadsheet
         console.log(`Got ${items.length} items for ${sec} from OLD spreadsheet`);
