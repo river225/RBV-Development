@@ -549,64 +549,56 @@ function createTradeListCard(entry, side) {
   const maxDurability = durability && durability.includes("/") ? durability.split("/")[1] : "100";
   const currentDurability = durability && durability.includes("/") ? durability.split("/")[0] : maxDurability;
   const durabilityInvisible = safe(item["Durability Invisible"]);
-  const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === "yes") ? 'style="opacity: 0;"' : "";
+  const hideDur = (durabilityInvisible && durabilityInvisible.toLowerCase() === "yes");
 
-  let imgTag = img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">` : "";
-  let durabilityHTML = "";
+  let durabilityBlock = "";
   if (durability && durability.includes("/")) {
-    durabilityHTML = `
-      <div class="durability-control" ${invisibleStyle}>
-        <label>Durability:</label>
-        <div class="durability-input-row">
-          <input type="number" class="durability-input"
-                 value="${currentDurability}" max="${maxDurability}" min="0"
-                 oninput="enforceMaxDurability(this)" onchange="updateCardValues(this); tradeListSaveAndUpdateTotals();">
-          <span class="durability-max">/${maxDurability}</span>
-          <div class="durability-arrows">
-            <button type="button" onmousedown="adjustDurability(this, 1)">▲</button>
-            <button type="button" onmousedown="adjustDurability(this, -1)">▼</button>
-          </div>
-        </div>
+    durabilityBlock = `
+      <div class="tl-card-dur" ${hideDur ? 'style="opacity:0"' : ""}>
+        <span class="tl-card-dur-label">Durability:</span>
+        <input type="number" class="tl-card-dur-input" value="${currentDurability}" max="${maxDurability}" min="0"
+               data-tl-id="${entry.id}" data-tl-side="${side}"
+               oninput="tradeListUpdateDurability(this)" onchange="tradeListSaveAndUpdateTotals()">
+        <span class="tl-card-dur-max">/${maxDurability}</span>
+        <button type="button" class="tl-card-dur-btn" data-dir="1" onclick="tradeListDurabilityArrow(this)">▲</button>
+        <button type="button" class="tl-card-dur-btn" data-dir="-1" onclick="tradeListDurabilityArrow(this)">▼</button>
       </div>`;
   }
 
-  let repairPrice = 0;
+  let repairPrice = "";
+  let pawnAmount = "";
   if (durability && durability.includes("/") && internalValue) {
     const [cur, max] = durability.split("/").map(v => parseInt(v) || 0);
     const missing = max - cur;
-    const internalVal = parseFloat(String(internalValue).replace(/[$,k]/gi, "")) * (String(internalValue).toLowerCase().includes("k") ? 1000 : 1);
-    repairPrice = Math.round(missing * (internalVal / max / 1.43));
-  }
-  let pawnAmount = 0;
-  if (durability && durability.includes("/") && internalValue) {
-    const [cur, max] = durability.split("/").map(v => parseInt(v) || 0);
-    const internalVal = parseFloat(String(internalValue).replace(/[$,k]/gi, "")) * (String(internalValue).toLowerCase().includes("k") ? 1000 : 1);
-    const baseValue = internalVal * 0.3;
-    const deduction = (max - cur) * ((internalVal * 0.3) / max / 1.43);
-    pawnAmount = Math.round(baseValue - deduction);
+    const iv = parseFloat(String(internalValue).replace(/[$,k]/gi, "")) * (String(internalValue).toLowerCase().includes("k") ? 1000 : 1);
+    repairPrice = "$" + Math.round(missing * (iv / max / 1.43)).toLocaleString();
+    const baseVal = iv * 0.3;
+    const ded = (max - cur) * ((iv * 0.3) / max / 1.43);
+    pawnAmount = "$" + Math.round(baseVal - ded).toLocaleString();
   }
 
+  const durPct = maxDurability ? (parseInt(currentDurability, 10) / parseInt(maxDurability, 10)) : 1;
+  const displayAvg = (durability && durability.includes("/") && avg) ? calculateDurabilityValue(avg, durPct) : (avg || "—");
+  const displayRanged = (durability && durability.includes("/") && ranged) ? calculateDurabilityValue(ranged, durPct) : (ranged || "—");
   const qty = entry.quantity || 1;
-  const qtyBadge = qty > 1 ? `<span class="trade-list-qty">×${qty}</span>` : "";
+  const qtyBadge = qty > 1 ? `<span class="tl-card-qty">×${qty}</span>` : "";
 
   return `
-    <div class="trade-list-card-wrapper" data-trade-entry-id="${entry.id}" data-side="${side}">
-      <button type="button" class="trade-list-remove" onclick="tradeListRemoveEntry('${side}', '${entry.id}')" aria-label="Remove">×</button>
+    <div class="tl-card" data-trade-entry-id="${entry.id}" data-side="${side}">
+      <button type="button" class="tl-card-remove" onclick="tradeListRemoveEntry('${side}', '${entry.id}')" aria-label="Remove">×</button>
       ${qtyBadge}
-      <div class="card trade-list-card" data-name="${escapeAttr(name)}"
-           data-avg="${escapeAttr(avg)}" data-ranged="${escapeAttr(ranged)}"
-           data-max-durability="${maxDurability}" data-internal-value="${escapeAttr(internalValue)}">
-        <div class="card-left">
-          ${imgTag}
-          ${durabilityHTML}
+      <div class="tl-card-inner">
+        <div class="tl-card-img-wrap">
+          ${img ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">` : ""}
         </div>
-        <div class="card-info">
-          <h3>${name}</h3>
-          ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
-          <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
-          <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
-          ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">$${pawnAmount.toLocaleString()}</span></div>` : ""}
-          ${durability && internalValue ? `<div class="card-repair">Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span></div>` : ""}
+        <div class="tl-card-info">
+          <div class="tl-card-name">${name}</div>
+          ${demand ? `<div class="tl-card-demand">Demand: ${demand}</div>` : ""}
+          <div class="tl-card-row">Average Value: <span class="tl-card-avg">${displayAvg}</span></div>
+          <div class="tl-card-row">Ranged Value: <span class="tl-card-ranged">${displayRanged}</span></div>
+          ${pawnAmount ? `<div class="tl-card-row">Pawn: <span class="tl-card-pawn">${pawnAmount}</span></div>` : ""}
+          ${repairPrice ? `<div class="tl-card-row">Repair: <span class="tl-card-repair">${repairPrice}</span></div>` : ""}
+          ${durabilityBlock}
         </div>
       </div>
     </div>`;
@@ -682,9 +674,9 @@ function tradeListSyncStateFromDom() {
   const state = tradeListGetState();
   ["want", "give"].forEach(side => {
     state[side].forEach(entry => {
-      const wrap = document.querySelector(`.trade-list-card-wrapper[data-side="${side}"][data-trade-entry-id="${entry.id}"]`);
-      if (!wrap) return;
-      const input = wrap.querySelector(".durability-input");
+      const card = document.querySelector(`.tl-card[data-side="${side}"][data-trade-entry-id="${entry.id}"]`);
+      if (!card) return;
+      const input = card.querySelector(".tl-card-dur-input");
       if (input) {
         const max = input.getAttribute("max") || "100";
         entry.durability = input.value + "/" + max;
@@ -693,6 +685,27 @@ function tradeListSyncStateFromDom() {
   });
   return state;
 }
+window.tradeListUpdateDurability = function(inputEl) {
+  const max = parseInt(inputEl.getAttribute("max")) || 100;
+  let v = parseInt(inputEl.value) || 0;
+  if (v < 0) v = 0;
+  if (v > max) v = max;
+  inputEl.value = v;
+  tradeListSaveAndUpdateTotals();
+};
+window.tradeListDurabilityArrow = function(btn) {
+  const card = btn.closest(".tl-card");
+  if (!card) return;
+  const input = card.querySelector(".tl-card-dur-input");
+  if (!input) return;
+  const dir = parseInt(btn.getAttribute("data-dir")) || 0;
+  const max = parseInt(input.getAttribute("max")) || 100;
+  let v = (parseInt(input.value) || 0) + dir;
+  if (v < 0) v = 0;
+  if (v > max) v = max;
+  input.value = v;
+  tradeListSaveAndUpdateTotals();
+};
 
 function tradeListSaveAndUpdateTotals() {
   const state = tradeListSyncStateFromDom();
