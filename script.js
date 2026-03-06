@@ -11,8 +11,8 @@ const SECTION_NAMES = [
   "Vehicles",
   
   // EXTRAS
-  "Trade List",
   "💰 Richest Players",
+  "Trade List",
   "Crew Logos"
 ];
 
@@ -837,7 +837,7 @@ function initSectionsNav() {
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
-    if (name === "Trade List") {
+    if (name === "💰 Richest Players") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
       nav.appendChild(gap);

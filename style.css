@@ -1518,9 +1518,14 @@ a { color: #fff; text-decoration: none; }
 
 /* RICHEST PLAYERS STYLES END */
 
-/* TRADE LIST SECTION */
+/* TRADE LIST SECTION (scoped; does not affect Richest Players / Crew Logos) */
 .trade-list-section {
   display: none;
+}
+
+.trade-list-section h2 {
+  text-align: center;
+  margin-bottom: 12px;
 }
 
 .trade-list-intro {
@@ -1528,12 +1533,17 @@ a { color: #fff; text-decoration: none; }
   font-size: 1rem;
   margin-bottom: 20px;
   max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .trade-list-search-wrap {
   position: relative;
   margin-bottom: 24px;
   max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .trade-list-search {
@@ -1597,54 +1607,63 @@ a { color: #fff; text-decoration: none; }
   text-align: center;
 }
 
+/* Two boxes side by side (horizontal layout) */
 .trade-list-boxes {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 16px;
+  gap: 28px;
+  margin-top: 20px;
 }
 
 .trade-list-box {
   background: #141d28;
   border: 3px solid #000;
-  border-radius: 12px;
-  padding: 20px;
-  min-height: 280px;
+  border-radius: 14px;
+  padding: 24px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
 }
 
 .trade-list-box-want { border-color: #33cce6; }
 .trade-list-box-give { border-color: #ff6b6b; }
 
 .trade-list-box h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.25rem;
+  margin: 0 0 10px 0;
+  font-size: 1.35rem;
 }
 
 .trade-list-box-want h3 { color: #33cce6; }
 .trade-list-box-give h3 { color: #ff6b6b; }
 
 .trade-list-total {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-weight: bold;
   color: #fff;
+  font-size: 1.05rem;
 }
 
+/* Items inside box: horizontal row, wraps; fits at least 6 items */
 .trade-list-cards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 12px;
-  min-height: 120px;
+  min-height: 280px;
+  align-content: flex-start;
 }
 
 .trade-list-empty {
   color: #666;
   font-size: 0.95rem;
-  padding: 20px;
+  padding: 24px;
   text-align: center;
+  width: 100%;
 }
 
 .trade-list-card-wrapper {
   position: relative;
+  flex: 0 0 auto;
 }
 
 .trade-list-card-wrapper .trade-list-remove {
@@ -1652,13 +1671,13 @@ a { color: #fff; text-decoration: none; }
   top: 4px;
   right: 4px;
   z-index: 5;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border: none;
   border-radius: 6px;
   background: #c00;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
   display: flex;
@@ -1671,6 +1690,7 @@ a { color: #fff; text-decoration: none; }
   background: #e00;
 }
 
+/* Quantity badge: bigger and more visible when 2+ */
 .trade-list-qty {
   position: absolute;
   top: 4px;
@@ -1678,14 +1698,67 @@ a { color: #fff; text-decoration: none; }
   z-index: 5;
   background: #33cce6;
   color: #000;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: bold;
+  min-width: 32px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-.trade-list-section .card {
+.trade-list-card-wrapper .trade-list-card {
   margin-bottom: 0;
+}
+
+/* Smaller cards inside Trade List; durability stays clickable */
+.trade-list-section .trade-list-card-wrapper .card {
+  margin-bottom: 0;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  max-width: 200px;
+}
+
+.trade-list-section .trade-list-card-wrapper .card .card-left img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.trade-list-section .trade-list-card-wrapper .card h3 {
+  font-size: 0.95rem;
+  margin: 0 0 4px 0;
+}
+
+.trade-list-section .trade-list-card-wrapper .card .card-avg,
+.trade-list-section .trade-list-card-wrapper .card .card-ranged,
+.trade-list-section .trade-list-card-wrapper .card .card-pawn,
+.trade-list-section .trade-list-card-wrapper .card .card-repair {
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
+/* Keep durability controls usable (min touch target) */
+.trade-list-section .trade-list-card-wrapper .durability-control {
+  margin-top: 6px;
+}
+
+.trade-list-section .trade-list-card-wrapper .durability-control label {
+  font-size: 0.75rem;
+}
+
+.trade-list-section .trade-list-card-wrapper .durability-input {
+  width: 42px;
+  padding: 6px 4px;
+  font-size: 0.85rem;
+}
+
+.trade-list-section .trade-list-card-wrapper .durability-arrows button {
+  min-width: 28px;
+  min-height: 28px;
+  padding: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
 }
 
 .trade-list-add-modal {
@@ -1747,6 +1820,9 @@ a { color: #fff; text-decoration: none; }
 @media (max-width: 768px) {
   .trade-list-boxes {
     grid-template-columns: 1fr;
+  }
+  .trade-list-section .trade-list-card-wrapper .card {
+    max-width: 100%;
   }
 }
 
