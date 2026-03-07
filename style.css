@@ -1326,6 +1326,36 @@ a { color: #fff; text-decoration: none; }
 
 
 /* RICHEST PLAYERS STYLES */
+.richest-players-section {
+  position: relative;
+}
+.richest-back-to-top {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #3a3a3a;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.2s ease;
+}
+.richest-back-to-top:hover {
+  opacity: 0.85;
+}
+.richest-back-to-top-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+.richest-back-to-top-text {
+  color: #3a3a3a;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
 .richest-players-header {
   text-align: center;
   margin-bottom: 30px;

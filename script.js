@@ -485,19 +485,32 @@ function renderScammerSection(items) {
 
 
  function renderRichestPlayersSection(items) {
+  const sectionId = slugify("💰 Richest Players");
   const html = `
-    <section class="section" id="${slugify("💰 Richest Players")}">
+    <section class="section richest-players-section" id="${sectionId}">
+      <a href="#" class="richest-back-to-top" id="richest-back-to-top" aria-label="Back to top">
+        <img src="https://i.ibb.co/rRJwtbQZ/dweffewdefdbgbef.png" alt="" class="richest-back-to-top-icon" />
+        <span class="richest-back-to-top-text">Back to top</span>
+      </a>
       ${createRichestPlayersSection(items)}
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
   
-  // Add event listener after HTML is inserted
+  // Add event listeners after HTML is inserted
   setTimeout(() => {
     const searchInput = document.getElementById('richest-search-input');
     if (searchInput) {
       searchInput.addEventListener('input', function(e) {
         filterRichestPlayers(e.target.value);
+      });
+    }
+    const backToTop = document.getElementById('richest-back-to-top');
+    const section = document.querySelector('.richest-players-section');
+    if (backToTop && section) {
+      backToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
   }, 100);
