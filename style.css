@@ -641,6 +641,7 @@ a { color: #fff; text-decoration: none; }
   box-shadow: 0 4px 20px rgba(184, 50, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   background: linear-gradient(135deg, #8b251f 0%, #c0392b 25%, #e74c3c 50%, #c0392b 75%, #a93226 100%);
   animation: giveaway-banner-shine 8s ease-in-out infinite;
+  gap: 20px 10px;
 }
 .legendary-banner.giveaway-banner--red .legendary-banner-text {
   white-space: normal;
