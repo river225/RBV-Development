@@ -636,9 +636,9 @@ a { color: #fff; text-decoration: none; }
 }
 .legendary-banner.giveaway-banner--red .legendary-banner-text {
   white-space: normal;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-width: 0;
-  max-width: 100%;
+  text-align: left;
 }
 .legendary-banner.giveaway-banner--red .legendary-banner-btn {
   background: linear-gradient(145deg, #fff 0%, #ffe8e8 30%, #ffd0d0 60%, #f8b8b8 100%);
@@ -660,9 +660,9 @@ a { color: #fff; text-decoration: none; }
 }
 .legendary-banner.giveaway-banner--purple .legendary-banner-text {
   white-space: normal;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-width: 0;
-  max-width: 100%;
+  text-align: left;
 }
 .legendary-banner.giveaway-banner--purple .legendary-banner-btn {
   background: linear-gradient(145deg, #fff 0%, #f0e8ff 30%, #e0d0ff 60%, #d0b8f8 100%);
