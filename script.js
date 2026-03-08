@@ -1112,13 +1112,24 @@ function applyBannerConfig(rows) {
   var omegaSection = document.getElementById("omega");
   var epicSection = document.getElementById("epic");
   if (omegaSection) {
-    var anacondaCard = omegaSection.querySelector('.card[data-name="Anaconda"]');
+    var anacondaCard = findCardByName(omegaSection, "Anaconda");
     applyCardGiveawayIcon(anacondaCard, showAnaconda, giveawayIconUrl);
   }
   if (epicSection) {
-    var fireworkCard = epicSection.querySelector('.card[data-name="Firework Launcher"]');
+    var fireworkCard = findCardByName(epicSection, "Firework Launcher");
     applyCardGiveawayIcon(fireworkCard, showFirework, giveawayIconUrl);
   }
+}
+
+function findCardByName(section, name) {
+  if (!section || !name) return null;
+  var cards = section.querySelectorAll(".card");
+  var want = name.toLowerCase().trim();
+  for (var i = 0; i < cards.length; i++) {
+    var n = (cards[i].getAttribute("data-name") || "").toLowerCase().trim();
+    if (n === want) return cards[i];
+  }
+  return section.querySelector('.card[data-name="' + name.replace(/"/g, '\\"') + '"]');
 }
 
 function applyCardGiveawayIcon(card, show, iconUrl) {

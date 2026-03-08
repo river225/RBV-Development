@@ -141,15 +141,17 @@ a { color: #fff; text-decoration: none; }
   position: relative;
 }
 
-/* Giveaway icon on item card when banner is active (Anaconda / Firework Launcher) */
+/* Giveaway icon on item card when banner is active (Anaconda / Firework Launcher).
+   Small icon, floats above all content so it stays on top when hovering the card. */
 .card-giveaway-icon {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 36px;
-  height: 36px;
-  z-index: 2;
+  bottom: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  z-index: 9999;
   pointer-events: none;
+  isolation: isolate;
 }
 .card-giveaway-icon img {
   width: 100%;
