@@ -1076,17 +1076,27 @@ async function loadTopDonators() {
   }
 }
 
-// Show/hide Epic/Omega giveaway banners from Website Configs (rows: Anaconda, Fireworkv; column Show = Yes/No)
+// Show/hide Epic/Omega giveaway banners from Website Configs.
+// Your sheet: row 1 = column headers "Anaconda GW" and "Firework GW", row 2 = "Yes" under each to show that banner.
+// Using "GW" avoids clashing with item names like Anaconda/Firework in other sheets.
 function applyBannerConfig(rows) {
   if (!rows || !rows.length) return;
   var showAnaconda = false;
   var showFirework = false;
-  rows.forEach(function (r) {
-    var name = (r.Title || r.Name || '').toString().trim();
-    var show = (r.Show || r.Enabled || '').toString().trim().toLowerCase();
-    if (name === "Anaconda") showAnaconda = /^(yes|1|true|on)$/.test(show);
-    if (name === "Fireworkv") showFirework = /^(yes|1|true|on)$/.test(show);
-  });
+  var first = rows[0];
+  if (first && ("Anaconda GW" in first || "Firework GW" in first)) {
+    var anacondaVal = (first["Anaconda GW"] || "").toString().trim().toLowerCase();
+    var fireworkVal = (first["Firework GW"] || "").toString().trim().toLowerCase();
+    showAnaconda = /^(yes|1|true|on)$/.test(anacondaVal);
+    showFirework = /^(yes|1|true|on)$/.test(fireworkVal);
+  } else {
+    rows.forEach(function (r) {
+      var name = (r.Title || r.Name || '').toString().trim();
+      var show = (r.Show || r.Enabled || '').toString().trim().toLowerCase();
+      if (name === "Anaconda GW") showAnaconda = /^(yes|1|true|on)$/.test(show);
+      if (name === "Firework GW") showFirework = /^(yes|1|true|on)$/.test(show);
+    });
+  }
   var anacondaEl = document.getElementById('omega-anaconda-banner');
   var fireworkEl = document.getElementById('epic-firework-banner');
   if (anacondaEl) anacondaEl.style.display = showAnaconda ? 'flex' : 'none';
@@ -1106,7 +1116,7 @@ async function loadValueChanges() {
     applyBannerConfig(rows);
     var filtered = rows.filter(function (r) {
       var name = (r.Title || r.Name || '').toString().trim();
-      if (name === "Anaconda" || name === "Fireworkv") return false;
+      if (name === "Anaconda GW" || name === "Firework GW") return false;
       var t = (r.Title || r.Date || r.Text || '').toString().trim();
       return t.length > 0;
     });
