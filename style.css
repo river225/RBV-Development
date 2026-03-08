@@ -615,7 +615,8 @@ a { color: #fff; text-decoration: none; }
   z-index: 1;
   flex-shrink: 0;
 }
-.legendary-banner-members #discord-member-count {
+.legendary-banner-members #discord-member-count,
+.legendary-banner-members .discord-member-count {
   font-size: 1.4rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -632,6 +633,12 @@ a { color: #fff; text-decoration: none; }
   box-shadow: 0 4px 20px rgba(184, 50, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   background: linear-gradient(135deg, #8b251f 0%, #c0392b 25%, #e74c3c 50%, #c0392b 75%, #a93226 100%);
   animation: giveaway-banner-shine 8s ease-in-out infinite;
+}
+.legendary-banner.giveaway-banner--red .legendary-banner-text {
+  white-space: normal;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
 }
 .legendary-banner.giveaway-banner--red .legendary-banner-btn {
   background: linear-gradient(145deg, #fff 0%, #ffe8e8 30%, #ffd0d0 60%, #f8b8b8 100%);
@@ -650,6 +657,12 @@ a { color: #fff; text-decoration: none; }
   box-shadow: 0 4px 20px rgba(100, 50, 160, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   background: linear-gradient(135deg, #4d3670 0%, #6a4c9e 25%, #8e63ce 50%, #6a4c9e 75%, #5b3d8a 100%);
   animation: giveaway-banner-shine 8s ease-in-out infinite;
+}
+.legendary-banner.giveaway-banner--purple .legendary-banner-text {
+  white-space: normal;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
 }
 .legendary-banner.giveaway-banner--purple .legendary-banner-btn {
   background: linear-gradient(145deg, #fff 0%, #f0e8ff 30%, #e0d0ff 60%, #d0b8f8 100%);
