@@ -626,6 +626,46 @@ a { color: #fff; text-decoration: none; }
   50% { background-position: 100% 50%; }
 }
 
+/* Omega – red giveaway banner (Anaconda) */
+.legendary-banner.giveaway-banner--red {
+  border-color: rgba(220, 53, 69, 0.5);
+  box-shadow: 0 4px 20px rgba(184, 50, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #8b251f 0%, #c0392b 25%, #e74c3c 50%, #c0392b 75%, #a93226 100%);
+  animation: giveaway-banner-shine 8s ease-in-out infinite;
+}
+.legendary-banner.giveaway-banner--red .legendary-banner-btn {
+  background: linear-gradient(145deg, #fff 0%, #ffe8e8 30%, #ffd0d0 60%, #f8b8b8 100%);
+  color: #5c1a1a;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 0 2px #a93226, 0 0 0 4px #000, 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.legendary-banner.giveaway-banner--red .legendary-banner-btn:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 2px #a93226, 0 0 0 4px #000, 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: linear-gradient(145deg, #fff 0%, #fff0f0 25%, #ffe0e0 55%, #ffd0d0 100%);
+  color: #4a1414;
+}
+
+/* Epic – purple giveaway banner (Firework) */
+.legendary-banner.giveaway-banner--purple {
+  border-color: rgba(138, 43, 226, 0.5);
+  box-shadow: 0 4px 20px rgba(100, 50, 160, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #4d3670 0%, #6a4c9e 25%, #8e63ce 50%, #6a4c9e 75%, #5b3d8a 100%);
+  animation: giveaway-banner-shine 8s ease-in-out infinite;
+}
+.legendary-banner.giveaway-banner--purple .legendary-banner-btn {
+  background: linear-gradient(145deg, #fff 0%, #f0e8ff 30%, #e0d0ff 60%, #d0b8f8 100%);
+  color: #2d1a5c;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 0 2px #5b3d8a, 0 0 0 4px #000, 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.legendary-banner.giveaway-banner--purple .legendary-banner-btn:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 2px #5b3d8a, 0 0 0 4px #000, 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: linear-gradient(145deg, #fff 0%, #f5f0ff 25%, #ebe0ff 55%, #e0d0ff 100%);
+  color: #1a0a4a;
+}
+@keyframes giveaway-banner-shine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 /* Prevent Legendary item cards from shrinking on small displays (banner no longer steals space) */
 #legendary .cards .card {
   min-width: min(100%, 280px);

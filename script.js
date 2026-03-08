@@ -395,6 +395,34 @@ function renderSection(title, items) {
     renderCrewLogosSection(items);
   } else if (title === "Legendary") {
     renderLegendarySectionWithBanner(items);
+  } else if (title === "Omega") {
+    const html = `
+      <section class="section" id="${slugify("Omega")}">
+        <h2>Omega</h2>
+        <div class="cards">
+          ${items.map(createCard).join("")}
+        </div>
+        <div class="legendary-banner giveaway-banner--red" id="omega-anaconda-banner" style="display: none;">
+          <p class="legendary-banner-text">We are also currently running an Anaconda giveaway in our Discord server.</p>
+          <a href="https://discord.gg/nKKkXyqCsv" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+        </div>
+      </section>
+    `;
+    document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  } else if (title === "Epic") {
+    const html = `
+      <section class="section" id="${slugify("Epic")}">
+        <h2>Epic</h2>
+        <div class="cards">
+          ${items.map(createCard).join("")}
+        </div>
+        <div class="legendary-banner giveaway-banner--purple" id="epic-firework-banner" style="display: none;">
+          <p class="legendary-banner-text">We are giving away a Firework Launcher in our Discord server.</p>
+          <a href="https://discord.gg/8AUjJu9jnr" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+        </div>
+      </section>
+    `;
+    document.getElementById("sections").insertAdjacentHTML("beforeend", html);
   } else {
     const html = `
       <section class="section" id="${slugify(title)}">
@@ -1048,6 +1076,23 @@ async function loadTopDonators() {
   }
 }
 
+// Show/hide Epic/Omega giveaway banners from Website Configs (rows: Anaconda, Fireworkv; column Show = Yes/No)
+function applyBannerConfig(rows) {
+  if (!rows || !rows.length) return;
+  var showAnaconda = false;
+  var showFirework = false;
+  rows.forEach(function (r) {
+    var name = (r.Title || r.Name || '').toString().trim();
+    var show = (r.Show || r.Enabled || '').toString().trim().toLowerCase();
+    if (name === "Anaconda") showAnaconda = /^(yes|1|true|on)$/.test(show);
+    if (name === "Fireworkv") showFirework = /^(yes|1|true|on)$/.test(show);
+  });
+  var anacondaEl = document.getElementById('omega-anaconda-banner');
+  var fireworkEl = document.getElementById('epic-firework-banner');
+  if (anacondaEl) anacondaEl.style.display = showAnaconda ? 'flex' : 'none';
+  if (fireworkEl) fireworkEl.style.display = showFirework ? 'flex' : 'none';
+}
+
 // Fetch and display recent value changes from spreadsheet (sheet: "Website Configs", columns: Title, Date, Text, Color)
 async function loadValueChanges() {
   var listEl = document.getElementById('value-changes-list');
@@ -1058,7 +1103,10 @@ async function loadValueChanges() {
       listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
       return;
     }
+    applyBannerConfig(rows);
     var filtered = rows.filter(function (r) {
+      var name = (r.Title || r.Name || '').toString().trim();
+      if (name === "Anaconda" || name === "Fireworkv") return false;
       var t = (r.Title || r.Date || r.Text || '').toString().trim();
       return t.length > 0;
     });
