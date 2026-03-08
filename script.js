@@ -1107,6 +1107,38 @@ function applyBannerConfig(rows) {
   var fireworkEl = document.getElementById('epic-firework-banner');
   if (anacondaEl) anacondaEl.style.display = showAnaconda ? 'flex' : 'none';
   if (fireworkEl) fireworkEl.style.display = showFirework ? 'flex' : 'none';
+
+  var giveawayIconUrl = "https://i.ibb.co/GfDf7F5h/sdadsdssad.png";
+  var omegaSection = document.getElementById("omega");
+  var epicSection = document.getElementById("epic");
+  if (omegaSection) {
+    var anacondaCard = omegaSection.querySelector('.card[data-name="Anaconda"]');
+    applyCardGiveawayIcon(anacondaCard, showAnaconda, giveawayIconUrl);
+  }
+  if (epicSection) {
+    var fireworkCard = epicSection.querySelector('.card[data-name="Firework Launcher"]');
+    applyCardGiveawayIcon(fireworkCard, showFirework, giveawayIconUrl);
+  }
+}
+
+function applyCardGiveawayIcon(card, show, iconUrl) {
+  if (!card) return;
+  var existing = card.querySelector(".card-giveaway-icon");
+  if (show) {
+    if (existing) {
+      existing.style.display = "";
+      return;
+    }
+    var wrap = document.createElement("div");
+    wrap.className = "card-giveaway-icon";
+    var img = document.createElement("img");
+    img.src = iconUrl;
+    img.alt = "";
+    wrap.appendChild(img);
+    card.appendChild(wrap);
+  } else {
+    if (existing) existing.remove();
+  }
 }
 
 // Fetch and display recent value changes from spreadsheet (sheet: "Website Configs", columns: Title, Date, Text, Color)

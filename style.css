@@ -141,6 +141,23 @@ a { color: #fff; text-decoration: none; }
   position: relative;
 }
 
+/* Giveaway icon on item card when banner is active (Anaconda / Firework Launcher) */
+.card-giveaway-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  z-index: 2;
+  pointer-events: none;
+}
+.card-giveaway-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .card-left {
   background: #1f2a38;
   border-radius: 8px;
@@ -635,9 +652,9 @@ a { color: #fff; text-decoration: none; }
   50% { background-position: 100% 50%; }
 }
 
-/* Legendary section banner: smaller text so button + members stay on one line */
+/* Legendary section banner: text size so button + members stay on one line */
 #legendary .legendary-banner .legendary-banner-text {
-  font-size: clamp(0.78rem, 1.1vw + 0.5rem, 0.95rem);
+  font-size: clamp(0.82rem, 1.2vw + 0.55rem, 1.02rem);
 }
 
 /* Omega – red giveaway banner (Anaconda) */
