@@ -635,6 +635,11 @@ a { color: #fff; text-decoration: none; }
   50% { background-position: 100% 50%; }
 }
 
+/* Legendary section banner: smaller text so button + members stay on one line */
+#legendary .legendary-banner .legendary-banner-text {
+  font-size: clamp(0.78rem, 1.1vw + 0.5rem, 0.95rem);
+}
+
 /* Omega – red giveaway banner (Anaconda) */
 .legendary-banner.giveaway-banner--red {
   border-color: rgba(220, 53, 69, 0.5);
@@ -645,7 +650,7 @@ a { color: #fff; text-decoration: none; }
 }
 .legendary-banner.giveaway-banner--red .legendary-banner-text {
   white-space: normal;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-width: 0;
   text-align: left;
 }

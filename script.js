@@ -450,7 +450,7 @@ function renderLegendarySectionWithBanner(items) {
         ${items.map(createCard).join("")}
       </div>
       <div class="legendary-banner">
-        <p class="legendary-banner-text">We <strong>giveaway</strong> a <strong>Legendary gun</strong> in our Discord server EVERY DAY!</p>
+        <p class="legendary-banner-text">We <strong>giveaway</strong> a <strong>Legendary gun</strong> in our Discord server every day!</p>
         <div class="legendary-banner-right">
           <a href="https://discord.gg/scgqMpPAC6" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
           <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
