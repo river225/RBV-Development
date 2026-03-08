@@ -4309,6 +4309,10 @@ body[data-theme="pink"] .home-divider {
   align-items: center;
   margin-right: 12px;
 }
+body.themes-disabled .theme-switcher {
+  display: none !important;
+  margin: 0 !important;
+}
 .theme-switcher-btn {
   width: 26px;
   height: 26px;

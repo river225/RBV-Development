@@ -1301,9 +1301,11 @@ function applyPinkThemeDividers() {
 function initThemeSwitcher() {
   if (THEMES_DISABLED) {
     document.body.removeAttribute('data-theme');
+    document.body.classList.add('themes-disabled');
     applyPinkThemeDividers();
     return;
   }
+  document.body.classList.remove('themes-disabled');
   var saved = localStorage.getItem('bsv-theme') || 'default';
   // Apply saved theme: '' for default, or specific theme name (e.g. 'red', 'pink', 'purple')
   if (saved === 'pink' || saved === 'red' || saved === 'purple') {
