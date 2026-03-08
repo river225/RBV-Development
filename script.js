@@ -403,9 +403,11 @@ function renderSection(title, items) {
           ${items.map(createCard).join("")}
         </div>
         <div class="legendary-banner giveaway-banner--red" id="omega-anaconda-banner" style="display: none;">
-          <p class="legendary-banner-text">We are doing an <strong>Anaconda giveaway</strong> in our Discord server.</p>
-          <a href="https://discord.gg/nKKkXyqCsv" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
-          <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
+          <p class="legendary-banner-text">Join our <strong>Anaconda giveaway</strong> in our Discord server!</p>
+          <div class="legendary-banner-right">
+            <a href="https://discord.gg/nKKkXyqCsv" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+            <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
+          </div>
         </div>
       </section>
     `;
@@ -418,9 +420,11 @@ function renderSection(title, items) {
           ${items.map(createCard).join("")}
         </div>
         <div class="legendary-banner giveaway-banner--purple" id="epic-firework-banner" style="display: none;">
-          <p class="legendary-banner-text">We are doing a <strong>Firework Launcher giveaway</strong> in our Discord server.</p>
-          <a href="https://discord.gg/8AUjJu9jnr" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
-          <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
+          <p class="legendary-banner-text">Join our <strong>Firework Launcher giveaway</strong> in our Discord server!</p>
+          <div class="legendary-banner-right">
+            <a href="https://discord.gg/8AUjJu9jnr" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+            <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
+          </div>
         </div>
       </section>
     `;
@@ -447,8 +451,10 @@ function renderLegendarySectionWithBanner(items) {
       </div>
       <div class="legendary-banner">
         <p class="legendary-banner-text">We giveaway 1 legendary gun in our discord server every day!</p>
-        <a href="https://discord.gg/scgqMpPAC6" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
-        <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
+        <div class="legendary-banner-right">
+          <a href="https://discord.gg/scgqMpPAC6" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+          <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
+        </div>
       </div>
     </section>
   `;

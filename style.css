@@ -566,6 +566,14 @@ a { color: #fff; text-decoration: none; }
   flex: 1 1 auto;
   min-width: 0;
 }
+.legendary-banner-right {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
 .legendary-banner-btn {
   display: inline-block;
   flex-shrink: 0;
