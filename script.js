@@ -1107,49 +1107,6 @@ function applyBannerConfig(rows) {
   var fireworkEl = document.getElementById('epic-firework-banner');
   if (anacondaEl) anacondaEl.style.display = showAnaconda ? 'flex' : 'none';
   if (fireworkEl) fireworkEl.style.display = showFirework ? 'flex' : 'none';
-
-  var giveawayIconUrl = "https://i.ibb.co/GfDf7F5h/sdadsdssad.png";
-  var omegaSection = document.getElementById("omega");
-  var epicSection = document.getElementById("epic");
-  if (omegaSection) {
-    var anacondaCard = findCardByName(omegaSection, "Anaconda");
-    applyCardGiveawayIcon(anacondaCard, showAnaconda, giveawayIconUrl);
-  }
-  if (epicSection) {
-    var fireworkCard = findCardByName(epicSection, "Firework Launcher");
-    applyCardGiveawayIcon(fireworkCard, showFirework, giveawayIconUrl);
-  }
-}
-
-function findCardByName(section, name) {
-  if (!section || !name) return null;
-  var cards = section.querySelectorAll(".card");
-  var want = name.toLowerCase().trim();
-  for (var i = 0; i < cards.length; i++) {
-    var n = (cards[i].getAttribute("data-name") || "").toLowerCase().trim();
-    if (n === want) return cards[i];
-  }
-  return section.querySelector('.card[data-name="' + name.replace(/"/g, '\\"') + '"]');
-}
-
-function applyCardGiveawayIcon(card, show, iconUrl) {
-  if (!card) return;
-  var existing = card.querySelector(".card-giveaway-icon");
-  if (show) {
-    if (existing) {
-      existing.style.display = "";
-      return;
-    }
-    var wrap = document.createElement("div");
-    wrap.className = "card-giveaway-icon";
-    var img = document.createElement("img");
-    img.src = iconUrl;
-    img.alt = "";
-    wrap.appendChild(img);
-    card.appendChild(wrap);
-  } else {
-    if (existing) existing.remove();
-  }
 }
 
 // Fetch and display recent value changes from spreadsheet (sheet: "Website Configs", columns: Title, Date, Text, Color)
@@ -1320,7 +1277,15 @@ if (window.innerWidth <= 430) {
 }
 
 /* ========== PINK WEBSITE THEME - theme switcher (remove with theme section in style.css) ========== */
+var THEMES_DISABLED = true; /* Set to false to re-enable theme switcher */
+
 function applyPinkThemeDividers() {
+  if (THEMES_DISABLED) {
+    document.querySelectorAll('.home-divider').forEach(function(el) {
+      el.style.removeProperty('background');
+    });
+    return;
+  }
   var theme = document.body.getAttribute('data-theme');
   var gradient = theme === 'pink'
     ? 'linear-gradient(90deg, transparent, #d0a8b8, transparent)'
@@ -1334,6 +1299,11 @@ function applyPinkThemeDividers() {
   });
 }
 function initThemeSwitcher() {
+  if (THEMES_DISABLED) {
+    document.body.removeAttribute('data-theme');
+    applyPinkThemeDividers();
+    return;
+  }
   var saved = localStorage.getItem('bsv-theme') || 'default';
   // Apply saved theme: '' for default, or specific theme name (e.g. 'red', 'pink', 'purple')
   if (saved === 'pink' || saved === 'red' || saved === 'purple') {
