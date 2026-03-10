@@ -157,7 +157,9 @@ a { color: #fff; text-decoration: none; }
   z-index: 5;
 }
 
-/* No hover/active visual effects on the giveaway icon */
+.card-giveaway-trigger:hover {
+  transform: scale(1.08) translateY(-1px);
+}
 
 .card-left {
   background: #1f2a38;
@@ -1574,7 +1576,7 @@ a { color: #fff; text-decoration: none; }
 .richest-card {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #1a2332 0%, #2a3444 100%);
+  background: #0d1419;
   border: 3px solid;
   border-radius: 12px;
   padding: 16px 20px;
@@ -3458,7 +3460,7 @@ body[data-theme="red"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="red"] .richest-card {
-  background: linear-gradient(135deg, #291212 0%, #351717 100%) !important;
+  background: #2a1515 !important;
 }
 body[data-theme="red"] .profile-link {
   color: #f0b0b0 !important;
@@ -3865,7 +3867,7 @@ body[data-theme="purple"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="purple"] .richest-card {
-  background: linear-gradient(135deg, #1e1230 0%, #28183c 100%) !important;
+  background: #261835 !important;
 }
 body[data-theme="purple"] .profile-link {
   color: #d3bff5 !important;
@@ -4233,7 +4235,7 @@ body[data-theme="pink"] .richest-search {
   border-color: #000000 !important;
 }
 body[data-theme="pink"] .richest-card {
-  background: linear-gradient(135deg, #3d2a35 0%, #4a3540 100%) !important;
+  background: #352830 !important;
 }
 body[data-theme="pink"] .profile-link {
   color: #d8b0c0 !important;
