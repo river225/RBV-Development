@@ -197,6 +197,7 @@ function createCard(item) {
   const ranged = safe(item["Ranged Value"]);
   const durability = safe(item["Durability"]);
   const internalValue = safe(item["Internal Value"]);
+  const giveawayFlag = safe(item["Giveaway"]);
 
 
   // Simple image tag (no broken overlay handling)
@@ -272,6 +273,8 @@ if (durability && durability.includes('/') && internalValue) {
   pawnAmount = `$${pawnAmount.toLocaleString()}`;
 }
   
+  const hasGiveaway = giveawayFlag && giveawayFlag.toString().trim().toLowerCase() === 'yes';
+  
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
          data-avg="${escapeAttr(avg)}" 
@@ -294,8 +297,33 @@ if (durability && durability.includes('/') && internalValue) {
           </div>
         ` : ''}
       </div>
+      ${hasGiveaway ? `
+        <button class="card-giveaway-trigger" type="button" aria-label="This item has an active giveaway" data-item-name="${escapeAttr(name)}"></button>
+      ` : ''}
     </div>
   `;
+}
+
+// Global giveaway modal (created once on demand)
+function ensureGiveawayModal() {
+  if (document.getElementById('giveaway-modal')) return;
+  const modal = document.createElement('div');
+  modal.id = 'giveaway-modal';
+  modal.className = 'giveaway-modal';
+  modal.innerHTML = `
+    <div class="giveaway-modal-backdrop" data-giveaway-close></div>
+    <div class="giveaway-modal-content">
+      <button class="giveaway-modal-close" type="button" aria-label="Close giveaway info" data-giveaway-close>&times;</button>
+      <h2 class="giveaway-modal-title">Giveaway Active!</h2>
+      <p class="giveaway-modal-text">
+        We are currently doing a giveaway for this item in our Discord server, Join Now!
+      </p>
+      <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="giveaway-modal-button">
+        Enter this Giveaway
+      </a>
+    </div>
+  `;
+  document.body.appendChild(modal);
 }
 
 function createCrewLogoCard(item) {
@@ -1000,6 +1028,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('loading-screen').style.display = 'none';
   }, 300);
 
+});
+
+// Giveaway card click handling
+document.addEventListener('click', function(e) {
+  const trigger = e.target.closest('.card-giveaway-trigger');
+  if (!trigger) return;
+  ensureGiveawayModal();
+  const modal = document.getElementById('giveaway-modal');
+  if (!modal) return;
+  modal.classList.add('visible');
+});
+
+document.addEventListener('click', function(e) {
+  if (e.target.matches('[data-giveaway-close]') || e.target.closest('[data-giveaway-close]')) {
+    const modal = document.getElementById('giveaway-modal');
+    if (modal) modal.classList.remove('visible');
+  }
 });
 
 function openRiverLinks(e) {

@@ -141,6 +141,37 @@ a { color: #fff; text-decoration: none; }
   position: relative;
 }
 
+/* Giveaway gift icon on item card (bottom-right) */
+.card-giveaway-trigger {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: transparent url("https://i.ibb.co/WW79gbn7/edfedfv.png") center center / contain no-repeat;
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.6),
+    0 0 14px rgba(51, 204, 230, 0.9);
+  border-radius: 50%;
+  outline: none;
+  z-index: 5;
+}
+
+.card-giveaway-trigger:hover {
+  transform: scale(1.08) translateY(-1px);
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(51, 204, 230, 1);
+}
+
+.card-giveaway-trigger:active {
+  transform: scale(0.98) translateY(0);
+}
+
 .card-left {
   background: #1f2a38;
   border-radius: 8px;
@@ -702,6 +733,82 @@ a { color: #fff; text-decoration: none; }
 .card-info label, .card-info .section-label, .tax-calculator label { text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000; }
 #floating-text-left { position: fixed; bottom: 6px; left: 10px; color: white; font-weight: 500; font-family: "Segoe UI", Roboto, Arial, sans-serif; font-size: 0.85rem; line-height: 1.25; z-index: 1000; text-align: left; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
 #floating-text-left .discord-line { font-weight: bold; font-size: 0.9rem; margin-top: 3px; text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; }
+
+/* Giveaway modal */
+.giveaway-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.giveaway-modal.visible {
+  display: flex;
+}
+
+.giveaway-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.giveaway-modal-content {
+  position: relative;
+  background: #101722;
+  border-radius: 14px;
+  border: 2px solid #33cce6;
+  padding: 22px 24px 20px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 0 18px rgba(51, 204, 230, 0.6);
+  color: #ffffff;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  z-index: 1;
+}
+
+.giveaway-modal-title {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #33cce6;
+}
+
+.giveaway-modal-text {
+  margin: 0 0 18px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.giveaway-modal-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #33cce6, #5bc5de);
+  color: #0a0f16;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.giveaway-modal-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+.giveaway-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
 
 .blockspin-header { font-size: 12rem; font-weight: normal; text-align: center; color: white; font-family: 'Paytone One', sans-serif; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 6px #fff, 0 0 12px #fff, 0 0 18px #ccc; }
 .blockspin-header .spin-word { color: #ff1a1a; text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 0 10px #ff1a1a, 0 0 20px #ff3333, 0 0 30px #ff4d4d, 0 0 40px #ff6666, 0 0 55px #ff8080; animation: redNeonPulse 4s ease-in-out infinite alternate, redFlicker 10s infinite; }
