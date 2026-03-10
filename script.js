@@ -12,8 +12,7 @@ const SECTION_NAMES = [
   
   // EXTRAS
   "💰 Richest Players",
-  "Crew Logos",
-  "Trade List"
+  "Crew Logos"
 ];
 
 // Tax calculator: 40k drop → 29,091 received (confirmed). Above 40k (e.g. 41,250) still gives 29,091. MAX 40K PER DROP.
@@ -415,13 +414,6 @@ function renderSection(title, items) {
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
     return;
   }
-
-  // Virtual section: Trade List (no items needed)
-  if (title === "Trade List") {
-    renderTradeListSection();
-    return;
-  }
-
   if (!items || items.length === 0) return;
 
   if (title === "💰 Richest Players") {
@@ -477,122 +469,6 @@ function renderSection(title, items) {
   }
 }
 
-// TRADE LIST SECTION
-function renderTradeListSection() {
-  const sectionId = slugify("Trade List");
-  const html = `
-    <section class="section trade-list-section" id="${sectionId}">
-      <h2>Trade List</h2>
-      <div class="trade-list-wrapper">
-        <div class="trade-box" data-side="want">
-          <h3 class="trade-box-title">Items I want...</h3>
-          <div class="trade-items" id="trade-want-items"></div>
-        </div>
-
-        <div class="trade-box" data-side="give">
-          <h3 class="trade-box-title">Items I'll give...</h3>
-          <div class="trade-items" id="trade-give-items"></div>
-        </div>
-      </div>
-    </section>
-  `;
-  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
-}
-
-function normalizeTradeName(name) {
-  return (name || '').toString().trim();
-}
-
-function normalizeTradeDurability(side, name, durInput) {
-  const raw = (durInput || '').toString().trim();
-  if (raw) return raw;
-  const key = name.toLowerCase();
-  const base = ALL_ITEMS_BY_NAME[key];
-  const dur = base && base["Durability"] ? String(base["Durability"]).trim() : '';
-  return dur;
-}
-
-function addTradeItem(side) {
-  const searchId = side === 'want' ? 'trade-want-search' : 'trade-give-search';
-  const durId = side === 'want' ? 'trade-want-durability' : 'trade-give-durability';
-  const listId = side === 'want' ? 'trade-want-items' : 'trade-give-items';
-
-  const nameInput = document.getElementById(searchId);
-  const durInput = document.getElementById(durId);
-  if (!nameInput) return;
-
-  const rawName = normalizeTradeName(nameInput.value);
-  if (!rawName) return;
-
-  const key = rawName.toLowerCase();
-  const base = ALL_ITEMS_BY_NAME[key] || null;
-  const finalDur = normalizeTradeDurability(side, rawName, durInput ? durInput.value : '');
-
-  const container = document.getElementById(listId);
-  if (!container) return;
-
-  // Stack same item + same durability
-  const existing = Array.from(container.querySelectorAll('.trade-item-card')).find(el => {
-    return (el.getAttribute('data-name') || '').toLowerCase() === key &&
-           (el.getAttribute('data-durability') || '') === finalDur;
-  });
-
-  if (existing) {
-    const countSpan = existing.querySelector('.trade-item-count');
-    const current = parseInt(existing.getAttribute('data-count') || '1', 10) || 1;
-    const next = current + 1;
-    existing.setAttribute('data-count', String(next));
-    if (countSpan) {
-      countSpan.textContent = 'x' + next;
-    }
-  } else {
-    const card = document.createElement('div');
-    card.className = 'trade-item-card';
-    card.setAttribute('data-name', rawName);
-    card.setAttribute('data-durability', finalDur);
-    card.setAttribute('data-count', '1');
-
-    const displayDur = finalDur ? `Durability: ${finalDur}` : (base && base["Durability"] ? `Durability: ${base["Durability"]}` : '');
-
-    card.innerHTML = `
-      <div class="trade-item-main">
-        <div class="trade-item-name">${rawName}</div>
-        ${displayDur ? `<div class="trade-item-durability">${displayDur}</div>` : ''}
-      </div>
-      <div class="trade-item-count"></div>
-    `;
-    container.appendChild(card);
-  }
-
-  // Clear inputs after add
-  nameInput.value = '';
-  if (durInput) durInput.value = '';
-}
-
-function addTradeMoney(side) {
-  const moneyId = side === 'want' ? 'trade-want-money' : 'trade-give-money';
-  const listId = side === 'want' ? 'trade-want-items' : 'trade-give-items';
-  const moneyInput = document.getElementById(moneyId);
-  const container = document.getElementById(listId);
-  if (!moneyInput || !container) return;
-
-  const raw = moneyInput.value.trim();
-  if (!raw) return;
-  const amount = Number(raw);
-  if (!isFinite(amount) || amount <= 0) return;
-
-  const card = document.createElement('div');
-  card.className = 'trade-item-card trade-money-card';
-  card.innerHTML = `
-    <div class="trade-item-main">
-      <div class="trade-item-name">Money</div>
-      <div class="trade-item-durability">$${amount.toLocaleString()}</div>
-    </div>
-  `;
-  container.appendChild(card);
-
-  moneyInput.value = '';
-}
 
 function renderLegendarySectionWithBanner(items) {
   const html = `
@@ -1080,9 +956,6 @@ function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
 function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
 
-// Global cache of all item rows by lowercase name (for Trade List search)
-const ALL_ITEMS_BY_NAME = {};
-
 // INIT - PARALLEL LOADING FOR SPEED 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
@@ -1119,9 +992,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (sec === "💰 Richest Players") {
         items = await fetchRichestPlayers(); // NEW spreadsheet
         console.log(`Got ${items.length} items for ${sec} from NEW spreadsheet`);
-      } else if (sec === "Trade List") {
-        // Virtual section (no sheet)
-        items = [];
       } else {
         items = await fetchSheet(sec); // OLD spreadsheet
         console.log(`Got ${items.length} items for ${sec} from OLD spreadsheet`);
@@ -1144,17 +1014,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   // Render in order
   results.forEach(({ section, items }) => {
-    // Build lookup map for Trade List from all normal item sections
-    if (items && items.length && section !== "💰 Richest Players" && section !== "Crew Logos" && section !== "Trade List") {
-      items.forEach(item => {
-        const n = safe(item["Name"]).toString().trim();
-        if (!n) return;
-        const key = n.toLowerCase();
-        if (!ALL_ITEMS_BY_NAME[key]) {
-          ALL_ITEMS_BY_NAME[key] = item;
-        }
-      });
-    }
     renderSection(section, items);
   });
 
