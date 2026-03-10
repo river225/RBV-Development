@@ -161,6 +161,10 @@ a { color: #fff; text-decoration: none; }
   z-index: 5;
 }
 
+.card-giveaway-trigger:hover {
+  transform: scale(1.08) translateY(-1px);
+}
+
 .card-giveaway-trigger:active {
   transform: scale(0.98) translateY(0);
 }
@@ -744,7 +748,7 @@ a { color: #fff; text-decoration: none; }
 .giveaway-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .giveaway-modal-content {
