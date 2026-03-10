@@ -2189,7 +2189,7 @@ a { color: #fff; text-decoration: none; }
 .nav-left a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   transition: color 0.3s ease;
   text-shadow: 1px 1px 0 #000;
