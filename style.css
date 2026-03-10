@@ -2137,7 +2137,7 @@ a { color: #fff; text-decoration: none; }
   background: #0a0f16;
   border-bottom: 2px solid #000;
   z-index: 1000;
-  padding: -2px 0;
+  padding: 4px 0;
 }
 
 .nav-container-full {
@@ -2156,13 +2156,13 @@ a { color: #fff; text-decoration: none; }
 }
 
 .nav-logo-img {
-  height: 80px;
+  height: 60px;
   width: auto;
   object-fit: contain;
 }
 
 .nav-title {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: bold;
   font-family: 'Paytone One', sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -2761,9 +2761,9 @@ body {
     display: none !important;
   }
   
-  /* Increase "BlockSpin Values" text size (slightly on small screens) */
+  /* Slightly larger \"BlockSpin Values\" text on small screens (but still compact) */
   .nav-title {
-    font-size: 1.9rem;
+    font-size: 1.7rem;
   }
   
   /* Center home page content */
