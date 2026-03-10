@@ -2162,7 +2162,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 .nav-title {
-  font-size: 2.3rem;
+  font-size: 1.7rem;
   font-weight: bold;
   font-family: 'Paytone One', sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -2195,7 +2195,7 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 1px 1px 0 #000;
 }
 
-.nav-left a:hover {
+.nav-left a:not(.nav-brand):hover {
   color: #33cce6;
 }
 
@@ -2761,9 +2761,9 @@ body {
     display: none !important;
   }
   
-  /* Increase "BlockSpin Values" text size */
+  /* Increase "BlockSpin Values" text size (slightly on small screens) */
   .nav-title {
-    font-size: 2.1rem;
+    font-size: 1.9rem;
   }
   
   /* Center home page content */
