@@ -2162,10 +2162,22 @@ a { color: #fff; text-decoration: none; }
 }
 
 .nav-title {
-  font-size: 1.7rem;
+  font-size: 2.3rem;
   font-weight: bold;
   font-family: 'Paytone One', sans-serif;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-brand:hover {
+  text-decoration: none;
 }
 
 .nav-separator {
@@ -2751,7 +2763,7 @@ body {
   
   /* Increase "BlockSpin Values" text size */
   .nav-title {
-    font-size: 2rem;
+    font-size: 2.1rem;
   }
   
   /* Center home page content */
