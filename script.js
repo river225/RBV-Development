@@ -486,49 +486,17 @@ function renderTradeListSection() {
       <div class="trade-list-wrapper">
         <div class="trade-box" data-side="want">
           <h3 class="trade-box-title">Items I want...</h3>
-          <div class="trade-box-controls">
-            <input type="text" class="trade-search-input" id="trade-want-search" placeholder="Search item name..." />
-            <input type="text" class="trade-durability-input" id="trade-want-durability" placeholder="Durability (e.g. 80/100, optional)" />
-            <button type="button" class="trade-add-item-btn" data-side="want">Add item</button>
-          </div>
-          <div class="trade-box-money">
-            <input type="number" class="trade-money-input" id="trade-want-money" placeholder="Add money amount (e.g. 500000)" min="0" />
-            <button type="button" class="trade-add-money-btn" data-side="want">Add money</button>
-          </div>
           <div class="trade-items" id="trade-want-items"></div>
         </div>
 
         <div class="trade-box" data-side="give">
           <h3 class="trade-box-title">Items I'll give...</h3>
-          <div class="trade-box-controls">
-            <input type="text" class="trade-search-input" id="trade-give-search" placeholder="Search item name..." />
-            <input type="text" class="trade-durability-input" id="trade-give-durability" placeholder="Durability (e.g. 80/100, optional)" />
-            <button type="button" class="trade-add-item-btn" data-side="give">Add item</button>
-          </div>
-          <div class="trade-box-money">
-            <input type="number" class="trade-money-input" id="trade-give-money" placeholder="Add money amount (e.g. 500000)" min="0" />
-            <button type="button" class="trade-add-money-btn" data-side="give">Add money</button>
-          </div>
           <div class="trade-items" id="trade-give-items"></div>
         </div>
       </div>
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
-
-  // Wire up buttons
-  document.querySelectorAll('.trade-add-item-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const side = this.getAttribute('data-side');
-      addTradeItem(side);
-    });
-  });
-  document.querySelectorAll('.trade-add-money-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const side = this.getAttribute('data-side');
-      addTradeMoney(side);
-    });
-  });
 }
 
 function normalizeTradeName(name) {
