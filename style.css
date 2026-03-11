@@ -368,69 +368,7 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; 
 }
 
-/* Crew Logos: link to alternate test layout page */
-.crew-logos-test-link {
-  margin: 20px 0 10px;
-  text-align: center;
-}
-
-.crew-logos-test-btn {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: 2px solid #33cce6;
-  background: #141d28;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(51, 204, 230, 0.4);
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.crew-logos-test-btn:hover {
-  background: #1f2a38;
-  transform: translateY(-1px);
-  box-shadow: 0 0 14px rgba(51, 204, 230, 0.6);
-}
-
-/* Crew Logos: (on main page) uses the normal .cards grid; no special scrolling overrides */
-
-/* Crew Logos TEST PAGE: horizontally scrollable rows per header, but only on crew-logos-test.html */
-body.crew-logos-test-page #crew-logos .cards {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 16px;
-  overflow-x: auto;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: 10px 10px 14px;
-  border: 2px solid #33cce6;
-  border-radius: 10px;
-  background: rgba(10, 15, 22, 0.9);
-  margin-bottom: 18px;
-}
-
-body.crew-logos-test-page #crew-logos .crew-logo-card {
-  flex: 0 0 210px;
-  max-width: 210px;
-}
-
-body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
-  height: 8px;
-}
-
-body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-thumb {
-  background: rgba(51, 204, 230, 0.7);
-  border-radius: 999px;
-}
-
-/* Crew Logos test: horizontally scrollable rows per header, scoped to this section */
+/* Crew Logos test: (no separate page anymore; keeping normal grid layout) */
 .hidden { 
   display: none !important; 
 }
