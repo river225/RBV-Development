@@ -138,21 +138,23 @@ body.crew-logos-test-page .test-main {
   padding: 0 20px;
 }
 
-/* Sidebar: own nav, fixed width – same visual size as main page (200px) */
+/* Sidebar: own nav – match main page exact size (220px nav = same as main visual weight) */
 body.crew-logos-test-page .test-nav {
-  width: 200px;
+  width: 220px;
   flex-shrink: 0;
   padding: 8px;
   border-right: 3px solid #000000;
   background: transparent;
+  box-sizing: border-box;
 }
 body.crew-logos-test-page .test-nav button {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 14px 20px;
+  box-sizing: border-box;
+  padding: 16px 24px;
   margin-bottom: 8px;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   background: #141d28;
@@ -161,7 +163,7 @@ body.crew-logos-test-page .test-nav button {
   cursor: pointer;
   color: #fff;
   text-align: left;
-  min-height: 58px;
+  min-height: 62px;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   transition: all 0.3s ease;
 }
