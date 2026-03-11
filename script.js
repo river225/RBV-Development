@@ -582,6 +582,7 @@ function renderScammerSection(items) {
 // SECTION NAVIGATION 
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
+  const isCrewLogosTestPage = document.body.classList.contains('crew-logos-test-page');
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
@@ -600,6 +601,16 @@ function initSectionsNav() {
     btn.textContent = name;
     btn.addEventListener("click", () => showSection(name));
     nav.appendChild(btn);
+
+    // On the main page only, add a "Crew Logos test" button directly under Crew Logos
+    if (!isCrewLogosTestPage && name === "Crew Logos") {
+      const testBtn = document.createElement("button");
+      testBtn.textContent = "Crew Logos test";
+      testBtn.addEventListener("click", () => {
+        window.location.href = "crew-logos-test.html#sec=" + encodeURIComponent("Crew Logos");
+      });
+      nav.appendChild(testBtn);
+    }
   });
 }
 

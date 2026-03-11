@@ -127,6 +127,39 @@ a { color: #fff; text-decoration: none; }
   overflow: hidden; 
 }
 
+/* Crew Logos TEST PAGE: horizontally scrollable rows per header, but only on crew-logos-test.html */
+body.crew-logos-test-page #crew-logos .cards {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px 14px;
+  border: 2px solid #33cce6;
+  border-radius: 10px;
+  background: rgba(10, 15, 22, 0.9);
+  margin-bottom: 18px;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card {
+  flex: 0 0 210px;
+  max-width: 210px;
+}
+
+body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
+  height: 8px;
+}
+
+body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-thumb {
+  background: rgba(51, 204, 230, 0.7);
+  border-radius: 999px;
+}
+
 /* Card */
 .card { 
   flex: 1 1 calc(50% - 16px); 
