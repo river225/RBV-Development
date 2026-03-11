@@ -527,13 +527,6 @@ function renderCrewLogosSection(items) {
       `;
     }
   });
-
-  // Link to dedicated test page with alternate layout
-  html += `
-    <div class="crew-logos-test-link">
-      <a href="crew-logos-test.html" class="crew-logos-test-btn">Open Crew Logos test page</a>
-    </div>
-  `;
   
   html += `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -607,6 +600,16 @@ function initSectionsNav() {
     btn.textContent = name;
     btn.addEventListener("click", () => showSection(name));
     nav.appendChild(btn);
+
+    // After the main Crew Logos button, add a second button that opens the test page
+    if (name === "Crew Logos") {
+      const testBtn = document.createElement("button");
+      testBtn.textContent = "Crew Logos test";
+      testBtn.addEventListener("click", () => {
+        window.location.href = "crew-logos-test.html";
+      });
+      nav.appendChild(testBtn);
+    }
   });
 }
 
