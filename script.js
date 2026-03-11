@@ -520,13 +520,9 @@ function renderCrewLogosSection(items) {
   Object.keys(grouped).forEach(header => {
     if (grouped[header].length > 0) {
       html += `
-        <div class="crew-group">
-          <div class="crew-header">${header}</div>
-          <div class="crew-logos-scroll">
-            <div class="cards crew-logos-row">
-              ${grouped[header].map(createCrewLogoCard).join("")}
-            </div>
-          </div>
+        <div class="crew-header">${header}</div>
+        <div class="cards crew-logos-row">
+          ${grouped[header].map(createCrewLogoCard).join("")}
         </div>
       `;
     }
