@@ -12,7 +12,8 @@ const SECTION_NAMES = [
   
   // EXTRAS
   "💰 Richest Players",
-  "Crew Logos"
+  "Crew Logos",
+  "Crew Logos test"
 ];
 
 // Tax calculator: 40k drop → 29,091 received (confirmed). Above 40k (e.g. 41,250) still gives 29,091. MAX 40K PER DROP.
@@ -420,6 +421,8 @@ function renderSection(title, items) {
     renderRichestPlayersSection(items);
   } else if (title === "Crew Logos") {
     renderCrewLogosSection(items);
+  } else if (title === "Crew Logos test") {
+    renderCrewLogosTestSection(items);
   } else if (title === "Legendary") {
     renderLegendarySectionWithBanner(items);
   } else if (title === "Omega") {
@@ -532,6 +535,40 @@ function renderCrewLogosSection(items) {
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
+// Crew Logos test: horizontally scrollable rows per header,
+// without touching global .cards or item section buttons.
+function renderCrewLogosTestSection(items) {
+  const grouped = {};
+  
+  items.forEach(item => {
+    const header = safe(item["Header"]) || "Uncategorized";
+    if (!grouped[header]) {
+      grouped[header] = [];
+    }
+    if (item["Name"]) {
+      grouped[header].push(item);
+    }
+  });
+
+  let html = `<section class="section" id="${slugify("Crew Logos test")}"><h2>Crew Logos test</h2>`;
+  
+  Object.keys(grouped).forEach(header => {
+    if (grouped[header].length > 0) {
+      html += `
+        <div class="crew-test-group">
+          <div class="crew-header">${header}</div>
+          <div class="crew-test-row">
+            ${grouped[header].map(createCrewLogoCard).join("")}
+          </div>
+        </div>
+      `;
+    }
+  });
+  
+  html += `</section>`;
+  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+}
+
 function renderScammerSection(items) {
   let html = `
     <section class="section" id="${slugify("Scammer List")}">
@@ -617,7 +654,7 @@ function showSection(name) {
    // Hide/show tax calculator and home value changes based on section (same slot: one or the other)
   const taxCalc = document.querySelector('.tax-calculator');
   const homeValueChanges = document.getElementById('home-value-changes');
-  const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+  const hiddenSections = ['Home', 'Crew Logos', 'Crew Logos test', 'Crate Game', '💰 Richest Players'];
   const isHome = name === 'Home';
   if (taxCalc) {
     if (hiddenSections.includes(name)) {
@@ -646,7 +683,7 @@ function showSection(name) {
   // Hide/show search bar based on section
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
-    const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+    const hiddenSearchSections = ['Home', 'Crew Logos', 'Crew Logos test', 'Crate Game', '💰 Richest Players'];
     if (hiddenSearchSections.includes(name)) {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
     } else {
@@ -992,6 +1029,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (sec === "💰 Richest Players") {
         items = await fetchRichestPlayers(); // NEW spreadsheet
         console.log(`Got ${items.length} items for ${sec} from NEW spreadsheet`);
+      } else if (sec === "Crew Logos test") {
+        // Reuse Crew Logos sheet for test layout
+        items = await fetchSheet("Crew Logos");
+        console.log(`Got ${items.length} items for ${sec} from Crew Logos sheet`);
       } else {
         items = await fetchSheet(sec); // OLD spreadsheet
         console.log(`Got ${items.length} items for ${sec} from OLD spreadsheet`);
