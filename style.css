@@ -281,12 +281,12 @@ a { color: #fff; text-decoration: none; }
 }
 
 
+/* Crew logo cards (base) */
 .crew-logo-card {
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
-  max-width: 210px;
-  min-width: 210px;
+  max-width: calc(33.33% - 16px);
   overflow: hidden;
   padding: 8px;
   min-height: 220px;
@@ -369,6 +369,10 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Crew Logos: make each header group a boxed, horizontally scrollable row */
+.section#crew-logos {
+  overflow: visible; /* allow the group box to show fully */
+}
+
 #crew-logos .crew-group {
   border: 2px solid #33cce6;
   border-radius: 10px;
@@ -388,6 +392,11 @@ a { color: #fff; text-decoration: none; }
   gap: 16px;
   overflow-x: auto;
   padding-bottom: 8px;
+}
+
+#crew-logos .crew-logos-row .crew-logo-card {
+  flex: 0 0 210px;
+  max-width: 210px;
 }
 
 #crew-logos .crew-logos-row::-webkit-scrollbar {
