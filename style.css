@@ -370,7 +370,10 @@ a { color: #fff; text-decoration: none; }
 
 /* Crew Logos: make each header group a boxed, horizontally scrollable row */
 #crew-logos {
-  overflow: hidden; /* prevent this section from pushing layout horizontally */
+  /* allow scroll containers inside to show fully, but keep within layout width */
+  overflow: visible;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 #crew-logos .crew-group {
@@ -403,6 +406,7 @@ a { color: #fff; text-decoration: none; }
   /* scrolling is handled by .crew-logos-scroll wrapper */
 }
 
+#crew-logos .crew-logos-row .card,
 #crew-logos .crew-logos-row .crew-logo-card {
   flex: 0 0 210px;
   max-width: 210px;
