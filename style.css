@@ -127,13 +127,6 @@ a { color: #fff; text-decoration: none; }
   overflow: hidden; 
 }
 
-/* Crew Logos TEST PAGE: hide search and right column; show section nav */
-body.crew-logos-test-page .search-container,
-body.crew-logos-test-page .tax-calculator,
-body.crew-logos-test-page .home-value-changes {
-  display: none !important;
-}
-
 /* Constrain section so scroll boxes don't overflow the page */
 body.crew-logos-test-page #crew-logos {
   min-width: 0;
@@ -141,39 +134,33 @@ body.crew-logos-test-page #crew-logos {
   overflow: hidden;
 }
 
-/* Each group = one box; inner row scrolls horizontally, narrower horizontally */
+/* Each group = one box; inner row scrolls horizontally (no impact on nav sizing) */
 body.crew-logos-test-page #crew-logos .cards {
   display: flex;
   flex-wrap: nowrap;
-  gap: 8px;
+  gap: 16px;
   overflow-x: auto;
   overflow-y: hidden;
   min-width: 0;
-  max-width: 60%;
-  width: 60%;
+  max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
-  padding: 6px 8px 8px;
-  border: 1px solid #33cce6;
-  border-radius: 6px;
+  padding: 10px 12px 12px;
+  border: 2px solid #33cce6;
+  border-radius: 10px;
   background: rgba(10, 15, 22, 0.9);
-  margin: 4px 0 10px auto; /* align to the right */
-}
-
-body.crew-logos-test-page #crew-logos .crew-header {
-  font-size: 0.9rem;
-  margin: 6px 0 4px 0;
-  padding: 4px 0;
+  margin: 10px 0;
 }
 
 /* Keep original vertical sizing; only control horizontal flow */
 body.crew-logos-test-page #crew-logos .crew-logo-card {
-  flex: 0 0 180px;
-  min-width: 180px;
-  max-width: 180px;
+  flex: 0 0 210px;
+  min-width: 210px;
+  max-width: 210px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
-  height: 6px;
+  height: 8px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-track {
