@@ -527,6 +527,13 @@ function renderCrewLogosSection(items) {
       `;
     }
   });
+
+  // Link to dedicated test page with alternate layout
+  html += `
+    <div class="crew-logos-test-link">
+      <a href="crew-logos-test.html" class="crew-logos-test-btn">Open Crew Logos test page</a>
+    </div>
+  `;
   
   html += `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
