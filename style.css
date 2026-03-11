@@ -156,7 +156,7 @@ body.crew-logos-test-page #crew-logos {
   overflow: hidden;
 }
 
-/* Each group = one box (half size); inner row scrolls horizontally */
+/* Each group = one box; inner row scrolls horizontally, narrower horizontally */
 body.crew-logos-test-page #crew-logos .cards {
   display: flex;
   flex-wrap: nowrap;
@@ -164,14 +164,14 @@ body.crew-logos-test-page #crew-logos .cards {
   overflow-x: auto;
   overflow-y: hidden;
   min-width: 0;
-  max-width: 100%;
-  width: 100%;
+  max-width: 60%;
+  width: 60%;
   box-sizing: border-box;
   padding: 6px 8px 8px;
   border: 1px solid #33cce6;
   border-radius: 6px;
   background: rgba(10, 15, 22, 0.9);
-  margin-bottom: 10px;
+  margin: 4px 0 10px auto; /* align to the right */
 }
 
 body.crew-logos-test-page #crew-logos .crew-header {
@@ -180,26 +180,11 @@ body.crew-logos-test-page #crew-logos .crew-header {
   padding: 4px 0;
 }
 
+/* Keep original vertical sizing; only control horizontal flow */
 body.crew-logos-test-page #crew-logos .crew-logo-card {
-  flex: 0 0 100px;
-  min-width: 100px;
-  max-width: 100px;
-  min-height: 120px;
-  padding: 4px;
-}
-
-body.crew-logos-test-page #crew-logos .crew-logo-card h3 {
-  font-size: 0.7rem;
-}
-
-body.crew-logos-test-page #crew-logos .crew-logo-card img {
-  width: 50px;
-  height: 50px;
-}
-
-body.crew-logos-test-page #crew-logos .crew-id,
-body.crew-logos-test-page #crew-logos .crew-id-container .copy-btn {
-  font-size: 0.65rem;
+  flex: 0 0 180px;
+  min-width: 180px;
+  max-width: 180px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
