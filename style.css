@@ -127,7 +127,7 @@ a { color: #fff; text-decoration: none; }
   overflow: hidden; 
 }
 
-/* Crew Logos TEST PAGE: hide search + right column; boxes scrollable, aligned right (same state as "boxes to the right, buttons wrong size") */
+/* Crew Logos TEST PAGE: static nav (same classes = same size as main); content only as big as needed */
 body.crew-logos-test-page .search-container,
 body.crew-logos-test-page .tax-calculator,
 body.crew-logos-test-page .home-value-changes {
@@ -141,15 +141,15 @@ body.crew-logos-test-page .main-container {
   padding-bottom: 40px;
 }
 
-/* Push main content to the right a little */
+/* Content area: only take the space it needs (no stretching) */
 body.crew-logos-test-page .sections {
-  flex: 1 1 100%;
+  flex: 0 1 auto;
   min-width: 0;
+  width: fit-content;
   max-width: 100%;
-  margin-left: auto;
 }
 
-/* Constrain section so scroll boxes don't overflow the page */
+/* Crew Logos section: don't grow beyond visible content */
 body.crew-logos-test-page #crew-logos {
   min-width: 0;
   max-width: 100%;
