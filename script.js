@@ -584,7 +584,6 @@ function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
   if (!nav) return;
   const isCrewLogosTestPage = document.body.classList.contains('crew-logos-test-page');
-  if (isCrewLogosTestPage) return;
 
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
@@ -601,7 +600,13 @@ function initSectionsNav() {
 
     const btn = document.createElement("button");
     btn.textContent = name;
-    btn.addEventListener("click", () => showSection(name));
+    if (isCrewLogosTestPage && name !== "Crew Logos") {
+      btn.addEventListener("click", () => {
+        window.location.href = "index.html#sec=" + encodeURIComponent(name);
+      });
+    } else {
+      btn.addEventListener("click", () => showSection(name));
+    }
     nav.appendChild(btn);
 
     // On the main page only, add a "Crew Logos test" button directly under Crew Logos

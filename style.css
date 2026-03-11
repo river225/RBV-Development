@@ -127,8 +127,7 @@ a { color: #fff; text-decoration: none; }
   overflow: hidden; 
 }
 
-/* Crew Logos TEST PAGE: no sidebar, no right column; only Crew Logos content */
-body.crew-logos-test-page .sections-nav,
+/* Crew Logos TEST PAGE: hide search and right column; show section nav */
 body.crew-logos-test-page .search-container,
 body.crew-logos-test-page .tax-calculator,
 body.crew-logos-test-page .home-value-changes {
@@ -142,10 +141,12 @@ body.crew-logos-test-page .main-container {
   padding-bottom: 40px;
 }
 
+/* Push main content to the right */
 body.crew-logos-test-page .sections {
   flex: 1 1 100%;
   min-width: 0;
   max-width: 100%;
+  margin-left: auto;
 }
 
 /* Constrain section so scroll boxes don't overflow the page */
@@ -155,32 +156,54 @@ body.crew-logos-test-page #crew-logos {
   overflow: hidden;
 }
 
-/* Each group = one box; inner row scrolls horizontally */
+/* Each group = one box (half size); inner row scrolls horizontally */
 body.crew-logos-test-page #crew-logos .cards {
   display: flex;
   flex-wrap: nowrap;
-  gap: 16px;
+  gap: 8px;
   overflow-x: auto;
   overflow-y: hidden;
   min-width: 0;
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
-  padding: 12px 14px 14px;
-  border: 2px solid #33cce6;
-  border-radius: 10px;
+  padding: 6px 8px 8px;
+  border: 1px solid #33cce6;
+  border-radius: 6px;
   background: rgba(10, 15, 22, 0.9);
-  margin-bottom: 18px;
+  margin-bottom: 10px;
+}
+
+body.crew-logos-test-page #crew-logos .crew-header {
+  font-size: 0.9rem;
+  margin: 6px 0 4px 0;
+  padding: 4px 0;
 }
 
 body.crew-logos-test-page #crew-logos .crew-logo-card {
-  flex: 0 0 200px;
-  min-width: 200px;
-  max-width: 200px;
+  flex: 0 0 100px;
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 120px;
+  padding: 4px;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card h3 {
+  font-size: 0.7rem;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card img {
+  width: 50px;
+  height: 50px;
+}
+
+body.crew-logos-test-page #crew-logos .crew-id,
+body.crew-logos-test-page #crew-logos .crew-id-container .copy-btn {
+  font-size: 0.65rem;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-track {
