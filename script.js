@@ -582,7 +582,7 @@ function renderScammerSection(items) {
 // SECTION NAVIGATION 
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
-  if (!nav) return;
+  if (!nav) return; // On crew-logos-test page we use a static nav without this id
   const isCrewLogosTestPage = document.body.classList.contains('crew-logos-test-page');
 
   SECTION_NAMES.forEach((name, index) => {
