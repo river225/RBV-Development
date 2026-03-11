@@ -69,19 +69,13 @@
     </div>
   </div>
 
-  <div class="main-container"> 
-    <!-- Section navigation -->
-    <nav class="sections-nav" id="sections-nav"></nav> 
-
-    <!-- Main content area -->
+  <div class="main-container">
+    <nav class="sections-nav" id="sections-nav" aria-hidden="true"></nav>
     <main id="sections" class="sections">
-      <!-- Search bar (centered in content column) -->
-      <div class="search-container"> 
-        <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
+      <div class="search-container">
+        <input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
       </div>
-    </main> 
-
-    <!-- Right column (tax / value changes) kept so layout feels identical -->
+    </main>
     <aside class="tax-calculator"></aside>
     <aside class="home-value-changes" id="home-value-changes"></aside>
   </div>

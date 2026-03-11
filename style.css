@@ -127,15 +127,46 @@ a { color: #fff; text-decoration: none; }
   overflow: hidden; 
 }
 
-/* Crew Logos TEST PAGE: horizontally scrollable rows per header, but only on crew-logos-test.html */
+/* Crew Logos TEST PAGE: no sidebar, no right column; only Crew Logos content */
+body.crew-logos-test-page .sections-nav,
+body.crew-logos-test-page .search-container,
+body.crew-logos-test-page .tax-calculator,
+body.crew-logos-test-page .home-value-changes {
+  display: none !important;
+}
+
+body.crew-logos-test-page .main-container {
+  max-width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+}
+
+body.crew-logos-test-page .sections {
+  flex: 1 1 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Constrain section so scroll boxes don't overflow the page */
+body.crew-logos-test-page #crew-logos {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Each group = one box; inner row scrolls horizontally */
 body.crew-logos-test-page #crew-logos .cards {
   display: flex;
   flex-wrap: nowrap;
   gap: 16px;
   overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 0;
   max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
-  padding: 10px 10px 14px;
+  padding: 12px 14px 14px;
   border: 2px solid #33cce6;
   border-radius: 10px;
   background: rgba(10, 15, 22, 0.9);
@@ -143,8 +174,9 @@ body.crew-logos-test-page #crew-logos .cards {
 }
 
 body.crew-logos-test-page #crew-logos .crew-logo-card {
-  flex: 0 0 210px;
-  max-width: 210px;
+  flex: 0 0 200px;
+  min-width: 200px;
+  max-width: 200px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {

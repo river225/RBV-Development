@@ -582,8 +582,10 @@ function renderScammerSection(items) {
 // SECTION NAVIGATION 
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
+  if (!nav) return;
   const isCrewLogosTestPage = document.body.classList.contains('crew-logos-test-page');
-  
+  if (isCrewLogosTestPage) return;
+
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
     if (name === "💰 Richest Players") {
