@@ -124,7 +124,7 @@ a { color: #fff; text-decoration: none; }
   flex-wrap: wrap; 
   gap: 16px; 
   width: 100%;
-  overflow: hidden; 
+  /* let specific sections (like Crew Logos) control scrolling */
 }
 
 /* Card */
@@ -369,7 +369,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Crew Logos: make each header group a boxed, horizontally scrollable row */
-.section#crew-logos {
+#crew-logos {
   overflow: visible; /* allow the group box to show fully */
 }
 
@@ -391,7 +391,7 @@ a { color: #fff; text-decoration: none; }
   flex-wrap: nowrap;
   gap: 16px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 4px 4px 8px;
 }
 
 #crew-logos .crew-logos-row .crew-logo-card {
