@@ -582,6 +582,7 @@ function renderScammerSection(items) {
 // SECTION NAVIGATION 
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
+  const isCrewLogosTestPage = document.body.classList.contains('crew-logos-test-page');
   
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
@@ -598,11 +599,26 @@ function initSectionsNav() {
 
     const btn = document.createElement("button");
     btn.textContent = name;
-    btn.addEventListener("click", () => showSection(name));
+
+    if (isCrewLogosTestPage) {
+      // On the Crew Logos test page, any section change (except Crew Logos itself)
+      // should take the user back to the main index.html, showing that section.
+      if (name === "Crew Logos") {
+        btn.addEventListener("click", () => showSection(name));
+      } else {
+        btn.addEventListener("click", () => {
+          window.location.href = `index.html#sec=${encodeURIComponent(name)}`;
+        });
+      }
+    } else {
+      // Normal behavior on main index.html
+      btn.addEventListener("click", () => showSection(name));
+    }
+
     nav.appendChild(btn);
 
-    // After the main Crew Logos button, add a second button that opens the test page
-    if (name === "Crew Logos") {
+    // After the main Crew Logos button on the main page, add a second button that opens the test page
+    if (!isCrewLogosTestPage && name === "Crew Logos") {
       const testBtn = document.createElement("button");
       testBtn.textContent = "Crew Logos test";
       testBtn.addEventListener("click", () => {
@@ -1028,7 +1044,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSection(section, items);
   });
 
-  showSection("Home");
+  // Decide which section to show first.
+  // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
+  let initialSection = "Home";
+  if (window.location.hash && window.location.hash.startsWith('#sec=')) {
+    const requested = decodeURIComponent(window.location.hash.substring(5));
+    if (SECTION_NAMES.includes(requested)) {
+      initialSection = requested;
+    }
+  }
+
+  showSection(initialSection);
   loadTopDonators();
   loadValueChanges();
   fetchDiscordMemberCount();
