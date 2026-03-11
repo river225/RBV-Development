@@ -249,6 +249,17 @@ body.crew-logos-test-page #crew-logos .crew-logo-card {
   max-width: 180px;
 }
 
+/* Copy button full width so it matches main-page proportion (no space/push shrinkage) */
+body.crew-logos-test-page #crew-logos .crew-logo-card .crew-id-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+body.crew-logos-test-page #crew-logos .crew-logo-card .copy-btn {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
   height: 8px;
 }
