@@ -285,8 +285,7 @@ a { color: #fff; text-decoration: none; }
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
-  flex: 0 0 210px;
-  max-width: 210px;
+  max-width: calc(33.33% - 16px);
   overflow: hidden;
   padding: 8px;
   min-height: 220px;
@@ -368,25 +367,29 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; 
 }
 
-/* Crew Logos: horizontally scrollable rows per header */
-.crew-row {
+/* Crew Logos: horizontally scrollable within Crew Logos section only */
+#crew-logos .cards {
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
   gap: 16px;
   overflow-x: auto;
   padding: 4px 4px 12px;
 }
 
-.crew-row::-webkit-scrollbar {
+#crew-logos .cards .crew-logo-card {
+  flex: 0 0 210px;
+  max-width: 210px;
+}
+
+#crew-logos .cards::-webkit-scrollbar {
   height: 8px;
 }
 
-.crew-row::-webkit-scrollbar-track {
+#crew-logos .cards::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.4);
 }
 
-.crew-row::-webkit-scrollbar-thumb {
+#crew-logos .cards::-webkit-scrollbar-thumb {
   background: rgba(51, 204, 230, 0.7);
   border-radius: 999px;
 }
