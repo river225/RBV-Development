@@ -522,8 +522,10 @@ function renderCrewLogosSection(items) {
       html += `
         <div class="crew-group">
           <div class="crew-header">${header}</div>
-          <div class="cards crew-logos-row">
-            ${grouped[header].map(createCrewLogoCard).join("")}
+          <div class="crew-logos-scroll">
+            <div class="cards crew-logos-row">
+              ${grouped[header].map(createCrewLogoCard).join("")}
+            </div>
           </div>
         </div>
       `;
