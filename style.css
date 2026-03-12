@@ -129,13 +129,13 @@ a { color: #fff; text-decoration: none; }
 
 /* ========== CREW LOGOS TEST PAGE: fully isolated layout (no shared main-page classes) ========== */
 
-/* Wrapper: own flex container, nothing from .main-container */
+/* Wrapper: own flex container, numerically match main .main-container */
 body.crew-logos-test-page .test-main {
   display: flex;
-  max-width: 1400px;
-  margin: 60px auto 40px;
-  gap: 24px;
-  padding: 0 20px;
+  max-width: 1800px;
+  margin: 50px auto 40px;
+  gap: 20px;
+  padding: 0 20px 40px 20px;
   align-items: flex-start;
 }
 
