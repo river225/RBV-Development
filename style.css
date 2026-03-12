@@ -129,13 +129,13 @@ a { color: #fff; text-decoration: none; }
 
 /* ========== CREW LOGOS TEST PAGE: fully isolated layout (no shared main-page classes) ========== */
 
-/* Wrapper: own flex container, numerically match main .main-container */
+/* Wrapper: tighter padding/gap so content (and card copy buttons) aren’t squeezed */
 body.crew-logos-test-page .test-main {
   display: flex;
   max-width: 1800px;
   margin: 50px auto 40px;
-  gap: 20px;
-  padding: 0 20px 40px 20px;
+  gap: 12px;
+  padding: 0 10px 40px 10px;
   align-items: flex-start;
 }
 
@@ -248,7 +248,7 @@ body.crew-logos-test-page #crew-logos .cards {
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 10px 12px 12px;
+  padding: 8px 10px 10px;
   border: 2px solid #33cce6;
   border-radius: 10px;
   background: rgba(10, 15, 22, 0.9);
@@ -262,15 +262,22 @@ body.crew-logos-test-page #crew-logos .crew-logo-card {
   min-width: 200px !important;
   max-width: 200px !important;
   min-height: 220px !important;
+  box-sizing: border-box;
+}
+body.crew-logos-test-page #crew-logos .crew-logo-card .crew-card-content {
+  width: 100%;
+  box-sizing: border-box;
 }
 body.crew-logos-test-page #crew-logos .crew-logo-card .crew-id-container {
   width: 100%;
+  align-self: stretch;
   box-sizing: border-box;
 }
 body.crew-logos-test-page #crew-logos .crew-logo-card .copy-btn {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
   height: 8px;
