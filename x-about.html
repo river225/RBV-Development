@@ -70,6 +70,50 @@
             margin-right: auto;
             text-align: left;
         }
+        .about-team-block {
+            text-align: center;
+            max-width: 720px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        .about-team-block .about-subsection {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .about-team-block .about-subsection h4 {
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 1px 1px 0 #000, -1px -1px 0 rgba(0, 0, 0, 0.8);
+        }
+        .about-team-block .about-subsection ul {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+        .about-team-blurb {
+            margin-top: 22px;
+            padding: 16px 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.88);
+        }
+        .about-team-blurb--green {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(74, 222, 128, 0.35);
+        }
+        .about-team-blurb--purple {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(196, 181, 253, 0.35);
+        }
+        .about-team-blurb p {
+            margin: 0;
+            text-shadow: 1px 1px 0 #000;
+        }
         .about-section h2 {
             font-size: 1.5rem;
             margin-bottom: 12px;
@@ -88,12 +132,24 @@
             text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000;
         }
         .about-container .about-section h3.about-team-heading--green {
-            color: #4ade80 !important;
-            text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000;
+            font-size: 1.65rem !important;
+            margin-bottom: 22px !important;
+            background: linear-gradient(135deg, #86efac 0%, #4ade80 35%, #22c55e 70%, #15803d 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 1px 0 rgba(0,0,0,0.9)) drop-shadow(0 -1px 0 rgba(0,0,0,0.5));
         }
         .about-container .about-section h3.about-team-heading--purple {
-            color: #c4b5fd !important;
-            text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000;
+            font-size: 1.65rem !important;
+            margin-bottom: 22px !important;
+            background: linear-gradient(135deg, #e9d5ff 0%, #c4b5fd 35%, #a78bfa 70%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 1px 0 rgba(0,0,0,0.85)) drop-shadow(0 -1px 0 rgba(0,0,0,0.45));
         }
         .about-subsection {
             margin-bottom: 20px;
@@ -246,7 +302,7 @@
             <p class="about-founder-name"><span class="river-name">river</span></p>
         </div>
 
-        <div class="about-section">
+        <div class="about-section about-team-block">
             <h3 class="about-team-heading about-team-heading--green">Value List Team</h3>
             <div class="about-subsection">
                 <h4>Value List Lead</h4>
@@ -256,7 +312,7 @@
                 </ul>
             </div>
             <div class="about-subsection">
-                <h4>Value List Team</h4>
+                <h4>Value List Team Members</h4>
                 <ul>
                     <li>Team Member 1</li>
                     <li>Team Member 2</li>
@@ -270,9 +326,12 @@
                     <li>Team Member 10</li>
                 </ul>
             </div>
+            <div class="about-team-blurb about-team-blurb--green">
+                <p>Edit this text to describe the Value List team — what they do, how values are decided, and how players can reach them.</p>
+            </div>
         </div>
 
-        <div class="about-section">
+        <div class="about-section about-team-block">
             <h3 class="about-team-heading about-team-heading--purple">Middleman Team</h3>
             <div class="about-subsection">
                 <h4>Middleman Lead</h4>
@@ -282,7 +341,7 @@
                 </ul>
             </div>
             <div class="about-subsection">
-                <h4>Middleman Team</h4>
+                <h4>Middleman Team Members</h4>
                 <ul>
                     <li>Team Member 1</li>
                     <li>Team Member 2</li>
@@ -295,6 +354,9 @@
                     <li>Team Member 9</li>
                     <li>Team Member 10</li>
                 </ul>
+            </div>
+            <div class="about-team-blurb about-team-blurb--purple">
+                <p>Edit this text to describe the Middleman team — what middlemen do, when to use them, and how this team supports safe trades.</p>
             </div>
         </div>
 
