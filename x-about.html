@@ -116,26 +116,28 @@
             padding: 0;
             text-align: center;
         }
-        /* Middleman Team Members only: 3 horizontal rows (items flow in columns, left to right) */
-        html .about-container .about-section.about-team-block:has(.about-team-heading--purple) .about-subsection:nth-child(3) ul {
+        /* Middleman Team Members: exactly 3 rows, names read left-to-right (--mm-cols set by script) */
+        html .about-container #middleman-members-list {
             display: grid;
+            grid-template-columns: repeat(var(--mm-cols, 7), minmax(0, 1fr));
             grid-template-rows: repeat(3, auto);
-            grid-auto-flow: column;
-            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: row;
             max-width: 720px;
             width: 100%;
-            gap: 8px 16px;
+            gap: 8px 14px;
             align-items: start;
             justify-items: center;
+            margin-left: auto;
+            margin-right: auto;
         }
-        html .about-container .about-section.about-team-block:has(.about-team-heading--purple) .about-subsection:nth-child(3) ul li {
+        html .about-container #middleman-members-list li {
             width: 100%;
             max-width: 100%;
             font-size: 0.92rem;
             padding: 4px 0;
         }
         @media (max-width: 640px) {
-            html .about-container .about-section.about-team-block:has(.about-team-heading--purple) .about-subsection:nth-child(3) ul {
+            html .about-container #middleman-members-list {
                 display: block;
                 max-width: 520px;
             }
@@ -410,7 +412,7 @@
             </div>
             <div class="about-subsection">
                 <h4>Middleman Team Members</h4>
-                <ul>
+                <ul id="middleman-members-list">
                     <li>kayxurs (celest_jil)</li>
                     <li>BxTer727 (bxter727)</li>
                     <li>Fr06styclipz21 (fr06styclipz21)</li>
@@ -459,6 +461,15 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        (function() {
+            var mm = document.getElementById('middleman-members-list');
+            if (mm) {
+                var n = mm.querySelectorAll('li').length;
+                if (n > 0) mm.style.setProperty('--mm-cols', String(Math.ceil(n / 3)));
+            }
+        })();
+    </script>
     <script>
         (function() {
             if (document.readyState === 'loading') return;
