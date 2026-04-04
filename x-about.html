@@ -60,6 +60,16 @@
         .about-section {
             margin-bottom: 32px;
         }
+        /* Override global style.css .about-section cyan box — keep bottom contact divider only */
+        .about-container .about-section {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
         .about-section h2 {
             font-size: 1.5rem;
             margin-bottom: 12px;
@@ -77,11 +87,13 @@
             font-weight: 700;
             text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000;
         }
-        .about-team-heading--green {
-            color: #4ade80;
+        .about-container .about-section h3.about-team-heading--green {
+            color: #4ade80 !important;
+            text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000;
         }
-        .about-team-heading--purple {
-            color: #c4b5fd;
+        .about-container .about-section h3.about-team-heading--purple {
+            color: #c4b5fd !important;
+            text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000;
         }
         .about-subsection {
             margin-bottom: 20px;
@@ -125,6 +137,7 @@
         .about-contact-wrap {
             margin-top: 44px;
             padding-top: 28px;
+            border-top: 1px solid #2a3945;
             text-align: center;
         }
         .about-contact-wrap p {
@@ -233,16 +246,29 @@
             <p class="about-founder-name"><span class="river-name">river</span></p>
         </div>
 
-        <!-- Value List: add names with <li>Name</li> inside each ul -->
         <div class="about-section">
             <h3 class="about-team-heading about-team-heading--green">Value List Team</h3>
             <div class="about-subsection">
                 <h4>Value List Lead</h4>
-                <ul></ul>
+                <ul>
+                    <li>Placeholder Lead A</li>
+                    <li>Placeholder Lead B</li>
+                </ul>
             </div>
             <div class="about-subsection">
                 <h4>Value List Team</h4>
-                <ul></ul>
+                <ul>
+                    <li>Team Member 1</li>
+                    <li>Team Member 2</li>
+                    <li>Team Member 3</li>
+                    <li>Team Member 4</li>
+                    <li>Team Member 5</li>
+                    <li>Team Member 6</li>
+                    <li>Team Member 7</li>
+                    <li>Team Member 8</li>
+                    <li>Team Member 9</li>
+                    <li>Team Member 10</li>
+                </ul>
             </div>
         </div>
 
@@ -250,11 +276,25 @@
             <h3 class="about-team-heading about-team-heading--purple">Middleman Team</h3>
             <div class="about-subsection">
                 <h4>Middleman Lead</h4>
-                <ul></ul>
+                <ul>
+                    <li>Placeholder Lead A</li>
+                    <li>Placeholder Lead B</li>
+                </ul>
             </div>
             <div class="about-subsection">
                 <h4>Middleman Team</h4>
-                <ul></ul>
+                <ul>
+                    <li>Team Member 1</li>
+                    <li>Team Member 2</li>
+                    <li>Team Member 3</li>
+                    <li>Team Member 4</li>
+                    <li>Team Member 5</li>
+                    <li>Team Member 6</li>
+                    <li>Team Member 7</li>
+                    <li>Team Member 8</li>
+                    <li>Team Member 9</li>
+                    <li>Team Member 10</li>
+                </ul>
             </div>
         </div>
 
