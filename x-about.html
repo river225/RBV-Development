@@ -8,7 +8,7 @@
     <title>About Us - BlockSpin Values</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* About page – original/blue theme only for now */
+        /* About page: layout + team accent colors (green / purple); inline rules override global .about-section */
         .about-container {
             max-width: 1100px;
             margin: 0 auto 60px;
@@ -107,6 +107,14 @@
         .about-container .about-team-block .about-subsection ul li {
             text-align: center;
             padding-left: 0;
+        }
+        .about-container .about-section.about-team-block:has(.about-team-heading--green) .about-subsection ul li {
+            color: #4ade80 !important;
+            text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
+        }
+        .about-container .about-section.about-team-block:has(.about-team-heading--purple) .about-subsection ul li {
+            color: #a78bfa !important;
+            text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
         }
         .about-team-blurb {
             margin-top: 22px;
@@ -348,15 +356,14 @@
             <div class="about-subsection">
                 <h4>Value List Team Members</h4>
                 <ul>
-                    
                     <li>K1L4 (k1l422)</li>
                     <li>treaxy (treax_y)</li>
                     <li>Spence (spence_67)</li>
-
+                    <li>duck (duck_alt21)</li>
                 </ul>
             </div>
             <div class="about-team-blurb about-team-blurb--green">
-                <p>The Value list Team is dedicated to ensuring our websites values are up to date and maintained!</p>
+                <p>The Value List Team is dedicated to ensuring our website’s values are up to date and maintained!</p>
             </div>
         </div>
 
@@ -366,39 +373,35 @@
                 <h4>Middleman Lead</h4>
                 <ul>
                     <li>duck (duck_alt21)</li>
-            
                 </ul>
             </div>
             <div class="about-subsection">
                 <h4>Middleman Team Members</h4>
                 <ul>
                     <li>kayxurs (celest_jil)</li>
-<li>BxTer727 (bxter727)</li>
-<li>Fr06styclipz21 (fr06styclipz21)</li>
-<li>Jokkaarr (jokkaarr)</li>
-<li>SAM (sam_127346)</li>
-<li>scribbles (scrxbbles)</li>
-<li>Trezzi (trezzi16)</li>
-<li>Windy (windyjuu)</li>
-<li>Grove (grove.)</li>
-<li>Ssl20 (ssl20_rt)</li>
-<li>Norm (normakos)</li>
-<li>taajmanzoor (jacobc1010)</li>
-<li>Jake (10kninjavibez)</li>
-<li>Nate (Nathan2216)</li>
-<li>Raymond lugnut (spence67)</li>
-<li>Skov (voskin)</li>
-<li>Baldhead (baldhead9501)</li>
-<li>starvolt.</li>
-<li>Cortezzz09 (cortezzz09)</li>
-<li>SuitMan (suit_man00)</li>
-                    
+                    <li>BxTer727 (bxter727)</li>
+                    <li>Fr06styclipz21 (fr06styclipz21)</li>
+                    <li>Jokkaarr (jokkaarr)</li>
+                    <li>SAM (sam_127346)</li>
+                    <li>scribbles (scrxbbles)</li>
+                    <li>Trezzi (trezzi16)</li>
+                    <li>Windy (windyjuu)</li>
+                    <li>Grove (grove.)</li>
+                    <li>Ssl20 (ssl20_rt)</li>
+                    <li>Norm (normakos)</li>
+                    <li>taajmanzoor (jacobc1010)</li>
+                    <li>Jake (10kninjavibez)</li>
+                    <li>Nate (Nathan2216)</li>
+                    <li>Raymond lugnut (spence67)</li>
+                    <li>Skov (voskin)</li>
+                    <li>Baldhead (baldhead9501)</li>
+                    <li>starvolt.</li>
+                    <li>Cortezzz09 (cortezzz09)</li>
+                    <li>SuitMan (suit_man00)</li>
                 </ul>
             </div>
             <div class="about-team-blurb about-team-blurb--purple">
-                <p>The Middleman team is dedicated to ensuring you never get scammed. While not a traditional website team, they operate within our Discord server and specialise in facilitating safe, secure trades.
-
-A Middleman temporarily holds the buyer’s item during a transaction. The seller then delivers their item to the buyer, and once everything is confirmed, the Middleman releases the buyer’s item to the seller. This process ensures that both parties fulfil their side of the trade, preventing scams.</p>
+                <p>The Middleman team is dedicated to ensuring you never get scammed. While not a website team, they operate within our Discord server and specialise in facilitating safe, secure trades. A Middleman temporarily holds the buyer’s item during a transaction. The seller then delivers their item to the buyer, and once everything is confirmed, the Middleman releases the buyer’s item to the seller. This process ensures that both parties fulfil their side of the trade, preventing scams.</p>
             </div>
         </div>
 
@@ -411,7 +414,7 @@ A Middleman temporarily holds the buyer’s item during a transaction. The selle
 
     <footer class="site-footer">
         <div class="footer-content">
-            <p>© 2025 BlockSpin Values</p>
+            <p>© 2026 BlockSpin Values</p>
             <div class="footer-links">
                 <a href="z-contact.html">Contact Us</a>
                 <span>•</span>
