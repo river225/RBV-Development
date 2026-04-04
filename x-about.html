@@ -91,10 +91,22 @@
             color: rgba(255, 255, 255, 0.95) !important;
             text-shadow: 1px 1px 0 #000, -1px -1px 0 rgba(0, 0, 0, 0.8);
         }
-        .about-team-block .about-subsection ul {
-            display: inline-block;
-            text-align: left;
+        .about-container .about-team-block .about-subsection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .about-container .about-team-block .about-subsection ul {
+            display: block;
+            width: 100%;
+            max-width: 520px;
             margin: 0 auto;
+            padding: 0;
+            text-align: center;
+        }
+        .about-container .about-team-block .about-subsection ul li {
+            text-align: center;
+            padding-left: 0;
         }
         .about-team-blurb {
             margin-top: 22px;
@@ -124,6 +136,17 @@
         }
         .about-container .about-section--founder {
             text-align: center !important;
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+            border-bottom: 1px solid #2a3945;
+        }
+        .about-container .about-section.about-team-block:has(+ .about-team-block) {
+            margin-bottom: 0;
+        }
+        .about-container .about-team-block + .about-team-block {
+            border-top: 1px solid #2a3945;
+            padding-top: 32px;
+            margin-top: 32px;
         }
         .about-container .about-section--founder h2 {
             text-align: center;
@@ -158,7 +181,7 @@
             -webkit-background-clip: unset !important;
             background-clip: unset !important;
             -webkit-text-fill-color: currentColor !important;
-            color: #6d28d9 !important;
+            color: #a78bfa !important;
             filter: none !important;
             text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000;
         }
@@ -349,16 +372,27 @@
             <div class="about-subsection">
                 <h4>Middleman Team Members</h4>
                 <ul>
-                    <li>Team Member 1</li>
-                    <li>Team Member 2</li>
-                    <li>Team Member 3</li>
-                    <li>Team Member 4</li>
-                    <li>Team Member 5</li>
-                    <li>Team Member 6</li>
-                    <li>Team Member 7</li>
-                    <li>Team Member 8</li>
-                    <li>Team Member 9</li>
-                    <li>Team Member 10</li>
+                    <li>kayxurs (celest_jil)</li>
+<li>BxTer727 (bxter727)</li>
+<li>Fr06styclipz21 (fr06styclipz21)</li>
+<li>Jokkaarr (jokkaarr)</li>
+<li>SAM (sam_127346)</li>
+<li>scribbles (scrxbbles)</li>
+<li>Trezzi (trezzi16)</li>
+<li>Windy (windyjuu)</li>
+<li>Grove (grove.)</li>
+<li>Ssl20 (ssl20_rt)</li>
+<li>Norm (normakos)</li>
+<li>taajmanzoor (jacobc1010)</li>
+<li>Jake (10kninjavibez)</li>
+<li>Nate (Nathan2216)</li>
+<li>Raymond lugnut (spence67)</li>
+<li>Skov (voskin)</li>
+<li>Baldhead (baldhead9501)</li>
+<li>starvolt.</li>
+<li>Cortezzz09 (cortezzz09)</li>
+<li>SuitMan (suit_man00)</li>
+                    
                 </ul>
             </div>
             <div class="about-team-blurb about-team-blurb--purple">
