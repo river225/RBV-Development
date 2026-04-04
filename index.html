@@ -225,6 +225,11 @@ We’ve launched a complete site redesign, and items will now display both their
     <!-- Divider -->
     <div class="home-divider"></div>
 
+    <!-- BSV AD Two — placeholder only (no AdSense on test). On main: replace with Display unit; client ca-pub-5741402692612033, slot 4878468951 -->
+    <div class="ad-slot-placeholder ad-slot-placeholder--home-bottom" id="ad-slot-bsv-2" aria-label="Advertisement">
+      <span class="ad-slot-placeholder-label">Ad space</span>
+    </div>
+
   </div> <!-- Close home-content-main -->
 
 
@@ -270,6 +275,16 @@ We’ve launched a complete site redesign, and items will now display both their
 
 </div>
 
+<!-- Entry popup ad — placeholder on test; on main paste Display unit (same client ca-pub-5741402692612033; create a dedicated unit in AdSense for popups) -->
+<div id="bsv-entry-ad-overlay" class="bsv-entry-ad-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="bsv-entry-ad-heading">
+  <div class="bsv-entry-ad-modal">
+    <button type="button" class="bsv-entry-ad-close" data-bsv-entry-ad-close aria-label="Close advertisement">×</button>
+    <p class="bsv-entry-ad-heading" id="bsv-entry-ad-heading">Advertisement</p>
+    <div class="ad-slot-placeholder ad-slot-placeholder--entry-popup" id="ad-slot-entry-popup">
+      <span class="ad-slot-placeholder-label">Ad space</span>
+    </div>
+  </div>
+</div>
 
 <script src="script.js"></script> 
 

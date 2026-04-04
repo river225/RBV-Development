@@ -15,6 +15,32 @@ const SECTION_NAMES = [
   "Crew Logos"
 ];
 
+// BSV Ad Three — one Display unit (slot 6782577562, client ca-pub-5741402692612033) at bottom of Uncommon/Rare/Epic/Legendary/Omega/Misc/Vehicles. Placeholder only on test.
+const BSV_AD_THREE_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeholder--section" data-bsv-ad="three" aria-label="Advertisement"><span class="ad-slot-placeholder-label">Ad space</span></div>`;
+
+// BSV Ad Four — Display unit (slot 4197814232): end of Crew Logos; under Richest intro text. Placeholder only on test.
+const BSV_AD_FOUR_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeholder--section" data-bsv-ad="four" aria-label="Advertisement"><span class="ad-slot-placeholder-label">Ad space</span></div>`;
+
+const BSV_SECTION_ADS_COOLDOWN_MS = 6 * 60 * 60 * 1000; /* 6 hours */
+const BSV_LS_SECTION_INLINE_ADS_AT = "bsv-section-inline-ads-last-at";
+var _bsvShowInlineSectionAds = false;
+
+function shouldShowInlineSectionAds() {
+  try {
+    var last = parseInt(localStorage.getItem(BSV_LS_SECTION_INLINE_ADS_AT), 10);
+    if (!last || isNaN(last)) return true;
+    return Date.now() - last >= BSV_SECTION_ADS_COOLDOWN_MS;
+  } catch (e) {
+    return true;
+  }
+}
+
+function markInlineSectionAdsShown() {
+  try {
+    localStorage.setItem(BSV_LS_SECTION_INLINE_ADS_AT, String(Date.now()));
+  } catch (e) {}
+}
+
 // Tax calculator: 40k drop → 29,091 received (confirmed). Above 40k (e.g. 41,250) still gives 29,091. MAX 40K PER DROP.
 const TAX_RECEIVE_RATIO = 29091 / 40000;
 const TAX_MAX_DROP = 40000;
@@ -64,7 +90,7 @@ function createRichestPlayersSection(data) {
     <div class="richest-players-header">
       <h2>Top 1,000 Richest Players in BlockSpin</h2>
       <p class="richest-intro">The Official BlockSpin leaderboard showing the wealthiest players ranked by the total value of their in-game assets. Rankings go to #1000 and update hourly. To appear, verify yourself in the official BlockSpin Discord server.</p>
-      
+      ${_bsvShowInlineSectionAds ? BSV_AD_FOUR_PLACEHOLDER : ""}
       <input 
         type="text" 
         class="richest-search" 
@@ -436,6 +462,7 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
+        ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -453,6 +480,7 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
+        ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -463,6 +491,7 @@ function renderSection(title, items) {
         <div class="cards">
           ${items.map(createCard).join("")}
         </div>
+        ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -484,6 +513,7 @@ function renderLegendarySectionWithBanner(items) {
           <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
         </div>
       </div>
+      ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -528,7 +558,7 @@ function renderCrewLogosSection(items) {
     }
   });
   
-  html += `</section>`;
+  html += (_bsvShowInlineSectionAds ? BSV_AD_FOUR_PLACEHOLDER : "") + `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
@@ -1013,11 +1043,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Wait for all to finish
   const results = await Promise.all(fetchPromises);
-  
+
+  _bsvShowInlineSectionAds = shouldShowInlineSectionAds();
+
   // Render in order
   results.forEach(({ section, items }) => {
     renderSection(section, items);
   });
+
+  if (_bsvShowInlineSectionAds) {
+    markInlineSectionAdsShown();
+  }
 
   // Decide which section to show first.
   // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
@@ -1038,9 +1074,34 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   setTimeout(() => {
     document.getElementById('loading-screen').style.display = 'none';
+    initEntryAdPopup();
   }, 300);
 
 });
+
+/** Full-screen entry ad popup — placeholder on test; paste AdSense ins in #ad-slot-entry-popup on main. Shows again on every full page load (no session storage). */
+function initEntryAdPopup() {
+  var overlay = document.getElementById('bsv-entry-ad-overlay');
+  if (!overlay) return;
+
+  function close() {
+    overlay.setAttribute('hidden', '');
+    document.body.classList.remove('bsv-entry-ad-open');
+    document.removeEventListener('keydown', onKey);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+  }
+
+  overlay.removeAttribute('hidden');
+  document.body.classList.add('bsv-entry-ad-open');
+  document.addEventListener('keydown', onKey);
+
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay || e.target.closest('[data-bsv-entry-ad-close]')) close();
+  });
+}
 
 // Giveaway card click handling
 document.addEventListener('click', function(e) {

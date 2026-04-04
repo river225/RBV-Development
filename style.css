@@ -2452,6 +2452,81 @@ body {
   color: rgba(148, 163, 184, 0.9);
   user-select: none;
 }
+.ad-slot-placeholder--home-bottom {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+/* Bottom of rarity / item sections (JS-rendered) */
+.ad-slot-placeholder--section {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+/* Entry popup (shown after load; placeholder until AdSense on main) */
+.bsv-entry-ad-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  background: rgba(10, 15, 22, 0.82);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.bsv-entry-ad-overlay[hidden] {
+  display: none !important;
+}
+body.bsv-entry-ad-open {
+  overflow: hidden;
+}
+.bsv-entry-ad-modal {
+  position: relative;
+  width: 100%;
+  max-width: min(728px, 96vw);
+  max-height: min(90vh, 600px);
+  padding: 20px 16px 16px;
+  border-radius: 14px;
+  background: #141d28;
+  border: 2px solid rgba(51, 204, 230, 0.45);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+.bsv-entry-ad-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bsv-entry-ad-close:hover {
+  background: rgba(255, 80, 80, 0.35);
+}
+.bsv-entry-ad-heading {
+  margin: 0 0 12px 0;
+  padding-right: 44px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.95);
+}
+.ad-slot-placeholder--entry-popup {
+  min-height: 200px;
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
 
 /* What is BlockSpin Values Section */
 .what-is-section {
