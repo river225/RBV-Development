@@ -59,12 +59,15 @@ a { color: #fff; text-decoration: none; }
     margin-top: 50px;
     gap: 20px;
     align-items: flex-start;
+    padding: 0 20px 40px 20px; /* single source (was duplicated in index.html inline) */
 }
+/* Sidebar: share row space 1 : 3 with main after fixed-width asides. Do not set a fixed width here —
+   a fixed width + flex:1 in index inline used to fight each other and made pages diverge. */
 .sections-nav {
-    width: 200px;
+    flex: 1 1 0%;
+    min-width: 0;
     padding: 8px;
     border-right: 3px solid #000000; /* vertical line */
-    
 }
 
 
@@ -89,7 +92,8 @@ a { color: #fff; text-decoration: none; }
 
 .sections {
     position: relative;
-    flex: 3; /* UPDATED from flex:1 */
+    flex: 3 1 0%;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -127,150 +131,146 @@ a { color: #fff; text-decoration: none; }
   overflow: hidden; 
 }
 
-/* Crew Logos TEST PAGE: static nav uses id="sections-nav-test" so main script doesn't touch it.
-   Mirror #sections-nav button styles so size and text match main page exactly. */
-body.crew-logos-test-page #sections-nav-test {
-  width: 200px;
-  padding: 8px;
-  border-right: 3px solid #000000;
-}
-body.crew-logos-test-page #sections-nav-test button {
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 14px 20px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 8px;
-  background: #141d28;
-  border: 3px solid #000000;
-  border-radius: 6px;
-  cursor: pointer;
-  color: #fff;
-  text-align: left;
-  min-height: 58px;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-}
-body.crew-logos-test-page #sections-nav-test button:hover:not(.active) {
-  background: #4a4a4a;
-  border-color: #000000;
-  transform: translateX(3px);
-}
-body.crew-logos-test-page #sections-nav-test button.active {
-  border-color: currentColor;
-  box-shadow: 0 0 20px currentColor, inset 0 1px 0 rgba(255,255,255,0.2);
-  transform: translateX(5px);
-  position: relative;
-  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
-  color: white;
-}
-body.crew-logos-test-page #sections-nav-test button.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
-  border-radius: 8px 8px 0 0;
-  pointer-events: none;
-}
-body.crew-logos-test-page #sections-nav-test button:first-child {
-  margin-bottom: 15px;
-  position: relative;
-}
-body.crew-logos-test-page #sections-nav-test button:first-child::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #33cce6;
-}
-
-/* Crew Logos TEST PAGE: content only as big as needed */
-body.crew-logos-test-page .search-container,
-body.crew-logos-test-page .tax-calculator,
-body.crew-logos-test-page .home-value-changes {
-  display: none !important;
-}
-
-body.crew-logos-test-page .main-container {
-  max-width: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 40px;
-}
-
-/* Content area: only take the space it needs (no stretching) */
-body.crew-logos-test-page .sections {
-  flex: 0 1 auto;
-  min-width: 0;
-  width: fit-content;
-  max-width: 100%;
-}
-
-/* Crew Logos section: don't grow beyond visible content */
-body.crew-logos-test-page #crew-logos {
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-/* Each group = one box; inner row scrolls horizontally, box aligned to the right */
-body.crew-logos-test-page #crew-logos .cards {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 16px;
+/* ========== CREW LOGOS TEST PAGE (centered, no sidebar; horizontal scroll rows) ========== */
+body.crew-logos-test-page {
   overflow-x: auto;
-  overflow-y: hidden;
-  min-width: 0;
-  max-width: 60%;
-  width: 60%;
+}
+
+body.crew-logos-test-page .hamburger-menu {
+  display: none;
+}
+
+body.crew-logos-test-page .crew-logos-test-shell {
+  max-width: 1100px;
+  width: 100%;
+  margin: 40px auto 0;
+  padding: 8px 20px 40px;
   box-sizing: border-box;
-  padding: 10px 12px 12px;
-  border: 2px solid #33cce6;
+}
+
+body.crew-logos-test-page .crew-logos-test-back-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 0;
+}
+
+body.crew-logos-test-page .crew-logos-test-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000;
+  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 40%, #3a9fb0 100%);
+  border: 3px solid #000;
   border-radius: 10px;
-  background: rgba(10, 15, 22, 0.9);
-  margin: 4px 0 10px auto;
+  box-shadow: 0 4px 14px rgba(51, 204, 230, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.crew-logos-test-page .crew-logos-test-back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(51, 204, 230, 0.35);
+}
+
+body.crew-logos-test-page main.crew-logos-test-main {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+body.crew-logos-test-page .crew-logos-test-main .search-container {
+  display: none;
+}
+
+/* Only Crew Logos section is relevant; hide other injected sections via script showSection — layout stays centered */
+body.crew-logos-test-page .crew-logos-test-main.sections {
+  flex: none;
+  min-width: 0;
+}
+
+body.crew-logos-test-page #crew-logos {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 body.crew-logos-test-page #crew-logos .crew-header {
-  margin: 6px 0 4px 0;
+  margin: 12px 0 8px 0;
+  text-align: center;
 }
 
-/* Fixed-width cards so row scrolls horizontally */
-body.crew-logos-test-page #crew-logos .crew-logo-card {
-  flex: 0 0 180px;
-  min-width: 180px;
-  max-width: 180px;
-}
-
-/* Copy button full width so it matches main-page proportion (no space/push shrinkage) */
-body.crew-logos-test-page #crew-logos .crew-logo-card .crew-id-container {
+/* Horizontal strip: 1 card or many — scroll only when content overflows */
+body.crew-logos-test-page #crew-logos .cards {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 16px;
   width: 100%;
-  box-sizing: border-box;
-}
-body.crew-logos-test-page #crew-logos .crew-logo-card .copy-btn {
-  width: 100%;
+  max-width: 100%;
   min-width: 0;
+  min-height: 0;
   box-sizing: border-box;
+  padding: 10px 12px 14px;
+  margin: 6px 0 14px;
+  border: 2px solid #33cce6;
+  border-radius: 12px;
+  background: rgba(10, 15, 22, 0.92);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(51, 204, 230, 0.85) rgba(0, 0, 0, 0.35);
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar {
-  height: 8px;
+  display: block !important;
+  height: 10px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
 }
 
 body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-thumb {
-  background: rgba(51, 204, 230, 0.7);
+  background: rgba(51, 204, 230, 0.75);
   border-radius: 999px;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card {
+  flex: 0 0 auto;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 220px;
+  box-sizing: border-box;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card .crew-card-content {
+  width: 100%;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card .crew-id-container {
+  width: 100%;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+body.crew-logos-test-page #crew-logos .crew-logo-card .copy-btn {
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 /* Card */
@@ -1156,6 +1156,12 @@ body.crew-logos-test-page #crew-logos .cards::-webkit-scrollbar-thumb {
 
 /* Crew Logos - Soft Cyan REVERSED gradient */
 #sections-nav button:nth-child(12).active {
+  background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
+  color: white;
+}
+
+/* Crew Logos test (extra button under Crew Logos on main + test page) */
+#sections-nav button:nth-child(13).active {
   background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
   color: white;
 }

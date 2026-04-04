@@ -581,9 +581,10 @@ function renderScammerSection(items) {
 
 // SECTION NAVIGATION 
 function initSectionsNav() {
+  // Crew Logos test page ships static HTML nav; must not duplicate buttons
+  if (document.body.classList.contains("crew-logos-test-page")) return;
   const nav = document.getElementById("sections-nav");
-  if (!nav) return; // On crew-logos-test page we use a static nav without this id
-  const isCrewLogosTestPage = document.body.classList.contains('crew-logos-test-page');
+  if (!nav) return;
 
   SECTION_NAMES.forEach((name, index) => {
     // Add gap and "Extras" header before first Extra
@@ -600,17 +601,11 @@ function initSectionsNav() {
 
     const btn = document.createElement("button");
     btn.textContent = name;
-    if (isCrewLogosTestPage && name !== "Crew Logos") {
-      btn.addEventListener("click", () => {
-        window.location.href = "index.html#sec=" + encodeURIComponent(name);
-      });
-    } else {
-      btn.addEventListener("click", () => showSection(name));
-    }
+    btn.addEventListener("click", () => showSection(name));
     nav.appendChild(btn);
 
-    // On the main page only, add a "Crew Logos test" button directly under Crew Logos
-    if (!isCrewLogosTestPage && name === "Crew Logos") {
+    // Add "Crew Logos test" button directly under Crew Logos (main site only)
+    if (name === "Crew Logos") {
       const testBtn = document.createElement("button");
       testBtn.textContent = "Crew Logos test";
       testBtn.addEventListener("click", () => {
@@ -1037,13 +1032,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Decide which section to show first.
-  // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
+  // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home (or Crew Logos on test page).
   let initialSection = "Home";
   if (window.location.hash && window.location.hash.startsWith('#sec=')) {
     const requested = decodeURIComponent(window.location.hash.substring(5));
     if (SECTION_NAMES.includes(requested)) {
       initialSection = requested;
     }
+  } else if (document.body.classList.contains('crew-logos-test-page')) {
+    initialSection = 'Crew Logos';
   }
 
   showSection(initialSection);
