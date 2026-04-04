@@ -581,8 +581,6 @@ function renderScammerSection(items) {
 
 // SECTION NAVIGATION 
 function initSectionsNav() {
-  // Crew Logos test page ships static HTML nav; must not duplicate buttons
-  if (document.body.classList.contains("crew-logos-test-page")) return;
   const nav = document.getElementById("sections-nav");
   if (!nav) return;
 
@@ -603,16 +601,6 @@ function initSectionsNav() {
     btn.textContent = name;
     btn.addEventListener("click", () => showSection(name));
     nav.appendChild(btn);
-
-    // Add "Crew Logos test" button directly under Crew Logos (main site only)
-    if (name === "Crew Logos") {
-      const testBtn = document.createElement("button");
-      testBtn.textContent = "Crew Logos test";
-      testBtn.addEventListener("click", () => {
-        window.location.href = "crew-logos-test.html#sec=" + encodeURIComponent("Crew Logos");
-      });
-      nav.appendChild(testBtn);
-    }
   });
 }
 
@@ -1032,15 +1020,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Decide which section to show first.
-  // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home (or Crew Logos on test page).
+  // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
   let initialSection = "Home";
   if (window.location.hash && window.location.hash.startsWith('#sec=')) {
     const requested = decodeURIComponent(window.location.hash.substring(5));
     if (SECTION_NAMES.includes(requested)) {
       initialSection = requested;
     }
-  } else if (document.body.classList.contains('crew-logos-test-page')) {
-    initialSection = 'Crew Logos';
   }
 
   showSection(initialSection);
