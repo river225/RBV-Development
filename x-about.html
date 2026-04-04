@@ -57,6 +57,11 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .about-container .about-intro {
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+            border-bottom: 1px solid #2a3945;
+        }
         .about-section {
             margin-bottom: 32px;
         }
@@ -88,8 +93,15 @@
             margin-bottom: 12px;
             font-size: 1.1rem;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.95) !important;
             text-shadow: 1px 1px 0 #000, -1px -1px 0 rgba(0, 0, 0, 0.8);
+        }
+        .about-container .about-section.about-team-block:has(.about-team-heading--green) .about-subsection h4 {
+            color: #4ade80 !important;
+            text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
+        }
+        .about-container .about-section.about-team-block:has(.about-team-heading--purple) .about-subsection h4 {
+            color: #a78bfa !important;
+            text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
         }
         .about-container .about-team-block .about-subsection {
             display: flex;
@@ -104,17 +116,14 @@
             padding: 0;
             text-align: center;
         }
-        .about-container .about-team-block .about-subsection ul li {
+        html .about-container .about-section.about-team-block .about-subsection ul li {
             text-align: center;
             padding-left: 0;
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 1px 1px 0 #000, -1px 1px 0 rgba(0, 0, 0, 0.85);
         }
-        .about-container .about-section.about-team-block:has(.about-team-heading--green) .about-subsection ul li {
-            color: #4ade80 !important;
-            text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
-        }
-        .about-container .about-section.about-team-block:has(.about-team-heading--purple) .about-subsection ul li {
-            color: #a78bfa !important;
-            text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000;
+        html .about-container .about-section.about-team-block .about-subsection ul li::before {
+            content: "• ";
         }
         .about-team-blurb {
             margin-top: 22px;
