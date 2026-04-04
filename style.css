@@ -2431,6 +2431,28 @@ body {
   max-width: 600px;
 }
 
+/* Reserved ad area (home, above announcements / top donators) — placeholder until main site */
+.ad-slot-placeholder {
+  max-width: 728px;
+  width: 100%;
+  min-height: 90px;
+  margin: 8px auto 28px;
+  box-sizing: border-box;
+  border: 2px dashed rgba(51, 204, 230, 0.35);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ad-slot-placeholder-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.9);
+  user-select: none;
+}
+
 /* What is BlockSpin Values Section */
 .what-is-section {
   max-width: 800px;
