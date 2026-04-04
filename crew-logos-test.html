@@ -69,9 +69,9 @@
     </div>
   </div>
 
-  <!-- Isolated layout: own wrappers so main-page CSS cannot affect sizing -->
-  <div class="test-main">
-    <nav class="test-nav" aria-label="Section navigation">
+  <div class="main-container">
+    <!-- Static nav (id different from sections-nav so main script doesn't touch it); same classes = same look as main page -->
+    <nav class="sections-nav" id="sections-nav-test" aria-label="Section navigation">
       <button type="button" onclick="window.location.href='index.html#sec=Home'">Home</button>
       <button type="button" onclick="window.location.href='index.html#sec=Uncommon'">Uncommon</button>
       <button type="button" onclick="window.location.href='index.html#sec=Rare'">Rare</button>
@@ -80,19 +80,19 @@
       <button type="button" onclick="window.location.href='index.html#sec=Omega'">Omega</button>
       <button type="button" onclick="window.location.href='index.html#sec=Misc'">Misc</button>
       <button type="button" onclick="window.location.href='index.html#sec=Vehicles'">Vehicles</button>
-      <div class="test-nav-gap"></div>
-      <div class="test-nav-extras">Extras</div>
+      <div class="nav-gap"></div>
+      <div class="nav-extras-header">Extras</div>
       <button type="button" onclick="window.location.href='index.html#sec=' + encodeURIComponent('💰 Richest Players')">💰 Richest Players</button>
       <button type="button" onclick="window.location.href='index.html#sec=Crew%20Logos'">Crew Logos</button>
       <button type="button" class="active">Crew Logos test</button>
     </nav>
-    <div class="test-content">
-      <main id="sections" class="test-sections">
-        <div class="search-container">
-          <input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
-        </div>
-      </main>
-    </div>
+    <main id="sections" class="sections">
+      <div class="search-container">
+        <input id="search" type="text" placeholder="Search items…" aria-label="Search items" />
+      </div>
+    </main>
+    <aside class="tax-calculator"></aside>
+    <aside class="home-value-changes" id="home-value-changes"></aside>
   </div>
 
   <script src="script.js"></script> 
