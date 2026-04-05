@@ -1074,34 +1074,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   setTimeout(() => {
     document.getElementById('loading-screen').style.display = 'none';
-    initEntryAdPopup();
   }, 300);
 
 });
-
-/** Full-screen entry ad popup — placeholder on test; paste AdSense ins in #ad-slot-entry-popup on main. Shows again on every full page load (no session storage). */
-function initEntryAdPopup() {
-  var overlay = document.getElementById('bsv-entry-ad-overlay');
-  if (!overlay) return;
-
-  function close() {
-    overlay.setAttribute('hidden', '');
-    document.body.classList.remove('bsv-entry-ad-open');
-    document.removeEventListener('keydown', onKey);
-  }
-
-  function onKey(e) {
-    if (e.key === 'Escape') close();
-  }
-
-  overlay.removeAttribute('hidden');
-  document.body.classList.add('bsv-entry-ad-open');
-  document.addEventListener('keydown', onKey);
-
-  overlay.addEventListener('click', function (e) {
-    if (e.target === overlay || e.target.closest('[data-bsv-entry-ad-close]')) close();
-  });
-}
 
 // Giveaway card click handling
 document.addEventListener('click', function(e) {

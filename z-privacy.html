@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .legal-page {
+      position: relative;
       max-width: 900px;
       margin: 100px auto 60px auto;
       padding: 40px;
@@ -55,6 +56,11 @@
       color: #33cce6;
     }
     
+    .legal-page code {
+      color: #a8e6ff;
+      font-size: 0.95em;
+    }
+    
     .legal-page a {
       color: #33cce6;
       text-decoration: underline;
@@ -64,19 +70,15 @@
       color: #5bc5de;
     }
     
-    .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #33cce6;
+    .legal-page a.back-btn-top,
+    .legal-page a.back-btn {
+      color: #000;
       text-decoration: none;
-      font-size: 1rem;
-      text-shadow: 2px 2px 4px #000;
-      transition: all 0.3s ease;
+      text-shadow: none;
     }
-    
-    .back-link:hover {
-      color: #fff;
-      text-shadow: 0 0 10px rgba(51, 204, 230, 0.8), 2px 2px 4px #000;
+    .legal-page a.back-btn-top:hover,
+    .legal-page a.back-btn:hover {
+      color: #000;
     }
   </style>
 </head>
@@ -114,44 +116,42 @@
 </nav>
 
   <div class="legal-page">
-    <a href="index.html" class="back-link">← Back to Home</a>
+    <a href="index.html" class="back-btn-top">← Back</a>
     
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last Updated: November 6, 2025</p>
+    <p class="last-updated">Last Updated: April 4, 2026</p>
     
     <p>BlockSpin Values ("we," "our," or "us") respects your privacy. This Privacy Policy explains how we handle information when you use our website at https://blockspinvalues.com/</p>
     
     <h2>1. Information We Collect</h2>
-    <p><strong>We do not intentionally collect or store any personally identifiable information.</strong></p>
+    <p><strong>We do not require accounts to use the public website.</strong> We do not ask you to register, and we do not run a login system for general browsing.</p>
+    <p>If you <strong>contact us</strong> by email or through Discord, we receive only what you choose to send (for example an email address or Discord username).</p>
+    <p>We do not collect payment information; the website is free to use.</p>
     
-    <p>BlockSpin Values is a publicly accessible information website. We do not:</p>
+    <h2>2. Browser Storage (localStorage)</h2>
+    <p>We store a small amount of data <strong>in your browser on your device</strong> using <strong>localStorage</strong> (not on our servers). Keys include:</p>
     <ul>
-      <li>Require user accounts or registration</li>
-      <li>Collect names, email addresses, or contact information</li>
-      <li>Use cookies or tracking technologies</li>
-      <li>Store user preferences or settings</li>
-      <li>Collect payment information (the website is completely free)</li>
+      <li><strong><code>bsv-theme</code></strong> — your theme choice (for example default or pink) so it can persist when you return</li>
+      <li><strong><code>bsv-section-inline-ads-last-at</code></strong> — a timestamp so certain inline ad areas are not shown on every page load more often than about once every six hours (when that feature is enabled)</li>
     </ul>
+    <p>You can clear this data anytime through your browser’s settings (e.g. “clear site data” for this website).</p>
     
-    <h2>2. Automatically Collected Information</h2>
-    <p>Our hosting provider (GitHub Pages) may automatically collect basic technical information such as:</p>
-    <ul>
-      <li>Browser type and version</li>
-      <li>Device type (desktop, mobile, tablet)</li>
-      <li>Operating system</li>
-      <li>Pages visited and time spent on site</li>
-      <li>Referral source (how you found our website)</li>
-    </ul>
-    <p>This information is collected by GitHub Pages for technical and security purposes only. We do not have direct access to this data.</p>
+    <h2>3. Advertising (Google AdSense)</h2>
+    <p>On the <strong>live</strong> website, we may display advertisements through <strong>Google AdSense</strong>. Google and its partners may use <strong>cookies, local storage, advertising identifiers, and similar technologies</strong> to show and measure ads and, where allowed, to personalize ads.</p>
+    <p>Google’s use of advertising cookies is described in <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">How Google uses cookies in advertising</a>. For more on how Google handles data, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google’s Privacy Policy</a>. You can manage some ad personalization at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+    <p>Where required by law (for example in the EEA or UK), personalized or non-essential advertising cookies may only be used with your consent via a consent mechanism we implement or through your browser — follow applicable prompts on the site or use your device/browser controls.</p>
+    <p><strong>Test or staging copies</strong> of the site may use placeholders only and may not load real ads.</p>
     
-    <h2>3. Data Storage</h2>
-    <p><strong>No user data is stored.</strong> All features on our website operate client-side in your browser:</p>
-    <ul>
-      <li><strong>Tax Calculator:</strong> Calculations are performed in your browser and not stored</li>
-      <li><strong>Search Function:</strong> Searches happen in your browser and are not recorded</li>
-    </ul>
+    <h2>4. Hosting and Technical Information</h2>
+    <p>The site may be hosted on services such as <strong>GitHub Pages</strong> or comparable hosting. Those providers may automatically log technical information (for example browser type, device type, IP address in server logs, pages requested, and referral URL) for security and operations. We do not directly control those logs; see your host’s privacy documentation.</p>
+    <p>When you use the site, your browser also sends requests to third parties we rely on (for example <strong>Google</strong> for Sheets or ads, <strong>Discord</strong> for invite information). Those services receive standard request data as described in their own policies.</p>
     
-    <h2>4. Richest Players Leaderboard</h2>
+    <h2>5. How Our Features Use Your Device</h2>
+    <p><strong>Tax calculator and item search:</strong> Run in your browser. We do not store your inputs or searches on our servers.</p>
+    <p><strong>Spreadsheet content:</strong> Values and other content are fetched in your browser from public Google Sheets (read-only). Your device contacts Google’s servers to retrieve that data.</p>
+    <p><strong>Discord:</strong> We may call Discord’s public API (for example to show approximate server member counts on banners). That request is made from your browser to Discord. See <a href="https://discord.com/privacy" target="_blank" rel="noopener">Discord’s Privacy Policy</a>.</p>
+    
+    <h2>6. Richest Players Leaderboard</h2>
     <p>Our "Richest Players" feature displays in-game wealth rankings:</p>
     <ul>
       <li><strong>Official Leaderboard:</strong> This is BlockSpin's official richest players leaderboard maintained by the game's community management</li>
@@ -162,33 +162,33 @@
       <li><strong>Removal Requests:</strong> For leaderboard removal requests, contact BlockSpin's Community Lead Csnsor</li>
     </ul>
     
-    <h2>5. Third-Party Services</h2>
-    <p>Our website displays data from and links to external services. When you click these links, you will be subject to their respective privacy policies:</p>
+    <h2>7. Third-Party Services and Links</h2>
+    <p>Our website loads data from and links to external services. When you visit or click through, those services’ privacy policies apply:</p>
     <ul>
-      <li><strong>Google Sheets:</strong> We pull item values and leaderboard data from public Google Sheets (read-only access)</li>
-      <li><strong>Discord:</strong> Links to our Discord server (discord.gg)</li>
-      <li><strong>TikTok:</strong> Links to creator TikTok profiles</li>
-      <li><strong>Roblox:</strong> Links to Roblox user profiles</li>
-      <li><strong>ImgBB:</strong> We use ImgBB for hosting item images and crew logos</li>
+      <li><strong>Google Sheets:</strong> Item values and other data are read from public Google Sheets in your browser</li>
+      <li><strong>Google AdSense:</strong> Advertising on the live site — see Section 3 above</li>
+      <li><strong>Discord:</strong> Links to our server; optional API requests for public invite information</li>
+      <li><strong>TikTok:</strong> Links to creator profiles</li>
+      <li><strong>Roblox:</strong> Links to user profiles</li>
+      <li><strong>ImgBB:</strong> Images for items and crew logos</li>
     </ul>
-    <p>We are not responsible for the privacy practices of these third-party services.</p>
+    <p>We are not responsible for the privacy practices of third-party services.</p>
    
-    <h2>6. Data Security</h2>
-    <p>All information displayed on our website — such as item values, crew logos, and leaderboard rankings — consists entirely of publicly available, game-related data. No private or personal information is stored or transmitted through our site.</p>
+    <h2>8. Data Security</h2>
+    <p>Game-related information shown on the site (values, crew logos, leaderboard entries) comes from public sources or community processes described above. We do not operate a database of user accounts for general browsing. Contact us if you have a specific security concern.</p>
     
-    <h2>7. Your Rights</h2>
-    <p>Because we do not collect personal data:</p>
+    <h2>9. Your Rights and Choices</h2>
+    <p>Depending on where you live, you may have rights to access, correct, delete, or restrict processing of personal data, and to object to certain processing (for example targeted advertising). Because we minimize what we hold, many requests may be limited to information you sent us directly or to data held by third parties such as Google — use their tools and your browser settings where applicable.</p>
     <ul>
-      <li>There is no personal data to access, modify, or delete</li>
-      <li>You are not tracked across sessions</li>
-      <li>You can use our website completely anonymously</li>
-      <li>If your Roblox username appears on the Richest Players leaderboard and you wish to be removed, contact us</li>
+      <li><strong>Theme and local storage:</strong> Clear site data in your browser to remove our localStorage entries</li>
+      <li><strong>Ads:</strong> Use <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> and your browser’s cookie controls</li>
+      <li><strong>Leaderboard:</strong> If your Roblox username appears on the Richest Players list and you wish to be removed, contact BlockSpin’s Community Lead (Csnsor) as described in Section 6, or contact us for guidance</li>
     </ul>
     
-    <h2>8. Changes to This Policy</h2>
+    <h2>10. Changes to This Policy</h2>
     <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. Any changes will be posted on this page with an updated "Last Updated" date. Continued use of the website after changes constitutes acceptance of the updated policy.</p>
     
-    <h2>9. Contact Us</h2>
+    <h2>11. Contact Us</h2>
     <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
     <ul>
       <li><strong>Email:</strong> riverytacc11@gmail.com</li>
@@ -196,13 +196,17 @@
       <li><strong>Website:</strong> <a href="z-contact.html">Contact Page</a></li>
     </ul>
     
-    <h2>10. Compliance</h2>
-    <p>This Privacy Policy is designed to comply with general privacy principles. We comply with applicable privacy principles, including GDPR and CCPA, to the extent they apply.</p>
+    <h2>12. Compliance</h2>
+    <p>We aim to follow applicable privacy laws, including the GDPR and CCPA, where they apply to our operations. This policy is not legal advice; consult a professional for your specific situation.</p>
+
+    <div style="text-align: center;">
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
   </div>
   
   <footer class="site-footer">
     <div class="footer-content">
-      <p>© 2025 BlockSpin Values</p>
+      <p>© 2026 BlockSpin Values</p>
       <div class="footer-links">
         <a href="z-contact.html">Contact River</a>
         <span>•</span>

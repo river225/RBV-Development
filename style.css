@@ -43,6 +43,38 @@ background-attachment: fixed;
 }
 a { color: #fff; text-decoration: none; }
 
+/* Back navigation (shared: FAQ, Trading Guide, legal/contact pages) */
+.back-btn-top {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background: #33cce6;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+.back-btn-top:hover {
+  background: #5bc5de;
+}
+.back-btn {
+  display: inline-block;
+  margin: 30px auto;
+  padding: 12px 30px;
+  background: #33cce6;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+.back-btn:hover {
+  background: #5bc5de;
+}
+
 /* Header */
 .site-header { text-align: left; max-width: 1100px; margin: 0 auto 16px; padding: 16px; }
 .header-top { display: flex; align-items: center; justify-content: space-between; }
@@ -2460,72 +2492,6 @@ body {
 .ad-slot-placeholder--section {
   margin-top: 28px;
   margin-bottom: 12px;
-}
-
-/* Entry popup (shown after load; placeholder until AdSense on main) */
-.bsv-entry-ad-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  box-sizing: border-box;
-  background: rgba(10, 15, 22, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.bsv-entry-ad-overlay[hidden] {
-  display: none !important;
-}
-body.bsv-entry-ad-open {
-  overflow: hidden;
-}
-.bsv-entry-ad-modal {
-  position: relative;
-  width: 100%;
-  max-width: min(728px, 96vw);
-  max-height: min(90vh, 600px);
-  padding: 20px 16px 16px;
-  border-radius: 14px;
-  background: #141d28;
-  border: 2px solid rgba(51, 204, 230, 0.45);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-}
-.bsv-entry-ad-close {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.bsv-entry-ad-close:hover {
-  background: rgba(255, 80, 80, 0.35);
-}
-.bsv-entry-ad-heading {
-  margin: 0 0 12px 0;
-  padding-right: 44px;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.95);
-}
-.ad-slot-placeholder--entry-popup {
-  min-height: 200px;
-  margin: 0;
-  max-width: none;
-  width: 100%;
 }
 
 /* What is BlockSpin Values Section */
