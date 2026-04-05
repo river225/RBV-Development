@@ -699,7 +699,7 @@ function getTaxBreakdown(amountWant) {
   if (want <= 0) return { totalWithdraw: 0, lines: [], singleDrop: true };
   const totalWithdraw = Math.round(want / TAX_RECEIVE_RATIO);
   if (totalWithdraw <= TAX_MAX_DROP) {
-    return { totalWithdraw, lines: ['Withdraw the amount above and drop once.'], singleDrop: true };
+    return { totalWithdraw, lines: ['Drop once using the amount shown above.'], singleDrop: true };
   }
   const full40kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
   const receivedFromFull = full40kCount * TAX_RECEIVE_PER_40K;
@@ -708,11 +708,11 @@ function getTaxBreakdown(amountWant) {
   const moreCount = full40kCount - 1;
   const moreTimes = moreCount === 1 ? '1 more time' : moreCount.toLocaleString() + ' more times';
   const lines = [
-    'Withdraw $40,000 and drop.',
+    'Drop $40,000 at a time (max per drop).',
     'Repeat ' + moreTimes + '.'
   ];
   if (lastWithdraw > 0) {
-    lines.push('Then withdraw $' + lastWithdraw.toLocaleString() + ' and drop once.');
+    lines.push('Then use $' + lastWithdraw.toLocaleString() + ' for the last drop.');
   }
   return { totalWithdraw, lines, singleDrop: false };
 }

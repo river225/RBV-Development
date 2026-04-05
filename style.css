@@ -1470,21 +1470,28 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box;
   margin: 0;
   padding: 12px 12px;
-  background: linear-gradient(135deg, rgba(26, 35, 50, 0.95) 0%, rgba(42, 58, 74, 0.95) 100%);
-  border: 2px solid rgba(167, 139, 250, 0.55);
+  background: linear-gradient(155deg, #080c12 0%, #0f1724 38%, #151d2b 100%);
+  border: 2px solid rgba(167, 139, 250, 0.5);
   border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 6px 18px rgba(0, 0, 0, 0.55);
   color: #c4b5fd;
   font-size: 0.78rem;
   line-height: 1.45;
   text-align: center;
   text-decoration: none;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .discord-mm-promo--sidebar:hover {
   color: #e9d5ff;
   border-color: rgba(196, 181, 253, 0.85);
+  background: linear-gradient(155deg, #0c121a 0%, #141f2e 40%, #1a2638 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 8px 22px rgba(0, 0, 0, 0.6);
   text-decoration: none;
 }
 
@@ -1501,20 +1508,24 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box;
   margin: 14px 0 0 0;
   padding: 12px 10px;
-  background: rgba(15, 23, 42, 0.65);
+  background: linear-gradient(155deg, #06090e 0%, #0c121c 45%, #121a28 100%);
   border: 2px solid rgba(167, 139, 250, 0.45);
   border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 4px 14px rgba(0, 0, 0, 0.5);
   color: #c4b5fd;
   font-size: 0.82rem;
   line-height: 1.45;
   text-align: center;
   text-decoration: none;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .discord-mm-promo--mobile-panel:hover {
   color: #e9d5ff;
   border-color: rgba(196, 181, 253, 0.75);
+  background: linear-gradient(155deg, #0a0f16 0%, #121a28 45%, #182232 100%);
 }
 
 .announcement-box-home {
