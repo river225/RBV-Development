@@ -626,20 +626,20 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-   // Hide/show tax calculator and home value changes based on section (same slot: one or the other)
-  const taxCalc = document.querySelector('.tax-calculator');
+   // Hide/show tax sidebar (calculator + Middleman promo) and home value changes (same slot: one or the other)
+  const taxSidebarColumn = document.getElementById('tax-sidebar-column');
   const homeValueChanges = document.getElementById('home-value-changes');
   const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
   const isHome = name === 'Home';
-  if (taxCalc) {
+  if (taxSidebarColumn) {
     if (hiddenSections.includes(name)) {
-      taxCalc.style.visibility = 'hidden';
-      taxCalc.style.opacity = '0';
-      taxCalc.style.display = isHome ? 'none' : 'block'; // free the slot on Home for value changes
+      taxSidebarColumn.style.visibility = 'hidden';
+      taxSidebarColumn.style.opacity = '0';
+      taxSidebarColumn.style.display = isHome ? 'none' : 'flex'; // free the slot on Home for value changes
     } else {
-      taxCalc.style.visibility = 'visible';
-      taxCalc.style.opacity = '1';
-      taxCalc.style.display = 'block';
+      taxSidebarColumn.style.visibility = 'visible';
+      taxSidebarColumn.style.opacity = '1';
+      taxSidebarColumn.style.display = 'flex';
     }
   }
   if (homeValueChanges) {
@@ -1254,7 +1254,6 @@ function setupMobileHamburgerMenu() {
   inner.className = 'mobile-menu-satellite-inner';
   inner.innerHTML =
     '<a href="index.html">Home</a>' +
-    '<a href="x-trading-guide.html">Trading Guide</a>' +
     '<a href="x-about.html">About Us</a>' +
     '<a href="x-faq.html">FAQ</a>' +
     '<a href="z-contact.html">Contact Us</a>';

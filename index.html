@@ -73,8 +73,6 @@ border: 2px solid #000000;
 
 <!-- Mobile Top Links -->
 <div class="mobile-top-links">
-  <a href="x-trading-guide.html">Trading Guide</a>
-  <span>|</span>
   <a href="x-about.html">About Us</a>
   <span>|</span>
   <a href="x-faq.html">FAQ</a>
@@ -97,7 +95,6 @@ border: 2px solid #000000;
         <img src="https://i.ibb.co/gZQzvDp1/qu-Ohyw-V8.webp" alt="BlockSpin Values Logo" class="nav-logo-img">
         <span class="nav-title">Block<span style="color: #ff1a1a;">Spin</span> <span style="color: #33cce6;">Values</span></span>
       </a>
-      <a href="x-trading-guide.html">Trading Guide</a>
       <a href="x-about.html">About Us</a>
       <a href="x-faq.html">FAQ</a>
     </div>
@@ -243,7 +240,8 @@ We’ve launched a complete site redesign, and items will now display both their
 
 
 
-    <!-- Tax calculator (hidden on Home) -->
+    <!-- Tax calculator + Middleman promo (hidden on Home; same column width) -->
+    <div class="tax-sidebar-column" id="tax-sidebar-column">
     <aside class="tax-calculator">
         <div class="tax-badge-wrapper">
             <div class="tax-badge"></div>
@@ -264,6 +262,8 @@ We’ve launched a complete site redesign, and items will now display both their
             - Wait 1 min between money drops
         </div>
     </aside>
+    <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--sidebar">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
+    </div>
 
     <!-- Value Changes (visible only on Home, same position as tax calc) -->
     <aside class="home-value-changes" id="home-value-changes">
@@ -292,8 +292,6 @@ We’ve launched a complete site redesign, and items will now display both their
   </div>
 </footer>
 
-<a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo">Tired of getting scammed during trades? Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
-
 <!-- Mobile Tax Calculator (Mobile Only - Fixed Position) -->
 <button class="mobile-calc-arrow" id="mobile-calc-arrow">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
@@ -315,6 +313,7 @@ We’ve launched a complete site redesign, and items will now display both their
             - The person resetting should <strong>not</strong> leave game in combat<br>
             - Wait 1 min between money drops
   </div>
+  <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--mobile-panel">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
 </aside>
 </body> 
 </html>
