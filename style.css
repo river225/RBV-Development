@@ -3430,10 +3430,28 @@ section[id$="richest-players"] .profile-link {
   line-height: 1.6;
   color: rgba(255,255,255,0.85);
   margin-top: 10px;
-  padding: 6px 8px;
+  padding: 8px 8px 10px;
   background: rgba(51, 204, 230, 0.08);
   border-left: 3px solid #33cce6;
   border-radius: 4px;
+}
+.tax-reminders-heading {
+  margin: 0 0 8px 0;
+  padding: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  color: #33cce6;
+  letter-spacing: 0.02em;
+}
+.tax-reminders-intro {
+  margin: 0 0 10px 0;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+.tax-reminders-bullets {
+  margin: 0;
 }
 .tax-reminders strong {
   color: #33cce6;
@@ -3600,6 +3618,9 @@ body[data-theme="red"] .tax-reminders {
 }
 body[data-theme="red"] .tax-reminders strong {
   color: #f09090 !important;
+}
+body[data-theme="red"] .tax-reminders-heading {
+  color: #f0b0b0 !important;
 }
 
 /* ---- Announcements ---- */
@@ -4008,6 +4029,9 @@ body[data-theme="purple"] .tax-reminders {
 body[data-theme="purple"] .tax-reminders strong {
   color: #c7a4ff !important;
 }
+body[data-theme="purple"] .tax-reminders-heading {
+  color: #d3bff5 !important;
+}
 
 /* ---- Announcements ---- */
 body[data-theme="purple"] .announcement-box-home {
@@ -4373,6 +4397,9 @@ body[data-theme="pink"] .tax-reminders {
 }
 body[data-theme="pink"] .tax-reminders strong {
   color: #d0a8b8 !important;
+}
+body[data-theme="pink"] .tax-reminders-heading {
+  color: #d8b0c0 !important;
 }
 
 /* ---- Announcements ---- */
