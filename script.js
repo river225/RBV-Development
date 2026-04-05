@@ -21,26 +21,6 @@ const BSV_AD_THREE_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeh
 // BSV Ad Four — Display unit (slot 4197814232): end of Crew Logos; under Richest intro text. Placeholder only on test.
 const BSV_AD_FOUR_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeholder--section" data-bsv-ad="four" aria-label="Advertisement"><span class="ad-slot-placeholder-label">Ad space</span></div>`;
 
-const BSV_SECTION_ADS_COOLDOWN_MS = 6 * 60 * 60 * 1000; /* 6 hours */
-const BSV_LS_SECTION_INLINE_ADS_AT = "bsv-section-inline-ads-last-at";
-var _bsvShowInlineSectionAds = false;
-
-function shouldShowInlineSectionAds() {
-  try {
-    var last = parseInt(localStorage.getItem(BSV_LS_SECTION_INLINE_ADS_AT), 10);
-    if (!last || isNaN(last)) return true;
-    return Date.now() - last >= BSV_SECTION_ADS_COOLDOWN_MS;
-  } catch (e) {
-    return true;
-  }
-}
-
-function markInlineSectionAdsShown() {
-  try {
-    localStorage.setItem(BSV_LS_SECTION_INLINE_ADS_AT, String(Date.now()));
-  } catch (e) {}
-}
-
 // Tax calculator: 40k drop → 29,091 received (confirmed). Above 40k (e.g. 41,250) still gives 29,091. MAX 40K PER DROP.
 const TAX_RECEIVE_RATIO = 29091 / 40000;
 const TAX_MAX_DROP = 40000;
@@ -90,7 +70,7 @@ function createRichestPlayersSection(data) {
     <div class="richest-players-header">
       <h2>Top 1,000 Richest Players in BlockSpin</h2>
       <p class="richest-intro">The Official BlockSpin leaderboard showing the wealthiest players ranked by the total value of their in-game assets. Rankings go to #1000 and update hourly. To appear, verify yourself in the official BlockSpin Discord server.</p>
-      ${_bsvShowInlineSectionAds ? BSV_AD_FOUR_PLACEHOLDER : ""}
+      ${BSV_AD_FOUR_PLACEHOLDER}
       <input 
         type="text" 
         class="richest-search" 
@@ -462,7 +442,7 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
-        ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
+        ${BSV_AD_THREE_PLACEHOLDER}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -480,7 +460,7 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
-        ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
+        ${BSV_AD_THREE_PLACEHOLDER}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -491,7 +471,7 @@ function renderSection(title, items) {
         <div class="cards">
           ${items.map(createCard).join("")}
         </div>
-        ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
+        ${BSV_AD_THREE_PLACEHOLDER}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -513,7 +493,7 @@ function renderLegendarySectionWithBanner(items) {
           <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
         </div>
       </div>
-      ${_bsvShowInlineSectionAds ? BSV_AD_THREE_PLACEHOLDER : ""}
+      ${BSV_AD_THREE_PLACEHOLDER}
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -558,7 +538,7 @@ function renderCrewLogosSection(items) {
     }
   });
   
-  html += (_bsvShowInlineSectionAds ? BSV_AD_FOUR_PLACEHOLDER : "") + `</section>`;
+  html += BSV_AD_FOUR_PLACEHOLDER + `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
@@ -1005,7 +985,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const progressBar = document.getElementById("progress-bar");
   const progressText = document.getElementById("progress-text");
 
-  
+  if (!sectionsContainer || !progressBar || !progressText) {
+    return;
+  }
+
   initSectionsNav();
   initSearch();
   initTaxCalculator();
@@ -1044,16 +1027,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Wait for all to finish
   const results = await Promise.all(fetchPromises);
 
-  _bsvShowInlineSectionAds = shouldShowInlineSectionAds();
-
   // Render in order
   results.forEach(({ section, items }) => {
     renderSection(section, items);
   });
-
-  if (_bsvShowInlineSectionAds) {
-    markInlineSectionAdsShown();
-  }
 
   // Decide which section to show first.
   // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
@@ -1248,30 +1225,52 @@ async function loadValueChanges() {
 }
 
 
-/* MOBILE MENU FUNCTIONALITY */
+/* MOBILE MENU FUNCTIONALITY — index clones #sections-nav; other pages get link list */
+function setupMobileHamburgerMenu() {
+  if (window.innerWidth > 430) return;
+  var hamburgerBtn = document.getElementById('hamburger-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (!hamburgerBtn || !mobileMenu || mobileMenu.dataset.bsvMobileInit === '1') return;
+  mobileMenu.dataset.bsvMobileInit = '1';
 
-if (window.innerWidth <= 430) {
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const sectionsNav = document.getElementById('sections-nav');
-  
-  if (hamburgerBtn && mobileMenu && sectionsNav) {
-    const navClone = sectionsNav.cloneNode(true);
+  var sectionsNav = document.getElementById('sections-nav');
+  if (sectionsNav) {
+    var navClone = sectionsNav.cloneNode(true);
     mobileMenu.appendChild(navClone);
-    
     hamburgerBtn.addEventListener('click', function() {
       hamburgerBtn.classList.toggle('active');
       mobileMenu.classList.toggle('active');
     });
-    
     mobileMenu.addEventListener('click', function(e) {
       if (e.target.tagName === 'BUTTON') {
         hamburgerBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
       }
     });
+    return;
   }
+
+  var inner = document.createElement('div');
+  inner.className = 'mobile-menu-satellite-inner';
+  inner.innerHTML =
+    '<a href="index.html">Home</a>' +
+    '<a href="x-trading-guide.html">Trading Guide</a>' +
+    '<a href="x-about.html">About Us</a>' +
+    '<a href="x-faq.html">FAQ</a>' +
+    '<a href="z-contact.html">Contact Us</a>';
+  mobileMenu.appendChild(inner);
+  hamburgerBtn.addEventListener('click', function() {
+    hamburgerBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      hamburgerBtn.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    }
+  });
 }
+document.addEventListener('DOMContentLoaded', setupMobileHamburgerMenu);
 
 
 // MOBILE TAX CALCULATOR

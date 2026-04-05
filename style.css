@@ -1447,6 +1447,45 @@ a { color: #fff; text-decoration: none; }
   font-size: 0.9rem;
 }
 
+/* Desktop only: floating Discord / Middleman promo (bottom-left) */
+.discord-mm-promo {
+  display: none;
+}
+
+@media (min-width: 431px) {
+  .discord-mm-promo {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9980;
+    max-width: min(320px, calc(100vw - 40px));
+    padding: 14px 18px;
+    margin: 0;
+    background: rgba(15, 23, 42, 0.96);
+    border: 2px solid #a78bfa;
+    border-radius: 12px;
+    color: #ddd6fe;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    text-align: left;
+    text-decoration: none;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  }
+
+  .discord-mm-promo:hover {
+    color: #f5f3ff;
+    border-color: #c4b5fd;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(139, 92, 246, 0.15);
+  }
+
+  .discord-mm-promo:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+  }
+}
+
 .announcement-box-home {
   background: #0d1419;
   border: 2px solid #ff9800;
@@ -2927,6 +2966,24 @@ body {
     margin: 20px 0 15px 0;
     font-size: 1.2rem;
     text-align: center;
+  }
+
+  .mobile-menu-overlay .mobile-menu-satellite-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-menu-overlay .mobile-menu-satellite-inner a {
+    color: #33cce6;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 10px 8px;
+    border-radius: 6px;
+  }
+
+  .mobile-menu-overlay .mobile-menu-satellite-inner a:active {
+    background: rgba(51, 204, 230, 0.12);
   }
 
   /* Hide desktop sidebar */
