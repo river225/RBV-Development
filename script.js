@@ -705,22 +705,16 @@ function getTaxBreakdown(amountWant) {
   const receivedFromFull = full40kCount * TAX_RECEIVE_PER_40K;
   const lastReceive = want - receivedFromFull;
   const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
-  const moreCount = full40kCount - 1;
   const lines = [];
 
   if (full40kCount === 1 && lastWithdraw > 0) {
-    lines.push('Drop $40,000.');
-    lines.push('Drop $' + lastWithdraw.toLocaleString() + '.');
+    lines.push('Drop $40,000 once');
+    lines.push('then Drop $' + lastWithdraw.toLocaleString() + '.');
+  } else if (lastWithdraw > 0) {
+    lines.push('Drop $40,000 ' + full40kCount.toLocaleString() + ' times');
+    lines.push('then Drop $' + lastWithdraw.toLocaleString() + '.');
   } else {
-    lines.push('Drop $40,000 per drop (max).');
-    if (moreCount > 0) {
-      lines.push(
-        moreCount === 1 ? 'Repeat 1 more time.' : 'Repeat ' + moreCount.toLocaleString() + ' more times.'
-      );
-    }
-    if (lastWithdraw > 0) {
-      lines.push('Drop $' + lastWithdraw.toLocaleString() + '.');
-    }
+    lines.push('Drop $40,000 ' + full40kCount.toLocaleString() + ' times.');
   }
   return { totalWithdraw, lines, singleDrop: false };
 }
