@@ -2463,16 +2463,16 @@ body {
 .home-page-clean {
   max-width: 900px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 18px 20px 40px;
 }
 
 .welcome-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .welcome-header h1 {
-  font-size: 4.2rem;
+  font-size: 4.8rem;
   margin: 0 0 15px 0;
   color: #fff;
   font-family: 'Paytone One', sans-serif;
