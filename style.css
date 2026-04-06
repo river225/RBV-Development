@@ -2911,17 +2911,21 @@ body {
 /* Hide mobile-only elements on desktop */
 .tax-calc-toggle,
 .tax-calculator-mobile,
-.mobile-top-links,
+.mobile-calc-backdrop,
 .mobile-calc-arrow,
 .mobile-tax-calc {
   display: none;
 }
 
-/* MOBILE STYLES */
+/* Drawer is mobile-only; without this it can affect layout on wide screens */
+.mobile-menu-overlay {
+  display: none;
+}
+
+/* MOBILE (≤430px): hamburger nav + tax side panel only */
 
 @media screen and (max-width: 430px) {
   
-  /* Hide desktop tax sidebar (calculator + promo) on mobile */
   .tax-sidebar-column {
     display: none !important;
   }
@@ -2930,11 +2934,6 @@ body {
     display: none !important;
   }
 
-  /* Remove container padding that causes left offset */
-  .main-container {
-    padding: 0 !important;
-  }
-  
   /* Hamburger button */
   .hamburger-menu {
     display: flex;
@@ -2970,7 +2969,7 @@ body {
 
   /* Mobile menu overlay */
   .mobile-menu-overlay {
-    display: block;
+    display: block !important;
     position: fixed;
     top: 0;
     left: -100%;
@@ -3032,152 +3031,32 @@ body {
     background: rgba(51, 204, 230, 0.12);
   }
 
-  /* Hide desktop sidebar */
+  /* Hide desktop sidebar — section nav is in the hamburger drawer */
   .main-container .sections-nav {
     display: none;
   }
-  
-  /* Hide Trading Guide, About Us, Discord, TikTok on mobile */
-  .top-navbar a,
-  .nav-separator {
-    display: none;
-  } 
 
-  /* Mobile top links */
-  .mobile-top-links {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    background: #1a2332;
-    border-radius: 12px;
-    margin: 0px;
-    margin-left: 0px; 
-    margin-right: 0px;
-    height: 60px;                      
-    display: flex;                      
-    align-items: center;              
-    justify-content: center;             
-  }
-  
-  .mobile-top-links a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .mobile-top-links span {
-    margin: 0 8px;
-    color: #fff;
-  }
-
-  /* Hide Quick Stats box on mobile */
-  .quick-stats-box {
-    display: none !important;
-  }
-  
-  /* Slightly larger \"BlockSpin Values\" text on small screens (but still compact) */
-  .nav-title {
-    font-size: 1.7rem;
-  }
-  
-  /* Center home page content */
-  .home-page-clean {
-    display: block !important;
-    max-width: 100% !important;
-    padding: 0 20px !important;
-    margin: 0 auto !important;
-  }
-  
-  .home-content-main {
-    margin: 0 auto !important;
-    width: 100% !important;
-  }
-  
-  /* Center all sections */
-  .welcome-header,
-  .hero-section,
-  .social-buttons-home,
-  .what-is-section {
-    text-align: center !important;
-  }
-  
-  /* Bigger welcome title */
-  .hero-section h1,
-  .welcome-header h1 {
-    font-size: 3.5rem;
-    line-height: 1.2;
-  }
-  
-  /* Bigger subtitle */
-  .hero-section p,
-  .welcome-header p {
-    font-size: 1.3rem;
-  }
-  
-  /* Bigger "What is BlockSpin Values" section */
-  .what-is-section {
-    max-width: 100%;
-    padding: 30px 25px;
-  }
-  
-  .what-is-section h2 {
-    font-size: 2.5rem;
-  }
-  
-  .what-is-section p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-  }
-  
-  /* Stack announcements vertically */
-  .home-two-columns {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  /* Center and bigger buttons */
-  .cta-buttons,
-  .social-buttons-home {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .cta-buttons button,
-  .social-btn {
-    font-size: 1.2rem;
-    padding: 18px 30px;
-  }
-  
-  /* MOBILE TAX CALCULATOR */
-  
-    /* Backdrop overlay */
+  /* Tax calc: backdrop + floating arrow + right-side panel */
   .mobile-calc-backdrop {
     display: block;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 949;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 899;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.28s ease;
   }
-  
+
   .mobile-calc-backdrop.active {
     opacity: 1;
     pointer-events: auto;
   }
-  
 
   .mobile-calc-arrow {
     display: flex !important;
     position: fixed;
-    right: 20px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
     width: 50px;
@@ -3192,39 +3071,44 @@ body {
     color: #fff;
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
   }
-  
-  /* Tax calculator panel */
+
   .mobile-tax-calc {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(100%, 400px);
     max-width: 400px;
-    max-height: 80vh;
-    background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
-    border: 3px solid #33cce6;
-    border-radius: 20px;
-    padding: 30px 20px;
+    height: 100vh;
+    max-height: none;
+    margin: 0;
+    padding: 56px 16px 24px;
+    background: linear-gradient(180deg, #1a2332 0%, #243044 100%);
+    border: none;
+    border-left: 3px solid #33cce6;
+    border-radius: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     z-index: 950;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
     box-sizing: border-box;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.55);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    pointer-events: none;
   }
-  
+
   .mobile-tax-calc.active {
-    opacity: 1;
+    transform: translateX(0);
     pointer-events: auto;
   }
-  
+
   .mobile-calc-close {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 12px;
+    right: 12px;
     width: 40px;
     height: 40px;
     background: #ff4444;
@@ -3238,21 +3122,23 @@ body {
     justify-content: center;
     line-height: 1;
     font-weight: bold;
-    z-index: 1000;
+    z-index: 2;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   }
-  
+
   .mobile-tax-calc h2 {
     color: #33cce6;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin: 0 0 14px 0;
+    padding-right: 44px;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+    flex-shrink: 0;
   }
-  
+
   .mobile-tax-calc input {
     width: 100%;
     background: rgba(51, 204, 230, 0.1);
@@ -3265,18 +3151,18 @@ body {
     margin-bottom: 12px;
     box-sizing: border-box;
   }
-  
+
   .mobile-tax-calc input::placeholder {
     color: rgba(255, 255, 255, 0.5);
   }
-  
+
   .mobile-tax-calc input:focus {
     outline: none;
     background: rgba(51, 204, 230, 0.15);
     border-color: #5bc5de;
     box-shadow: 0 0 20px rgba(51, 204, 230, 0.3);
   }
-  
+
   .mobile-tax-calc .tax-result {
     background: #1a2532;
     border: 2px solid #2a3542;
@@ -3286,7 +3172,7 @@ body {
     text-align: left;
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
   }
-  
+
   .mobile-tax-calc .tax-result h3 {
     color: #6ab5be;
     font-size: 0.8rem;
@@ -3296,7 +3182,7 @@ body {
     letter-spacing: 0.5px;
     text-shadow: none;
   }
-  
+
   .mobile-tax-calc .tax-result .amount {
     color: #81e681;
     font-size: 1.6rem;
@@ -3304,114 +3190,6 @@ body {
     text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
     font-family: 'Courier New', monospace;
   }
-    
- 
-  .search-container {
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-  
-  #search {
-    width: 280px !important;      
-    font-size: 0.9rem !important;  
-  }
-
-    /* Hide only item rarity section titles on mobile */
-  .sections > section:not(#home) > h2 {
-    color: transparent !important;
-  }
-  
-  /* but keep specific sections visible */
-  section[data-section*="richest"] h2,
-  section[data-section*="Richest"] h2,
-  section[data-section*="crew"] h2,
-  section[data-section*="Crew"] h2 {
-    color: inherit !important;
-  }
-
-    /* Keep footer at bottom for short sections only */
-  .sections {
-    min-height: calc(100vh - 250px) !important;
-  }
-
-section[id$="richest-players"] {
-    width: 100vw;
-    position: relative;
-    --rp-scale: 0.80;
-    transform: scale(var(--rp-scale));
-    transform-origin: top left;
-    margin-left: calc((100vw - (100vw * var(--rp-scale))) / 2);
-    pointer-events: auto !important;
-}
-
-section[id$="richest-players"] * {
-    max-width: 100% !important;
-    pointer-events: auto !important;
-}
-
-section[id$="richest-players"] .richest-search {
-    touch-action: manipulation !important;
-    font-size: 16px !important;
-    min-height: 44px !important;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-html, body {
-    overflow-x: hidden;
-}
-
-section[id$="richest-players"] .richest-card {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px;
-    padding: 14px 16px;
-}
-
-section[id$="richest-players"] .card-top {
-    display: flex !important;
-    align-items: center;
-    justify-content: flex-start !important;
-    gap: 12px;
-    width: 100%;
-}
-
-section[id$="richest-players"] .rank-badge {
-    width: 46px !important;
-    height: 46px !important;
-    font-size: 1.35rem !important;
-    flex-shrink: 0;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-}
-
-section[id$="richest-players"] .rank-badge.rank-long {
-    font-size: 1.0rem !important;
-}
-
-body[data-theme="red"] section[id$="richest-players"] .rank-badge {
-    filter: brightness(1.2);
-}
-section[id$="richest-players"] .player-name {
-    font-size: 1.25rem !important;
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-section[id$="richest-players"] .player-level {
-    font-size: 0.95rem !important;
-    opacity: 0.9;
-}
-
-section[id$="richest-players"] .player-worth {
-    font-size: 0.95rem !important;
-    opacity: 0.9;
-}
-
-section[id$="richest-players"] .view-profile,
-section[id$="richest-players"] .profile-link {
-    display: none !important;
-}
-
 
 }
 
@@ -3838,9 +3616,9 @@ body[data-theme="red"] .info-separator {
     border-right-color: #e08a8a !important;
   }
   body[data-theme="red"] .mobile-tax-calc {
-    background: linear-gradient(135deg, #2c1616 0%, #3a1919 50%, #3a1919 100%) !important;
-    border-color: #e08a8a !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(180deg, #2c1616 0%, #3a1919 100%) !important;
+    border-left-color: #e08a8a !important;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45) !important;
   }
   body[data-theme="red"] .mobile-tax-calc h2 {
     color: #f0c0c0 !important;
@@ -4619,9 +4397,9 @@ body[data-theme="pink"] .info-separator {
     border-right-color: #c898a8 !important;
   }
   body[data-theme="pink"] .mobile-tax-calc {
-    background: linear-gradient(135deg, #3d2a35 0%, #4a3540 50%, #4a3540 100%) !important;
-    border-color: #c898a8 !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
+    border-left-color: #c898a8 !important;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc h2 {
     color: #e0c0d0 !important;

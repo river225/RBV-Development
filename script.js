@@ -1124,12 +1124,10 @@ async function loadTopDonators() {
   try {
     const donators = await fetchSheet("Top Donate");
     const donatorList = document.getElementById('donator-list');
-    const mobileDonatorList = document.getElementById('mobile-donator-list');
     
     if (!donators || donators.length === 0) {
       const noDonatorsHTML = '<div class="donator-loading">No donators yet</div>';
       if (donatorList) donatorList.innerHTML = noDonatorsHTML;
-      if (mobileDonatorList) mobileDonatorList.innerHTML = noDonatorsHTML;
       return;
     }
     
@@ -1156,15 +1154,12 @@ async function loadTopDonators() {
     }).join('');
     
     if (donatorList) donatorList.innerHTML = donatorsHTML;
-    if (mobileDonatorList) mobileDonatorList.innerHTML = donatorsHTML;
     
   } catch (error) {
     console.error('Error loading donators:', error);
     const errorHTML = '<div class="donator-loading">Failed to load donators</div>';
     const donatorList = document.getElementById('donator-list');
-    const mobileDonatorList = document.getElementById('mobile-donator-list');
     if (donatorList) donatorList.innerHTML = errorHTML;
-    if (mobileDonatorList) mobileDonatorList.innerHTML = errorHTML;
   }
 }
 
@@ -1291,38 +1286,41 @@ document.addEventListener('DOMContentLoaded', setupMobileHamburgerMenu);
 // MOBILE TAX CALCULATOR
 
 if (window.innerWidth <= 430) {
-  // Wait for DOM to be fully loaded
   document.addEventListener('DOMContentLoaded', function() {
     const arrow = document.getElementById('mobile-calc-arrow');
     const calc = document.getElementById('mobile-tax-calc');
+    const backdrop = document.getElementById('mobile-calc-backdrop');
     const closeBtn = document.getElementById('mobile-calc-close');
     const input = document.getElementById('mobile-tax-input');
     const amount = document.getElementById('mobile-tax-amount');
     
-    // Debug: Check if elements exist
-    console.log('Arrow:', arrow);
-    console.log('Calc:', calc);
-    console.log('Close:', closeBtn);
-    
     if (!arrow || !calc || !closeBtn || !input || !amount) {
-      console.error('Mobile tax calculator elements not found!');
       return;
     }
+
+    function openCalc() {
+      calc.classList.add('active');
+      if (backdrop) {
+        backdrop.classList.add('active');
+        backdrop.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function closeCalc() {
+      calc.classList.remove('active');
+      if (backdrop) {
+        backdrop.classList.remove('active');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+    }
     
-    // Sections where calculator should appear
     const calcSections = ['home', 'uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
     
-    // Open calculator
-    arrow.addEventListener('click', () => {
-      console.log('Arrow clicked!');
-      calc.classList.add('active');
-    });
-    
-    // Close calculator
-    closeBtn.addEventListener('click', () => {
-      console.log('Close clicked!');
-      calc.classList.remove('active');
-    });
+    arrow.addEventListener('click', openCalc);
+    closeBtn.addEventListener('click', closeCalc);
+    if (backdrop) {
+      backdrop.addEventListener('click', closeCalc);
+    }
     
     const breakdownEl = document.getElementById('mobile-tax-breakdown');
 
@@ -1354,19 +1352,14 @@ if (window.innerWidth <= 430) {
         }
       });
       
-      console.log('Active section:', activeSection);
-      
       if (calcSections.includes(activeSection)) {
         arrow.style.display = 'flex';
-        console.log('Showing arrow');
       } else {
         arrow.style.display = 'none';
-        calc.classList.remove('active');
-        console.log('Hiding arrow');
+        closeCalc();
       }
     }
     
-    // Check on page load
     updateArrowVisibility();
     
     // Check when sections change

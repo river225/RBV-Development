@@ -71,13 +71,6 @@ border: 2px solid #000000;
 
   
 
-<!-- Mobile Top Links -->
-<div class="mobile-top-links">
-  <a href="x-about.html">About Us</a>
-  <span>|</span>
-  <a href="x-faq.html">FAQ</a>
-</div>
-
 <!-- Hamburger Menu Button -->
 <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu">
   <span></span>
@@ -259,7 +252,8 @@ We’ve launched a complete site redesign, and items will now display both their
             <h3 class="tax-reminders-heading">How does it work?</h3>
             <p class="tax-reminders-intro">Tax Calculator shows exactly how much cash to drop and in what order to avoid losing money to the game's cash tax system.</p>
             <p class="tax-reminders-bullets">- <strong>You NEED BlockSpin Plus</strong> for this Calculator<br>
-            - <strong>NEVER</strong> leave the game in combat after resetting</p>
+            - <strong>NEVER</strong> leave the game in combat after resetting<br>
+            - Wait 1 min in between cash drops</p>
         </div>
     </aside>
     <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--sidebar">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
@@ -292,8 +286,9 @@ We’ve launched a complete site redesign, and items will now display both their
   </div>
 </footer>
 
-<!-- Mobile Tax Calculator (Mobile Only - Fixed Position) -->
-<button class="mobile-calc-arrow" id="mobile-calc-arrow">
+<!-- Mobile Tax Calculator: backdrop + arrow + side panel -->
+<div class="mobile-calc-backdrop" id="mobile-calc-backdrop" aria-hidden="true"></div>
+<button class="mobile-calc-arrow" id="mobile-calc-arrow" type="button" aria-label="Open tax calculator">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
   </svg>
@@ -311,7 +306,8 @@ We’ve launched a complete site redesign, and items will now display both their
     <h3 class="tax-reminders-heading">How does it work?</h3>
     <p class="tax-reminders-intro">Tax Calculator shows exactly how much cash to drop and in what order to avoid losing money to the game's cash tax system.</p>
     <p class="tax-reminders-bullets">- <strong>You NEED BlockSpin Plus</strong> for this Calculator<br>
-    - <strong>NEVER</strong> leave the game in combat after resetting</p>
+    - <strong>NEVER</strong> leave the game in combat after resetting<br>
+    - Wait 1 min in between cash drops</p>
   </div>
   <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--mobile-panel">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
 </aside>
