@@ -990,7 +990,7 @@ a { color: #fff; text-decoration: none; }
   color: white;
 }
 
-/* Uncommon - Green REVERSED gradient */
+/* Common / Uncommon - Green REVERSED gradient */
 #sections-nav button:nth-child(2).active {
   background: linear-gradient(135deg, #2c6b2f 0%, #388e3c 25%, #4caf50 50%, #6fd66f 75%, #81e681 100%);
   color: white;

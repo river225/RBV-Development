@@ -2,7 +2,7 @@
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Home",
-  "Uncommon",
+  "Common / Uncommon",
   "Rare", 
   "Epic",
   "Legendary",
@@ -15,7 +15,7 @@ const SECTION_NAMES = [
   "Crew Logos"
 ];
 
-// BSV Ad Three — one Display unit (slot 6782577562, client ca-pub-5741402692612033) at bottom of Uncommon/Rare/Epic/Legendary/Omega/Misc/Vehicles. Placeholder only on test.
+// BSV Ad Three — one Display unit (slot 6782577562, client ca-pub-5741402692612033) at bottom of Common/Uncommon/Rare/Epic/Legendary/Omega/Misc/Vehicles. Placeholder only on test.
 const BSV_AD_THREE_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeholder--section" data-bsv-ad="three" aria-label="Advertisement"><span class="ad-slot-placeholder-label">Ad space</span></div>`;
 
 // BSV Ad Four — Display unit (slot 4197814232): end of Crew Logos; under Richest intro text. Placeholder only on test.
@@ -699,7 +699,11 @@ function getTaxBreakdown(amountWant) {
   if (want <= 0) return { totalWithdraw: 0, lines: [], singleDrop: true };
   const totalWithdraw = Math.round(want / TAX_RECEIVE_RATIO);
   if (totalWithdraw <= TAX_MAX_DROP) {
-    return { totalWithdraw, lines: ['Drop once using the amount shown above.'], singleDrop: true };
+    return {
+      totalWithdraw,
+      lines: ['Drop $' + totalWithdraw.toLocaleString()],
+      singleDrop: true
+    };
   }
   const full40kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
   const receivedFromFull = full40kCount * TAX_RECEIVE_PER_40K;
@@ -968,7 +972,16 @@ document.addEventListener('touchend', stopDurabilityAdjust);
 // HELPERS 
 function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
-function slugify(str) { return str.toLowerCase().replace(/\s+/g, "-"); }
+/** Google Sheet tab name when it differs from the sidebar label */
+function getSheetNameForSection(displayName) {
+  if (displayName === "Common / Uncommon") return "Uncommon";
+  return displayName;
+}
+
+function slugify(str) {
+  if (str === "Common / Uncommon") return "uncommon";
+  return str.toLowerCase().replace(/\s+/g, "-");
+}
 
 // INIT - PARALLEL LOADING FOR SPEED 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -1010,7 +1023,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         items = await fetchRichestPlayers(); // NEW spreadsheet
         console.log(`Got ${items.length} items for ${sec} from NEW spreadsheet`);
       } else {
-        items = await fetchSheet(sec); // OLD spreadsheet
+        items = await fetchSheet(getSheetNameForSection(sec)); // OLD spreadsheet (sheet tab may differ from nav label)
         console.log(`Got ${items.length} items for ${sec} from OLD spreadsheet`);
       }
     } catch (error) {
@@ -1038,7 +1051,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
   let initialSection = "Home";
   if (window.location.hash && window.location.hash.startsWith('#sec=')) {
-    const requested = decodeURIComponent(window.location.hash.substring(5));
+    let requested = decodeURIComponent(window.location.hash.substring(5));
+    if (requested === "Uncommon") requested = "Common / Uncommon";
     if (SECTION_NAMES.includes(requested)) {
       initialSection = requested;
     }
