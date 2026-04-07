@@ -614,7 +614,7 @@ function initSectionsNav() {
   });
 }
 
-/** Mobile (≤430px): put search under the section title; desktop: keep search before #home */
+/** ≤1024px (phones + iPads): put search under the section title; wider: keep search before #home */
 function syncItemSectionSearchPlacement(name) {
   const sectionsEl = document.getElementById("sections");
   const searchContainer = document.querySelector(".search-container");
@@ -638,7 +638,7 @@ function syncItemSectionSearchPlacement(name) {
     }
   }
 
-  if (!window.matchMedia("(max-width: 430px)").matches || hiddenSearchSections.includes(name)) {
+  if (!window.matchMedia("(max-width: 1024px)").matches || hiddenSearchSections.includes(name)) {
     restoreSearchBeforeHome();
     return;
   }
@@ -1309,7 +1309,7 @@ async function loadValueChanges() {
 
 /* MOBILE MENU FUNCTIONALITY — index clones #sections-nav; other pages get link list */
 function setupMobileHamburgerMenu() {
-  if (window.innerWidth > 430) return;
+  if (!window.matchMedia("(max-width: 1024px)").matches) return;
   var hamburgerBtn = document.getElementById('hamburger-btn');
   var mobileMenu = document.getElementById('mobile-menu');
   if (!hamburgerBtn || !mobileMenu || mobileMenu.dataset.bsvMobileInit === '1') return;
@@ -1365,8 +1365,9 @@ document.addEventListener('DOMContentLoaded', setupMobileHamburgerMenu);
 
 // MOBILE TAX CALCULATOR
 
-if (window.innerWidth <= 430) {
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
+    if (!window.matchMedia("(max-width: 1024px)").matches) return;
+
     const arrow = document.getElementById('mobile-calc-arrow');
     const calc = document.getElementById('mobile-tax-calc');
     const backdrop = document.getElementById('mobile-calc-backdrop');
@@ -1383,6 +1384,7 @@ if (window.innerWidth <= 430) {
 
     function openCalc() {
       calc.classList.add('active');
+      document.body.classList.add('mobile-panel-open');
       if (backdrop) {
         backdrop.classList.add('active');
         backdrop.setAttribute('aria-hidden', 'false');
@@ -1391,6 +1393,7 @@ if (window.innerWidth <= 430) {
 
     function closeCalc() {
       calc.classList.remove('active');
+      document.body.classList.remove('mobile-panel-open');
       if (backdrop) {
         backdrop.classList.remove('active');
         backdrop.setAttribute('aria-hidden', 'true');
@@ -1462,7 +1465,6 @@ if (window.innerWidth <= 430) {
       });
     }
   });
-}
 
 /* ========== PINK WEBSITE THEME - theme switcher (remove with theme section in style.css) ========== */
 var THEMES_DISABLED = true; /* Set to false to re-enable theme switcher */

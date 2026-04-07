@@ -2511,7 +2511,7 @@ a { color: #fff; text-decoration: none; }
   text-decoration: none;
 }
 
-/* Shown only on mobile — About/FAQ in document flow below fixed header (see ≤430px rules) */
+/* Shown below fixed header on ≤1024px (phones + tablets); hidden on desktop (see tablet hamburger block) */
 .mobile-subnav {
   display: none;
 }
@@ -3116,6 +3116,13 @@ body {
   display: none;
 }
 
+
+/* Hide hamburger while mobile tax/recent panel is open */
+body.mobile-panel-open .hamburger-menu {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* LARGE PHONES (431px–767px): balanced single-column content */
 @media screen and (min-width: 431px) and (max-width: 767px) {
   .main-container {
@@ -3273,9 +3280,9 @@ body {
   }
 }
 
-/* MOBILE (≤430px): hamburger nav + tax side panel only */
+/* TABLET + PHONE (≤1024px): hamburger nav + mobile tax / value-changes panel (covers iPads) */
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 1024px) {
   
   .tax-sidebar-column {
     display: none !important;
@@ -3559,16 +3566,16 @@ body {
     right: auto;
     bottom: auto;
     transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 400px;
-    max-height: 80vh;
+    width: min(88vw, 340px);
+    max-width: 340px;
+    height: min(68vh, 520px);
+    max-height: 68vh;
     margin: 0;
-    padding: 30px 20px;
+    padding: 12px 12px 10px;
     background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
-    border: 3px solid #33cce6;
-    border-radius: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    border: 2px solid #33cce6;
+    border-radius: 16px;
+    overflow: hidden;
     z-index: 950;
     box-sizing: border-box;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
@@ -3582,16 +3589,17 @@ body {
     pointer-events: auto;
   }
 
+  /* Fixed to panel — never part of .mobile-tax-scroll, so it cannot scroll away */
   .mobile-calc-close {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
     background: #ff4444;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
     border-radius: 50%;
-    font-size: 2rem;
+    font-size: 1.65rem;
     color: #fff;
     cursor: pointer;
     display: flex;
@@ -3599,8 +3607,19 @@ body {
     justify-content: center;
     line-height: 1;
     font-weight: bold;
-    z-index: 2;
+    z-index: 20;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+
+  /* One scroll area: top = Value Changes, scroll down to see rest of list + promo */
+  .mobile-tax-scroll {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 44px 2px 18px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Shield badge: top-left of panel (same inset as close button on the right) */
@@ -3630,9 +3649,9 @@ body {
 
   .mobile-tax-calc h2 {
     color: #33cce6;
-    font-size: 1.35rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    margin: 0 0 14px 0;
+    margin: 0 0 10px 0;
     padding-right: 0;
     text-align: center;
     text-transform: uppercase;
@@ -3645,8 +3664,8 @@ body {
     background: rgba(51, 204, 230, 0.1);
     border: 2px solid #33cce6;
     border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 0.95rem;
+    padding: 8px 10px;
+    font-size: 0.88rem;
     color: white;
     transition: all 0.3s ease;
     margin-bottom: 12px;
@@ -3668,8 +3687,8 @@ body {
     background: #1a2532;
     border: 2px solid #2a3542;
     border-radius: 8px;
-    padding: 10px 12px;
-    margin: 12px 0;
+    padding: 8px 10px;
+    margin: 8px 0;
     text-align: left;
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
   }
@@ -3686,7 +3705,7 @@ body {
 
   .mobile-tax-calc .tax-result .amount {
     color: #81e681;
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     font-weight: 600;
     text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
     font-family: 'Courier New', monospace;
@@ -3708,10 +3727,16 @@ body {
 
   .mobile-recent-changes .value-changes-heading {
     margin-top: 0;
+    margin-bottom: 6px;
+    font-size: clamp(1rem, 4vw, 1.2rem);
   }
 
+  /* No inner scroll — outer .mobile-tax-scroll scrolls (beats .value-changes-list { overflow-y: scroll !important }) */
   .mobile-recent-changes .value-changes-list {
-    max-height: none;
+    height: auto;
+    max-height: none !important;
+    overflow-y: visible !important;
+    overflow-x: hidden;
   }
 
   /* Same hue as desktop cards, slightly darker than #243040 */
@@ -4132,7 +4157,7 @@ body[data-theme="red"] .info-separator {
 }
 
 /* ---- Mobile ---- */
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 1024px) {
   body[data-theme="red"] .hamburger-menu {
     background: #2c1616 !important;
     border-color: #e08a8a !important;
@@ -4913,7 +4938,7 @@ body[data-theme="pink"] .info-separator {
 }
 
 /* ---- Mobile ---- */
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 1024px) {
   body[data-theme="pink"] .hamburger-menu {
     background: #3d2a35 !important;
     border-color: #c898a8 !important;
