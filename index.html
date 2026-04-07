@@ -128,8 +128,13 @@ border: 2px solid #000000;
 
 <div class="main-container"> 
 
-    <!-- Section navigation --> 
-    <nav class="sections-nav" id="sections-nav"></nav> 
+    <!-- Section navigation (sidebar hidden ≤1024px; nav clone goes to hamburger only) -->
+    <div class="sections-sidebar">
+      <nav class="sections-nav" id="sections-nav"></nav>
+      <p class="sections-nav-suggest">
+        <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener noreferrer" class="sections-nav-suggest-link">Want to suggest value changes? click here</a>
+      </p>
+    </div>
 
     <!-- Main content area --> 
     <main id="sections" class="sections">
