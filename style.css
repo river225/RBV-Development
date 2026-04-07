@@ -88,7 +88,7 @@ a { color: #fff; text-decoration: none; }
     display: flex;
     max-width: 1800px;  /* Increased from 1600px */
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 36px;
     gap: 20px;
     align-items: flex-start;
     padding: 0 20px 40px 20px; /* single source (was duplicated in index.html inline) */
@@ -224,6 +224,12 @@ a { color: #fff; text-decoration: none; }
   opacity: 0.8;
   pointer-events: none;
   z-index: 10;
+}
+
+@media screen and (max-width: 430px) {
+  .card-left::after {
+    bottom: 110px;
+  }
 }
 
 .card:hover {
@@ -399,6 +405,7 @@ a { color: #fff; text-decoration: none; }
   text-align: center;
   margin: 10px 0 12px 0;
   padding: 10px 0;
+  border-bottom: 2px solid #33cce6;
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
   width: 100%; 
   box-sizing: border-box; 
@@ -425,6 +432,14 @@ a { color: #fff; text-decoration: none; }
   opacity: 0;
 }
 
+/* Home: don’t sticky the sidebar — avoids Value Changes / Middleman block shifting with scroll + async list height */
+@media screen and (min-width: 431px) {
+  body.is-home .tax-sidebar-column {
+    position: static;
+    top: auto;
+  }
+}
+
 /* Tax Calculator */
 .tax-calculator {
   background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
@@ -440,14 +455,20 @@ a { color: #fff; text-decoration: none; }
   transition: none !important;
 }
 
-/* Tax calculator badge + tooltip */
-.tax-badge-wrapper {
-  position: relative;
+/* Tax calculator badge + tooltip (anchored to card top-left, not the zero-height wrapper) */
+.tax-calculator .tax-badge-wrapper {
+  position: static;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  pointer-events: none;
 }
 .tax-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: 10px;
+  left: 10px;
+  right: auto;
   width: 28px;
   height: 28px;
   background-image: url("https://i.ibb.co/Xf6gXy0w/Screenshot-2026-03-05-at-13-24-49-removebg-preview-1.png");
@@ -458,11 +479,13 @@ a { color: #fff; text-decoration: none; }
   cursor: pointer;
   opacity: 0.95;
   transition: transform 0.15s ease, opacity 0.15s ease;
+  z-index: 2;
 }
 .tax-badge-tooltip {
   position: absolute;
-  top: 26px;
-  right: 0;
+  top: 46px;
+  left: 10px;
+  right: auto;
   transform: translateX(0) translateY(0);
   max-width: 200px;
   padding: 8px 10px;
@@ -476,6 +499,7 @@ a { color: #fff; text-decoration: none; }
   opacity: 0;
   pointer-events: none;
   white-space: normal;
+  text-align: left;
   z-index: 5;
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
@@ -1500,6 +1524,18 @@ a { color: #fff; text-decoration: none; }
   outline-offset: 3px;
 }
 
+.discord-mm-promo-cta {
+  display: block;
+  margin-top: 12px;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+.discord-mm-promo--sidebar:hover .discord-mm-promo-cta,
+.discord-mm-promo--mobile-panel:hover .discord-mm-promo-cta {
+  text-decoration: underline !important;
+}
+
 /* Middleman promo — inside mobile tax calculator panel (same inner width as panel) */
 .discord-mm-promo--mobile-panel {
   display: block;
@@ -1615,19 +1651,20 @@ a { color: #fff; text-decoration: none; }
 
 .richest-back-to-top {
   position: fixed;
-  top: 100px;
+  top: 124px;
   right: 12px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: #3a3a3a;
+  color: #000000;
   cursor: pointer;
   z-index: 10;
   transition: opacity 0.2s ease;
 }
 .richest-back-to-top:hover {
-  opacity: 0.85;
+  opacity: 0.9;
+  color: #000000;
 }
 .richest-back-to-top-icon {
   width: 22px;
@@ -1636,7 +1673,7 @@ a { color: #fff; text-decoration: none; }
   display: block;
 }
 .richest-back-to-top-text {
-  color: #3a3a3a;
+  color: #000000;
   font-size: 0.95rem;
   font-weight: 600;
 }
@@ -1970,6 +2007,83 @@ a { color: #fff; text-decoration: none; }
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+}
+
+/* Richest Players — mobile: no level row; username left, net worth center-right, link full width */
+@media screen and (max-width: 430px) {
+  .richest-players-section .player-level {
+    display: none !important;
+  }
+
+  .richest-players-section .richest-card {
+    padding: 10px 12px !important;
+    gap: 10px !important;
+    min-height: 0 !important;
+  }
+
+  .richest-players-section .richest-card .player-info {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 8px;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .richest-players-section .richest-card .player-name {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    justify-self: start;
+    text-align: left;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.25;
+  }
+
+  .richest-players-section .richest-card .player-worth {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+    text-align: right;
+    white-space: normal;
+    width: fit-content;
+    max-width: 100%;
+    margin-left: auto;
+    font-size: clamp(0.95rem, 4.2vw, 1.22rem) !important;
+  }
+
+  .richest-players-section .richest-card .player-worth span {
+    font-size: 0.92em !important;
+  }
+
+  .richest-players-section .richest-card .profile-link {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 0;
+    align-self: start;
+  }
+
+  .richest-players-section .richest-card .rank-badge {
+    flex-shrink: 0;
+  }
+
+  .richest-back-to-top {
+    top: 148px;
+  }
+
+  /* Crew Logos: blue line under subgroup (item group) titles only; smaller ID text */
+  #crew-logos .crew-header {
+    border-bottom: 2px solid #33cce6;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .crew-logo-card .crew-id {
+    font-size: 0.72rem;
+  }
 }
 
 
@@ -2397,6 +2511,11 @@ a { color: #fff; text-decoration: none; }
   text-decoration: none;
 }
 
+/* Shown only on mobile — About/FAQ in document flow below fixed header (see ≤430px rules) */
+.mobile-subnav {
+  display: none;
+}
+
 .nav-separator {
   color: #666;
   font-size: 1.2rem;
@@ -2463,26 +2582,40 @@ body {
 .home-page-clean {
   max-width: 900px;
   margin: 0 auto;
-  padding: 18px 20px 40px;
+  padding: 0 20px 40px;
 }
 
 .welcome-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 }
 
+/* Desktop: one line — BlockSpin Values */
 .welcome-header h1 {
-  font-size: 4.8rem;
-  margin: 0 0 15px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.18em;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: clamp(4.35rem, 6.5vw, 5.5rem);
+  margin: 0 auto 8px;
   color: #fff;
   font-family: 'Paytone One', sans-serif;
   text-shadow: 3px 3px 0 #000, -3px 3px 0 #000, 3px -3px 0 #000, -3px -3px 0 #000;
+}
+.welcome-header h1 .welcome-title-line {
+  display: inline-block;
+  line-height: 1.02;
 }
 
 .welcome-header .subtitle {
   font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.95);
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   text-shadow: 1.5px 1.5px 0 #000;
 }
 
@@ -2491,6 +2624,44 @@ body {
   color: rgba(255, 255, 255, 0.85);
   margin: 0;
   text-shadow: 1px 1px 0 #000;
+}
+
+/* Desktop: extra space between hero title and tagline / founder line */
+@media screen and (min-width: 431px) {
+  .welcome-header .subtitle {
+    margin-top: 18px;
+    margin-bottom: 10px;
+  }
+  .welcome-header .founder-credit {
+    margin-top: 4px;
+  }
+}
+
+/* Mobile only: Values under BlockSpin (matches site ≤430px breakpoint) */
+@media screen and (max-width: 430px) {
+  section#home .home-page-clean {
+    margin-top: -18px;
+  }
+  .welcome-header {
+    margin-top: -10px;
+    margin-bottom: 6px;
+  }
+  .welcome-header h1 {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.06em;
+    font-size: clamp(3.15rem, 12vw, 4.6rem);
+  }
+  .welcome-header h1 .welcome-title-line {
+    display: block;
+  }
+  .welcome-header .subtitle {
+    font-size: 1.18rem;
+  }
+  .welcome-header .founder-credit {
+    font-size: 1.05rem;
+  }
 }
 
 .social-buttons-home {
@@ -2604,13 +2775,16 @@ body {
 
 .home-two-columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0,1fr) lets columns shrink so the row doesn’t overflow the main column (avoids clipping next to fixed 240px tax sidebar) */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 30px;
   margin-top: 40px;
+  width: 100%;
 }
 
 /* Announcements & Donators Boxes */
 .home-column {
+  min-width: 0;
   background: #0d1117;
   border: 3px solid #d4a027;
   border-radius: 16px;
@@ -2627,28 +2801,32 @@ body {
 }
 
 /* Announcements heading - ORANGE */
+.home-column:first-child {
+  position: relative;
+}
 .home-column:first-child h2 {
   color: #ffa500;
 }
-
-/* Announcements heading icon */
-.home-heading-with-icon {
-  position: relative;
-}
-.home-heading-with-icon::before {
+/* Small icon in top-left of the Announcements card (does not affect title centering) */
+.home-column:first-child::before {
   content: "";
   position: absolute;
-  left: 4px; /* nudge slightly left */
-  top: 50%;
-  transform: translateY(-50%);
-  width: 56px;
-  height: 56px;
+  top: 12px;
+  left: 12px;
+  width: 28px;
+  height: 28px;
   background-image: url("https://i.ibb.co/20SshwSg/dfsawefsvdbsadfsv.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
+}
+@media screen and (max-width: 768px) {
+  .home-column:first-child::before {
+    content: none;
+    display: none;
+  }
 }
 
 /* Home header subtitle icon (matches Announcements float style) */
@@ -2678,6 +2856,14 @@ body {
   color: #ffde59;
 }
 
+/* Narrow / mid-width desktop: stack the two home cards so neither column is clipped beside the tax sidebar */
+@media screen and (max-width: 960px) {
+  .home-two-columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
 /* Value Changes aside — match Announcements styling */
 .home-value-changes {
   display: none;
@@ -2685,8 +2871,8 @@ body {
   opacity: 0;
   width: 240px;
   max-width: 240px;
-  margin-top: 68px;
-  margin-right: 12px;
+  margin-top: 0;
+  margin-right: 0;
   align-self: flex-start;
   background: #0d1117; /* same as .home-column (Announcements box) */
   border: 3px solid #d4a027; /* same border as Announcements */
@@ -2694,6 +2880,14 @@ body {
   padding: 24px 20px;
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.6);
+}
+.tax-sidebar-column .home-value-changes {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.tax-sidebar-column .value-changes-list {
+  min-height: 200px;
 }
 .home-value-changes .value-changes-heading {
   font-size: 1.55rem; /* larger header to better fill box */
@@ -2725,7 +2919,7 @@ body {
 }
 .value-change-item {
   padding: 16px;
-  background: #1c2937; /* same as .announcement-item-clean */
+  background: #181f2c; /* same slate as before, one step darker than #1c2937 */
   position: relative; /* for top-right icon */
   border-radius: 10px;
   margin-bottom: 0;
@@ -2922,6 +3116,163 @@ body {
   display: none;
 }
 
+/* LARGE PHONES (431px–767px): balanced single-column content */
+@media screen and (min-width: 431px) and (max-width: 767px) {
+  .main-container {
+    padding: 0 14px 32px;
+    gap: 14px;
+  }
+
+  .main-container .sections-nav,
+  .tax-sidebar-column,
+  .tax-calculator {
+    display: none !important;
+  }
+
+  .sections {
+    width: 100%;
+  }
+
+  .sections > .section:not(#home) > h2:first-of-type {
+    text-align: center;
+    margin: 0 0 10px;
+  }
+
+  .sections .section > .search-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100%;
+    margin: 4px 0 16px !important;
+    justify-content: center;
+  }
+
+  #search,
+  .richest-search {
+    max-width: 640px;
+    font-size: 1rem;
+  }
+
+  .card {
+    flex: 1 1 100%;
+    gap: 14px;
+  }
+
+  .card-left {
+    min-width: 150px;
+  }
+
+  .card img {
+    width: 122px;
+    height: 122px;
+  }
+
+  .card-info h3 {
+    font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+  }
+
+  .card-avg,
+  .card-ranged,
+  .card-pawn,
+  .card-repair {
+    font-size: 0.98rem;
+  }
+
+  .crew-logo-card {
+    max-width: calc(50% - 10px);
+    min-height: 200px;
+  }
+
+  .crew-logo-card img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .richest-players-section .richest-card .player-worth {
+    font-size: clamp(0.92rem, 2.2vw, 1.1rem) !important;
+  }
+
+  .top-navbar .nav-right {
+    display: none !important;
+  }
+
+  .top-navbar .nav-title {
+    font-size: clamp(1.45rem, 4vw, 1.8rem);
+  }
+
+  .mobile-subnav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 10px 14px 12px;
+  }
+
+  .mobile-subnav a {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #1a2332;
+    border: 1px solid rgba(51, 204, 230, 0.5);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  body {
+    padding-top: 72px;
+  }
+}
+
+/* TABLETS (768px–1023px): tighter desktop layout */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .main-container {
+    padding: 0 16px 34px;
+    gap: 14px;
+  }
+
+  .sections-nav {
+    flex: 0 0 220px;
+    max-width: 220px;
+  }
+
+  .tax-sidebar-column {
+    display: none !important;
+  }
+
+  .sections {
+    flex: 1 1 auto;
+  }
+
+  .card {
+    flex: 1 1 calc(50% - 12px);
+    gap: 14px;
+  }
+
+  .card-left {
+    min-width: 150px;
+  }
+
+  .card img {
+    width: 126px;
+    height: 126px;
+  }
+
+  .card-info h3 {
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  }
+
+  .crew-logo-card {
+    max-width: calc(33.33% - 12px);
+  }
+
+  .richest-back-to-top {
+    top: 112px;
+  }
+}
+
 /* MOBILE (≤430px): hamburger nav + tax side panel only */
 
 @media screen and (max-width: 430px) {
@@ -2934,13 +3285,101 @@ body {
     display: none !important;
   }
 
-  /* Hamburger button */
+  /* Mobile header cleanup: hide right-side action buttons only */
+  .top-navbar .nav-right {
+    display: none !important;
+  }
+
+  .top-navbar .nav-container-full {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    box-sizing: border-box;
+  }
+
+  /* Header row: logo/title only — About/FAQ use .mobile-subnav below */
+  .top-navbar .nav-left:has(.nav-brand) {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+  }
+
+  .top-navbar .nav-left:has(.nav-brand) > .nav-brand {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .top-navbar .nav-left > a:not(.nav-brand) {
+    display: none !important;
+  }
+
+  .top-navbar .nav-left:not(:has(.nav-brand)) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    width: 100%;
+  }
+
+  .top-navbar .nav-left:not(:has(.nav-brand)) .nav-separator {
+    display: none;
+  }
+
+  .top-navbar .nav-title {
+    font-size: 1.85rem;
+  }
+
+  /* In-flow strip under fixed header (not position:fixed): top-right, gap below header */
+  .mobile-subnav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px 12px 12px;
+    background: transparent;
+  }
+
+  .mobile-subnav a {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #1a2332;
+    border: 1px solid rgba(51, 204, 230, 0.5);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    white-space: nowrap;
+    max-width: min(100%, 280px);
+    box-sizing: border-box;
+  }
+
+  .mobile-subnav--contact a {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  /* Fixed navbar only — .mobile-subnav follows in document flow */
+  body {
+    padding-top: 72px;
+  }
+
+  /* Hamburger — below header band */
   .hamburger-menu {
     display: flex;
     position: fixed;
-    top: 130px;
+    top: 96px;
     left: 30px;
-    z-index: 1000;
+    right: auto;
+    z-index: 1001;
     background: #141d28;
     border: 2px solid #33cce6;
     border-radius: 8px;
@@ -3036,6 +3475,27 @@ body {
     display: none;
   }
 
+  /* Item sections (not Home): section title above search; search is inserted before .cards in DOM on mobile */
+  .sections > .section:not(#home) > h2:first-of-type {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 14px;
+    margin: 0 0 8px 0;
+  }
+
+  .sections .section > .search-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    z-index: 5;
+    margin: 4px 0 16px !important;
+  }
+
   /* Tax calc: backdrop + floating arrow + right-side panel */
   .mobile-calc-backdrop {
     display: block;
@@ -3056,52 +3516,69 @@ body {
   .mobile-calc-arrow {
     display: flex !important;
     position: fixed;
-    right: 16px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: #3b82f6;
-    border: 3px solid #000;
-    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    background: rgba(10, 15, 22, 0.82);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(91, 197, 222, 0.9);
+    border-radius: 16px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 900;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
+    color: #7be3f2;
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.45),
+      inset 0 0 0 1px rgba(51, 204, 230, 0.18);
+    transition: transform 0.18s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .mobile-calc-arrow svg {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 0 6px rgba(123, 227, 242, 0.45));
+  }
+
+  .mobile-calc-arrow:active {
+    transform: translateY(-50%) scale(0.94);
+    background: rgba(20, 32, 44, 0.9);
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.42),
+      inset 0 0 0 1px rgba(91, 197, 222, 0.28);
   }
 
   .mobile-tax-calc {
-    display: flex !important;
-    flex-direction: column;
+    display: block !important;
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: auto;
-    width: min(100%, 400px);
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    width: 90%;
     max-width: 400px;
-    height: 100vh;
-    max-height: none;
+    max-height: 80vh;
     margin: 0;
-    padding: 56px 16px 24px;
-    background: linear-gradient(180deg, #1a2332 0%, #243044 100%);
-    border: none;
-    border-left: 3px solid #33cce6;
-    border-radius: 0;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #1a2332 0%, #2a3a4a 100%);
+    border: 3px solid #33cce6;
+    border-radius: 20px;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 950;
     box-sizing: border-box;
-    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.55);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transition: opacity 0.3s ease;
     pointer-events: none;
   }
 
   .mobile-tax-calc.active {
-    transform: translateX(0);
+    opacity: 1;
     pointer-events: auto;
   }
 
@@ -3126,17 +3603,41 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   }
 
+  /* Shield badge: top-left of panel (same inset as close button on the right) */
+  .mobile-tax-calc .tax-badge-wrapper {
+    position: static;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .mobile-tax-calc .tax-badge {
+    top: 12px;
+    left: 12px;
+    right: auto;
+    z-index: 3;
+  }
+  .mobile-tax-calc .tax-badge-tooltip {
+    top: 48px;
+    left: 12px;
+    right: auto;
+    z-index: 6;
+    max-width: min(220px, calc(100vw - 32px));
+  }
+
   .mobile-tax-calc h2 {
     color: #33cce6;
     font-size: 1.35rem;
     font-weight: 700;
     margin: 0 0 14px 0;
-    padding-right: 44px;
+    padding-right: 0;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
-    flex-shrink: 0;
   }
 
   .mobile-tax-calc input {
@@ -3189,6 +3690,34 @@ body {
     font-weight: 600;
     text-shadow: 0 0 10px rgba(129, 230, 129, 0.3);
     font-family: 'Courier New', monospace;
+  }
+
+  /* Home: tint the whole slide-out panel (not only the list block) — softer than the old inner-only fill */
+  body.is-home .mobile-tax-calc {
+    background: linear-gradient(165deg, #1a2330 0%, #243041 42%, #1e2a38 100%);
+  }
+
+  .mobile-recent-changes {
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .mobile-recent-changes .value-changes-heading {
+    margin-top: 0;
+  }
+
+  .mobile-recent-changes .value-changes-list {
+    max-height: none;
+  }
+
+  /* Same hue as desktop cards, slightly darker than #243040 */
+  .mobile-recent-changes .value-change-item {
+    background: #1f2b38;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
 }
@@ -3617,8 +4146,8 @@ body[data-theme="red"] .info-separator {
   }
   body[data-theme="red"] .mobile-tax-calc {
     background: linear-gradient(180deg, #2c1616 0%, #3a1919 100%) !important;
-    border-left-color: #e08a8a !important;
-    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45) !important;
+    border-color: #e08a8a !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
   }
   body[data-theme="red"] .mobile-tax-calc h2 {
     color: #f0c0c0 !important;
@@ -4398,8 +4927,8 @@ body[data-theme="pink"] .info-separator {
   }
   body[data-theme="pink"] .mobile-tax-calc {
     background: linear-gradient(180deg, #3d2a35 0%, #4a3540 100%) !important;
-    border-left-color: #c898a8 !important;
-    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45) !important;
+    border-color: #c898a8 !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
   }
   body[data-theme="pink"] .mobile-tax-calc h2 {
     color: #e0c0d0 !important;

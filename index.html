@@ -111,6 +111,10 @@ border: 2px solid #000000;
   </div>
 </nav>
 
+<div class="mobile-subnav" aria-label="Secondary navigation">
+  <a href="x-about.html">About Us</a>
+  <a href="x-faq.html">FAQ</a>
+</div>
 
 <div id="loading-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #16202c 0%, #1f2d3d 50%, #16202c 100%); display: flex; align-items: center; justify-content: center; z-index: 9999;">
   <div style="text-align: center; width: 400px; max-width: 90%;">
@@ -142,7 +146,10 @@ border: 2px solid #000000;
     
     <!-- Welcome Header -->
     <div class="welcome-header">
-      <h1><span style="color: #fff;">Block</span><span style="color: #ff1a1a;">Spin</span> <span style="color: #33cce6;">Values</span></h1>
+      <h1>
+        <span class="welcome-title-line"><span style="color: #fff;">Block</span><span style="color: #ff1a1a;">Spin</span></span>
+        <span class="welcome-title-line" style="color: #33cce6;">Values</span>
+      </h1>
       <p class="subtitle welcome-subtitle-with-icon">The Most Trusted BlockSpin Value List</p>
       <p class="founder-credit">Founded and maintained by <a href="#" onclick="openRiverLinks(event)" style="color: #33cce6; text-decoration: underline;">river</a></p>
     </div>
@@ -170,7 +177,7 @@ border: 2px solid #000000;
       
       <!-- Announcements -->
       <div class="home-column">
-        <h2 class="home-heading-with-icon">Announcements</h2>
+        <h2>Announcements</h2>
         <div class="announcement-list">
 
           <div class="announcement-item-clean">
@@ -233,7 +240,7 @@ We’ve launched a complete site redesign, and items will now display both their
 
 
 
-    <!-- Tax calculator + Middleman promo (hidden on Home; same column width) -->
+    <!-- Tax sidebar slot: Tax Calculator (other sections) / Value Changes (Home) -->
     <div class="tax-sidebar-column" id="tax-sidebar-column">
     <aside class="tax-calculator">
         <div class="tax-badge-wrapper">
@@ -256,16 +263,14 @@ We’ve launched a complete site redesign, and items will now display both their
             - Wait 1 min in between cash drops</p>
         </div>
     </aside>
-    <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--sidebar">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
-    </div>
-
-    <!-- Value Changes (visible only on Home, same position as tax calc) -->
+    <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--sidebar">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!<br><span class="discord-mm-promo-cta">Click here to join our Discord</span></a>
     <aside class="home-value-changes" id="home-value-changes">
         <h2 class="value-changes-heading">Value Changes</h2>
         <div class="value-changes-list" id="value-changes-list">
             <div class="value-changes-loading">Loading value changes...</div>
         </div>
     </aside>
+    </div>
 
 </div>
 
@@ -275,7 +280,7 @@ We’ve launched a complete site redesign, and items will now display both their
 <!-- Footer -->
 <footer class="site-footer">
   <div class="footer-content">
-    <p>© 2025 BlockSpin Values</p>
+    <p>© 2026 BlockSpin Values</p>
     <div class="footer-links">
       <a href="z-contact.html">Contact Us</a>
 <span>•</span>
@@ -296,20 +301,34 @@ We’ve launched a complete site redesign, and items will now display both their
 
 <aside class="mobile-tax-calc" id="mobile-tax-calc">
   <button class="mobile-calc-close" id="mobile-calc-close">×</button>
-  <h2>Tax Calculator</h2>
-   <div class="tax-result">
-    <div class="amount">$<span id="mobile-tax-amount">0</span></div>
-    <div id="mobile-tax-breakdown" class="tax-breakdown"></div>
+  <div class="mobile-tax-content" id="mobile-tax-content">
+    <div class="tax-badge-wrapper">
+      <div class="tax-badge"></div>
+      <div class="tax-badge-tooltip">
+        Our Tax Calculator has been carefully tested to ensure accuracy. If you find an issue, please let us know.
+      </div>
+    </div>
+    <h2>Tax Calculator</h2>
+    <div class="tax-result">
+      <div class="amount">$<span id="mobile-tax-amount">0</span></div>
+      <div id="mobile-tax-breakdown" class="tax-breakdown"></div>
+    </div>
+    <input type="number" id="mobile-tax-input" placeholder="Enter amount..." />
+    <div class="tax-reminders">
+      <h3 class="tax-reminders-heading">How does it work?</h3>
+      <p class="tax-reminders-intro">Tax Calculator shows exactly how much cash to drop and in what order to avoid losing money to the game's cash tax system.</p>
+      <p class="tax-reminders-bullets">- <strong>You NEED BlockSpin Plus</strong> for this Calculator<br>
+      - <strong>NEVER</strong> leave the game in combat after resetting<br>
+      - Wait 1 min in between cash drops</p>
+    </div>
   </div>
-  <input type="number" id="mobile-tax-input" placeholder="Enter amount..." />
-  <div class="tax-reminders">
-    <h3 class="tax-reminders-heading">How does it work?</h3>
-    <p class="tax-reminders-intro">Tax Calculator shows exactly how much cash to drop and in what order to avoid losing money to the game's cash tax system.</p>
-    <p class="tax-reminders-bullets">- <strong>You NEED BlockSpin Plus</strong> for this Calculator<br>
-    - <strong>NEVER</strong> leave the game in combat after resetting<br>
-    - Wait 1 min in between cash drops</p>
+  <div class="mobile-recent-changes" id="mobile-recent-changes">
+    <h2 class="value-changes-heading">Value Changes</h2>
+    <div class="value-changes-list" id="mobile-value-changes-list">
+      <div class="value-changes-loading">Loading value changes...</div>
+    </div>
   </div>
-  <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--mobile-panel">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!</a>
+  <a href="https://discord.gg/SBBpSGhCyf" target="_blank" rel="noopener noreferrer" class="discord-mm-promo discord-mm-promo--mobile-panel">Tired of getting scammed during trades?<br>Our Middleman service can help you never get scammed again!<br>Join our discord server and get a Middleman today!<br><span class="discord-mm-promo-cta">Click here to join our Discord</span></a>
 </aside>
 </body> 
 </html>

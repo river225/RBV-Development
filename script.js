@@ -234,8 +234,8 @@ function createCard(item) {
                  onchange="updateCardValues(this)">
           <span class="durability-max">/${maxDurability}</span>
           <div class="durability-arrows">
-            <button onmousedown="adjustDurability(this, 1)">▲</button>
-            <button onmousedown="adjustDurability(this, -1)">▼</button>
+            <button onmousedown="adjustDurability(this, 1, event)" ontouchstart="adjustDurability(this, 1, event)">▲</button>
+            <button onmousedown="adjustDurability(this, -1, event)" ontouchstart="adjustDurability(this, -1, event)">▼</button>
           </div>
         </div>
       </div>
@@ -562,7 +562,7 @@ function renderScammerSection(items) {
   const html = `
     <section class="section richest-players-section" id="${sectionId}">
       <a href="#" class="richest-back-to-top" id="richest-back-to-top" aria-label="Back to top">
-        <img src="https://i.ibb.co/rRJwtbQZ/dweffewdefdbgbef.png" alt="" class="richest-back-to-top-icon" />
+        <img src="https://i.ibb.co/N2kY994q/undo.png" alt="" class="richest-back-to-top-icon" />
         <span class="richest-back-to-top-text">Back to top</span>
       </a>
       ${createRichestPlayersSection(items)}
@@ -614,6 +614,54 @@ function initSectionsNav() {
   });
 }
 
+/** Mobile (≤430px): put search under the section title; desktop: keep search before #home */
+function syncItemSectionSearchPlacement(name) {
+  const sectionsEl = document.getElementById("sections");
+  const searchContainer = document.querySelector(".search-container");
+  if (!sectionsEl || !searchContainer) return;
+
+  const hiddenSearchSections = ["Home", "Crew Logos", "Crate Game", "💰 Richest Players"];
+
+  function restoreSearchBeforeHome() {
+    const homeSec = document.getElementById("home");
+    if (
+      searchContainer.parentNode === sectionsEl &&
+      homeSec &&
+      searchContainer.nextElementSibling === homeSec
+    ) {
+      return;
+    }
+    if (homeSec) {
+      sectionsEl.insertBefore(searchContainer, homeSec);
+    } else {
+      sectionsEl.prepend(searchContainer);
+    }
+  }
+
+  if (!window.matchMedia("(max-width: 430px)").matches || hiddenSearchSections.includes(name)) {
+    restoreSearchBeforeHome();
+    return;
+  }
+
+  const activeSec = document.getElementById(slugify(name));
+  if (!activeSec || !activeSec.classList.contains("section")) {
+    restoreSearchBeforeHome();
+    return;
+  }
+
+  const cards = activeSec.querySelector(".cards");
+  if (cards) {
+    activeSec.insertBefore(searchContainer, cards);
+  } else {
+    const h2 = activeSec.querySelector("h2");
+    if (h2) {
+      h2.insertAdjacentElement("afterend", searchContainer);
+    } else {
+      activeSec.prepend(searchContainer);
+    }
+  }
+}
+
 //  BANNER LOGIC FROM MAIN SITE
 function showSection(name) {
   console.log(`Showing section: ${name}`);
@@ -626,32 +674,31 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-   // Hide/show tax sidebar (calculator + Middleman promo) and home value changes (same slot: one or the other)
+   // Tax sidebar slot: show Value Changes on Home, Tax Calculator elsewhere
   const taxSidebarColumn = document.getElementById('tax-sidebar-column');
   const homeValueChanges = document.getElementById('home-value-changes');
-  const hiddenSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+  const taxCalc = taxSidebarColumn ? taxSidebarColumn.querySelector('.tax-calculator') : null;
+  const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players'];
   const isHome = name === 'Home';
+  document.body.classList.toggle('is-home', isHome);
   if (taxSidebarColumn) {
     if (hiddenSections.includes(name)) {
       taxSidebarColumn.style.visibility = 'hidden';
       taxSidebarColumn.style.opacity = '0';
-      taxSidebarColumn.style.display = isHome ? 'none' : 'flex'; // free the slot on Home for value changes
+      taxSidebarColumn.style.display = 'none';
     } else {
       taxSidebarColumn.style.visibility = 'visible';
       taxSidebarColumn.style.opacity = '1';
       taxSidebarColumn.style.display = 'flex';
     }
   }
+  if (taxCalc) {
+    taxCalc.style.display = isHome ? 'none' : 'block';
+  }
   if (homeValueChanges) {
-    if (isHome) {
-      homeValueChanges.style.visibility = 'visible';
-      homeValueChanges.style.opacity = '1';
-      homeValueChanges.style.display = 'block';
-    } else {
-      homeValueChanges.style.visibility = 'hidden';
-      homeValueChanges.style.opacity = '0';
-      homeValueChanges.style.display = 'none';
-    }
+    homeValueChanges.style.visibility = isHome ? 'visible' : 'hidden';
+    homeValueChanges.style.opacity = isHome ? '1' : '0';
+    homeValueChanges.style.display = isHome ? 'block' : 'none';
   }
 
     
@@ -660,9 +707,9 @@ function showSection(name) {
   if (searchContainer) {
     const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
     if (hiddenSearchSections.includes(name)) {
-      searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0;';
+      searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0; overflow: hidden;';
     } else {
-      searchContainer.style.cssText = 'visibility: visible; height: auto; margin: 20px 0 !important; width: 100%; display: flex; justify-content: center; align-items: center;';
+      searchContainer.style.cssText = 'visibility: visible; height: auto; overflow: visible; width: 100%; display: flex; justify-content: center; align-items: center;';
     }
   }
   
@@ -677,7 +724,7 @@ function showSection(name) {
     b.classList.toggle("active", b.textContent === name);
   });
 
-
+  syncItemSectionSearchPlacement(name);
 }
 
 // SEARCH 
@@ -819,12 +866,19 @@ function enforceMaxDurability(input) {
   updateCardValues(input);
 }
 
-function adjustDurability(btn, direction) {
-  event.preventDefault(); // Prevent both touch and mouse events firing
+function adjustDurability(btn, direction, evt) {
+  if (evt) evt.preventDefault(); // Prevent both touch and mouse events firing
   
   const card = btn.closest('.card');
   const input = card.querySelector('.durability-input');
   const maxDurability = parseInt(card.dataset.maxDurability);
+  const isTouch =
+    !!evt && (
+      evt.type === 'touchstart' ||
+      (evt.pointerType && evt.pointerType === 'touch')
+    );
+  const holdDelayMs = isTouch ? 120 : 200;
+  const repeatEveryMs = isTouch ? 30 : 50;
   
   function adjust() {
     let newValue = (parseInt(input.value) || 0) + direction;
@@ -836,8 +890,8 @@ function adjustDurability(btn, direction) {
   adjust();
   
   durabilityTimeout = setTimeout(() => {
-    durabilityInterval = setInterval(adjust, 50);
-  }, 200);
+    durabilityInterval = setInterval(adjust, repeatEveryMs);
+  }, holdDelayMs);
 }
 
 function stopDurabilityAdjust() {
@@ -968,6 +1022,7 @@ function formatLikeOriginal(num, original) {
 
 document.addEventListener('mouseup', stopDurabilityAdjust);
 document.addEventListener('touchend', stopDurabilityAdjust);
+document.addEventListener('touchcancel', stopDurabilityAdjust);
 
 // HELPERS 
 function safe(str) { return str ?? ""; }
@@ -1069,6 +1124,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('loading-screen').style.display = 'none';
   }, 300);
 
+});
+
+var _searchPlacementResizeTimer;
+window.addEventListener("resize", function () {
+  clearTimeout(_searchPlacementResizeTimer);
+  _searchPlacementResizeTimer = setTimeout(function () {
+    var active = document.querySelector("#sections-nav button.active");
+    if (active && typeof syncItemSectionSearchPlacement === "function") {
+      syncItemSectionSearchPlacement(active.textContent.trim());
+    }
+  }, 120);
 });
 
 // Giveaway card click handling
@@ -1193,11 +1259,16 @@ function applyBannerConfig(rows) {
 // Fetch and display recent value changes from spreadsheet (sheet: "Website Configs", columns: Title, Date, Text, Color)
 async function loadValueChanges() {
   var listEl = document.getElementById('value-changes-list');
-  if (!listEl) return;
+  var mobileListEl = document.getElementById('mobile-value-changes-list');
+  if (!listEl && !mobileListEl) return;
+  function setValueChangesHtml(html) {
+    if (listEl) listEl.innerHTML = html;
+    if (mobileListEl) mobileListEl.innerHTML = html;
+  }
   try {
     var rows = await fetchSheet("Website Configs");
     if (!rows || rows.length === 0) {
-      listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
+      setValueChangesHtml('<div class="value-changes-loading">No value changes yet.</div>');
       return;
     }
     applyBannerConfig(rows);
@@ -1208,7 +1279,7 @@ async function loadValueChanges() {
       return t.length > 0;
     });
     if (filtered.length === 0) {
-      listEl.innerHTML = '<div class="value-changes-loading">No value changes yet.</div>';
+      setValueChangesHtml('<div class="value-changes-loading">No value changes yet.</div>');
       return;
     }
     var colorMap = { green: 'green', orange: 'orange', red: 'red', blue: 'blue' };
@@ -1228,10 +1299,10 @@ async function loadValueChanges() {
         (textEsc ? '<p class="value-change-text">' + textEsc + '</p>' : '') +
         '</div>';
     }).join('');
-    listEl.innerHTML = html;
+    setValueChangesHtml(html);
   } catch (err) {
     console.error('Error loading value changes:', err);
-    listEl.innerHTML = '<div class="value-changes-loading">Failed to load value changes.</div>';
+    setValueChangesHtml('<div class="value-changes-loading">Failed to load value changes.</div>');
   }
 }
 
@@ -1248,6 +1319,15 @@ function setupMobileHamburgerMenu() {
   if (sectionsNav) {
     var navClone = sectionsNav.cloneNode(true);
     mobileMenu.appendChild(navClone);
+    // cloneNode does not copy JS listeners; wire cloned buttons manually
+    navClone.querySelectorAll('button').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var sectionName = (btn.textContent || '').trim();
+        showSection(sectionName);
+        hamburgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
     hamburgerBtn.addEventListener('click', function() {
       hamburgerBtn.classList.toggle('active');
       mobileMenu.classList.toggle('active');
@@ -1293,6 +1373,9 @@ if (window.innerWidth <= 430) {
     const closeBtn = document.getElementById('mobile-calc-close');
     const input = document.getElementById('mobile-tax-input');
     const amount = document.getElementById('mobile-tax-amount');
+    const mobileTaxContent = document.getElementById('mobile-tax-content');
+    const mobileRecentChanges = document.getElementById('mobile-recent-changes');
+    const mobilePromo = calc.querySelector('.discord-mm-promo--mobile-panel');
     
     if (!arrow || !calc || !closeBtn || !input || !amount) {
       return;
@@ -1352,6 +1435,11 @@ if (window.innerWidth <= 430) {
         }
       });
       
+      const isHome = activeSection === 'home';
+      if (mobileTaxContent) mobileTaxContent.style.display = isHome ? 'none' : 'block';
+      if (mobileRecentChanges) mobileRecentChanges.style.display = isHome ? 'block' : 'none';
+      if (mobilePromo) mobilePromo.style.display = isHome ? 'none' : 'block';
+
       if (calcSections.includes(activeSection)) {
         arrow.style.display = 'flex';
       } else {
