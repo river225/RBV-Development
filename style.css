@@ -1,7 +1,3 @@
-/* ============================================================
-   DESKTOP STYLES
-   ============================================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 /* Hide all scrollbars */
@@ -83,19 +79,15 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* Main layout changes start */
 .main-container {
     display: flex;
-    max-width: 1800px;  /* Increased from 1600px */
+    max-width: 1800px;
     margin: 0 auto;
     margin-top: 36px;
     gap: 20px;
     align-items: flex-start;
-    padding: 0 20px 40px 20px; /* single source (was duplicated in index.html inline) */
+    padding: 0 20px 40px 20px;
 }
-/* Sidebar: share row space 1 : 3 with main after fixed-width asides. Do not set a fixed width here —
-   a fixed width + flex:1 in index inline used to fight each other and made pages diverge. */
-/* Left column: rarity section buttons + value-suggestion link (desktop only; whole column hidden ≤1024px) */
 .sections-sidebar {
     flex: 1 1 0%;
     min-width: 0;
@@ -140,7 +132,6 @@ a { color: #fff; text-decoration: none; }
     flex-direction: column;
     gap: 24px;
 }
-/* Search bar: out of flow so it doesn't push section content down */
 .search-container {
     position: absolute;
     top: -2px;
@@ -162,8 +153,6 @@ a { color: #fff; text-decoration: none; }
 #search::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
-/*  Main layout changes end  */
-
 /* Cards container */
 .cards { 
   display: flex; 
@@ -299,7 +288,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 /* Value text styling */
-.card-avg, .card-ranged, .card-pawn, .card-repair {
+.card-avg, .card-ranged, .card-networth, .card-pawn, .card-repair {
   font-size: 1.05rem;
   font-weight: 700;
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
@@ -328,6 +317,13 @@ a { color: #fff; text-decoration: none; }
 .card-pawn .pawn-value {
   color: #5ec7c2;
   font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.card-networth .networth-value {
+  color: #c64f4f;
+  font-weight: 800;
   font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
@@ -463,7 +459,6 @@ a { color: #fff; text-decoration: none; }
   opacity: 0;
 }
 
-/* Home: don’t sticky the sidebar — avoids Value Changes / Middleman block shifting with scroll + async list height */
 @media screen and (min-width: 431px) {
   body.is-home .tax-sidebar-column {
     position: static;
@@ -486,7 +481,6 @@ a { color: #fff; text-decoration: none; }
   transition: none !important;
 }
 
-/* Tax calculator badge + tooltip (anchored to card top-left, not the zero-height wrapper) */
 .tax-calculator .tax-badge-wrapper {
   position: static;
   height: 0;
@@ -568,7 +562,7 @@ a { color: #fff; text-decoration: none; }
   border: 2px solid #33cce6;
   border-radius: 8px;
   padding: 10px 12px;
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   color: white;
   transition: all 0.3s ease;
   margin-bottom: 12px;
@@ -576,6 +570,7 @@ a { color: #fff; text-decoration: none; }
 
 .tax-calculator input::placeholder {
   color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95em;
 }
 
 .tax-calculator input:focus {
@@ -625,7 +620,17 @@ a { color: #fff; text-decoration: none; }
   max-width: 100%;
   display: block;
   overflow-wrap: anywhere;
-  word-break: break-all;
+  word-break: normal;
+}
+
+.tax-after-label {
+  color: #81e681;
+  font-size: 0.72em;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-left: 6px;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 
@@ -848,6 +853,103 @@ a { color: #fff; text-decoration: none; }
   background: linear-gradient(145deg, #fff 0%, #f5f0ff 25%, #ebe0ff 55%, #e0d0ff 100%);
   color: #1a0a4a;
 }
+
+#epic .epic-shark-promo {
+  margin-top: clamp(16px, 4vw, 28px);
+  text-align: center;
+  width: 100%;
+  max-width: min(560px, calc(100vw - 24px));
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 clamp(8px, 2.5vw, 16px);
+  box-sizing: border-box;
+}
+#epic .epic-shark-promo-link {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  text-decoration: none;
+  color: inherit;
+  border: 3px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #141d28;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+#epic .epic-shark-promo-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+#epic .epic-shark-promo-text {
+  margin: 0;
+  padding: clamp(12px, 3vw, 16px) clamp(10px, 2.5vw, 14px) clamp(8px, 2vw, 12px);
+  font-weight: 800;
+  font-size: clamp(0.82rem, 2.8vw, 1.2rem);
+  letter-spacing: 0.03em;
+  color: #33cce6;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+  line-height: 1.3;
+}
+#epic .epic-shark-promo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+/* Home: bottom promo row, stacked and centered (desktop + mobile) */
+.home-bottom-promo-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 3vw, 22px);
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(10px, 2.5vw, 20px);
+  box-sizing: border-box;
+}
+#home .home-shark-promo {
+  width: 100%;
+  max-width: min(440px, 100%);
+  text-align: center;
+}
+#home .home-shark-promo-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  border: 3px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #141d28;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+#home .home-shark-promo-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+#home .home-shark-promo-text {
+  margin: 0;
+  padding: clamp(12px, 3vw, 16px) clamp(10px, 2.5vw, 14px) clamp(8px, 2vw, 12px);
+  font-weight: 800;
+  font-size: clamp(0.82rem, 2.8vw, 1.15rem);
+  letter-spacing: 0.03em;
+  color: #33cce6;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+  line-height: 1.3;
+}
+#home .home-shark-promo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+
 @keyframes giveaway-banner-shine {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -1042,7 +1144,6 @@ a { color: #fff; text-decoration: none; }
 }
 
 
-/* Polish section navigation buttons */
 #sections-nav button {
   font-size: 1.2rem;
   font-weight: 600;
@@ -1059,7 +1160,6 @@ a { color: #fff; text-decoration: none; }
   position: relative;
 }
 
-/* Add shine effect to active buttons */
 #sections-nav button.active::before {
   content: '';
   position: absolute;
@@ -1708,7 +1808,6 @@ a { color: #fff; text-decoration: none; }
 
 
 
-/* RICHEST PLAYERS STYLES */
 .richest-players-section {
   position: relative;
 }
@@ -1930,8 +2029,6 @@ a { color: #fff; text-decoration: none; }
   opacity: 0.7;
   text-decoration: underline;
 }
-
-/* RICHEST PLAYERS STYLES END */
 
 /* Base richest card */
 
@@ -2779,37 +2876,6 @@ body {
   max-width: 600px;
 }
 
-/* Reserved ad area (home, above announcements / top donators) — placeholder until main site */
-.ad-slot-placeholder {
-  max-width: 728px;
-  width: 100%;
-  min-height: 90px;
-  margin: 8px auto 28px;
-  box-sizing: border-box;
-  border: 2px dashed rgba(51, 204, 230, 0.35);
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.ad-slot-placeholder-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.9);
-  user-select: none;
-}
-.ad-slot-placeholder--home-bottom {
-  margin-top: 12px;
-  margin-bottom: 0;
-}
-/* Bottom of rarity / item sections (JS-rendered) */
-.ad-slot-placeholder--section {
-  margin-top: 28px;
-  margin-bottom: 12px;
-}
-
 /* What is BlockSpin Values Section */
 .what-is-section {
   max-width: 800px;
@@ -3245,6 +3311,7 @@ body.mobile-panel-open .hamburger-menu {
 
   .card-avg,
   .card-ranged,
+  .card-networth,
   .card-pawn,
   .card-repair {
     font-size: 0.98rem;
@@ -3524,6 +3591,59 @@ body.mobile-panel-open .hamburger-menu {
     text-align: center;
   }
 
+  .mobile-menu-drawer-promo {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 2px solid rgba(51, 204, 230, 0.28);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .mobile-menu-sponsored-label {
+    margin: 0 0 10px;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(148, 163, 184, 0.95);
+    text-align: center;
+  }
+  .mobile-menu-shark-promo {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  .mobile-menu-shark-promo-link {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    text-decoration: none;
+    color: inherit;
+    border: 2px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #141d28;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .mobile-menu-shark-promo-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  .mobile-menu-shark-promo-text {
+    margin: 0;
+    padding: 10px 8px 8px;
+    font-weight: 800;
+    font-size: clamp(0.68rem, 2.8vw, 0.88rem);
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    color: #33cce6;
+    text-shadow: 1px 1px 0 #000, -1px 1px 0 #000;
+  }
+  .mobile-menu-shark-promo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .mobile-menu-overlay .mobile-menu-satellite-inner {
     display: flex;
     flex-direction: column;
@@ -3730,7 +3850,7 @@ body.mobile-panel-open .hamburger-menu {
     border: 2px solid #33cce6;
     border-radius: 8px;
     padding: 8px 10px;
-    font-size: 0.88rem;
+    font-size: 0.8rem;
     color: white;
     transition: all 0.3s ease;
     margin-bottom: 12px;
@@ -3739,6 +3859,7 @@ body.mobile-panel-open .hamburger-menu {
 
   .mobile-tax-calc input::placeholder {
     color: rgba(255, 255, 255, 0.5);
+    font-size: 0.95em;
   }
 
   .mobile-tax-calc input:focus {
@@ -3815,12 +3936,18 @@ body.mobile-panel-open .hamburger-menu {
 .tax-breakdown {
   font-size: 0.8rem;
   line-height: 1.4;
-  margin-top: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #000;
   color: rgba(255,255,255,0.9);
 }
 .tax-how-label {
   color: #33cce6;
   font-weight: 600;
+}
+.tax-warning-line {
+  color: #ff4d4d;
+  font-weight: 700;
 }
 .tax-reminders {
   font-size: 0.75rem;

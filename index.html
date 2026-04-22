@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="style.css" />
 <style> 
 
-/* Floating buttons at the bottom */ 
 .bottom-buttons { 
     position: fixed; 
     bottom: 20px; 
@@ -39,7 +38,6 @@
     background-color: #FE2C55; 
 } 
 
-/* Header styling */ 
 .site-header { 
     text-align: center; 
     padding: 20px 20px 10px 20px; 
@@ -54,7 +52,6 @@
     color: white; 
 } 
 
-/* Search bar - positioned in style.css so it doesn't push content */ 
 #search { 
     width: 400px; 
     max-width: 90%;
@@ -71,14 +68,12 @@ border: 2px solid #000000;
 
   
 
-<!-- Hamburger Menu Button -->
 <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu">
   <span></span>
   <span></span>
   <span></span>
 </button>
 
-<!-- Mobile Menu Overlay -->
 <div class="mobile-menu-overlay" id="mobile-menu"></div>
 
 <nav class="top-navbar">
@@ -128,7 +123,6 @@ border: 2px solid #000000;
 
 <div class="main-container"> 
 
-    <!-- Section navigation (sidebar hidden ≤1024px; nav clone goes to hamburger only) -->
     <div class="sections-sidebar">
       <nav class="sections-nav" id="sections-nav"></nav>
       <p class="sections-nav-suggest">
@@ -136,20 +130,16 @@ border: 2px solid #000000;
       </p>
     </div>
 
-    <!-- Main content area --> 
     <main id="sections" class="sections">
-     <!-- Search bar (centered in content column) -->
      <div class="search-container"> 
        <input id="search" type="text" placeholder="Search items…" aria-label="Search items" /> 
      </div>
      <section id="home" style="display: block;">
   
-  <!-- New Clean Home Page -->
   <div class="home-page-clean">
     
     <div class="home-content-main">
     
-    <!-- Welcome Header -->
     <div class="welcome-header">
       <h1>
         <span class="welcome-title-line"><span style="color: #fff;">Block</span><span style="color: #ff1a1a;">Spin</span></span>
@@ -159,7 +149,6 @@ border: 2px solid #000000;
       <p class="founder-credit">Founded and maintained by <a href="#" onclick="openRiverLinks(event)" style="color: #33cce6; text-decoration: underline;">river</a></p>
     </div>
 
-    <!-- Social Buttons -->
     <div class="social-buttons-home">
       <a href="https://discord.gg/QbapryYUUx" class="social-btn discord-btn" target="_blank">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -169,21 +158,18 @@ border: 2px solid #000000;
       </a>
     </div>
 
-    <!-- Divider -->
     <div class="home-divider"></div>
 
-    <!-- BSV AD one — placeholder only (no AdSense on test). On main: replace this div’s contents with your Display unit; client ca-pub-5741402692612033, slot 3034904243 -->
-    <div class="ad-slot-placeholder ad-slot-placeholder--bsv1" id="ad-slot-bsv-1" aria-label="Advertisement">
-      <span class="ad-slot-placeholder-label">Ad space</span>
-    </div>
-
-    <!-- Two Column Section -->
     <div class="home-two-columns">
       
-      <!-- Announcements -->
       <div class="home-column">
         <h2>Announcements</h2>
         <div class="announcement-list">
+
+             <div class="announcement-item-clean">
+  <p class="announcement-date">April 17, 2025</p>
+  <p class="announcement-text">Website Update is now live! The Tax Calculator is finally back and more advanced 🔥 It shows exactly how much to trade and in what order to avoid overpaying. New Recent Changes box lets you track all value list updates. (On mobile click blue arrow in a gun section to access tax calculator.)</p>
+</div>
 
           <div class="announcement-item-clean">
   <p class="announcement-date">Dec 3, 2025</p>
@@ -204,7 +190,6 @@ We’ve launched a complete site redesign, and items will now display both their
 
 
 
-      <!-- Top Donators -->
       <div class="home-column">
         <h2>💰 Top Donators</h2>
         <p class="donator-subtitle">Thank you to our generous supporters! Join our Discord to support!</p>
@@ -215,37 +200,34 @@ We’ve launched a complete site redesign, and items will now display both their
 
     </div>
 
-    <!-- Divider -->
     <div class="home-divider"></div>
 
-    <!-- What is BlockSpin Values Section -->
     <div class="what-is-section">
       <h2>What is BlockSpin Values?</h2>
       <p>BlockSpin Values is the trusted value list for all items in the Roblox game BlockSpin. Our dedicated team of top traders keeps values updated daily to help you make fair trades and avoid scams. Whether you're looking for weapon values, checking crew logos, or calculating taxes, we've got everything you need to trade with confidence.</p>
     </div>
 
-    <!-- Divider -->
     <div class="home-divider"></div>
 
-    <!-- BSV AD Two — placeholder only (no AdSense on test). On main: replace with Display unit; client ca-pub-5741402692612033, slot 4878468951 -->
-    <div class="ad-slot-placeholder ad-slot-placeholder--home-bottom" id="ad-slot-bsv-2" aria-label="Advertisement">
-      <span class="ad-slot-placeholder-label">Ad space</span>
+    <div class="home-bottom-promo-row" id="home-bottom-promo-row">
+      <div class="home-shark-promo">
+        <a href="https://attackshark.com/?ref=RIVER" target="_blank" rel="noopener noreferrer sponsored" class="home-shark-promo-link">
+          <p class="home-shark-promo-text">CLICK HERE TO GET THE BEST GAMING MICE!</p>
+          <img src="https://i.ibb.co/0pM24HZ9/ph-11134207-7rasi-m9tr2cfmioxw1c.jpg" alt="Attack Shark gaming mice" class="home-shark-promo-img" loading="lazy" />
+        </a>
+      </div>
     </div>
 
-  </div> <!-- Close home-content-main -->
+  </div>
 
 
-</div> <!-- Close home-page-clean -->
+</div>
 
 </section>
-
-
- </section>
     </main> 
 
 
 
-    <!-- Tax sidebar slot: Tax Calculator (other sections) / Value Changes (Home) -->
     <div class="tax-sidebar-column" id="tax-sidebar-column">
     <aside class="tax-calculator">
         <div class="tax-badge-wrapper">
@@ -259,11 +241,12 @@ We’ve launched a complete site redesign, and items will now display both their
             <div class="amount">$<span id="tax-amount">0</span></div>
             <div id="tax-breakdown" class="tax-breakdown"></div>
         </div>
-        <input type="number" id="taxInput" placeholder="Enter amount..." />
+        <input type="number" id="taxInput" placeholder="Enter cash amount to drop" />
         <div class="tax-reminders">
             <h3 class="tax-reminders-heading">How does it work?</h3>
             <p class="tax-reminders-intro">Tax Calculator shows exactly how much cash to drop and in what order to avoid losing money to the game's cash tax system.</p>
             <p class="tax-reminders-bullets">- <strong>You NEED BlockSpin Plus</strong> for this Calculator<br>
+            - <span class="tax-warning-line">Never reset with more than 40,000 cash on you</span><br>
             - <strong>NEVER</strong> leave the game in combat after resetting<br>
             - Wait 1 min in between cash drops</p>
         </div>
@@ -282,7 +265,6 @@ We’ve launched a complete site redesign, and items will now display both their
 <script src="script.js"></script> 
 
 
-<!-- Footer -->
 <footer class="site-footer">
   <div class="footer-content">
     <p>© 2026 BlockSpin Values</p>
@@ -296,7 +278,6 @@ We’ve launched a complete site redesign, and items will now display both their
   </div>
 </footer>
 
-<!-- Mobile Tax Calculator: backdrop + arrow + side panel -->
 <div class="mobile-calc-backdrop" id="mobile-calc-backdrop" aria-hidden="true"></div>
 <button class="mobile-calc-arrow" id="mobile-calc-arrow" type="button" aria-label="Open tax calculator">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
@@ -319,11 +300,12 @@ We’ve launched a complete site redesign, and items will now display both their
       <div class="amount">$<span id="mobile-tax-amount">0</span></div>
       <div id="mobile-tax-breakdown" class="tax-breakdown"></div>
     </div>
-    <input type="number" id="mobile-tax-input" placeholder="Enter amount..." />
+    <input type="number" id="mobile-tax-input" placeholder="Enter cash amount to drop" />
     <div class="tax-reminders">
       <h3 class="tax-reminders-heading">How does it work?</h3>
       <p class="tax-reminders-intro">Tax Calculator shows exactly how much cash to drop and in what order to avoid losing money to the game's cash tax system.</p>
       <p class="tax-reminders-bullets">- <strong>You NEED BlockSpin Plus</strong> for this Calculator<br>
+      - <span class="tax-warning-line">Never reset with more than 40,000 cash on you</span><br>
       - <strong>NEVER</strong> leave the game in combat after resetting<br>
       - Wait 1 min in between cash drops</p>
     </div>

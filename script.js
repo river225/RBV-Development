@@ -1,4 +1,3 @@
-// CONFIG — Test site: use test spreadsheet. For live site, use: 1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs
 const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
 const SECTION_NAMES = [
   "Home",
@@ -10,26 +9,50 @@ const SECTION_NAMES = [
   "Misc",
   "Vehicles",
   
-  // EXTRAS
   "💰 Richest Players",
   "Crew Logos"
 ];
 
-// BSV Ad Three — one Display unit (slot 6782577562, client ca-pub-5741402692612033) at bottom of Common/Uncommon/Rare/Epic/Legendary/Omega/Misc/Vehicles. Placeholder only on test.
-const BSV_AD_THREE_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeholder--section" data-bsv-ad="three" aria-label="Advertisement"><span class="ad-slot-placeholder-label">Ad space</span></div>`;
+const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
 
-// BSV Ad Four — Display unit (slot 4197814232): end of Crew Logos; under Richest intro text. Placeholder only on test.
-const BSV_AD_FOUR_PLACEHOLDER = `<div class="ad-slot-placeholder ad-slot-placeholder--section" data-bsv-ad="four" aria-label="Advertisement"><span class="ad-slot-placeholder-label">Ad space</span></div>`;
+function initAnalytics() {
+  if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === "G-XXXXXXXXXX") return;
+  if (typeof window.gtag === "function") return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function() { window.dataLayer.push(arguments); };
+  window.gtag("js", new Date());
+  window.gtag("config", GA_MEASUREMENT_ID);
 
-// Tax calculator: 40k drop → 29,091 received (confirmed). Above 40k (e.g. 41,250) still gives 29,091. MAX 40K PER DROP.
+  var gaScript = document.createElement("script");
+  gaScript.async = true;
+  gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_MEASUREMENT_ID);
+  document.head.appendChild(gaScript);
+}
+
+function trackEvent(name, params) {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("event", name, params || {});
+}
+
+function setupDiscordClickTracking() {
+  if (document.documentElement.dataset.discordTrackingInit === "1") return;
+  document.documentElement.dataset.discordTrackingInit = "1";
+  document.addEventListener("click", function (e) {
+    var link = e.target.closest('a[href*="discord.gg"], a[href*="discord.com/invite"]');
+    if (!link) return;
+    trackEvent("discord_click", {
+      link_url: link.href,
+      link_text: (link.textContent || "").trim().slice(0, 80),
+      page_path: window.location.pathname
+    });
+  });
+}
+
 const TAX_RECEIVE_RATIO = 29091 / 40000;
 const TAX_MAX_DROP = 40000;
 const TAX_RECEIVE_PER_40K = 29091;
 
-// RICHEST PLAYERS SECTION START
-
 function formatNetWorth(value) {
-  // Remove dollar signs, commas, and any other non-numeric characters except decimal point
   const cleanValue = String(value).replace(/[$,]/g, '');
   const num = parseFloat(cleanValue);
   
@@ -44,13 +67,13 @@ function formatNetWorth(value) {
 }
 
 function getRankColor(rank) {
-  if (rank === 1) return '#FFD700';        // 🥇 Gold
-  if (rank === 2) return '#C0C0C0';        // 🥈 Silver
-  if (rank === 3) return '#CD7F32';        // 🥉 Bronze
-  if (rank >= 4 && rank <= 25) return '#8B5CF6';   // 🟣 Purple (4-25)
-  if (rank >= 26 && rank <= 100) return '#EC4899'; // 💖 Pink (26-100)
-  if (rank >= 101 && rank <= 500) return '#48BB78'; // 🟢 Green (101-500)
-  return '#A0A0A0'; // ⚪ Gray (501-1000)
+  if (rank === 1) return '#FFD700';
+  if (rank === 2) return '#C0C0C0';
+  if (rank === 3) return '#CD7F32';
+  if (rank >= 4 && rank <= 25) return '#8B5CF6';
+  if (rank >= 26 && rank <= 100) return '#EC4899';
+  if (rank >= 101 && rank <= 500) return '#48BB78';
+  return '#A0A0A0';
 }
 
 function getRankSize(rank) {
@@ -70,7 +93,6 @@ function createRichestPlayersSection(data) {
     <div class="richest-players-header">
       <h2>Top 1,000 Richest Players in BlockSpin</h2>
       <p class="richest-intro">The Official BlockSpin leaderboard showing the wealthiest players ranked by the total value of their in-game assets. Rankings go to #1000 and update hourly. To appear, verify yourself in the official BlockSpin Discord server.</p>
-      ${BSV_AD_FOUR_PLACEHOLDER}
       <input 
         type="text" 
         class="richest-search" 
@@ -88,7 +110,6 @@ function createRichestPlayersSection(data) {
     const level = player['Level'] || 'N/A';
     const rankClass = ("" + rank).length >= 3 ? "rank-long" : "";
     
-    // Create Roblox search URL
     const robloxSearchUrl = `https://www.roblox.com/search/users?keyword=${encodeURIComponent(playerName)}`;
 
     return `
@@ -122,9 +143,7 @@ function filterRichestPlayers(query) {
     }
   });
 }
-// RICHEST PLAYERS SECTION END 
 
-// === FETCH HELPERS ===
 async function fetchSheet(sheetName) {
   try {
     const base = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq`;
@@ -144,8 +163,6 @@ async function fetchSheet(sheetName) {
       return obj;
     });
 
-    // For most sheets we filter out blank rows using the Name/Header-style columns.
-    // For "Website Configs" (value changes) we want ALL rows and will filter separately.
     if (sheetName === "Website Configs") {
       return items;
     }
@@ -165,7 +182,6 @@ async function fetchSheet(sheetName) {
   }
 }
 
-// Special fetch for Richest Players from different spreadsheet
 async function fetchRichestPlayers() {
   try {
     const RICHEST_SPREADSHEET_ID = "1nfWrJcFkVCZ-Yr0mWmCCjQoQgUD3_-W2Qsy4XD4NT3k";
@@ -186,7 +202,6 @@ async function fetchRichestPlayers() {
       return obj;
     });
 
-    // Filter out empty rows and return rows 2-1000 (index 1-999)
     const validItems = items.filter(x => String(x["Roblox Username"] || "").trim().length > 0);
     return validItems;
   } catch (err) {
@@ -205,8 +220,6 @@ function createCard(item) {
   const internalValue = safe(item["Internal Value"]);
   const giveawayFlag = safe(item["Giveaway"]);
 
-
-  // Simple image tag (no broken overlay handling)
   let imgTag = "";
   if (img) {
     imgTag = `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`;
@@ -214,7 +227,6 @@ function createCard(item) {
 
   let durabilityHTML = '';
   
-  // Check if "Durability Invisible" is set to "Yes"
   const durabilityInvisible = safe(item["Durability Invisible"]);
   const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === 'yes') ? 'style="opacity: 0;"' : '';
   
@@ -243,31 +255,25 @@ function createCard(item) {
     
   }
 
-  // Calculate exact repair price (numeric; format later in template)
 let repairPrice = 0;
 if (durability && durability.includes('/') && internalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const missingDurability = maxDurability - currentDurability;
 
-  // Convert internal value (handles "$" and "k")
   const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) *
                       (internalValue.toLowerCase().includes('k') ? 1000 : 1);
 
-  // Use tested divisor (1.43) for accuracy
   const rawRepair = missingDurability * (internalVal / maxDurability / 1.43);
   repairPrice = Math.round(rawRepair);
 }
 
-  // Calculate exact pawn amount (money formatted)
 let pawnAmount = 0;
 if (durability && durability.includes('/') && internalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
 
-  // Convert internal value (handles "$" and "k")
   const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) *
                       (internalValue.toLowerCase().includes('k') ? 1000 : 1);
 
-  // Pawn formula: (internalValue * 0.3) - ((maxDurability - currentDurability) * ((internalValue * 0.3) / maxDurability / 1.43))
   const baseValue = internalVal * 0.3;
   const missingDurability = maxDurability - currentDurability;
   const deduction = missingDurability * ((internalVal * 0.3) / maxDurability / 1.43);
@@ -275,7 +281,6 @@ if (durability && durability.includes('/') && internalValue) {
   const rawPawn = baseValue - deduction;
   pawnAmount = Math.round(rawPawn);
 
-  // Format as money
   pawnAmount = `$${pawnAmount.toLocaleString()}`;
 }
   
@@ -296,6 +301,7 @@ if (durability && durability.includes('/') && internalValue) {
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
+        <div class="card-networth">Networth Value: <span class="networth-value">${internalValue || "N/A"}</span></div>
         ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
         ${durability && internalValue ? `
           <div class="card-repair">
@@ -310,7 +316,6 @@ if (durability && durability.includes('/') && internalValue) {
   `;
 }
 
-// Global giveaway modal (created once on demand)
 function ensureGiveawayModal() {
   if (document.getElementById('giveaway-modal')) return;
   const modal = document.createElement('div');
@@ -362,10 +367,8 @@ function createScammerCard(item) {
   const evidence = safe(item["Evidence"]);
   const submittedDate = item["Date"] || item["Submitted Date"] || "";
 
-  // Handle Roblox name - check if it contains a URL and extract both parts
   let robloxNameHtml;
   if (robloxName.includes('http')) {
-    // Extract the URL and the text before it
     const urlMatch = robloxName.match(/(.*?)(https?:\/\/\S+)/);
     if (urlMatch) {
       const textPart = urlMatch[1].trim();
@@ -378,7 +381,6 @@ function createScammerCard(item) {
     robloxNameHtml = robloxName;
   }
 
-  // Handle evidence links
   const evidenceLinks = evidence.split(",").map(link => link.trim()).filter(link => link.length > 0);
   let evidenceHtml = "";
   if (evidenceLinks.length > 0) {
@@ -401,19 +403,16 @@ function createScammerCard(item) {
 }
 
 function renderSection(title, items) {
-  // Always render BlockSpin Map even if no items
   if (title === "BlockSpin Map") {
     renderBlockSpinMapSection();
     return;
   }
 
-  // Always render Home section even if no items
   if (title === "Home") {
     const html = `
       <section class="section" id="${slugify(title)}">
         <h2>${title}</h2>
         <div class="home-content">
-          <!-- Add your home page content here -->
         </div>
       </section>
     `;
@@ -442,7 +441,6 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
-        ${BSV_AD_THREE_PLACEHOLDER}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -460,7 +458,12 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
-        ${BSV_AD_THREE_PLACEHOLDER}
+        <div class="epic-shark-promo">
+          <a href="https://attackshark.com/?ref=RIVER" target="_blank" rel="noopener noreferrer sponsored" class="epic-shark-promo-link">
+            <p class="epic-shark-promo-text">CLICK HERE TO GET THE BEST GAMING MICE!</p>
+            <img src="https://i.ibb.co/0pM24HZ9/ph-11134207-7rasi-m9tr2cfmioxw1c.jpg" alt="Attack Shark gaming mice" class="epic-shark-promo-img" loading="lazy" />
+          </a>
+        </div>
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -471,7 +474,6 @@ function renderSection(title, items) {
         <div class="cards">
           ${items.map(createCard).join("")}
         </div>
-        ${BSV_AD_THREE_PLACEHOLDER}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -493,7 +495,6 @@ function renderLegendarySectionWithBanner(items) {
           <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
         </div>
       </div>
-      ${BSV_AD_THREE_PLACEHOLDER}
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -538,7 +539,7 @@ function renderCrewLogosSection(items) {
     }
   });
   
-  html += BSV_AD_FOUR_PLACEHOLDER + `</section>`;
+  html += `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
@@ -570,7 +571,6 @@ function renderScammerSection(items) {
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
   
-  // Add event listeners after HTML is inserted
   setTimeout(() => {
     const searchInput = document.getElementById('richest-search-input');
     if (searchInput) {
@@ -589,13 +589,11 @@ function renderScammerSection(items) {
   }, 100);
 }
 
-// SECTION NAVIGATION 
 function initSectionsNav() {
   const nav = document.getElementById("sections-nav");
   if (!nav) return;
 
   SECTION_NAMES.forEach((name, index) => {
-    // Add gap and "Extras" header before first Extra
     if (name === "💰 Richest Players") {
       const gap = document.createElement("div");
       gap.className = "nav-gap";
@@ -614,7 +612,6 @@ function initSectionsNav() {
   });
 }
 
-/** ≤1024px (phones + iPads): put search under the section title; wider: keep search before #home */
 function syncItemSectionSearchPlacement(name) {
   const sectionsEl = document.getElementById("sections");
   const searchContainer = document.querySelector(".search-container");
@@ -662,11 +659,9 @@ function syncItemSectionSearchPlacement(name) {
   }
 }
 
-//  BANNER LOGIC FROM MAIN SITE
 function showSection(name) {
   console.log(`Showing section: ${name}`);
   
-    // Reset durability when switching sections
   document.querySelectorAll('.durability-input').forEach(input => {
     const card = input.closest('.card');
     const maxDurability = card.dataset.maxDurability;
@@ -674,7 +669,6 @@ function showSection(name) {
     updateCardValues(input);
   });
   
-   // Tax sidebar slot: show Value Changes on Home, Tax Calculator elsewhere
   const taxSidebarColumn = document.getElementById('tax-sidebar-column');
   const homeValueChanges = document.getElementById('home-value-changes');
   const taxCalc = taxSidebarColumn ? taxSidebarColumn.querySelector('.tax-calculator') : null;
@@ -702,7 +696,6 @@ function showSection(name) {
   }
 
     
-  // Hide/show search bar based on section
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
     const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
@@ -713,21 +706,19 @@ function showSection(name) {
     }
   }
   
-  // Show/hide sections
   SECTION_NAMES.forEach(sec => {
     const el = document.getElementById(slugify(sec));
     if (el) el.style.display = sec === name ? "block" : "none";
   });
 
-  // Highlight active nav button
   document.querySelectorAll("#sections-nav button").forEach(b => {
     b.classList.toggle("active", b.textContent === name);
   });
 
   syncItemSectionSearchPlacement(name);
+  trackEvent("view_section", { section_name: name });
 }
 
-// SEARCH 
 function initSearch() {
   const input = document.getElementById("search");
   if (!input) return;
@@ -770,7 +761,19 @@ function getTaxBreakdown(amountWant) {
   return { totalWithdraw, lines, singleDrop: false };
 }
 
-// TAX CALCULATOR (40k max per drop, multi-drop breakdown)
+function formatDollar(amount) {
+  return '$' + (Math.round(Number(amount) || 0)).toLocaleString();
+}
+
+function buildTaxBreakdownHtml(want, breakdown) {
+  return '<span class="tax-how-label">To drop ' +
+    formatDollar(want) +
+    ' in game you drop ' +
+    formatDollar(breakdown.totalWithdraw) +
+    '. Steps:</span><br>' +
+    breakdown.lines.map(function(line) { return line + '<br>'; }).join('');
+}
+
 function initTaxCalculator() {
   const taxInput = document.getElementById("taxInput");
   const taxAmount = document.getElementById("tax-amount");
@@ -785,14 +788,13 @@ function initTaxCalculator() {
     const raw = taxInput.value.replace(/[^\d]/g, '');
     const want = parseInt(raw, 10) || 0;
     const b = getTaxBreakdown(want);
-    taxAmount.textContent = b.totalWithdraw.toLocaleString();
+    taxAmount.innerHTML = b.totalWithdraw.toLocaleString() + ' <span class="tax-after-label">After Tax</span>';
     if (taxBreakdown) {
       if (b.totalWithdraw <= 0) {
         taxBreakdown.innerHTML = '';
         return;
       }
-      taxBreakdown.innerHTML = '<span class="tax-how-label">How to drop this much:</span><br>' +
-        b.lines.map(function(line) { return line + '<br>'; }).join('');
+      taxBreakdown.innerHTML = buildTaxBreakdownHtml(want, b);
     }
   }
 
@@ -817,7 +819,6 @@ function initTaxCalculator() {
   update();
 }
 
-// COPY TO CLIPBOARD
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => {
     const btn = event.target;
@@ -847,11 +848,9 @@ function copyToClipboard(text) {
   });
 }
 
-// DURABILITY FUNCTIONS 
 let durabilityInterval = null;
 let durabilityTimeout = null;
 
-// Prevent typing numbers higher than max
 function enforceMaxDurability(input) {
   const card = input.closest('.card');
   const maxDurability = parseInt(card.dataset.maxDurability);
@@ -867,7 +866,7 @@ function enforceMaxDurability(input) {
 }
 
 function adjustDurability(btn, direction, evt) {
-  if (evt) evt.preventDefault(); // Prevent both touch and mouse events firing
+  if (evt) evt.preventDefault();
   
   const card = btn.closest('.card');
   const input = card.querySelector('.durability-input');
@@ -907,7 +906,7 @@ function stopDurabilityAdjust() {
 
 function updateCardValues(input) {
   const card = input.closest('.card');
-  const currentDurability = parseInt(input.value) || 0; // Fixed: Default to 0 if empty
+  const currentDurability = parseInt(input.value) || 0;
   const maxDurability = parseInt(card.dataset.maxDurability);
   
   const durabilityPercent = currentDurability / maxDurability;
@@ -918,7 +917,6 @@ function updateCardValues(input) {
   card.querySelector('.avg-value').textContent = calculateDurabilityValue(originalAvg, durabilityPercent);
   card.querySelector('.ranged-value').textContent = calculateDurabilityValue(originalRanged, durabilityPercent);
   
-  // Update repair price
   const internalValue = card.dataset.internalValue;
   const repairValueElement = card.querySelector('.repair-value');
   
@@ -926,22 +924,20 @@ function updateCardValues(input) {
     const missingDurability = maxDurability - currentDurability;
     const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
     const repairPrice = Math.round(missingDurability * (internalVal / maxDurability / 1.43));
-    repairValueElement.textContent = '$' + (isNaN(repairPrice) ? 0 : repairPrice).toLocaleString(); // Fixed: Shows $0 instead of NaN
+    repairValueElement.textContent = '$' + (isNaN(repairPrice) ? 0 : repairPrice).toLocaleString();
   }
   
-  // Update pawn amount
   const pawnValueElement = card.querySelector('.pawn-value');
   
   if (pawnValueElement && internalValue) {
     const missingDurability = maxDurability - currentDurability;
     const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
     
-    // Pawn formula
     const baseValue = internalVal * 0.3;
     const deduction = missingDurability * ((internalVal * 0.3) / maxDurability / 1.43);
     const pawnPrice = Math.round(baseValue - deduction);
     
-    pawnValueElement.textContent = '$' + (isNaN(pawnPrice) ? 0 : pawnPrice).toLocaleString(); // Fixed: Shows $0 instead of NaN
+    pawnValueElement.textContent = '$' + (isNaN(pawnPrice) ? 0 : pawnPrice).toLocaleString();
   }
 }
 
@@ -950,10 +946,8 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
     return originalValue || 'N/A';
   }
   
-  // New formula: 20% floor + 80% scaled by durability
   const valueMultiplier = 0.20 + (0.80 * durabilityPercent);
   
-  // Handle range format (works for "Ranged Value")
   if (originalValue.includes(' to ')) {
     const parts = originalValue.split(' to ');
     const low = parseValue(parts[0]) * valueMultiplier;
@@ -966,7 +960,6 @@ function calculateDurabilityValue(originalValue, durabilityPercent) {
     }
   }
   
-  // Handle single value
   const value = parseValue(originalValue) * valueMultiplier;
   
   if (!isNaN(value) && value > 0) {
@@ -980,14 +973,18 @@ function parseValue(str) {
   if (!str) return 0;
   
   str = str.toString().trim().toLowerCase();
-  str = str.replace(/[$,]/g, ''); // Remove $ and commas
+  str = str.replace(/[$,]/g, '');
+  
+  if (/\bmillion\b/.test(str)) {
+    return parseFloat(str.replace(/[^0-9.]/g, '')) * 1000000;
+  }
   
   if (str.includes('k')) {
-    return parseFloat(str.replace('k', '')) * 1000;
+    return parseFloat(str.replace(/k/g, '')) * 1000;
   }
   
   if (str.includes('m')) {
-    return parseFloat(str.replace('m', '')) * 1000000;
+    return parseFloat(str.replace(/m/g, '')) * 1000000;
   }
   
   return parseFloat(str.replace(/[^0-9.]/g, '')) || 0;
@@ -998,24 +995,21 @@ function parseValue(str) {
 function formatLikeOriginal(num, original) {
   num = Math.round(num);
   
-  // Check what format the original was in
-  const wasK = original.toLowerCase().includes('k');
-  const wasM = original.toLowerCase().includes('m');
+  const lower = original.toLowerCase();
+  // "1 Million" contains "m" but must not use abbreviated $Xm styling
+  const wasK = lower.includes('k') && !/\bthousand\b/.test(lower);
+  const wasM = lower.includes('m') && !/\bmillion\b/.test(lower);
   const hadCommas = original.includes(',');
   
   if (wasM) {
-    // Original was in millions — round to whole number
     const m = Math.round(num / 1000000);
     return '$' + m + 'm';
   } else if (wasK) {
-    // Original was in thousands — round to whole number
     const k = Math.round(num / 1000);
     return '$' + k + 'k';
   } else if (hadCommas || num >= 1000) {
-    // Original had commas or number is big enough
     return '$' + num.toLocaleString();
   } else {
-    // Simple number
     return '$' + num;
   }
 }
@@ -1024,10 +1018,8 @@ document.addEventListener('mouseup', stopDurabilityAdjust);
 document.addEventListener('touchend', stopDurabilityAdjust);
 document.addEventListener('touchcancel', stopDurabilityAdjust);
 
-// HELPERS 
 function safe(str) { return str ?? ""; }
 function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
-/** Google Sheet tab name when it differs from the sidebar label */
 function getSheetNameForSection(displayName) {
   if (displayName === "Common / Uncommon") return "Uncommon";
   return displayName;
@@ -1038,11 +1030,11 @@ function slugify(str) {
   return str.toLowerCase().replace(/\s+/g, "-");
 }
 
-// INIT - PARALLEL LOADING FOR SPEED 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
+  initAnalytics();
+  setupDiscordClickTracking();
 
-  // Safety timeout - force hide loading screen after 15 seconds
   setTimeout(() => {
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen && loadingScreen.style.display !== 'none') {
@@ -1066,19 +1058,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   const totalSections = SECTION_NAMES.length;
   let loadedSections = 0;
 
-  // Fetch all sections at once (parallel)
   const fetchPromises = SECTION_NAMES.map(async (sec) => {
    
     console.log(`Fetching data for: ${sec}`);
     
     let items;
     try {
-      // Use NEW spreadsheet for Richest Players, OLD spreadsheet for everything else
       if (sec === "💰 Richest Players") {
-        items = await fetchRichestPlayers(); // NEW spreadsheet
+        items = await fetchRichestPlayers();
         console.log(`Got ${items.length} items for ${sec} from NEW spreadsheet`);
       } else {
-        items = await fetchSheet(getSheetNameForSection(sec)); // OLD spreadsheet (sheet tab may differ from nav label)
+        items = await fetchSheet(getSheetNameForSection(sec));
         console.log(`Got ${items.length} items for ${sec} from OLD spreadsheet`);
       }
     } catch (error) {
@@ -1094,16 +1084,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     return { section: sec, items };
   });
 
-  // Wait for all to finish
   const results = await Promise.all(fetchPromises);
 
-  // Render in order
   results.forEach(({ section, items }) => {
     renderSection(section, items);
   });
 
-  // Decide which section to show first.
-  // If URL has a hash like #sec=Legendary, honor that; otherwise default to Home.
   let initialSection = "Home";
   if (window.location.hash && window.location.hash.startsWith('#sec=')) {
     let requested = decodeURIComponent(window.location.hash.substring(5));
@@ -1137,7 +1123,6 @@ window.addEventListener("resize", function () {
   }, 120);
 });
 
-// Giveaway card click handling
 document.addEventListener('click', function(e) {
   const trigger = e.target.closest('.card-giveaway-trigger');
   if (!trigger) return;
@@ -1319,7 +1304,16 @@ function setupMobileHamburgerMenu() {
   if (sectionsNav) {
     var navClone = sectionsNav.cloneNode(true);
     mobileMenu.appendChild(navClone);
-    // cloneNode does not copy JS listeners; wire cloned buttons manually
+    var drawerPromo = document.createElement('div');
+    drawerPromo.className = 'mobile-menu-drawer-promo';
+    drawerPromo.innerHTML =
+      '<p class="mobile-menu-sponsored-label">Sponsored</p>' +
+      '<div class="mobile-menu-shark-promo">' +
+      '<a href="https://attackshark.com/?ref=RIVER" target="_blank" rel="noopener noreferrer sponsored" class="mobile-menu-shark-promo-link">' +
+      '<p class="mobile-menu-shark-promo-text">CLICK HERE TO GET THE BEST GAMING MICE!</p>' +
+      '<img src="https://i.ibb.co/0pM24HZ9/ph-11134207-7rasi-m9tr2cfmioxw1c.jpg" alt="Attack Shark gaming mice" class="mobile-menu-shark-promo-img" loading="lazy" />' +
+      '</a></div>';
+    mobileMenu.appendChild(drawerPromo);
     navClone.querySelectorAll('button').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var sectionName = (btn.textContent || '').trim();
@@ -1334,6 +1328,10 @@ function setupMobileHamburgerMenu() {
     });
     mobileMenu.addEventListener('click', function(e) {
       if (e.target.tagName === 'BUTTON') {
+        hamburgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      }
+      if (e.target.closest && e.target.closest('.mobile-menu-drawer-promo a')) {
         hamburgerBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
       }
@@ -1361,7 +1359,6 @@ function setupMobileHamburgerMenu() {
   });
 }
 document.addEventListener('DOMContentLoaded', setupMobileHamburgerMenu);
-
 
 // MOBILE TAX CALCULATOR
 
@@ -1413,14 +1410,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateMobileTax() {
       const want = parseInt((input.value || '').replace(/[^\d]/g, ''), 10) || 0;
       const b = getTaxBreakdown(want);
-      amount.textContent = b.totalWithdraw.toLocaleString();
+      amount.innerHTML = b.totalWithdraw.toLocaleString() + ' <span class="tax-after-label">After Tax</span>';
       if (breakdownEl) {
         if (b.totalWithdraw <= 0) {
           breakdownEl.innerHTML = '';
           return;
         }
-        breakdownEl.innerHTML = '<span class="tax-how-label">How to drop this much:</span><br>' +
-          b.lines.map(function(line) { return line + '<br>'; }).join('');
+        breakdownEl.innerHTML = buildTaxBreakdownHtml(want, b);
       }
     }
     input.addEventListener('input', updateMobileTax);
