@@ -158,7 +158,7 @@ async function fetchSheet(sheetName) {
       const obj = {};
       cols.forEach((label, i) => {
         const cell = r.c?.[i];
-        obj[label] = cell ? (cell.f ?? cell.v ?? "") : "";
+        obj[label] = getCellDisplayValue(cell);
       });
       return obj;
     });
@@ -197,7 +197,7 @@ async function fetchRichestPlayers() {
       const obj = {};
       cols.forEach((label, i) => {
         const cell = r.c?.[i];
-        obj[label] = cell ? (cell.f ?? cell.v ?? "") : "";
+        obj[label] = getCellDisplayValue(cell);
       });
       return obj;
     });
@@ -1042,6 +1042,16 @@ function parseInternalValue(value) {
   else if (/\bmillion\b/.test(raw) || raw.includes("m")) n *= 1e6;
   else if (/\bthousand\b/.test(raw) || raw.includes("k")) n *= 1e3;
   return n;
+}
+function getCellDisplayValue(cell) {
+  if (!cell) return "";
+  if (cell.f !== undefined && cell.f !== null && String(cell.f).trim() !== "") {
+    return cell.f;
+  }
+  if (cell.v !== undefined && cell.v !== null) {
+    return cell.v;
+  }
+  return "";
 }
 function getSheetNameForSection(displayName) {
   if (displayName === "Common / Uncommon") return "Uncommon";
