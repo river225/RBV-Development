@@ -218,6 +218,9 @@ function createCard(item) {
   const ranged = safe(item["Ranged Value"]);
   const durability = safe(item["Durability"]);
   const internalValue = safe(getInternalValueFromItem(item));
+  const internalValueText = String(internalValue).trim();
+  const hasInternalValue = internalValueText !== "";
+  const networthDisplay = hasInternalValue ? internalValueText : "N/A";
   const giveawayFlag = safe(item["Giveaway"]);
 
   let imgTag = "";
@@ -256,7 +259,7 @@ function createCard(item) {
   }
 
 let repairPrice = 0;
-if (durability && durability.includes('/') && internalValue) {
+if (durability && durability.includes('/') && hasInternalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const missingDurability = maxDurability - currentDurability;
   const internalVal = parseInternalValue(internalValue);
@@ -266,7 +269,7 @@ if (durability && durability.includes('/') && internalValue) {
 }
 
 let pawnAmount = 0;
-if (durability && durability.includes('/') && internalValue) {
+if (durability && durability.includes('/') && hasInternalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const internalVal = parseInternalValue(internalValue);
 
@@ -287,7 +290,7 @@ if (durability && durability.includes('/') && internalValue) {
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-max-durability="${durability ? durability.split('/')[1] : '100'}"
-         data-internal-value="${escapeAttr(internalValue)}">
+         data-internal-value="${escapeAttr(internalValueText)}">
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
@@ -299,9 +302,9 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-value-separator"></div>
         <div class="card-secondary-values">
-          <div class="card-networth">Networth Value: <span class="networth-value">${escapeHtml(internalValue || "N/A")}</span></div>
-          ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
-          ${durability && internalValue ? `
+          <div class="card-networth">Networth Value: <span class="networth-value">${escapeHtml(networthDisplay)}</span></div>
+          ${durability && hasInternalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
+          ${durability && hasInternalValue ? `
             <div class="card-repair">
               Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span>
             </div>
