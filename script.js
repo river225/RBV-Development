@@ -217,7 +217,7 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const durability = safe(item["Durability"]);
-  const internalValue = safe(item["Internal Value"]);
+  const internalValue = safe(getInternalValueFromItem(item));
   const giveawayFlag = safe(item["Giveaway"]);
 
   let imgTag = "";
@@ -1042,6 +1042,25 @@ function parseInternalValue(value) {
   else if (/\bmillion\b/.test(raw) || raw.includes("m")) n *= 1e6;
   else if (/\bthousand\b/.test(raw) || raw.includes("k")) n *= 1e3;
   return n;
+}
+function normalizeHeaderKey(s) {
+  return String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+function getInternalValueFromItem(item) {
+  if (!item || typeof item !== "object") return "";
+  const direct = item["Internal Value"];
+  if (direct !== undefined && direct !== null && String(direct).trim() !== "") return direct;
+
+  const preferredKeys = ["internalvalue", "networthvalue", "internal", "networth"];
+  for (const key of Object.keys(item)) {
+    const norm = normalizeHeaderKey(key);
+    if (!norm) continue;
+    if (preferredKeys.includes(norm) || norm.includes("internalvalue") || norm.includes("networthvalue")) {
+      const v = item[key];
+      if (v !== undefined && v !== null && String(v).trim() !== "") return v;
+    }
+  }
+  return "";
 }
 function getCellDisplayValue(cell) {
   if (!cell) return "";
