@@ -259,9 +259,7 @@ let repairPrice = 0;
 if (durability && durability.includes('/') && internalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const missingDurability = maxDurability - currentDurability;
-
-  const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) *
-                      (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+  const internalVal = parseInternalValue(internalValue);
 
   const rawRepair = missingDurability * (internalVal / maxDurability / 1.43);
   repairPrice = Math.round(rawRepair);
@@ -270,9 +268,7 @@ if (durability && durability.includes('/') && internalValue) {
 let pawnAmount = 0;
 if (durability && durability.includes('/') && internalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
-
-  const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) *
-                      (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+  const internalVal = parseInternalValue(internalValue);
 
   const baseValue = internalVal * 0.3;
   const missingDurability = maxDurability - currentDurability;
@@ -303,7 +299,7 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-value-separator"></div>
         <div class="card-secondary-values">
-          <div class="card-networth">Networth Value: <span class="networth-value">${internalValue || "N/A"}</span></div>
+          <div class="card-networth">Networth Value: <span class="networth-value">${escapeHtml(internalValue || "N/A")}</span></div>
           ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
           ${durability && internalValue ? `
             <div class="card-repair">
@@ -925,7 +921,7 @@ function updateCardValues(input) {
   
   if (repairValueElement && internalValue) {
     const missingDurability = maxDurability - currentDurability;
-    const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+    const internalVal = parseInternalValue(internalValue);
     const repairPrice = Math.round(missingDurability * (internalVal / maxDurability / 1.43));
     repairValueElement.textContent = '$' + (isNaN(repairPrice) ? 0 : repairPrice).toLocaleString();
   }
@@ -934,7 +930,7 @@ function updateCardValues(input) {
   
   if (pawnValueElement && internalValue) {
     const missingDurability = maxDurability - currentDurability;
-    const internalVal = parseFloat(internalValue.replace(/[$,k]/gi, '')) * (internalValue.toLowerCase().includes('k') ? 1000 : 1);
+    const internalVal = parseInternalValue(internalValue);
     
     const baseValue = internalVal * 0.3;
     const deduction = missingDurability * ((internalVal * 0.3) / maxDurability / 1.43);
@@ -1022,7 +1018,31 @@ document.addEventListener('touchend', stopDurabilityAdjust);
 document.addEventListener('touchcancel', stopDurabilityAdjust);
 
 function safe(str) { return str ?? ""; }
-function escapeAttr(str) { return (str+"").replace(/"/g, "&quot;"); }
+function escapeAttr(str) {
+  return (str + "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+function escapeHtml(str) {
+  return (str + "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+function parseInternalValue(value) {
+  const raw = String(value || "").trim().toLowerCase();
+  if (!raw) return 0;
+  const numeric = raw.replace(/[^0-9.]/g, "");
+  if (!numeric) return 0;
+  let n = parseFloat(numeric);
+  if (!isFinite(n)) return 0;
+  if (/\bbillion\b/.test(raw) || raw.includes("b")) n *= 1e9;
+  else if (/\bmillion\b/.test(raw) || raw.includes("m")) n *= 1e6;
+  else if (/\bthousand\b/.test(raw) || raw.includes("k")) n *= 1e3;
+  return n;
+}
 function getSheetNameForSection(displayName) {
   if (displayName === "Common / Uncommon") return "Uncommon";
   return displayName;
