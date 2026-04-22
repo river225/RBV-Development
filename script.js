@@ -303,7 +303,6 @@ if (durability && durability.includes('/') && internalValue) {
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-value-separator"></div>
         <div class="card-secondary-values">
-          <div class="card-extra-info-title">Exrta Information</div>
           <div class="card-networth">Networth Value: <span class="networth-value">${internalValue || "N/A"}</span></div>
           ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
           ${durability && internalValue ? `
