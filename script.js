@@ -301,13 +301,17 @@ if (durability && durability.includes('/') && internalValue) {
         ${demand ? `<span class="badge">Demand: ${demand}</span>` : ""}
         <div class="card-avg">Average Value: <span class="avg-value">${avg}</span></div>
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
-        <div class="card-networth">Networth Value: <span class="networth-value">${internalValue || "N/A"}</span></div>
-        ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
-        ${durability && internalValue ? `
-          <div class="card-repair">
-            Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span>
-          </div>
-        ` : ''}
+        <div class="card-value-separator"></div>
+        <div class="card-secondary-values">
+          <div class="card-extra-info-title">Exrta Information</div>
+          <div class="card-networth">Networth Value: <span class="networth-value">${internalValue || "N/A"}</span></div>
+          ${durability && internalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
+          ${durability && internalValue ? `
+            <div class="card-repair">
+              Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span>
+            </div>
+          ` : ''}
+        </div>
       </div>
       ${hasGiveaway ? `
         <button class="card-giveaway-trigger" type="button" aria-label="This item has an active giveaway" data-item-name="${escapeAttr(name)}"></button>

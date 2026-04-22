@@ -315,17 +315,39 @@ a { color: #fff; text-decoration: none; }
 
 /* Pawn Amount (inline in card-info) */
 .card-pawn .pawn-value {
-  color: #c64f4f;
+  color: #E6C15F;
   font-weight: 700;
   font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
 .card-networth .networth-value {
-  color: #ff9944;
+  color: #5bc5de;
   font-weight: 800;
   font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.card-value-separator {
+  height: 2px;
+  width: 100%;
+  margin: 8px 0 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(91,197,222,0.85), rgba(255,255,255,0.12));
+}
+
+.card-secondary-values {
+  margin-top: 4px;
+}
+
+.card-extra-info-title {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #d7e6ef;
+  margin: 0 0 8px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
 .sections-nav-suggest {
@@ -2327,7 +2349,7 @@ a { color: #fff; text-decoration: none; }
 .repair-value {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #5ec7c2;
+  color: #c64f4f;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
