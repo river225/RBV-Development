@@ -160,6 +160,8 @@ async function fetchSheet(sheetName) {
         const cell = r.c?.[i];
         obj[label] = getCellDisplayValue(cell);
       });
+      obj.__rowValues = (r.c || []).map(getCellDisplayValue);
+      obj.__colLabels = cols.slice();
       return obj;
     });
 
@@ -199,6 +201,8 @@ async function fetchRichestPlayers() {
         const cell = r.c?.[i];
         obj[label] = getCellDisplayValue(cell);
       });
+      obj.__rowValues = (r.c || []).map(getCellDisplayValue);
+      obj.__colLabels = cols.slice();
       return obj;
     });
 
@@ -1061,6 +1065,32 @@ function getInternalValueFromItem(item) {
     if (preferredKeys.includes(norm) || norm.includes("internalvalue") || norm.includes("networthvalue")) {
       const v = item[key];
       if (v !== undefined && v !== null && String(v).trim() !== "") return v;
+    }
+  }
+
+  // Fallback: recover by sheet column position when labels are inconsistent.
+  const rowValues = Array.isArray(item.__rowValues) ? item.__rowValues : [];
+  const colLabels = Array.isArray(item.__colLabels) ? item.__colLabels : [];
+  if (rowValues.length) {
+    let internalIdx = -1;
+    for (let i = 0; i < colLabels.length; i++) {
+      if (normalizeHeaderKey(colLabels[i]).includes("internalvalue")) {
+        internalIdx = i;
+        break;
+      }
+    }
+    if (internalIdx >= 0 && internalIdx < rowValues.length) {
+      const byHeaderIndex = rowValues[internalIdx];
+      if (byHeaderIndex !== undefined && byHeaderIndex !== null && String(byHeaderIndex).trim() !== "") {
+        return byHeaderIndex;
+      }
+    }
+    // Known schema fallback: Name, Image URL, Demand, Average, Ranged, Quantum, Durability, Internal, Durability Invisible
+    if (rowValues.length >= 8) {
+      const byKnownIndex = rowValues[7];
+      if (byKnownIndex !== undefined && byKnownIndex !== null && String(byKnownIndex).trim() !== "") {
+        return byKnownIndex;
+      }
     }
   }
   return "";
