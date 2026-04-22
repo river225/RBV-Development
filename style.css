@@ -315,14 +315,14 @@ a { color: #fff; text-decoration: none; }
 
 /* Pawn Amount (inline in card-info) */
 .card-pawn .pawn-value {
-  color: #5ec7c2;
+  color: #c64f4f;
   font-weight: 700;
   font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
 }
 
 .card-networth .networth-value {
-  color: #c64f4f;
+  color: #ff9944;
   font-weight: 800;
   font-size: 1.2rem;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
@@ -2327,7 +2327,7 @@ a { color: #fff; text-decoration: none; }
 .repair-value {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #ff9944;
+  color: #5ec7c2;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
