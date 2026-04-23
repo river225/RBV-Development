@@ -8,6 +8,7 @@ const SECTION_NAMES = [
   "Omega",
   "Misc",
   "Vehicles",
+  "Accessories (Untradable)",
   
   "💰 Richest Players",
   "Crew Logos"
@@ -250,7 +251,12 @@ function createCard(item) {
   let durabilityHTML = '';
   
   const durabilityInvisible = safe(item["Durability Invisible"]);
-  const invisibleStyle = (durabilityInvisible && durabilityInvisible.toLowerCase() === 'yes') ? 'style="opacity: 0;"' : '';
+  const durabilityInvisibleNormalized = String(durabilityInvisible).trim().toLowerCase();
+  const isDurabilityInvisible =
+    /^(yes|true|1|ticked|checked|on|y)$/i.test(durabilityInvisibleNormalized);
+  const invisibleStyle = isDurabilityInvisible ? 'style="opacity: 0;"' : '';
+  const showPawn = durability && durability.includes('/') && hasInternalValue;
+  const showRepair = showPawn && !isDurabilityInvisible;
   
   if (durability && durability.includes('/')) {
     const maxDurability = durability.split('/')[1] || "100";
@@ -278,7 +284,7 @@ function createCard(item) {
   }
 
 let repairPrice = 0;
-if (durability && durability.includes('/') && hasInternalValue) {
+if (showPawn) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const missingDurability = maxDurability - currentDurability;
   const internalVal = internalNum;
@@ -288,7 +294,7 @@ if (durability && durability.includes('/') && hasInternalValue) {
 }
 
 let pawnAmount = 0;
-if (durability && durability.includes('/') && hasInternalValue) {
+if (showPawn) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const internalVal = internalNum;
 
@@ -322,8 +328,8 @@ if (durability && durability.includes('/') && hasInternalValue) {
         <div class="card-value-separator"></div>
         <div class="card-secondary-values">
           <div class="card-networth">Networth Value: <span class="networth-value">${escapeHtml(String(networthDisplay))}</span></div>
-          ${durability && hasInternalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
-          ${durability && hasInternalValue ? `
+          ${showPawn ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
+          ${showRepair ? `
             <div class="card-repair">
               Repair Price: <span class="repair-value">$${repairPrice.toLocaleString()}</span>
             </div>
@@ -423,6 +429,32 @@ function createScammerCard(item) {
   `;
 }
 
+function createAccessoryCard(item) {
+  const name = safe(item["Name"]);
+  const img = safe(item["Image URL"] || item["Image"]);
+  const rarity = safe(item["Rarity"]);
+  const networthValue = safe(item["Networth Value"]);
+  const pawnValue = safe(item["Pawn Value"]);
+  const crate = safe(item["Crate"]);
+
+  const imgTag = img
+    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
+    : `<div class="accessory-no-image">No Image</div>`;
+
+  return `
+    <div class="accessory-card" data-name="${escapeAttr(name)}">
+      <h3>${escapeHtml(name)}</h3>
+      <div class="accessory-image-wrap">
+        ${imgTag}
+      </div>
+      <div class="accessory-meta"><span>Rarity:</span> ${escapeHtml(rarity || "N/A")}</div>
+      <div class="accessory-meta"><span>Networth Value:</span> ${escapeHtml(networthValue || "N/A")}</div>
+      <div class="accessory-meta"><span>Pawn Value:</span> ${escapeHtml(pawnValue || "N/A")}</div>
+      <div class="accessory-meta"><span>Crate:</span> ${escapeHtml(crate || "N/A")}</div>
+    </div>
+  `;
+}
+
 function renderSection(title, items) {
   if (title === "BlockSpin Map") {
     renderBlockSpinMapSection();
@@ -446,6 +478,8 @@ function renderSection(title, items) {
     renderRichestPlayersSection(items);
   } else if (title === "Crew Logos") {
     renderCrewLogosSection(items);
+  } else if (title === "Accessories (Untradable)") {
+    renderAccessoriesSection(items);
   } else if (title === "Legendary") {
     renderLegendarySectionWithBanner(items);
   } else if (title === "Omega") {
@@ -564,6 +598,64 @@ function renderCrewLogosSection(items) {
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
 }
 
+function renderAccessoriesSection(items) {
+  const miniToBig = {};
+
+  // Pass 1: build mini-header -> big-header map from any row that defines both.
+  items.forEach(item => {
+    const big = safe(item["Big Header"]).trim();
+    const mini = safe(item["Mini Header"]).trim();
+    if (big && mini) miniToBig[mini] = big;
+  });
+
+  const structure = {};
+
+  function ensureGroup(bigHeader, miniHeader) {
+    const big = bigHeader || "Uncategorized";
+    const mini = miniHeader || "General";
+    if (!structure[big]) structure[big] = {};
+    if (!structure[big][mini]) structure[big][mini] = [];
+  }
+
+  // Pass 2: add explicit mini-header rows to structure even without items.
+  items.forEach(item => {
+    const big = safe(item["Big Header"]).trim();
+    const mini = safe(item["Mini Header"]).trim();
+    const hasName = safe(item["Name"]).trim() !== "";
+    if (big && mini && !hasName) ensureGroup(big, mini);
+  });
+
+  // Pass 3: place item cards by mini-header, then inferred big-header.
+  items.forEach(item => {
+    const name = safe(item["Name"]).trim();
+    if (!name) return;
+
+    const mini = safe(item["Mini Header"]).trim() || "General";
+    const explicitBig = safe(item["Big Header"]).trim();
+    const big = explicitBig || miniToBig[mini] || "Uncategorized";
+    ensureGroup(big, mini);
+    structure[big][mini].push(item);
+  });
+
+  let html = `<section class="section accessories-section" id="${slugify("Accessories (Untradable)")}"><h2>Accessories (Untradable)</h2>`;
+
+  Object.keys(structure).forEach(bigHeader => {
+    html += `<div class="accessories-big-header">${escapeHtml(bigHeader)}</div>`;
+    const miniGroups = structure[bigHeader];
+    Object.keys(miniGroups).forEach(miniHeader => {
+      html += `
+        <div class="accessories-mini-header">${escapeHtml(miniHeader)}</div>
+        <div class="accessories-grid">
+          ${miniGroups[miniHeader].map(createAccessoryCard).join("")}
+        </div>
+      `;
+    });
+  });
+
+  html += `</section>`;
+  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+}
+
 
 function renderScammerSection(items) {
   let html = `
@@ -638,7 +730,7 @@ function syncItemSectionSearchPlacement(name) {
   const searchContainer = document.querySelector(".search-container");
   if (!sectionsEl || !searchContainer) return;
 
-  const hiddenSearchSections = ["Home", "Crew Logos", "Crate Game", "💰 Richest Players"];
+  const hiddenSearchSections = ["Home", "Crew Logos", "Crate Game", "💰 Richest Players", "Accessories (Untradable)"];
 
   function restoreSearchBeforeHome() {
     const homeSec = document.getElementById("home");
@@ -693,7 +785,7 @@ function showSection(name) {
   const taxSidebarColumn = document.getElementById('tax-sidebar-column');
   const homeValueChanges = document.getElementById('home-value-changes');
   const taxCalc = taxSidebarColumn ? taxSidebarColumn.querySelector('.tax-calculator') : null;
-  const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players'];
+  const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players', 'Accessories (Untradable)'];
   const isHome = name === 'Home';
   document.body.classList.toggle('is-home', isHome);
   if (taxSidebarColumn) {
@@ -719,7 +811,7 @@ function showSection(name) {
     
   const searchContainer = document.querySelector('.search-container');
   if (searchContainer) {
-    const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players'];
+    const hiddenSearchSections = ['Home', 'Crew Logos', 'Crate Game', '💰 Richest Players', 'Accessories (Untradable)'];
     if (hiddenSearchSections.includes(name)) {
       searchContainer.style.cssText = 'visibility: hidden; height: 0; margin: 0; overflow: hidden;';
     } else {
@@ -1137,6 +1229,7 @@ function getCellDisplayValue(cell) {
 }
 function getSheetNameForSection(displayName) {
   if (displayName === "Common / Uncommon") return "Uncommon";
+  if (displayName === "Accessories (Untradable)") return "Accessories";
   return displayName;
 }
 

@@ -450,6 +450,88 @@ a { color: #fff; text-decoration: none; }
   box-sizing: border-box; 
 }
 
+/* Accessories (Untradable) section */
+.accessories-section {
+  width: 100%;
+}
+
+.accessories-big-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #7ee7ff;
+  margin: 26px 0 12px;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.accessories-mini-header {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #e7f6ff;
+  margin: 14px 0 12px;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.accessory-card {
+  background: linear-gradient(180deg, #121d2c, #101926);
+  border: 3px solid #000;
+  border-radius: 14px;
+  padding: 14px 12px 16px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.accessory-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: #fff;
+  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.accessory-image-wrap {
+  width: 100%;
+  min-height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.accessory-image-wrap img {
+  max-width: 125px;
+  max-height: 125px;
+  object-fit: contain;
+}
+
+.accessory-no-image {
+  opacity: 0.55;
+  font-weight: 700;
+}
+
+.accessory-meta {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
+}
+
+.accessory-meta span {
+  color: #7ee7ff;
+}
+
 .hidden { 
   display: none !important; 
 }
@@ -2339,7 +2421,7 @@ a { color: #fff; text-decoration: none; }
 .repair-value {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #c64f4f;
+  color: #d55b5b;
   text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 2px 0 0 #000, -2px 0 0 #000;
 }
 
@@ -3327,6 +3409,10 @@ body.mobile-panel-open .hamburger-menu {
   .card-pawn,
   .card-repair {
     font-size: 0.98rem;
+  }
+
+  .accessories-grid {
+    grid-template-columns: 1fr;
   }
 
 
