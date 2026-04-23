@@ -154,12 +154,19 @@ async function fetchSheet(sheetName) {
 
     const cols = json.table.cols.map(c => c.label?.trim() || "");
     const rows = json.table.rows || [];
+    const internalColIdx = cols.findIndex(l =>
+      normalizeHeaderKey(l).includes("internalvalue")
+    );
+
     const items = rows.map(r => {
       const obj = {};
       cols.forEach((label, i) => {
         const cell = r.c?.[i];
         obj[label] = getCellDisplayValue(cell);
       });
+      if (internalColIdx >= 0) {
+        obj["Internal Value"] = coerceInternalCell(r.c?.[internalColIdx]);
+      }
       obj.__rowValues = (r.c || []).map(getCellDisplayValue);
       obj.__colLabels = cols.slice();
       return obj;
@@ -221,10 +228,18 @@ function createCard(item) {
   const avg = safe(item["Average Value"]);
   const ranged = safe(item["Ranged Value"]);
   const durability = safe(item["Durability"]);
-  const internalValue = safe(getInternalValueFromItem(item));
-  const internalValueText = String(internalValue).trim();
-  const hasInternalValue = internalValueText !== "";
-  const networthDisplay = hasInternalValue ? internalValueText : "N/A";
+  const internalRaw = String(getInternalValueFromItem(item) ?? "").trim();
+  const internalNum = parseInternalValue(internalRaw);
+  const hasInternalValue =
+    Number.isFinite(internalNum) && internalNum > 0;
+  const internalValueForAttr = hasInternalValue
+    ? String(internalNum)
+    : internalRaw;
+  const networthDisplay = hasInternalValue
+    ? "$" + Math.round(internalNum).toLocaleString("en-US")
+    : internalRaw !== ""
+      ? internalRaw
+      : "N/A";
   const giveawayFlag = safe(item["Giveaway"]);
 
   let imgTag = "";
@@ -266,7 +281,7 @@ let repairPrice = 0;
 if (durability && durability.includes('/') && hasInternalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
   const missingDurability = maxDurability - currentDurability;
-  const internalVal = parseInternalValue(internalValue);
+  const internalVal = internalNum;
 
   const rawRepair = missingDurability * (internalVal / maxDurability / 1.43);
   repairPrice = Math.round(rawRepair);
@@ -275,7 +290,7 @@ if (durability && durability.includes('/') && hasInternalValue) {
 let pawnAmount = 0;
 if (durability && durability.includes('/') && hasInternalValue) {
   const [currentDurability, maxDurability] = durability.split('/').map(v => parseInt(v) || 0);
-  const internalVal = parseInternalValue(internalValue);
+  const internalVal = internalNum;
 
   const baseValue = internalVal * 0.3;
   const missingDurability = maxDurability - currentDurability;
@@ -294,7 +309,7 @@ if (durability && durability.includes('/') && hasInternalValue) {
          data-avg="${escapeAttr(avg)}" 
          data-ranged="${escapeAttr(ranged)}" 
          data-max-durability="${durability ? durability.split('/')[1] : '100'}"
-         data-internal-value="${escapeAttr(internalValueText)}">
+         data-internal-value="${escapeAttr(internalValueForAttr)}">
       <div class="card-left">
         ${imgTag}
         ${durabilityHTML}
@@ -306,7 +321,7 @@ if (durability && durability.includes('/') && hasInternalValue) {
         <div class="card-ranged">Ranged Value: <span class="ranged-value">${ranged}</span></div>
         <div class="card-value-separator"></div>
         <div class="card-secondary-values">
-          <div class="card-networth">Networth Value: <span class="networth-value">${escapeHtml(networthDisplay)}</span></div>
+          <div class="card-networth">Networth Value: <span class="networth-value">${escapeHtml(String(networthDisplay))}</span></div>
           ${durability && hasInternalValue ? `<div class="card-pawn">Pawn Amount: <span class="pawn-value">${pawnAmount}</span></div>` : ''}
           ${durability && hasInternalValue ? `
             <div class="card-repair">
@@ -1092,6 +1107,21 @@ function getInternalValueFromItem(item) {
         return byKnownIndex;
       }
     }
+  }
+  return "";
+}
+/** Prefer numeric cell.v from Sheets (reliable); else formatted f; else string v. */
+function coerceInternalCell(cell) {
+  if (!cell) return "";
+  if (typeof cell.v === "number" && Number.isFinite(cell.v)) {
+    return String(cell.v);
+  }
+  if (cell.v !== null && cell.v !== undefined) {
+    const vs = String(cell.v).trim();
+    if (vs !== "") return vs;
+  }
+  if (cell.f !== undefined && cell.f !== null && String(cell.f).trim() !== "") {
+    return String(cell.f);
   }
   return "";
 }
