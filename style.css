@@ -473,63 +473,64 @@ a { color: #fff; text-decoration: none; }
   text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-.accessories-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 10px;
+.accessories-section .cards {
+  margin-bottom: 12px;
 }
 
-.accessory-card {
-  background: linear-gradient(180deg, #121d2c, #101926);
-  border: 3px solid #000;
-  border-radius: 14px;
-  padding: 14px 12px 16px;
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.accessory-item-card .card-info h3 {
   text-align: center;
 }
 
-.accessory-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.35rem;
-  color: #fff;
-  text-shadow: 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000;
-}
-
-.accessory-image-wrap {
-  width: 100%;
-  min-height: 125px;
-  display: flex;
+.accessory-item-card .card-left {
   align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
 }
 
-.accessory-image-wrap img {
-  max-width: 125px;
-  max-height: 125px;
-  object-fit: contain;
+.accessory-item-card .card-left::after {
+  display: none;
 }
 
-.accessory-no-image {
-  opacity: 0.55;
-  font-weight: 700;
+.accessory-item-card .card-ranged span,
+.accessory-item-card .card-networth span,
+.accessory-item-card .card-pawn span {
+  font-size: 1.2rem;
 }
 
-.accessory-meta {
-  width: 100%;
-  margin-top: 6px;
-  font-size: 1.02rem;
-  font-weight: 700;
+.accessory-item-card .accessory-label {
   color: #fff;
-  text-shadow: 1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000;
 }
 
-.accessory-meta span {
-  color: #7ee7ff;
+.accessory-item-card .accessory-rarity-badge {
+  text-transform: none;
+  min-width: 110px;
+  text-align: center;
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-omega {
+  background: linear-gradient(135deg, #8b251f 0%, #c0392b 25%, #e74c3c 50%, #ff6b6b 75%, #ff8080 100%);
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-legendary {
+  background: linear-gradient(135deg, #9b7e0a 0%, #d6a910 25%, #f5c312 50%, #ffdb4d 75%, #ffed70 100%);
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-epic {
+  background: linear-gradient(135deg, #4d3670 0%, #6a4c9e 25%, #8e63ce 50%, #b388ff 75%, #c9a3ff 100%);
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-rare {
+  background: linear-gradient(135deg, #1e4d7a 0%, #2d6db5 25%, #4a90e2 50%, #73b3f5 75%, #8fc3ff 100%);
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-uncommon {
+  background: linear-gradient(135deg, #2c6b2f 0%, #388e3c 25%, #4caf50 50%, #6fd66f 75%, #81e681 100%);
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-common {
+  background: linear-gradient(135deg, #3a4657 0%, #556274 25%, #6c7b8f 50%, #98a5b8 75%, #c3ccda 100%);
+}
+
+.accessory-item-card .accessory-rarity-badge.rarity-default {
+  background: linear-gradient(135deg, #2f3f55 0%, #455a75 50%, #5f7591 100%);
 }
 
 .hidden { 
@@ -3419,11 +3420,6 @@ body.mobile-panel-open .hamburger-menu {
   .card-repair {
     font-size: 0.98rem;
   }
-
-  .accessories-grid {
-    grid-template-columns: 1fr;
-  }
-
 
   .crew-logo-card {
     max-width: calc(50% - 10px);

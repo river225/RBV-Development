@@ -436,21 +436,31 @@ function createAccessoryCard(item) {
   const networthValue = safe(item["Networth Value"]);
   const pawnValue = safe(item["Pawn Value"]);
   const crate = safe(item["Crate"]);
-
+  const rarityNorm = String(rarity || "").trim().toLowerCase();
+  const rarityClass =
+    rarityNorm === "omega" ? "rarity-omega" :
+    rarityNorm === "legendary" ? "rarity-legendary" :
+    rarityNorm === "epic" ? "rarity-epic" :
+    rarityNorm === "rare" ? "rarity-rare" :
+    rarityNorm === "uncommon" ? "rarity-uncommon" :
+    rarityNorm === "common" ? "rarity-common" :
+    "rarity-default";
   const imgTag = img
     ? `<img src="${img}" alt="${name}" onerror="this.style.display='none'">`
-    : `<div class="accessory-no-image">No Image</div>`;
+    : "";
 
   return `
-    <div class="accessory-card" data-name="${escapeAttr(name)}">
-      <h3>${escapeHtml(name)}</h3>
-      <div class="accessory-image-wrap">
+    <div class="card accessory-item-card" data-name="${escapeAttr(name)}">
+      <div class="card-left">
         ${imgTag}
       </div>
-      <div class="accessory-meta"><span>Rarity:</span> ${escapeHtml(rarity || "N/A")}</div>
-      <div class="accessory-meta"><span>Networth Value:</span> ${escapeHtml(networthValue || "N/A")}</div>
-      <div class="accessory-meta"><span>Pawn Value:</span> ${escapeHtml(pawnValue || "N/A")}</div>
-      <div class="accessory-meta"><span>Crate:</span> ${escapeHtml(crate || "N/A")}</div>
+      <div class="card-info">
+        <h3>${escapeHtml(name)}</h3>
+        ${rarity ? `<span class="badge accessory-rarity-badge ${rarityClass}">${escapeHtml(rarity)}</span>` : ""}
+        <div class="card-networth"><span class="accessory-label">Networth Value:</span> <span class="networth-value">${escapeHtml(networthValue || "N/A")}</span></div>
+        <div class="card-pawn"><span class="accessory-label">Pawn Value:</span> <span class="pawn-value">${escapeHtml(pawnValue || "N/A")}</span></div>
+        <div class="card-ranged"><span class="accessory-label">Crate:</span> <span>${escapeHtml(crate || "N/A")}</span></div>
+      </div>
     </div>
   `;
 }
@@ -645,7 +655,7 @@ function renderAccessoriesSection(items) {
     Object.keys(miniGroups).forEach(miniHeader => {
       html += `
         <div class="accessories-mini-header">${escapeHtml(miniHeader)}</div>
-        <div class="accessories-grid">
+        <div class="cards">
           ${miniGroups[miniHeader].map(createAccessoryCard).join("")}
         </div>
       `;
