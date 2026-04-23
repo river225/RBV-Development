@@ -785,7 +785,7 @@ function showSection(name) {
   const taxSidebarColumn = document.getElementById('tax-sidebar-column');
   const homeValueChanges = document.getElementById('home-value-changes');
   const taxCalc = taxSidebarColumn ? taxSidebarColumn.querySelector('.tax-calculator') : null;
-  const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players', 'Accessories (Untradable)'];
+  const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players'];
   const isHome = name === 'Home';
   document.body.classList.toggle('is-home', isHome);
   if (taxSidebarColumn) {
@@ -1605,7 +1605,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    const calcSections = ['home', 'uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicle', 'misc'];
+    const calcSections = ['home', 'uncommon', 'rare', 'epic', 'legendary', 'omega', 'vehicles', 'misc', 'accessories-(untradable)'];
     
     arrow.addEventListener('click', openCalc);
     closeBtn.addEventListener('click', closeCalc);
