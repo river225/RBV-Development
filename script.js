@@ -434,8 +434,14 @@ function createAccessoryCard(item) {
   const img = safe(item["Image URL"] || item["Image"]);
   const rarity = safe(item["Rarity"]);
   const networthValue = safe(item["Networth Value"]);
-  const pawnValue = safe(item["Pawn Value"]);
   const crate = safe(item["Crate"]);
+  const networthNum = parseInternalValue(networthValue);
+  const networthDisplay = networthNum > 0
+    ? "$" + Math.round(networthNum).toLocaleString("en-US")
+    : "N/A";
+  const pawnDisplay = networthNum > 0
+    ? "$" + Math.round(networthNum * 0.3).toLocaleString("en-US")
+    : "N/A";
   const rarityNorm = String(rarity || "").trim().toLowerCase();
   const rarityClass =
     rarityNorm === "omega" ? "rarity-omega" :
@@ -457,8 +463,8 @@ function createAccessoryCard(item) {
       <div class="card-info">
         <h3>${escapeHtml(name)}</h3>
         ${rarity ? `<span class="badge accessory-rarity-badge ${rarityClass}">${escapeHtml(rarity)}</span>` : ""}
-        <div class="card-networth"><span class="accessory-label">Networth Value:</span> <span class="networth-value">${escapeHtml(networthValue || "N/A")}</span></div>
-        <div class="card-pawn"><span class="accessory-label">Pawn Value:</span> <span class="pawn-value">${escapeHtml(pawnValue || "N/A")}</span></div>
+        <div class="card-networth"><span class="accessory-label">Networth Value:</span> <span class="networth-value">${escapeHtml(networthDisplay)}</span></div>
+        <div class="card-pawn"><span class="accessory-label">Pawn Value:</span> <span class="pawn-value">${escapeHtml(pawnDisplay)}</span></div>
         <div class="card-ranged"><span class="accessory-label">Crate:</span> <span>${escapeHtml(crate || "N/A")}</span></div>
       </div>
     </div>
