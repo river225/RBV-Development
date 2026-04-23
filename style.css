@@ -1244,13 +1244,16 @@ a { color: #fff; text-decoration: none; }
   letter-spacing: 0.5px;
   padding: 14px 20px;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Color-coded active button states */
 #sections-nav button.active {
   border-color: currentColor;
-  box-shadow: 0 0 20px currentColor, inset 0 1px 0 rgba(255,255,255,0.2);
-  transform: translateX(5px);
+  box-shadow: 0 0 14px currentColor, inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: none;
   position: relative;
 }
 
@@ -1314,15 +1317,21 @@ a { color: #fff; text-decoration: none; }
   color: white;
 }
 
+/* Accessories (Untradable) */
+#sections-nav button:nth-child(9).active {
+  background: linear-gradient(135deg, #3f2f72 0%, #59429b 25%, #765bc2 50%, #9a7ae0 75%, #b39af0 100%);
+  color: white;
+}
+
 /* Richest Players (first Extra) */
-#sections-nav button:nth-child(11).active {
+#sections-nav button:nth-child(12).active {
   background: linear-gradient(135deg, #9b7e0a 0%, #d6a910 25%, #f5c312 50%, #ffdb4d 75%, #ffed70 100%);
   color: white;
   position: relative;
   overflow: hidden;
 }
 
-#sections-nav button:nth-child(11).active::after {
+#sections-nav button:nth-child(12).active::after {
   content: '';
   position: absolute;
   top: -50%;
@@ -1341,7 +1350,7 @@ a { color: #fff; text-decoration: none; }
 
 
 /* Crew Logos - Soft Cyan REVERSED gradient */
-#sections-nav button:nth-child(12).active {
+#sections-nav button:nth-child(13).active {
   background: linear-gradient(135deg, #1a5560 0%, #2d7a8a 25%, #3a9fb0 50%, #5bc5de 75%, #6dd5f0 100%);
   color: white;
 }
