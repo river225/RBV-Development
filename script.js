@@ -804,7 +804,7 @@ function showSection(name) {
   const middlemanPromo = taxSidebarColumn ? taxSidebarColumn.querySelector('.discord-mm-promo--sidebar') : null;
   const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players'];
   // Keep sidebar layout space, but make tax/middleman boxes invisible + non-interactive for this section.
-  const ghostSidebarSections = ['New Section'];
+  const ghostSidebarSections = ['Accessories (Untradable)'];
   const shouldGhostSidebarBoxes = ghostSidebarSections.includes(name);
   const isHome = name === 'Home';
   document.body.classList.toggle('is-home', isHome);
