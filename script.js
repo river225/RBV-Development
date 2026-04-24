@@ -15,6 +15,7 @@ const SECTION_NAMES = [
 ];
 
 const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const ACCESSORIES_SECTION_NAME = "Accessories (Untradable)";
 
 function initAnalytics() {
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === "G-XXXXXXXXXX") return;
@@ -653,23 +654,86 @@ function renderAccessoriesSection(items) {
     structure[big][mini].push(item);
   });
 
-  let html = `<section class="section accessories-section" id="${slugify("Accessories (Untradable)")}"><h2>Accessories (Untradable)</h2>`;
+  let html = `<section class="section accessories-section" id="${slugify(ACCESSORIES_SECTION_NAME)}"><h2>${ACCESSORIES_SECTION_NAME}</h2>`;
+  const navData = [];
+  let bigCounter = 0;
+  let miniCounter = 0;
 
   Object.keys(structure).forEach(bigHeader => {
-    html += `<div class="accessories-big-header">${escapeHtml(bigHeader)}</div>`;
+    const bigAnchor = `acc-big-${bigCounter++}`;
+    html += `<div class="accessories-big-header" id="${bigAnchor}">${escapeHtml(bigHeader)}</div>`;
     const miniGroups = structure[bigHeader];
+    const miniEntries = [];
     Object.keys(miniGroups).forEach(miniHeader => {
+      const miniAnchor = `acc-mini-${miniCounter++}`;
       html += `
-        <div class="accessories-mini-header">${escapeHtml(miniHeader)}</div>
+        <div class="accessories-mini-header" id="${miniAnchor}">${escapeHtml(miniHeader)}</div>
         <div class="cards">
           ${miniGroups[miniHeader].map(createAccessoryCard).join("")}
         </div>
       `;
+      miniEntries.push({ title: miniHeader, anchor: miniAnchor });
     });
+    navData.push({ title: bigHeader, anchor: bigAnchor, minis: miniEntries });
   });
 
   html += `</section>`;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  renderAccessoriesFastNav(navData);
+}
+
+function renderAccessoriesFastNav(navData) {
+  const sidebar = document.getElementById("tax-sidebar-column");
+  if (!sidebar) return;
+
+  let box = document.getElementById("accessories-fast-nav");
+  if (!box) {
+    box = document.createElement("aside");
+    box.id = "accessories-fast-nav";
+    box.style.display = "none";
+    box.style.background = "#1d2836";
+    box.style.border = "1px solid #2e4054";
+    box.style.borderRadius = "12px";
+    box.style.padding = "14px";
+    box.style.marginTop = "12px";
+    box.style.maxHeight = "calc(100vh - 180px)";
+    box.style.overflowY = "auto";
+    sidebar.appendChild(box);
+  }
+
+  const rows = [];
+  rows.push('<h2 style="margin:0 0 10px 0; color:#33cce6; font-size:1.05rem;">Fast Navigation</h2>');
+
+  navData.forEach(group => {
+    rows.push(
+      `<button type="button" data-target="${escapeAttr(group.anchor)}" style="display:block;width:100%;text-align:left;background:transparent;border:none;color:#ffffff;font-weight:700;padding:7px 6px;cursor:pointer;">${escapeHtml(group.title)}</button>`
+    );
+    (group.minis || []).forEach(mini => {
+      rows.push(
+        `<button type="button" data-target="${escapeAttr(mini.anchor)}" style="display:block;width:100%;text-align:left;background:transparent;border:none;color:#9ec3dd;padding:6px 18px;cursor:pointer;">${escapeHtml(mini.title)}</button>`
+      );
+    });
+  });
+
+  rows.push('<div style="height:8px"></div>');
+  rows.push('<button type="button" id="acc-fast-nav-top" style="width:100%;padding:10px 12px;background:#2f80ed;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;">Back to Top</button>');
+  box.innerHTML = rows.join("");
+
+  box.querySelectorAll("button[data-target]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.getAttribute("data-target");
+      const el = targetId ? document.getElementById(targetId) : null;
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  const topBtn = document.getElementById("acc-fast-nav-top");
+  if (topBtn) {
+    topBtn.addEventListener("click", () => {
+      const sec = document.getElementById(slugify(ACCESSORIES_SECTION_NAME));
+      if (sec) sec.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 }
 
 
@@ -802,10 +866,12 @@ function showSection(name) {
   const homeValueChanges = document.getElementById('home-value-changes');
   const taxCalc = taxSidebarColumn ? taxSidebarColumn.querySelector('.tax-calculator') : null;
   const middlemanPromo = taxSidebarColumn ? taxSidebarColumn.querySelector('.discord-mm-promo--sidebar') : null;
+  const accessoriesFastNav = document.getElementById('accessories-fast-nav');
   const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players'];
   // Keep sidebar layout space, but make tax/middleman boxes invisible + non-interactive for this section.
-  const ghostSidebarSections = ['Accessories (Untradable)', '💰 Richest Players', 'Crew Logos'];
+  const ghostSidebarSections = [ACCESSORIES_SECTION_NAME];
   const shouldGhostSidebarBoxes = ghostSidebarSections.includes(name);
+  const isAccessoriesSection = name === ACCESSORIES_SECTION_NAME;
   const isHome = name === 'Home';
   document.body.classList.toggle('is-home', isHome);
   if (taxSidebarColumn) {
@@ -841,6 +907,19 @@ function showSection(name) {
       middlemanPromo.style.visibility = 'visible';
       middlemanPromo.style.opacity = '1';
       middlemanPromo.style.pointerEvents = 'auto';
+    }
+  }
+  if (accessoriesFastNav) {
+    if (isAccessoriesSection) {
+      accessoriesFastNav.style.display = 'block';
+      accessoriesFastNav.style.visibility = 'visible';
+      accessoriesFastNav.style.opacity = '1';
+      accessoriesFastNav.style.pointerEvents = 'auto';
+    } else {
+      accessoriesFastNav.style.display = 'none';
+      accessoriesFastNav.style.visibility = 'hidden';
+      accessoriesFastNav.style.opacity = '0';
+      accessoriesFastNav.style.pointerEvents = 'none';
     }
   }
   if (homeValueChanges) {
