@@ -801,7 +801,11 @@ function showSection(name) {
   const taxSidebarColumn = document.getElementById('tax-sidebar-column');
   const homeValueChanges = document.getElementById('home-value-changes');
   const taxCalc = taxSidebarColumn ? taxSidebarColumn.querySelector('.tax-calculator') : null;
+  const middlemanPromo = taxSidebarColumn ? taxSidebarColumn.querySelector('.discord-mm-promo--sidebar') : null;
   const hiddenSections = ['Crew Logos', 'Crate Game', '💰 Richest Players'];
+  // Keep sidebar layout space, but make tax/middleman boxes invisible + non-interactive for this section.
+  const ghostSidebarSections = ['New Section'];
+  const shouldGhostSidebarBoxes = ghostSidebarSections.includes(name);
   const isHome = name === 'Home';
   document.body.classList.toggle('is-home', isHome);
   if (taxSidebarColumn) {
@@ -816,7 +820,28 @@ function showSection(name) {
     }
   }
   if (taxCalc) {
-    taxCalc.style.display = isHome ? 'none' : 'block';
+    if (shouldGhostSidebarBoxes) {
+      taxCalc.style.display = 'block';
+      taxCalc.style.visibility = 'hidden';
+      taxCalc.style.opacity = '0';
+      taxCalc.style.pointerEvents = 'none';
+    } else {
+      taxCalc.style.display = isHome ? 'none' : 'block';
+      taxCalc.style.visibility = 'visible';
+      taxCalc.style.opacity = '1';
+      taxCalc.style.pointerEvents = 'auto';
+    }
+  }
+  if (middlemanPromo) {
+    if (shouldGhostSidebarBoxes) {
+      middlemanPromo.style.visibility = 'hidden';
+      middlemanPromo.style.opacity = '0';
+      middlemanPromo.style.pointerEvents = 'none';
+    } else {
+      middlemanPromo.style.visibility = 'visible';
+      middlemanPromo.style.opacity = '1';
+      middlemanPromo.style.pointerEvents = 'auto';
+    }
   }
   if (homeValueChanges) {
     homeValueChanges.style.visibility = isHome ? 'visible' : 'hidden';
