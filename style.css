@@ -3370,6 +3370,32 @@ body.mobile-panel-open .hamburger-menu {
     display: none !important;
   }
 
+  /* Accessories mobile: slightly smaller cards */
+  .accessories-section .card.accessory-item-card {
+    gap: 10px;
+    padding: 9px;
+  }
+
+  .accessories-section .accessory-item-card .card-left {
+    min-width: 110px;
+    padding: 6px;
+  }
+
+  .accessories-section .accessory-item-card .card-left img {
+    width: 84px;
+    height: 84px;
+  }
+
+  .accessories-section .accessory-item-card .card-info h3 {
+    font-size: 1rem;
+  }
+
+  .accessories-section .accessory-item-card .card-networth,
+  .accessories-section .accessory-item-card .card-pawn,
+  .accessories-section .accessory-item-card .card-ranged {
+    font-size: 0.86rem;
+  }
+
   .sections {
     width: 100%;
   }

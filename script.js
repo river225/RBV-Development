@@ -1767,25 +1767,24 @@ document.addEventListener('DOMContentLoaded', function() {
       if (bigHeaders.length === 0 && miniHeaders.length === 0) return;
 
       const rows = [];
-      rows.push('<h2 style="margin:0 0 12px 0; color:#dbeafe; font-size:1.1rem; text-align:center; font-weight:800; letter-spacing:0.3px;">Fast Navigation</h2>');
-      rows.push('<p style="margin:0 0 12px 0; color:#93c5fd; font-size:0.78rem; text-align:center; opacity:0.9;">Jump to accessory categories instantly</p>');
+      rows.push('<h2 style="margin:0 0 8px 0; color:#dbeafe; font-size:0.95rem; text-align:center; font-weight:700;">Fast Navigation</h2>');
 
       bigHeaders.forEach(function(el) {
         const id = el.id || '';
         const title = escapeHtml((el.textContent || '').trim());
         if (!id || !title) return;
-        rows.push(`<button type="button" data-target="${escapeAttr(id)}" style="display:block;width:100%;text-align:left;background:linear-gradient(135deg,#2a3550 0%,#23304a 100%);border:1px solid #4f6b95;color:#f8fbff;font-weight:700;padding:10px 12px;cursor:pointer;border-radius:12px;margin-bottom:8px;box-shadow:0 2px 0 rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.08);">${title}</button>`);
+        rows.push(`<button type="button" data-target="${escapeAttr(id)}" style="display:block;width:100%;text-align:left;background:transparent;border:none;color:#e5efff;font-weight:700;padding:6px 4px;cursor:pointer;border-radius:0;margin-bottom:2px;font-size:0.82rem;">${title}</button>`);
       });
 
       miniHeaders.forEach(function(el) {
         const id = el.id || '';
         const title = escapeHtml((el.textContent || '').trim());
         if (!id || !title) return;
-        rows.push(`<button type="button" data-target="${escapeAttr(id)}" style="display:block;width:100%;text-align:left;background:#111a2a;border:1px solid #2c3f5f;color:#bfdbfe;padding:8px 12px;cursor:pointer;border-radius:10px;margin:0 0 7px 14px;opacity:.96;">${title}</button>`);
+        rows.push(`<button type="button" data-target="${escapeAttr(id)}" style="display:block;width:100%;text-align:left;background:transparent;border:none;color:#9ec3dd;padding:5px 4px 5px 14px;cursor:pointer;border-radius:0;margin:0 0 1px 0;font-size:0.76rem;">${title}</button>`);
       });
 
-      rows.push('<div style="height:10px"></div>');
-      rows.push('<button type="button" id="mobile-acc-fast-nav-top" style="width:100%;padding:11px 12px;background:linear-gradient(135deg,#7c3aed 0%,#3b82f6 100%);color:#fff;border:1px solid #8b5cf6;border-radius:11px;cursor:pointer;font-weight:800;box-shadow:0 6px 16px rgba(76,29,149,.32);">Back to Top</button>');
+      rows.push('<div style="height:8px"></div>');
+      rows.push('<button type="button" id="mobile-acc-fast-nav-top" style="width:100%;padding:7px 9px;background:#203047;color:#cfe6ff;border:1px solid #355274;border-radius:8px;cursor:pointer;font-weight:700;font-size:0.78rem;">Back to Top</button>');
 
       mobileTaxContent.innerHTML = rows.join('');
 
