@@ -695,14 +695,17 @@ function renderAccessoriesFastNav(navData) {
     box.style.border = "1px solid #2e4054";
     box.style.borderRadius = "12px";
     box.style.padding = "14px";
-    box.style.marginTop = "12px";
+    box.style.marginTop = "0";
+    box.style.marginBottom = "12px";
     box.style.maxHeight = "calc(100vh - 180px)";
     box.style.overflowY = "auto";
-    sidebar.appendChild(box);
+    box.style.position = "sticky";
+    box.style.top = "12px";
+    sidebar.insertBefore(box, sidebar.firstChild);
   }
 
   const rows = [];
-  rows.push('<h2 style="margin:0 0 10px 0; color:#33cce6; font-size:1.05rem;">Fast Navigation</h2>');
+  rows.push('<h2 style="margin:0 0 10px 0; color:#33cce6; font-size:1.05rem; text-align:center;">Fast Navigation</h2>');
 
   navData.forEach(group => {
     rows.push(
