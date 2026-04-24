@@ -691,10 +691,11 @@ function renderAccessoriesFastNav(navData) {
     box = document.createElement("aside");
     box.id = "accessories-fast-nav";
     box.style.display = "none";
-    box.style.background = "#1d2836";
-    box.style.border = "1px solid #2e4054";
-    box.style.borderRadius = "12px";
-    box.style.padding = "14px";
+    box.style.background = "linear-gradient(180deg, #16202c 0%, #1f2d3d 100%)";
+    box.style.border = "2px solid #33cce6";
+    box.style.borderRadius = "16px";
+    box.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.35)";
+    box.style.padding = "16px";
     box.style.marginTop = "0";
     box.style.marginBottom = "12px";
     box.style.maxHeight = "calc(100vh - 180px)";
@@ -705,15 +706,15 @@ function renderAccessoriesFastNav(navData) {
   }
 
   const rows = [];
-  rows.push('<h2 style="margin:0 0 10px 0; color:#33cce6; font-size:1.05rem; text-align:center;">Fast Navigation</h2>');
+  rows.push('<h2 style="margin:0 0 12px 0; color:#33cce6; font-size:1.12rem; text-align:center; font-weight:800;">Fast Navigation</h2>');
 
   navData.forEach(group => {
     rows.push(
-      `<button type="button" data-target="${escapeAttr(group.anchor)}" style="display:block;width:100%;text-align:left;background:transparent;border:none;color:#ffffff;font-weight:700;padding:7px 6px;cursor:pointer;">${escapeHtml(group.title)}</button>`
+      `<button type="button" data-target="${escapeAttr(group.anchor)}" style="display:block;width:100%;text-align:left;background:#1a2532;border:1px solid #2f3f52;color:#ffffff;font-weight:700;padding:9px 10px;cursor:pointer;border-radius:10px;margin-bottom:7px;">${escapeHtml(group.title)}</button>`
     );
     (group.minis || []).forEach(mini => {
       rows.push(
-        `<button type="button" data-target="${escapeAttr(mini.anchor)}" style="display:block;width:100%;text-align:left;background:transparent;border:none;color:#9ec3dd;padding:6px 18px;cursor:pointer;">${escapeHtml(mini.title)}</button>`
+        `<button type="button" data-target="${escapeAttr(mini.anchor)}" style="display:block;width:100%;text-align:left;background:#141d28;border:1px solid #26384a;color:#9ec3dd;padding:8px 12px;cursor:pointer;border-radius:9px;margin:0 0 6px 14px;">${escapeHtml(mini.title)}</button>`
       );
     });
   });
@@ -1705,6 +1706,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileTaxContent = document.getElementById('mobile-tax-content');
     const mobileRecentChanges = document.getElementById('mobile-recent-changes');
     const mobilePromo = calc.querySelector('.discord-mm-promo--mobile-panel');
+    const accessoriesSectionId = slugify(ACCESSORIES_SECTION_NAME);
+    const originalMobileTaxContentHtml = mobileTaxContent ? mobileTaxContent.innerHTML : '';
     
     if (!arrow || !calc || !closeBtn || !input || !amount) {
       return;
@@ -1753,6 +1756,65 @@ document.addEventListener('DOMContentLoaded', function() {
     input.addEventListener('input', updateMobileTax);
     updateMobileTax();
 
+    function renderMobileAccessoriesFastNav() {
+      if (!mobileTaxContent) return;
+      const section = document.getElementById(accessoriesSectionId);
+      if (!section) return;
+
+      const bigHeaders = Array.from(section.querySelectorAll('.accessories-big-header'));
+      const miniHeaders = Array.from(section.querySelectorAll('.accessories-mini-header'));
+
+      if (bigHeaders.length === 0 && miniHeaders.length === 0) return;
+
+      const rows = [];
+      rows.push('<h2 style="margin:0 0 12px 0; color:#33cce6; font-size:1.12rem; text-align:center; font-weight:800;">Fast Navigation</h2>');
+
+      bigHeaders.forEach(function(el) {
+        const id = el.id || '';
+        const title = escapeHtml((el.textContent || '').trim());
+        if (!id || !title) return;
+        rows.push(`<button type="button" data-target="${escapeAttr(id)}" style="display:block;width:100%;text-align:left;background:#1a2532;border:1px solid #2f3f52;color:#ffffff;font-weight:700;padding:9px 10px;cursor:pointer;border-radius:10px;margin-bottom:7px;">${title}</button>`);
+      });
+
+      miniHeaders.forEach(function(el) {
+        const id = el.id || '';
+        const title = escapeHtml((el.textContent || '').trim());
+        if (!id || !title) return;
+        rows.push(`<button type="button" data-target="${escapeAttr(id)}" style="display:block;width:100%;text-align:left;background:#141d28;border:1px solid #26384a;color:#9ec3dd;padding:8px 12px;cursor:pointer;border-radius:9px;margin:0 0 6px 14px;">${title}</button>`);
+      });
+
+      rows.push('<div style="height:10px"></div>');
+      rows.push('<button type="button" id="mobile-acc-fast-nav-top" style="width:100%;padding:10px 12px;background:#2f80ed;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;">Back to Top</button>');
+
+      mobileTaxContent.innerHTML = rows.join('');
+
+      mobileTaxContent.querySelectorAll('button[data-target]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const targetId = btn.getAttribute('data-target');
+          const target = targetId ? document.getElementById(targetId) : null;
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          closeCalc();
+        });
+      });
+
+      const topBtn = document.getElementById('mobile-acc-fast-nav-top');
+      if (topBtn) {
+        topBtn.addEventListener('click', function() {
+          const sec = document.getElementById(accessoriesSectionId);
+          if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          closeCalc();
+        });
+      }
+    }
+
+    function restoreMobileTaxContent() {
+      if (!mobileTaxContent) return;
+      if (mobileTaxContent.dataset.navMode === 'accessories') {
+        mobileTaxContent.innerHTML = originalMobileTaxContentHtml;
+        mobileTaxContent.dataset.navMode = '';
+      }
+    }
+
     // Show/hide arrow based on active section
     function updateArrowVisibility() {
       const sections = document.querySelectorAll('.sections > section');
@@ -1766,9 +1828,22 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       const isHome = activeSection === 'home';
-      if (mobileTaxContent) mobileTaxContent.style.display = isHome ? 'none' : 'block';
-      if (mobileRecentChanges) mobileRecentChanges.style.display = isHome ? 'block' : 'none';
-      if (mobilePromo) mobilePromo.style.display = isHome ? 'none' : 'block';
+      const isAccessories = activeSection === accessoriesSectionId;
+
+      if (isAccessories) {
+        renderMobileAccessoriesFastNav();
+        if (mobileTaxContent) {
+          mobileTaxContent.dataset.navMode = 'accessories';
+          mobileTaxContent.style.display = 'block';
+        }
+        if (mobileRecentChanges) mobileRecentChanges.style.display = 'none';
+        if (mobilePromo) mobilePromo.style.display = 'none';
+      } else {
+        restoreMobileTaxContent();
+        if (mobileTaxContent) mobileTaxContent.style.display = isHome ? 'none' : 'block';
+        if (mobileRecentChanges) mobileRecentChanges.style.display = isHome ? 'block' : 'none';
+        if (mobilePromo) mobilePromo.style.display = isHome ? 'none' : 'block';
+      }
 
       if (calcSections.includes(activeSection)) {
         arrow.style.display = 'flex';
