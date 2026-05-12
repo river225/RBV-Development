@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = "1rhptMcfWB2I-x3i9TNMwePcDD9SWWwGsaLwELqxCKzo";
+const SPREADSHEET_ID = "1vAm9x7c5JPxpHxDHVcDgQifXsAvW9iW2wPVuQLENiYs";
 const SECTION_NAMES = [
   "Home",
   "Common / Uncommon",
@@ -14,10 +14,75 @@ const SECTION_NAMES = [
   "Crew Logos"
 ];
 
-const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+const GA_MEASUREMENT_ID = "G-0T25993BCC";
 const ACCESSORIES_SECTION_NAME = "Untradable Items";
 
+const BSV_BOT_PUBLIC_BASE_DEFAULT = "https://bsv-bot-production.up.railway.app";
+
+function normalizeApiBase(url) {
+  return String(url || "")
+    .trim()
+    .replace(/\/+$/, "");
+}
+
+function resolveBsvBotPublicBase() {
+  const fallback = normalizeApiBase(BSV_BOT_PUBLIC_BASE_DEFAULT);
+  if (typeof window === "undefined") return fallback;
+  const fromWindow = window.__BSV_BOT_PUBLIC_BASE__;
+  if (fromWindow && String(fromWindow).trim()) return normalizeApiBase(fromWindow);
+  if (typeof document !== "undefined" && document.querySelector) {
+    const meta = document.querySelector('meta[name="bsv-bot-api-base"]');
+    const content = meta && meta.getAttribute("content");
+    if (content && String(content).trim()) return normalizeApiBase(content);
+  }
+  return fallback;
+}
+
+const BSV_BOT_PUBLIC_BASE = resolveBsvBotPublicBase();
+const BOOSTERS_API_URL = `${BSV_BOT_PUBLIC_BASE}/api/boosters`;
+
+if (typeof window !== "undefined") {
+  window.BSV_BOT_PUBLIC_BASE = BSV_BOT_PUBLIC_BASE;
+  window.bsvBotApiUrl = function (path) {
+    const p = String(path || "").trim().replace(/^\/+/, "");
+    return p ? `${BSV_BOT_PUBLIC_BASE}/${p}` : BSV_BOT_PUBLIC_BASE;
+  };
+}
+const GIVEAWAY_CONFIG_SPREADSHEET_ID = "1hjj8Pd21KOhI9bjUz4-UupADhJzksATcVDJfo186GFk";
+const GIVEAWAYS_SHEET_NAME = "Giveaways";
+const BANNERS_SHEET_NAME = "banner";
+const CONTENT_SHEET_NAME = "content";
+const TRUE_REGEX = /^(yes|true|1|on|y)$/i;
+const FALSE_REGEX = /^(no|false|0|off|n)$/i;
+const giveawayItems = new Set();
+const bannerVisibility = { anaconda: false, firework: false, legendary: true, humvee: true, robux: true };
+const HUMVEE_GIVEAWAY_IMAGE_URL = "https://i.ibb.co/Fkhg8bTK/Screenshot-2026-05-05-003408-removebg-preview.png";
+const ROBUX_GIVEAWAY_IMAGE_URL = "https://i.ibb.co/7fC16qY/Screenshot-2026-05-06-at-02-28-05-removebg-preview.png";
+const ROBUX_GIVEAWAY_DISCORD_URL = "https://discord.gg/GufVWmACAh";
+const HUMVEE_GIVEAWAY_DISCORD_URL = "https://discord.gg/nKKkXyqCsv";
+
+/** Sections that show the Robux giveaway strip (same layout as Humvee). */
+const ROBUX_GIVEAWAY_SECTION_TITLES = new Set(["Common / Uncommon", "Rare", "Epic", "Omega", "Misc"]);
+const sectionContentEmbeds = new Map();
+const CONTENT_SECTIONS = [
+  "Common / Uncommon",
+  "Rare",
+  "Epic",
+  "Legendary",
+  "Omega",
+  "Misc",
+  "Vehicles"
+];
+
+function isBsvTestEnvironment() {
+  if (typeof document === "undefined") return false;
+  if (document.documentElement && document.documentElement.dataset.bsvEnv === "test") return true;
+  const meta = document.querySelector('meta[name="bsv-env"][content="test"]');
+  return Boolean(meta);
+}
+
 function initAnalytics() {
+  if (isBsvTestEnvironment()) return;
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === "G-XXXXXXXXXX") return;
   if (typeof window.gtag === "function") return;
   window.dataLayer = window.dataLayer || [];
@@ -50,9 +115,11 @@ function setupDiscordClickTracking() {
   });
 }
 
-const TAX_RECEIVE_RATIO = 29091 / 40000;
-const TAX_MAX_DROP = 40000;
-const TAX_RECEIVE_PER_40K = 29091;
+const TAX_LEGACY_FULL_DROP = 40000;
+const TAX_LEGACY_RECEIVE = 29091;
+const TAX_MAX_DROP = 60000;
+const TAX_RECEIVE_PER_MAX_DROP = Math.floor((TAX_MAX_DROP * TAX_LEGACY_RECEIVE) / TAX_LEGACY_FULL_DROP);
+const TAX_RECEIVE_RATIO = TAX_LEGACY_RECEIVE / TAX_LEGACY_FULL_DROP;
 
 function formatNetWorth(value) {
   const cleanValue = String(value).replace(/[$,]/g, '');
@@ -223,6 +290,436 @@ async function fetchRichestPlayers() {
   }
 }
 
+async function fetchExternalSheet(spreadsheetId, sheetName) {
+  try {
+    const base = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq`;
+    const url = `${base}?tqx=out:json&sheet=${encodeURIComponent(sheetName)}&headers=1`;
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.substring(47, text.length - 2));
+    const cols = json.table.cols.map((c) => c.label?.trim() || "");
+    const rows = json.table.rows || [];
+    return rows.map((r) => {
+      const obj = {};
+      cols.forEach((label, i) => {
+        obj[label] = getCellDisplayValue(r.c?.[i]);
+      });
+      return obj;
+    });
+  } catch (err) {
+    console.error(`Failed to fetch external sheet: ${sheetName}`, err);
+    return [];
+  }
+}
+
+function parseBooleanCell(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return null;
+  if (TRUE_REGEX.test(raw)) return true;
+  if (FALSE_REGEX.test(raw)) return false;
+  return null;
+}
+
+function normalizeItemName(name) {
+  return String(name || "").trim().toLowerCase();
+}
+
+function extractCellValueByIncludes(row, keyword) {
+  const keys = Object.keys(row || {});
+  for (const key of keys) {
+    if (key.toLowerCase().includes(keyword)) return row[key];
+  }
+  return "";
+}
+
+function rowHasKeyword(row, keyword) {
+  const needle = String(keyword || "").toLowerCase();
+  if (!needle) return false;
+  const keys = Object.keys(row || {});
+  for (const key of keys) {
+    const keyLower = String(key || "").toLowerCase();
+    const valueLower = String(row[key] || "").toLowerCase();
+    if (keyLower.includes(needle) || valueLower.includes(needle)) return true;
+  }
+  return false;
+}
+
+function parseBannerDecisionForKeyword(row, keyword) {
+  const keys = Object.keys(row || {});
+  const keywordLower = String(keyword || "").toLowerCase();
+  if (!keywordLower) return null;
+
+  // If a yes/no is directly under a keyword-like header (e.g. "Firework Launcher Giveawat")
+  for (const key of keys) {
+    const keyLower = String(key || "").toLowerCase();
+    if (!keyLower.includes(keywordLower)) continue;
+    const parsed = parseBooleanCell(row[key]);
+    if (parsed !== null) return parsed;
+  }
+
+  // If keyword appears in a value cell and yes/no is in another cell on the same row.
+  if (rowHasKeyword(row, keywordLower)) {
+    for (const key of keys) {
+      const parsed = parseBooleanCell(row[key]);
+      if (parsed !== null) return parsed;
+    }
+  }
+  return null;
+}
+
+function applyExternalBannerVisibility() {
+  var anacondaEl = document.getElementById("omega-anaconda-banner");
+  var fireworkEl = document.getElementById("epic-firework-banner");
+  var legendaryEl = document.getElementById("legendary-daily-giveaway-banner");
+  var humveeEl = document.getElementById("vehicles-humvee-giveaway-banner");
+  var humveeHomeEl = document.getElementById("home-humvee-giveaway-banner");
+  var humveeOn = bannerVisibility.humvee ? "flex" : "none";
+  var robuxOn = bannerVisibility.robux ? "flex" : "none";
+  if (anacondaEl) anacondaEl.style.display = bannerVisibility.anaconda ? "flex" : "none";
+  if (fireworkEl) fireworkEl.style.display = bannerVisibility.firework ? "flex" : "none";
+  if (legendaryEl) legendaryEl.style.display = bannerVisibility.legendary ? "flex" : "none";
+  if (humveeEl) humveeEl.style.display = humveeOn;
+  if (humveeHomeEl) humveeHomeEl.style.display = humveeOn;
+  document.querySelectorAll('[id^="robux-giveaway-banner-"]').forEach(function (node) {
+    node.style.display = robuxOn;
+  });
+}
+
+function normalizeContentSectionName(name) {
+  const raw = String(name || "").trim().toLowerCase();
+  if (!raw) return "";
+  if (raw.includes("uncommon") || raw === "common") return "Common / Uncommon";
+  if (raw.includes("rare")) return "Rare";
+  if (raw.includes("epic")) return "Epic";
+  if (raw.includes("legendary")) return "Legendary";
+  if (raw.includes("omega")) return "Omega";
+  if (raw.includes("misc")) return "Misc";
+  if (raw.includes("vehicle")) return "Vehicles";
+  return "";
+}
+
+/** Short column headers: Video C, Video R, … Video V (letter = first letter of section). */
+function sectionFromVideoColumnHeader(header) {
+  const compact = String(header || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "");
+  const m = compact.match(/^video([crelomv])$/);
+  if (!m) return "";
+  const byLetter = {
+    c: "Common / Uncommon",
+    r: "Rare",
+    e: "Epic",
+    l: "Legendary",
+    o: "Omega",
+    m: "Misc",
+    v: "Vehicles"
+  };
+  return byLetter[m[1]] || "";
+}
+
+function resolveContentSectionLabel(label) {
+  return sectionFromVideoColumnHeader(label) || normalizeContentSectionName(label);
+}
+
+function extractVideoEmbedUrl(url) {
+  const raw = String(url || "").trim();
+  if (!raw) return "";
+  let parsed;
+  try {
+    parsed = new URL(raw);
+  } catch (_) {
+    return "";
+  }
+  const host = parsed.hostname.toLowerCase();
+  if (host.includes("youtube.com")) {
+    const videoId = parsed.searchParams.get("v");
+    if (videoId) return `https://www.youtube.com/embed/${encodeURIComponent(videoId)}`;
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const maybeEmbed = parts[0] === "embed" && parts[1] ? parts[1] : "";
+    if (maybeEmbed) return `https://www.youtube.com/embed/${encodeURIComponent(maybeEmbed)}`;
+  }
+  if (host.includes("youtu.be")) {
+    const id = parsed.pathname.split("/").filter(Boolean)[0];
+    if (id) return `https://www.youtube.com/embed/${encodeURIComponent(id)}`;
+  }
+  if (host.includes("tiktok.com")) {
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const videoIdx = parts.indexOf("video");
+    if (videoIdx >= 0 && parts[videoIdx + 1]) {
+      return `https://www.tiktok.com/embed/v2/${encodeURIComponent(parts[videoIdx + 1])}`;
+    }
+  }
+  return "";
+}
+
+function extractSectionContentFields(row) {
+  const sectionValue =
+    row.Section ||
+    row.section ||
+    row["Section Name"] ||
+    row["section name"] ||
+    extractCellValueByIncludes(row, "section");
+  const linkValue =
+    row.Link ||
+    row.link ||
+    row.URL ||
+    row.url ||
+    row.Video ||
+    row.video ||
+    extractCellValueByIncludes(row, "http");
+
+  return {
+    section: String(sectionValue || "").trim(),
+    link: String(linkValue || "").trim()
+  };
+}
+
+async function loadSectionContentConfig() {
+  sectionContentEmbeds.clear();
+  const rows = await fetchExternalSheet(GIVEAWAY_CONFIG_SPREADSHEET_ID, CONTENT_SHEET_NAME);
+  const grouped = new Map();
+
+  function pushEmbed(sectionName, rawUrl) {
+    const normalizedSection = resolveContentSectionLabel(sectionName);
+    if (!normalizedSection) return;
+    const embedUrl = extractVideoEmbedUrl(rawUrl);
+    if (!embedUrl) return;
+    if (!grouped.has(normalizedSection)) grouped.set(normalizedSection, []);
+    grouped.get(normalizedSection).push(embedUrl);
+  }
+
+  // Format C (horizontal): Google GViz with headers=1 puts spreadsheet row 1 into **column keys**,
+  // not into rows[0]. rows[] are data rows only — each object is keyed by section names.
+  let usedColumnLayout = false;
+  if (rows.length > 0) {
+    const columnKeys = Object.keys(rows[0] || {});
+    const sectionByColumnKey = new Map();
+    columnKeys.forEach((colKey) => {
+      const normalized = resolveContentSectionLabel(colKey);
+      if (normalized) sectionByColumnKey.set(colKey, normalized);
+    });
+    if (sectionByColumnKey.size > 0) {
+      usedColumnLayout = true;
+      rows.forEach((row) => {
+        sectionByColumnKey.forEach((sectionName, colKey) => {
+          const cellValue = String((row && row[colKey]) || "").trim();
+          if (!cellValue || !/^https?:\/\//i.test(cellValue)) return;
+          pushEmbed(sectionName, cellValue);
+        });
+      });
+    }
+  }
+
+  if (!usedColumnLayout) {
+    // Format A support: headers like Section + Link (existing behavior).
+    rows.forEach((row) => {
+      const fields = extractSectionContentFields(row);
+      if (!fields.section || !fields.link) return;
+      pushEmbed(fields.section, fields.link);
+    });
+
+    // Format B support: section name rows, with links listed beneath.
+    let activeSection = "";
+    rows.forEach((row) => {
+      const cells = Object.values(row || {})
+        .map((v) => String(v || "").trim())
+        .filter(Boolean);
+      if (!cells.length) return;
+
+      const detectedSection = cells
+        .map((v) => resolveContentSectionLabel(v))
+        .find(Boolean) || "";
+
+      const rawUrls = cells.filter((v) => /^https?:\/\//i.test(v));
+
+      if (detectedSection) {
+        activeSection = detectedSection;
+        if (rawUrls.length) {
+          rawUrls.forEach((url) => pushEmbed(activeSection, url));
+        }
+        return;
+      }
+
+      if (activeSection && rawUrls.length) {
+        rawUrls.forEach((url) => pushEmbed(activeSection, url));
+      }
+    });
+  }
+
+  // Each section: every valid link you added (extra rows under a column, or multiple Section/Link rows)
+  // has the same chance to be shown. Pick is uniform and runs again on every full page load / refresh.
+  grouped.forEach((links, section) => {
+    if (!links.length) return;
+    const unique = [...new Set(links)];
+    const pool = unique.length ? unique : links;
+    const selected = pool[Math.floor(Math.random() * pool.length)];
+    sectionContentEmbeds.set(section, selected);
+  });
+}
+
+function embedUrlWithScrollAutoplay(embedUrl) {
+  try {
+    const u = new URL(String(embedUrl || "").trim(), "https://example.com");
+    const host = u.hostname.toLowerCase();
+    if (host.includes("youtube.com")) {
+      u.searchParams.set("autoplay", "1");
+      u.searchParams.set("mute", "1");
+      u.searchParams.set("playsinline", "1");
+      u.searchParams.set("rel", "0");
+      return u.toString();
+    }
+    if (host.includes("tiktok.com")) {
+      u.searchParams.set("autoplay", "1");
+      u.searchParams.set("mute", "1");
+      return u.toString();
+    }
+  } catch (_) {}
+  return String(embedUrl || "").trim();
+}
+
+/** Browsers allow autoplay only after user gesture or when muted; reload iframe with autoplay when box scrolls into view. */
+function setupSectionEmbedScrollAutoplay() {
+  const boxes = document.querySelectorAll(".section-content-embed");
+  if (!boxes.length || typeof IntersectionObserver === "undefined") return;
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const box = entry.target;
+        if (!(box instanceof HTMLElement)) return;
+        if (box.dataset.autoplayDone === "1") return;
+        const iframe = box.querySelector("iframe");
+        if (!(iframe instanceof HTMLIFrameElement)) return;
+        const baseSrc = iframe.dataset.baseSrc || iframe.getAttribute("src") || "";
+        if (!baseSrc) return;
+        box.dataset.autoplayDone = "1";
+        iframe.src = embedUrlWithScrollAutoplay(baseSrc);
+        obs.unobserve(box);
+      });
+    },
+    { threshold: 0.32, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  boxes.forEach((box) => {
+    const iframe = box.querySelector("iframe");
+    if (iframe) {
+      const src = iframe.getAttribute("src") || "";
+      iframe.dataset.baseSrc = src;
+    }
+    obs.observe(box);
+  });
+}
+
+function renderSectionContentEmbeds() {
+  CONTENT_SECTIONS.forEach((sectionName) => {
+    const embedUrl = sectionContentEmbeds.get(sectionName);
+    if (!embedUrl) return;
+    const sectionEl = document.getElementById(slugify(sectionName));
+    if (!sectionEl) return;
+
+    const existing = sectionEl.querySelector(".section-content-embed");
+    if (existing) existing.remove();
+
+    const isTikTok = /tiktok\.com/i.test(embedUrl);
+    const embedKindClass = isTikTok ? "section-content-embed--tiktok" : "section-content-embed--youtube";
+    const frameRatioClass = isTikTok
+      ? "section-content-embed-frame-wrap--portrait"
+      : "section-content-embed-frame-wrap--landscape";
+
+    const wrapper = document.createElement("div");
+    wrapper.className = `section-content-embed ${embedKindClass}`;
+    wrapper.innerHTML = `
+      <h3 class="section-content-embed-title">You might like this BlockSpin Video!</h3>
+      <div class="section-content-embed-frame-wrap ${frameRatioClass}">
+        <iframe
+          src="${escapeAttr(embedUrl)}"
+          data-base-src="${escapeAttr(embedUrl)}"
+          title="${escapeAttr(sectionName)} featured video"
+          loading="lazy"
+          allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+        </iframe>
+      </div>
+    `;
+    sectionEl.appendChild(wrapper);
+  });
+  setupSectionEmbedScrollAutoplay();
+}
+
+async function loadExternalGiveawayConfig() {
+  giveawayItems.clear();
+  bannerVisibility.anaconda = false;
+  bannerVisibility.firework = false;
+  bannerVisibility.legendary = true;
+  bannerVisibility.humvee = true;
+  bannerVisibility.robux = true;
+
+  const [giveawayRows, bannerRows] = await Promise.all([
+    fetchExternalSheet(GIVEAWAY_CONFIG_SPREADSHEET_ID, GIVEAWAYS_SHEET_NAME),
+    fetchExternalSheet(GIVEAWAY_CONFIG_SPREADSHEET_ID, BANNERS_SHEET_NAME)
+  ]);
+
+  giveawayRows.forEach((row) => {
+    const item = String(row.Item || row.item || extractCellValueByIncludes(row, "item") || "").trim();
+    const giveawayValue = row.Giveaway || row.giveaway || extractCellValueByIncludes(row, "giveaway");
+    if (!item) return;
+    if (parseBooleanCell(giveawayValue) === true) {
+      giveawayItems.add(normalizeItemName(item));
+    }
+  });
+
+  bannerRows.forEach((row) => {
+    Object.keys(row || {}).forEach((key) => {
+      const keyLower = String(key || "").toLowerCase();
+      const valueParsed = parseBooleanCell(row[key]);
+      if (valueParsed === null) return;
+      if (keyLower.includes("anaconda")) bannerVisibility.anaconda = valueParsed;
+      if (keyLower.includes("firework")) bannerVisibility.firework = valueParsed;
+      if (keyLower.includes("legendary")) bannerVisibility.legendary = valueParsed;
+      if (keyLower.includes("humvee")) bannerVisibility.humvee = valueParsed;
+      if (keyLower.includes("robux")) bannerVisibility.robux = valueParsed;
+    });
+
+    const rawName = String(
+      row.Name ||
+      row.name ||
+      row.Item ||
+      row.item ||
+      row.Title ||
+      row.title ||
+      extractCellValueByIncludes(row, "giveaway")
+    ).trim();
+    if (!rawName) return;
+    const lowerName = rawName.toLowerCase();
+    const rawValue = row.Enabled || row.enabled || row.Value || row.value || row.Show || row.show || extractCellValueByIncludes(row, "show");
+    const parsed = parseBooleanCell(rawValue);
+    if (parsed === null) return;
+    if (lowerName.includes("anaconda")) bannerVisibility.anaconda = parsed;
+    if (lowerName.includes("firework")) bannerVisibility.firework = parsed;
+    if (lowerName.includes("legendary")) bannerVisibility.legendary = parsed;
+    if (lowerName.includes("humvee")) bannerVisibility.humvee = parsed;
+    if (lowerName.includes("robux")) bannerVisibility.robux = parsed;
+  });
+
+  // Fallback parser: supports typos/alternate layouts like "Giveawat"/different columns.
+  bannerRows.forEach((row) => {
+    const fireworkDecision = parseBannerDecisionForKeyword(row, "firework");
+    if (fireworkDecision !== null) bannerVisibility.firework = fireworkDecision;
+    const anacondaDecision = parseBannerDecisionForKeyword(row, "anaconda");
+    if (anacondaDecision !== null) bannerVisibility.anaconda = anacondaDecision;
+    const legendaryDecision = parseBannerDecisionForKeyword(row, "legendary");
+    if (legendaryDecision !== null) bannerVisibility.legendary = legendaryDecision;
+    const humveeDecision = parseBannerDecisionForKeyword(row, "humvee");
+    if (humveeDecision !== null) bannerVisibility.humvee = humveeDecision;
+    const robuxDecision = parseBannerDecisionForKeyword(row, "robux");
+    if (robuxDecision !== null) bannerVisibility.robux = robuxDecision;
+  });
+
+  applyExternalBannerVisibility();
+}
+
 function createCard(item) {
   const name = safe(item["Name"]);
   const img = safe(item["Image URL"]);
@@ -245,7 +742,6 @@ function createCard(item) {
     : internalRaw !== ""
       ? internalRaw
       : "N/A";
-  const giveawayFlag = safe(item["Giveaway"]);
 
   let imgTag = "";
   if (img) {
@@ -313,7 +809,7 @@ if (showPawn) {
   pawnAmount = `$${pawnAmount.toLocaleString()}`;
 }
   
-  const hasGiveaway = giveawayFlag && giveawayFlag.toString().trim().toLowerCase() === 'yes';
+  const hasGiveaway = giveawayItems.has(normalizeItemName(name));
   
   return `
     <div class="card" data-name="${escapeAttr(name)}" 
@@ -503,6 +999,8 @@ function renderSection(title, items) {
     renderAccessoriesSection(items);
   } else if (title === "Legendary") {
     renderLegendarySectionWithBanner(items);
+  } else if (title === "Vehicles") {
+    renderVehiclesSectionWithBanner(items);
   } else if (title === "Omega") {
     const html = `
       <section class="section" id="${slugify("Omega")}">
@@ -517,6 +1015,7 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
+        ${buildRobuxGiveawayBannerHtml("robux-giveaway-banner-" + slugify("Omega"))}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -534,22 +1033,22 @@ function renderSection(title, items) {
             <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
           </div>
         </div>
-        <div class="epic-shark-promo">
-          <a href="https://attackshark.com/?ref=RIVER" target="_blank" rel="noopener noreferrer sponsored" class="epic-shark-promo-link">
-            <p class="epic-shark-promo-text">CLICK HERE TO GET THE BEST GAMING MICE!</p>
-            <img src="https://i.ibb.co/0pM24HZ9/ph-11134207-7rasi-m9tr2cfmioxw1c.jpg" alt="Attack Shark gaming mice" class="epic-shark-promo-img" loading="lazy" />
-          </a>
-        </div>
+        ${buildRobuxGiveawayBannerHtml("robux-giveaway-banner-" + slugify("Epic"))}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
   } else {
+    const robuxTail =
+      ROBUX_GIVEAWAY_SECTION_TITLES.has(title)
+        ? buildRobuxGiveawayBannerHtml("robux-giveaway-banner-" + slugify(title))
+        : "";
     const html = `
       <section class="section" id="${slugify(title)}">
         <h2>${title}</h2>
         <div class="cards">
           ${items.map(createCard).join("")}
         </div>
+        ${robuxTail}
       </section>
     `;
     document.getElementById("sections").insertAdjacentHTML("beforeend", html);
@@ -564,16 +1063,31 @@ function renderLegendarySectionWithBanner(items) {
       <div class="cards">
         ${items.map(createCard).join("")}
       </div>
-      <div class="legendary-banner">
-        <p class="legendary-banner-text">We <strong>giveaway</strong> a <strong>Legendary gun</strong> in our Discord server every day!</p>
+      <div class="legendary-banner giveaway-banner--gold" id="legendary-daily-giveaway-banner" style="display: none;">
+        <p class="legendary-banner-text">We do <strong>daily legendary gun giveaways</strong>!</p>
         <div class="legendary-banner-right">
-          <a href="https://discord.gg/scgqMpPAC6" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
+          <a href="https://discord.gg/QbapryYUUx" target="_blank" rel="noopener" class="legendary-banner-btn">Join our Discord server</a>
           <p class="legendary-banner-members"><span class="discord-member-count">—</span> members</p>
         </div>
       </div>
     </section>
   `;
   document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  applyExternalBannerVisibility();
+}
+
+function renderVehiclesSectionWithBanner(items) {
+  const html = `
+    <section class="section" id="${slugify("Vehicles")}">
+      <h2>Vehicles</h2>
+      <div class="cards">
+        ${items.map(createCard).join("")}
+      </div>
+      ${buildHumveeGiveawayBannerHtml("vehicles-humvee-giveaway-banner")}
+    </section>
+  `;
+  document.getElementById("sections").insertAdjacentHTML("beforeend", html);
+  applyExternalBannerVisibility();
 }
 
 function fetchDiscordMemberCount() {
@@ -587,6 +1101,41 @@ function fetchDiscordMemberCount() {
       }
     })
     .catch(function () {});
+}
+
+function createFooterBoosterCard(booster) {
+  const name = escapeHtml(String(booster?.name || "Unknown"));
+  const avatarUrl = escapeAttr(String(booster?.avatarUrl || ""));
+  return `
+    <article class="footer-booster-card" aria-label="${name}">
+      <img src="${avatarUrl}" alt="${name}" loading="lazy" decoding="async" />
+      <span>${name}</span>
+    </article>
+  `;
+}
+
+async function loadFooterBoosters() {
+  const footer = document.getElementById("footer-boosters");
+  const track = document.getElementById("footer-boosters-track");
+  if (!footer || !track) return;
+
+  if (!BOOSTERS_API_URL || BOOSTERS_API_URL.includes("YOUR-RAILWAY-URL")) {
+    return;
+  }
+
+  try {
+    const res = await fetch(BOOSTERS_API_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Boosters endpoint failed: ${res.status}`);
+    const data = await res.json();
+    const boosters = Array.isArray(data?.boosters) ? data.boosters : [];
+    if (boosters.length === 0) return;
+
+    const cardsHtml = boosters.map(createFooterBoosterCard).join("");
+    track.innerHTML = cardsHtml + cardsHtml;
+    footer.hidden = false;
+  } catch (err) {
+    console.error("Failed to load footer boosters:", err);
+  }
 }
 
 function renderCrewLogosSection(items) {
@@ -976,28 +1525,32 @@ function initSearch() {
 function getTaxBreakdown(amountWant) {
   const want = Math.round(Number(amountWant) || 0);
   if (want <= 0) return { totalWithdraw: 0, lines: [], singleDrop: true };
-  const totalWithdraw = Math.round(want / TAX_RECEIVE_RATIO);
-  if (totalWithdraw <= TAX_MAX_DROP) {
+
+  const oneDropCash = Math.round(want / TAX_RECEIVE_RATIO);
+  if (oneDropCash <= TAX_MAX_DROP) {
     return {
-      totalWithdraw,
-      lines: ['Drop $' + totalWithdraw.toLocaleString()],
+      totalWithdraw: oneDropCash,
+      lines: ["Drop $" + oneDropCash.toLocaleString("en-US")],
       singleDrop: true
     };
   }
-  const full40kCount = Math.floor(totalWithdraw / TAX_MAX_DROP);
-  const receivedFromFull = full40kCount * TAX_RECEIVE_PER_40K;
-  const lastReceive = want - receivedFromFull;
-  const lastWithdraw = Math.round(lastReceive / TAX_RECEIVE_RATIO);
-  const lines = [];
 
-  if (full40kCount === 1 && lastWithdraw > 0) {
-    lines.push('Drop $40,000 once');
-    lines.push('then Drop $' + lastWithdraw.toLocaleString() + '.');
+  const fullMaxDropCount = Math.floor(want / TAX_RECEIVE_PER_MAX_DROP);
+  const receivedFromFull = fullMaxDropCount * TAX_RECEIVE_PER_MAX_DROP;
+  const lastReceive = want - receivedFromFull;
+  const lastWithdraw = lastReceive > 0 ? Math.round(lastReceive / TAX_RECEIVE_RATIO) : 0;
+  const totalWithdraw = fullMaxDropCount * TAX_MAX_DROP + lastWithdraw;
+  const lines = [];
+  const maxDropLabel = "$" + TAX_MAX_DROP.toLocaleString("en-US");
+
+  if (fullMaxDropCount === 1 && lastWithdraw > 0) {
+    lines.push("Drop " + maxDropLabel + " once");
+    lines.push("then Drop $" + lastWithdraw.toLocaleString("en-US") + ".");
   } else if (lastWithdraw > 0) {
-    lines.push('Drop $40,000 ' + full40kCount.toLocaleString() + ' times');
-    lines.push('then Drop $' + lastWithdraw.toLocaleString() + '.');
+    lines.push("Drop " + maxDropLabel + " " + fullMaxDropCount.toLocaleString("en-US") + " times");
+    lines.push("then Drop $" + lastWithdraw.toLocaleString("en-US") + ".");
   } else {
-    lines.push('Drop $40,000 ' + full40kCount.toLocaleString() + ' times.');
+    lines.push("Drop " + maxDropLabel + " " + fullMaxDropCount.toLocaleString("en-US") + " times.");
   }
   return { totalWithdraw, lines, singleDrop: false };
 }
@@ -1366,6 +1919,62 @@ function slugify(str) {
   return str.toLowerCase().replace(/\s+/g, "-");
 }
 
+function buildHumveeGiveawayBannerHtml(bannerId) {
+  const img = escapeAttr(HUMVEE_GIVEAWAY_IMAGE_URL);
+  const id = escapeAttr(bannerId);
+  return `
+      <div class="legendary-banner giveaway-banner--humvee" id="${id}" style="display: none;">
+        <div class="humvee-banner-shoutout-layer" aria-hidden="true">
+          <span class="humvee-banner-shoutout-floater">Hosted by Midas</span>
+        </div>
+        <div class="humvee-banner-media">
+          <img src="${img}" alt="Humvee" class="humvee-banner-image" loading="lazy" decoding="async" />
+        </div>
+        <p class="legendary-banner-text humvee-banner-copy humvee-banner-copy--stack">
+          <span class="humvee-banner-title">Humvee Giveaway!</span>
+          <span class="humvee-banner-tagline">Join our discord server to enter</span>
+        </p>
+        <div class="legendary-banner-right humvee-banner-actions">
+          <a href="${escapeAttr(HUMVEE_GIVEAWAY_DISCORD_URL)}" target="_blank" rel="noopener" class="legendary-banner-btn humvee-banner-btn-holo">Enter Giveaway</a>
+          <p class="legendary-banner-members humvee-banner-entered-note">300+ People have already entered</p>
+        </div>
+      </div>`;
+}
+
+function buildRobuxGiveawayBannerHtml(bannerId) {
+  const img = escapeAttr(ROBUX_GIVEAWAY_IMAGE_URL);
+  const id = escapeAttr(bannerId);
+  const href = escapeAttr(ROBUX_GIVEAWAY_DISCORD_URL);
+  return `
+      <div class="legendary-banner giveaway-banner--robux" id="${id}" style="display: none;">
+        <div class="humvee-banner-media">
+          <img src="${img}" alt="5,000 Robux" class="humvee-banner-image" loading="lazy" decoding="async" />
+        </div>
+        <p class="legendary-banner-text humvee-banner-copy humvee-banner-copy--stack">
+          <span class="humvee-banner-title">5,000 Robux Giveaway!</span>
+          <span class="humvee-banner-tagline">Join our discord server to enter</span>
+        </p>
+        <div class="legendary-banner-right humvee-banner-actions">
+          <a href="${href}" target="_blank" rel="noopener" class="legendary-banner-btn humvee-banner-btn-holo robux-banner-btn-holo">Enter Giveaway</a>
+          <p class="legendary-banner-members humvee-banner-entered-note">Giveaway in our Discord server</p>
+        </div>
+      </div>`;
+}
+
+function initHumveeShoutoutAnimations() {
+  if (typeof window !== "undefined" && window.__humveeShoutoutInit) return;
+  if (typeof window !== "undefined") window.__humveeShoutoutInit = true;
+  function kickHumveeShoutouts() {
+    document.querySelectorAll(".humvee-banner-shoutout-floater").forEach(function (el) {
+      el.classList.remove("humvee-shoutout-run");
+      void el.offsetWidth;
+      el.classList.add("humvee-shoutout-run");
+    });
+  }
+  setInterval(kickHumveeShoutouts, 60000);
+  setTimeout(kickHumveeShoutouts, 3500);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log('DOM loaded, initializing...');
   initAnalytics();
@@ -1387,9 +1996,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  var homeHumveeWrap = document.querySelector(".home-humvee-banner-wrap");
+  if (homeHumveeWrap) {
+    homeHumveeWrap.innerHTML = buildHumveeGiveawayBannerHtml("home-humvee-giveaway-banner");
+  }
+
   initSectionsNav();
   initSearch();
   initTaxCalculator();
+  await loadExternalGiveawayConfig();
+  await loadSectionContentConfig();
 
   const totalSections = SECTION_NAMES.length;
   let loadedSections = 0;
@@ -1425,6 +2041,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   results.forEach(({ section, items }) => {
     renderSection(section, items);
   });
+  applyExternalBannerVisibility();
+  initHumveeShoutoutAnimations();
+  renderSectionContentEmbeds();
 
   let initialSection = "Home";
   if (window.location.hash && window.location.hash.startsWith('#sec=')) {
@@ -1439,6 +2058,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadTopDonators();
   loadValueChanges();
   fetchDiscordMemberCount();
+  loadFooterBoosters();
 
   sectionsContainer.classList.add("loaded");
   
@@ -1550,33 +2170,6 @@ async function loadTopDonators() {
   }
 }
 
-// Show/hide Epic/Omega giveaway banners from Website Configs.
-// Your sheet: row 1 = column headers "Anaconda GW" and "Firework GW", row 2 = "Yes" under each to show that banner.
-// Using "GW" avoids clashing with item names like Anaconda/Firework in other sheets.
-function applyBannerConfig(rows) {
-  if (!rows || !rows.length) return;
-  var showAnaconda = false;
-  var showFirework = false;
-  var first = rows[0];
-  if (first && ("Anaconda GW" in first || "Firework GW" in first)) {
-    var anacondaVal = (first["Anaconda GW"] || "").toString().trim().toLowerCase();
-    var fireworkVal = (first["Firework GW"] || "").toString().trim().toLowerCase();
-    showAnaconda = /^(yes|1|true|on)$/.test(anacondaVal);
-    showFirework = /^(yes|1|true|on)$/.test(fireworkVal);
-  } else {
-    rows.forEach(function (r) {
-      var name = (r.Title || r.Name || '').toString().trim();
-      var show = (r.Show || r.Enabled || '').toString().trim().toLowerCase();
-      if (name === "Anaconda GW") showAnaconda = /^(yes|1|true|on)$/.test(show);
-      if (name === "Firework GW") showFirework = /^(yes|1|true|on)$/.test(show);
-    });
-  }
-  var anacondaEl = document.getElementById('omega-anaconda-banner');
-  var fireworkEl = document.getElementById('epic-firework-banner');
-  if (anacondaEl) anacondaEl.style.display = showAnaconda ? 'flex' : 'none';
-  if (fireworkEl) fireworkEl.style.display = showFirework ? 'flex' : 'none';
-}
-
 // Fetch and display recent value changes from spreadsheet (sheet: "Website Configs", columns: Title, Date, Text, Color)
 async function loadValueChanges() {
   var listEl = document.getElementById('value-changes-list');
@@ -1592,7 +2185,6 @@ async function loadValueChanges() {
       setValueChangesHtml('<div class="value-changes-loading">No value changes yet.</div>');
       return;
     }
-    applyBannerConfig(rows);
     var filtered = rows.filter(function (r) {
       var name = (r.Title || r.Name || '').toString().trim();
       if (name === "Anaconda GW" || name === "Firework GW") return false;
@@ -1640,16 +2232,18 @@ function setupMobileHamburgerMenu() {
   if (sectionsNav) {
     var navClone = sectionsNav.cloneNode(true);
     mobileMenu.appendChild(navClone);
-    var drawerPromo = document.createElement('div');
-    drawerPromo.className = 'mobile-menu-drawer-promo';
-    drawerPromo.innerHTML =
-      '<p class="mobile-menu-sponsored-label">Sponsored</p>' +
-      '<div class="mobile-menu-shark-promo">' +
-      '<a href="https://attackshark.com/?ref=RIVER" target="_blank" rel="noopener noreferrer sponsored" class="mobile-menu-shark-promo-link">' +
-      '<p class="mobile-menu-shark-promo-text">CLICK HERE TO GET THE BEST GAMING MICE!</p>' +
-      '<img src="https://i.ibb.co/0pM24HZ9/ph-11134207-7rasi-m9tr2cfmioxw1c.jpg" alt="Attack Shark gaming mice" class="mobile-menu-shark-promo-img" loading="lazy" />' +
-      '</a></div>';
-    mobileMenu.appendChild(drawerPromo);
+    if (!isBsvTestEnvironment()) {
+      var drawerPromo = document.createElement('div');
+      drawerPromo.className = 'mobile-menu-drawer-promo';
+      drawerPromo.innerHTML =
+        '<p class="mobile-menu-sponsored-label">Sponsored</p>' +
+        '<div class="mobile-menu-shark-promo">' +
+        '<a href="https://attackshark.com/?ref=RIVER" target="_blank" rel="noopener noreferrer sponsored" class="mobile-menu-shark-promo-link">' +
+        '<p class="mobile-menu-shark-promo-text">CLICK HERE TO GET THE BEST GAMING MICE!</p>' +
+        '<img src="https://i.ibb.co/0pM24HZ9/ph-11134207-7rasi-m9tr2cfmioxw1c.jpg" alt="Attack Shark gaming mice" class="mobile-menu-shark-promo-img" loading="lazy" />' +
+        '</a></div>';
+      mobileMenu.appendChild(drawerPromo);
+    }
     navClone.querySelectorAll('button').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var sectionName = (btn.textContent || '').trim();

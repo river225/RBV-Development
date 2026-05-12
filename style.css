@@ -486,7 +486,7 @@ a { color: #fff; text-decoration: none; }
 }
 
 .accessory-item-card .card-left::after {
-  display: none;
+  display: block;
 }
 
 .accessory-item-card .card-ranged span,
@@ -949,6 +949,738 @@ a { color: #fff; text-decoration: none; }
   color: #1a0a4a;
 }
 
+/* Legendary – daily giveaway banner */
+.legendary-banner.giveaway-banner--gold {
+  border-color: rgba(253, 224, 71, 0.72);
+  box-shadow:
+    0 4px 26px rgba(251, 191, 36, 0.48),
+    0 0 36px rgba(253, 224, 71, 0.22),
+    inset 0 2px 0 rgba(255, 255, 255, 0.28);
+  background: linear-gradient(
+    135deg,
+    #a16207 0%,
+    #ca8a04 18%,
+    #eab308 38%,
+    #fde047 52%,
+    #facc15 68%,
+    #ca8a04 85%,
+    #92400e 100%
+  );
+  animation: giveaway-banner-shine 8s ease-in-out infinite;
+  gap: 20px 10px;
+}
+.legendary-banner.giveaway-banner--gold .legendary-banner-text {
+  white-space: normal;
+  flex: 0 1 auto;
+  min-width: 0;
+  text-align: left;
+}
+.legendary-banner.giveaway-banner--gold .legendary-banner-btn {
+  background: linear-gradient(145deg, #fff 0%, #fffbeb 30%, #fef3c7 60%, #fde68a 100%);
+  color: #422006;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 0 2px #a16207, 0 0 0 4px #000, 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.legendary-banner.giveaway-banner--gold .legendary-banner-btn:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.95), 0 0 0 2px #a16207, 0 0 0 4px #000, 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: linear-gradient(145deg, #fff 0%, #fffbeb 25%, #fef9c3 55%, #fef3c7 100%);
+  color: #291506;
+}
+
+/* Vehicles - Humvee giveaway banner (compact strip + holo CTA + party energy) */
+.legendary-banner.giveaway-banner--humvee {
+  padding: 7px 14px 7px 10px;
+  margin-top: 18px;
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 0 32px rgba(255, 94, 188, 0.55),
+    0 0 52px rgba(56, 189, 248, 0.38),
+    0 6px 22px rgba(236, 72, 153, 0.42),
+    inset 0 2px 0 rgba(255, 255, 255, 0.35);
+  background:
+    radial-gradient(ellipse 100% 90% at 12% 20%, rgba(255, 255, 255, 0.45) 0%, transparent 46%),
+    radial-gradient(ellipse 80% 70% at 88% 75%, rgba(255, 230, 120, 0.5) 0%, transparent 55%),
+    linear-gradient(
+      128deg,
+      #ff2d8b 0%,
+      #ff7a3d 20%,
+      #ffe14a 40%,
+      #d946ff 60%,
+      #22d3ee 80%,
+      #ff5c9a 100%
+    );
+  background-size: 100% 100%, 100% 100%, 300% 300%;
+  animation:
+    giveaway-banner-shine 8.5s ease-in-out infinite,
+    humvee-party-glow 4.5s ease-in-out infinite;
+  gap: 10px 14px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 148px minmax(180px, 1fr) auto;
+  align-items: center;
+  justify-items: stretch;
+  font-family: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  border-radius: 14px;
+  filter: saturate(1.12);
+}
+/* Swirling color + confetti specks (replaces default gold stripe ::before) */
+.legendary-banner.giveaway-banner--humvee::before {
+  content: "";
+  position: absolute;
+  inset: -70%;
+  background:
+    conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.22) 55deg, transparent 110deg, rgba(255, 210, 255, 0.2) 180deg, transparent 235deg, rgba(160, 240, 255, 0.18) 290deg, transparent 360deg),
+    radial-gradient(circle at 18% 38%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0.85) 1px, transparent 2px),
+    radial-gradient(circle at 72% 62%, rgba(255, 255, 255, 0.65) 0, rgba(255, 255, 255, 0.65) 1px, transparent 2px),
+    radial-gradient(circle at 55% 22%, rgba(255, 255, 160, 0.75) 0, rgba(255, 255, 160, 0.75) 1px, transparent 2px),
+    radial-gradient(circle at 40% 78%, rgba(255, 200, 255, 0.7) 0, rgba(255, 200, 255, 0.7) 1px, transparent 2px);
+  background-size: auto, 140px 140px, 180px 170px, 160px 160px, 190px 175px;
+  animation: humvee-party-swirl 16s linear infinite, humvee-confetti-drift 9s ease-in-out infinite;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+  opacity: 0.95;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-shoutout-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-shoutout-floater {
+  position: absolute;
+  top: 42%;
+  left: -30%;
+  transform: translate(-20%, -50%);
+  white-space: nowrap;
+  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  font-size: clamp(0.48rem, 0.55vw + 0.28rem, 0.58rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  text-shadow:
+    0 0 14px rgba(0, 0, 0, 0.65),
+    0 0 22px rgba(255, 105, 180, 0.35);
+  opacity: 0;
+  will-change: transform, opacity, left;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-shoutout-floater.humvee-shoutout-run {
+  animation: humvee-shoutout-fly 14s linear forwards;
+}
+.legendary-banner.giveaway-banner--humvee > :not(.humvee-banner-shoutout-layer) {
+  position: relative;
+  z-index: 2;
+}
+.legendary-banner.giveaway-banner--humvee::after {
+  content: "";
+  position: absolute;
+  top: -38%;
+  left: -48%;
+  width: 38%;
+  height: 175%;
+  pointer-events: none;
+  border-radius: 18px;
+  background: linear-gradient(
+    102deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.65) 42%,
+    rgba(255, 255, 220, 0.35) 58%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(14deg);
+  animation: humvee-banner-sweep 3.8s ease-in-out infinite;
+  z-index: 1;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-copy--stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.28rem;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-title {
+  font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  font-size: clamp(2rem, 4vw + 1rem, 3.15rem);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  line-height: 0.98;
+  text-align: center;
+  color: #fff;
+  text-shadow:
+    0 0 28px rgba(255, 240, 160, 0.65),
+    0 0 18px rgba(255, 105, 180, 0.55),
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-tagline {
+  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  font-size: clamp(0.92rem, 1.2vw + 0.68rem, 1.18rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  max-width: 22rem;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+.legendary-banner.giveaway-banner--humvee .legendary-banner-text {
+  white-space: normal;
+  margin: 0;
+  align-self: center;
+  min-width: 0;
+}
+.legendary-banner.giveaway-banner--humvee .legendary-banner-btn.humvee-banner-btn-holo {
+  padding: 10px 18px;
+  border-radius: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #16071f;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: linear-gradient(
+    120deg,
+    #cffafe 0%,
+    #e9d5ff 18%,
+    #fbcfe8 36%,
+    #a5f3fc 54%,
+    #ddd6fe 72%,
+    #fbcfe8 88%,
+    #cffafe 100%
+  );
+  background-size: 280% 280%;
+  animation: humvee-holo-gradient 5.5s ease-in-out infinite;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    0 0 14px rgba(236, 72, 153, 0.35),
+    0 0 22px rgba(34, 211, 238, 0.28),
+    0 3px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.legendary-banner.giveaway-banner--humvee .legendary-banner-btn.humvee-banner-btn-holo::before {
+  content: "";
+  position: absolute;
+  inset: -40% -30%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 62%,
+    transparent 100%
+  );
+  transform: translateX(-30%) rotate(12deg);
+  animation: humvee-holo-sheen 3.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.legendary-banner.giveaway-banner--humvee .legendary-banner-btn.humvee-banner-btn-holo:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: saturate(1.15) brightness(1.05);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.88),
+    0 0 20px rgba(236, 72, 153, 0.45),
+    0 0 28px rgba(34, 211, 238, 0.38),
+    0 6px 16px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  color: #0c0314;
+}
+.legendary-banner.giveaway-banner--humvee .legendary-banner-btn.humvee-banner-btn-holo:active {
+  transform: translateY(0) scale(1);
+  filter: saturate(1.05) brightness(1);
+}
+@keyframes humvee-holo-gradient {
+  0%, 100% { background-position: 12% 40%; }
+  50% { background-position: 88% 60%; }
+}
+@keyframes humvee-holo-sheen {
+  0%, 12% { transform: translateX(-45%) rotate(12deg); opacity: 0; }
+  28% { opacity: 1; }
+  55% { transform: translateX(55%) rotate(12deg); opacity: 0.85; }
+  100% { transform: translateX(55%) rotate(12deg); opacity: 0; }
+}
+.legendary-banner.giveaway-banner--humvee .legendary-banner-members {
+  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -6px;
+}
+.legendary-banner.giveaway-banner--humvee .humvee-banner-entered-note {
+  margin: 0;
+  font-size: clamp(0.78rem, 0.95vw + 0.48rem, 0.92rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: none;
+}
+.humvee-banner-media {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+.humvee-banner-image {
+  width: 138px;
+  max-width: 100%;
+  height: auto;
+  max-height: 88px;
+  object-fit: contain;
+  pointer-events: none;
+  transform: translate(0, -1px);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+/* Vehicles section only: shift Humvee artwork toward the middle/right */
+#vehicles-humvee-giveaway-banner .humvee-banner-media {
+  justify-content: flex-end;
+  padding-left: 12px;
+  padding-right: 2px;
+}
+#vehicles-humvee-giveaway-banner .humvee-banner-image {
+  transform: translateX(14px);
+}
+
+@keyframes humvee-shoutout-fly {
+  0% {
+    left: -35%;
+    opacity: 0;
+    transform: translate(-40%, -50%) rotate(-22deg) scale(0.92);
+  }
+  12% {
+    opacity: 0.92;
+  }
+  88% {
+    opacity: 0.92;
+  }
+  100% {
+    left: 118%;
+    opacity: 0;
+    transform: translate(0, -52%) rotate(720deg) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-shoutout-floater.humvee-shoutout-run {
+    animation: none;
+    opacity: 0 !important;
+  }
+}
+@media screen and (max-width: 860px) {
+  .legendary-banner.giveaway-banner--humvee,
+  .legendary-banner.giveaway-banner--robux {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "media text"
+      "actions actions";
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-media,
+  .legendary-banner.giveaway-banner--robux .humvee-banner-media {
+    grid-area: media;
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-media {
+    justify-content: flex-start;
+  }
+  .legendary-banner.giveaway-banner--humvee .legendary-banner-text,
+  .legendary-banner.giveaway-banner--robux .legendary-banner-text { grid-area: text; }
+  .legendary-banner.giveaway-banner--humvee .legendary-banner-right,
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-actions,
+  .legendary-banner.giveaway-banner--robux .legendary-banner-right,
+  .legendary-banner.giveaway-banner--robux .humvee-banner-actions {
+    grid-area: actions;
+    justify-content: center;
+    margin-top: -4px;
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-title {
+    font-size: clamp(1.75rem, 5vw + 0.75rem, 2.55rem);
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-tagline {
+    font-size: clamp(0.86rem, 1.8vw + 0.55rem, 1.05rem);
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-title {
+    font-size: clamp(1.75rem, 5vw + 0.75rem, 2.55rem);
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-tagline {
+    font-size: clamp(0.86rem, 1.8vw + 0.55rem, 1.05rem);
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-image {
+    width: 118px;
+    max-height: 82px;
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-image {
+    width: min(168px, 46vw);
+    max-height: 112px;
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-entered-note {
+    white-space: normal;
+    max-width: 16rem;
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-entered-note {
+    white-space: normal;
+    max-width: 16rem;
+  }
+  #vehicles-humvee-giveaway-banner .humvee-banner-media {
+    justify-content: flex-end;
+  }
+}
+@media screen and (max-width: 520px) {
+  .legendary-banner.giveaway-banner--humvee,
+  .legendary-banner.giveaway-banner--robux {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "text"
+      "actions";
+    justify-items: center;
+    text-align: center;
+    padding: 8px 12px 10px;
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-media,
+  .legendary-banner.giveaway-banner--robux .humvee-banner-media {
+    justify-content: center;
+    align-self: center;
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-image {
+    transform: none;
+    width: 112px;
+    max-height: 76px;
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-image {
+    transform: none;
+    width: min(152px, 72vw);
+    max-height: 102px;
+  }
+  #vehicles-humvee-giveaway-banner .humvee-banner-image {
+    transform: translateX(8px);
+  }
+  .legendary-banner.giveaway-banner--humvee .humvee-banner-entered-note {
+    white-space: normal;
+    max-width: 17rem;
+    font-size: 0.76rem;
+  }
+  .legendary-banner.giveaway-banner--robux .humvee-banner-entered-note {
+    white-space: normal;
+    max-width: 17rem;
+    font-size: 0.76rem;
+  }
+}
+
+/* Robux giveaway strip — same structure as Humvee; blue + cyan with violet accents */
+.legendary-banner.giveaway-banner--robux {
+  padding: 7px 14px 7px 8px;
+  margin-top: 18px;
+  border-color: rgba(191, 219, 254, 0.45);
+  box-shadow:
+    0 0 28px rgba(59, 130, 246, 0.38),
+    0 0 52px rgba(139, 92, 246, 0.22),
+    0 6px 22px rgba(15, 23, 42, 0.58),
+    inset 0 2px 0 rgba(255, 255, 255, 0.28);
+  background:
+    radial-gradient(ellipse 100% 92% at 12% 24%, rgba(255, 255, 255, 0.38) 0%, transparent 46%),
+    radial-gradient(ellipse 78% 70% at 88% 72%, rgba(167, 139, 250, 0.28) 0%, transparent 54%),
+    linear-gradient(
+      122deg,
+      #0b1328 0%,
+      #1e3a8a 16%,
+      #2563eb 32%,
+      #6366f1 46%,
+      #38bdf8 62%,
+      #7c3aed 78%,
+      #0ea5e9 92%,
+      #172554 100%
+    );
+  background-size: 100% 100%, 100% 100%, 320% 320%;
+  animation:
+    giveaway-banner-shine 8.5s ease-in-out infinite,
+    robux-party-glow 4.8s ease-in-out infinite;
+  gap: 10px 12px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(172px, 252px) minmax(180px, 1fr) auto;
+  align-items: center;
+  justify-items: stretch;
+  font-family: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  border-radius: 14px;
+  filter: saturate(1.08);
+}
+.legendary-banner.giveaway-banner--robux .humvee-banner-media {
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 2px;
+  padding-right: 6px;
+  min-width: 0;
+}
+.legendary-banner.giveaway-banner--robux .humvee-banner-image {
+  width: min(228px, 38vw);
+  max-width: 100%;
+  max-height: 128px;
+  height: auto;
+  object-fit: contain;
+  transform: translate(2px, -1px);
+  filter: drop-shadow(0 6px 14px rgba(15, 23, 42, 0.45)) drop-shadow(0 0 20px rgba(56, 189, 248, 0.22));
+}
+.legendary-banner.giveaway-banner--robux::before {
+  content: "";
+  position: absolute;
+  inset: -70%;
+  background:
+    conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(129, 140, 248, 0.2) 52deg, transparent 108deg, rgba(56, 189, 248, 0.18) 178deg, transparent 232deg, rgba(167, 139, 250, 0.16) 292deg, transparent 360deg),
+    radial-gradient(circle at 22% 34%, rgba(255, 255, 255, 0.82) 0, rgba(255, 255, 255, 0.82) 1px, transparent 2px),
+    radial-gradient(circle at 72% 56%, rgba(196, 181, 253, 0.72) 0, rgba(196, 181, 253, 0.72) 1px, transparent 2px),
+    radial-gradient(circle at 50% 22%, rgba(165, 243, 252, 0.62) 0, rgba(165, 243, 252, 0.62) 1px, transparent 2px),
+    radial-gradient(circle at 44% 82%, rgba(129, 140, 248, 0.55) 0, rgba(129, 140, 248, 0.55) 1px, transparent 2px);
+  background-size: auto, 138px 138px, 172px 162px, 152px 152px, 182px 168px;
+  animation: humvee-party-swirl 17s linear infinite, humvee-confetti-drift 9.5s ease-in-out infinite;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+  opacity: 0.9;
+}
+.legendary-banner.giveaway-banner--robux > * {
+  position: relative;
+  z-index: 2;
+}
+.legendary-banner.giveaway-banner--robux::after {
+  content: "";
+  position: absolute;
+  top: -38%;
+  left: -48%;
+  width: 38%;
+  height: 175%;
+  pointer-events: none;
+  border-radius: 18px;
+  background: linear-gradient(
+    102deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.58) 40%,
+    rgba(196, 181, 253, 0.42) 54%,
+    rgba(165, 243, 252, 0.28) 68%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(14deg);
+  animation: humvee-banner-sweep 3.8s ease-in-out infinite;
+  z-index: 1;
+}
+/* Typography + stack: match Humvee placement (center column / Bebas + Nunito) */
+.legendary-banner.giveaway-banner--robux .humvee-banner-copy--stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.28rem;
+}
+.legendary-banner.giveaway-banner--robux .humvee-banner-title {
+  font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  font-size: clamp(2rem, 4vw + 1rem, 3.15rem);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  line-height: 0.98;
+  text-align: center;
+  color: #fff;
+  text-shadow:
+    0 0 22px rgba(56, 189, 248, 0.65),
+    0 0 20px rgba(167, 139, 250, 0.55),
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000;
+}
+.legendary-banner.giveaway-banner--robux .humvee-banner-tagline {
+  font-family: "Nunito Sans", "Segoe UI", sans-serif;
+  font-size: clamp(0.92rem, 1.2vw + 0.68rem, 1.18rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  max-width: 22rem;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+.legendary-banner.giveaway-banner--robux .legendary-banner-text {
+  white-space: normal;
+  margin: 0;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 36rem;
+  text-align: center;
+  padding-inline: 4px;
+  min-width: 0;
+}
+.legendary-banner.giveaway-banner--robux .humvee-banner-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -6px;
+}
+.legendary-banner.giveaway-banner--robux .humvee-banner-entered-note {
+  margin: 0;
+  font-size: clamp(0.78rem, 0.95vw + 0.48rem, 0.92rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: none;
+  color: #fff;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+/* Holo CTA — blue / cyan / violet (no gold) */
+.legendary-banner.giveaway-banner--robux .legendary-banner-btn.humvee-banner-btn-holo.robux-banner-btn-holo {
+  padding: 10px 18px;
+  border-radius: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #0c1228;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  border: 1px solid rgba(191, 219, 254, 0.55);
+  background: linear-gradient(
+    118deg,
+    #e0e7ff 0%,
+    #bfdbfe 14%,
+    #93c5fd 30%,
+    #a5b4fc 46%,
+    #7dd3fc 62%,
+    #c4b5fd 80%,
+    #dbeafe 100%
+  );
+  background-size: 280% 280%;
+  animation: robux-holo-gradient 5.5s ease-in-out infinite;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.78),
+    0 0 18px rgba(59, 130, 246, 0.38),
+    0 0 26px rgba(139, 92, 246, 0.26),
+    0 3px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.legendary-banner.giveaway-banner--robux .legendary-banner-btn.humvee-banner-btn-holo.robux-banner-btn-holo::before {
+  content: "";
+  position: absolute;
+  inset: -40% -30%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0.58) 50%,
+    rgba(255, 255, 255, 0) 62%,
+    transparent 100%
+  );
+  transform: translateX(-30%) rotate(12deg);
+  animation: humvee-holo-sheen 3.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.legendary-banner.giveaway-banner--robux .legendary-banner-btn.humvee-banner-btn-holo.robux-banner-btn-holo:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: saturate(1.1) brightness(1.05);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.88),
+    0 0 24px rgba(56, 189, 248, 0.45),
+    0 0 32px rgba(139, 92, 246, 0.32),
+    0 6px 16px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+  color: #070d18;
+}
+.legendary-banner.giveaway-banner--robux .legendary-banner-btn.humvee-banner-btn-holo.robux-banner-btn-holo:active {
+  transform: translateY(0) scale(1);
+  filter: saturate(1.05) brightness(1);
+}
+
+@keyframes robux-holo-gradient {
+  0%, 100% { background-position: 14% 42%; }
+  50% { background-position: 86% 58%; }
+}
+
+@keyframes robux-party-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 26px rgba(59, 130, 246, 0.36),
+      0 0 48px rgba(139, 92, 246, 0.2),
+      0 5px 18px rgba(15, 23, 42, 0.48),
+      inset 0 2px 0 rgba(255, 255, 255, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 0 42px rgba(56, 189, 248, 0.42),
+      0 0 54px rgba(129, 140, 246, 0.34),
+      0 8px 24px rgba(15, 23, 42, 0.5),
+      inset 0 2px 0 rgba(255, 255, 255, 0.38);
+  }
+}
+
+@keyframes humvee-banner-sweep {
+  0% { left: -48%; opacity: 0; }
+  12% { opacity: 1; }
+  42% { left: 118%; opacity: 0.95; }
+  100% { left: 118%; opacity: 0; }
+}
+
+@keyframes humvee-party-swirl {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes humvee-confetti-drift {
+  0%, 100% {
+    background-position: 0 0, 0 0, 40px 30px, -25px 50px, 60px -20px;
+  }
+  50% {
+    background-position: 0 0, 25px -35px, 80px 55px, 15px 70px, -40px 35px;
+  }
+}
+
+@keyframes humvee-party-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 28px rgba(255, 94, 188, 0.45),
+      0 0 48px rgba(56, 189, 248, 0.28),
+      0 5px 18px rgba(236, 72, 153, 0.35),
+      inset 0 2px 0 rgba(255, 255, 255, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 42px rgba(56, 189, 248, 0.52),
+      0 0 56px rgba(255, 215, 90, 0.42),
+      0 8px 26px rgba(217, 70, 239, 0.48),
+      inset 0 2px 0 rgba(255, 255, 255, 0.45);
+  }
+}
+
 #epic .epic-shark-promo {
   margin-top: clamp(16px, 4vw, 28px);
   text-align: center;
@@ -992,6 +1724,89 @@ a { color: #fff; text-decoration: none; }
   width: 100%;
   height: auto;
   vertical-align: top;
+}
+
+.section-content-embed {
+  margin: 22px auto 10px auto;
+  width: 100%;
+  max-width: min(560px, 100%);
+  box-sizing: border-box;
+  background: linear-gradient(165deg, rgba(14, 20, 30, 0.99) 0%, rgba(8, 12, 18, 1) 100%);
+  border: 1px solid rgba(51, 204, 230, 0.12);
+  border-radius: 10px;
+  padding: 0;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  overflow: visible;
+}
+
+/* YouTube / landscape: wider card. TikTok / vertical: narrower card so full 9:16 fits on screen */
+.section-content-embed--tiktok {
+  max-width: min(420px, 100%);
+}
+
+.section-content-embed--youtube {
+  max-width: min(560px, 100%);
+}
+
+.section-content-embed::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(51, 204, 230, 0.2) 0%, #33cce6 50%, rgba(51, 204, 230, 0.2) 100%);
+  border-radius: 10px 10px 0 0;
+}
+
+.section-content-embed-title {
+  margin: 0;
+  padding: 11px 14px 10px;
+  color: rgba(220, 232, 245, 0.95);
+  font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1.35;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+/* Responsive embed box: iframe fills the box; ratio matches platform */
+.section-content-embed-frame-wrap {
+  position: relative;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  background: #000;
+  border-radius: 0 0 9px 9px;
+  overflow: hidden;
+}
+
+/* YouTube & typical landscape: 16:9 */
+.section-content-embed-frame-wrap--landscape {
+  padding-bottom: 56.25%;
+}
+
+/* TikTok vertical video: 9:16 (was wrongly forced to 16:9, which crops portrait) */
+.section-content-embed-frame-wrap--portrait {
+  padding-bottom: 177.78%;
+}
+
+.section-content-embed-frame-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 560px) {
+  .section-content-embed,
+  .section-content-embed--tiktok,
+  .section-content-embed--youtube {
+    max-width: 100%;
+  }
 }
 
 /* Home: bottom promo row, stacked and centered (desktop + mobile) */
@@ -1719,6 +2534,7 @@ a { color: #fff; text-decoration: none; }
   padding: 30px 20px;
   margin-top: 60px;
   text-align: center;
+  position: relative;
 }
 
 .footer-content p {
@@ -1752,6 +2568,90 @@ a { color: #fff; text-decoration: none; }
 .footer-links span {
   color: #666;
   font-size: 0.9rem;
+}
+
+.footer-boosters {
+  width: min(1200px, calc(100% - 30px));
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  margin: 0 0 10px 0;
+  z-index: 3;
+}
+
+.footer-boosters-title {
+  margin: 0 0 8px 0;
+  color: #ffd8f1;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 10px rgba(255, 93, 214, 0.35);
+  text-align: center;
+}
+
+.footer-boosters-viewport {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 93, 214, 0.55);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 93, 214, 0.18) 0%, rgba(255, 156, 191, 0.12) 100%), #120d16;
+  box-shadow: 0 8px 22px rgba(255, 93, 214, 0.18);
+}
+
+.footer-boosters-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding: 8px 12px;
+  animation: footerBoostersMarquee 34s linear infinite;
+}
+
+.footer-booster-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 156, 191, 0.7);
+  background: linear-gradient(120deg, rgba(255, 93, 214, 0.24) 0%, rgba(255, 156, 191, 0.2) 100%), rgba(30, 15, 28, 0.9);
+  color: #ffe9f7;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.footer-booster-card img {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 156, 191, 0.9);
+  box-shadow: 0 0 0 2px rgba(255, 93, 214, 0.18);
+}
+
+@keyframes footerBoostersMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .footer-boosters-viewport {
+    max-width: 100%;
+  }
+
+  .footer-booster-card {
+    font-size: 0.78rem;
+    padding: 5px 9px;
+  }
+
+  .footer-booster-card img {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 /* Middleman promo — desktop: under tax calc (matches .tax-sidebar-column width) */
@@ -2745,6 +3645,23 @@ a { color: #fff; text-decoration: none; }
   justify-content: space-between;
 }
 
+/* Desktop: brand + title flush to the left edge of the viewport */
+@media screen and (min-width: 1025px) {
+  .top-navbar {
+    padding-left: 0;
+  }
+
+  .nav-container-full {
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 18px;
+    box-sizing: border-box;
+  }
+}
+
 .nav-left {
   display: flex;
   align-items: center;
@@ -2755,6 +3672,7 @@ a { color: #fff; text-decoration: none; }
   height: 60px;
   width: auto;
   object-fit: contain;
+  margin-left: 12px;
 }
 
 .nav-title {
@@ -2933,7 +3851,19 @@ body {
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
+}
+
+.home-humvee-banner-wrap {
+  width: 100%;
+  max-width: min(920px, calc(100% - 24px));
+  margin: 0 auto 28px;
+  padding: 0 clamp(10px, 2.5vw, 16px);
+  box-sizing: border-box;
+}
+
+.home-humvee-banner-wrap .legendary-banner.giveaway-banner--humvee {
+  margin-top: 0;
 }
 
 .social-btn {
@@ -3370,6 +4300,32 @@ body.mobile-panel-open .hamburger-menu {
     display: none !important;
   }
 
+  /* Accessories mobile: slightly smaller cards */
+  .accessories-section .card.accessory-item-card {
+    gap: 10px;
+    padding: 9px;
+  }
+
+  .accessories-section .accessory-item-card .card-left {
+    min-width: 110px;
+    padding: 6px;
+  }
+
+  .accessories-section .accessory-item-card .card-left img {
+    width: 84px;
+    height: 84px;
+  }
+
+  .accessories-section .accessory-item-card .card-info h3 {
+    font-size: 1rem;
+  }
+
+  .accessories-section .accessory-item-card .card-networth,
+  .accessories-section .accessory-item-card .card-pawn,
+  .accessories-section .accessory-item-card .card-ranged {
+    font-size: 0.86rem;
+  }
+
   .sections {
     width: 100%;
   }
@@ -3518,7 +4474,11 @@ body.mobile-panel-open .hamburger-menu {
 /* TABLET + PHONE (≤1024px): hamburger nav + mobile tax / value-changes panel (covers iPads) */
 
 @media screen and (max-width: 1024px) {
-  
+  /* Slightly smaller base type so layout feels less cramped on phones/tablets */
+  html {
+    font-size: 93%;
+  }
+
   .tax-sidebar-column {
     display: none !important;
   }
@@ -3534,8 +4494,8 @@ body.mobile-panel-open .hamburger-menu {
 
   .top-navbar .nav-container-full {
     width: 100%;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
     box-sizing: border-box;
   }
 
@@ -3545,11 +4505,13 @@ body.mobile-panel-open .hamburger-menu {
     flex-wrap: nowrap;
     align-items: center;
     width: 100%;
+    min-width: 0;
   }
 
   .top-navbar .nav-left:has(.nav-brand) > .nav-brand {
     flex: 1;
     min-width: 0;
+    max-width: 100%;
   }
 
   .top-navbar .nav-left > a:not(.nav-brand) {
@@ -3569,20 +4531,35 @@ body.mobile-panel-open .hamburger-menu {
   }
 
   .top-navbar .nav-title {
-    font-size: 1.85rem;
+    font-size: clamp(1.05rem, 4.2vw, 1.65rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  /* In-flow strip under fixed header (not position:fixed): top-right, gap below header */
+  .nav-logo-img {
+    height: clamp(40px, 10vw, 52px) !important;
+    width: auto !important;
+    margin-left: 10px !important;
+  }
+
+  .nav-brand {
+    gap: clamp(6px, 2vw, 12px) !important;
+  }
+
+  /* In-flow strip: horizontal pills so About/FAQ don’t stack under the title */
   .mobile-subnav {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
     gap: 8px;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     margin: 0;
-    padding: 10px 12px 12px;
+    padding: 8px 8px 10px;
     background: transparent;
   }
 
@@ -3592,7 +4569,7 @@ body.mobile-panel-open .hamburger-menu {
     background: #1a2332;
     border: 1px solid rgba(51, 204, 230, 0.5);
     border-radius: 999px;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
     line-height: 1.15;
     color: #fff;
@@ -3600,7 +4577,7 @@ body.mobile-panel-open .hamburger-menu {
     text-shadow: none;
     text-align: center;
     white-space: nowrap;
-    max-width: min(100%, 280px);
+    flex: 0 0 auto;
     box-sizing: border-box;
   }
 
@@ -5327,601 +6304,3 @@ body.themes-disabled .theme-switcher {
   background: linear-gradient(135deg, #6a4ad9 0%, #8d6fff 100%);
 }
 /* ========== PINK WEBSITE THEME END ========== */
-
-
-/* =======================================================================
-   BSV DEV — design overhaul
-   Activates only on the development site (`<html data-bsv-env="test">`).
-   Deep-blue palette + glass surfaces + sticky animated sidebar + smoother
-   cards / search / typography. Keeps all original card values intact.
-   ======================================================================= */
-
-/* ---------- Palette & tokens ---------- */
-html[data-bsv-env="test"] {
-  --bsv-bg-0: #03070f;
-  --bsv-bg-1: #050d1d;
-  --bsv-bg-2: #081530;
-  --bsv-bg-3: #0c2249;
-  --bsv-bg-4: #0e2a5e;
-
-  --bsv-surface:        rgba(14, 28, 56, 0.78);
-  --bsv-surface-strong: rgba(18, 34, 68, 0.92);
-  --bsv-surface-elev:   rgba(24, 44, 84, 0.96);
-  --bsv-surface-bright: rgba(34, 60, 110, 0.92);
-
-  --bsv-stroke:         rgba(125, 195, 255, 0.18);
-  --bsv-stroke-strong:  rgba(125, 211, 252, 0.42);
-  --bsv-stroke-soft:    rgba(125, 195, 255, 0.10);
-
-  --bsv-accent:         #38bdf8;
-  --bsv-accent-deep:    #2563eb;
-  --bsv-accent-2:       #6366f1;
-  --bsv-accent-3:       #a855f7;
-  --bsv-accent-glow:    rgba(56, 189, 248, 0.55);
-  --bsv-accent-glow-2:  rgba(99, 102, 241, 0.42);
-
-  --bsv-text:           #e9f1ff;
-  --bsv-text-dim:       #a9bcd6;
-  --bsv-text-soft:      #7d92b1;
-
-  --bsv-good:           #6ee7b7;
-  --bsv-warn:           #fbbf24;
-  --bsv-bad:            #f87171;
-
-  --bsv-radius-sm: 10px;
-  --bsv-radius:    16px;
-  --bsv-radius-lg: 22px;
-  --bsv-radius-xl: 28px;
-
-  --bsv-shadow-1: 0 1px 0 rgba(255,255,255,0.04) inset, 0 12px 28px -12px rgba(2,10,26,0.85), 0 0 0 1px var(--bsv-stroke);
-  --bsv-shadow-2: 0 1px 0 rgba(255,255,255,0.06) inset, 0 22px 60px -28px rgba(2,10,26,0.95), 0 0 0 1px var(--bsv-stroke-strong);
-  --bsv-shadow-glow: 0 0 0 1px var(--bsv-stroke-strong), 0 0 38px -10px var(--bsv-accent-glow);
-
-  --bsv-ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* ---------- Base / typography ---------- */
-html[data-bsv-env="test"] body {
-  background:
-    radial-gradient(1200px 700px at 12% -8%, rgba(56,189,248,0.18), transparent 60%),
-    radial-gradient(900px 600px at 95% 8%,  rgba(99,102,241,0.16), transparent 60%),
-    radial-gradient(900px 700px at 50% 110%, rgba(37,99,235,0.18), transparent 60%),
-    linear-gradient(180deg, #03070f 0%, #050d1d 28%, #081530 62%, #050d1d 100%);
-  background-attachment: fixed;
-  color: var(--bsv-text);
-  font-family: 'Plus Jakarta Sans', 'Inter', 'Nunito Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.01em;
-}
-html[data-bsv-env="test"] body::before {
-  content: "";
-  position: fixed; inset: 0;
-  background:
-    radial-gradient(circle at 18% 22%, rgba(125,211,252,0.07) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 78% 64%, rgba(167,139,250,0.06) 0 1px, transparent 1.6px);
-  background-size: 240px 240px, 280px 280px;
-  pointer-events: none; z-index: 0; opacity: 0.55;
-}
-html[data-bsv-env="test"] .main-container,
-html[data-bsv-env="test"] .top-navbar,
-html[data-bsv-env="test"] .site-footer { position: relative; z-index: 1; }
-html[data-bsv-env="test"] a { color: var(--bsv-text); }
-html[data-bsv-env="test"] ::selection { background: rgba(56,189,248,0.35); color: #fff; }
-html[data-bsv-env="test"] .theme-switcher { display: none !important; }
-
-/* ---------- Top navbar (glass, deep) ---------- */
-html[data-bsv-env="test"] .top-navbar {
-  background: linear-gradient(180deg, rgba(5,13,29,0.92), rgba(5,13,29,0.78));
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  backdrop-filter: blur(14px) saturate(140%);
-  border-bottom: 1px solid var(--bsv-stroke);
-  box-shadow: 0 10px 30px -22px rgba(0,0,0,0.95);
-  padding: 6px 0;
-}
-html[data-bsv-env="test"] .nav-logo-img { height: 48px; }
-html[data-bsv-env="test"] .nav-title {
-  font-family: 'Plus Jakarta Sans', 'Paytone One', sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  font-size: 1.35rem;
-  text-shadow: none;
-}
-html[data-bsv-env="test"] .nav-title > span { text-shadow: 0 0 18px rgba(56,189,248,0.35); }
-html[data-bsv-env="test"] .nav-left a {
-  font-weight: 600; font-size: 0.98rem; text-shadow: none;
-  padding: 8px 12px; border-radius: 999px;
-  transition: background 220ms var(--bsv-ease), color 220ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .nav-left a:not(.nav-brand):hover {
-  color: #fff; background: rgba(56,189,248,0.12);
-}
-html[data-bsv-env="test"] .nav-discord,
-html[data-bsv-env="test"] .nav-tiktok {
-  width: 38px; height: 38px; border-radius: 12px;
-  border: 1px solid var(--bsv-stroke);
-}
-html[data-bsv-env="test"] .nav-discord:hover,
-html[data-bsv-env="test"] .nav-tiktok:hover { transform: translateY(-1px) scale(1.04); }
-html[data-bsv-env="test"] body { padding-top: 64px; }
-
-/* ---------- Main container ---------- */
-html[data-bsv-env="test"] .main-container {
-  max-width: 1760px;
-  margin: 28px auto 0;
-  gap: 26px;
-  padding: 0 22px 56px;
-}
-
-/* ---------- Sidebar (sticky + smooth + accent rail) ---------- */
-html[data-bsv-env="test"] .sections-sidebar {
-  border-right: none;
-  background: linear-gradient(180deg, var(--bsv-surface) 0%, rgba(8,21,48,0.72) 100%);
-  border: 1px solid var(--bsv-stroke);
-  border-radius: var(--bsv-radius-lg);
-  padding: 14px 12px 6px;
-  box-shadow: var(--bsv-shadow-1);
-  position: relative;
-  overflow: hidden;
-}
-html[data-bsv-env="test"] .sections-sidebar::before {
-  content: "";
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(420px 160px at 0% 0%, rgba(56,189,248,0.18), transparent 60%),
-    radial-gradient(420px 220px at 100% 100%, rgba(99,102,241,0.16), transparent 60%);
-  pointer-events: none; opacity: 0.85;
-}
-@media (min-width: 1025px) {
-  html[data-bsv-env="test"] .sections-sidebar {
-    position: sticky;
-    top: 84px;
-    max-height: calc(100vh - 104px);
-    overflow-y: auto;
-    flex: 0 0 268px;
-  }
-  html[data-bsv-env="test"] .sections-sidebar::-webkit-scrollbar { width: 0 !important; }
-}
-
-html[data-bsv-env="test"] .sections-nav { padding: 4px 4px 6px; position: relative; z-index: 1; }
-html[data-bsv-env="test"] .sections-nav button {
-  position: relative;
-  width: 100%;
-  padding: 11px 14px 11px 18px;
-  margin: 0 0 8px;
-  min-height: 46px;
-  display: flex; align-items: center; gap: 10px;
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-  font-weight: 700; font-size: 0.98rem;
-  letter-spacing: 0.01em;
-  color: var(--bsv-text);
-  background: linear-gradient(180deg, rgba(20,38,72,0.72), rgba(14,28,56,0.72));
-  border: 1px solid var(--bsv-stroke);
-  border-radius: 14px;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 22px -16px rgba(0,0,0,0.9);
-  cursor: pointer;
-  text-align: left;
-  overflow: hidden;
-  transition:
-    transform 220ms var(--bsv-ease),
-    background 220ms var(--bsv-ease),
-    border-color 220ms var(--bsv-ease),
-    box-shadow 220ms var(--bsv-ease),
-    color 220ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .sections-nav button::before {
-  content: "";
-  position: absolute;
-  left: 6px; top: 50%;
-  transform: translateY(-50%) scaleY(0.4);
-  width: 4px; height: 70%;
-  border-radius: 4px;
-  background: linear-gradient(180deg, var(--bsv-accent), var(--bsv-accent-2));
-  opacity: 0;
-  transition: opacity 220ms var(--bsv-ease), transform 320ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .sections-nav button:hover:not(.active) {
-  background: linear-gradient(180deg, rgba(34,58,108,0.92), rgba(18,34,68,0.92)) !important;
-  border-color: var(--bsv-stroke-strong);
-  transform: translateX(2px);
-}
-html[data-bsv-env="test"] .sections-nav button:hover:not(.active)::before { opacity: 0.55; transform: translateY(-50%) scaleY(0.85); }
-html[data-bsv-env="test"] .sections-nav button.active {
-  background:
-    linear-gradient(180deg, rgba(56,189,248,0.18), rgba(99,102,241,0.16)) !important;
-  border-color: var(--bsv-stroke-strong) !important;
-  color: #fff !important;
-  box-shadow:
-    0 0 0 1px var(--bsv-stroke-strong) inset,
-    0 0 32px -10px var(--bsv-accent-glow),
-    0 14px 26px -18px rgba(2,10,26,0.95) !important;
-}
-html[data-bsv-env="test"] .sections-nav button.active::before { opacity: 1; transform: translateY(-50%) scaleY(1); }
-
-html[data-bsv-env="test"] .nav-extras-header {
-  color: var(--bsv-text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
-  border-bottom: 1px solid var(--bsv-stroke);
-  margin: 14px 6px 10px;
-  padding: 6px 0 8px;
-  text-shadow: none;
-  font-weight: 700;
-}
-html[data-bsv-env="test"] .sections-nav-suggest { padding: 6px 6px 12px; position: relative; z-index: 1; }
-html[data-bsv-env="test"] .sections-nav-suggest-link {
-  display: block; text-align: center;
-  padding: 10px 12px; border-radius: 12px;
-  font-size: 0.9rem; font-weight: 600;
-  background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(99,102,241,0.16));
-  border: 1px dashed var(--bsv-stroke-strong);
-  color: var(--bsv-text);
-  transition: background 220ms var(--bsv-ease), border-color 220ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .sections-nav-suggest-link:hover {
-  background: linear-gradient(135deg, rgba(56,189,248,0.22), rgba(99,102,241,0.26));
-  border-color: var(--bsv-accent);
-}
-
-/* ---------- Sections column + section headers ---------- */
-html[data-bsv-env="test"] .sections { gap: 30px; }
-html[data-bsv-env="test"] .sections h2 {
-  font-family: 'Plus Jakarta Sans', 'Paytone One', sans-serif;
-  font-size: clamp(1.65rem, 1.1rem + 1.6vw, 2.2rem);
-  font-weight: 800; letter-spacing: 0.01em;
-  margin: 4px 0 12px;
-  background: linear-gradient(120deg, #fff 0%, #c8e6ff 50%, #a4c8ff 100%);
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent;
-  text-shadow: none;
-  position: relative;
-  padding-bottom: 10px;
-}
-html[data-bsv-env="test"] .sections > section > h2::after {
-  content: "";
-  position: absolute; left: 0; bottom: 0;
-  width: 88px; height: 3px; border-radius: 999px;
-  background: linear-gradient(90deg, var(--bsv-accent), var(--bsv-accent-2) 60%, transparent);
-}
-
-/* ---------- Search bar (pill, glow on focus, with icon) ---------- */
-html[data-bsv-env="test"] .search-container {
-  position: relative;
-  top: auto; left: auto; right: auto;
-  display: flex; justify-content: center;
-  margin: 0 0 18px;
-  z-index: 5;
-}
-html[data-bsv-env="test"] #search {
-  width: min(640px, 100%);
-  max-width: 100%;
-  padding: 14px 18px 14px 46px;
-  border-radius: 999px;
-  background:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23a9bcd6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m20 20-3-3'/></svg>") 16px center/18px 18px no-repeat,
-    linear-gradient(180deg, rgba(18,34,68,0.92), rgba(10,22,46,0.92));
-  border: 1px solid var(--bsv-stroke);
-  color: var(--bsv-text);
-  font-weight: 600;
-  font-size: 0.98rem;
-  letter-spacing: 0.02em;
-  box-shadow: var(--bsv-shadow-1);
-  transition: border-color 220ms var(--bsv-ease), box-shadow 220ms var(--bsv-ease), transform 220ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] #search::placeholder { color: var(--bsv-text-soft); }
-html[data-bsv-env="test"] #search:focus {
-  outline: none;
-  border-color: var(--bsv-accent);
-  box-shadow: 0 0 0 4px rgba(56,189,248,0.18), 0 18px 38px -22px rgba(0,0,0,0.95);
-  transform: translateY(-1px);
-}
-
-/* ---------- Cards (keep all values; deeper surface, smoother) ---------- */
-html[data-bsv-env="test"] .cards { gap: 22px; }
-html[data-bsv-env="test"] .card {
-  flex: 1 1 calc(50% - 22px);
-  gap: 18px;
-  padding: 18px 18px 22px;
-  border: 1px solid var(--bsv-stroke);
-  border-radius: var(--bsv-radius-lg);
-  background:
-    radial-gradient(420px 200px at 0% 0%, rgba(56,189,248,0.10), transparent 60%),
-    linear-gradient(180deg, rgba(20,38,72,0.92), rgba(10,22,46,0.92));
-  box-shadow: var(--bsv-shadow-1);
-  transition:
-    transform 320ms var(--bsv-ease),
-    box-shadow 320ms var(--bsv-ease),
-    border-color 320ms var(--bsv-ease),
-    background 320ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--bsv-shadow-2), 0 0 36px -14px var(--bsv-accent-glow);
-  border-color: var(--bsv-stroke-strong);
-}
-html[data-bsv-env="test"] .card:has(.card-giveaway-trigger) { padding-bottom: 56px; }
-
-html[data-bsv-env="test"] .card-left {
-  background: linear-gradient(180deg, rgba(34,60,110,0.85), rgba(18,34,68,0.85));
-  border: 1px solid var(--bsv-stroke);
-  border-radius: var(--bsv-radius);
-  padding: 12px 12px;
-  min-width: 178px;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset;
-}
-html[data-bsv-env="test"] .card-left::after { opacity: 0.18; }
-html[data-bsv-env="test"] .card img {
-  width: 148px; height: 148px;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.55));
-}
-
-html[data-bsv-env="test"] .card-info { gap: 10px; padding-top: 6px; }
-html[data-bsv-env="test"] .card-info h3 {
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.02em;
-  color: #f4faff;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.55);
-}
-html[data-bsv-env="test"] .card-info .badge {
-  border: 1px solid rgba(0,0,0,0.45);
-  background: linear-gradient(135deg, var(--bsv-accent-2), var(--bsv-accent-3));
-  box-shadow: 0 6px 16px -8px rgba(99,102,241,0.7);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.55);
-}
-
-html[data-bsv-env="test"] .card-avg,
-html[data-bsv-env="test"] .card-ranged,
-html[data-bsv-env="test"] .card-networth,
-html[data-bsv-env="test"] .card-pawn,
-html[data-bsv-env="test"] .card-repair {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--bsv-text-dim);
-  text-shadow: none;
-  letter-spacing: 0.01em;
-  margin: 0;
-  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
-}
-html[data-bsv-env="test"] .avg-value {
-  color: var(--bsv-good); font-size: 1.18rem; font-weight: 800;
-  text-shadow: 0 0 14px rgba(110,231,183,0.35);
-}
-html[data-bsv-env="test"] .ranged-value {
-  color: #f6c958; font-size: 1.18rem; font-weight: 800;
-  text-shadow: 0 0 14px rgba(246,201,88,0.28);
-}
-html[data-bsv-env="test"] .card-networth .networth-value {
-  color: var(--bsv-accent); font-size: 1.12rem; font-weight: 800;
-  text-shadow: 0 0 14px rgba(56,189,248,0.35);
-}
-html[data-bsv-env="test"] .card-pawn .pawn-value {
-  color: #ffb066; font-size: 1.08rem; font-weight: 700;
-  text-shadow: 0 0 12px rgba(255,176,102,0.28);
-}
-html[data-bsv-env="test"] .card-repair .repair-value {
-  color: #fda4af; font-size: 1.05rem; font-weight: 700;
-  text-shadow: 0 0 12px rgba(253,164,175,0.25);
-}
-html[data-bsv-env="test"] .card-value-separator {
-  background: linear-gradient(90deg, transparent, var(--bsv-stroke-strong), transparent);
-  height: 1px; margin: 10px 0 12px;
-}
-html[data-bsv-env="test"] .durability-control label { color: var(--bsv-text-dim); }
-html[data-bsv-env="test"] .durability-input {
-  background: rgba(8,21,48,0.85); border: 1px solid var(--bsv-stroke);
-  border-radius: 8px; color: var(--bsv-text);
-}
-html[data-bsv-env="test"] .durability-arrows button {
-  background: rgba(56,189,248,0.18); border: 1px solid var(--bsv-stroke-strong); color: #fff;
-}
-html[data-bsv-env="test"] .durability-arrows button:hover { background: rgba(56,189,248,0.32); }
-
-@media (max-width: 980px) {
-  html[data-bsv-env="test"] .card { flex: 1 1 100%; }
-}
-
-/* ---------- Home page ---------- */
-html[data-bsv-env="test"] .home-page-clean { max-width: 980px; padding: 0 22px 56px; }
-html[data-bsv-env="test"] .welcome-header h1 {
-  font-family: 'Plus Jakarta Sans', 'Paytone One', sans-serif;
-  letter-spacing: 0.005em;
-  font-size: clamp(3.4rem, 2rem + 4vw, 5.6rem);
-  text-shadow: 0 10px 40px rgba(56,189,248,0.18);
-}
-html[data-bsv-env="test"] .welcome-header h1 .welcome-title-line:first-child {
-  background: linear-gradient(120deg, #ffffff 0%, #cfe8ff 50%, #ffffff 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-html[data-bsv-env="test"] .welcome-header h1 .welcome-title-line:last-child {
-  background: linear-gradient(120deg, #38bdf8 0%, #a78bfa 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-html[data-bsv-env="test"] .welcome-header .subtitle {
-  color: var(--bsv-text-dim); text-shadow: none; font-weight: 500;
-}
-html[data-bsv-env="test"] .welcome-header .founder-credit {
-  color: var(--bsv-text-soft); text-shadow: none;
-}
-
-html[data-bsv-env="test"] .social-btn {
-  border: 1px solid var(--bsv-stroke-strong);
-  box-shadow: 0 14px 36px -18px rgba(56,189,248,0.55);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  text-shadow: none;
-  border-radius: 14px;
-  transition: transform 240ms var(--bsv-ease), box-shadow 240ms var(--bsv-ease), background 240ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .discord-btn {
-  background: linear-gradient(135deg, #5865F2 0%, #404aff 100%);
-}
-html[data-bsv-env="test"] .discord-btn:hover {
-  background: linear-gradient(135deg, #6a76ff 0%, #5865F2 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 22px 46px -22px rgba(88,101,242,0.85);
-}
-
-html[data-bsv-env="test"] .home-divider {
-  background: linear-gradient(90deg, transparent, var(--bsv-accent), var(--bsv-accent-2), transparent);
-  height: 2px; opacity: 0.7;
-}
-html[data-bsv-env="test"] .home-two-columns { gap: 26px; }
-html[data-bsv-env="test"] .home-column {
-  background:
-    radial-gradient(600px 240px at 0% 0%, rgba(56,189,248,0.10), transparent 60%),
-    linear-gradient(180deg, rgba(14,28,56,0.92), rgba(8,21,48,0.92));
-  border: 1px solid var(--bsv-stroke);
-  border-radius: var(--bsv-radius-lg);
-  box-shadow: var(--bsv-shadow-1);
-  padding: 26px;
-}
-html[data-bsv-env="test"] .home-column h2 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  text-shadow: none;
-  letter-spacing: 0.01em;
-}
-html[data-bsv-env="test"] .home-column:first-child h2 { color: #ffc266; }
-html[data-bsv-env="test"] .home-column:last-child h2 { color: #f7d774; }
-html[data-bsv-env="test"] .announcement-item-clean,
-html[data-bsv-env="test"] .donator-item {
-  background: rgba(8,21,48,0.7);
-  border: 1px solid var(--bsv-stroke-soft);
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  transition: border-color 220ms var(--bsv-ease), transform 220ms var(--bsv-ease);
-}
-html[data-bsv-env="test"] .announcement-item-clean:hover,
-html[data-bsv-env="test"] .donator-item:hover {
-  border-color: var(--bsv-stroke-strong);
-  transform: translateY(-2px);
-}
-html[data-bsv-env="test"] .announcement-date { color: var(--bsv-accent); font-weight: 700; }
-html[data-bsv-env="test"] .announcement-text { color: var(--bsv-text); }
-
-html[data-bsv-env="test"] .what-is-section {
-  background:
-    radial-gradient(800px 320px at 0% 0%, rgba(99,102,241,0.18), transparent 60%),
-    linear-gradient(180deg, rgba(14,28,56,0.95), rgba(8,21,48,0.95));
-  border: 1px solid var(--bsv-stroke-strong);
-  border-radius: var(--bsv-radius-lg);
-  box-shadow: var(--bsv-shadow-1);
-}
-html[data-bsv-env="test"] .what-is-section h2 {
-  background: linear-gradient(120deg, #fff, #9ad6ff);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  text-shadow: none;
-}
-html[data-bsv-env="test"] .what-is-section p { color: var(--bsv-text-dim); text-shadow: none; }
-
-/* ---------- Tax sidebar (right column) ---------- */
-html[data-bsv-env="test"] .tax-sidebar-column { gap: 18px; }
-html[data-bsv-env="test"] .tax-calculator,
-html[data-bsv-env="test"] .home-value-changes {
-  background:
-    radial-gradient(420px 200px at 100% 0%, rgba(56,189,248,0.12), transparent 60%),
-    linear-gradient(180deg, rgba(14,28,56,0.95), rgba(8,21,48,0.95));
-  border: 1px solid var(--bsv-stroke);
-  border-radius: var(--bsv-radius-lg);
-  box-shadow: var(--bsv-shadow-1);
-}
-html[data-bsv-env="test"] .tax-calculator h2,
-html[data-bsv-env="test"] .home-value-changes .value-changes-heading {
-  background: linear-gradient(120deg, #fff, #9ad6ff);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  text-shadow: none;
-}
-html[data-bsv-env="test"] .tax-calculator input {
-  background: rgba(8,21,48,0.85);
-  border: 1px solid var(--bsv-stroke);
-  color: var(--bsv-text);
-  border-radius: 12px;
-}
-html[data-bsv-env="test"] .tax-calculator input:focus {
-  border-color: var(--bsv-accent);
-  box-shadow: 0 0 0 4px rgba(56,189,248,0.18);
-  outline: none;
-}
-html[data-bsv-env="test"] .discord-mm-promo--sidebar {
-  background:
-    linear-gradient(135deg, rgba(88,101,242,0.18), rgba(99,102,241,0.10));
-  border: 1px solid var(--bsv-stroke-strong);
-  border-radius: var(--bsv-radius-lg);
-  box-shadow: var(--bsv-shadow-1);
-  text-shadow: none;
-}
-html[data-bsv-env="test"] .discord-mm-promo-cta { color: var(--bsv-accent); }
-html[data-bsv-env="test"] .value-change-item {
-  background: rgba(8,21,48,0.75) !important;
-  border: 1px solid var(--bsv-stroke-soft) !important;
-  border-radius: 12px !important;
-}
-
-/* ---------- Footer ---------- */
-html[data-bsv-env="test"] .site-footer {
-  background:
-    linear-gradient(180deg, rgba(5,13,29,0.6), rgba(5,13,29,0.95));
-  border-top: 1px solid var(--bsv-stroke);
-}
-html[data-bsv-env="test"] .site-footer a:hover { color: var(--bsv-accent); }
-
-/* ---------- Hamburger / mobile-menu tweaks ---------- */
-html[data-bsv-env="test"] .mobile-menu-overlay {
-  background:
-    radial-gradient(700px 400px at 80% -10%, rgba(56,189,248,0.18), transparent 60%),
-    linear-gradient(180deg, rgba(5,13,29,0.96), rgba(8,21,48,0.96));
-  border-left: 1px solid var(--bsv-stroke);
-}
-html[data-bsv-env="test"] .hamburger-menu span { background: #fff; }
-
-/* ---------- Smooth section enter ---------- */
-html[data-bsv-env="test"] .sections > section { animation: bsvFadeUp 360ms var(--bsv-ease) both; }
-@keyframes bsvFadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  html[data-bsv-env="test"] *,
-  html[data-bsv-env="test"] *::before,
-  html[data-bsv-env="test"] *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-/* ---------- Dev-build badge ---------- */
-html[data-bsv-env="test"] body::after {
-  content: "DEV BUILD";
-  position: fixed;
-  top: 14px; right: 14px;
-  z-index: 1500;
-  padding: 6px 10px;
-  font: 700 0.68rem/1 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: 0.2em;
-  color: #cfe8ff;
-  background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(99,102,241,0.22));
-  border: 1px solid var(--bsv-stroke-strong);
-  border-radius: 999px;
-  box-shadow: 0 10px 24px -14px rgba(56,189,248,0.6);
-  pointer-events: none;
-}
-@media (max-width: 720px) {
-  html[data-bsv-env="test"] body::after { top: 70px; right: 10px; font-size: 0.6rem; padding: 4px 8px; }
-}
-
-/* ---------- Responsive polish ---------- */
-@media (max-width: 1024px) {
-  html[data-bsv-env="test"] .main-container { gap: 18px; padding: 0 16px 56px; }
-  html[data-bsv-env="test"] .sections-sidebar { display: none; }
-}
-@media (max-width: 480px) {
-  html[data-bsv-env="test"] .card-left { min-width: 0; }
-  html[data-bsv-env="test"] .card img { width: 124px; height: 124px; }
-  html[data-bsv-env="test"] .sections h2 { font-size: 1.45rem; }
-}
-
-/* =======================================================================
-   BSV DEV — overhaul end
-   ======================================================================= */
